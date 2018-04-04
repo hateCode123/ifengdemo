@@ -1,0 +1,31 @@
+{
+    "appname": "app",
+    "debug": false,
+    "port": 3000,
+    "outputStd": false,
+    "viewsdir": "dist",
+    "apiPrefix": "",
+    "cacheURL": true,
+    "logs": [
+        {
+            "type": "rotating-file",
+            "path": "/data/logs/out.log",
+            "level": "info",
+            "period": "1d",
+            "count": 30
+        },
+        {
+            "type": "rotating-file",
+            "path": "/data/logs/err.log",
+            "level": "error",
+            "period": "1d",
+            "count": 30
+        }
+    ],
+    "redisHosts": [
+
+    ],
+    "blacklist": [
+        "/controllers/black/black.js"
+    ]
+}

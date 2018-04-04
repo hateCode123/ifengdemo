@@ -1,0 +1,9 @@
+.box {
+    box-sizing: border-box;
+    height: 150px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    text-align: center;
+    line-height: 150px;
+    margin-bottom: 5px;
+}

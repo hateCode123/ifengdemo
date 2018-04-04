@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--cmpp:start-->
+    <title><%- docData.title %>_凤凰财经</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<%- docData.tags %>" />
+    <meta name="description" content="<%- docData.summary %>" />
+    <meta name="og:webtype" content="news" />
+    <meta property="og:url" content="<%- docData.url %>" />
+    <meta property="og:title" content="<%- docData.title %>" />
+    <meta property="og:description" content="<%- docData.summary %>"/>
+    <meta name="og:time " content="<%- docData.newsTime %>" />
+    <meta name="og:category " content="凤凰财经" />
+    <meta property="og:image" content="" />
+    <meta name="og:img_slide" content=""/>
+    <meta name="og:img_video" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://i.ifeng.com/ifengurl.f?vt=5&ch=rj_bd_me&url=<%- docData.url %>" />
+    <meta http-equiv="mobile-agent" content="format=xhtml;url=http://i.ifeng.com/ifengurl.f?vt=2&ch=rj_bd_me&url=<%- docData.url %>" />
+
+    <script src="http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js"></script>
+    <script src="http://p0.ifengimg.com/fe/finance_article/scripts/jquery.slimscroll_208ae5b9.js"></script>
+    <!--requirejs and glue, base core for components-->
+    <script src="http://y0.ifengimg.com/fe/detail/scripts/base-core_5664eba4.min.js"></script>
+    <!--广告代码--><script src="http://m1.ifengimg.com/ifeng/sources/inice_v1.js"></script>
+    <script src="http://p0.ifengimg.com/a98b27eebe4deb98/2016/45/md5.js"></script>
+    <script src="http://p0.ifengimg.com/a/2018/0109/antiTheft.js"></script>
+    
+    <script src="http://y0.ifengimg.com/commonpage/1130/F-RequireJS.min.js"></script>
+    <script>
+        var suffix = device.type === "pc" ? ".pc" : ".mobile";
+
+        requirejs.config({
+            paths: {
+                // 基础模块
+                "F": "http://y0.ifengimg.com/base/origin/F-amd-1.2.0.min",
+                "FM":  "http://y0.ifengimg.com/commonpage/1130/F-amd-mobile-1.1.1.min",
+                "debug": "http://y0.ifengimg.com/commonpage/1130/F-amd-mobile-1.1.0.min",
+
+                // 头部
+                'keywords': 'http://m0.ifengimg.com/keywords',
+                "header": "http://y0.ifengimg.com/commonpage/1130/header.pc.min",
+                "search": "http://y0.ifengimg.com/commonpage/1130/header" + suffix + ".min",
+
+                // 轮播图
+                "ppt.pc": "http://p0.ifengimg.com/fe/zx2/scripts/ppt.pc_b844b957",
+                "ppt.mobile": "http://y0.ifengimg.com/commonpage/1205/ppt.mobile.min",
+
+                // 视频播放器
+                "video.pc": "http://p0.ifengimg.com/fe/news_detail/scripts/video_9137fc10",
+                "video.mobile": "http://p3.ifengimg.com/a/2018/0118/finance_mobile",
+
+                // 评论相关
+                "comment.number": "http://p0.ifengimg.com/a/2016/1110/comment/comment_number_add1",
+                "recommend.comment_number": "http://p0.ifengimg.com/a/2016/1110/comment/comment_number_add1",
+                "comment.pc": "http://y0.ifengimg.com/a/2015/0530/comment.pc.v3.min",
+                "comment.mobile": "http://y0.ifengimg.com/commonpage/1216/v1/comment.mobile.min",
+
+
+                // tab切换 推荐 看了还看
+                "tabControl.pc": "http://y0.ifengimg.com/commonpage/1218/recommend.pc.min",
+                "recommend.pc": "http://y1.ifengimg.com/a/2015/0519/comment.pc.v2.0519.min",
+                "readAndRead": "http://y0.ifengimg.com/commonpage/1206/recommend" + suffix + ".min",
+
+                "survey.pc": "http://y0.ifengimg.com/commonpage/1203/survey.pc.min",
+
+                //pc端分享(内容分享和划词分享)
+                "share.pc": "http://y0.ifengimg.com/commonpage/2016/0125/utils.pc.min",
+                //移动端分享(内容分享)
+                "share.mobile": "http://y0.ifengimg.com/commonpage/2014/0612/utils.mobile.min",
+                //返回顶部
+                "utils": "http://y0.ifengimg.com/commonpage/2016/0125/utils.pc.min",
+                //48小时点击排行浮动
+                "floatIt.pc" : "http://y0.ifengimg.com/commonpage/2016/0125/utils.pc.min",
+                "picLazy": "http://y0.ifengimg.com/commonpage/2016/0125/utils.pc.min",
+
+                // 通用登录
+                "public_login": "http://y1.ifengimg.com/commonpage/20151202/public_login.min",
+
+                "jquery#1.8.1" : "http://y1.ifengimg.com/fe/jQuery/jquery-1.8.1.min",
+                "getSurveyHtml":"http://p1.ifengimg.com/a/2016/0810/com-box-survey_8e15dcd7",
+                //点赞
+                "dianzan":"http://p0.ifengimg.com/fe/news_detail/scripts/dianzan_554f2bc4",
+                //ppt的模板
+                "artTemplate#3.0.3" : "http://p0.ifengimg.com/fe/product_wzyh/scripts/template_b75f1e4e",
+                "product_wzyh#1.0.1/template":"http://p0.ifengimg.com/fe/product_wzyh/scripts/product_wzyh_template_9c201afd"
+            },
+            waitSeconds: 20,
+            shim: {}
+        });
+        tasker.runAfterDomReady();
+    </script>
+    <script>
+        if (device.type === "mobile") {
+            document.write('<link rel="stylesheet" href="http://p0.ifengimg.com/a/2017/0210/46d8e7c9e67b115.css"/>');
+        } else if (device.type === "pad") {
+            document.write('<link rel="stylesheet" href="http://p0.ifengimg.com/fe/zx2/styles/ipadV3_c1e41b65.css"/>');
+        } else {
+            document.write('<link rel="stylesheet" href="http://p0.ifengimg.com/fe/finance_article/styles/46eb92951f152c5_054cc8fd.css"/>');
+        }
+    </script>
+    <script>
+        // @TODO: 全局参数
+        define("detail", [], function () {
+            return {
+                "docName": "<%- docData.title %>",
+                "docUrl": "<%- docData.url %>",
+                "summary": "<%- docData.summary %>",
+                "skey":"<%- docData.skey %>",
+                "commentUrl":"<%- docData.commentUrl %>",
+                "image": "http://y3.ifengimg.com/a/2016/0414/ab605e5e0631dd6size71_w300_h300.jpg",
+                "channelTitle": "财经",
+                "speUrl":"http://finance.ifeng.com/news/special/2018lianghui/"
+            };
+        });
+    </script>
+    <!--全站渠道标记传递-->
+    <script>
+        (function($) {
+            function getSign(localSearch,ret){
+                var localSearchArr = localSearch.split("#");
+                for(var i=0;i<localSearchArr.length;i++){
+                    var localParam = localSearchArr[i];
+                    if(localParam.indexOf("_")==-1)continue;
+                    var localParamArr = localParam.split("?");
+                    for(var j=0;j<localParamArr.length;j++){
+                        var localParam2 = localParamArr[j];
+                        if(localParam2.indexOf("_")==-1)continue;
+                        var localParam2Arr = localParam2.split("&");
+                        for(var m=0;m <localParam2Arr.length;m++){
+                            var localParam3 = localParam2Arr[m];
+                            if(localParam3.indexOf("_")==-1)continue;
+                            var localParam3Arr = localParam3.split("|");
+                            for(var k=0;k<localParam3Arr.length;k++){
+                                var localParam4 = localParam3Arr[k];
+                                if(localParam4.indexOf("_")!=0)continue;
+                                if(ret==''){
+                                    ret+=localParam4;
+                                }else{
+                                    ret = ret+"&"+localParam4;
+                                }
+                            }
+                        }
+                    }
+                }    
+                return ret;
+            }
+
+            function getParam(localSearch ,localHash) {
+                var ret = '';
+                if(localSearch.indexOf("_zbs")>-1){
+                    ret = getSign(localSearch,ret);
+                }
+                if(localHash.indexOf("_zbs")>-1){
+                    ret = getSign(localHash,ret);
+                }
+                return ret;
+            }
+
+            //文章页的任意跳转
+            $(document).on("click", "a", function() {
+                var localHref = $(this).attr("sign-trs-href") || $(this).attr("href");
+            
+                if(localHref!="undefined" && localHref!=undefined && localHref!="" && localHref!="#" && localHref.indexOf("javascript:")==-1){
+                    localHref = localHref.trim();
+                    var localSearch = location.search;
+                    var localHash = location.hash;
+                    
+                    $(this).attr("sign-trs-href",localHref);
+
+                    var newUrl = '';
+                    
+                    var inWhitelist = false;
+                    var whitelist = ['http://dol.deliver.ifeng.com/'];
+                    for(var i = 0, len = whitelist.length; i < len; i++){
+                        if(localHref.indexOf(whitelist[i]) > -1){
+                            inWhitelist = true;
+                        }
+                    }
+                    // 传递下划线开头的统计
+                    var curSrc = getParam(localSearch ,localHash);
+                    if ((localSearch || localHash) && curSrc && !inWhitelist) {
+                        if (localHref.indexOf('?') > -1) {
+                            newUrl = localHref + '&' + curSrc;
+                        } else {
+                            newUrl = localHref + '?' + curSrc;
+                        }
+                        $(this).attr("href",newUrl);
+                    }
+                }
+            });
+
+        })(jQuery);
+    </script>
+
+    <script>
+        if (device.type !== "pc") {
+            define('renderCommentCount', [], function () {
+                return function (num1, num2,num3) {
+                    var doms = document.querySelectorAll(".js_commentCount");
+                    if(!num3 == 0 && !num1 ){//关闭评论并删除评论内容
+                        for (var i = 0, iLen = doms.length; i < iLen; i++) {
+                            doms[i].hide()
+                        }
+                        return false;
+                    }else{
+                        window["__commentCount"] = [num1, num2];
+                        for ( i = 0; i < iLen; i++) {
+                            doms[i].innerHTML = '<span class="ss_none"><em>' + num2 + '</em>人参与</span><em>' +
+                                num1 + '</em><span class="ss_none">评论</span>';
+                        }
+                    }
+                };
+            });
+
+            define("jumpToCommentView", ["detail"], function (detail) {
+                var skey = detail.skey ? '&skey=' + encodeURIComponent(detail.skey) : "";
+                var speUrl = detail.speUrl ? 'speUrl=' + encodeURIComponent(detail.speUrl) : "";
+                var url = 'http://gentie.ifeng.com/view.html';
+                url = url + "?docName=" + encodeURIComponent(detail.docName) +
+                    '&docUrl=' + encodeURIComponent(detail.commentUrl) + skey + speUrl;
+                return function () {
+                    window.open(url, "comment", "");
+                }
+            });
+
+            creatTasker("auto", ["FM", "detail", "renderCommentCount"], function (F, detail, renderCommentCount) {
+                var commentCountUrl = 'http://comment.ifeng.com/get.php';
+
+                if (typeof __commentCount !== "undefined") {
+                    renderCommentCount(__commentCount[0], __commentCount[1]);
+                } else {
+                    F.jsonp({
+                        url: commentCountUrl,
+                        data: {
+                            doc_url: detail.commentUrl,
+                            format:'js',
+                            job:1,
+                            callback:'callbackGetFastCommentCount'
+                        },
+                        cache:true,
+                        callback: "callbackGetFastCommentCount",
+                        success: function (cmtJson) {
+                            renderCommentCount(cmtJson.count, cmtJson.join_count,cmtJson.allow_comment);
+                        }
+                    });
+                }
+            }, "next", "获取评论数");
+        } else {
+            creatTasker("auto", ["comment.number", "detail"], function (commentNumber, detail) {
+                var detailNew = {
+                    "docName": detail.docName,
+                    "docUrl": detail.commentUrl || detail.docUrl,
+                    "skey":detail.skey,
+                    "pcUrl":detail.docUrl
+                };
+                
+                commentNumber(detailNew);
+            }, "next", "当前位置获取评论数");
+            creatTasker("auto", ["recommend.comment_number"], function (commentNumber) {
+                commentNumber();
+            }, "next", "推荐位置获取评论数");
+        }
+    </script>
+
+    <script src="http://m1.ifengimg.com/ifeng/sources/inice_v1.js"></script>
+    <script src="http://p0.ifengimg.com/a/2017/0324/fa.min.js"></script>
+
+    <script>
+        var docData = <%- JSON.stringify(docData) %>;
+        
+        var categoryData = <%- JSON.stringify(categoryData) %>;
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

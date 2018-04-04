@@ -1,0 +1,20 @@
+{
+    "appname": "app",
+    "debug": false,
+    "port": 3000,
+    "outputStd": true,
+    "viewsdir": "dist",
+    "apiPrefix": "",
+    "cacheURL": true,
+    "logs": {
+        "level": "debug"
+    },
+    "redisHosts": [
+        { "host": "10.21.7.23", "port": 7000 },
+        { "host": "10.21.7.23", "port": 7001 },
+        { "host": "10.21.7.23", "port": 7002 }
+    ],
+    "blacklist":[
+        "/controllers/black/black.js"
+    ]
+}

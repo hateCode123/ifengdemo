@@ -1,0 +1,18 @@
+{
+    "appname": "app",
+    "debug": false,
+    "port": 3000,
+    "outputStd": true,
+    "viewsdir": "dist",
+    "apiPrefix": "",
+    "cacheURL": false,
+    "logs": {
+        "level": "debug"
+    },
+    "redisHosts": [
+
+    ],
+    "blacklist": [
+        "/controllers/black/black.js"
+    ]
+}

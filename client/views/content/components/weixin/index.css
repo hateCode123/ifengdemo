@@ -1,0 +1,36 @@
+.box {
+    composes: clearfix from global;
+    margin-bottom: 10px;
+    border: 1px solid #e3e3e3;
+    padding: 15px 0;
+}
+
+.pic {
+    width: 148px;
+    border-right: 1px solid #e3e3e3;
+    text-align: center;
+    float: left;
+    & img {
+        width: 80px;
+        height: 80px;
+    }
+    & .text {
+        line-height: 18px;
+        color: #666;
+        padding-top: 8px;
+    }
+}
+
+.detail {
+    float: right;
+    width: 135px;
+    margin-top: 13px;
+    & p {
+        font: bold 14px/18px simsun;
+        float: left;
+        margin-bottom: 35px;
+        background: url(./v.gif) no-repeat right 5px;
+        padding-right: 15px;
+        color: #01426c;
+    }
+}

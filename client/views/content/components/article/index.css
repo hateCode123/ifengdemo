@@ -1,0 +1,72 @@
+.title {
+    font: bold 24px '宋体';
+    padding: 0 0 20px 0;
+    letter-spacing: -1.5px;
+}
+
+.info {
+    composes: clearfix from global;
+    padding-bottom: 5px;
+}
+
+.base_info {
+    float: left;
+    width: 250px;
+    color: #999;
+    line-height: 22px;
+    & a {
+        color: #808080;
+    }
+}
+
+.share_box {
+    width: 230px;
+    float: right;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    line-height: 40px;
+    box-sizing: border-box;
+    color: #ccc;
+}
+
+.comment_count_box {
+    z-index: 1000;
+    float: right;
+    margin-right: 10px;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 40px;
+    box-sizing: border-box;
+    color: #ccc;
+}
+
+.editor {
+    margin-bottom: 40px;
+}
+
+.tools {
+    composes: clearfix from global;
+    margin-bottom: 10px;
+}
+
+.recommend_box {
+    width: 100px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    line-height: 40px;
+    text-align: center;
+    color: #ccc;
+}
+
+.declare {
+    color: #999;
+    padding-top: 3px;
+    padding-bottom: 20px;
+    line-height: 18px;
+}

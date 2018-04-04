@@ -1,0 +1,45 @@
+.extra {
+    float: right;
+    display: block;
+    padding-top: 7px;
+    width: 145px;
+}
+
+.top {
+    & h3 {
+        font: 16px/36px Microsoft Yahei;
+        & a {
+            color: #004276;
+        }
+    }
+}
+
+.extend {
+    composes: clearfix from global;
+    padding: 0 0 3px 0;
+    line-height: 16px;
+    color: #999;
+}
+
+.time {
+}
+
+.comment {
+    float: right;
+    & em {
+        font-weight: bold;
+        color: #f54343;
+        font-family: Georgia;
+        font-size: 16px;
+    }
+}
+
+.list {
+    padding-top: 5px;
+    & li {
+        line-height: 24px;
+        color: #004276;
+        padding-left: 7px;
+        background: url(./all.png) no-repeat 0 -1006px;
+    }
+}

@@ -1,0 +1,12 @@
+.box {
+    composes: clearfix from global;
+    display: none;
+    width: 200px;
+    float: left;
+}
+
+@media (min-width: 1250px) {
+    .box {
+        display: block;
+    }
+}

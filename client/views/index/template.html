@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <title></title>
+    <script>
+        var jsonData = <%- JSON.stringify(jsonData) %>
+    </script>
+    {{#each htmlWebpackPlugin.files.css}}
+        <link href="{{this.value}}" rel="stylesheet">
+    {{/each}}
+</head>
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.chunks}}
+        <script src="{{entry}}" type="text/javascript"></script>
+    {{/each}}
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+.layout {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.main {
+    flex: 1;
+}
+
+.sider {
+    margin-left: 20px;
+    width: 280px;
+    flex-shrink: 0;
+}
