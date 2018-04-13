@@ -1,13 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 import { createUrl } from '../../utils/index';
-import AsidePannel from '../../commons/asidePannel/index.jsx';
+import AsidePannel from '../../commons/asidePannel/index';
 
+/**
+ * 定义 ChannelRecommend 组件
+ */
+class ChannelRecommend extends React.PureComponent {
+    /**
+     * 绑定属性
+     * @param {*} props
+     */
+    constructor(props) {
+        super(props);
+        this.state = { commentCount: null };
+    }
 
-class ChannelRecommend extends React.Component {
-    state = {
-        commentCount: null,
-    };
+    /**
+     * 渲染组件
+     */
     render() {
         const { content } = this.props;
         const top = content[0];
@@ -15,7 +27,10 @@ class ChannelRecommend extends React.Component {
         const { commentCount } = this.state;
         const extraContent = (
             <span className={styles.extra}>
-                <a href="//gongyi.ifeng.com/hot/special/fhwytjh/ " target="_blank">
+                <a
+                    href="//gongyi.ifeng.com/hot/special/fhwytjh/ "
+                    target="_blank"
+                    rel="nofollow me noopener noreferrer">
                     <img
                         src="//p1.ifengimg.com/a/2017/0817/donate_4.jpg"
                         width="145"
@@ -25,11 +40,16 @@ class ChannelRecommend extends React.Component {
                 </a>
             </span>
         );
+
         return (
             <AsidePannel title="频道推荐" extraContent={extraContent}>
                 <div className={styles.top}>
                     <h3>
-                        <a href={createUrl(top.id)} title={top.title} target="_blank">
+                        <a
+                            href={createUrl(top.id)}
+                            title={top.title}
+                            target="_blank"
+                            rel="nofollow me noopener noreferrer">
                             {top.title}
                         </a>
                     </h3>
@@ -61,4 +81,15 @@ class ChannelRecommend extends React.Component {
     }
 }
 
+/**
+ * 定义组件属性类型
+ * */
+ChannelRecommend.propTypes = { content: PropTypes.array };
+
+/**
+ * 定义组件默认属性
+ * */
+ChannelRecommend.defaultProps = {};
+
+export { ChannelRecommend };
 export default ChannelRecommend;

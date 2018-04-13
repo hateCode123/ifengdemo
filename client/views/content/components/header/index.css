@@ -40,6 +40,15 @@
     }
 }
 
+.adBox {
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    height: 90px;
+    float: right;
+    text-align: center;
+    line-height: 90px;
+}
+
 
 @media (min-width: 1250px) {
     .h_mainNavNew, .pic1000, .searchDiv {

@@ -3,9 +3,13 @@ const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const webpack = require('webpack');
-const px2rem = require('postcss-px2rem');
+// const px2rem = require('postcss-px2rem');
 const nextcss = require('postcss-cssnext');
 const postImport = require('postcss-import');
+const aspectRatioMini = require('postcss-aspect-ratio-mini');
+const pxToViewport = require('postcss-px-to-viewport');
+const viewPortUnits = require('postcss-viewport-units');
+const writeSvg = require('postcss-write-svg');
 const CleanPlugin = require('clean-webpack-plugin');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
@@ -13,19 +17,97 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
+const env = process.env.NODE_ENV;
 
-const createConfig = function(type) {
+const pcCssConfig = {
+    test: /\.css$/,
+    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+    use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+            'css-loader?modules&localIdentName=[local]-[hash:base64:5]',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    sourceMap: true,
+                    plugins: function() {
+                        return [
+                            postImport(),
+                            nextcss({
+                                browsers: ['last 2 versions', 'ie >= 9'],
+                            }),
+                            // px2rem({
+                            //     remUnit: 75,
+                            // }),
+                        ];
+                    },
+                },
+            },
+        ],
+    }),
+};
+
+const mobileCssConfig = {
+    test: /\.css$/,
+    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+    use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+            'css-loader?modules&localIdentName=[local]-[hash:base64:5]',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    sourceMap: true,
+                    plugins: function() {
+                        return [
+                            postImport(),
+                            aspectRatioMini(),
+                            writeSvg({utf8: false}),
+                            pxToViewport({
+                                viewportWidth: 750,
+                                viewportHeight: 1334,
+                                unitPrecision: 5,
+                                viewportUnit: 'vw',
+                                selectorBlackList: ['.ignore', '.hairlines'],
+                                minPixelValue: 1,
+                                mediaQuery: false,
+                            }),
+                            viewPortUnits(),
+                            nextcss({
+                                browsers: ['last 2 versions', 'ie >= 9'],
+                                // browsers: ['chrome >= 56'],
+                            }),
+                                // px2rem({
+                            //     remUnit: 75,
+                            // }),
+                        ];
+                    },
+                },
+            },
+        ],
+    }),
+};
+
+const fileExtend = {
+    pc_view : '',
+    pc_edit: '_edit',
+    mobile_view: '_mobile',
+    mobile_edit: '_mobile_edit'
+};
+
+const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'source-map',
-        entry: getEntrys('./client/views/*/app.js'),
+        entry: getEntrys(platform === 'pc' ? './client/views/*/app.js' : './client/mobile/views/*/app.js'),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: `[name].${type}.[chunkhash:5].js`,
+            filename: `[name].${platform}_${type}.[chunkhash:5].js`,
             publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
-            //publicPath: '/',
-            chunkFilename: `[name].${type}.[chunkhash:5].js`,
+            publicPath: env === 'pre_development'? '/' : ('//p0.ifengimg.com/fe/zl/test/live/' + appName + '/'),
+            chunkFilename: `[name].${platform}_${type}.[chunkhash:5].js`,
         },
         resolve: {
+            extensions: ['.js', '.json', '.jsx'],
             alias: {
                 Chip:
                     type === 'view'
@@ -66,33 +148,7 @@ const createConfig = function(type) {
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
-                {
-                    test: /\.css$/,
-                    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            'css-loader?modules&localIdentName=[local]-[hash:base64:5]',
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true,
-                                    plugins: function() {
-                                        return [
-                                            postImport(),
-                                            nextcss({
-                                                browsers: ['last 2 versions', 'ie >= 9'],
-                                            }),
-                                            // px2rem({
-                                            //     remUnit: 75,
-                                            // }),
-                                        ];
-                                    },
-                                },
-                            },
-                        ],
-                    }),
-                },
+                cssConfig,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
                     use: [
@@ -133,9 +189,10 @@ const createConfig = function(type) {
                 allChunks: true
             }),
             new CleanPlugin(['dist']),
-            ...getHTMLs('./client/views/*/template.html', type === 'view' ? '' : '_edit'),
+            ...getHTMLs(platform === 'pc' ? './client/views/*/template.html' : './client/mobile/views/*/template.html', fileExtend[`${platform}_${type}`]),
         ],
     };
 };
 
-module.exports = [createConfig('view'), createConfig('visualediting')];
+module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
+

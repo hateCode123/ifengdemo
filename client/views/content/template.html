@@ -95,7 +95,11 @@
                 title: '未来'
             }],
             topAdExtend: '<a href="http://news.ifeng.com/listpage/106193/1/list.shtml" target="_blank"><img src="http://p1.ifengimg.com/a/2018_12/e59ec99f4f6468b.gif" alt="FUN来了"></a>',
-            topAd: '顶部广告',
+            topAd: {
+                data: {title:'顶部广告'},
+                preload: ['http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js','http://m1.ifengimg.com/ifeng/sources/inice_v1.js'],
+                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
+            },
             logo: {
                 url: '//finance.ifeng.com/',
                 title: '凤凰网财经',
@@ -234,7 +238,11 @@
                 }]
             },
             qrCode: ['//p3.ifengimg.com/a/2017/0822/ef1f8f1ad492125size20_w160_h214.jpg'],
-            articleAd: '文章下部广告',
+            articleAd: {
+                data: {title:'文章下部广告'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("articleAd"); $(elm).html(data.title)}'
+            },
             recommendArtical: `
 <style>
     .rec {
@@ -255,8 +263,6 @@
     </a>
 </div>
             `,
-            admid1:'中部广告1',
-            admid2:'中部广告2',
             recommendMid: [{
                 title: '中国拟对这些美国进口产品加征关税（附清单）',
                 url: '//finance.ifeng.com/a/20180330/16052351_0.shtml?_cpb_xinxiliu_pdtj',
@@ -418,22 +424,85 @@
 
             }],
             adGameMid: {
-                data: '广告内容',
+                data: {title:'游戏广告内容'},
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm) {console.log(123); $(elm).html($(elm).attr("[data-content]"))}'
+                callback: 'function(elm, data) {console.log("adGameMid"); $(elm).html(data.title)}'
             },
-            admid3: '底部广告位',
-            adaside1: '侧栏广告1',
-            adaside2: '侧栏广告2',
-            adaside3: '侧栏广告3',
-            adaside4: '侧栏广告4',
-            adaside5: '侧栏广告5',
-            adaside6: '侧栏广告6',
-            adaside7: '侧栏广告7',
-            adaside8: '侧栏广告8',
-            adaside9: '侧栏广告9',
-            adaside10: '侧栏广告10',
-            adaside11: '侧栏广告11',
+            admid1:{
+                data: {title:'中部广告1'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("admid1"); $(elm).html(data.title)}'
+            },
+            admid2:{
+                data: {title:'中部广告2'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("admid2"); $(elm).html(data.title)}'
+            },
+            admid3: {
+                data: {title:'底部广告位'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("admid3"); $(elm).html(data.title)}'
+            },
+            adaside1: {
+                data: {title:'侧栏广告1'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside1"); $(elm).html(data.title)}'
+            },
+            adaside1: {
+                data: {title:'侧栏广告1'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside1"); $(elm).html(data.title)}'
+            },
+            adaside2: {
+                data: {title:'侧栏广告2'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside2"); $(elm).html(data.title)}'
+            },
+            adaside3: {
+                data: {title:'侧栏广告3'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside3"); $(elm).html(data.title)}'
+            },
+            adaside4: {
+                data: {title:'侧栏广告4'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside4"); $(elm).html(data.title)}'
+            },
+            adaside5: {
+                data: {title:'侧栏广告5'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside5"); $(elm).html(data.title)}'
+            },
+            adaside6: {
+                data: {title:'侧栏广告6'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside6"); $(elm).html(data.title)}'
+            },
+            adaside7: {
+                data: {title:'侧栏广告7'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside7"); $(elm).html(data.title)}'
+            },
+            adaside8: {
+                data: {title:'侧栏广告8'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside8"); $(elm).html(data.title)}'
+            },
+            adaside9: {
+                data: {title:'侧栏广告9'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside9"); $(elm).html(data.title)}'
+            },
+            adaside10: {
+                data: {title:'侧栏广告10'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside10"); $(elm).html(data.title)}'
+            },
+            adaside11: {
+                data: {title:'侧栏广告11'},
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("adaside11"); $(elm).html(data.title)}'
+            },
             channelRecommand: [{
                 url: '//finance.ifeng.com/a/20180330/16052318_0.shtml?_cpb_pindaotj1',
                 title: '特朗普到底在怕什么？',
@@ -630,7 +699,9 @@
         <span>Copyright © 2016 Phoenix New Media Limited All Rights Reserved.</span>
     </div>
 </div>            
-            `
+            `,
+            recommendNews: JSON.parse(__jsonData__.recommendNews),
+            mainTuiguang: JSON.parse(__jsonData__.mainTuiguang)
         };
     </script>
     {{#each htmlWebpackPlugin.files.css}}
@@ -644,12 +715,12 @@
         <script src="{{entry}}" type="text/javascript"></script>
     {{/each}}
     <script>
-        var boxs = document.querySelectorAll('[data-adhook]');
-        console.log(boxs.length);
-        for (var i = 0, iLen = boxs.length; i < iLen; i++) {
-            var text = boxs[i].innerText;
-            boxs[i].innerHTML = text + '我修改了你';
-        }
+        // var boxs = document.querySelectorAll('[data-adhook]');
+        // console.log(boxs.length);
+        // for (var i = 0, iLen = boxs.length; i < iLen; i++) {
+        //     var text = boxs[i].innerText;
+        //     boxs[i].innerHTML = text + '我修改了你';
+        // }
     </script>
 </body>
 

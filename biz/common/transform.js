@@ -1,7 +1,8 @@
 module.exports = {
-    listTransform : async data => {
+    listTransform: async data => {
         return data.map((item, i) => ({
-            ...item, index: i
-        }))
-    }
-}
+            ...item,
+            index: i,
+        }));
+    },
+};

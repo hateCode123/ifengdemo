@@ -1,10 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 
-class Comment extends React.Component {
+/**
+ * 定义 Comment 组件
+ */
+class Comment extends React.PureComponent {
+    /**
+     * 渲染组件
+     */
     render() {
-        return <div className={styles.box} >评论组件</div>;
+        return <div className={ styles.box } >评论组件</div>;
     }
 }
 
+/**
+ * 定义组件属性类型
+ * */
+Comment.propTypes = {};
+
+/**
+ * 定义组件默认属性
+ * */
+Comment.defaultProps = {};
+
+export { Comment };
 export default Comment;

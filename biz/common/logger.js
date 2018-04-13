@@ -3,6 +3,7 @@ const config = require('../configs');
 const logs = config.default.logs;
 
 let streams = [];
+
 if ( process.env.NODE_ENV !== 'production') {
     logs.stream = process.stdout;
     streams.push(logs);

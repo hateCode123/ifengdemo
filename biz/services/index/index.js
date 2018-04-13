@@ -1,6 +1,5 @@
-
-exports.getOriginData = async (id) => {
-    return  [
+exports.getOriginData = async id => {
+    return [
         {
             title: '朝韩运动员走在“朝鲜半岛旗”下的10个瞬间(图)',
             href: 'http://news.ifeng.com/a/20180210/55938132_0.shtml?_cpb_pindaotj2',
@@ -36,9 +35,7 @@ exports.getOriginData = async (id) => {
     ];
 };
 
-
-
-exports.getMainContent = async ()=>{
+exports.getMainContent = async() => {
     return `
 <style>
   .dy_box {
@@ -138,4 +135,4 @@ exports.getMainContent = async ()=>{
     </div>
 </div>
 `;
-}
+};

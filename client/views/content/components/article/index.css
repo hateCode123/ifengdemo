@@ -70,3 +70,10 @@
     padding-bottom: 20px;
     line-height: 18px;
 }
+
+.adArticleBox {
+    height: 90px;
+    text-align: center;
+    line-height: 90px;
+    margin-bottom: 5px;
+}

@@ -1,64 +1,102 @@
+/**
+ * 后台服务入口
+ */
 const Koa = require('koa');
 const http = require('http');
 const path = require('path');
-const app = new Koa();
 const onerror = require('koa-onerror');
 const json = require('koa-json');
 const bodyParser = require('koa-bodyparser');
-const views = require('koa-views');
 const logger = require('./biz/common/logger');
 const config = require('./biz/configs');
-const static = require('koa-static');
+const koaStatic = require('koa-static');
+const routers = require('./biz/routers');
+const rewrite = require('./biz/rewrite');
+const env = process.env.NODE_ENV || 'development';
 
-// handle error
+// 创建koa实例
+const app = new Koa();
+let views = null;
+
+// const server = http.Server(app.callback());
+
+// 导出koa 实例，方便单元测试
+const server = app.listen(config.default.port || 3000, () => {
+    logger.info(`app is listening ${config.default.port || 3000}`);
+});
+
+module.exports = server;
+
+if (env === 'development') {
+    views = require('./biz/common/middlewares/koa-views');
+    const socket = require('socket.io');
+    const io = socket(server);
+
+    // 静态资源设置
+    app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
+
+    const chokidar = require('chokidar');
+
+    setTimeout(() => {
+        io.sockets.emit('reload');
+    }, 1000);
+
+    chokidar.watch('devtmp', {}).on('all', (event, path) => {
+        // console.log(event, path);
+        io.sockets.emit('reload');
+    });
+} else {
+    views = require('koa-views');
+}
+
+// 捕获未知错误
 onerror(app);
 
-// --webapi response; html & json & jsonp
+// 对ctx对象进行扩展，添加 html & json & jsonp 等方法
 const webapi = require('./biz/common/middlewares/koa-webapi');
+
 webapi(app);
 
+// 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
 app.use(bodyParser());
+
+// 美化json格式输出
 app.use(json());
 
-// 加载模板引擎
-app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), {
-    map: {html: 'ejs'}
-}));
+// 模板引擎设置
+app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { html: 'ejs' } }));
 
-// --静态资源
-app.use(static(path.join(__dirname, `./${config.default.viewsdir}`), {index: 'index.html'}));
+// 静态资源设置
+app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
 
-// logger access logger
-app.use(async (ctx, next) => {
+// 监控请求响应时间，catch未知的错误
+app.use(async(ctx, next) => {
     logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
-    let start = new Date();
+    const start = new Date();
+
     try {
         await next();
     } catch (err) {
         logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
         logger.error(err);
-        if (ctx.method == 'POST') {
+        if (ctx.method === 'POST') {
             logger.error(ctx.request.body);
         }
-        let isAjax = ctx.headers['x-requested-with'] == 'XMLHttpRequest';
-        if(isAjax){
+        const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
+
+        if (isAjax) {
             ctx.json(1, err.message);
-        }else{
+        } else {
             throw err;
         }
     }
-    let ms = new Date() - start;
+    const ms = new Date() - start;
+
     logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
 });
 
-// routers
-let routers = require('./biz/routers');
+// 路由重写，根据项目需要在rewrite中添加重写规则
+app.use(rewrite);
+
+// 加载路由
 app.use(routers.routes(), routers.allowedMethods());
-
-// Create HTTP server.
-let server = http.createServer(app.callback());
-// Listen on provided port, on all network interfaces.
-
-module.exports = app.listen(config.default.port || 3000, () => {
-    logger.info(`app is listening ${config.default.port || 3000}`);
-});

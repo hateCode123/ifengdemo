@@ -1,6 +1,6 @@
 {
   "restartable": "rs",
-  "ignore": [".git", "node_modules","logs","tests","views","client"],
+  "ignore": [".git", "node_modules","logs","tests","views","client","devtmp","package.json","webpack.config.js"],
   "verbose": true,
   "execMap": {
 
@@ -9,7 +9,8 @@
     "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
   },
   "watch": [
-    "biz"
+    "biz",
+    "app.js"
   ],
   "env": {
     "NODE_ENV": "development",

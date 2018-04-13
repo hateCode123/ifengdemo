@@ -7,14 +7,15 @@ const Joi = require('joi');
  * @return {Funciton}
  */
 exports.validate = (schemas, type) => {
-    return async function (ctx, next) {
+    return async(ctx, next) => {
         if (schemas) {
-            let ret = Joi.validate(Object.assign({}, ctx.query, ctx.params, ctx.request.body), schemas, {
-                allowUnknown: true,
-            });
+            const ret = Joi.validate(Object.assign({}, ctx.query, ctx.params, ctx.request.body), schemas, { allowUnknown: true });
+
             if (ret.error) {
                 switch (type) {
                     case 'html':
+                    case 'xml':
+                    case 'text':
                         ctx.body = `<!DOCTYPE html>
                                         <html>
                                             <head></head>
@@ -23,12 +24,18 @@ exports.validate = (schemas, type) => {
                                                 <p>${JSON.stringify(ret.error.details)}</p>
                                             </body>
                                         </html>`;
+                        break;
+                    case 'jsonp':
+                        ctx.jsonp({ error: 'params validate occurs Error' });
+                        break;
                     default:
                         ctx.json(1, 'params validate occurs Error', ret.error.details);
                 }
+
                 return;
             }
         }
+
         return next();
     };
 };

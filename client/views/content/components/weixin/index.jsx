@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './index.css';
-import {loadScript} from '@ifeng/ui_base';
+import { loadScript } from '@ifeng/ui_base';
 
-class Wexin extends React.Component {
+/**
+ * 定义 Wexin 组件
+ */
+class Wexin extends React.PureComponent {
+    /**
+     *
+     */
     createMarkup = () => {
         return {
             __html: `<wb:follow-button
@@ -14,11 +21,20 @@ class Wexin extends React.Component {
     />`,
         };
     };
+
+    /**
+     *
+     */
     componentDidMount() {
-        loadScript('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')
+        loadScript('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
     }
+
+    /**
+     *
+     */
     render() {
         const { content } = this.props;
+
         return (
             <div className={styles.box}>
                 <div className={styles.pic}>
@@ -29,7 +45,11 @@ class Wexin extends React.Component {
                 </div>
                 <div className={styles.detail}>
                     <p>
-                        <a href="http://weibo.com/financeifeng" target="_blank" title="凤凰财经">
+                        <a
+                            href="http://weibo.com/financeifeng"
+                            target="_blank"
+                            title="凤凰财经"
+                            rel="nofollow me noopener noreferrer">
                             凤凰财经
                         </a>
                     </p>
@@ -40,4 +60,15 @@ class Wexin extends React.Component {
     }
 }
 
+/**
+ * 定义组件属性类型
+ * */
+Wexin.propTypes = { content: PropTypes.object };
+
+/**
+ * 定义组件默认属性
+ * */
+Wexin.defaultProps = {};
+
+export { Wexin };
 export default Wexin;

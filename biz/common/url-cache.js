@@ -1,19 +1,17 @@
 'use strict';
-const logger = require('@ifeng/logger');
+const logger = require('./logger');
 const Chance = require('chance');
-
 const chance = new Chance();
 
 /**
  * 随机在过期时间加上0~30秒的值,防止高并发缓存同时失效的问题
  * @param {Number} expire
  */
-function random(expire) {
+const random = (expire) => {
     return expire + chance.integer({ min: 0, max: 30 });
-}
+};
 
-
-module.exports = (cache,type,options) => {
+module.exports = (cache, type, options) => {
     const prefix = options.prefix;
     const engine = options.engine;
 
@@ -34,17 +32,19 @@ module.exports = (cache,type,options) => {
      * @param {String} type
      * @param {String} key
      */
-    async function getCache(type, key) {
+    const getCache = async(type, key) => {
+        const ret = await engine.get(key);
+
         switch (type) {
             case 'html':
             case 'xml':
             case 'text':
-                return engine.get(key);
+            case 'jsonp':
+                return ret;
             default:
-                let ret = await engine.get(key);
                 return JSON.parse(ret);
         }
-    }
+    };
 
     /**
      *  set data in cache with expire
@@ -53,27 +53,31 @@ module.exports = (cache,type,options) => {
      * @param {*} data
      * @param {Number} expire
      */
-    async function setCache(type, key, data, expire) {
+    const setCache = async(type, key, data, expire) => {
         switch (type) {
             case 'html':
             case 'xml':
             case 'text':
+            case 'jsonp':
                 return engine.setex(key, expire, data);
             default:
                 return engine.setex(key, expire, JSON.stringify(data));
         }
-    }
+    };
 
-    return async (ctx, next) => {
-        let key = prefix + '::URL::CACHE::' + ctx.url;
-        if (ctx.method !== 'GET' || !cache ||cache <= 0) {
+    return async(ctx, next) => {
+        const key = `${prefix}::URL::CACHE::${ctx.url}`;
+
+        if (ctx.method !== 'GET' || !cache || cache <= 0) {
             return next();
         }
 
-        let ret = await getCache(type, key);
+        const ret = await getCache(type, key);
+        
         if (ret) {
             ctx.body = ret;
             logger.info(`url_cache: ${ctx.method} ${ctx.url} get response body from cache`);
+            
             return;
         }
 
@@ -81,5 +85,5 @@ module.exports = (cache,type,options) => {
         setCache(type, key, ctx.body, random(cache)).catch(err => {
             logger.error(`url_cache: ${key} cache happened error:${err}`);
         });
-    }
+    };
 };

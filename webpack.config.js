@@ -1,23 +1,106 @@
 const path = require('path');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const webpack = require('webpack');
-const px2rem = require('postcss-px2rem');
+// const px2rem = require('postcss-px2rem');
 const nextcss = require('postcss-cssnext');
 const postImport = require('postcss-import');
+const aspectRatioMini = require('postcss-aspect-ratio-mini');
+const pxToViewport = require('postcss-px-to-viewport');
+const viewPortUnits = require('postcss-viewport-units');
+const writeSvg = require('postcss-write-svg');
 const CleanPlugin = require('clean-webpack-plugin');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
-const createConfig = function(type) {
+
+const pcCssConfig = {
+    test: /\.css$/,
+    // exclude: /node_modules/,
+    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+    use: [
+        'style-loader',
+        'css-loader?modules&localIdentName=[path][name]_[local]',
+        {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true,
+                plugins: function() {
+                    return [
+                        postImport(),
+                        nextcss({
+                            browsers: ['last 2 versions', 'ie >= 9'],
+                            // browsers: ['chrome >= 56'],
+                        }),
+
+                        // px2rem({
+                        //     remUnit: 75,
+                        // }),
+                    ];
+                },
+            },
+        },
+    ],
+};
+
+const mobileCssConfig = {
+    test: /\.css$/,
+    // exclude: /node_modules/,
+    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+    use: [
+        'style-loader',
+        'css-loader?modules&localIdentName=[path][name]_[local]',
+        {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true,
+                plugins: function() {
+                    return [
+                        postImport(),
+                        aspectRatioMini(),
+                        writeSvg({utf8: false}),
+                        pxToViewport({
+                            viewportWidth: 750,
+                            viewportHeight: 1334,
+                            unitPrecision: 5,
+                            viewportUnit: 'vw',
+                            selectorBlackList: ['.ignore', '.hairlines'],
+                            minPixelValue: 1,
+                            mediaQuery: false,
+                        }),
+                        viewPortUnits(),
+                        nextcss({
+                            browsers: ['last 2 versions', 'ie >= 9'],
+                            // browsers: ['chrome >= 56'],
+                        }),
+
+                        // px2rem({
+                        //     remUnit: 75,
+                        // }),
+                    ];
+                },
+            },
+        },
+    ],
+};
+
+const fileExtend = {
+    pc_view : '',
+    pc_edit: '_edit',
+    mobile_view: '_mobile',
+    mobile_edit: '_mobile_edit'
+};
+
+const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys('./client/views/*/app.js'),
+        entry: getEntrys(platform === 'pc' ? './client/views/*/app.js' : './client/mobile/views/*/app.js'),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
-            filename: `js/[name]_${type}.js`,
+            filename: `js/[name]_${platform}_${type}.js`,
             publicPath: '/',
-            chunkFilename: `js/[name]_${type}.js`,
+            chunkFilename: `js/[name]_${platform}_${type}.js`,
         },
         resolve: {
+            extensions: ['.js', '.json', '.jsx'],
             alias: {
                 Chip:
                     type === 'view'
@@ -58,34 +141,7 @@ const createConfig = function(type) {
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
-                {
-                    test: /\.css$/,
-                    // exclude: /node_modules/,
-                    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-                    use: [
-                        'style-loader',
-                        'css-loader?modules&localIdentName=[path][name]_[local]',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: function() {
-                                    return [
-                                        postImport(),
-                                        nextcss({
-                                            browsers: ['last 2 versions', 'ie >= 9'],
-                                            // browsers: ['chrome >= 56'],
-                                        }),
-
-                                        // px2rem({
-                                        //     remUnit: 75,
-                                        // }),
-                                    ];
-                                },
-                            },
-                        },
-                    ],
-                },
+                cssConfig,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
                     use: [
@@ -110,18 +166,18 @@ const createConfig = function(type) {
             new WriteFileWebpackPlugin(),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('development'),
-                // ChipStaticUrl: JSON.stringify('https://ucms.ifeng.com/shard/static/edit/'),
-                // ChipRecommendUrl: JSON.stringify('https://ucms.ifeng.com/shard/recommend/edit/'),
-                ChipStaticUrl: JSON.stringify('https://wugs.ucms.ifeng.com:8843/shard/static/edit/'),
-                ChipRecommendUrl: JSON.stringify(' https://wugs.ucms.ifeng.com:8843/shard/recommend/edit/'),
+                ChipStaticUrl: JSON.stringify('https://ucms.ifeng.com/shard/static/edit/'),
+                ChipRecommendUrl: JSON.stringify('https://ucms.ifeng.com/shard/recommend/edit/'),
             }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: ['vendor', 'manifest'],
                 minChunks: 2,
             }),
             new webpack.NamedModulesPlugin(),
-            ...getHTMLs('./client/views/*/template.html', type === 'view' ? '' : '_edit'),
+            ...getHTMLs(platform === 'pc' ? './client/views/*/template.html' : './client/mobile/views/*/template.html', fileExtend[`${platform}_${type}`]),
         ],
     };
 };
-module.exports = [createConfig('view'), createConfig('visualediting')];
+// module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
+module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
+

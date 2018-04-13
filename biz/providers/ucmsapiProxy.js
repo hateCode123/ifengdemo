@@ -3,11 +3,15 @@
 // TARS version 1.0.1.
 // **********************************************************************
 
-var TarsStream = require('@tars/stream');
-var TarsError  = require('@tars/rpc').error;
+const TarsStream = require('@tars/stream');
+const TarsError  = require('@tars/rpc').error;
+const Tars = require("@tars/rpc").client;
+const path = require('path');
+const env = process.env.NODE_ENV || 'development';
+
+Tars.initialize(path.join(__dirname,`../configs/${env}/config.conf`));
 
 var Tarsapi = Tarsapi || {};
-module.exports.Tarsapi = Tarsapi;
 
 Tarsapi.SearchProxy = function () {
     this._name   = undefined;
@@ -50,7 +54,7 @@ Tarsapi.RedisProxy.prototype.getTimeout = function ( ) {
 
 
 Tarsapi.SearchProxy.prototype.test = function (s) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, s);
         return os.getBinBuffer();
@@ -89,7 +93,7 @@ Tarsapi.SearchProxy.prototype.test = function (s) {
 
 
 Tarsapi.KVProxy.prototype.del = function (enumValue, k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, enumValue);
         os.writeString(2, k);
@@ -128,7 +132,7 @@ Tarsapi.KVProxy.prototype.del = function (enumValue, k) {
 }
 
 Tarsapi.KVProxy.prototype.getCategories = function (ids) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -166,7 +170,7 @@ Tarsapi.KVProxy.prototype.getCategories = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getCategory = function (id) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -204,7 +208,7 @@ Tarsapi.KVProxy.prototype.getCategory = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getCustom = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -242,7 +246,7 @@ Tarsapi.KVProxy.prototype.getCustom = function (k) {
 }
 
 Tarsapi.KVProxy.prototype.getCustoms = function (keys) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, keys);
         return os.getBinBuffer();
@@ -280,7 +284,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function (keys) {
 }
 
 Tarsapi.KVProxy.prototype.getDocument = function (id) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
@@ -318,7 +322,7 @@ Tarsapi.KVProxy.prototype.getDocument = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getDocuments = function (ids) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -356,7 +360,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getRecommendFragment = function (id) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -394,7 +398,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getRecommendFragments = function (ids) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -432,7 +436,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getStaticFragment = function (id) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -470,7 +474,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getStaticFragments = function (ids) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -508,7 +512,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getVideo = function (id) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
@@ -546,7 +550,7 @@ Tarsapi.KVProxy.prototype.getVideo = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getVideos = function (ids) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -584,7 +588,7 @@ Tarsapi.KVProxy.prototype.getVideos = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.putCategory = function (id, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -623,7 +627,7 @@ Tarsapi.KVProxy.prototype.putCategory = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putCustom = function (k, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -662,7 +666,7 @@ Tarsapi.KVProxy.prototype.putCustom = function (k, v) {
 }
 
 Tarsapi.KVProxy.prototype.putDocument = function (id, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
@@ -701,7 +705,7 @@ Tarsapi.KVProxy.prototype.putDocument = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putRecommendFragment = function (id, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -740,7 +744,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putStaticFragment = function (id, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -779,7 +783,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putVideo = function (id, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
@@ -819,7 +823,7 @@ Tarsapi.KVProxy.prototype.putVideo = function (id, v) {
 
 
 Tarsapi.RedisProxy.prototype.blpop = function (time, ks) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
@@ -858,7 +862,7 @@ Tarsapi.RedisProxy.prototype.blpop = function (time, ks) {
 }
 
 Tarsapi.RedisProxy.prototype.brpop = function (time, ks) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
@@ -897,7 +901,7 @@ Tarsapi.RedisProxy.prototype.brpop = function (time, ks) {
 }
 
 Tarsapi.RedisProxy.prototype.del = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -935,7 +939,7 @@ Tarsapi.RedisProxy.prototype.del = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.expire = function (k, exp) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeInt32(2, exp);
@@ -974,7 +978,7 @@ Tarsapi.RedisProxy.prototype.expire = function (k, exp) {
 }
 
 Tarsapi.RedisProxy.prototype.get = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1012,7 +1016,7 @@ Tarsapi.RedisProxy.prototype.get = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.getRange = function (k, startOffset, endOffset) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeInt32(2, startOffset);
@@ -1052,7 +1056,7 @@ Tarsapi.RedisProxy.prototype.getRange = function (k, startOffset, endOffset) {
 }
 
 Tarsapi.RedisProxy.prototype.hgetAll = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1090,7 +1094,7 @@ Tarsapi.RedisProxy.prototype.hgetAll = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.hmset = function (k, hash) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeMap(2, hash);
@@ -1129,7 +1133,7 @@ Tarsapi.RedisProxy.prototype.hmset = function (k, hash) {
 }
 
 Tarsapi.RedisProxy.prototype.llen = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1167,7 +1171,7 @@ Tarsapi.RedisProxy.prototype.llen = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.lpop = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1205,7 +1209,7 @@ Tarsapi.RedisProxy.prototype.lpop = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.lpush = function (k, element) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
@@ -1244,7 +1248,7 @@ Tarsapi.RedisProxy.prototype.lpush = function (k, element) {
 }
 
 Tarsapi.RedisProxy.prototype.rpop = function (k) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1282,7 +1286,7 @@ Tarsapi.RedisProxy.prototype.rpop = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.rpush = function (k, element) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
@@ -1321,7 +1325,7 @@ Tarsapi.RedisProxy.prototype.rpush = function (k, element) {
 }
 
 Tarsapi.RedisProxy.prototype.set = function (k, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -1360,7 +1364,7 @@ Tarsapi.RedisProxy.prototype.set = function (k, v) {
 }
 
 Tarsapi.RedisProxy.prototype.setex = function (k, v, expire) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -1400,7 +1404,7 @@ Tarsapi.RedisProxy.prototype.setex = function (k, v, expire) {
 }
 
 Tarsapi.RedisProxy.prototype.setnx = function (k, v) {
-    var _encode = function () { 
+    var _encode = function () {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -1438,5 +1442,4 @@ Tarsapi.RedisProxy.prototype.setnx = function (k, v) {
     return this._worker.tars_invoke('setnx', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
-
-
+exports.KVProxy = Tars.stringToProxy(Tarsapi.KVProxy, Tars.configure.get("main.KVServer"));
