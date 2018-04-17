@@ -28,8 +28,8 @@
 * /biz/controllers 后端路由模块，所有的路由都在controller中，业务开发人员主要在该目录实现功能，获取数据，加工数据，响应数据
 * /biz/services 数据服务，所有的数据库操作，rpc调用，http请求发送，等等功能，原则上都必须services中
 * /biz/providers 包含rpc调用类，以后如果有新的rpc类，或者sql类也放到该文件中
-* /biz/router.js 后端路由模块
-* /biz/rewrite.js 路由重写，将满足条件的路由重写到真正的业务路由中去，根据业务需要进行配置，可以删除
+* /biz/router.js 后端路由模块 ，如果pc路由找不到，不会去尝试h5路由，如果h5和pc要公用路由处理方法，可以在 router中进行手动配置，详情请查看文件中的 rewriteList 对象
+* /biz/rewrite.js 路由重写，将满足条件的路由重写到真正的业务路由中去，例如：底页根据headers ，id 选择pc路由 或h5 路由，根据业务需要进行配置，可以删除
 * /app.js 后端项目入口文件
 
 ## 常用命令

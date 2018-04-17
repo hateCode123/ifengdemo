@@ -43,4 +43,9 @@ module.exports = (app, options = {}) => {
         this.type = contentType;
         this.body = response;
     };
+
+    // extend error function
+    app.context.error = function(status) {
+        this.status = status || 404;
+    };
 };

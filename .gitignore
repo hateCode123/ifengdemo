@@ -3,3 +3,4 @@ dist/*
 devtmp/*
 tmp
 logs
+.vscode
