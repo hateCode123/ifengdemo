@@ -12,6 +12,13 @@ const redis = require('./common/redis');
 const urlCache = require('./common/url-cache');
 const { match } = require('./common/url-match');
 
+let routerList = [];
+let rewriteList = {
+    '/heartbeat': '/api/heartbeat',
+    '/mobile/content/:id': '/content/:id',
+    '/mobile/content/:id/edit': '/content/:id/edit',
+};
+
 const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
     // http请求类型，暂时只支持get和post
     const method = ctrlObj[i].method || 'get|post';
@@ -66,8 +73,15 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
         }
         if (_.isFunction(handler)) {
             // 将路由挂载
-            router[methodItem](path, ...meddlewareList, match(type, cache, edit, ctrlPath, handler));
-            logger.debug(`${methodItem}\t:${path}`);
+            // router[methodItem](path, ...meddlewareList, match(type, cache, edit, ctrlPath, handler));
+            meddlewareList.push(match(type, cache, edit, ctrlPath, handler));
+            routerList.push({
+                path,
+                method: methodItem,
+                handlers: meddlewareList,
+            });
+
+            // logger.debug(`${methodItem}\t:${path}`);
         }
     }
 };
@@ -103,8 +117,38 @@ const routerLoad = ctrlPath => {
     });
 };
 
+const getRouter = path => {
+    for (const item of routerList) {
+        if (item.path === path) {
+            return item;
+        }
+    }
+
+    return null;
+};
+
 routerLoad('api');
 routerLoad('pc');
 routerLoad('mobile');
+
+for (const from in rewriteList) {
+    let item = getRouter(rewriteList[from]);
+
+    if (!item) {
+        continue;
+    }
+    
+    // 将rewrite路由挂载
+    router[item.method](from, ...item.handlers);
+
+    logger.debug(`${item.method}\t:${from}`);
+}
+
+for (const item of routerList) {
+    // 将路由挂载
+    router[item.method](item.path, ...item.handlers);
+
+    logger.debug(`${item.method}\t:${item.path}`);
+}
 
 module.exports = router;

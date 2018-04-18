@@ -24,19 +24,16 @@ const error = result => {
 module.exports = async(ctx, next) => {
     console.log(ctx.url);
     let type = '';
-    const ua = ctx.headers['user-agent'];
-    const ispc = isPC(ua);
+    const deviceType = ctx.headers['deviceType'] || 'pc';
 
-    console.log(ispc);
+    // if (/^\/heartbeat/.test(ctx.url)) {
+    //     return await rewrite(/\/heartbeat(.*)/, '/api/heartbeat$1')(ctx, next);
+    // }
 
-    if (/^\/heartbeat/.test(ctx.url)) {
-        return await rewrite(/\/heartbeat(.*)/, '/api/heartbeat$1')(ctx, next);
-    }
-
-    // 监控api
-    if (/^\/api\//.test(ctx.url)) {
-        return await rewrite(/\/api(.*)/, '/api$1')(ctx, next);
-    }
+    // // 监控api
+    // if (/^\/api\//.test(ctx.url)) {
+    //     return await rewrite(/\/api(.*)/, '/api$1')(ctx, next);
+    // }
 
     // 底页面 rewrite
     if (/^\/r\//.test(ctx.url)) {
@@ -55,38 +52,20 @@ module.exports = async(ctx, next) => {
 
         type = 'content';
 
-        let partten = ispc ? `/${type}$1` : `/mobile/${type}$1`;
+        let partten = deviceType === 'pc' ? `/${type}$1` : `/mobile/${type}$1`;
 
         return await rewrite(/\/r(.*)/, partten)(ctx, next);
     }
 
-    // 是否是移动端
-    if (/^\/mobile\//.test(ctx.url)) {
-        return await next();
-    }
+    // // 是否是移动端
+    // if (/^\/mobile\//.test(ctx.url)) {
+    //     return await next();
+    // }
 
-    if (ispc) {
-        // return await rewrite(/(.*)/, '$1')(ctx, next);
-        for (const item of pcToMobileList) {
-            if (item.from.test(ctx.url)) {
-                return await rewrite(item.from, item.to)(ctx, next);
-            }
-        }
-
-        return await next();
-    } else {
-        for (const item of mobileToPcList) {
-            if (item.from.test(ctx.url)) {
-                return await rewrite(item.from, item.to)(ctx, next);
-            }
-        }
+    if (deviceType === 'mobile' && !/(^\/api\/)|(^\/heartbeat)|(^\/mobile\/)/.test(ctx.url)) {
 
         return await rewrite(/(.*)/, '/mobile$1')(ctx, next);
     }
+
+    return await next();
 };
-
-// { from: /^\/content(.*)/, to: '/mobile/content$1' }
-let pcToMobileList = [];
-
-// { from: /^\/content(.*)/, to: '/content$1' }, { from: /^\/index(.*)/, to: '/index$1' }
-let mobileToPcList = []; 
