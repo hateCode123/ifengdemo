@@ -11,9 +11,9 @@ import WemoneyNav from './components/wemoneyNav/';
 import Lunbo from './components/lunbo/';
 import HotNews from './components/hotNews/';
 import AdAside  from './components/adAside/';
+import NewsList from './components/newslist/';
 /*
 import News from './components/newslist/';
-import AdAside  from './components/adAside/';
 import TopButton  from './components/topButton/';
 import Footer from './components/footer/';
 */
@@ -33,17 +33,23 @@ class Layout extends React.PureComponent{
                     <WemoneyNav content={content.wemoneyNav} />
                 </div>
 
-                <div className={styles.bodyCon}>
+
+                <div className={styles.bodyCon +" "+ styles.clearfix}>
                     <div className={styles.bodyMes}>
+
                         <div className={styles.bodyLeftCon}>
-                            
+                            <Lunbo content={content.wemoneyLunbo}/>
+                            <NewsList content={content.wemoneyNewsFlow}/>
                         </div>
+
+
                         <div className={styles.bodyRightCon}>
                             <div className={styles.onlineResolve}>
                                 <HotNews content={content.wemoneyNewsRanking}/>
                             </div>
-                                <AdAside content={content.wemoneyAdAside}/>
+                            <AdAside content={content.wemoneyAdAside}/>
                         </div>
+
                     </div>
                 </div>
 

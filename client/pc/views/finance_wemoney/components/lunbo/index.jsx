@@ -17,26 +17,15 @@ class Lunbo extends React.PureComponent {
     render() {
         const content = this.props.content ;
 
-        //const list = content.slice(0)
-        /*var content = [{
-                title: '1迷你世界联机：抢凳子小游戏 汤米不小心被淘汰',
-                url: '//finance.ifeng.com/a/20180223/15993655_0.shtml&#10;',
-                poster:'http://p2.ifengimg.com/a/2018_08/033dafb51076bff_size16_w550_h306.jpg'
-            }, {
-                title: '2迷你世界联机：抢凳子小游戏 汤米不小心被淘汰',
-                url: '//finance.ifeng.com/a/20180223/15993294_0.shtml&#10;',
-               poster:'http://p1.ifengimg.com/a/2018_08/567c1a67e008fdf_size121_w580_h330.jpg'
-            }]
-            */
         const creatList = () =>(
             <ul >
                 {content.map((item,index) => (
                     //styles.unslider-active
-                    <li >
+                    <li key={index} className={styles.unsliderWrap}>
                         <a href={item.url} target="_blank">
-                            <img src={item.poster}  />
+                            <img src={item.poster}  className={styles.trans}/>
                         </a>
-                        <div >
+                        <div className={styles.bannerTitleCon}>
                             <a href={item.url} target="_blank">
                                 <p><strong><span style={{fonSize:'14pt'}}>{item.title}</span></strong></p>
                             </a>
@@ -51,18 +40,18 @@ class Lunbo extends React.PureComponent {
             <ol>
                 {content.map((item,index) => (
                     //styles.unslider-active
-                    <li data-slide={index} >{index}</li>
+                    <li data-slide={index} key={index}>{index}</li>
                 ))}
             </ol>
         )
 
 
         return (
-            <div>               
-                <div style={{overflow: 'hidden'}}>
+            <div className={styles.unslider}>               
+                <div className={styles.wrapCon + " "+ styles.unsliderFade}>
                     {creatList()}
                 </div>
-                <nav>
+                <nav className={styles.unsliderNav}>
                     {creatTag()}
                 </nav>
                     
