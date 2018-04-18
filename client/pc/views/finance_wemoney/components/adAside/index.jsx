@@ -1,30 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 
 /**
  * 定义 Comment 组件
  */
-class Comment extends React.Component {
+class AdAside extends React.Component {
     /**
      * 渲染组件
      */
     render() {
         const { content } = this.props;
 
-        return <div className={ styles.box } data-adhook={ content }>{ content }</div>;
+        //return <div className={ styles.box } data-adhook={ content }>{ content }</div>;
+        return (
+            <div>
+            <ul>
+                {content.map((item,index) => (
+                    <li key={index}>
+                        <a className={styles.evaluateCon} href={item.url}>
+                            <img src={item.imgUrl} alt={item.title} />
+                        </a>
+                        <span>span是一个行内标签</span>
+                    </li>
+                ))}
+            </ul>
+            </div>
+        )
     }
 }
 
 /**
  * 定义组件属性类型
  * */
-Comment.propTypes = { content: PropTypes.string };
+AdAside.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性
  * */
-Comment.defaultProps = {};
+AdAside.defaultProps = {};
 
-export { Comment };
-export default Comment;
+export { AdAside };
+export default AdAside;

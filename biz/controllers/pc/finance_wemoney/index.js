@@ -42,6 +42,7 @@ exports.finance_wemoney = {
         console.log('getStaticFragment 10003...')
         const wemoneyNav = KVProxy.getStaticFragment(10003).then(success(), error);
         const wemoneyLunbo = KVProxy.getStaticFragment(10006).then(success('content'), error);
+        const wemoneyAdAside = KVProxy.getStaticFragment(10004).then(success('content'), error);
         const wemoneyNewsRanking = KVProxy.getStaticFragment(10005).then(success('content'), error);
         const wemoneyNewsFlow = KVProxy.getStaticFragment(10007).then(success('content'), error);
 
@@ -50,7 +51,8 @@ exports.finance_wemoney = {
             wemoneyNav,
             wemoneyLunbo,
             wemoneyNewsFlow,
-            wemoneyNewsRanking
+            wemoneyNewsRanking,
+            wemoneyAdAside
         ]);
 
         //console.log("11111 : ", otherData)
@@ -60,6 +62,7 @@ exports.finance_wemoney = {
                 wemoneyLunbo: otherData[1],
                 wemoneyNewsFlow: otherData[2],
                 wemoneyNewsRanking: otherData[3],
+                wemoneyAdAside: otherData[4],
             }
         //};
         //console.log(allData)

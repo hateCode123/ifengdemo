@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-
+import Chip from 'Chip';
 /**
  * 定义 Comment 组件
  */

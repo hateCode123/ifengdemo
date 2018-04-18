@@ -10,6 +10,7 @@ import Header from './components/header/';
 import WemoneyNav from './components/wemoneyNav/';
 import Lunbo from './components/lunbo/';
 import HotNews from './components/hotNews/';
+import AdAside  from './components/adAside/';
 /*
 import News from './components/newslist/';
 import AdAside  from './components/adAside/';
@@ -41,6 +42,7 @@ class Layout extends React.PureComponent{
                             <div className={styles.onlineResolve}>
                                 <HotNews content={content.wemoneyNewsRanking}/>
                             </div>
+                                <AdAside content={content.wemoneyAdAside}/>
                         </div>
                     </div>
                 </div>
