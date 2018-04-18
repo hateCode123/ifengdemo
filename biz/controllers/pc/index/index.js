@@ -4,7 +4,7 @@ const logger = require('../../../common/logger');
 const indexService = require('../../../services/index');
 
 exports.index = {
-    path: '/index',
+    path: '/pc/index',
     method: 'get',
     handler: async ctx => {
         const originData = await indexService.getOriginData();

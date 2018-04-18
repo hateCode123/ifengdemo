@@ -1,0 +1,123 @@
+
+.wrapCon{
+    width:654px;
+    height:400px;
+    font-size:12px;
+
+}
+.unslider{
+    background:#fff;
+    position:relative;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    & li {
+        width:654px;
+        height:400px;
+        position:relative;
+        & img {
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:0;
+            width:654px;
+            height:400px;
+        }
+    }
+}
+
+.unslider-nav{
+    position: absolute;
+    bottom: 27px;
+    right: 18px;
+    z-index: 10;
+
+}
+.bannerTitleCon{
+    width:629px;
+    height:68px;
+    line-height:68px;
+    padding-left:25px;
+    background: rgb(129,140,154);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#80000000,endColorstr=#80000000)"; /*Filter for IE8 */ 
+    background: rgba(129,140,154,0.5);
+    position:absolute;
+    bottom:0;
+    z-index:1;
+    font-size:16px;
+    font-family: "microsoft Yahei";
+    color:#fff;
+    overflow:hidden;
+    cursor:pointer;
+
+    & a {
+        color:#fff;
+        &:hover{
+          color:#fe5421;  
+        }
+    }
+}/*170412a*/
+
+
+/*lunbo styles end */
+.mesListCon{
+    width:650px;
+    /*min-height:600px;*/
+}
+
+
+.unslider-wrap {
+    position: relative
+    
+}
+
+.unslider-wrap.unslider-carousel>li {
+    float: left
+}
+
+.unslider-vertical>ul {
+    height: 100%
+}
+
+.unslider-vertical li {
+    float: none;
+    width: 100%
+}
+
+.unslider-fade {
+    position: relative
+}
+
+.unslider-fade .unslider-wrap li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 8
+}
+
+.unslider-fade .unslider-wrap li.unslider-active {
+    z-index: 10
+}
+
+.unslider li,
+.unslider ol,
+.unslider ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none
+}
+
+.unslider-arrow {
+    position: absolute;
+    left: 20px;
+    z-index: 2;
+    cursor: pointer
+}
+
+.unslider-arrow.next {
+    left: auto;
+    right: 20px
+}
+

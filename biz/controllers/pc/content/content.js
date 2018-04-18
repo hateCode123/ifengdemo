@@ -18,7 +18,7 @@ const error = result => {
 };
 
 exports.contentId = {
-    path: '/content/:id',
+    path: '/pc/content/:id',
     method: 'get',
     edit: true,
     type: 'html',

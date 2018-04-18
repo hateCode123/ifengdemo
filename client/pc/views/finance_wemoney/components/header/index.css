@@ -1,0 +1,57 @@
+.h_mainNavNew {
+    width: 980px;
+    height: 26px;
+    margin: 0 auto;
+    padding: 7px 10px 3px;
+    font-family: '宋体';
+    position: relative;
+    z-index: 999;
+    background: #fff;
+}
+
+.pic1000 {
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    height: 90px;
+}
+
+.searchDiv {
+    width: 1000px;
+    margin: 0 auto;
+    height: 36px;
+    padding: 20px 0 0 0px;
+    position: relative;
+    z-index: 103;
+}
+
+.theLogo {
+    width: 620px;
+    float: left;
+    font-size: 12px;
+    height: 34px;
+    overflow: hidden;
+
+    & a img {
+        position: relative;
+        left: 0;
+        top: 0;
+        right: 361px;
+        float: left;
+    }
+}
+
+.adBox {
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    height: 90px;
+    float: right;
+    text-align: center;
+    line-height: 90px;
+}
+
+
+@media (min-width: 1250px) {
+    .h_mainNavNew, .pic1000, .searchDiv {
+        width: 1240px;
+    }
+}
