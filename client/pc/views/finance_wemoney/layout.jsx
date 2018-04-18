@@ -12,9 +12,9 @@ import Lunbo from './components/lunbo/';
 import HotNews from './components/hotNews/';
 import AdAside  from './components/adAside/';
 import NewsList from './components/newslist/';
+import GoTop  from './components/goTop/';
 /*
 import News from './components/newslist/';
-import TopButton  from './components/topButton/';
 import Footer from './components/footer/';
 */
 
@@ -52,7 +52,8 @@ class Layout extends React.PureComponent{
 
                     </div>
                 </div>
-
+                
+                <GoTop />
                 <ChipEdit />
             </div>
         )
