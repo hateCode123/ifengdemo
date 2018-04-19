@@ -6,15 +6,17 @@
 .text{
         height: 26px; overflow: hidden;
         & a {
-            color: #222222;font-size: 18px;font-weight: bold;line-height:26px;height: 26px;overflow: hidden;
-            & :hover{color: #fc5522;}
-        }
+            color: #222222;font-size: 18px;font-weight: bold;line-height:26px;height: 26px;overflow: hidden;text-decoration: none;
+        };
+        & :hover{color: #fc5522;} 
 
     }
 .time{ 
         color: #999999; font-size: 14px; margin-top: 34px;
         & b{border: solid 1px #17a0e0; color: #17a0e0; padding: 1px 5px; border-radius: 4px; font-weight: normal; font-size: 12px;}
         & span{font-size: 12px; color: #999; margin-left: 10px;}
+        & redBg{ background: #ff4245; color: #fff; border: solid 1px #ff4245;};
+        & redBor{border: solid 1px #ff4245; color: #ff4245;};
 
     } 
     

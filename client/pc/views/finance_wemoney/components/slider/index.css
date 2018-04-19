@@ -28,6 +28,7 @@
     cursor:pointer;
     & a {
         color:#fff;
+        text-decoration: none;
         &:hover{
           color:#fe5421;  
         }

@@ -11,11 +11,11 @@ class News extends React.Component {
      */
     render() {
         const  {content}  = this.props;
-        let typeName = [];
-        {content.map((item,index) => (
-            //styles.unslider-active
-            typeName.push(item.type)
-        ))} 
+//        let typeName = [];
+//        {content.map((item,index) => (
+//            //styles.unslider-active
+//            typeName.push(item.type)
+//        ))} 
 
         const creatList = () =>(
             <div>
@@ -39,16 +39,21 @@ class News extends React.Component {
                         <div className={styles.ly}>
                             <a href="#" target="_blank" ></a>
                         </div>
-                        
+
                     </div>
                     
                 ))} 
-        </div>
+            </div>
             )
 
         return (
             <div className={styles.sp}>
+            <Chip
+                id="10007" type="static" title="wemoney新闻信息流"
+                groupName="文章" content={ content}
+            >
                 {creatList()}
+            </Chip>
             </div>
 
         )
