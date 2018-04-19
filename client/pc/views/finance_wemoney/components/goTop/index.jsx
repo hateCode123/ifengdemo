@@ -22,12 +22,6 @@ class GoTop extends React.PureComponent {
         };
     }
 
-    // 返回顶部
-    scrollToTop = () => {
-        window.scrollTo(0, 0);
-    };
-
-
 
     // 返回顶部
     scrollToTop = () => {

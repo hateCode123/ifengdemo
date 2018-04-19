@@ -26,12 +26,17 @@ class HotNews extends React.Component {
 
         return (
             <div className={styles.hotSpecial}>
+            <Chip
+                id="10005" type="static" title="wemoney热门新闻排行"
+                groupName="文章" content={ content}
+            >
                 <a href=""><span className={styles.hotTitle}>热门新闻排行</span></a>
                 <i className={styles.hotLineIcon}></i>
 
                 <div className={styles.hotMesCon}>
                         {creatList()}
                 </div>
+            </Chip>
             </div>
 
         )

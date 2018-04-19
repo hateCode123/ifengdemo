@@ -13,18 +13,6 @@ class NewsList extends React.Component {
     render() {
         const  {content}  = this.props;
 
-        const creatList = () =>(
-            <ul >
-                {content.map((item,index) => (
-                    //styles.unslider-active
-                    <li key={index}>
-                        <i className={styles.hotCircleIcon}></i>
-                        <a href={item.url} target="_blank"><span>{item.title}</span></a>
-                    </li>
-                ))} 
-            </ul>
-        )
-
         return (
             <div className={styles.list}>
                 <div className={styles.sp}>

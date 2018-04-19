@@ -30,24 +30,29 @@ class SimpleSlider extends React.PureComponent {
     const content = this.props.content ;
 
     return (
-    <div className={styles.unslider}>               
-        <div className={styles.wrapCon + " "+ styles.unsliderFade}>
-        <Slider {...settings}>
-            {content.map((item,index) => (
-                //styles.unslider-active
-                <div key={index} className={styles.unsliderWrap}>
-                    <a href={item.url} target="_blank">
-                        <img src={item.poster}  className={styles.trans}/>
-                    </a>
-                    <div className={styles.bannerTitleCon}>
-                        <a href={item.url} target="_blank">
-                            <p><strong><span>{item.title}</span></strong></p>
-                        </a>
-                    </div>
-                    <a href={item.url} target="_blank"></a>
-                </div>
-            ))}
-        </Slider>
+    <div>               
+        <div className={styles.wrapCon}>
+        <Chip
+            id="10006" type="static" title="wemoney轮播"
+            groupName="文章" content={ content}
+        >
+          <Slider {...settings}>
+              {content.map((item,index) => (
+                  //styles.unslider-active
+                  <div key={index}>
+                      <a href={item.url} target="_blank">
+                          <img src={item.poster}/>
+                      </a>
+                      <div className={styles.bannerTitleCon}>
+                          <a href={item.url} target="_blank">
+                              <p><strong><span>{item.title}</span></strong></p>
+                          </a>
+                      </div>
+                      <a href={item.url} target="_blank"></a>
+                  </div>
+              ))}
+          </Slider>
+        </Chip>
         </div>       
      </div>
     );

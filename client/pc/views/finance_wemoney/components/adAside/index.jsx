@@ -16,6 +16,10 @@ class AdAside extends React.Component {
         //return <div className={ styles.box } data-adhook={ content }>{ content }</div>;
         return (
             <div>
+            <Chip
+                id="10004" type="static" title="wemoney右侧广告"
+                groupName="文章" content={ content}
+            >
             <ul>
                 {content.map((item,index) => (
                     <li key={index}>
@@ -26,6 +30,7 @@ class AdAside extends React.Component {
                     </li>
                 ))}
             </ul>
+            </Chip>
             </div>
         )
     }
