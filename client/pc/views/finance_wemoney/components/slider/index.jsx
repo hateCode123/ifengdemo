@@ -13,7 +13,18 @@ class SimpleSlider extends React.PureComponent {
       slidesToScroll: 1,
       autoplay:true,
       autoplaySpeed:3000,
-      speed:3000
+      speed:3000,
+      appendDots: dots => (
+        <div
+          style={{
+            backgroundColor: "#fc5522",
+            borderRadius: "10px",
+            padding: "10px"
+          }}
+        >
+          <ul style={{ margin: "0px" }} className={styles.slickDots}> {dots} </ul>
+        </div>
+      ),
     };
 
     const content = this.props.content ;
@@ -30,15 +41,10 @@ class SimpleSlider extends React.PureComponent {
                     </a>
                     <div className={styles.bannerTitleCon}>
                         <a href={item.url} target="_blank">
-                            <p><strong><span style={{fonSize:'24pt'}}>{item.title}</span></strong></p>
+                            <p><strong><span>{item.title}</span></strong></p>
                         </a>
                     </div>
                     <a href={item.url} target="_blank"></a>
-                    <nav className={styles.unsliderNav}>
-                      <ol>
-                            <li data-slide={index} key={index}>{index}</li>
-                      </ol>
-                  </nav>
                 </div>
             ))}
         </Slider>
