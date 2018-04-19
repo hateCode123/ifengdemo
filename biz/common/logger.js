@@ -4,7 +4,7 @@ const logs = config.default.logs;
 
 let streams = [];
 
-if ( process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     logs.stream = process.stdout;
     streams.push(logs);
 } else {
@@ -13,7 +13,10 @@ if ( process.env.NODE_ENV !== 'production') {
 
 const logger = bunyan.createLogger({
     name: 'app',
-    streams
+    streams,
 });
+
+console.log = logger.debug.bind(logger);
+console.error = logger.error.bind(logger);
 
 module.exports = logger;

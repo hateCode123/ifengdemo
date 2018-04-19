@@ -2,14 +2,20 @@ const { listTransform } = require('../../../common/transform');
 const redis = require('../../../common/redis');
 const logger = require('../../../common/logger');
 const indexService = require('../../../services/index');
+const { KVProxy } = require('../../../providers/ucmsapiProxy');
+
+const { jsonParse, handleData, handleJson, handleJsonbByKey, handleJs } = require('../../../services/common/common');
 
 exports.index = {
-    path: '/pc/index',
+    path: '/index',
     method: 'get',
     handler: async ctx => {
         const originData = await indexService.getOriginData();
         const mainContent = await indexService.getMainContent();
         const siderList = await listTransform(originData);
+
+        let testFunction = await KVProxy.getStaticFragment(10013).then(...handleJs(ctx, 'content', true));
+
         const data = {
             msg: 'HELLO WORLD',
             API: {
@@ -29,6 +35,7 @@ exports.index = {
                 siderList,
                 mainContent,
             },
+            testFunction,
         };
 
         await ctx.html('index', data);

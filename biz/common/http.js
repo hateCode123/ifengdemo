@@ -14,9 +14,9 @@ class HTTPTools {
         try {
             const ret = await rp(options);
 
-            logger.info(
-                `http service response ok and takes ${new Date() - startTime}ms. options:${options}. body:${ret}`,
-            );
+            // logger.info(
+            //     `http service response ok and takes ${new Date() - startTime}ms. options:${options}. body:${ret}`,
+            // );
 
             return ret;
         } catch (err) {

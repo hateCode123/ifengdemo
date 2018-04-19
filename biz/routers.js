@@ -13,12 +13,15 @@ const urlCache = require('./common/url-cache');
 const { match } = require('./common/url-match');
 
 let routerList = [];
+
+// 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
 let rewriteList = {
     '/heartbeat': '/api/heartbeat',
     '/mobile/content/:id': '/content/:id',
     '/mobile/content/:id/edit': '/content/:id/edit',
 };
 
+// 处理路由中间件逻辑
 const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
     // http请求类型，暂时只支持get和post
     const method = ctrlObj[i].method || 'get|post';
@@ -72,20 +75,21 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
             continue;
         }
         if (_.isFunction(handler)) {
-            // 将路由挂载
-            // router[methodItem](path, ...meddlewareList, match(type, cache, edit, ctrlPath, handler));
+
+            // 将handler业务方法放入队列
             meddlewareList.push(match(type, cache, edit, ctrlPath, handler));
+
+            // 将路由放入路由列表
             routerList.push({
                 path,
                 method: methodItem,
                 handlers: meddlewareList,
             });
-
-            // logger.debug(`${methodItem}\t:${path}`);
         }
     }
 };
 
+// 自动加载controllers中的路由
 const routerLoad = ctrlPath => {
     glob.sync(`${__dirname}/controllers/${ctrlPath}/**/*.js`).forEach(file => {
         const urlPath = file.replace(__dirname, '');
