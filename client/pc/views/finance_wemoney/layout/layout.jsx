@@ -2,16 +2,16 @@ import React from 'react';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
-import './reset.css';
+import '../reset.css';
 import styles from './layout.css';
 
 
-import WemoneyNav from './components/wemoneyNav/';
-import SimpleSlider from './components/slider/';
-import HotNews from './components/hotNews/';
-import AdAside  from './components/adAside/';
-import NewsList from './components/newslist/';
-import GoTop  from './components/goTop/';
+import WemoneyNav from './wemoneyNav/';
+import SimpleSlider from './slider/';
+import HotNews from './hotNews/';
+import AdAside  from './adAside/';
+import NewsList from './newslist/';
+import GoTop  from './goTop/';
 
 /*
 import News from './components/newslist/';
