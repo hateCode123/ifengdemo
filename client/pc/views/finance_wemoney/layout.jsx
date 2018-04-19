@@ -4,15 +4,15 @@ import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
 import './reset.css';
 import styles from './layout.css';
-/*
-import Header from './components/header/';
-*/
+
+
 import WemoneyNav from './components/wemoneyNav/';
-import Lunbo from './components/lunbo/';
+import SimpleSlider from './components/slider/';
 import HotNews from './components/hotNews/';
 import AdAside  from './components/adAside/';
 import NewsList from './components/newslist/';
 import GoTop  from './components/goTop/';
+
 /*
 import News from './components/newslist/';
 import Footer from './components/footer/';
@@ -29,6 +29,8 @@ class Layout extends React.PureComponent{
 
         return (
             <div>
+                <div>公用头部导航</div>
+                
                 <div className={styles.navCon} >
                     <WemoneyNav content={content.wemoneyNav} />
                 </div>
@@ -38,7 +40,7 @@ class Layout extends React.PureComponent{
                     <div className={styles.bodyMes}>
 
                         <div className={styles.bodyLeftCon}>
-                            <Lunbo content={content.wemoneyLunbo}/>
+                            <SimpleSlider content={content.wemoneyLunbo}/>
                             <NewsList content={content.wemoneyNewsFlow}/>
                         </div>
 
@@ -52,7 +54,7 @@ class Layout extends React.PureComponent{
 
                     </div>
                 </div>
-                
+                <div>底部版权</div>
                 <GoTop />
                 <ChipEdit />
             </div>

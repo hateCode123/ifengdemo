@@ -48,7 +48,7 @@ class GoTop extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-GoTop.propTypes = { content: PropTypes.object };
+GoTop.propTypes = {};
 
 /**
  * 定义组件默认属性

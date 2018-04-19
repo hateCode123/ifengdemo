@@ -37,8 +37,10 @@
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-loadable": "^5.3.1",
+        "react-slick": "^0.23.1",
         "request": "^2.85.0",
         "request-promise": "^4.2.2",
+        "slick-carousel": "^1.8.1",
         "webpack": "^3.11.0",
         "write-file-webpack-plugin": "^4.2.0"
     },
