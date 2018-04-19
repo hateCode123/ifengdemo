@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 /**
- * 定义 Comment 组件
+ * 定义 HotNews 组件
  */
-class HotNews extends React.Component {
+class HotNews extends React.PureComponent {
     /**
      * 渲染组件
      */

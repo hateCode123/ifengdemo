@@ -4,9 +4,9 @@ import styles from './index.css';
 import Chip from 'Chip';
 
 /**
- * 定义 Comment 组件
+ * 定义 AdAside 组件
  */
-class AdAside extends React.Component {
+class AdAside extends React.PureComponent {
     /**
      * 渲染组件
      */

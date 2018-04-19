@@ -30,7 +30,7 @@ class Layout extends React.PureComponent{
         return (
             <div>
                 <div>公用头部导航</div>
-                
+
                 <div className={styles.navCon} >
                     <WemoneyNav content={content.wemoneyNav} />
                 </div>

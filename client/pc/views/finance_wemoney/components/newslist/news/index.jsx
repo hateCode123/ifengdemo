@@ -18,21 +18,37 @@ class News extends React.Component {
         ))} 
 
         const creatList = () =>(
-
-            <ul >
+            <div>
                 {content.map((item,index) => (
-                    <div>
-                        <a href="#" target="" class="img-l"><img src={item.poster} /></a>
+                    <div key={index} className={styles.listL + " "+ styles.clearfix}>
+
+                        <a href={item.url} target="_blank" className = {styles.imgStyle}><img src={item.poster} /></a>
+                        
+                        <div className={styles.listText}>
+                            <p className={styles.text}>
+                                <a href={item.url}> {item.title} </a>
+                            </p>
+                            <p className={styles.time}>
+                                <b>{item.type}</b>
+                                <span>{item.source}</span>
+                                <span>{item.date}</span> 
+                                <span>{item.time}</span>
+                            </p>
+                        </div>
+
+                        <div className={styles.ly}>
+                            <a href="#" target="_blank" ></a>
+                        </div>
+                        
                     </div>
                     
                 ))} 
-            </ul>
-        )
+        </div>
+            )
 
         return (
-            <div className={styles.listL +" "+styles.clearfix}>
-                
-                hello news
+            <div className={styles.sp}>
+                {creatList()}
             </div>
 
         )

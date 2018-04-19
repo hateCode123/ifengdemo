@@ -4,9 +4,9 @@ import styles from './index.css';
 import Chip from 'Chip';
 import News from './news';
 /**
- * 定义 Comment 组件
+ * 定义 NewsList 组件
  */
-class NewsList extends React.Component {
+class NewsList extends React.PureComponent {
     /**
      * 渲染组件
      */
@@ -15,9 +15,7 @@ class NewsList extends React.Component {
 
         return (
             <div className={styles.list}>
-                <div className={styles.sp}>
-                    <News content={content}/>
-                </div>
+                <News content={content}/>
                 <div className={styles.more +" " +styles.mt22}>
                     <a href="#" target="_blank">查看更多新闻</a>
                 </div>
