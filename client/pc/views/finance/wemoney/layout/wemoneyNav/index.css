@@ -1,7 +1,7 @@
 .navCon {
     width: 100%;
     height: 80px;
-    background:url('./navBG.png');
+    background: url('./navBG.png');
     background-repeat: repeat;
-    position:relative;
+    position: relative;
 }
