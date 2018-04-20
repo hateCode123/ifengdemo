@@ -1,0 +1,52 @@
+.listL{ width: 640px; padding-top: 13px; padding-bottom: 20px; position: relative;font-family:"微软雅黑"; z-index: 22; margin-top: 7px;border-bottom: 1px solid #e7e7e7;
+    & img{
+         float: left; margin-right: 20px;
+    }
+}
+.text{
+        height: 26px; overflow: hidden;
+        & a {
+            color: #222222;font-size: 18px;font-weight: bold;line-height:26px;height: 26px;overflow: hidden;text-decoration: none;
+        };
+        & :hover{color: #fc5522;} 
+
+    }
+.time{ 
+        color: #999999; font-size: 14px; margin-top: 34px;
+        & b{border: solid 1px #17a0e0; color: #17a0e0; padding: 1px 5px; border-radius: 4px; font-weight: normal; font-size: 12px;}
+        & span{font-size: 12px; color: #999; margin-left: 10px;}
+        & redBg{ background: #ff4245; color: #fff; border: solid 1px #ff4245;};
+        & redBor{border: solid 1px #ff4245; color: #ff4245;};
+
+    } 
+    
+
+.clearfix {
+    & :after {content:"."; height:0; visibility:hidden; clear:left;}
+}
+.imgStyle{width: 144px;height:80px; overflow: hidden; display: block;float: left; margin-right: 20px;}
+
+.trans{transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;-webkit-backface-visibility: hidden;
+    & :hover{
+        transform:scale(1.04, 1.04);-ms-transform:scale(1.04, 1.04);-webkit-transform:scale(1.04, 1.04);
+    }
+
+}
+.listText{
+
+}
+.ly {
+    & a{
+        color: #999999;text-decoration: none;position: absolute; right: 0px; top: 74px; z-index: 98; background: url(http://ued.ifeng.com/test/songbb/finance_wemoney/images/ly_0.png) no-repeat left center; line-height: 24px; height: 24px; padding-left: 27px; font-size: 12px;
+    }
+    & :hover{
+        background: url(http://ued.ifeng.com/test/songbb/finance_wemoney/images/ly_hover.png) no-repeat left center; color: #f54343;
+    }
+}
+
+
+

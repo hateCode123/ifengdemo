@@ -8,10 +8,13 @@ const onerror = require('koa-onerror');
 const json = require('koa-json');
 const bodyParser = require('koa-bodyparser');
 const logger = require('./biz/common/logger');
+const Timers = require('./biz/common/utils/timers');
 const config = require('./biz/configs');
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
+const _ = require('lodash');
+
 const env = process.env.NODE_ENV || 'development';
 
 // 创建koa实例
@@ -28,14 +31,14 @@ const server = app.listen(config.default.port || 3000, () => {
 module.exports = server;
 
 if (env === 'development') {
-    views = require('./biz/common/middlewares/koa-views');
     const socket = require('socket.io');
     const io = socket(server);
+    const chokidar = require('chokidar');
+
+    views = require('./biz/common/middlewares/koa-views');
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
-
-    const chokidar = require('chokidar');
 
     setTimeout(() => {
         io.sockets.emit('reload');
@@ -69,31 +72,76 @@ app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { htm
 // 静态资源设置
 app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
 
-// 监控请求响应时间，catch未知的错误
-app.use(async(ctx, next) => {
-    logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
-    const start = new Date();
+if (config.default.statistics) {
+    // 监控请求响应时间，catch未知的错误
+    app.use(async(ctx, next) => {
+        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        const start = new Date();
 
-    try {
-        await next();
-    } catch (err) {
-        logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
-        logger.error(err);
-        if (ctx.method === 'POST') {
-            logger.error(ctx.request.body);
+        ctx.routerTimeStart = process.hrtime();
+        ctx.rpcTimeList = [[], []];
+        ctx.parseTime = 0;
+        try {
+            await next();
+        } catch (err) {
+            logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
+            logger.error(err);
+            if (ctx.method === 'POST') {
+                logger.error(ctx.request.body);
+            }
+            const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
+
+            if (isAjax) {
+                ctx.json(1, err.message);
+            } else {
+                throw err;
+            }
         }
-        const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
+        const ms = new Date() - start;
 
-        if (isAjax) {
-            ctx.json(1, err.message);
-        } else {
-            throw err;
+        if (!ctx.routerTimeEnd) {
+            ctx.routerTimeEnd = Timers.timeEnd(ctx.routerTimeStart);
         }
-    }
-    const ms = new Date() - start;
+        let rpcTime = 0;
 
-    logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
-});
+        for (let i of ctx.rpcTimeList[0]) {
+            rpcTime += parseInt(i);
+        }
+        rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
+        rpcTime = rpcTime.toFixed(3)
+
+        // logger.debug(`--> time router - ${ctx.routerTimeEnd}ms`);
+        // logger.debug(`--> time rpc - ${rpcTime}ms`);
+        // logger.debug(`--> time JSON.parse - ${ctx.parseTime}ms`);
+        logger.debug( `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${ctx.routerTimeEnd}ms - rpc:${rpcTime}ms - JSON.parse: ${ctx.parseTime}ms`);
+    });
+} else {
+    // 监控请求响应时间，catch未知的错误
+    app.use(async(ctx, next) => {
+        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        const start = new Date();
+
+        try {
+            await next();
+        } catch (err) {
+            logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
+            logger.error(err);
+            if (ctx.method === 'POST') {
+                logger.error(ctx.request.body);
+            }
+            const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
+
+            if (isAjax) {
+                ctx.json(1, err.message);
+            } else {
+                throw err;
+            }
+        }
+        const ms = new Date() - start;
+
+        logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
+    });
+}
 
 // 路由重写，根据项目需要在rewrite中添加重写规则
 app.use(rewrite);

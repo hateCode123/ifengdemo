@@ -6,6 +6,7 @@
     "viewsdir": "dist",
     "apiPrefix": "",
     "cacheURL": false,
+    "statistics": false,
     "logs": {
         "level": "debug"
     },

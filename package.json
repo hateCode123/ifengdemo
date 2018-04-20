@@ -8,7 +8,7 @@
         "start": "node ./bin/dev.js",
         "pre": "node ./bin/pre.js",
         "build": "webpack --config './webpack.prod.config' -p",
-        "test": "mocha -t 20000 tests --recursive --exit",
+        "test": "mocha -t 20000 tests --recursive --exit | bunyan",
         "eslint": "eslint ./client/**/*.js && eslint ./client/**/*.jsx",
         "eslint_fix": "eslint ./client/** --fix",
         "api_eslint": "eslint ./app.js && eslint ./biz/**/**/**.js",

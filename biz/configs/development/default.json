@@ -6,6 +6,7 @@
     "viewsdir": "devtmp",
     "apiPrefix": "",
     "cacheURL": true,
+    "statistics": true,
     "logs": {
         "level": "debug"
     },
