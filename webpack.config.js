@@ -92,7 +92,7 @@ const fileExtend = {
 const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/views/*/app.js' : './client/mobile/views/*/app.js'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.js' : './client/mobile/views/**/app.js'),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
             filename: `js/[name]_${platform}_${type}.js`,
@@ -174,10 +174,11 @@ const createConfig = function(type, platform, cssConfig) {
                 minChunks: 2,
             }),
             new webpack.NamedModulesPlugin(),
-            ...getHTMLs(platform === 'pc' ? './client/pc/views/*/template.html' : './client/mobile/views/*/template.html', fileExtend[`${platform}_${type}`]),
+            ...getHTMLs(platform === 'pc' ? './client/pc/views/**/template.html' : './client/mobile/views/**/template.html', fileExtend[`${platform}_${type}`]),
         ],
     };
 };
 // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
 module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
+// module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig)];
 

@@ -1,9 +1,0 @@
-.box {
-    box-sizing: border-box;
-    height: 240px;
-    border: 1px solid #ccc;
-    color: #ccc;
-    text-align: center;
-    line-height: 120px;
-    margin-bottom: 20px;
-}

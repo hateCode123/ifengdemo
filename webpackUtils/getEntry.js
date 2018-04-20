@@ -5,8 +5,14 @@ module.exports = function getEntrys(globPath) {
     const files = glob.sync(globPath);
     let result = {};
     for (let file of files) {
-        const paths = file.split(isWin() ? '/' : '/');
-        result[paths[paths.length - 2]] = file;
+        // const paths = file.split(isWin() ? '/' : '/');
+        // result[paths[paths.length - 2]] = file;
+
+        let path = file.replace('./client/pc/views/','').replace('./client/mobile/views/','');
+        let paths = path.split('/');
+        paths.pop();
+        let entryName = paths.join('_');
+        result[entryName] = file;
     }
     return result;
 };
