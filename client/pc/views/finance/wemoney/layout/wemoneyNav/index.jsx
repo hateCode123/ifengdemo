@@ -9,26 +9,21 @@ import Recommend from './recommend/';
  */
 class WemoneyNav extends React.PureComponent {
     /**
-     * 绑定属性
-     * @param {*} props
-     */
-
-    /**
      * 渲染组件
      */
     render() {
         const { content } = this.props;
         return (
-
-            <div>               
-                <Chip
-                    id={ content.id } type="static" title={ content.name }
-                    groupName="文章" content={ content.content }
-                >
-                    <Recommend />
-                </Chip>
+            <div className={styles.navCon} > 
+                <div>               
+                    <Chip
+                        id={ content.id } type="static" title={ content.name }
+                        groupName="文章" content={ content.content }
+                    >
+                        <Recommend />
+                    </Chip>
+                </div>
             </div>
-
         );
     }
 }

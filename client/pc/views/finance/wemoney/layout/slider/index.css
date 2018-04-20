@@ -13,7 +13,6 @@
     width:629px;
     height:68px;
     line-height:68px;
-
     padding-left:25px;
     background: rgb(129,140,154);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#80000000,endColorstr=#80000000)"; /*Filter for IE8 */ 
@@ -33,7 +32,7 @@
           color:#fe5421;  
         }
     }
-}/*170412a*/
+}
 
 .slickDots{
     position: absolute;
@@ -47,25 +46,11 @@
             &:before{
                 color: #fff;
                 opacity: 1;
-                /* background: url(http://y0.ifengimg.com/fe/weMoney/images/whiteCircle_dcec2d4e.png) */
             };
         }
     }
-
-}
-/* 
-.unsliderWrap.unslider-carousel>li {
-    float: left
 }
 
-.unslider-vertical>ul {
-    height: 100%
-}
-
-.unslider-vertical li {
-    float: none;
-    width: 100%
-} */
 
 
 

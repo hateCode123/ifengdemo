@@ -9,7 +9,7 @@ class News extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        console.log(content);
+        //console.log(content);
 
         return (
             <div className={styles.contentList}>

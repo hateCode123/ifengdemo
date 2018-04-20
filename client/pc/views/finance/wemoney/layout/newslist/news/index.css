@@ -93,11 +93,14 @@
             right: 0px;
             top: 90px;
             z-index: 98;
-            background: url('./ly_hover.png') no-repeat left center;
+            background: url('./ly_0.png') no-repeat left center;
             line-height: 24px;
             height: 24px;
             padding-left: 27px;
             font-size: 12px;
+        }
+        & :hover{
+            background: url('./ly_hover.png') no-repeat left center; color: #f54343;
         }
     }
 }
