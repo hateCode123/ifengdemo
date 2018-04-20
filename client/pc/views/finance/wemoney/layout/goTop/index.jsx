@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 
+
 /**
  * 定义 GoTop 组件
  */
@@ -13,10 +14,9 @@ class GoTop extends React.PureComponent {
 
     // 渲染之后
     componentDidMount() {
-        window.onscroll = function() {
+        window.onscroll = function () {
             const t = document.documentElement.scrollTop || document.body.scrollTop;
             const top_view = document.getElementById('goTop');
-
             if (top_view !== null) {
                 top_view.style.display = t >= 700 ? 'block' : 'none';
             }

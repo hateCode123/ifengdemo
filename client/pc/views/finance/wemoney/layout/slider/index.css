@@ -44,10 +44,10 @@
             width: 12px;
             height: 12px;
             overflow: hidden;
-            &:before {
+            /* &:before { */
                 color: #fff;
                 opacity: 1;
-            }
+            /* } */
             ;
         }
     }

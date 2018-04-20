@@ -4,58 +4,61 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Slider from 'react-slick';
 
+import slick from 'slick-carousel/slick/slick.css';
+import slickTheme from 'slick-carousel/slick/slick-theme.css';
+
 class SimpleSlider extends React.PureComponent {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      speed: 3000,
-      appendDots: dots => (
-          <div
-              style={{
-            backgroundColor: '#fc5522',
-            borderRadius: '10px',
-            padding: '10px'
-          }}
-        >
-              <ul style={{ margin: '0px' }} className={styles.slickDots}> {dots} </ul>
-          </div>
-      ),
-    };
-
-    const content = this.props.content;
-
-    return (
-        <div>
-            <div className={styles.wrapCon}>
-                <Chip
-                    id="10006" type="static" title="wemoney轮播"
-                    groupName="文章" content={content}
+    render() {
+        const settings = {
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            speed: 3000,
+            appendDots: dots => (
+                <div
+                    style={{
+                        backgroundColor: '#fc5522',
+                        borderRadius: '10px',
+                        padding: '10px'
+                    }}
                 >
-                    <Slider {...settings}>
-                        {content.map((item, index) => (
-                            <div key={index}>
-                                <a href={item.url} target="_blank">
-                                    <img src={item.poster} />
-                                </a>
-                                <div className={styles.bannerTitleCon}>
+                    <ul style={{ margin: '0px' }} className={styles.slickDots}> {dots} </ul>
+                </div>
+            ),
+        };
+
+        const content = this.props.content;
+
+        return (
+            <div>
+                <div className={styles.wrapCon}>
+                    <Chip
+                        id="10006" type="static" title="wemoney轮播"
+                        groupName="文章" content={content}
+                    >
+                        <Slider {...settings}>
+                            {content.map((item, index) => (
+                                <div key={index}>
                                     <a href={item.url} target="_blank">
-                                        <p><strong><span>{item.title}</span></strong></p>
+                                        <img src={item.poster} />
                                     </a>
+                                    <div className={styles.bannerTitleCon}>
+                                        <a href={item.url} target="_blank">
+                                            <p><strong><span>{item.title}</span></strong></p>
+                                        </a>
+                                    </div>
+                                    <a href={item.url} target="_blank" />
                                 </div>
-                                <a href={item.url} target="_blank" />
-                            </div>
-              ))}
-                    </Slider>
-                </Chip>
+                            ))}
+                        </Slider>
+                    </Chip>
+                </div>
             </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 
 /**
