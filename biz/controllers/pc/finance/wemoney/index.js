@@ -1,10 +1,10 @@
-const redis = require('../../../common/redis');
-const logger = require('../../../common/logger');
-const { KVProxy } = require('../../../providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../services/common/common');
+const redis = require('../../../../common/redis');
+const logger = require('../../../../common/logger');
+const { KVProxy } = require('../../../../providers/ucmsapiProxy');
+const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
-    path: '/pc/finance_wemoney',
+    path: '/pc/finance/wemoney',
     method: 'get',
     edit: true,
     type: 'html',
