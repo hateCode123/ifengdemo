@@ -8,41 +8,42 @@ import styles from './layout.css';
 import WemoneyNav from './wemoneyNav/';
 import SimpleSlider from './slider/';
 import HotNews from './hotNews/';
-import AdAside  from './adAside/';
+import AdAside from './adAside/';
 import NewsList from './newslist/';
-import GoTop  from './goTop/';
+import GoTop from './goTop/';
 
 /*
 import Header from './components/header/';
 import Footer from './components/footer/';
 */
 
-class Layout extends React.PureComponent{
+class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
      */
 
-     render(){
+    render() {
         const { content } = this.props;
-        console.log(content)
+
+        console.log(content);
 
         return (
             <div>
                 <div>公用头部导航</div>
                 <WemoneyNav content={content.wemoneyNav} />
-                
-                <div className={styles.bodyCon +" "+ styles.clearfix}>
+
+                <div className={`${styles.bodyCon } ${ styles.clearfix}`}>
                     <div className={styles.bodyMes}>
 
                         <div className={styles.bodyLeftCon}>
-                            <SimpleSlider content={content.wemoneyLunbo}/>
-                            <NewsList content={content.wemoneyNewsFlow}/>
+                            <SimpleSlider content={content.wemoneyLunbo} />
+                            <NewsList content={content.wemoneyNewsFlow} />
                         </div>
 
 
-                        <div className={styles.bodyRightCon}>  
-                            <HotNews content={content.wemoneyNewsRanking}/>
-                            <AdAside content={content.wemoneyAdAside}/>
+                        <div className={styles.bodyRightCon}>
+                            <HotNews content={content.wemoneyNewsRanking} />
+                            <AdAside content={content.wemoneyAdAside} />
                         </div>
 
                     </div>
@@ -51,8 +52,8 @@ class Layout extends React.PureComponent{
                 <GoTop />
                 <ChipEdit />
             </div>
-        )
-     }
+        );
+    }
 }
 
 /**

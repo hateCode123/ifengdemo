@@ -13,12 +13,13 @@ class WemoneyNav extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+
         return (
-            <div className={styles.navCon} > 
-                <div>               
+            <div className={styles.navCon} >
+                <div>
                     <Chip
-                        id={ content.id } type="static" title={ content.name }
-                        groupName="文章" content={ content.content }
+                        id={content.id} type="static" title={content.name}
+                        groupName="文章" content={content.content}
                     >
                         <Recommend />
                     </Chip>

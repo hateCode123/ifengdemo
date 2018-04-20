@@ -1,36 +1,36 @@
-.clearfix{
+.clearfix {
     &:after {
-        content:"."; 
-        display:block; 
-        height:0; 
-        visibility:hidden; 
-        clear:left;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: left;
     }
 }
 
-.bodyCon{
-    width:100%;
+.bodyCon {
+    width: 100%;
     padding-bottom: 26px;
-    background:#eee;
-    & .bodyMes{
-        width:1000px;
-        margin:0 auto;
-        padding-top:40px;
-        position:relative;
-        font-size:0;
-        & .bodyLeftCon{
-            width:654px;
-            margin-right:40px;
-            display:inline-block;
-            float:left;
+    background: #eee;
+    & .bodyMes {
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 40px;
+        position: relative;
+        font-size: 0;
+        & .bodyLeftCon {
+            width: 654px;
+            margin-right: 40px;
+            display: inline-block;
+            float: left;
         }
     }
 }
 
-.bodyRightCon{
-    width:306px;
-    display:inline-block;
-    float:left;
+.bodyRightCon {
+    width: 306px;
+    display: inline-block;
+    float: left;
 }
 
 @media (min-width: 1250px) {

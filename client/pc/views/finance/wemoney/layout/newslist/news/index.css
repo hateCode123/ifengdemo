@@ -1,6 +1,5 @@
 .list {
     composes: clearfix from global;
-    
     z-index: 90;
     width: 640px;
     border-bottom: solid 1px #ededed;
@@ -99,8 +98,9 @@
             padding-left: 27px;
             font-size: 12px;
         }
-        & :hover{
-            background: url('./ly_hover.png') no-repeat left center; color: #f54343;
+        & :hover {
+            background: url('./ly_hover.png') no-repeat left center;
+            color: #f54343;
         }
     }
 }
