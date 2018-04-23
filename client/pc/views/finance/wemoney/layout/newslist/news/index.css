@@ -57,7 +57,7 @@
                 color: #999;
                 margin-left: 10px;
             }
-            & .stick {
+            & .category1 {
                 border: solid 1px #17a0e0;
                 color: #17a0e0;
                 padding: 1px 5px;
@@ -65,7 +65,7 @@
                 font-weight: normal;
                 font-size: 12px;
             }
-            & .special {
+            & .category2 {
                 background: #ff4245;
                 color: #fff;
                 border: solid 1px #ff4245;
@@ -74,7 +74,7 @@
                 font-weight: normal;
                 font-size: 12px;
             }
-            & .selection {
+            & .category3 {
                 border: solid 1px #ff4245;
                 color: #ff4245;
                 padding: 1px 5px;

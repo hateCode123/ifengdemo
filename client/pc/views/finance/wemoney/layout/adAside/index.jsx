@@ -13,7 +13,6 @@ class AdAside extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        // return <div className={ styles.box } data-adhook={ content }>{ content }</div>;
         return (
             <div>
                 <Chip

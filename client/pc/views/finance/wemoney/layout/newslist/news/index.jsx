@@ -1,45 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import getData from './comment';
 
-class News extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            commentNum: 0
-        };
-    }
-
-    componentDidMount() {
-
-    }
-
+class ContentList extends React.PureComponent {
     /**
      * 渲染组件
      */
-
     render() {
         const { content } = this.props;
+        const type = {
+            置顶: 'category0',
+            专题: 'category1',
+            热: 'category2',
+            荐: 'category2',
+            本地: 'category2',
+            快讯: 'category2',
+            热门: 'category2',
+            突发: 'category2',
+            原创: 'category2',
+            深度: 'category2',
+            独家: 'category2',
+            焦点: 'category2',
+            '24小时': 'category2',
+            广告: 'ad',
+        };
 
         return (
             <div className={styles.contentList}>
                 {content.map((item, index) => (
                     <div key={index} className={styles.list}>
-                        {item.poster ? (
+                        {item.thumbnail ? (
                             <a
-                                href={item.url}
+                                href={item.pcUrl}
                                 target="_blank"
                                 rel="nofollow me noopener noreferrer"
                                 className={styles.imgBox}>
-                                <img src={item.poster} width="144" height="96" className={styles.trans} />
+                                <img src={item.thumbnail} width="144" height="96" className={styles.trans} />
                             </a>
                         ) : (
-                                ''
-                            )}
+                            ''
+                        )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
                                 <a
-                                    href={item.url}
+                                    href={item.pcUrl}
                                     target="_blank"
                                     rel="nofollow me noopener noreferrer"
                                     title={item.title}>
@@ -47,17 +52,34 @@ class News extends React.PureComponent {
                                 </a>
                             </p>
                             <p className={styles.time}>
-                                <span className={styles[`${item.typeStyle}`]}>{item.type}</span>
-                                <span className={styles.source}>{item.source}</span>
-                                <span className={styles.date}>{item.date}</span>
-                                <span className={styles.date}>{item.time}</span>
+                                {item.custom ? (
+                                    <span className={styles[type[`${item.custom.articleTag}`]]}>
+                                        {item.custom.articleTag}
+                                    </span>
+                                ) : (
+                                    ''
+                                )}
+                                {item.source ? <span className={styles.source}>{item.source}</span> : ''}
+                                {item.createdTime ? (
+                                    <span className={styles.date}>
+                                        {Number(item.createdTime.split('-')[0]) < 2018
+                                            ? 'item.createdTime'
+                                            : `${item.createdTime.split('-')[1]}-${item.createdTime.split('-')[2]}`}
+                                    </span>
+                                ) : (
+                                    ''
+                                )}
                             </p>
                         </div>
-                        <div className={styles.comment}>
-                            <a href="#" target="_blank" rel="nofollow me noopener noreferrer">
-                                {this.state.commentNum}
-                            </a>
-                        </div>
+                        {item.commentUrl ? (
+                            <div className={styles.comment}>
+                                <a href={item.commentUrl} target="_blank" rel="nofollow me noopener noreferrer">
+                                    {/* {item.columns} */}
+                                </a>
+                            </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 ))}
             </div>
@@ -68,12 +90,12 @@ class News extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-News.propTypes = { content: PropTypes.array };
+ContentList.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性
  * */
-News.defaultProps = {};
+ContentList.defaultProps = {};
 
-export { News };
-export default News;
+export { ContentList };
+export default ContentList;
