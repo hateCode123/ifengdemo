@@ -26,7 +26,7 @@ class Search extends React.PureComponent {
     handleSearch() {
         const keyword = this.state.value;
         let searchUrl = 'http://zhannei.baidu.com/cse/search?p=0&s=16378496155419916178&entry=1&area=2&q=';
-        window.open(searchUrl + keyword);
+        window.addEventListener('open', window.open(searchUrl + keyword));
     }
 
     onKeyPress(event) {
