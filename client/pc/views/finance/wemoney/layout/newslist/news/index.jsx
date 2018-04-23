@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import { rel } from '../../../../../../../utils/rel';
 
 class News extends React.PureComponent {
     /**
@@ -17,11 +18,7 @@ class News extends React.PureComponent {
                     {content.map((item, index) => (
                         <div key={index} className={styles.list}>
                             {item.poster ? (
-                                <a
-                                    href={item.url}
-                                    target="_blank"
-                                    rel="nofollow me noopener noreferrer"
-                                    className={styles.imgBox}>
+                                <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
                                     <img src={item.poster} width="144" height="96" className={styles.trans} />
                                 </a>
                             ) : (
@@ -29,11 +26,7 @@ class News extends React.PureComponent {
                             )}
                             <div className={styles.list_text}>
                                 <p className={styles.text}>
-                                    <a
-                                        href={item.url}
-                                        target="_blank"
-                                        rel="nofollow me noopener noreferrer"
-                                        title={item.title}>
+                                    <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                         {item.title}
                                     </a>
                                 </p>

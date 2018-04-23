@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 
 import slick from 'slick-carousel/slick/slick.css';
 import slickTheme from 'slick-carousel/slick/slick-theme.css';
+import { rel } from '../../../../../../utils/rel';
 
 class SimpleSlider extends React.PureComponent {
     render() {
@@ -41,11 +42,11 @@ class SimpleSlider extends React.PureComponent {
                         <Slider {...settings}>
                             {content.map((item, index) => (
                                 <div key={index}>
-                                    <a href={item.url} target="_blank">
+                                    <a href={item.url} target="_blank" rel={rel}>
                                         <img src={item.poster} />
                                     </a>
                                     <div className={styles.bannerTitleCon}>
-                                        <a href={item.url} target="_blank">
+                                        <a href={item.url} target="_blank" rel={rel}>
                                             <p>
                                                 <strong>
                                                     <span>{item.title}</span>
@@ -53,7 +54,7 @@ class SimpleSlider extends React.PureComponent {
                                             </p>
                                         </a>
                                     </div>
-                                    <a href={item.url} target="_blank" />
+                                    <a href={item.url} target="_blank" rel={rel} />
                                 </div>
                             ))}
                         </Slider>

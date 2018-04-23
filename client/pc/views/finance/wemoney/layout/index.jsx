@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import '../reset.css';
 import styles from './index.css';
 
-import Navigation from './Navigation/';
+import Navigation from './navigation/';
 import SimpleSlider from './slider/';
 import HotNews from './hotNews/';
 import AdAside from './adAside/';
@@ -44,7 +44,11 @@ class Layout extends React.PureComponent {
 
                         <div className={styles.bodyRightCon}>
                             <HotNews content={content.hotNews} />
-                            <AdAside content={content.adAside} />
+                            <AdAside content={content.adAside1} />
+                            <AdAside content={content.adAside2} />
+                            <AdAside content={content.adAside3} />
+                            <AdAside content={content.adAside4} />
+                            <AdAside content={content.adAside5} />
                         </div>
                     </div>
                 </div>
