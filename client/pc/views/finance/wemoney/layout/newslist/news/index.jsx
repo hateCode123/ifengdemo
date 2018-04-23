@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class News extends React.PureComponent {
+
     /**
      * 渲染组件
      */
+
     render() {
         const { content } = this.props;
-
-        console.log(content);
 
         return (
             <div className={styles.contentList}>
@@ -24,8 +24,8 @@ class News extends React.PureComponent {
                                 <img src={item.poster} width="144" height="96" className={styles.trans} />
                             </a>
                         ) : (
-                            ''
-                        )}
+                                ''
+                            )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
                                 <a
@@ -43,11 +43,6 @@ class News extends React.PureComponent {
                                 <span className={styles.date}>{item.time}</span>
                             </p>
                         </div>
-                            <div className={styles.comment}>
-                                <a href="#" target="_blank" rel="nofollow me noopener noreferrer">
-                                    1225
-                                </a>
-                            </div>
                     </div>
                 ))}
             </div>

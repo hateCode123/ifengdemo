@@ -47,6 +47,18 @@ const pcCssConfig = {
     }),
 };
 
+const commoncss = {
+    test: /\.css$/,
+    // exclude: /node_modules/,
+    include: /node_modules/,
+    use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+            'css-loader',
+        ],
+    }),
+};
+
 const mobileCssConfig = {
     test: /\.css$/,
     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
@@ -149,6 +161,7 @@ const createConfig = function(type, platform, cssConfig) {
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
                 cssConfig,
+                commoncss,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
                     use: [

@@ -9,7 +9,7 @@ const { KVProxy } = require('./providers/ucmsapiProxy');
 const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('./services/common/common');
 
 module.exports = async(ctx, next) => {
-    logger.debug(ctx.url);
+    // logger.debug(ctx.url);
     let type = '';
     const deviceType = ctx.headers['deviceType'] || 'pc';
 

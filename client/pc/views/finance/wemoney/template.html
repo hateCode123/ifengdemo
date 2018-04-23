@@ -4,20 +4,9 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
-    <!-- 替换域名ifeng -->
-    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-    <style type="text/css">
-        .slick-dots li.slick-active button:before
-            {
-                opacity: 1;
-                color: #fc5521;
-            }
-    </style>
     <title></title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
-        //console.log("allData"+allData.wemoneyNav)
         var jsonData = {
             nav: [{
                 url: '//www.ifeng.com/',
@@ -105,11 +94,11 @@
                 url: '//dol.deliver.ifeng.com/c?z=ifeng&amp;la=0&amp;si=2&amp;cg=1&amp;c=1&amp;ci=2&amp;or=7549&amp;l=28704&amp;bg=28703&amp;b=37275&amp;u=http://audi-future.ifeng.com/',
                 title: '未来'
             }],
-            wemoneyNav: allData.wemoneyNav,
-            wemoneyLunbo: allData.wemoneyLunbo,
-            wemoneyNewsFlow: allData.wemoneyNewsFlow,
-            wemoneyNewsRanking: allData.wemoneyNewsRanking,
-            wemoneyAdAside: allData.wemoneyAdAside
+            navigation: allData.navigation,
+            slider: allData.slider,
+            info: allData.info,
+            hotNews: allData.hotNews,
+            adAside: allData.adAside
         };
     </script>
     {{#each htmlWebpackPlugin.files.css}}
@@ -122,14 +111,6 @@
     {{#each htmlWebpackPlugin.files.chunks}}
         <script src="{{entry}}" type="text/javascript"></script>
     {{/each}}
-    <script>
-        // var boxs = document.querySelectorAll('[data-adhook]');
-        // console.log(boxs.length);
-        // for (var i = 0, iLen = boxs.length; i < iLen; i++) {
-        //     var text = boxs[i].innerText;
-        //     boxs[i].innerHTML = text + '我修改了你';
-        // }
-    </script>
 </body>
 
 </html>

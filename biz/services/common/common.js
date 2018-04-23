@@ -1,4 +1,5 @@
 const Timers = require('../../common/utils/timers');
+const logger = require('../../common/logger');
 const config = require('../../configs');
 
 /**
@@ -12,7 +13,7 @@ const jsonParse = (jsonStr, ctx) => {
         const start = Timers.time();
         let json = JSON.parse(jsonStr);
 
-        ctx.parseTime = (parseFloat(ctx.parseTime) + parseFloat(Timers.timeEnd(start))).toFixed(3);
+        ctx.parseTime.push(Timers.timeEnd(start));
 
         return json;
     } else {
@@ -53,17 +54,13 @@ const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false
 
             if (key) {
                 if (jsStatus) {
-                    return `try {
-                        ${result.response.return[key]}
-                    } catch (error) {
-                        console.log(error);
-                    }`;
+                    return result.response.return[key];
                 }
                 if (typeof result.response.return[key] === 'string') {
                     try {
                         return jsonParse(result.response.return[key], ctx);
-                    } catch (e) {
-                        console.log(e);
+                    } catch (err) {
+                        logger.error(err);
 
                         return result.response.return[key];
                     }
@@ -74,7 +71,7 @@ const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false
 
             return result.response.return;
         } catch (err) {
-            console.log(err);
+            logger.error(err);
 
             return null;
         }
@@ -101,6 +98,8 @@ const error = (ctx, singleType = false) => {
                 ctx.rpcTimeList[1].push(result.response.costtime);
             }
         }
+
+        return null;
     };
 };
 
@@ -134,7 +133,7 @@ const handleJsonByKey = (ctx, key, singleType = false) => {
 
 /**
  * @param {Object} ctx http请求上下文
- * @param {String|Boolean} key 取rpc返回的json数据，key键对应的值返回
+ * @param {String|Boolean} key 取rpc返回的json数据，key键对应的值返回 ，一般为字符串
  * @param {Boolean} singleType 因为rpc请求有单个执行的，有多个并行执行的，为了统计rpc响应时间,当单个执行rpc请求时请传入true
  * @return {Array} 
  */

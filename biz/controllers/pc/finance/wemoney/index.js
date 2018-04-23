@@ -1,7 +1,15 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const { KVProxy } = require('../../../../providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
+const {
+    KVProxy
+} = require('../../../../providers/ucmsapiProxy');
+const {
+    jsonParse,
+    handleData,
+    handleJson,
+    handleJsonByKey,
+    handleJs
+} = require('../../../../services/common/common');
 
 exports.financeWemoney = {
     path: '/pc/finance/wemoney',
@@ -10,32 +18,44 @@ exports.financeWemoney = {
     type: 'html',
     handler: async ctx => {
 
-        // wemoney导航静态碎片
-        console.log('getStaticFragment 10003...');
-        const wemoneyNav = KVProxy.getStaticFragment(10003).then(...handleJson(ctx));
-        const wemoneyLunbo = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
-        const wemoneyAdAside = KVProxy.getStaticFragment(10004).then(...handleJsonByKey(ctx, 'content'));
-        const wemoneyNewsRanking = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
-        const wemoneyNewsFlow = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
+        // console.log('getStaticFragment 10003...');
+        const navigation = KVProxy.getStaticFragment(10003).then(...handleJson(ctx));
+
+        // console.log('getStaticFragment 10006...');
+        const slider = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getStaticFragment 10004...');
+        const adAside = KVProxy.getStaticFragment(10004).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getStaticFragment 10005...');
+        const hotNews = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getStaticFragment 10007...');
+         const info = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getRecommendFragment 17007_719_68...');
+        // const info = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
         const otherData = await Promise.all([
-            wemoneyNav,
-            wemoneyLunbo,
-            wemoneyNewsFlow,
-            wemoneyNewsRanking,
-            wemoneyAdAside,
+            navigation,
+            slider,
+            info,
+            hotNews,
+            adAside,
         ]);
 
         // console.log("11111 : ", otherData)
-    
+
         const allData = {
-            wemoneyNav: otherData[0],
-            wemoneyLunbo: otherData[1],
-            wemoneyNewsFlow: otherData[2],
-            wemoneyNewsRanking: otherData[3],
-            wemoneyAdAside: otherData[4],
+            navigation: otherData[0],
+            slider: otherData[1],
+            info: otherData[2],
+            hotNews: otherData[3],
+            adAside: otherData[4],
         };
- 
-        await ctx.html('finance_wemoney', { allData });
+
+        await ctx.html('finance_wemoney', {
+            allData
+        });
     },
 };

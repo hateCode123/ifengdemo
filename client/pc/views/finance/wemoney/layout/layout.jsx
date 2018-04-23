@@ -5,51 +5,47 @@ import PropTypes from 'prop-types';
 import '../reset.css';
 import styles from './layout.css';
 
-
-import WemoneyNav from './wemoneyNav/';
+import Navigation from './Navigation/';
 import SimpleSlider from './slider/';
 import HotNews from './hotNews/';
-import AdAside  from './adAside/';
+import AdAside from './adAside/';
 import NewsList from './newslist/';
-import GoTop  from './goTop/';
+import GoTop from './goTop/';
 
 /*
-import News from './components/newslist/';
+import Header from './components/header/';
 import Footer from './components/footer/';
 */
 
-class Layout extends React.PureComponent{
+class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
      */
 
-     render(){
+    render() {
+        /**
+         * 组件分发数据
+         */
         const { content } = this.props;
         console.log(content)
 
         return (
             <div>
                 <div>公用头部导航</div>
+                <Navigation content={content.navigation} />
 
-                <div className={styles.navCon} >
-                    <WemoneyNav content={content.wemoneyNav} />
-                </div>
-
-
-                <div className={styles.bodyCon +" "+ styles.clearfix}>
+                <div className={`${styles.bodyCon } ${ styles.clearfix}`}>
                     <div className={styles.bodyMes}>
 
                         <div className={styles.bodyLeftCon}>
-                            <SimpleSlider content={content.wemoneyLunbo}/>
-                            <NewsList content={content.wemoneyNewsFlow}/>
+                            <SimpleSlider content={content.slider} />
+                            <NewsList content={content.info} />
                         </div>
 
 
                         <div className={styles.bodyRightCon}>
-                            <div className={styles.onlineResolve}>
-                                <HotNews content={content.wemoneyNewsRanking}/>
-                            </div>
-                            <AdAside content={content.wemoneyAdAside}/>
+                            <HotNews content={content.hotNews} />
+                            <AdAside content={content.adAside} />
                         </div>
 
                     </div>
@@ -58,8 +54,8 @@ class Layout extends React.PureComponent{
                 <GoTop />
                 <ChipEdit />
             </div>
-        )
-     }
+        );
+    }
 }
 
 /**

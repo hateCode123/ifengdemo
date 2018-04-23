@@ -44,8 +44,8 @@ if (env === 'development') {
         io.sockets.emit('reload');
     }, 1000);
 
-    chokidar.watch('devtmp', {}).on('all', (event, path) => {
-        // console.log(event, path);
+    chokidar.watch('devtmp', {}).on('change', (event, path) => {
+        // console.log(event, '----', path);
         io.sockets.emit('reload');
     });
 } else {
@@ -74,13 +74,13 @@ app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index:
 
 if (config.default.statistics) {
     // 监控请求响应时间，catch未知的错误
-    app.use(async(ctx, next) => {
+    app.use(async (ctx, next) => {
         logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
 
         ctx.routerTimeStart = process.hrtime();
         ctx.rpcTimeList = [[], []];
-        ctx.parseTime = 0;
+        ctx.parseTime = [];
         try {
             await next();
         } catch (err) {
@@ -102,22 +102,35 @@ if (config.default.statistics) {
         if (!ctx.routerTimeEnd) {
             ctx.routerTimeEnd = Timers.timeEnd(ctx.routerTimeStart);
         }
+
         let rpcTime = 0;
+        let rpcCount = ctx.rpcTimeList[0].length + ctx.rpcTimeList[1].length;
 
         for (let i of ctx.rpcTimeList[0]) {
-            rpcTime += parseInt(i);
+            rpcTime += parseFloat(i);
         }
         rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
-        rpcTime = rpcTime.toFixed(3)
+        rpcTime = rpcTime.toFixed(3);
+
+        let parseTime = 0;
+
+        for (let i of ctx.parseTime) {
+            parseTime += parseFloat(i);
+        }
+        parseTime = parseTime.toFixed(3);
 
         // logger.debug(`--> time router - ${ctx.routerTimeEnd}ms`);
         // logger.debug(`--> time rpc - ${rpcTime}ms`);
         // logger.debug(`--> time JSON.parse - ${ctx.parseTime}ms`);
-        logger.debug( `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${ctx.routerTimeEnd}ms - rpc:${rpcTime}ms - JSON.parse: ${ctx.parseTime}ms`);
+        logger.debug(
+            `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
+                ctx.routerTimeEnd
+            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${ctx.parseTime.length}, ${parseTime}ms]`,
+        );
     });
 } else {
     // 监控请求响应时间，catch未知的错误
-    app.use(async(ctx, next) => {
+    app.use(async (ctx, next) => {
         logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
 
