@@ -1,0 +1,22 @@
+.histogram {
+    padding-left: 33px;
+    color: #222;
+    height: 24px;
+    line-height: 24px;
+    border-bottom: 1px solid #ebebeb;
+    & a {
+        & .red {
+            background: #ff2a00;
+            width: 8px;
+        }
+        & .green {
+            background: #029d3f;
+            width: 8px;
+        }
+        & div {
+            float: left;
+            border-right: 3px solid #fff;
+            font-size: 0px;
+        }
+    }
+}

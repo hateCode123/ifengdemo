@@ -1,0 +1,41 @@
+.customStock_box {
+    composes: clearfix from global;
+    margin-top: 18px;
+    overflow: hidden;
+    & .table {
+        width: 400px;
+        height: 73px;
+        float: left;
+        & .tabs {
+            width: 400px;
+        }
+    }
+    & .btn {
+        float: left;
+        width: 98px;
+        padding-left: 19px;
+        & .login {
+            cursor: pointer;
+            padding: 3px 13px;
+            color: #fff;
+            background: #f54343;
+            display: block;
+            float: left;
+        }
+        & .tip {
+            color: #666666;
+            text-align: center;
+            padding-top: 8px;
+            display: block;
+            float: left;
+        }
+    }
+}
+
+.tab {
+    background: #fdebeb;
+    border-bottom: solid 1px #fccfd0;
+    height: 24px;
+    line-height: 24px;
+    color: #666;
+}

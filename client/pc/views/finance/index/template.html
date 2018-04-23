@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="always" name="referrer">
+    <title></title>
+    <script>
+        var __jsonData__ = <%- JSON.stringify(allData) %>;
+        var allData = <%- JSON.stringify(allData) %>;
+        var jsonData = {
+            nav: [{
+                url: '//www.ifeng.com/',
+                title: '首页'
+            }, {
+                url: '//news.ifeng.com/',
+                title: '资讯'
+            }, {
+                url: '//v.ifeng.com/',
+                title: '视频'
+            }, {
+                url: '//zhibo.ifeng.com/',
+                title: '直播'
+            }, {
+                url: '//finance.ifeng.com/',
+                title: '财经'
+            }, {
+                url: '//ent.ifeng.com/',
+                title: '娱乐'
+            }, {
+                url: '//sports.ifeng.com/',
+                title: '体育'
+            }, {
+                url: '//fashion.ifeng.com/',
+                title: '时尚'
+            }, {
+                url: '//auto.ifeng.com/',
+                title: '汽车'
+            }, {
+                url: '//house.ifeng.com/',
+                title: '房产'
+            }, {
+                url: '//tech.ifeng.com/',
+                title: '科技'
+            }, {
+                url: '//book.ifeng.com/',
+                title: '读书'
+            }, {
+                url: '//games.ifeng.com/',
+                title: '游戏'
+            }, {
+                url: '//culture.ifeng.com/',
+                title: '文化'
+            }, {
+                url: '//news.ifeng.com/history/',
+                title: '历史'
+            }, {
+                url: '//news.ifeng.com/mil/',
+                title: '军事'
+            }, {
+                url: '//lehuo.ifeng.com/',
+                title: '乐活'
+            }, {
+                url: '//fo.ifeng.com/',
+                title: '佛教'
+            }, {
+                url: '//travel.ifeng.com/',
+                title: '旅游'
+            }, {
+                url: '//imall.ifeng.com/',
+                title: '匠选'
+            }, {
+                url: '//guoxue.ifeng.com/',
+                title: '国学'
+            }, {
+                url: '//digi.ifeng.com/',
+                title: '数码'
+            }, {
+                url: '//health.ifeng.com/',
+                title: '健康'
+            }, {
+                url: '//home.ifeng.com/',
+                title: '家居'
+            }, {
+                url: '//cp.ifeng.com/?aid=45',
+                title: '彩票'
+            }, {
+                url: '//gongyi.ifeng.com/',
+                title: '公益'
+            }, {
+                url: '//jiu.ifeng.com/',
+                title: '酒业'
+            }, {
+                url: '//dol.deliver.ifeng.com/c?z=ifeng&amp;la=0&amp;si=2&amp;cg=1&amp;c=1&amp;ci=2&amp;or=7549&amp;l=28704&amp;bg=28703&amp;b=37275&amp;u=http://audi-future.ifeng.com/',
+                title: '未来'
+            }],
+            topAd: {
+                data: {
+                    title: '顶部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
+            },
+            logo: {
+                url: '//finance.ifeng.com/',
+                title: '凤凰网财经',
+                src: '//p0.ifengimg.com/37780e23b9ea2d8b/2017/38/logoFinance.png',
+                width: 161,
+                height: 27
+            },
+            logo_ad: {
+                src: '//p1.ifengimg.com/a/2016_23/26a9c07a77f503f.jpg',
+                width: 172,
+                height: 18,
+            },
+            navigation: allData.navigation,
+            stock: {},
+            stockMarket: allData.stockMarket,
+            production: allData.production,
+            bannerPic: allData.bannerPic,
+            headline: allData.headline,
+            dayNews: allData.dayNews,
+            extraNews: allData.extraNews,
+            recommend: allData.recommend,
+            middleAd: {
+                data: {
+                    title: '中部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            comicBook: {
+                url: '//finance.ifeng.com/picture/special/picture725/',
+                src: '//p3.ifengimg.com/937637d0d37b9a40/2018/2/29a9a45b7cf453f.jpg',
+                title: '央行发的钱是如何流入你手里的',
+                rank: '725期',
+                date: '2018-1-12',
+            },
+            talking: allData.talking,
+            talkingList: allData.talkingList,
+            finance: allData.finance,
+            financeList: allData.financeList,
+            stocks: allData.stocks,
+            stocksList: allData.stocksList,
+            titleAd: allData.titleAd,
+            financeVideo: [{
+                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
+                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
+                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
+            }, {
+                url: '//finance.ifeng.com/a/20171208/15853609_0.shtml',
+                src: '////p1.ifengimg.com/937637d0d37b9a40/2017/39/89ca464b7a87993.jpg',
+                title: '比特币在国外监管如何？',
+            }, {
+                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
+                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
+                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
+            }, ],
+            institute: allData.institute,
+            state: allData.state,
+            meeting: allData.meeting,
+            market: allData.market,
+            courier: allData.courier,
+            asideAd1: {
+                data: {
+                    title: '侧边广告 1'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd2: {
+                data: {
+                    title: '侧边广告 2'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd3: {
+                data: {
+                    title: '侧边广告 3'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd4: {
+                data: {
+                    title: '侧边广告 4'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd5: {
+                data: {
+                    title: '侧边广告 5'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd6: {
+                data: {
+                    title: '侧边广告 6'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            info: {
+                tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
+                content: [
+                    allData.customList,
+                    allData.customList,
+                    allData.customList,
+                    allData.customList,
+                    allData.customList,
+                    allData.customList,
+                ],
+                softAd: [{
+                    url: '#',
+                    thumbnail: 'http://ued.ifeng.com/test/wt/18year/1yue/finance/images/tab_tu.jpg',
+                    title: '取消微观领域的汇兑逐步取消微观领域的汇兑限制',
+                    type: 'ad',
+                    custom: {
+                        articleTag: '广告'
+                    },
+                }],
+                hardAd: {
+                    data: {
+                        title: '硬广'
+                    },
+                    preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                    callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+                }
+            },
+            cooperation: allData.cooperation,
+            bottomAd: {
+                data: {
+                    title: '底部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            footer: `        <style>
+            .footer {
+                width: 1000px;
+                margin: 0 auto;
+                border-top: 1px solid #ccc
+            }
+
+            .footer a {
+                color: #000;
+                font-size: 12px;
+                text-decoration: none
+            }
+
+            .footer a:hover {
+                color: #f54343;
+                text-decoration: underline
+            }
+
+            .footer .footlink {
+                position: relative;
+                height: 28px;
+                padding-top: 15px;
+                border-top: 1px solid #fff;
+                overflow: hidden;
+                color: #000;
+                line-height: 28px;
+                font-size: 12px
+            }
+
+            .footer .fk_l {
+                text-align: center;
+            }
+
+            .footer .fk_r {
+                position: absolute;
+                width: 100px;
+                right: 0;
+                top: 15px;
+            }
+
+            .footer .fk_l a {
+                padding: 0 7px;
+                border-right: 1px solid #000
+            }
+
+            .footer .fk_l .nolpad {
+                padding-left: 0
+            }
+
+            .footer .fk_l .noborder {
+                border: none
+            }
+
+            .footer .fk_r ul {
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                list-style: none
+            }
+
+            .footer .fk_r ul li {
+                float: left;
+                height: 28px;
+                overflow: hidden
+            }
+
+            .footer .fk_r ul .l_bg001 {
+                background: url(http://p2.ifengimg.com/a/2016_21/nav0416_14_fd540caa-fd540caadc.gif) no-repeat left 9px;
+                padding-left: 19px
+            }
+
+            .footer .fk_r ul .l_bg002 {
+                background: url(http://p2.ifengimg.com/a/2016_21/nav0416_17-68c300b50b.gif) no-repeat left 9px;
+                padding-left: 17px;
+                margin-left: 18px
+            }
+
+            .footer .copyright {
+                font-family: Arial, "宋体";
+                color: #666;
+                height: 28px;
+                text-align: center;
+                overflow: hidden;
+                line-height: 28px
+            }
+
+            .footer .copyright span {
+                padding-right: 12px;
+                font-size: 12px
+            }
+        </style>
+        <div id="footer" class="footer mt02">
+            <div class="footlink clearfix">
+                <div class="fk_l">
+                    <a class="nolpad" href="http://www.ifeng.com/corp/about/intro/" target="_blank">凤凰新媒体介绍</a>
+                    <a href="http://ir.ifeng.com/" target="_blank">投资者关系 Investor Relations</a>
+                    <a href="http://biz.ifeng.com/" target="_blank">广告服务</a>
+                    <a href="http://career.ifeng.com/" target="_blank">诚征英才</a>
+                    <a href="http://www.ifeng.com/corp/privacy/" target="_blank">保护隐私权</a>
+                    <a href="http://www.ifeng.com/corp/exemption/" target="_blank">免责条款</a>
+                    <a href="http://www.ifeng.com/corp/feedback/" target="_blank">意见反馈</a>
+                    <a href="http://phtv.ifeng.com/intro/" target="_blank" class="noborder">凤凰卫视介绍</a>
+                </div>
+
+            </div>
+            <div class="copyright">
+                <span>凤凰新媒体</span>
+                <span>版权所有</span>
+                <span>Copyright © 2016 Phoenix New Media Limited All Rights Reserved.</span>
+            </div>
+        </div>`,
+            qrCode: {
+                url: 'http://p3.ifengimg.com/a/2016/0516/5fe93593da14bccsize17_w120_h164.png',
+                title: '凤凰新闻客户端',
+                width: 120,
+                height: 164
+            },
+        };
+
+    </script>
+    {{#each htmlWebpackPlugin.files.css}}
+    <link href="{{.}}" rel="stylesheet"> {{/each}}
+</head>
+
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.chunks}}
+    <script src="{{entry}}" type="text/javascript"></script>
+    {{/each}}
+</body>
+
+</html>

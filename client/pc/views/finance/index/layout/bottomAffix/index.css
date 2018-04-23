@@ -1,0 +1,23 @@
+.box {
+    left: 8.5px;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000000;
+}
+
+.fdockbar {
+    position: fixed;
+    clear: both;
+    left: 0;
+    bottom: 0;
+    z-index: 1000000;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-family: "å¾®è½¯é›…é»‘","å®‹ä½“",Arial, Verdana;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #5587B4;
+    color: #fff;
+}

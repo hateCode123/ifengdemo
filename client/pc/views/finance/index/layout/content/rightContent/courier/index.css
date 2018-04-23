@@ -1,0 +1,178 @@
+.courier {
+    margin-top: 20px;
+    & .title {
+        margin-top: 15px;
+        & .title_tabs {
+            & li {
+                background: #ffd1d1;
+                width: 150px;
+                height: 25px;
+                text-align: center;
+                line-height: 25px;
+                float: left;
+                color: #2b2b2b;
+                cursor: pointer;
+                font-size: 14px;
+                font-family: '微软雅黑';
+            }
+            & li.current {
+                background: #f54343;
+                color: #fff;
+            }
+        }
+    }
+    & .content {
+        & dl {
+            & dt {
+                height: 30px;
+                line-height: 30px;
+                background: #fff;
+                color: #000;
+                padding: 0 10px;
+                border-bottom: 1px solid #dddddd;
+                font-weight: bold;
+                & .content_title {
+                    float: right;
+                    display: inline;
+                }
+            }
+            & dd {
+                height: 91px;
+                padding: 5px 10px 3px;
+                background: #f5f5f5;
+                border-bottom: 1px dotted #ddd;
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+                & .col {
+                    height: 20px;
+                    line-height: 20px;
+                    overflow: hidden;
+                    padding-top: 5px;
+                    & .income {
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 16px;
+                        font-weight: bold;
+                        float: right;
+                        width: 65px;
+                        text-align: right;
+                        color: #ba2636;
+                    }
+                    & .type {
+                        width: 45px;
+                        height: 20px;
+                        line-height: 20px;
+                        text-align: center;
+                        display: inline-block;
+                        font-style: normal;
+                        color: #fff;
+                        margin: 0 10px;
+                        float: right;
+                    }
+                    & .risk {
+                        background: #f54343;
+                    }
+                    & .warning {
+                        background: #f39800;
+                    }
+                    & a {
+                        font-size: 12px;
+                        font-weight: bold;
+                        color: #2b2b2b;
+                    }
+                }
+                & p {
+                    color: #666;
+                    line-height: 24px;
+                    margin-top: 6px;
+                    & span {
+                        color: #000;
+                    }
+                }
+                & .shop {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    & a {
+                        & .btn {
+                            background: url('./gs_05.png') no-repeat;
+                            width: 46px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+            & dd.over {
+                background: rgb(255, 255, 255);
+            }
+            & dd.out {
+                background: rgb(248, 248, 248);
+            }
+
+            & .bar_L {
+                width: 155px;
+                float: left;
+                display: inline;
+                & h6 {
+                    font-size: 12px;
+                    height: 25px;
+                    line-height: 25px;
+                    overflow: hidden;
+                    margin-top: 5px;
+                    & a {
+                        color: #2b2b2b;
+                    }
+                }
+                & p {
+                    color: #666;
+                    line-height: 22px;
+                    margin-top: 5px;
+                    height: 45px;
+                    overflow: hidden;
+                    & span {
+                        color: #333;
+                    }
+                }
+            }
+            & .bar_R {
+                width: 78px;
+                padding-bottom: 10px;
+                float: right;
+                display: inline;
+                & .tip {
+                    display: block;
+                    background: #e3e5ed;
+                    height: 22px;
+                    line-height: 22px;
+                    font-weight: normal;
+                    color: #434343;
+                    text-align: center;
+                }
+                & .income {
+                    display: block;
+                    background: #fff;
+                    border: 1px solid #eee;
+                    height: 30px;
+                    font: 700 18px/30px Arial, '微软雅黑';
+                    text-align: center;
+                    color: #f54343;
+                }
+                & a {
+                    display: block;
+                    background: url('./icon_3.gif') no-repeat #fff;
+                    height: 20px;
+                    line-height: 20px;
+                    border: 1px solid #e3e5ed;
+                    border-width: 1px 2px 2px 1px;
+                    padding-left: 30px;
+                    color: #333;
+                    margin-top: 5px;
+                }
+                & a:hover {
+                    background-color: #f3f3f3;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

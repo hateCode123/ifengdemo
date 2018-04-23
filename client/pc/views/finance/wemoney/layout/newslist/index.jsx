@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import News from './news';
-import { rel } from '../../../../../../utils/rel';
+import { rel } from '../../../../../../../utils/rel';
 
 /**
  * 定义 NewsList 组件
