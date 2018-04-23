@@ -57,7 +57,7 @@
                 color: #999;
                 margin-left: 10px;
             }
-            & .category1 {
+            & .stick {
                 border: solid 1px #17a0e0;
                 color: #17a0e0;
                 padding: 1px 5px;
@@ -65,7 +65,7 @@
                 font-weight: normal;
                 font-size: 12px;
             }
-            & .category2 {
+            & .special {
                 background: #ff4245;
                 color: #fff;
                 border: solid 1px #ff4245;
@@ -74,7 +74,7 @@
                 font-weight: normal;
                 font-size: 12px;
             }
-            & .category3 {
+            & .selection {
                 border: solid 1px #ff4245;
                 color: #ff4245;
                 padding: 1px 5px;
@@ -82,25 +82,6 @@
                 font-weight: normal;
                 font-size: 12px;
             }
-        }
-    }
-    & .comment {
-        & a {
-            color: #999999;
-            text-decoration: none;
-            position: absolute;
-            right: 0px;
-            top: 90px;
-            z-index: 98;
-            background: url('./ly_0.png') no-repeat left center;
-            line-height: 24px;
-            height: 24px;
-            padding-left: 27px;
-            font-size: 12px;
-        }
-        & :hover {
-            background: url('./ly_hover.png') no-repeat left center;
-            color: #f54343;
         }
     }
 }

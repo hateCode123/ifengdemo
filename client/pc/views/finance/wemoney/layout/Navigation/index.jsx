@@ -18,7 +18,7 @@ class Navigation extends React.PureComponent {
             <div className={styles.navCon} >
                 <div>
                     <Chip
-                        id={content.id} type="static" title={content.name}
+                        id="10003" type="static" title="导航"
                         groupName="文章" content={content.content}
                     >
                         <Recommend />
