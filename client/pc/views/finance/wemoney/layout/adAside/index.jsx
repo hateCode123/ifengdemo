@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Recommend from '../recommend/';
 
 /**
  * 定义 AdAside 组件
@@ -15,20 +16,8 @@ class AdAside extends React.PureComponent {
 
         return (
             <div>
-                <Chip
-                    id="10004" type="static" title="wemoney右侧广告"
-                    groupName="文章" content={content}
-                >
-                    <ul>
-                        {content.map((item, index) => (
-                            <li key={index}>
-                                <a className={styles.evaluateCon} href={item.url}>
-                                    <img src={item.imgUrl} alt={item.title} />
-                                </a>
-                                <span>span是一个行内标签</span>
-                            </li>
-                        ))}
-                    </ul>
+                <Chip id={content.id} type="static" title={content.name} groupName="文章" content={content.content}>
+                    <Recommend />
                 </Chip>
             </div>
         );
@@ -38,7 +27,7 @@ class AdAside extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-AdAside.propTypes = { content: PropTypes.array };
+AdAside.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
