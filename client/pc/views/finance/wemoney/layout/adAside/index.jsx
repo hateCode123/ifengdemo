@@ -15,10 +15,7 @@ class AdAside extends React.PureComponent {
 
         return (
             <div>
-                <Chip
-                    id="10004" type="static" title="wemoney右侧广告"
-                    groupName="文章" content={content}
-                >
+                <Chip id="10004" type="static" title="wemoney右侧广告" groupName="文章" content={content}>
                     <ul>
                         {content.map((item, index) => (
                             <li key={index}>

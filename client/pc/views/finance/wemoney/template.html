@@ -6,110 +6,25 @@
     <meta content="always" name="referrer">
     <title></title>
     <script>
-        var allData = <%- JSON.stringify(allData) %>;
+        var __jsonData__ = <%- JSON.stringify(allData) %>;
         var jsonData = {
-            nav: [{
-                url: '//www.ifeng.com/',
-                title: '首页'
-            }, {
-                url: '//news.ifeng.com/',
-                title: '资讯'
-            }, {
-                url: '//v.ifeng.com/',
-                title: '视频'
-            }, {
-                url: '//zhibo.ifeng.com/',
-                title: '直播'
-            }, {
-                url: '//finance.ifeng.com/',
-                title: '财经'
-            }, {
-                url: '//ent.ifeng.com/',
-                title: '娱乐'
-            }, {
-                url: '//sports.ifeng.com/',
-                title: '体育'
-            }, {
-                url: '//fashion.ifeng.com/',
-                title: '时尚'
-            }, {
-                url: '//auto.ifeng.com/',
-                title: '汽车'
-            }, {
-                url: '//house.ifeng.com/',
-                title: '房产'
-            }, {
-                url: '//tech.ifeng.com/',
-                title: '科技'
-            }, {
-                url: '//book.ifeng.com/',
-                title: '读书'
-            }, {
-                url: '//games.ifeng.com/',
-                title: '游戏'
-            }, {
-                url: '//culture.ifeng.com/',
-                title: '文化'
-            }, {
-                url: '//news.ifeng.com/history/',
-                title: '历史'
-            }, {
-                url: '//news.ifeng.com/mil/',
-                title: '军事'
-            }, {
-                url: '//lehuo.ifeng.com/',
-                title: '乐活'
-            }, {
-                url: '//fo.ifeng.com/',
-                title: '佛教'
-            }],
-            navMore: [{
-                url: '//travel.ifeng.com/',
-                title: '旅游'
-            }, {
-                url: '//imall.ifeng.com/',
-                title: '匠选'
-            }, {
-                url: '//guoxue.ifeng.com/',
-                title: '国学'
-            }, {
-                url: '//digi.ifeng.com/',
-                title: '数码'
-            }, {
-                url: '//health.ifeng.com/',
-                title: '健康'
-            }, {
-                url: '//home.ifeng.com/',
-                title: '家居'
-            }, {
-                url: '//cp.ifeng.com/?aid=45',
-                title: '彩票'
-            }, {
-                url: '//gongyi.ifeng.com/',
-                title: '公益'
-            }, {
-                url: '//jiu.ifeng.com/',
-                title: '酒业'
-            }, {
-                url: '//dol.deliver.ifeng.com/c?z=ifeng&amp;la=0&amp;si=2&amp;cg=1&amp;c=1&amp;ci=2&amp;or=7549&amp;l=28704&amp;bg=28703&amp;b=37275&amp;u=http://audi-future.ifeng.com/',
-                title: '未来'
-            }],
-            navigation: allData.navigation,
-            slider: allData.slider,
-            info: allData.info,
-            hotNews: allData.hotNews,
-            adAside: allData.adAside
+            nav: [],
+            navigation: __jsonData__.navigation,
+            slider: __jsonData__.slider,
+            info: __jsonData__.info,
+            hotNews: __jsonData__.hotNews,
+            adAside: __jsonData__.adAside
         };
+
     </script>
     {{#each htmlWebpackPlugin.files.css}}
-        <link href="{{.}}" rel="stylesheet">
-    {{/each}}
+    <link href="{{.}}" rel="stylesheet"> {{/each}}
 </head>
 
 <body>
     <div id="root"></div>
     {{#each htmlWebpackPlugin.files.chunks}}
-        <script src="{{entry}}" type="text/javascript"></script>
+    <script src="{{entry}}" type="text/javascript"></script>
     {{/each}}
 </body>
 

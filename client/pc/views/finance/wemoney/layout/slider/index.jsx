@@ -22,10 +22,12 @@ class SimpleSlider extends React.PureComponent {
                     style={{
                         backgroundColor: '#fc5522',
                         borderRadius: '10px',
-                        padding: '10px'
-                    }}
-                >
-                    <ul style={{ margin: '0px' }} className={styles.slickDots}> {dots} </ul>
+                        padding: '10px',
+                    }}>
+                    <ul style={{ margin: '0px' }} className={styles.slickDots}>
+                        {' '}
+                        {dots}{' '}
+                    </ul>
                 </div>
             ),
         };
@@ -35,10 +37,7 @@ class SimpleSlider extends React.PureComponent {
         return (
             <div>
                 <div className={styles.wrapCon}>
-                    <Chip
-                        id="10006" type="static" title="wemoney轮播"
-                        groupName="文章" content={content}
-                    >
+                    <Chip id="10006" type="static" title="wemoney轮播" groupName="文章" content={content}>
                         <Slider {...settings}>
                             {content.map((item, index) => (
                                 <div key={index}>
@@ -47,7 +46,11 @@ class SimpleSlider extends React.PureComponent {
                                     </a>
                                     <div className={styles.bannerTitleCon}>
                                         <a href={item.url} target="_blank">
-                                            <p><strong><span>{item.title}</span></strong></p>
+                                            <p>
+                                                <strong>
+                                                    <span>{item.title}</span>
+                                                </strong>
+                                            </p>
                                         </a>
                                     </div>
                                     <a href={item.url} target="_blank" />

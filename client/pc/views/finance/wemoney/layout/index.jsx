@@ -3,7 +3,7 @@ import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
 import '../reset.css';
-import styles from './layout.css';
+import styles from './index.css';
 
 import Navigation from './Navigation/';
 import SimpleSlider from './slider/';
@@ -27,27 +27,25 @@ class Layout extends React.PureComponent {
          * 组件分发数据
          */
         const { content } = this.props;
-        console.log(content)
+
+        console.log(content);
 
         return (
             <div>
                 <div>公用头部导航</div>
                 <Navigation content={content.navigation} />
 
-                <div className={`${styles.bodyCon } ${ styles.clearfix}`}>
+                <div className={styles.bodyCon}>
                     <div className={styles.bodyMes}>
-
                         <div className={styles.bodyLeftCon}>
                             <SimpleSlider content={content.slider} />
                             <NewsList content={content.info} />
                         </div>
 
-
                         <div className={styles.bodyRightCon}>
                             <HotNews content={content.hotNews} />
                             <AdAside content={content.adAside} />
                         </div>
-
                     </div>
                 </div>
                 <div>底部版权</div>

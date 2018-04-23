@@ -7,17 +7,17 @@ import styles from './index.css';
  */
 class Recommend extends React.PureComponent {
     /**
-     * 
+     *
      */
     createMarkup = () => {
         return { __html: this.props.content };
-    }
+    };
 
     /**
      * 渲染组件
      */
     render() {
-        return <div className={ styles.box } dangerouslySetInnerHTML={ this.createMarkup() } />;
+        return <div className={styles.box} dangerouslySetInnerHTML={this.createMarkup()} />;
     }
 }
 

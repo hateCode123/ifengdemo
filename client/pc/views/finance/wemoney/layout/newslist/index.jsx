@@ -17,11 +17,12 @@ class NewsList extends React.PureComponent {
         return (
             <div className={styles.list}>
                 <News content={content} />
-                <div className={`${styles.more } ${ styles.mt22}`}>
-                    <a href="#" target="_blank">查看更多新闻</a>
+                <div className={styles.more}>
+                    <a href="#" target="_blank">
+                        查看更多新闻
+                    </a>
                 </div>
             </div>
-
         );
     }
 }
