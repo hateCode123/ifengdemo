@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import '../reset.css';
 import styles from './layout.css';
 
-import WemoneyNav from './wemoneyNav/';
+import Navigation from './Navigation/';
 import SimpleSlider from './slider/';
 import HotNews from './hotNews/';
 import AdAside from './adAside/';
@@ -23,27 +23,29 @@ class Layout extends React.PureComponent {
      */
 
     render() {
+        /**
+         * 组件分发数据
+         */
         const { content } = this.props;
-
-        console.log(content);
+        console.log(content)
 
         return (
             <div>
                 <div>公用头部导航</div>
-                <WemoneyNav content={content.wemoneyNav} />
+                <Navigation content={content.navigation} />
 
                 <div className={`${styles.bodyCon } ${ styles.clearfix}`}>
                     <div className={styles.bodyMes}>
 
                         <div className={styles.bodyLeftCon}>
-                            <SimpleSlider content={content.wemoneyLunbo} />
-                            <NewsList content={content.wemoneyNewsFlow} />
+                            <SimpleSlider content={content.slider} />
+                            <NewsList content={content.info} />
                         </div>
 
 
                         <div className={styles.bodyRightCon}>
-                            <HotNews content={content.wemoneyNewsRanking} />
-                            <AdAside content={content.wemoneyAdAside} />
+                            <HotNews content={content.hotNews} />
+                            <AdAside content={content.adAside} />
                         </div>
 
                     </div>

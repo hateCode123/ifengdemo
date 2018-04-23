@@ -15,8 +15,8 @@ class SimpleSlider extends React.PureComponent {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 3000,
-            speed: 3000,
+            autoplaySpeed: 2000,
+            speed: 2000,
             appendDots: dots => (
                 <div
                     style={{

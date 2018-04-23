@@ -5,9 +5,9 @@ import Chip from 'Chip';
 import Recommend from './recommend/';
 
 /**
- * 定义 wemoneyNav 组件
+ * 定义 Navigation 组件
  */
-class WemoneyNav extends React.PureComponent {
+class Navigation extends React.PureComponent {
     /**
      * 渲染组件
      */
@@ -18,7 +18,7 @@ class WemoneyNav extends React.PureComponent {
             <div className={styles.navCon} >
                 <div>
                     <Chip
-                        id={content.id} type="static" title={content.name}
+                        id="10003" type="static" title="导航"
                         groupName="文章" content={content.content}
                     >
                         <Recommend />
@@ -32,12 +32,12 @@ class WemoneyNav extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-WemoneyNav.propTypes = { content: PropTypes.object };
+Navigation.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
-WemoneyNav.defaultProps = {};
+Navigation.defaultProps = {};
 
-export { WemoneyNav };
-export default WemoneyNav;
+export { Navigation };
+export default Navigation;

@@ -3,16 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class News extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            commentNum: 0
-        };
-    }
-
-    componentDidMount() {
-
-    }
 
     /**
      * 渲染组件
@@ -52,11 +42,6 @@ class News extends React.PureComponent {
                                 <span className={styles.date}>{item.date}</span>
                                 <span className={styles.date}>{item.time}</span>
                             </p>
-                        </div>
-                        <div className={styles.comment}>
-                            <a href="#" target="_blank" rel="nofollow me noopener noreferrer">
-                                {this.state.commentNum}
-                            </a>
                         </div>
                     </div>
                 ))}
