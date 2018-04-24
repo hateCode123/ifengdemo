@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import { rel } from '../../../../../../utils/rel';
 
 /**
  * 定义 HotNews 组件
@@ -14,11 +15,13 @@ class HotNews extends React.PureComponent {
         const { content } = this.props;
 
         const creatList = () => (
-            <ul >
+            <ul>
                 {content.map((item, index) => (
                     <li key={index}>
                         <i className={styles.hotCircleIcon} />
-                        <a href={item.url} target="_blank"><span>{item.title}</span></a>
+                        <a href={item.url} target="_blank" rel={rel}>
+                            <span>{item.title}</span>
+                        </a>
                     </li>
                 ))}
             </ul>
@@ -27,20 +30,16 @@ class HotNews extends React.PureComponent {
         return (
             <div className={styles.onlineResolve}>
                 <div className={styles.hotSpecial}>
-                    <Chip
-                        id="10005" type="static" title="wemoney热门新闻排行"
-                        groupName="文章" content={content}
-                    >
-                        <a href=""><span className={styles.hotTitle}>热门新闻排行</span></a>
+                    <Chip id="10005" type="static" title="wemoney热门新闻排行" groupName="文章" content={content}>
+                        <a href="">
+                            <span className={styles.hotTitle}>热门新闻排行</span>
+                        </a>
                         <i className={styles.hotLineIcon} />
 
-                        <div className={styles.hotMesCon}>
-                            {creatList()}
-                        </div>
+                        <div className={styles.hotMesCon}>{creatList()}</div>
                     </Chip>
                 </div>
             </div>
-
         );
     }
 }

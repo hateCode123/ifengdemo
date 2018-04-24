@@ -49,7 +49,7 @@ const pcCssConfig = {
 
 const commoncss = {
     test: /\.css$/,
-    // exclude: /node_modules/,
+    exclude: [path.resolve(__dirname, 'node_modules/@ifeng')],
     include: /node_modules/,
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
@@ -110,7 +110,7 @@ const fileExtend = {
 const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.js' : './client/mobile/views/**/app.js'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.jsx' : './client/mobile/views/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: `[name].${platform}_${type}.[chunkhash:5].js`,

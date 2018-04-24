@@ -1,14 +1,5 @@
-.clearfix {
-    &:after {
-        content: ".";
-        display: block;
-        height: 0;
-        visibility: hidden;
-        clear: left;
-    }
-}
-
 .bodyCon {
+    composes: clearfix from global;
     width: 100%;
     padding-bottom: 26px;
     background: #eee;
@@ -31,13 +22,4 @@
     width: 306px;
     display: inline-block;
     float: left;
-}
-
-@media (min-width: 1250px) {
-    .layout {
-        width: 1240px;
-    }
-    .hot {
-        display: block;
-    }
 }

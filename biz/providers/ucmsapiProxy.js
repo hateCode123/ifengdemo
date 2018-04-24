@@ -53,8 +53,326 @@ Tarsapi.RedisProxy.prototype.getTimeout = function ( ) {
 }
 
 
+Tarsapi.SearchProxy.prototype.del = function (id, newsTime) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt64(1, id);
+        os.writeString(2, newsTime);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('del', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.delData = function (indexName, type, id) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, indexName);
+        os.writeString(2, type);
+        os.writeInt64(3, id);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('delData', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.getById = function (id) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt64(1, id);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getById', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.getByIds = function (ids) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeList(1, ids);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readMap(0, true, TarsStream.Map(TarsStream.Int64, TarsStream.String));
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getByIds', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.list = function (searchPath, specialChannelPath, type, status, offset, size, sort, returnFields) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, searchPath);
+        os.writeString(2, specialChannelPath);
+        os.writeString(3, type);
+        os.writeString(4, status);
+        os.writeInt32(5, offset);
+        os.writeInt32(6, size);
+        os.writeString(7, sort);
+        os.writeString(8, returnFields);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+    return this._worker.tars_invoke('list', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.listByQueryStr = function (queryStr) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, queryStr);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('listByQueryStr', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.put = function (id, dataJson, newsTime) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt64(1, id);
+        os.writeString(2, dataJson);
+        os.writeString(3, newsTime);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('put', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.putData = function (indexName, type, id, dataJson) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, indexName);
+        os.writeString(2, type);
+        os.writeInt64(3, id);
+        os.writeString(4, dataJson);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('putData', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.SearchProxy.prototype.test = function (s) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, s);
         return os.getBinBuffer();
@@ -91,9 +409,90 @@ Tarsapi.SearchProxy.prototype.test = function (s) {
     return this._worker.tars_invoke('test', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
+Tarsapi.SearchProxy.prototype.update = function (id, dataJson, newsTime) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt64(1, id);
+        os.writeString(2, dataJson);
+        os.writeString(3, newsTime);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('update', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.SearchProxy.prototype.updateData = function (indexName, type, id, dataJson) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, indexName);
+        os.writeString(2, type);
+        os.writeInt64(3, id);
+        os.writeString(4, dataJson);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('updateData', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 
 Tarsapi.KVProxy.prototype.del = function (enumValue, k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, enumValue);
         os.writeString(2, k);
@@ -131,8 +530,84 @@ Tarsapi.KVProxy.prototype.del = function (enumValue, k) {
     return this._worker.tars_invoke('del', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
+Tarsapi.KVProxy.prototype.getAd = function (k) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, k);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getAd', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.KVProxy.prototype.getAds = function (ks) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeList(1, ks);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getAds', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.KVProxy.prototype.getCategories = function (ids) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -170,7 +645,7 @@ Tarsapi.KVProxy.prototype.getCategories = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getCategory = function (id) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -208,7 +683,7 @@ Tarsapi.KVProxy.prototype.getCategory = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getCustom = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -245,10 +720,10 @@ Tarsapi.KVProxy.prototype.getCustom = function (k) {
     return this._worker.tars_invoke('getCustom', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
-Tarsapi.KVProxy.prototype.getCustoms = function (keys) {
-    var _encode = function () {
+Tarsapi.KVProxy.prototype.getCustoms = function (ks) {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
-        os.writeList(1, keys);
+        os.writeList(1, ks);
         return os.getBinBuffer();
     }
 
@@ -284,7 +759,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function (keys) {
 }
 
 Tarsapi.KVProxy.prototype.getDocument = function (id) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
@@ -322,7 +797,7 @@ Tarsapi.KVProxy.prototype.getDocument = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getDocuments = function (ids) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -360,7 +835,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getRecommendFragment = function (id) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -398,7 +873,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getRecommendFragments = function (ids) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -436,7 +911,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function (ids) {
 }
 
 Tarsapi.KVProxy.prototype.getStaticFragment = function (id) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
@@ -474,7 +949,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getStaticFragments = function (ids) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -511,8 +986,84 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function (ids) {
     return this._worker.tars_invoke('getStaticFragments', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
+Tarsapi.KVProxy.prototype.getStructuredFragment = function (id) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt32(1, id);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getStructuredFragment', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.KVProxy.prototype.getStructuredFragments = function (ids) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeList(1, ids);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('getStructuredFragments', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.KVProxy.prototype.getVideo = function (id) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
@@ -550,7 +1101,7 @@ Tarsapi.KVProxy.prototype.getVideo = function (id) {
 }
 
 Tarsapi.KVProxy.prototype.getVideos = function (ids) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
@@ -587,8 +1138,47 @@ Tarsapi.KVProxy.prototype.getVideos = function (ids) {
     return this._worker.tars_invoke('getVideos', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
+Tarsapi.KVProxy.prototype.putAd = function (k, v) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeString(1, k);
+        os.writeString(2, v);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('putAd', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.KVProxy.prototype.putCategory = function (id, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -627,7 +1217,7 @@ Tarsapi.KVProxy.prototype.putCategory = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putCustom = function (k, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -666,7 +1256,7 @@ Tarsapi.KVProxy.prototype.putCustom = function (k, v) {
 }
 
 Tarsapi.KVProxy.prototype.putDocument = function (id, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
@@ -705,7 +1295,7 @@ Tarsapi.KVProxy.prototype.putDocument = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putRecommendFragment = function (id, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -744,7 +1334,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function (id, v) {
 }
 
 Tarsapi.KVProxy.prototype.putStaticFragment = function (id, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
@@ -782,8 +1372,47 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function (id, v) {
     return this._worker.tars_invoke('putStaticFragment', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
+Tarsapi.KVProxy.prototype.putStructuredFragment = function (id, v) {
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt32(1, id);
+        os.writeString(2, v);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readBoolean(0, true, TarsStream.Boolean);
+
+            return {request:data.request, response:response};
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request : data.request, response : response};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {request:data.request, response:response};
+    }
+
+    return this._worker.tars_invoke('putStructuredFragment', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.KVProxy.prototype.putVideo = function (id, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
@@ -823,7 +1452,7 @@ Tarsapi.KVProxy.prototype.putVideo = function (id, v) {
 
 
 Tarsapi.RedisProxy.prototype.blpop = function (time, ks) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
@@ -862,7 +1491,7 @@ Tarsapi.RedisProxy.prototype.blpop = function (time, ks) {
 }
 
 Tarsapi.RedisProxy.prototype.brpop = function (time, ks) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
@@ -901,7 +1530,7 @@ Tarsapi.RedisProxy.prototype.brpop = function (time, ks) {
 }
 
 Tarsapi.RedisProxy.prototype.del = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -939,7 +1568,7 @@ Tarsapi.RedisProxy.prototype.del = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.expire = function (k, exp) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeInt32(2, exp);
@@ -978,7 +1607,7 @@ Tarsapi.RedisProxy.prototype.expire = function (k, exp) {
 }
 
 Tarsapi.RedisProxy.prototype.get = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1016,7 +1645,7 @@ Tarsapi.RedisProxy.prototype.get = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.getRange = function (k, startOffset, endOffset) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeInt32(2, startOffset);
@@ -1056,7 +1685,7 @@ Tarsapi.RedisProxy.prototype.getRange = function (k, startOffset, endOffset) {
 }
 
 Tarsapi.RedisProxy.prototype.hgetAll = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1094,7 +1723,7 @@ Tarsapi.RedisProxy.prototype.hgetAll = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.hmset = function (k, hash) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeMap(2, hash);
@@ -1133,7 +1762,7 @@ Tarsapi.RedisProxy.prototype.hmset = function (k, hash) {
 }
 
 Tarsapi.RedisProxy.prototype.llen = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1171,7 +1800,7 @@ Tarsapi.RedisProxy.prototype.llen = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.lpop = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1209,7 +1838,7 @@ Tarsapi.RedisProxy.prototype.lpop = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.lpush = function (k, element) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
@@ -1248,7 +1877,7 @@ Tarsapi.RedisProxy.prototype.lpush = function (k, element) {
 }
 
 Tarsapi.RedisProxy.prototype.rpop = function (k) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
@@ -1286,7 +1915,7 @@ Tarsapi.RedisProxy.prototype.rpop = function (k) {
 }
 
 Tarsapi.RedisProxy.prototype.rpush = function (k, element) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
@@ -1325,7 +1954,7 @@ Tarsapi.RedisProxy.prototype.rpush = function (k, element) {
 }
 
 Tarsapi.RedisProxy.prototype.set = function (k, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -1363,12 +1992,12 @@ Tarsapi.RedisProxy.prototype.set = function (k, v) {
     return this._worker.tars_invoke('set', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
 }
 
-Tarsapi.RedisProxy.prototype.setex = function (k, v, expire) {
-    var _encode = function () {
+Tarsapi.RedisProxy.prototype.setex = function (k, v, exp) {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
-        os.writeInt32(3, expire);
+        os.writeInt32(3, exp);
         return os.getBinBuffer();
     }
 
@@ -1404,7 +2033,7 @@ Tarsapi.RedisProxy.prototype.setex = function (k, v, expire) {
 }
 
 Tarsapi.RedisProxy.prototype.setnx = function (k, v) {
-    var _encode = function () {
+    var _encode = function () { 
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
@@ -1443,3 +2072,4 @@ Tarsapi.RedisProxy.prototype.setnx = function (k, v) {
 }
 
 exports.KVProxy = Tars.stringToProxy(Tarsapi.KVProxy, Tars.configure.get("main.KVServer"));
+exports.SearchProxy = Tars.stringToProxy(Tarsapi.SearchProxy, Tars.configure.get("main.SearchServer"));

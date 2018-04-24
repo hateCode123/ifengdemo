@@ -5,3 +5,7 @@
     background-repeat: repeat;
     position: relative;
 }
+.nav {
+    width: 1000px;
+    margin: 0 auto;
+}

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Recommend from './recommend/';
+import Recommend from '../recommend/';
+import Search from './Search/';
 
 /**
  * 定义 Navigation 组件
@@ -15,14 +16,12 @@ class Navigation extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <div className={styles.navCon} >
-                <div>
-                    <Chip
-                        id="10003" type="static" title="导航"
-                        groupName="文章" content={content.content}
-                    >
+            <div className={styles.navCon}>
+                <div className={styles.nav}>
+                    <Chip id="10003" type="static" title="导航" groupName="文章" content={content.content}>
                         <Recommend />
                     </Chip>
+                    <Search />
                 </div>
             </div>
         );
