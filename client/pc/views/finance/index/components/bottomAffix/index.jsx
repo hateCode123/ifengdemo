@@ -9,6 +9,8 @@ import styles from './index.css';
 class BottomAffix extends React.PureComponent {
     state = {
         isShow: false,
+        quoteShow: false,
+        fundsShow: false,
     };
 
     componentDidMount() {
@@ -40,11 +42,43 @@ class BottomAffix extends React.PureComponent {
         scrollTo(0, 0);
     };
 
+    handleQuoteShow = () => {
+        const { quoteShow } = this.state;
+
+        this.setState({ quoteShow: !quoteShow });
+    };
+
+    handleFundsShow = () => {
+        const { fundsShow } = this.state;
+
+        this.setState({ fundsShow: !fundsShow });
+    };
+
+    handleMouseOver = flag => {
+        if (flag === 0) {
+            this.setState({ quoteShow: false });
+        } else if (flag === 1) {
+            this.setState({ fundsShow: false });
+        }
+    };
+
+    handleSearch = flag => {
+        if (flag === 0) {
+            const quote = document.getElementsByClassName('quote')[0].value;
+
+            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
+        } else if (flag === 1) {
+            const funds = document.getElementsByClassName('funds')[0].value;
+
+            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
+        }
+    };
+
     /**
      * 渲染组件
      */
     render() {
-        const { isShow } = this.state;
+        const { isShow, quoteShow, fundsShow } = this.state;
 
         const bottomAffix = (
             <div className={styles.affix_box}>
@@ -52,18 +86,34 @@ class BottomAffix extends React.PureComponent {
                     <tbody>
                         <tr>
                             <td>
-                                <a href="javascript:void(0);">
+                                <a href="javascript:void(0);" onClick={this.handleQuoteShow}>
                                     <div className={styles.quote} />
                                     <p>查行情</p>
                                 </a>
+                                <div
+                                    className={`${styles.caption} ${quoteShow ? styles.show : styles.hide}`}
+                                    onMouseLeave={() => this.handleMouseOver(0)}>
+                                    <div className={styles.search}>
+                                        <input className="quote" placeholder="代码/拼音/名称" />
+                                        <a onClick={() => this.handleSearch(0)}>搜索</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="javascript:void(0);">
+                                <a href="javascript:void(0);" onClick={this.handleFundsShow}>
                                     <div className={styles.funds} />
                                     <p>查资金</p>
                                 </a>
+                                <div
+                                    className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
+                                    onMouseLeave={() => this.handleMouseOver(1)}>
+                                    <div className={styles.search}>
+                                        <input className="funds" placeholder="代码/拼音/名称" />
+                                        <a onClick={() => this.handleSearch(1)}>搜索</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         {isShow ? (
