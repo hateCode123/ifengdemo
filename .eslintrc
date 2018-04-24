@@ -62,21 +62,21 @@
         "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "strict" }],
         "keyword-spacing": ["error", { "before": true, "after": true }],
         "linebreak-style": ["error", "unix"],
-        "lines-around-comment": [
-            "error",
-            {
-                "beforeBlockComment": true,
-                "afterBlockComment": false,
-                "beforeLineComment": true,
-                "afterLineComment": false,
-                "allowBlockStart": true,
-                "allowObjectStart": true,
-                "allowArrayStart": true
-            }
-        ],
+        // "lines-around-comment": [
+        //     "error",
+        //     {
+        //         "beforeBlockComment": true,
+        //         "afterBlockComment": false,
+        //         "beforeLineComment": true,
+        //         "afterLineComment": false,
+        //         "allowBlockStart": true,
+        //         "allowObjectStart": true,
+        //         "allowArrayStart": true
+        //     }
+        // ],
         "new-parens": "error",
         // "new-cap": [ "error", { "newIsCap": true, "capIsNew": true } ],
-        "newline-after-var": ["error", "always"],
+        // "newline-after-var": ["error", "always"],
         "newline-before-return": "error",
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         //"no-continue": "error",

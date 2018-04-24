@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.css';
+import '../../reset.css';
 
 class Navigation extends React.PureComponent {
     /**
@@ -19,23 +20,8 @@ class Navigation extends React.PureComponent {
         ));
 
         return (
-            <div className={styles.g_col} cmpp-type="s">
-                <div className={styles.w1000}>
-                    <div className={styles.col_banner}>
-                        <ul className={styles.clearfix}>{navigation}</ul>
-                        <div className={styles.p_banner}>
-                            <a href="http://jr.ifeng.com/" target="_blank">
-                                凤凰金融
-                            </a>
-                            <a href="http://ds.ifeng.com/" target="_blank">
-                                报名炒股大赛赢百万奖金
-                            </a>
-                            <a href="http://finance.ifeng.com/app/hq/" target="_blank">
-                                基金行情
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div className={styles.col_banner}>
+                <ul class="clearfix">{navigation}</ul>
             </div>
         );
     }

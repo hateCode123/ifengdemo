@@ -1,53 +1,14 @@
-.navCon {
-    width: 100%;
-    height: 80px;
-    background:url(http://y0.ifengimg.com/fe/weMoney/images/navBG_f19dbe04.png);
-    background-repeat: repeat;
-    position:relative;
+
+.col_banner ul {
+    background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_02.png) no-repeat left top;
 }
-
-.clearfix{&:after {content:"."; display:block; height:0; visibility:hidden; clear:left;}}
-
-.bodyCon{
-    width:100%;
-    padding-bottom: 26px;
-    background:#eee;
-    & .bodyMes{
-        width:1000px;
-        /*min-height:1783px;*/
-        margin:0 auto;
-        padding-top:40px;
-        position:relative;
-        font-size:0;
-        & .bodyLeftCon{
-            width:654px;
-            margin-right:40px;
-            display:inline-block;
-            float:left;
-        }
-    }
+.col_banner ul li {
+    float: left;
+    line-height: 38px;
+    padding: 0px 20px;
+    height: 38px;
+    background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_02.png) no-repeat right top;;
 }
-
-/*lunbo styles start*/
-
-/* right */
-.bodyRightCon{
-    width:306px;
-    display:inline-block;
-    float:left;
-    & .onlineResolve{
-        width:306px;
-        display:block;
-    }
-}
-
-
-
-@media (min-width: 1250px) {
-    .layout {
-        width: 1240px;
-    }
-    .hot {
-        display: block;
-    }
-}
+.col_banner ul li a{ color:#FFF; font-weight:bold; font-size:14px; text-decoration:none;}
+.col_banner ul li a:hover{ color:#fdc300;}
+ 

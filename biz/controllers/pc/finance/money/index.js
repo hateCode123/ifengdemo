@@ -9,33 +9,35 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-
         // 导航静态碎片
-        console.log('getStaticFragment 10019...');
+
         const navigation = KVProxy.getStaticFragment(10019).then(...handleJsonByKey(ctx, 'content'));
-        // const wemoneyLunbo = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
-        // const wemoneyAdAside = KVProxy.getStaticFragment(10004).then(...handleJsonByKey(ctx, 'content'));
+        const subNavigation = KVProxy.getStaticFragment(10020).then(...handleJsonByKey(ctx, 'content'));
+        const collapse = KVProxy.getStaticFragment(10026).then(...handleJsonByKey(ctx, 'content'));
+
+        const topLinkTable = KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
         // const wemoneyNewsRanking = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
         // const wemoneyNewsFlow = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
-console.log('navigation',navigation)
+
         const otherData = await Promise.all([
             navigation,
+            subNavigation,
+            collapse,
+            topLinkTable,
             // wemoneyLunbo,
             // wemoneyNewsFlow,
             // wemoneyNewsRanking,
             // wemoneyAdAside,
         ]);
-
-        // console.log("11111 : ", otherData)
-    
+        
         const allData = {
             navigation: otherData[0],
-            // wemoneyLunbo: otherData[1],
-            // wemoneyNewsFlow: otherData[2],
-            // wemoneyNewsRanking: otherData[3],
+            subNavigation: otherData[1],
+            collapse: otherData[2],
+            topLinkTable: otherData[3],
             // wemoneyAdAside: otherData[4],
         };
- 
+
         await ctx.html('finance_money', { allData });
     },
 };

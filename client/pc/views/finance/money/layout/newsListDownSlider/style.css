@@ -1,0 +1,78 @@
+.box_txt01 {
+    & h2 {
+        font-family: Microsoft YaHei;
+        font-size: 20px;
+        color: #2b2b2b;
+        font-weight: normal;
+        height: 28px;
+        line-height: 28px;
+        vertical-align: bottom;
+        overflow: hidden;
+    }
+
+    & h2 a {
+        color: #2b2b2b;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    & h2 a:hover {
+        color: #f54343;
+    } /*150806a*/
+    & .box_01 {
+        overflow: hidden;
+        padding-bottom: 9px;
+        border-bottom: 1px solid #e7e7e7;
+        margin-bottom: 15px;
+    }
+    & p {
+        color: #999999;
+        line-height: 24px;
+        height: 20px;
+    }
+    & .box_01_1 {
+        margin-top: 5px;
+        overflow: hidden;
+    }
+    & h3 {
+        font-size: 14px;
+        color: #2b2b2b;
+        height: 26px;
+        line-height: 26px;
+        font-weight: normal;
+        vertical-align: bottom;
+        overflow: hidden;
+    }
+    & h3 span {
+        color: #666;
+        margin-right: 7px;
+    }
+    & h3 a {
+        color: #2b2b2b;
+    }
+    & h3 a:hover {
+        color: #f54343;
+    } /*150806a*/
+    & h3 .video {
+        background: url(http://y1.ifengimg.com/e01ed39fc2da5d4a/2013/0527/list03.gif) no-repeat left center;
+        padding-left: 17px;
+        margin-left: 3px;
+    }
+    & .hyh {
+        position: absolute;
+        right: 0px;
+        bottom: 10px;
+        background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/hyh.png) no-repeat;
+        width: 51px;
+        height: 24px;
+        cursor: pointer;
+        display: none;
+    }
+}
+.huh_box {
+    position: relative;
+}
+.huh_box:hover {
+    & .hyh {
+        display: block;
+    }
+}
