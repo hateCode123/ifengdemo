@@ -1,0 +1,14 @@
+/* composes: clearfix from global; */
+.col_w1000 {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.col_w480 {
+    width: 480px;
+}
+
+.f1 {
+    composes: col_w480;
+    float: left;
+}
