@@ -9,24 +9,41 @@ class ComicBook extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+        const data = {};
+
+        if (content && content.list) {
+            const datas = content.list[0];
+
+            data.url = datas.url;
+            data.thumbnails = JSON.parse(datas.thumbnails).image[0].url;
+            data.title = datas.title;
+            data.rank = datas.wemediaEAccountId;
+            data.date = datas.newsTime.split(' ')[0];
+        } else {
+            data.url = '#';
+            data.thumbnails = '#';
+            data.title = '';
+            data.rank = '';
+            data.date = '';
+        }
 
         return (
             <div className={styles.box}>
                 <div className={styles.picTxt}>
                     <div className={styles.pic}>
-                        <a href={content.url} target="_blank" rel={rel} title="连环话">
-                            <img src={content.src} alt="连环话" className={styles.trans} />
+                        <a href={data.url} target="_blank" rel={rel} title="连环话">
+                            <img src={data.thumbnails} alt="连环话" className={styles.trans} />
                             <span>连环话</span>
                         </a>
                     </div>
                     <h3>
-                        <a href={content.url} target="_blank" rel={rel} title={content.title}>
-                            {content.title}
+                        <a href={data.url} target="_blank" rel={rel} title={data.title}>
+                            {data.title}
                         </a>
                     </h3>
                     <div className={styles.txt}>
-                        {content.rank}
-                        <span>{content.date}</span>
+                        {data.rank}期
+                        <span>{data.date}</span>
                     </div>
                 </div>
             </div>

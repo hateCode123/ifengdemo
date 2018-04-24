@@ -92,7 +92,11 @@ class FundsFlow extends React.PureComponent {
                                             item.tenDayList[item.tenDayList.length - 1] > 0 ? styles.red : styles.green
                                         }
                                         style={{ textAlign: 'center' }}>
-                                        <span>{item.tenDayList[item.tenDayList.length - 1].toFixed(0)}</span>
+                                        <span>
+                                            {Number(item.tenDayList[item.tenDayList.length - 1]) === 0
+                                                ? 0
+                                                : item.tenDayList[item.tenDayList.length - 1].toFixed(0)}
+                                        </span>
                                     </td>
                                     <td
                                         className={item.last > 0 ? styles.red : styles.green}

@@ -39,9 +39,7 @@ class RightContent extends React.PureComponent {
                         <Chip id="20008" type="recommend" title="研究院" groupName="正文" content={content.institute}>
                             <ThinkTank tip="研究院" />
                         </Chip>
-                        <Chip id="20009" type="recommend" title="国子策" groupName="正文" content={content.state}>
-                            <ThinkTank tip="国子策" />
-                        </Chip>
+                        <ThinkTank tip="国子策" />
                     </ul>
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />

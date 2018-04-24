@@ -7,8 +7,9 @@ import Header from './header/';
 import Navigation from './navigation/';
 import Stock from './stock/';
 import Content from './content/';
-import Footer from './footer/';
-import QrCode from './qrCode';
+import BottomFooter from './footer/';
+import QrCode from '../components/qrCode/';
+import BottomAffix from '../components/bottomAffix/';
 
 class Layout extends React.PureComponent {
     render() {
@@ -56,7 +57,6 @@ class Layout extends React.PureComponent {
                 asideAd6: content.asideAd6,
                 financeVideo: content.financeVideo,
                 institute: content.institute,
-                state: content.state,
                 meeting: content.meeting,
                 market: content.market,
                 courier: content.courier,
@@ -68,7 +68,6 @@ class Layout extends React.PureComponent {
             footer: content.footer,
         };
         const qrCode = content.qrCode;
-        const bottomAffix = content.bottomAffix;
 
         return (
             <div className={styles.ip_col}>
@@ -78,9 +77,10 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <Stock content={stockData} />
                 <Content content={contentData} />
-                <Footer content={footerData} />
+                <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
                 <QrCode content={qrCode} />
+                <BottomAffix />
                 <ChipEdit />
             </div>
         );

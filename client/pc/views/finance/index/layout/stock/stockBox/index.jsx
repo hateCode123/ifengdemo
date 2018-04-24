@@ -12,7 +12,7 @@ class StockBox extends React.PureComponent {
                 code: 'sh000001',
             },
             {
-                name: '深证指数',
+                name: '深证成指',
                 type: 'stock',
                 code: 'sz399001',
             },
@@ -45,28 +45,30 @@ class StockBox extends React.PureComponent {
             return codeList;
         });
 
-        await loadScript('http://hq.finance.ifeng.com/q.php', {
+        const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
             data: {
                 l: codeList.join(','),
                 f: 'json',
+                e: 'dddddd(json_q)',
             },
+            jsonpCallback: 'dddddd',
         });
 
-        for (let a = 0; a < Object.keys(json_q).length; a++) {
+        for (let a = 0; a < Object.keys(result).length; a++) {
             let style = '';
 
-            if (json_q[codeList[a]][2] > 0) {
+            if (result[codeList[a]][2] > 0) {
                 style = 'red';
-            } else if (json_q[codeList[a]][2] < 0) {
+            } else if (result[codeList[a]][2] < 0) {
                 style = 'green';
             } else {
                 style = 'black';
             }
 
             price.push({
-                price: json_q[codeList[a]][0],
-                index: json_q[codeList[a]][2],
-                percent: json_q[codeList[a]][3],
+                price: result[codeList[a]][0],
+                index: result[codeList[a]][2],
+                percent: result[codeList[a]][3],
                 style,
             });
         }

@@ -166,7 +166,7 @@
         "react/jsx-equals-spacing": "error",
         "react/jsx-filename-extension": "error",
         "react/jsx-first-prop-new-line": ["error", "multiline"],
-        "react/jsx-indent": ["error", 4],
+        // "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "react/jsx-key": "error",
         // "react/jsx-max-props-per-line": [ "warn", { "maximum": 3 } ],

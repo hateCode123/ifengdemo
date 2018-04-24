@@ -2,29 +2,56 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
+import { jsonp } from '@ifeng/ui_base';
 
 class ThinkTank extends React.PureComponent {
+    state = {
+        data: {},
+    };
+
+    /**
+     * 请求数据
+     */
+    componentDidMount() {
+        const { content } = this.props;
+
+        if (!content) {
+            jsonp('//lark.ifeng.com/lark/topic_list.jhtml?topic.categoryId=1421', {
+                data: {
+                    offset: 0,
+                    limit: 1,
+                    pageSize: 1,
+                },
+            }).then(data => {
+                this.setState({ data: data.data.data[0] });
+            });
+        }
+    }
+
     /**
      * 渲染组件
      */
     render() {
+        const { data } = this.state;
         const { content, tip } = this.props;
+
+        const datas = content ? content[0] : data;
 
         return (
             <li className={styles.listitem}>
                 <div className={styles.hot}>
                     <div className={styles.box}>
                         <div>
-                            <a href={content[0].url} target="_blank" rel={rel}>
-                                <img src={content[0].thumbnail} width="300" height="169" />
+                            <a href={datas.url} target="_blank" rel={rel}>
+                                <img src={datas.thumbnail} width="300" height="169" />
                             </a>
                         </div>
                         <div className={styles.wrapper}>
                             <div className={styles.mask} />
                             <div className={styles.details}>
                                 <h3 className={styles.title}>
-                                    <a href={content[0].url} target="_blank" rel={rel}>
-                                        {content[0].title}
+                                    <a href={datas.url} target="_blank" rel={rel}>
+                                        {datas.title}
                                     </a>
                                 </h3>
                             </div>

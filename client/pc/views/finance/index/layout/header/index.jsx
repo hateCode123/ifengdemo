@@ -4,8 +4,8 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '../../components/ad/';
 import Logo from './logo/';
-import Nav from './nav/';
-import UserInfo from './userInfo/';
+import Nav from '../../../../../components/nav/';
+import UserInfo from '../../../../../components/userInfo/';
 import Search from './search/';
 
 /**
@@ -23,31 +23,28 @@ class Header extends React.PureComponent {
         };
 
         const topNav = (
-            <div className={ styles.h_mainNavNew } key="topNav">
-                <Chip
-                    id="7" type="static" title="导航"
-                    groupName="头部" content={ content.nav }
-                >
-                    <Nav limit={ 18 } />
+            <div className={styles.h_mainNavNew} key="topNav">
+                <Chip id="7" type="static" title="导航" groupName="头部" content={content.nav}>
+                    <Nav limit={18} />
                 </Chip>
                 <UserInfo />
             </div>
         );
         const topAd = (
-            <div key="topAd" className={ styles.ad }>
-                <Ad content={ content.topAd } styleName={ styles.box } />
+            <div key="topAd" className={styles.ad}>
+                <Ad content={content.topAd} styleName={styles.box} />
             </div>
         );
         const topSearch = (
-            <div className={ styles.h_searchDiv } key="topSearch">
-                <div className={ styles.h_theLogo }>
-                    <Logo content={ logoData } />
+            <div className={styles.h_searchDiv} key="topSearch">
+                <div className={styles.h_theLogo}>
+                    <Logo content={logoData} />
                 </div>
                 <Search />
             </div>
         );
 
-        return [ topNav, topAd, topSearch ];
+        return [topNav, topAd, topSearch];
     }
 }
 

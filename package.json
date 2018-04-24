@@ -45,6 +45,7 @@
         "write-file-webpack-plugin": "^4.2.0"
     },
     "devDependencies": {
+        "@ifeng/ui_pc_auth": "^1.0.2",
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.2.2",
         "babel-loader": "^7.1.3",

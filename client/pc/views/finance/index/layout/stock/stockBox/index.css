@@ -26,6 +26,9 @@
                 height: 14px;
                 font-family: Arial;
                 padding-top: 3px;
+                & span {
+                    padding: 0 5px;
+                }
             }
             & .red {
                 color: #f54343;

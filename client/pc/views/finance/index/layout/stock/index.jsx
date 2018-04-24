@@ -11,7 +11,7 @@ import Production from './production/';
 
 class Stock extends React.PureComponent {
     state = {
-        current: 2,
+        current: 0,
     };
 
     handleTabsChange = index => {

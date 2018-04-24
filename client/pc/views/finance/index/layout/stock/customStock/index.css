@@ -8,6 +8,29 @@
         float: left;
         & .tabs {
             width: 400px;
+            & tbody tr {
+                & .tab {
+                    background: #fdebeb;
+                    border-bottom: solid 1px #fccfd0;
+                    height: 24px;
+                    line-height: 24px;
+                    color: #666;
+                }
+                & .item {
+                    height: 24px;
+                    line-height: 24px;
+                    color: #666;
+                }
+                & .red {
+                    color: #f54343;
+                }
+                & .green {
+                    color: #54b59c;
+                }
+                & .black {
+                    color: #222;
+                }
+            }
         }
     }
     & .btn {
@@ -21,6 +44,10 @@
             background: #f54343;
             display: block;
             float: left;
+            & a {
+                padding: 3px 0px;
+                color: #fff;
+            }
         }
         & .tip {
             color: #666666;
@@ -30,12 +57,4 @@
             float: left;
         }
     }
-}
-
-.tab {
-    background: #fdebeb;
-    border-bottom: solid 1px #fccfd0;
-    height: 24px;
-    line-height: 24px;
-    color: #666;
 }
