@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Tabs from './tabs/';
 import ContentList from './contentList/';
-import Ad from '../../../components/ad/';
+import Ad from '../../../../../../components/ad/';
 
 class Info extends React.PureComponent {
     state = {

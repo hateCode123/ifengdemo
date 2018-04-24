@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { Ad } from '../../components/ad/';
+import { Ad } from '../../../../../components/ad/';
 import Cooperation from '../../components/cooperation/';
 import Footer from '../../../../../components/footer/';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Ad from '../../components/ad/';
+import Ad from '../../../../../components/ad/';
 import Logo from './logo/';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '../../../../../components/userInfo/';

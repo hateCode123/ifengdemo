@@ -7,6 +7,7 @@ import StockMarket from './stockMarket/';
 import CustomStock from './customStock/';
 import FundsFlow from './fundsFlow/';
 import StockBox from './stockBox';
+import StockSearch from './stockSearch/';
 import Production from './production/';
 
 class Stock extends React.PureComponent {
@@ -50,7 +51,7 @@ class Stock extends React.PureComponent {
                                     content={content.stockMarket}>
                                     <StockMarket />
                                 </Chip>
-                                <div className={`${styles.btn} clearfix`}>股票搜索组件</div>
+                                <StockSearch />
                             </div>
                         </div>
                         <div className={styles.sub_box}>{getBox()}</div>
