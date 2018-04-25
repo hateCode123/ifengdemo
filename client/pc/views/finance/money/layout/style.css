@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* CSS Document */
-.space25{ height:25px; overflow:hidden;}
+/* .space25{ height:25px; overflow:hidden;}
 .space26{ height:26px; overflow:hidden;}
 .space27{ height:27px; overflow:hidden;}
 .space30{ height:30px; overflow:hidden;}
@@ -15,19 +15,20 @@
 .pl20{ padding-left:20px;}
 .mb30{ margin-bottom:30px;}
 .mr8{ margin-right:8px;}
-.pr17{ padding-right:17px;}
+.pr17{ padding-right:17px;} */
 
 .g_col{ width:100%; background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_01.png)repeat-x;}
 .w1000{ width:1000px; margin:0 auto;
     composes: clearfix from global;
 }
-
-
-.l_left{ width:400px; float:left; margin-right:30px;}
-/* .w240{ width:240px; margin-right:30px; overflow:hidden;}
+.l_left{
+  
+    width:400px; float:left; margin-right:30px;
+}
+.w240{ width:240px; margin-right:30px; overflow:hidden;}
 .w300{ width:298px; overflow:hidden;}
 .fl{ float:left;}
-.bor{ border:1px solid #efefef;} */
+.bor{ border:1px solid #efefef;}
 .l_right{ width:570px; float:left;}
 
 /*焦点图*/
@@ -50,3 +51,8 @@
 #sea_08:hover b{ background:url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_04.png) left -93px no-repeat;}
 #sea_09 b{ display:block; height:53px; width:119px; background:url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_03.png) -122px -93px no-repeat;}
 #sea_09:hover b{ background:url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_04.png) -122px -93px no-repeat;}
+
+
+
+.title_02{ height:32px; border-bottom:1px solid #efefef; line-height:32px; color:#333333; background:#fafafa; font-size:16px; padding-left:12px; font-family:Microsoft YaHei;}
+.w1000 .title_02 a{ color:#333333;font-size:16px;font-family:Microsoft YaHei; text-decoration:none;}

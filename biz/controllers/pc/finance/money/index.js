@@ -16,8 +16,8 @@ exports.financeWemoney = {
         const collapse = KVProxy.getStaticFragment(10026).then(...handleJsonByKey(ctx, 'content'));
 
         const topLinkTable = KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
-        // const wemoneyNewsRanking = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
-        // const wemoneyNewsFlow = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
+        const market = KVProxy.getStaticFragment(10035).then(...handleJson(ctx));
+        const test = KVProxy.getCustom('finance_22005_516_1293').then(...handleJson(ctx));
 
         const otherData = await Promise.all([
             navigation,
@@ -26,7 +26,8 @@ exports.financeWemoney = {
             topLinkTable,
             // wemoneyLunbo,
             // wemoneyNewsFlow,
-            // wemoneyNewsRanking,
+            market,
+            test,
             // wemoneyAdAside,
         ]);
         
@@ -35,7 +36,8 @@ exports.financeWemoney = {
             subNavigation: otherData[1],
             collapse: otherData[2],
             topLinkTable: otherData[3],
-            // wemoneyAdAside: otherData[4],
+            market: otherData[4],
+            test: otherData[5],
         };
 
         await ctx.html('finance_money', { allData });

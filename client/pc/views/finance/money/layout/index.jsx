@@ -2,6 +2,7 @@ import React from 'react';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
+import { rel } from '../../../../../utils/rel';
 
 import '../reset.css';
 import style from './style.css';
@@ -60,8 +61,8 @@ class Layout extends React.PureComponent {
         },
     };
 
-    createMarkup = () => {
-        return { __html: this.props.content.topLinkTable.content };
+    createMarkup = content => {
+        return { __html: content };
     };
     render() {
         // todo  mockdata
@@ -87,47 +88,74 @@ class Layout extends React.PureComponent {
             </div>
         );
 
+        /**
+         * 理财产品
+         */
+        const topLinkTable = (
+            <Chip
+                id="10029"
+                type="static"
+                title="理财产品"
+                groupName="首屏"
+                content={this.props.content.topLinkTable.content}>
+                <div
+                    className={` ${style.caption01} ${style.w240} ${style.fl} `}
+                    dangerouslySetInnerHTML={this.createMarkup(this.props.content.topLinkTable.content)}
+                />
+            </Chip>
+        );
+
+        /**
+         * 理财超市
+         */
+        const marker = (
+            <div className={`${style.bor} ${style.w300} ${style.fl}`}>
+                <div className={style.title_02}>
+                    <a href="http://18.ifeng.com" rel={rel}>
+                        理财超市
+                    </a>
+                </div>
+                <Chip
+                    id="10035"
+                    type="static"
+                    title="理财超市"
+                    groupName="首屏"
+                    content={this.props.content.market.content}>
+                    <div dangerouslySetInnerHTML={this.createMarkup(this.props.content.market.content)} />
+                </Chip>
+            </div>
+        );
+
         return (
             <div>
                 <div className={style.navCon}>
                     {nav}
                     {subnav}
                 </div>
-                <div className={style.space20} />
+                <div className="space20 " />
                 {/* <Collapse content={content.collapse} /> */}
 
                 {/* todo <!--凰家理财超市开始--> */}
-                <div className={style.w1000}>
-                    <div className={style.col} style={{ position: 'relative' }} />
+                <div className="w1000">
+                    <div className="col" style={{ position: 'relative' }} />
                 </div>
                 {/*  <!--凰家理财超市结束--> */}
                 {/* <!--首屏部分 begin--> */}
-                <div className={style.w1000}>
+                <div className="w1000">
                     <div className={style.l_left}>
-                        {/* <!--焦点图--> */}
-                        <div
-                            className={style.fpic06}
-                            // id="tabSlide02"
-                            // onmouseover="onindex()"
-                            // onmouseout="outindex()"
-                            // cmpp-type="r"
-                        />
-                        <div className={style.space30} />
+                        {/*todo  <!--焦点图--> */}
+                        <div className={style.fpic06} />
+                        {/* // id="tabSlide02" // onmouseover="onindex()" // onmouseout="outindex()" // cmpp-type="r" */}
+                        <div className="space30" />
                         <NewsListDownSlider content={content.newsListDownSlider} />
                         <NewsListLeft content={content.newsListLeft} />
                     </div>
                     <div className={style.l_right}>
-                        <Chip
-                            id="10029"
-                            type="static"
-                            title="理财产品"
-                            groupName="首屏"
-                            content={this.props.content.topLinkTable.content}>
-                            <div
-                                className={` ${style.caption01} ${style.w240} ${style.fl} `}
-                                dangerouslySetInnerHTML={this.createMarkup()}
-                            />
-                        </Chip>
+                        <div className="clearfix">
+                            {topLinkTable}
+                            {marker}
+                        </div>
+                        <div className="space27" />
                     </div>
                 </div>
 

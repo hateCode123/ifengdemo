@@ -120,5 +120,43 @@ a:active {
         clear: both;
         visibility: hidden;
     }
+    & .fl{ float:left;}
+    & .space25{ height:25px; overflow:hidden;}
+    & .space26{ height:26px; overflow:hidden;}
+    & .space27{ height:27px; overflow:hidden;}
+    & .space30{ height:30px; overflow:hidden;}
+    & .space20{ height:20px; overflow:hidden;}
+    & .space15{ height:15px; overflow:hidden;}
+    & .space18{ height:18px; overflow:hidden;}
+    & .space10{ height:10px; overflow:hidden; *height:30px; _height:10px;}
+    & .space6{ height:6px; overflow:hidden; *height:30px; _height:6px;}
+    & .mb18{ margin-bottom:18px;}
+    & .pt20{ padding-top:20px;}
+    & .pl20{ padding-left:20px;}
+    & .mb30{ margin-bottom:30px;}
+    & .mr8{ margin-right:8px;}
+    & .pr17{ padding-right:17px;}
+    
+    & .g_col{ width:100%; background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_01.png)repeat-x;}
+    & .w1000{ width:1000px; margin:0 auto;} 
+
+
+    & .title_02{ height:32px; border-bottom:1px solid #efefef; line-height:32px; color:#333333; background:#fafafa; font-size:16px; padding-left:12px; font-family:Microsoft YaHei;}
+    & .title_02 a{ color:#333333;font-size:16px;font-family:Microsoft YaHei; text-decoration:none;}
+    
+    & .title_03{ font-size:22px; color:#2b2b2b; line-height:22px;  padding-bottom:10px;
+         /* background:url(../images/c_09.png) no-repeat left bottom;  */
+        font-family:Microsoft YaHei;}
+    & .title_04{ height:34px; line-height:28px; font-size:28px;font-family:Microsoft YaHei; font-weight:bold;}
+    & .title_05{ line-height:16px; font-size:16px; color:#f54343; padding-bottom:8px; border-bottom:1px solid #cccccc; font-family:Microsoft YaHei;}
+    & .bg01{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_05.png) no-repeat left bottom;}
+    & .bg02{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_06.png) no-repeat left bottom;}
+    & .bg03{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_07.png) no-repeat left bottom;}
+    & .more{ line-height:18px; 
+        /* background:url(../images/g36.png)     no-repeat 53px center; */
+         width:63px; float:right; font-size:12px;}
+    &  .more a{ color:#666666; font-family: sans-serif}
+    &  .more a:hover{ color:#f54343;}/*150806a*/
+
 }
  
