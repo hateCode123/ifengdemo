@@ -20,7 +20,7 @@ exports.list = {
         let headline = KVProxy.getRecommendFragment(20003).then(...handleJsonByKey(ctx, 'data'));
 
         // console.log('getStaticFragment 10011...');
-        let extraNews = KVProxy.getStaticFragment(10011).then(...handleJsonByKey(ctx, 'content'));
+        let extraNews = KVProxy.getStaticFragment(10011).then(...handleJs(ctx, 'content'));
 
         // console.log('getRecommendFragment 20004...');
         let recommend = KVProxy.getRecommendFragment(20004).then(...handleJsonByKey(ctx, 'data'));
@@ -44,37 +44,34 @@ exports.list = {
         let stocksList = KVProxy.getRecommendFragment(20007).then(...handleJsonByKey(ctx, 'data'));
 
         // console.log('getRecommendFragment 10012...');
-        let titleAd = KVProxy.getStaticFragment(10012).then(...handleJsonByKey(ctx, 'content'));
+        let titleAd = KVProxy.getStaticFragment(10012).then(...handleJs(ctx, 'content'));
 
         // console.log('getRecommendFragment 20008...');
         let institute = KVProxy.getRecommendFragment(20008).then(...handleJsonByKey(ctx, 'data'));
-
-        // console.log('getRecommendFragment 20009...');
-        let state = KVProxy.getRecommendFragment(20009).then(...handleJsonByKey(ctx, 'data'));
 
         // console.log('getRecommendFragment 20010...');
         let meeting = KVProxy.getRecommendFragment(20010).then(...handleJsonByKey(ctx, 'data'));
 
         // console.log('getRecommendFragment 10015...');
-        let cooperation = KVProxy.getStaticFragment(10015).then(...handleJsonByKey(ctx, 'content'));
+        let cooperation = KVProxy.getStaticFragment(10015).then(...handleJs(ctx, 'content'));
 
         // console.log('getRecommendFragment 17007_719_68...');
         let customList = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
         // console.log('getRecommendFragment 10014...');
-        let market = KVProxy.getStaticFragment(10014).then(...handleJsonByKey(ctx, 'content'));
+        let market = KVProxy.getStaticFragment(10014).then(...handleJs(ctx, 'content'));
 
         // console.log('getRecommendFragment 10016...');
         let courier = KVProxy.getStaticFragment(10016).then(...handleJsonByKey(ctx, 'content'));
 
         // console.log('getRecommendFragment 10017...');
-        let production = KVProxy.getStaticFragment(10017).then(...handleJsonByKey(ctx, 'content'));
+        let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
 
         // console.log('getRecommendFragment 17007_719_68...');
         let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
         // console.log('getRecommendFragment 10018...');
-        let stockMarket = KVProxy.getStaticFragment(10018).then(...handleJsonByKey(ctx, 'content'));
+        let stockMarket = KVProxy.getStaticFragment(10018).then(...handleJs(ctx, 'content'));
 
         // 返回连环话数据
         let comicBook = SearchProxy.list('1-68-', '*', '*', '1', 0, 1, 'newsTime:desc', '*').then(...handleJson(ctx));
