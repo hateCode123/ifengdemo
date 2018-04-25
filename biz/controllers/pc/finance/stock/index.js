@@ -4,7 +4,7 @@ const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
 
 exports.list = {
-    path: '/pc/finance/index',
+    path: '/pc/finance/stock',
     method: 'get',
     type: 'html',
     cache: 0,
@@ -158,6 +158,6 @@ exports.list = {
             financeVideo,
         };
 
-        await ctx.html('finance_index', { allData });
+        await ctx.html('finance_stock', { allData });
     },
 };

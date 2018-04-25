@@ -1,0 +1,66 @@
+.pic_img {
+    width: 400px;
+    height: 230px;
+    overflow: hidden;
+    display: block;
+    & img {
+        display: block;
+    }
+    & .trans {
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-backface-visibility: hidden;
+    }
+    & .trans:hover {
+        transform: scale(1.04, 1.04);
+        -ms-transform: scale(1.04, 1.04);
+        -webkit-transform: scale(1.04, 1.04);
+    }
+}
+.text {
+    width: 300px;
+    height: 36px;
+    background: #000;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+}
+.title {
+    font-size: 14px;
+    text-indent: 10px;
+    width: 300px;
+    height: 36px;
+    line-height: 36px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    & a {
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 14px;
+    }
+}
+.dotList {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 2px;
+    & li {
+        float: left;
+        width: 12px;
+        height: 2px;
+        margin: 0 0 0 2px;
+        display: block;
+        cursor: pointer;
+        background: #ffffff;
+        overflow: hidden;
+    }
+    & .current {
+        background: #ff2838;
+    }
+}
