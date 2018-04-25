@@ -21,7 +21,7 @@ class Navigation extends React.PureComponent {
 
         return (
             <div className={styles.col_banner}>
-                <ul class="clearfix">{navigation}</ul>
+                <ul className="clearfix">{navigation}</ul>
             </div>
         );
     }

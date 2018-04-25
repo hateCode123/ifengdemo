@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Chip from 'Chip';
 import style from './style.css';
 import '../../reset.css';
-import { rel } from '../../../../../../utils/rel';
+import { rel } from '../../../../../utils/rel';
 
-class newsListDownSlider extends React.PureComponent {
+class NewsListDownSliderInner extends React.PureComponent {
     /**
      * 渲染组件
      */
     state = {
         showData: [],
     };
-    componentDidMount() {
+    componentWillMount() {
         this.randomShowData();
     }
     changeHandler = () => {
@@ -46,11 +47,12 @@ class newsListDownSlider extends React.PureComponent {
     render() {
         const { showData } = this.state;
         const { content } = this.props;
+        
         const list = showData.map((item, index) => {
             if (index % 3 === 0) {
                 return (
                     <h2 key={index}>
-                        <a href={item.url} rel={rel}>
+                        <a href={item.url} rel={rel}  target="_blank">
                             {item.title}
                         </a>
                     </h2>
@@ -58,7 +60,7 @@ class newsListDownSlider extends React.PureComponent {
             } else if (index % 3 === 1) {
                 return (
                     <h3 key={index} className={style.box_01_1}>
-                        <a href={item.url} rel={rel}>
+                        <a href={item.url} rel={rel}  target="_blank">
                             {item.title}
                         </a>
                     </h3>
@@ -66,7 +68,7 @@ class newsListDownSlider extends React.PureComponent {
             } else if (index % 3 === 2) {
                 return (
                     <h3 key={index} className={style.box_01}>
-                        <a href={item.url} rel={rel}>
+                        <a href={item.url} rel={rel}  target="_blank">
                             {item.title}
                         </a>
                     </h3>
@@ -83,6 +85,28 @@ class newsListDownSlider extends React.PureComponent {
                 {list}
                 {changeBtn()}
             </div>
+        );
+    }
+}
+
+/**
+ * 定义组件属性类型
+ * */
+NewsListDownSliderInner.propTypes = { content: PropTypes.array };
+
+/**
+ * 定义组件默认属性
+ * */
+NewsListDownSliderInner.defaultProps = {};
+
+class newsListDownSlider extends React.PureComponent {
+    render() {
+        const { content } = this.props;
+
+        return (
+            <Chip id="20013" type="recommend" title="焦点图下方6条新闻列表" groupName="首屏" content={content}>
+                <NewsListDownSliderInner />
+            </Chip>
         );
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
-import { rel } from '../../../../../utils/rel';
+import { rel } from '../../../../utils/rel';
 
 import '../reset.css';
 import style from './style.css';
@@ -12,6 +12,10 @@ import SubNavigation from './subnav/';
 // import Collapse from './collapse/';
 import NewsListDownSlider from './newsListDownSlider/';
 import NewsListLeft from './newsListLeft/';
+import Market from './market/';
+
+import TopLinkTable from './topLinkTable/';
+import JueJin from './JueJin/';
 class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
@@ -61,19 +65,17 @@ class Layout extends React.PureComponent {
         },
     };
 
-    createMarkup = content => {
-        return { __html: content };
-    };
     render() {
         // todo  mockdata
-        // const { content } = this.props;
-        const { content } = this.state;
+        const { content } = this.props;
+
+        // const { content } = this.state;
         /**
          * 导航
          */
         const nav = (
-            <div className={style.g_col}>
-                <div className={style.w1000}>
+            <div className="g_col">
+                <div className="w1000">
                     <Navigation content={content.navigation} />
                 </div>
             </div>
@@ -83,55 +85,16 @@ class Layout extends React.PureComponent {
          * 二级导航
          */
         const subnav = (
-            <div className={style.w1000}>
+            <div className="w1000">
                 <SubNavigation content={content.subNavigation} />
-            </div>
-        );
-
-        /**
-         * 理财产品
-         */
-        const topLinkTable = (
-            <Chip
-                id="10029"
-                type="static"
-                title="理财产品"
-                groupName="首屏"
-                content={this.props.content.topLinkTable.content}>
-                <div
-                    className={` ${style.caption01} ${style.w240} ${style.fl} `}
-                    dangerouslySetInnerHTML={this.createMarkup(this.props.content.topLinkTable.content)}
-                />
-            </Chip>
-        );
-
-        /**
-         * 理财超市
-         */
-        const marker = (
-            <div className={`${style.bor} ${style.w300} ${style.fl}`}>
-                <div className={style.title_02}>
-                    <a href="http://18.ifeng.com" rel={rel}>
-                        理财超市
-                    </a>
-                </div>
-                <Chip
-                    id="10035"
-                    type="static"
-                    title="理财超市"
-                    groupName="首屏"
-                    content={this.props.content.market.content}>
-                    <div dangerouslySetInnerHTML={this.createMarkup(this.props.content.market.content)} />
-                </Chip>
             </div>
         );
 
         return (
             <div>
-                <div className={style.navCon}>
-                    {nav}
-                    {subnav}
-                </div>
+                {nav}
+                {subnav}
+
                 <div className="space20 " />
                 {/* <Collapse content={content.collapse} /> */}
 
@@ -146,16 +109,17 @@ class Layout extends React.PureComponent {
                         {/*todo  <!--焦点图--> */}
                         <div className={style.fpic06} />
                         {/* // id="tabSlide02" // onmouseover="onindex()" // onmouseout="outindex()" // cmpp-type="r" */}
-                        <div className="space30" />
+
                         <NewsListDownSlider content={content.newsListDownSlider} />
                         <NewsListLeft content={content.newsListLeft} />
                     </div>
                     <div className={style.l_right}>
                         <div className="clearfix">
-                            {topLinkTable}
-                            {marker}
+                            <TopLinkTable content={content.topLinkTable} />
+                            <Market content={content.market} title={content.marketTitle} />
                         </div>
                         <div className="space27" />
+                        <JueJin content={content} />
                     </div>
                 </div>
 

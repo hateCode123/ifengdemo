@@ -1,0 +1,27 @@
+ 
+ 
+ 
+ 
+.title_03 {
+    font-size: 22px;
+    color: #2b2b2b;
+    line-height: 22px;
+    padding-bottom: 10px;
+    background: url('./images/c_09.png') no-repeat left bottom;
+    font-family: Microsoft YaHei;
+}
+
+.more {
+    line-height: 18px;
+    background: url('./images/g36.png') no-repeat 53px center;
+    width: 63px;
+    float: right;
+    font-size: 12px;
+}
+.more a {
+    color: #666666;
+    font-family: sans-serif;
+}
+.more a:hover {
+    color: #f54343;
+} 
