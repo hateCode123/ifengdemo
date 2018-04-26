@@ -8,22 +8,23 @@ import CommonTitleL from './../commonTitleL/';
 import Licaisudi from './../licaisudi/';
 import HotFunds from '../hotFunds/';
 
-class Juejin extends React.PureComponent {
+class Taojin extends React.PureComponent {
     /**
      * 渲染组件
      */
 
     render() {
         const { content } = this.props;
+        console.log(content);
 
         return (
             <div className={style.juej}>
                 <Chip
                     id="10039"
                     type="static"
-                    title="境内掘金title"
+                    title="海外淘金title"
                     groupName="首屏"
-                    content={content.jingneijuejinTitle}>
+                    content={content.haiwaitaojinTitle}>
                     <CommonTitleL />
                 </Chip>
 
@@ -31,10 +32,10 @@ class Juejin extends React.PureComponent {
                     <HotFunds content={content.hotFounds} />
                     <Licaisudi
                         content={{
-                            title: content.sudiTitle01,
-                            titleChipConfig: { id: '10045', group: '首屏', name: '境内理财速递title' },
-                            content: content.sudiContent01,
-                            contentChipConfig: { id: '10048', group: '首屏', name: '境内理财速递content' },
+                            title: content.sudiTitle02,
+                            titleChipConfig: { id: '10045', group: '首屏', name: '海外理财速递title' },
+                            content: content.sudiContent02,
+                            contentChipConfig: { id: '10048', group: '首屏', name: '海外理财速递content' },
                         }}
                     />
                 </div>
@@ -46,12 +47,12 @@ class Juejin extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Juejin.propTypes = { content: PropTypes.object };
+Taojin.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
-Juejin.defaultProps = {};
+Taojin.defaultProps = {};
 
-export { Juejin };
-export default Juejin;
+export { Taojin };
+export default Taojin;

@@ -15,7 +15,9 @@ import NewsListLeft from './newsListLeft/';
 import Market from './market/';
 
 import TopLinkTable from './topLinkTable/';
-import JueJin from './JueJin/';
+import JueJin from './jueJin/';
+import TaoJin from './taoJin/';
+
 class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
@@ -120,6 +122,7 @@ class Layout extends React.PureComponent {
                         </div>
                         <div className="space27" />
                         <JueJin content={content} />
+                        <TaoJin content={content} />
                     </div>
                 </div>
 

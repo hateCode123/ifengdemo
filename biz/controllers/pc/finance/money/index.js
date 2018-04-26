@@ -25,7 +25,13 @@ exports.financeWemoney = {
         const jingneijuejinTitle = KVProxy.getStaticFragment(10039).then(...handleJsonByKey(ctx, 'content'));
         const marketTitle = KVProxy.getStaticFragment(10042).then(...handleJsonByKey(ctx, 'content'));
         const sudiTitle01 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
-        const sudiContent01=  KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
+        const sudiContent01 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
+
+        const haiwaitaojinTitle = KVProxy.getStaticFragment(10039).then(...handleJsonByKey(ctx, 'content'));
+        const sudiTitle02 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
+        const sudiContent02 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
+
+
         const otherData = await Promise.all([
             navigation,
             subNavigation,
@@ -38,7 +44,10 @@ exports.financeWemoney = {
             jingneijuejinTitle,
             marketTitle,
             sudiTitle01,
-            sudiContent01
+            sudiContent01,
+            haiwaitaojinTitle,
+            sudiTitle02,
+            sudiContent02,
         ]);
 
         const allData = {
@@ -53,7 +62,10 @@ exports.financeWemoney = {
             jingneijuejinTitle: otherData[8],
             marketTitle: otherData[9],
             sudiTitle01: otherData[10],
-            sudiContent01: otherData[11]
+            sudiContent01: otherData[11],
+            haiwaitaojinTitle: otherData[12],
+            sudiTitle02: otherData[13],
+            sudiContent02: otherData[14],
         };
 
         await ctx.html('finance_money', { allData });

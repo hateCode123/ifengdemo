@@ -115,13 +115,15 @@ LicaisudiInner.defaultProps = {};
 class Licaisudi extends React.PureComponent {
     render() {
         const { content } = this.props;
+        const titleChipConfig = content.titleChipConfig;
+        const contentChipConfig = content.contentChipConfig;
 
         return (
             <div className={style.wrap}>
-                <Chip id="10045" type="static" title="境内掘金理财速递title" groupName="首屏" content={content.title}>
+                <Chip id={titleChipConfig.id} type="static" title={titleChipConfig.name} groupName={titleChipConfig.group} content={content.title}>
                     <CommonTitleM />
                 </Chip>
-                <Chip id="10048" type="static" title="境内掘金理财速递" groupName="首屏" content={content.content}>
+                <Chip id={contentChipConfig.id} type="static" title={contentChipConfig.name} groupName={contentChipConfig.group} content={content.content}>
                     <LicaisudiInner />
                 </Chip>
             </div>
