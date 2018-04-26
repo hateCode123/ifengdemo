@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Topic from './topic/';
-import BannerPic from './bannerPic/';
 import Headline from './headline/';
-import DateNews from './dateNews/';
-import Recommend from './recommend/';
+import Broadcast from './broadcast/';
+import NewsLive from './newsLive/';
+import News from './news/';
+import Answer from './answer/';
+import { Ad } from '../../../../../../components/ad';
 
 class LeftContent extends React.PureComponent {
     /**
@@ -17,18 +18,20 @@ class LeftContent extends React.PureComponent {
 
         return (
             <div className={styles.col_L}>
-                <Topic />
-                <Chip id="20002" type="recommend" title="焦点图" groupName="正文" content={content.bannerPic}>
-                    <BannerPic />
-                </Chip>
-                <Chip id="20003" type="recommend" title="头条新闻" groupName="正文" content={content.headline}>
+                <Chip id="20018" type="recommend" title="头条新闻" groupName="正文" content={content.headline}>
                     <Headline />
                 </Chip>
-                <DateNews content={content.dayNews} extraNews={content.extraNews} />
-                <Chip id="20004" type="recommend" title="推荐" groupName="正文" content={content.recommend}>
-                    <Recommend />
-                </Chip>
-                <div className={styles.col_R} />
+                <div className={styles.space10} />
+                <Broadcast />
+                <div className={styles.space20} />
+                <NewsLive content={content.newsLive} />
+                <div className={styles.space10} />
+                <News content={content.news} />
+                <div className={styles.space3} />
+                <Answer content={content.answer} />
+                <div className={styles.ad}>
+                    <Ad content={content.leftAsideAd} styleName={styles.ad_box} />
+                </div>
             </div>
         );
     }

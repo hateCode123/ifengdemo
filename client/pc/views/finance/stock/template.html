@@ -101,18 +101,33 @@
                 callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
             },
             logo: {
-                url: '//finance.ifeng.com/',
-                title: '凤凰网财经',
-                src: '//p0.ifengimg.com/37780e23b9ea2d8b/2017/38/logoFinance.png',
+                url: '//finance.ifeng.com/stock/',
+                title: '凤凰网股票',
+                src: '//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoStock.png',
                 width: 161,
                 height: 27
             },
             logo_ad: {
-                src: '//p1.ifengimg.com/a/2016_23/26a9c07a77f503f.jpg',
-                width: 172,
-                height: 18,
+                src: '//y1.ifengimg.com/a/2015/0810/hots.png',
+                width: 149,
+                height: 27,
             },
             navigation: allData.navigation,
+            subNavigation: allData.subNavigation,
+            jumpLink: allData.jumpLink,
+            headline: allData.headline,
+            newsLiveTab: allData.newsLiveTab,
+            liveLogo: allData.liveLogo,
+            newsTab: allData.newsTab,
+            answerTab: allData.answerTab,
+            answerList: allData.answerList,
+            leftAsideAd: {
+                data: {
+                    title: '左部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("leftAsideAd"); $(elm).html(data.title)}'
+            },
             cooperation: allData.cooperation,
             bottomAd: {
                 data: {
@@ -233,10 +248,10 @@
             </div>
         </div>`,
             qrCode: {
-                url: 'http://p3.ifengimg.com/a/2016/0516/5fe93593da14bccsize17_w120_h164.png',
-                title: '凤凰新闻客户端',
-                width: 120,
-                height: 164
+                url: '//y2.ifengimg.com/a/2016_10/63901608d827c5e.jpg',
+                title: '凤凰证券',
+                width: 110,
+                height: 144
             },
         };
 

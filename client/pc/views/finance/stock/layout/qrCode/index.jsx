@@ -29,9 +29,6 @@ class QrCode extends React.PureComponent {
 
         const qrCode = (
             <div className={styles.qrCode} style={{ display: isShow ? 'block' : 'none' }}>
-                <span className={styles.closeBtn} onClick={this.handleClose}>
-                    关闭
-                </span>
                 <img
                     src={content.url}
                     width={content.width}
@@ -39,6 +36,9 @@ class QrCode extends React.PureComponent {
                     alt={content.title}
                     title={content.title}
                 />
+                <span className={styles.closeBtn} onClick={this.handleClose}>
+                    关闭
+                </span>
             </div>
         );
 

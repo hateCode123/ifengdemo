@@ -10,14 +10,32 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
-        // console.log('getStaticFragment 10002...');
-        let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
+        // console.log('getStaticFragment 10038...');
+        let navigation = KVProxy.getStaticFragment(10038).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20002...');
-        let bannerPic = KVProxy.getRecommendFragment(20002).then(...handleJsonByKey(ctx, 'data'));
+        // console.log('getStaticFragment 10040...');
+        let subNavigation = KVProxy.getStaticFragment(10040).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20003...');
-        let headline = KVProxy.getRecommendFragment(20003).then(...handleJsonByKey(ctx, 'data'));
+        // console.log('getStaticFragment 10044...');
+        let jumpLink = KVProxy.getStaticFragment(10044).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getRecommendFragment 20018...');
+        let headline = KVProxy.getRecommendFragment(20018).then(...handleJsonByKey(ctx, 'data'));
+
+        // console.log('getStaticFragment 10049...');
+        let newsLiveTab = KVProxy.getStaticFragment(10049).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getStaticFragment 10050...');
+        let newsTab = KVProxy.getStaticFragment(10050).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getStaticFragment 10051...');
+        let answerTab = KVProxy.getStaticFragment(10051).then(...handleJsonByKey(ctx, 'content'));
+
+        // console.log('getRecommendFragment 20019...');
+        let answerList = KVProxy.getRecommendFragment(20019).then(...handleJsonByKey(ctx, 'data'));
+
+        // console.log('getStaticFragment 10052...');
+        let liveLogo = KVProxy.getStaticFragment(10052).then(...handleJsonByKey(ctx, 'content'));
 
         // console.log('getStaticFragment 10011...');
         let extraNews = KVProxy.getStaticFragment(10011).then(...handleJs(ctx, 'content'));
@@ -81,81 +99,39 @@ exports.list = {
 
         [
             navigation,
-            bannerPic,
+            subNavigation,
+            jumpLink,
             headline,
-            recommend,
-            talking,
-            finance,
-            stocks,
-            talkingList,
-            financeList,
-            stocksList,
-            extraNews,
-            titleAd,
-            institute,
-            meeting,
+            newsLiveTab,
+            newsTab,
+            answerTab,
+            answerList,
             cooperation,
-            customList,
-            market,
-            courier,
-            production,
-            dayNews,
-            stockMarket,
-            comicBook,
-            financeVideo,
+            liveLogo,
         ] = await Promise.all([
             navigation,
-            bannerPic,
+            subNavigation,
+            jumpLink,
             headline,
-            recommend,
-            talking,
-            finance,
-            stocks,
-            talkingList,
-            financeList,
-            stocksList,
-            extraNews,
-            titleAd,
-            institute,
-            meeting,
+            newsLiveTab,
+            newsTab,
+            answerTab,
+            answerList,
             cooperation,
-            customList,
-            market,
-            courier,
-            production,
-            dayNews,
-            stockMarket,
-            comicBook,
-            financeVideo,
+            liveLogo,
         ]);
 
-        // console.dir(otherData, { depth: null });
         let allData = {
-            // navigation: JSON.parse(navigation).content,
-            // bannerPic: JSON.parse(bannerPic).data,
             navigation,
-            bannerPic,
+            subNavigation,
+            jumpLink,
             headline,
-            recommend,
-            talking,
-            finance,
-            stocks,
-            talkingList,
-            financeList,
-            stocksList,
-            extraNews,
-            titleAd,
-            institute,
-            meeting,
+            newsLiveTab,
+            newsTab,
+            answerTab,
+            answerList,
             cooperation,
-            customList,
-            market,
-            courier,
-            production,
-            dayNews,
-            stockMarket,
-            comicBook,
-            financeVideo,
+            liveLogo,
         };
 
         await ctx.html('finance_stock', { allData });

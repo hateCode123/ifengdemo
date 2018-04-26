@@ -1,4 +1,31 @@
 .col_L {
-    float: left;
     width: 400px;
+    float: left;
+    margin-right: 30px;
+    overflow: hidden;
+    & .space10 {
+        height: 10px;
+        overflow: hidden;
+    }
+    & .space20 {
+        height: 19px;
+        overflow: hidden;
+    }
+    & .space3 {
+        height: 3px;
+        overflow: hidden;
+    }
+    & .ad {
+        overflow: hidden;
+        margin-top: 18px;
+        & .ad_box {
+            clear: both;
+            position: relative;
+            margin: 0 auto;
+            text-align: center;
+            width: 400px;
+            height: 150px;
+            line-height: 150px;
+        }
+    }
 }

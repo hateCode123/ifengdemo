@@ -24,16 +24,16 @@
 
 .ad {
     width: 1000px;
-    height: 90px;
+    height: 91px;
     margin: 0 auto;
 }
 
 .h_searchDiv {
     width: 1000px;
     margin: 0 auto;
-    height: 26px;
-    padding-top: 28px;
-    padding-bottom: 10px;
+    height: 37px;
+    padding: 19px 0 0;
+    background: #fff;
 }
 
 .h_theLogo {

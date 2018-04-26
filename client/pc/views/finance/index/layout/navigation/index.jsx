@@ -29,7 +29,7 @@ class Navigation extends React.PureComponent {
             <div className={styles.col_box}>
                 <div className={styles.col_navlist}>
                     <div className={styles.col_nav}>
-                        <ul className="claerfix">{navigation}</ul>
+                        <ul className="clearfix">{navigation}</ul>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import { Ad } from '../../../../../components/ad/';
 import Footer from '../../../../../components/footer/';
 

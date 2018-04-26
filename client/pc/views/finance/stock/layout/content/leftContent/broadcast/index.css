@@ -1,0 +1,10 @@
+.broadcast {
+    position: relative;
+    width: 400px;
+    height: 28px;
+    line-height: 28px;
+    background: #f2f3f3;
+    padding-left: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}

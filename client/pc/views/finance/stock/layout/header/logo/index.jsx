@@ -18,14 +18,9 @@ class Logo extends React.PureComponent {
                 <img src={logo.src} alt={logo.title} width={logo.width} height={logo.height} />
             </a>
         );
-        const ad1 = (
-            <div key="ad_1" className={styles.ad_1}>
-                <img src={logoAd.src} width={logoAd.width} height={logoAd.height} />
-            </div>
-        );
-        const ad2 = <div key="ad_2" className={styles.ad_2} />;
+        const ad = <img key="ad" className={styles.ad} src={logoAd.src} width={logoAd.width} height={logoAd.height} />;
 
-        return [LOGO, ad1, ad2];
+        return [LOGO, ad];
     }
 }
 

@@ -23,8 +23,8 @@ class Headline extends React.PureComponent {
      */
     handleChange = () => {
         const { data } = this.state;
-        const result = data.slice(0, 8);
-        const newData = data.concat(result).slice(8);
+        const result = data.slice(0, 9);
+        const newData = data.concat(result).slice(9);
 
         this.setState({
             data: newData,
@@ -40,12 +40,10 @@ class Headline extends React.PureComponent {
 
         return (
             <div className={styles.box} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
-                <div>
-                    <Title title={data[0]} text={data[1]} />
-                    <Title title={data[2]} text={data[3]} />
-                    <Title title={data[4]} text={data[5]} />
-                    <Title title={data[6]} text={data[7]} />
-                </div>
+                <Title title={data[0]} text={data[1]} extra={data[2]} />
+                <Title title={data[3]} text={data[4]} />
+                <Title title={data[5]} text={data[6]} />
+                <Title title={data[7]} text={data[8]} />
                 <div
                     className={styles.hyh}
                     style={{ display: isOver && content.length > 8 ? 'block' : 'none' }}

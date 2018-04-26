@@ -1,0 +1,3 @@
+.news_live {
+    composes: clearfix from global;
+}

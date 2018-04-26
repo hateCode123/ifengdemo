@@ -8,20 +8,31 @@ class Title extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { title, text } = this.props;
+        const { title, text, extra } = this.props;
 
         return (
-            <div className={styles.hot}>
+            <div className={styles.box}>
                 <h2 className={styles.title}>
                     <a href={title.url} target="_blank" rel={rel} title={title.title}>
                         {title.title}
                     </a>
                 </h2>
-                <p className={styles.text}>
-                    <a href={text.url} target="_blank" rel={rel} title={text.title}>
-                        {text.title}
-                    </a>
-                </p>
+                <div className={styles.text}>
+                    <h3>
+                        <a href={text.url} target="_blank" rel={rel} title={text.title}>
+                            {text.title}
+                        </a>
+                    </h3>
+                    {extra ? (
+                        <h3>
+                            <a href={extra.url} target="_blank" rel={rel} title={extra.title}>
+                                {extra.title}
+                            </a>
+                        </h3>
+                    ) : (
+                        ''
+                    )}
+                </div>
             </div>
         );
     }
@@ -33,6 +44,7 @@ class Title extends React.PureComponent {
 Title.propTypes = {
     title: PropTypes.object,
     text: PropTypes.object,
+    extra: PropTypes.object,
 };
 
 /**

@@ -1,5 +1,4 @@
 .box {
-    margin-top: 20px;
     position: relative;
     & .hyh {
         position: absolute;

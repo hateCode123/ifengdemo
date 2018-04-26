@@ -1,0 +1,62 @@
+.answer {
+    position: relative;
+    padding-bottom: 1px;
+    overflow: hidden;
+    margin-top: 14px;
+    & .answer_list {
+        margin-top: 15px;
+        overflow: hidden;
+        & .list {
+            overflow: hidden;
+            & p {
+                overflow: hidden;
+                height: 26px;
+                margin-bottom: 9px;
+                line-height: 26px;
+                & a {
+                    font-size: 16px;
+                    color: #2b2b2b;
+                    line-height: 26px;
+                    font-family: '微软雅黑';
+                    font-weight: bold;
+                    vertical-align: bottom;
+                }
+                & a:hover {
+                    color: #f54343;
+                }
+            }
+            & ul,
+            & ul li {
+                padding: 0px;
+                margin: 0px;
+                list-style: none;
+            }
+            & ul {
+                & li:first-child {
+                    font-weight: bold;
+                }
+                & li {
+                    height: 26px;
+                    line-height: 26px;
+                    background: url(./c_04.png) 1px center no-repeat;
+                    padding-left: 12px;
+                    vertical-align: bottom;
+                    overflow: hidden;
+                    & a {
+                        font-size: 14px;
+                        color: #2b2b2b;
+                    }
+                }
+            }
+        }
+    }
+    & .hyh {
+        position: absolute;
+        right: 0px;
+        bottom: 10px;
+        background: url(./hyh.png) no-repeat;
+        width: 51px;
+        height: 24px;
+        cursor: pointer;
+    }
+}
