@@ -5,10 +5,13 @@ import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import Header from './header/';
 import Navigation from './navigation/';
+import AnimationPic from './animationPic/';
 import StockPlate from './stockPlate/';
 import StockSearch from './stockSearch/';
 import JumpLink from './jumpLink/';
 import Content from './content';
+import HotSpots from './hotSpots';
+import School from './school';
 import BottomFooter from './footer/';
 import Cooperation from './cooperation/';
 import QrCode from './qrCode/';
@@ -30,6 +33,7 @@ class Layout extends React.PureComponent {
             nav: content.navigation,
             subNav: content.subNavigation,
         };
+        const animationPic = content.animationPic;
         const jumpLink = content.jumpLink;
         const contentData = {
             leftContent: {
@@ -47,6 +51,37 @@ class Layout extends React.PureComponent {
                 },
                 leftAsideAd: content.leftAsideAd,
             },
+            bannerPic: content.bannerPic,
+            rightContent: {
+                subject: {
+                    subjectTitle: content.subjectTitle,
+                    subject: content.subject,
+                },
+                market: {
+                    marketTitle: content.marketTitle,
+                    market: content.market,
+                },
+                courier: content.courier,
+                playItem: content.playItem,
+                rightSideAd: content.rightSideAd,
+                linkList: content.linkList,
+                dayStock: {
+                    dayStockTitle: content.dayStockTitle,
+                    dayStock: content.dayStock,
+                },
+            },
+        };
+        const hotSpotsData = {
+            hotSpotsTitle: content.hotSpotsTitle,
+            hotSpotsSubTitle1: content.hotSpotsSubTitle1,
+            hotSpotsSubTitle2: content.hotSpotsSubTitle2,
+            hotSpotsAd: content.hotSpotsAd,
+        };
+        const schoolData = {
+            schoolTitle: content.schoolTitle,
+            schoolSubTitle1: content.schoolSubTitle1,
+            schoolSubTitle2: content.schoolSubTitle2,
+            schoolAd: content.schoolAd,
         };
         const footerData = {
             bottomAd: content.bottomAd,
@@ -56,11 +91,12 @@ class Layout extends React.PureComponent {
         const qrCode = content.qrCode;
 
         return (
-            <div className={styles.ip_col}>
+            <div className={styles.col_box}>
                 <Header content={headerData} />
                 <div className={styles.content}>
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
+                        <AnimationPic content={animationPic} />
                         <StockPlate />
                         <div className={styles.search_box}>
                             <StockSearch />
@@ -70,14 +106,18 @@ class Layout extends React.PureComponent {
                             <div className="clear" />
                         </div>
                     </div>
+                    <div className={styles.space20} />
+                    <Content content={contentData} />
+                    <div className={styles.space30} />
+                    <HotSpots content={hotSpotsData} />
+                    <div className={styles.space30} />
+                    <School content={schoolData} />
                 </div>
-                <div className={styles.space} />
-                <Content content={contentData} />
                 <Chip id="10015" type="static" title="底部合作链接" groupName="底部" content={cooperation}>
                     <Cooperation />
                 </Chip>
                 <BottomFooter content={footerData} />
-                <div className={styles.bottom} />
+                <div className={styles.space25} />
                 <QrCode content={qrCode} />
                 <BottomAffix />
                 <ChipEdit />

@@ -42,7 +42,7 @@ class Answer extends React.PureComponent {
         const { answerTab, answerList } = content;
 
         return (
-            <div className={styles.answer} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
+            <div className={`${styles.answer} clearfix`} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
                 <Chip id="10051" type="static" title="牛人解盘标题" groupName="正文" content={answerTab}>
                     <Tab />
                 </Chip>

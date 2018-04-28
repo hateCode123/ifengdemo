@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import RightSideTitle from '../../../../components/rightSideTitle';
 
-class Market extends React.PureComponent {
+class Subject extends React.PureComponent {
     /**
      * 插入 html
      */
     createMarkup = () => {
-        return { __html: this.props.content.market };
+        return { __html: this.props.content.subject };
     };
 
     /**
@@ -19,7 +19,7 @@ class Market extends React.PureComponent {
 
         return (
             <div className={styles.box}>
-                <RightSideTitle content={content.marketTitle} />
+                <RightSideTitle content={content.subjectTitle} />
                 <div dangerouslySetInnerHTML={this.createMarkup()} />
             </div>
         );
@@ -29,12 +29,12 @@ class Market extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Market.propTypes = { content: PropTypes.object };
+Subject.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
-Market.defaultProps = {};
+Subject.defaultProps = {};
 
-export { Market };
-export default Market;
+export { Subject };
+export default Subject;

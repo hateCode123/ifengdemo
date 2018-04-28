@@ -46,7 +46,7 @@ class Headline extends React.PureComponent {
                 <Title title={data[7]} text={data[8]} />
                 <div
                     className={styles.hyh}
-                    style={{ display: isOver && content.length > 8 ? 'block' : 'none' }}
+                    style={{ display: isOver && content.length > 9 ? 'block' : 'none' }}
                     onClick={this.handleChange}
                 />
             </div>

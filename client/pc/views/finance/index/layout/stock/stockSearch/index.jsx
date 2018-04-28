@@ -37,8 +37,8 @@ class StockSearch extends React.PureComponent {
         );
     };
 
-    handleKeyup = () => {
-        const val = document.getElementById('searchInput').value;
+    handleKeyup = e => {
+        const val = e.target.value;
 
         this.getList(val);
     };

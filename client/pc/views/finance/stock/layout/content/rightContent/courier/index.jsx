@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import BoxTitle from '../boxTitle/';
 import { rel } from '../../../../../../../utils/rel';
 
 class Courier extends React.PureComponent {
@@ -22,7 +21,7 @@ class Courier extends React.PureComponent {
     };
 
     handleListLeave = index => {
-        this.setState({ currentCol: 'index' });
+        this.setState({ currentCol: index });
     };
 
     /**
@@ -34,7 +33,7 @@ class Courier extends React.PureComponent {
         const types = {
             指数型: 'risk',
             股票型: 'risk',
-            混合型: 'warning',
+            混合型: 'risk',
         };
         const list0 = [];
         const list1 = [];
@@ -101,7 +100,11 @@ class Courier extends React.PureComponent {
 
         return (
             <div className={styles.courier}>
-                <BoxTitle url="//finance.ifeng.com/zhuanti/" title="理财速递" />
+                <div className={styles.caption}>
+                    <a href="//finance.ifeng.com/zhuanti/" target="_blank" rel={rel} title="理财速递">
+                        理财速递
+                    </a>
+                </div>
                 <div className={styles.title}>
                     <ul className={`${styles.title_tabs} clearfix`}>
                         {content.map((item, index) => (

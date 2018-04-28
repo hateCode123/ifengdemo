@@ -8,12 +8,15 @@ class StockSearch extends React.PureComponent {
         current: null,
         isShow: false,
         data: [],
+        type: 'all',
     };
 
     getList = str => {
+        const { type } = this.state;
+
         jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {
-                t: 'all',
+                t: type,
                 q: str,
                 cb: 'suggestCallback(suggest_json)',
             },
@@ -21,6 +24,12 @@ class StockSearch extends React.PureComponent {
         }).then(data => {
             this.setState({ data });
         });
+    };
+
+    handleSelect = e => {
+        const selectVal = e.target.value;
+
+        this.setState({ type: selectVal });
     };
 
     handleMouseOver = index => {
@@ -37,8 +46,8 @@ class StockSearch extends React.PureComponent {
         );
     };
 
-    handleKeyup = () => {
-        const val = document.getElementById('searchInput').value;
+    handleKeyup = e => {
+        const val = e.target.value;
 
         this.getList(val);
     };
@@ -83,7 +92,10 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handleFocus = () => {
+    handleFocus = e => {
+        const val = e.target.value;
+
+        this.getList(val);
         this.setState({ isShow: true });
     };
 
@@ -93,13 +105,23 @@ class StockSearch extends React.PureComponent {
         }, 150);
     };
 
-    handeleSearch = () => {
+    handeleQuoteSearch = () => {
         const { current, data } = this.state;
 
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
 
             window.open(`http://finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+        }
+    };
+
+    handeleFundsSearch = () => {
+        const { current, data } = this.state;
+
+        if (data.length > 0) {
+            const stock = data[current !== null ? current : 0];
+
+            window.open(`http://finance.ifeng.com/zjlx/${stock.c}`);
         }
     };
 
@@ -112,7 +134,6 @@ class StockSearch extends React.PureComponent {
             stock: '股票',
             fund: '基金',
             hkstock: '港股',
-            usstock: '美股',
             forex: '外汇',
             bond: '债券',
         };
@@ -120,14 +141,6 @@ class StockSearch extends React.PureComponent {
         return (
             <div className={`${styles.search_box} clearfix`}>
                 <div className={styles.text}>
-                    <input
-                        id="searchInput"
-                        placeholder="代码/拼音"
-                        onKeyUp={this.handleKeyup}
-                        onKeyDown={this.handleKeydown}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                    />
                     {isShow && data.length > 0 ? (
                         <div className={styles.stockList}>
                             <table>
@@ -150,6 +163,24 @@ class StockSearch extends React.PureComponent {
                     ) : (
                         ''
                     )}
+                    <a className={styles.tip}>股票查询</a>
+                    <input
+                        id="searchInput"
+                        placeholder="代码/拼音/名称"
+                        onKeyUp={this.handleKeyup}
+                        onKeyDown={this.handleKeydown}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur}
+                    />
+                    <select name="type" className={styles.select} onChange={this.handleSelect}>
+                        <option value="all">全部</option>
+                        <option value="fund">基金</option>
+                        <option value="hkstock">港股</option>
+                        <option value="forex">外汇</option>
+                        <option value="bond">债券</option>
+                    </select>
+                    <button className={styles.q_btn} onClick={this.handeleQuoteSearch} />
+                    <button className={styles.f_btn} onClick={this.handeleFundsSearch} />
                 </div>
                 <div className={styles.btn}>
                     <a className={styles.search} onClick={this.handeleSearch} />
