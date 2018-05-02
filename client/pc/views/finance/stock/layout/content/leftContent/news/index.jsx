@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { Tab } from '../../../../components/tab';
+import NewsList from '../../../../components/newsList';
 
 class News extends React.PureComponent {
     /**
@@ -16,6 +17,7 @@ class News extends React.PureComponent {
                 <Chip id="10050" type="static" title="公司要闻标题" groupName="正文" content={content.newsTab}>
                     <Tab />
                 </Chip>
+                <NewsList content={content.news.list} limit={8} />
             </div>
         );
     }

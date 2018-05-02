@@ -95,8 +95,10 @@ class StockSearch extends React.PureComponent {
     handleFocus = e => {
         const val = e.target.value;
 
-        this.getList(val);
-        this.setState({ isShow: true });
+        if (val) {
+            this.getList(val);
+            this.setState({ isShow: true });
+        }
     };
 
     handleBlur = () => {

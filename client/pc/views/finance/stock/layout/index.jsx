@@ -33,6 +33,7 @@ class Layout extends React.PureComponent {
             nav: content.navigation,
             subNav: content.subNavigation,
         };
+        const stockPlate = content.stockPlate;
         const animationPic = content.animationPic;
         const jumpLink = content.jumpLink;
         const contentData = {
@@ -40,10 +41,14 @@ class Layout extends React.PureComponent {
                 headline: content.headline,
                 newsLive: {
                     newsLiveTab: content.newsLiveTab,
+                    stockNews1: content.stockNews1,
+                    stockNews2: content.stockNews2,
+                    stockNews3: content.stockNews3,
                     liveLogo: content.liveLogo,
                 },
                 news: {
                     newsTab: content.newsTab,
+                    news: content.news,
                 },
                 answer: {
                     answerTab: content.answerTab,
@@ -74,13 +79,18 @@ class Layout extends React.PureComponent {
         const hotSpotsData = {
             hotSpotsTitle: content.hotSpotsTitle,
             hotSpotsSubTitle1: content.hotSpotsSubTitle1,
+            marketAnalysis: content.marketAnalysis,
             hotSpotsSubTitle2: content.hotSpotsSubTitle2,
+            hotPlate: content.hotPlate,
+            industry: content.industry,
             hotSpotsAd: content.hotSpotsAd,
         };
         const schoolData = {
             schoolTitle: content.schoolTitle,
             schoolSubTitle1: content.schoolSubTitle1,
+            logs: content.logs,
             schoolSubTitle2: content.schoolSubTitle2,
+            school: content.school,
             schoolAd: content.schoolAd,
         };
         const footerData = {
@@ -97,7 +107,7 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <AnimationPic content={animationPic} />
-                        <StockPlate />
+                        <StockPlate content={stockPlate} />
                         <div className={styles.search_box}>
                             <StockSearch />
                             <Chip id="10044" type="static" title="导航跳转链接" groupName="导航栏" content={jumpLink}>

@@ -67,7 +67,7 @@ exports.list = {
         // console.log('getRecommendFragment 10017...');
         let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
 
-        // console.log('getRecommendFragment 17007_719_68...');
+        // console.log('getCustom 17007_719_68...');
         let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
         // console.log('getRecommendFragment 10018...');

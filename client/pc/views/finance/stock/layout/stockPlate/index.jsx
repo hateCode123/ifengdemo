@@ -8,50 +8,7 @@ class StockPlate extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const content = [
-            {
-                title: '生物医药',
-                percent: 1.58,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-            {
-                title: '生物医药',
-                percent: 1.58,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-            {
-                title: '生物医药',
-                percent: 1.58,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-            {
-                title: '生物医药',
-                percent: -1.58,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-            {
-                title: '生物医药',
-                percent: -1.58,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-            {
-                title: '生物医药',
-                percent: 0.00,
-                url: '//app.finance.ifeng.com/list/stock_cate.php?c=400116059',
-                fund: '//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=ind400116059',
-                quote: '//app.finance.ifeng.com/report/search.php?yb_search_type=title&amp;titletxt=%E5%8C%BB%E8%8D%AF',
-            },
-        ];
+        const { content } = this.props;
 
         const getStyle = num => {
             if (num === 0) {
@@ -96,7 +53,7 @@ class StockPlate extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-StockPlate.propTypes = {};
+StockPlate.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

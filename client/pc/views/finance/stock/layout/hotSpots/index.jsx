@@ -5,6 +5,8 @@ import HeadTitle from '../../components/headTitle/';
 import { Ad } from '../../../../../components/ad';
 import Caption from '../../components/caption';
 import NewsList from '../../components/newsList';
+import TableTitle from '../../components/tableTitle/';
+import Industry from './industry/';
 
 class HotSpots extends React.PureComponent {
     /**
@@ -12,57 +14,11 @@ class HotSpots extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+        const marketAnalysisList = content.marketAnalysis.list;
+        const hotPlateList = content.hotPlate.list;
+        const industry = content.industry;
 
-        const newsList = [
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '0 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '1 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '2 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '3 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '4 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '5 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '6 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '7 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '8 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '9 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '10 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-            {
-                url: '//finance.ifeng.com/a/20180205/15968336_0.shtml',
-                title: '11 持股还是持币过春节？机构们几乎站在了同一战线',
-            },
-        ];
+        console.log(content.industry);
 
         return (
             <div className={`${styles.hot_spots} clearfix`}>
@@ -70,17 +26,22 @@ class HotSpots extends React.PureComponent {
                 <div className={styles.col_L}>
                     <div className={styles.box}>
                         <Caption content={content.hotSpotsSubTitle1} />
-                        <NewsList content={newsList} limit={11} />
+                        {marketAnalysisList.length > 0 ? <NewsList content={marketAnalysisList} limit={11} /> : ''}
                     </div>
                     <div className={styles.box}>
                         <Caption content={content.hotSpotsSubTitle2} />
-                        <NewsList content={newsList} limit={11} />
+                        {hotPlateList.length > 0 ? <NewsList content={hotPlateList} limit={11} /> : ''}
                     </div>
                     <div className={styles.ad}>
                         <Ad content={content.hotSpotsAd} styleName={styles.ad_box} />
                     </div>
                 </div>
-                <div className={styles.col_R} />
+                <div className={styles.col_R}>
+                    <div className={styles.data_box}>
+                        <TableTitle title={industry.title} url={industry.url} more={industry.more} />
+                        <Industry tabs={industry.tabs} data={industry.data} max={8} />
+                    </div>
+                </div>
             </div>
         );
     }

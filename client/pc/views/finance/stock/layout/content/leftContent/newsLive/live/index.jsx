@@ -115,7 +115,7 @@ class Live extends React.PureComponent {
             jsonpCallback: 'getLiveData',
         }).then(data => {
             this.setState({
-                liveData: data.data,
+                liveData: data.data.slice(0, 10),
                 lastid: `t${data.data[0].id}`,
             });
         });
@@ -140,7 +140,7 @@ class Live extends React.PureComponent {
                 const { liveData } = this.state;
 
                 this.setState({
-                    liveData: data.concat(liveData),
+                    liveData: data.concat(liveData).slice(0, 10),
                     lastid: `t${data[0].id}`,
                 });
             }
