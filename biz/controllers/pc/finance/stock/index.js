@@ -53,6 +53,24 @@ exports.list = {
         // 牛人解盘
         let answerList = KVProxy.getRecommendFragment(20019).then(...handleJsonByKey(ctx, 'data'));
 
+        // 视频抓牛股标题
+        let cattleStocksTitle = KVProxy.getStaticFragment(10100).then(...handleJsonByKey(ctx, 'content'));
+
+        // 涨跌排行榜标题
+        let rankTitle = KVProxy.getStaticFragment(10101).then(...handleJsonByKey(ctx, 'content'));
+
+        // 资金流向标题
+        let fundsFlowTitle = KVProxy.getStaticFragment(10102).then(...handleJsonByKey(ctx, 'content'));
+
+        // 自选股登录标题
+        let customStocksTitle = KVProxy.getStaticFragment(10103).then(...handleJsonByKey(ctx, 'content'));
+
+        // 分析师答疑标题
+        let QATitle = KVProxy.getStaticFragment(10104).then(...handleJsonByKey(ctx, 'content'));
+
+        // 分析师答疑
+        let QATabs = KVProxy.getStaticFragment(10105).then(...handleJsonByKey(ctx, 'content'));
+
         // 轮播图
         let bannerPic = KVProxy.getStaticFragment(10075).then(...handleJsonByKey(ctx, 'content'));
 
@@ -172,6 +190,12 @@ exports.list = {
             answerTab,
             answerList,
             bannerPic,
+            cattleStocksTitle,
+            rankTitle,
+            fundsFlowTitle,
+            customStocksTitle,
+            QATitle,
+            QATabs,
             subjectTitle,
             subject,
             marketTitle,
@@ -222,6 +246,12 @@ exports.list = {
             answerTab,
             answerList,
             bannerPic,
+            cattleStocksTitle,
+            rankTitle,
+            fundsFlowTitle,
+            customStocksTitle,
+            QATitle,
+            QATabs,
             subjectTitle,
             subject,
             marketTitle,
@@ -274,6 +304,12 @@ exports.list = {
             answerTab,
             answerList,
             bannerPic,
+            cattleStocksTitle,
+            rankTitle,
+            fundsFlowTitle,
+            customStocksTitle,
+            QATitle,
+            QATabs,
             subjectTitle,
             subject,
             marketTitle,

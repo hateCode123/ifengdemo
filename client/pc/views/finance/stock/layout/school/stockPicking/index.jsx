@@ -33,7 +33,7 @@ class StockPicking extends React.PureComponent {
 
         setInterval(() => {
             this.getStockData();
-        }, 1000);
+        }, 60000);
     }
 
     handleMouseOver = index => {

@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import CattleStocks from './cattleStocks/';
+import Rank from './rank/';
+import FundsFlow from './fundsFlow/';
+import CustomStocks from './customStocks/';
+import Qa from './QA/';
 
 class MiddleContent extends React.PureComponent {
     /**
@@ -12,7 +17,15 @@ class MiddleContent extends React.PureComponent {
 
         return (
             <div className={styles.col_M}>
-                <div />
+                <CattleStocks content={content.cattleStocksTitle} />
+                <div className={styles.space16} />
+                <Rank content={content.rankTitle} />
+                <div className={styles.space16} />
+                <FundsFlow content={content.fundsFlowTitle} />
+                <div className={styles.space16} />
+                <CustomStocks content={content.customStocksTitle} />
+                <div className={styles.space20} />
+                <Qa content={content.QaTitle} tabs={content.QaTabs} />
             </div>
         );
     }

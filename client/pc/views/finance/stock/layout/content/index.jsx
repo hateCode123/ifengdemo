@@ -22,7 +22,7 @@ class Content extends React.PureComponent {
                         <BannerPic />
                     </Chip>
                     <div className="clearfix">
-                        <MiddleContent />
+                        <MiddleContent content={content.middleContent} />
                         <RightContent content={content.rightContent} />
                     </div>
                 </div>

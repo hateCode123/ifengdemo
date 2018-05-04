@@ -57,6 +57,14 @@ class Layout extends React.PureComponent {
                 leftAsideAd: content.leftAsideAd,
             },
             bannerPic: content.bannerPic,
+            middleContent: {
+                cattleStocksTitle: content.cattleStocksTitle,
+                rankTitle: content.rankTitle,
+                fundsFlowTitle: content.fundsFlowTitle,
+                customStocksTitle: content.customStocksTitle,
+                QaTitle: content.QATitle,
+                QaTabs: content.QATabs,
+            },
             rightContent: {
                 subject: {
                     subjectTitle: content.subjectTitle,
