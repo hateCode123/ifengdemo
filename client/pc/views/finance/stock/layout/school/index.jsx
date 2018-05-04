@@ -6,6 +6,9 @@ import { Ad } from '../../../../../components/ad';
 import ResearchSearch from './researchSearch/';
 import Caption from '../../components/caption';
 import NewsList from '../../components/newsList';
+import TableTitle from '../../components/tableTitle/';
+import StarAnalyst from './starAnalyst/';
+import StockPicking from './stockPicking/';
 
 class School extends React.PureComponent {
     /**
@@ -15,6 +18,17 @@ class School extends React.PureComponent {
         const { content } = this.props;
         const logsList = content.logs.list;
         const schoolList = content.school.list;
+        const {
+            starAnalystTitle,
+            starAnalyst,
+            stockPickingTitle,
+            stockPickingData0,
+            stockPickingData1,
+            stockPickingData2,
+            stockPickingData3,
+            stockPickingData4,
+        } = content;
+        const data = [stockPickingData0, stockPickingData1, stockPickingData2, stockPickingData3, stockPickingData4];
 
         return (
             <div className={`${styles.school} clearfix`}>
@@ -34,7 +48,24 @@ class School extends React.PureComponent {
                         <Ad content={content.schoolAd} styleName={styles.ad_box} />
                     </div>
                 </div>
-                <div className={styles.col_R} />
+                <div className={styles.col_R}>
+                    <div>
+                        <TableTitle
+                            title={starAnalystTitle.title}
+                            url={starAnalystTitle.url}
+                            more={starAnalystTitle.more}
+                        />
+                        <StarAnalyst tabs={starAnalystTitle.tabs} content={starAnalyst} />
+                    </div>
+                    <div className={styles.data_box}>
+                        <TableTitle
+                            title={stockPickingTitle.title}
+                            url={stockPickingTitle.url}
+                            more={stockPickingTitle.more}
+                        />
+                        <StockPicking tabs={stockPickingTitle.tabs} content={data} />
+                    </div>
+                </div>
             </div>
         );
     }

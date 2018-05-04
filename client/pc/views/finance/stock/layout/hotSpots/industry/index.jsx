@@ -54,7 +54,7 @@ class Industry extends React.PureComponent {
                         <tbody>
                             {datas.data.map((item, index) => (
                                 <tr key={index}>
-                                    <td width="100">{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
+                                    <td>{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
                                     <td className={item.fouds > 0 ? styles.red : styles.green}>{item.fouds}</td>
                                     <td>
                                         {item.details ? (

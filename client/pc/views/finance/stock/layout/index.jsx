@@ -83,6 +83,10 @@ class Layout extends React.PureComponent {
             hotSpotsSubTitle2: content.hotSpotsSubTitle2,
             hotPlate: content.hotPlate,
             industry: content.industry,
+            singleStockTitle: content.singleStockTitle,
+            marketRadar: content.marketRadar,
+            track: content.track,
+            fiveDays: content.fiveDays,
             hotSpotsAd: content.hotSpotsAd,
         };
         const schoolData = {
@@ -91,6 +95,14 @@ class Layout extends React.PureComponent {
             logs: content.logs,
             schoolSubTitle2: content.schoolSubTitle2,
             school: content.school,
+            starAnalystTitle: content.starAnalystTitle,
+            starAnalyst: content.starAnalyst,
+            stockPickingTitle: content.stockPickingTitle,
+            stockPickingData0: content.stockPickingData0,
+            stockPickingData1: content.stockPickingData1,
+            stockPickingData2: content.stockPickingData2,
+            stockPickingData3: content.stockPickingData3,
+            stockPickingData4: content.stockPickingData4,
             schoolAd: content.schoolAd,
         };
         const footerData = {
