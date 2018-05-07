@@ -16,6 +16,7 @@ class Rank extends React.PureComponent {
         return (
             <div className={styles.rank_box}>
                 <MidTitle title={title} url={url} />
+                <div className={`${styles.rank} clearfix`} />
             </div>
         );
     }

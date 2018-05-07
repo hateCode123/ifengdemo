@@ -115,7 +115,7 @@
                 "classes": "always"
             }
         ],
-        "space-before-function-paren": ["error", "never"],
+        // "space-before-function-paren": ["error", "never"],
         // "space-in-parens": [ "error", "always" ],
         "space-infix-ops": "error",
         "space-unary-ops": [
