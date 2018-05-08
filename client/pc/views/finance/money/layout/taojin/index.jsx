@@ -6,7 +6,8 @@ import '../../reset.css';
 import { rel } from '../../../../../utils/rel';
 import CommonTitleL from './../commonTitleL/';
 import Licaisudi from './../licaisudi/';
-import HotFunds from '../hotFunds/';
+// import HotFunds from '../hotFunds/';
+import HotFundsTable from '../hotfundsTable/';
 
 class Taojin extends React.PureComponent {
     /**
@@ -15,12 +16,11 @@ class Taojin extends React.PureComponent {
 
     render() {
         const { content } = this.props;
-        console.log(content);
 
         return (
             <div className={style.juej}>
                 <Chip
-                    id="10039"
+                    id="10110"
                     type="static"
                     title="海外淘金title"
                     groupName="首屏"
@@ -29,13 +29,27 @@ class Taojin extends React.PureComponent {
                 </Chip>
 
                 <div className="clearfix  pt20">
-                    <HotFunds content={content.hotFounds} />
+                    <div className="w240 fl" cmpp-type="s">
+                        <div className={style.title_05}>短期收益较高产品</div>
+
+                        <div>
+                            <HotFundsTable
+                                content={content.haiwaiHotfunds}
+                                head={[
+                                    { txt: '简称', tdKey: 'name' },
+                                    { txt: '近一个月收益', tdKey: 'oneMonth' },
+                                    { txt: '操作', tdKey: false },
+                                ]}
+                            />
+                        </div>
+                    </div>
+
                     <Licaisudi
                         content={{
                             title: content.sudiTitle02,
-                            titleChipConfig: { id: '10045', group: '首屏', name: '海外理财速递title' },
+                            titleChipConfig: { id: '10045', group: '首屏', name: '理财速递title' },
                             content: content.sudiContent02,
-                            contentChipConfig: { id: '10048', group: '首屏', name: '海外理财速递content' },
+                            contentChipConfig: { id: '10111', group: '首屏', name: '海外理财速递content' },
                         }}
                     />
                 </div>

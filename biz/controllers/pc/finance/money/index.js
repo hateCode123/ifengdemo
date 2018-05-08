@@ -17,7 +17,7 @@ exports.financeWemoney = {
 
         const topLinkTable = KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
         const market = KVProxy.getStaticFragment(10035).then(...handleJson(ctx));
-        const test = KVProxy.getCustom('finance_22005_516_1293').then(...handleJson(ctx));
+        const jingneiQuanyiHotFunds = KVProxy.getCustom('finance_22005_516_1293').then(...handleJson(ctx)); // 境内 热门权益类
 
         const newsListDownSlider = KVProxy.getRecommendFragment('20013').then(...handleJsonByKey(ctx, 'data'));
         const newsListLeft = KVProxy.getRecommendFragment('20014').then(...handleJsonByKey(ctx, 'data'));
@@ -27,10 +27,14 @@ exports.financeWemoney = {
         const sudiTitle01 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
         const sudiContent01 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
 
-        const haiwaitaojinTitle = KVProxy.getStaticFragment(10039).then(...handleJsonByKey(ctx, 'content'));
+        const haiwaitaojinTitle = KVProxy.getStaticFragment(10110).then(...handleJsonByKey(ctx, 'content'));
         const sudiTitle02 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
-        const sudiContent02 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
+        const sudiContent02 = KVProxy.getStaticFragment(10111).then(...handleJsonByKey(ctx, 'content'));
 
+        const jingneiHuobiHotFunds = KVProxy.getCustom('finance_22005_516_1294').then(...handleJson(ctx)); // 境内 货币
+        const haiwaiHotfunds = KVProxy.getCustom('finance_22005_516_1295').then(...handleJson(ctx)); // 海外基金
+
+        const rediantuijianTitle = KVProxy.getStaticFragment(10113).then(...handleJsonByKey(ctx, 'content'));
 
         const otherData = await Promise.all([
             navigation,
@@ -38,7 +42,7 @@ exports.financeWemoney = {
             collapse,
             topLinkTable,
             market,
-            test,
+            jingneiQuanyiHotFunds,
             newsListDownSlider,
             newsListLeft,
             jingneijuejinTitle,
@@ -48,6 +52,9 @@ exports.financeWemoney = {
             haiwaitaojinTitle,
             sudiTitle02,
             sudiContent02,
+            jingneiHuobiHotFunds,
+            haiwaiHotfunds,
+            rediantuijianTitle,
         ]);
 
         const allData = {
@@ -56,7 +63,7 @@ exports.financeWemoney = {
             collapse: otherData[2],
             topLinkTable: otherData[3],
             market: otherData[4],
-            test: otherData[5],
+            jingneiQuanyiHotFunds: otherData[5],
             newsListDownSlider: otherData[6],
             newsListLeft: otherData[7],
             jingneijuejinTitle: otherData[8],
@@ -66,6 +73,9 @@ exports.financeWemoney = {
             haiwaitaojinTitle: otherData[12],
             sudiTitle02: otherData[13],
             sudiContent02: otherData[14],
+            jingneiHuobiHotFunds: otherData[15],
+            haiwaiHotfunds: otherData[16],
+            rediantuijianTitle: otherData[17],
         };
 
         await ctx.html('finance_money', { allData });

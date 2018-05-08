@@ -6,7 +6,7 @@ import '../../reset.css';
 // import { rel } from '../../../../../utils/rel';
 import HotFundsTable from '../hotfundsTable/';
 
-class HotFunds extends React.PureComponent {
+class Rediantuijian extends React.PureComponent {
     state = {
         current: 0,
         tabContentConfig: [
@@ -61,7 +61,7 @@ class HotFunds extends React.PureComponent {
 
         return (
             <div className="w240 fl" cmpp-type="s">
-                <ul id="yb01" className={style.labe_01}>
+                <ul id="yb01" className={style.labe_02}>
                     {tabDom}
                 </ul>
                 {tabContentDom}
@@ -73,11 +73,11 @@ class HotFunds extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-HotFunds.propTypes = { content: PropTypes.object };
+Rediantuijian.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
-HotFunds.defaultProps = {};
-export { HotFunds };
-export default HotFunds;
+Rediantuijian.defaultProps = {};
+export { Rediantuijian };
+export default Rediantuijian;

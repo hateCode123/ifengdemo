@@ -28,11 +28,11 @@ class Juejin extends React.PureComponent {
                 </Chip>
 
                 <div className="clearfix  pt20">
-                    <HotFunds content={content.hotFounds} />
+                    <HotFunds content={content} />
                     <Licaisudi
                         content={{
                             title: content.sudiTitle01,
-                            titleChipConfig: { id: '10045', group: '首屏', name: '境内理财速递title' },
+                            titleChipConfig: { id: '10045', group: '首屏', name: '理财速递title' },
                             content: content.sudiContent01,
                             contentChipConfig: { id: '10048', group: '首屏', name: '境内理财速递content' },
                         }}

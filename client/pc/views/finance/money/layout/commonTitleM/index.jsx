@@ -5,7 +5,7 @@ import style from './style.css';
 import '../../reset.css';
 import { rel } from '../../../../../utils/rel';
 
-class CommonTitleMInner extends React.PureComponent {
+class CommonTitleM extends React.PureComponent {
     render() {
         const { content } = this.props;
         // {"title":"理财超市","url":"", "newOpen":true}
@@ -31,33 +31,33 @@ class CommonTitleMInner extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-CommonTitleMInner.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-CommonTitleMInner.defaultProps = {};
-
-class CommonTitleM extends React.PureComponent {
-    render() {
-        const { content } = this.props;
-
-        return (
-            <Chip id="10039" type="static" title="理财产品" groupName="首屏" content={content}>
-                <CommonTitleMInner />
-            </Chip>
-        );
-    }
-}
-
-/**
- * 定义组件属性类型
- * */
 CommonTitleM.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
 CommonTitleM.defaultProps = {};
+
+// class CommonTitleM extends React.PureComponent {
+//     render() {
+//         const { content } = this.props;
+
+//         return (
+//             <Chip id="10039" type="static" title="理财产品" groupName="首屏" content={content}>
+//                 <CommonTitleM />
+//             </Chip>
+//         );
+//     }
+// }
+
+// /**
+//  * 定义组件属性类型
+//  * */
+// CommonTitleM.propTypes = { content: PropTypes.object };
+
+// /**
+//  * 定义组件默认属性
+//  * */
+// CommonTitleM.defaultProps = {};
 export { CommonTitleM };
 export default CommonTitleM;

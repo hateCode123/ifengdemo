@@ -17,55 +17,56 @@ import Market from './market/';
 import TopLinkTable from './topLinkTable/';
 import JueJin from './jueJin/';
 import TaoJin from './taoJin/';
-
+import CommonTitleL from './commonTitleL/';
+import Rediantuijian from './rediantuijian/';
 class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
      */
 
-    state = {
-        content: {
-            navigation: [{ title: '财经首页', url: 'http://fdasfd/' }],
-            subNavigation: [
-                { title: '123', url: 'http://fdasfd/' },
-                { title: '123', url: 'http://fdasfd/' },
-                { title: '123', url: 'http://fdasfd/' },
-            ],
-            newsListDownSlider: [
-                { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-            ],
-            newsListLeft: [
-                { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-                { title: '17绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-            ],
-        },
-    };
+    // state = {
+    //     content: {
+    //         // navigation: [{ title: '财经首页', url: 'http://fdasfd/' }],
+    // subNavigation: [
+    //     { title: '123', url: 'http://fdasfd/' },
+    //     { title: '123', url: 'http://fdasfd/' },
+    //     { title: '123', url: 'http://fdasfd/' },
+    // ],
+    // newsListDownSlider: [
+    //     { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    // ],
+    // newsListLeft: [
+    //     { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    //     { title: '17绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
+    // ],
+    //     },
+    // };
 
     render() {
         // todo  mockdata
@@ -123,6 +124,18 @@ class Layout extends React.PureComponent {
                         <div className="space27" />
                         <JueJin content={content} />
                         <TaoJin content={content} />
+                        <div className={style.rdtj}>
+                        
+                            <Chip
+                                id="10113"
+                                type="static"
+                                title="热点推荐title"
+                                groupName="首屏"
+                                content={content.rediantuijianTitle}>
+                                <CommonTitleL />
+                            </Chip>
+                            <Rediantuijian content={content} />
+                        </div>
                     </div>
                 </div>
 
