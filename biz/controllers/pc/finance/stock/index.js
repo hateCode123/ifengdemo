@@ -1,7 +1,16 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
+const {
+    KVProxy,
+    SearchProxy
+} = require('../../../../providers/ucmsapiProxy');
+const {
+    jsonParse,
+    handleData,
+    handleJson,
+    handleJsonByKey,
+    handleJs
+} = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -141,10 +150,10 @@ exports.list = {
         let schoolSubTitle2 = KVProxy.getStaticFragment(10073).then(...handleJsonByKey(ctx, 'content'));
 
         // 高手操盘日志
-        let logs = SearchProxy.list('1-67-96-', '*', '*', '1', 0, 100, '', '*').then(...handleJson(ctx));
+        let logs = SearchProxy.list('1-67-96-', '*', '*', '1', 0, 10, '', '*').then(...handleJson(ctx));
 
         // 股民学校
-        let school = SearchProxy.list('1-67-101-', '*', '*', '1', 0, 100, '', '*').then(...handleJson(ctx));
+        let school = SearchProxy.list('1-67-101-', '*', '*', '1', 0, 10, '', '*').then(...handleJson(ctx));
 
         // 明星分析师标题
         let starAnalystTitle = KVProxy.getStaticFragment(10092).then(...handleJsonByKey(ctx, 'content'));
@@ -345,6 +354,8 @@ exports.list = {
             cooperation,
         };
 
-        await ctx.html('finance_stock', { allData });
+        await ctx.html('finance_stock', {
+            allData
+        });
     },
 };
