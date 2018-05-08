@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import { cookie } from '@ifeng/ui_base';
 
 class QaForm extends React.PureComponent {
     state = {
@@ -8,48 +9,11 @@ class QaForm extends React.PureComponent {
     };
 
     componentDidMount() {
-        const sid = this.getQuestionUserName('sid');
+        const sid = cookie.get('sid');
         const user = sid === null ? `凤凰网友${parseInt(Math.random() * (10000 - 1)) + 1}` : sid.substr(32);
 
         this.setState({ questionUserName: user });
     }
-
-    /**
-     * 获取当前用户名
-     */
-    getQuestionUserName = name => {
-        const arg = `${name}=`;
-        const alen = arg.length;
-        const clen = document.cookie.length;
-        let i = 0;
-        let j = 0;
-
-        while (i < clen) {
-            j = i + alen;
-
-            if (document.cookie.substring(i, j) === arg) {
-                return this.getCookieVal(j);
-            }
-
-            i = document.cookie.indexOf(' ', i) + 1;
-
-            if (i === 0) {
-                break;
-            }
-        }
-
-        return null;
-    };
-
-    getCookieVal = offset => {
-        let endstr = document.cookie.indexOf(';', offset);
-
-        if (endstr === -1) {
-            endstr = document.cookie.length;
-        }
-
-        return decodeURIComponent(document.cookie.substring(offset, endstr));
-    };
 
     /**
      * 渲染组件

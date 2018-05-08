@@ -68,8 +68,7 @@
         "eslint-plugin-react": "^7.7.0",
         "extract-text-webpack-plugin": "^3.0.2",
         "f.lib.ejs-loader": "http://fex.staff.ifeng.com/live/f.lib.ejs-loader/repository/archive.tar.gz?ref=1.0.3",
-        "f.lib.ejs-src-loader":
-            "http://fex.staff.ifeng.com/live/f.lib.ejs-src-loader/repository/archive.tar.gz?ref=1.0.1",
+        "f.lib.ejs-src-loader": "http://fex.staff.ifeng.com/live/f.lib.ejs-src-loader/repository/archive.tar.gz?ref=1.0.1",
         "f.lib.upload": "http://fex.staff.ifeng.com/live/f.lib.upload/repository/archive.tar.gz?ref=master",
         "f.lib.upload2": "git+http://fex.staff.ifeng.com/whale/f.lib.upload2.git#v1.0.1",
         "file-loader": "^1.1.9",
