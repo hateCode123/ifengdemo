@@ -43,7 +43,7 @@ const pcCssConfig = {
 
 const commoncss = {
     test: /\.css$/,
-    // exclude: /node_modules/,
+    exclude: [path.resolve(__dirname, 'node_modules/@ifeng')],
     include: /node_modules/,
     use: [
         'style-loader',
@@ -102,7 +102,7 @@ const fileExtend = {
 const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.js' : './client/mobile/views/**/app.js'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.jsx' : './client/mobile/views/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
             filename: `js/[name]_${platform}_${type}.js`,
