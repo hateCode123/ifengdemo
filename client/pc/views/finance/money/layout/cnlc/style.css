@@ -1,0 +1,11 @@
+/*分析师答疑*/
+.cnlc{
+    margin-top: 30px;
+    composes: w1000 from global;
+   
+}
+.labe_04{composes : clearfix from global; position:relative; padding-bottom:10px;}
+.labe_04 li{ float:left; line-height:22px; padding-right:8px; margin-right:8px; background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_10.png) right center no-repeat; cursor:pointer;}
+.labe_04 li a{ padding:1px 9px; color:#333333; text-decoration:none; font-size:14px; font-family:Microsoft YaHei;}
+.labe_04 li.current a{ background:#f54343; color:#FFF;}
+.labe_04 li:last-child{ background:none;}

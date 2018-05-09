@@ -5,28 +5,81 @@ import style from './style.css';
 import '../../reset.css';
 // import { rel } from '../../../../../utils/rel';
 import HotFundsTable from '../hotfundsTable/';
+import CommonTitleL from './../commonTitleL/';
 
 class Rediantuijian extends React.PureComponent {
+    // rediantuijianTableStock,
+    // rediantuijianTableMix,
+    // rediantuijianTableZhishu,
+    // rediantuijianTableZhaiquan,
+    // rediantuijianTableMoney,
     state = {
         current: 0,
         tabContentConfig: [
             {
-                tabTxt: '热门权益类基金',
+                tabTxt: '股票型',
                 title: [
-                    { txt: '简称', tdKey: 'name' },
-                    { txt: '近一个月收益', tdKey: 'oneMonth' },
-                    { txt: '操作', tdKey: false },
+                    { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '基金代码', tdKey: 'code' },
+                    { txt: '最新净值', tdKey: 'unitNet' },
+                    { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
+                    { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
+                    { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
+                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
-                content: this.props.content.jingneiQuanyiHotFunds || [],
+                content: this.props.content.rediantuijianTableStock || [],
             },
             {
-                tabTxt: '热门货币类基金',
+                tabTxt: '混合型',
                 title: [
-                    { txt: '简称', tdKey: 'name' },
-                    { txt: '7日年化', tdKey: 'rateSevenDay' },
-                    { txt: '操作', tdKey: false },
+                    { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '基金代码', tdKey: 'code' },
+                    { txt: '最新净值', tdKey: 'unitNet' },
+                    { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
+                    { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
+                    { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
+                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
-                content: this.props.content.jingneiHuobiHotFunds || [],
+                content: this.props.content.rediantuijianTableMix || [],
+            },
+            {
+                tabTxt: '指数型',
+                title: [
+                    { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '基金代码', tdKey: 'code' },
+                    { txt: '最新净值', tdKey: 'unitNet' },
+                    { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
+                    { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
+                    { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
+                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                ],
+                content: this.props.content.rediantuijianTableZhishu || [],
+            },
+            {
+                tabTxt: '债券型',
+                title: [
+                    { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '基金代码', tdKey: 'code' },
+                    { txt: '最新净值', tdKey: 'unitNet' },
+                    { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
+                    { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
+                    { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
+                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                ],
+                content: this.props.content.rediantuijianTableZhaiquan || [],
+            },
+            {
+                tabTxt: '货币型',
+                title: [
+                    { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '基金代码', tdKey: 'code' },
+               
+                    { txt: '万份收益', tdKey: 'unitInterest', postfix: '%' },
+                    { txt: '7日年化收益率', tdKey: 'rateSevenDay', postfix: '%' },
+                   
+                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                ],
+                content: this.props.content.rediantuijianTableMoney || [],
             },
         ],
     };
@@ -36,7 +89,7 @@ class Rediantuijian extends React.PureComponent {
         });
     };
     render() {
-        // const { content } = this.props;
+        const { content } = this.props;
         const { current, tabContentConfig } = this.state;
         const tabDom = tabContentConfig.map((item, v) => {
             return (
@@ -44,7 +97,7 @@ class Rediantuijian extends React.PureComponent {
                     key={v}
                     className={v === current ? style.current : null}
                     onMouseOver={() => this.handleTabsChange(v)}>
-                    {item.tabTxt}
+                    <a>{item.tabTxt}</a>
                 </li>
             );
         });
@@ -60,11 +113,20 @@ class Rediantuijian extends React.PureComponent {
         });
 
         return (
-            <div className="w240 fl" cmpp-type="s">
-                <ul id="yb01" className={style.labe_02}>
-                    {tabDom}
-                </ul>
-                {tabContentDom}
+            <div className={style.rdtj}>
+                <Chip
+                    id="10113"
+                    type="static"
+                    title="热点推荐title"
+                    groupName="首屏"
+                    content={content.rediantuijianTitle}>
+                    <CommonTitleL />
+                </Chip>
+                {/* <Rediantuijian content={content} /> */}
+                <div style={{ marginTop: '18px' }}>
+                    <ul className={style.labe_02}>{tabDom}</ul>
+                    {tabContentDom}
+                </div>
             </div>
         );
     }

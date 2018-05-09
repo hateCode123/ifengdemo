@@ -36,6 +36,28 @@ exports.financeWemoney = {
 
         const rediantuijianTitle = KVProxy.getStaticFragment(10113).then(...handleJsonByKey(ctx, 'content'));
 
+        const rediantuijianTableStock = KVProxy.getCustom('finance_22005_516_1296').then(...handleJson(ctx)); // 热点推荐 股票型
+        const rediantuijianTableMix = KVProxy.getCustom('finance_22005_516_1297').then(...handleJson(ctx)); // 热点推荐 混合型
+        const rediantuijianTableZhishu = KVProxy.getCustom('finance_22005_516_1298').then(...handleJson(ctx)); // 热点推荐 指数型
+        const rediantuijianTableZhaiquan = KVProxy.getCustom('finance_22005_516_1299').then(...handleJson(ctx)); // 热点推荐 债券型
+        const rediantuijianTableMoney = KVProxy.getCustom('finance_22005_516_1300').then(...handleJson(ctx)); // 热点推荐 货币型
+
+        const cnlcJijin = KVProxy.getCustom('finance_22005_516_243').then(...handleJson(ctx)); // 分析师答疑 基金
+        const cnlcListJijin = KVProxy.getCustom('finance_22005_516_244').then(...handleJson(ctx)); // 分析师答疑列表 基金
+
+        const cnlcTitle = KVProxy.getStaticFragment(10047).then(...handleJsonByKey(ctx, 'content')); 
+        const cnlcP2P = KVProxy.getCustom('finance_22005_516_245').then(...handleJson(ctx)); // 分析师答疑 P2p
+        const cnlcListP2P = KVProxy.getCustom('finance_22005_516_249').then(...handleJson(ctx)); // 分析师答疑列表 P2p
+
+        const cnlcTrust = KVProxy.getCustom('finance_22005_516_246').then(...handleJson(ctx)); // 分析师答疑 信托
+        const cnlcListTrust = KVProxy.getCustom('finance_22005_516_250').then(...handleJson(ctx)); // 分析师答疑列表 信托
+
+        const cnlcPrivate = KVProxy.getCustom('finance_22005_516_247').then(...handleJson(ctx)); // 分析师答疑 私募
+        const cnlcListPrivate = KVProxy.getCustom('finance_22005_516_251').then(...handleJson(ctx)); // 分析师答疑列表 私募
+
+        const cnlcFinance = KVProxy.getCustom('finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
+        const cnlcListFinance = KVProxy.getCustom('finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
+
         const otherData = await Promise.all([
             navigation,
             subNavigation,
@@ -55,6 +77,22 @@ exports.financeWemoney = {
             jingneiHuobiHotFunds,
             haiwaiHotfunds,
             rediantuijianTitle,
+            rediantuijianTableStock,
+            rediantuijianTableMix,
+            rediantuijianTableZhishu,
+            rediantuijianTableZhaiquan,
+            rediantuijianTableMoney,
+            cnlcJijin,
+            cnlcListJijin,
+            cnlcTitle,
+            cnlcP2P,
+            cnlcListP2P,
+            cnlcTrust,
+            cnlcListTrust,
+            cnlcPrivate,
+            cnlcListPrivate,
+            cnlcFinance,
+            cnlcListFinance,
         ]);
 
         const allData = {
@@ -76,6 +114,22 @@ exports.financeWemoney = {
             jingneiHuobiHotFunds: otherData[15],
             haiwaiHotfunds: otherData[16],
             rediantuijianTitle: otherData[17],
+            rediantuijianTableStock: otherData[18],
+            rediantuijianTableMix: otherData[19],
+            rediantuijianTableZhishu: otherData[20],
+            rediantuijianTableZhaiquan: otherData[21],
+            rediantuijianTableMoney: otherData[22],
+            cnlcJijin: otherData[23],
+            cnlcListJijin: otherData[24],
+            cnlcTitle: otherData[25],
+            cnlcP2P: otherData[26],
+            cnlcListP2P: otherData[27],
+            cnlcTrust: otherData[28],
+            cnlcListTrust: otherData[29],
+            cnlcPrivate: otherData[30],
+            cnlcListPrivate: otherData[31],
+            cnlcFinance: otherData[32],
+            cnlcListFinance: otherData[33],
         };
 
         await ctx.html('finance_money', { allData });

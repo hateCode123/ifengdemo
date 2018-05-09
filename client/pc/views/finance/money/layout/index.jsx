@@ -1,75 +1,26 @@
-import React from 'react';
-import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
-import { rel } from '../../../../utils/rel';
-
+import React from 'react';
 import '../reset.css';
-import style from './style.css';
-
+import JueJin from './jueJin/';
+import Market from './market/';
 import Navigation from './nav/';
-import SubNavigation from './subnav/';
 // import Collapse from './collapse/';
 import NewsListDownSlider from './newsListDownSlider/';
 import NewsListLeft from './newsListLeft/';
-import Market from './market/';
-
-import TopLinkTable from './topLinkTable/';
-import JueJin from './jueJin/';
-import TaoJin from './taoJin/';
-import CommonTitleL from './commonTitleL/';
 import Rediantuijian from './rediantuijian/';
+import style from './style.css';
+import SubNavigation from './subnav/';
+import TaoJin from './taoJin/';
+import TopLinkTable from './topLinkTable/';
+import Cnlc from './cnlc/';
+
 class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
      */
 
-    // state = {
-    //     content: {
-    //         // navigation: [{ title: '财经首页', url: 'http://fdasfd/' }],
-    // subNavigation: [
-    //     { title: '123', url: 'http://fdasfd/' },
-    //     { title: '123', url: 'http://fdasfd/' },
-    //     { title: '123', url: 'http://fdasfd/' },
-    // ],
-    // newsListDownSlider: [
-    //     { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    // ],
-    // newsListLeft: [
-    //     { title: '0绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '1绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '2绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '3绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '4绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '5绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '6绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '10绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '11绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '12绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '13绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '14绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '15绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '16绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    //     { title: '17绩规模双飙升 上海基金业为何能强势崛起', url: 'http://fdasfd/' },
-    // ],
-    //     },
-    // };
-
     render() {
-        // todo  mockdata
         const { content } = this.props;
 
         // const { content } = this.state;
@@ -107,7 +58,7 @@ class Layout extends React.PureComponent {
                 </div>
                 {/*  <!--凰家理财超市结束--> */}
                 {/* <!--首屏部分 begin--> */}
-                <div className="w1000">
+                <div className="w1000 clearfix">
                     <div className={style.l_left}>
                         {/*todo  <!--焦点图--> */}
                         <div className={style.fpic06} />
@@ -124,20 +75,11 @@ class Layout extends React.PureComponent {
                         <div className="space27" />
                         <JueJin content={content} />
                         <TaoJin content={content} />
-                        <div className={style.rdtj}>
-                        
-                            <Chip
-                                id="10113"
-                                type="static"
-                                title="热点推荐title"
-                                groupName="首屏"
-                                content={content.rediantuijianTitle}>
-                                <CommonTitleL />
-                            </Chip>
-                            <Rediantuijian content={content} />
-                        </div>
+                        <Rediantuijian content={content} />
                     </div>
                 </div>
+
+                <Cnlc content={content} />
 
                 <ChipEdit />
             </div>
