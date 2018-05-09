@@ -4,6 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import { Tab } from '../../../../components/tab';
 import { rel } from '../../../../../../../utils/rel';
+import AnswerList from './answerList/';
 
 class Answer extends React.PureComponent {
     state = {
@@ -39,31 +40,29 @@ class Answer extends React.PureComponent {
     render() {
         const { data, isOver } = this.state;
         const { content } = this.props;
-        const { answerTab, answerList } = content;
+        const { answerList } = content;
+        const title = {
+            id: '10051',
+            type: 'static',
+            title: '牛人解盘主标题',
+            groupName: '正文',
+            content: content.answerTab,
+        };
+
+        const subTitle = {
+            id: '10117',
+            type: 'static',
+            title: '牛人解盘子标题',
+            groupName: '正文',
+            content: content.answerSubTab,
+        };
 
         return (
             <div className={`${styles.answer} clearfix`} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
-                <Chip id="10051" type="static" title="牛人解盘标题" groupName="正文" content={answerTab}>
-                    <Tab />
+                <Tab title={title} subTitle={subTitle} />
+                <Chip id="20019" type="recommend" title="牛人解盘列表" groupName="正文">
+                    <AnswerList data={data} />
                 </Chip>
-                <div className={styles.answer_list}>
-                    <div className={styles.list}>
-                        <p>
-                            <a href={data[0].url} target="_blank" rel={rel}>
-                                {data[0].title}
-                            </a>
-                        </p>
-                        <ul>
-                            {data.slice(1, 7).map((item, index) => (
-                                <li key={index}>
-                                    <a href={item.url} target="_blank" rel={rel}>
-                                        {item.title}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
                 <div
                     className={styles.hyh}
                     style={{ display: isOver && answerList.length > 7 ? 'block' : 'none' }}

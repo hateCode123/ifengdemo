@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
-import { MidTitle } from '../../../../components/midTitle';
 
 class Rank extends React.PureComponent {
     state = {
@@ -107,84 +106,77 @@ class Rank extends React.PureComponent {
      */
     render() {
         const { tabs, raise, current, loading, data } = this.state;
-        const { content } = this.props;
-        const { title, url } = content;
 
         return (
-            <div className={styles.rank_box}>
-                <MidTitle title={title} url={url} />
-                <div className={`${styles.rank} clearfix`}>
-                    <div className={`${styles.title} clearfix`}>
-                        <div className={styles.title_name}>股票名称</div>
-                        {current !== 2 ? (
-                            <div
-                                className={raise ? styles.raise_up : styles.raise_down}
-                                onClick={this.handleRaiseChange}>
-                                涨跌幅
-                            </div>
-                        ) : (
-                            <div className={styles.raise} onClick={this.handleRaiseChange}>
-                                量比
-                            </div>
-                        )}
-                    </div>
-                    <div className={styles.tabs}>
-                        <ul>
-                            {tabs.map((item, index) => (
-                                <li
-                                    key={index}
-                                    className={current === index ? styles.current : ''}
-                                    data-index={index}
-                                    onClick={this.handleTabsChange}>
-                                    {item.tab}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    {loading ? (
-                        <div className={styles.loading} />
+            <div className={`${styles.rank} clearfix`}>
+                <div className={`${styles.title} clearfix`}>
+                    <div className={styles.title_name}>股票名称</div>
+                    {current !== 2 ? (
+                        <div className={raise ? styles.raise_up : styles.raise_down} onClick={this.handleRaiseChange}>
+                            涨跌幅
+                        </div>
                     ) : (
-                        <div className={styles.table}>
-                            <table>
-                                <tbody>
-                                    {data.map((item, index) => (
-                                        <tr key={index}>
-                                            <td style={{ width: '107px' }}>
-                                                <a
-                                                    href={
-                                                        index < 3
-                                                            ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
-                                                            : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
-                                                                  3,
-                                                              )}/`
-                                                    }
-                                                    target="_blank"
-                                                    rel={rel}>
-                                                    {item.name.slice(0, 6)}
-                                                </a>
-                                                {item.news && item.news !== '' ? (
-                                                    <a href={item.news} target="_blank" rel={rel}>
-                                                        <p />
-                                                    </a>
-                                                ) : (
-                                                    ''
-                                                )}
-                                            </td>
-                                            <td className={item.chg_pct > 0 ? styles.red : styles.green}>
-                                                <span>
-                                                    {current === 2
-                                                        ? Number(item.vol_ratio).toFixed(2)
-                                                        : Number(item.chg_pct).toFixed(2)}
-                                                    {current === 2 ? '' : '%'}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className={styles.raise} onClick={this.handleRaiseChange}>
+                            量比
                         </div>
                     )}
                 </div>
+                <div className={styles.tabs}>
+                    <ul>
+                        {tabs.map((item, index) => (
+                            <li
+                                key={index}
+                                className={current === index ? styles.current : ''}
+                                data-index={index}
+                                onClick={this.handleTabsChange}>
+                                {item.tab}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                {loading ? (
+                    <div className={styles.loading} />
+                ) : (
+                    <div className={styles.table}>
+                        <table>
+                            <tbody>
+                                {data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td style={{ width: '107px' }}>
+                                            <a
+                                                href={
+                                                    index < 3
+                                                        ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
+                                                        : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
+                                                              3,
+                                                          )}/`
+                                                }
+                                                target="_blank"
+                                                rel={rel}>
+                                                {item.name.slice(0, 6)}
+                                            </a>
+                                            {item.news && item.news !== '' ? (
+                                                <a href={item.news} target="_blank" rel={rel}>
+                                                    <p />
+                                                </a>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </td>
+                                        <td className={item.chg_pct > 0 ? styles.red : styles.green}>
+                                            <span>
+                                                {current === 2
+                                                    ? Number(item.vol_ratio).toFixed(2)
+                                                    : Number(item.chg_pct).toFixed(2)}
+                                                {current === 2 ? '' : '%'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         );
     }
@@ -193,9 +185,7 @@ class Rank extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Rank.propTypes = {
-    content: PropTypes.object,
-};
+Rank.propTypes = {};
 
 /**
  * 定义组件默认属性

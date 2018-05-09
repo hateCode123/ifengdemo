@@ -8,7 +8,7 @@ class PlayItem extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
+        const content = this.props.content[0];
 
         return (
             <div className={styles.playitem}>
@@ -27,7 +27,7 @@ class PlayItem extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-PlayItem.propTypes = { content: PropTypes.object };
+PlayItem.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

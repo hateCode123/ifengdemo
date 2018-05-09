@@ -83,69 +83,64 @@ class FundsFlow extends React.PureComponent {
      */
     render() {
         const { tabs, current, loading, data } = this.state;
-        const { content } = this.props;
-        const { title, url } = content;
 
         return (
-            <div className={styles.funds_flow}>
-                <MidTitle title={title} url={url} />
-                <div className={`${styles.box} clearfix`}>
-                    <div className={`${styles.title} clearfix`}>
-                        <div className={styles.title_name}>股票名称</div>
-                        <div className={styles.raise}>增减仓（万）</div>
-                    </div>
-                    <div className={styles.tabs}>
-                        <ul>
-                            {tabs.map((item, index) => (
-                                <li
-                                    key={index}
-                                    className={current === index ? styles.current : ''}
-                                    data-index={index}
-                                    onClick={this.handleTabsChange}>
-                                    {item.tab}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    {loading ? (
-                        <div className={styles.loading} />
-                    ) : (
-                        <div className={styles.table}>
-                            <table>
-                                <tbody>
-                                    {data.map((item, index) => (
-                                        <tr key={index}>
-                                            <td style={{ width: '107px' }}>
-                                                <a
-                                                    href={
-                                                        index < 3
-                                                            ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
-                                                            : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
-                                                                  3,
-                                                              )}/`
-                                                    }
-                                                    target="_blank"
-                                                    rel={rel}>
-                                                    {item.name.slice(0, 6)}
-                                                </a>
-                                                {item.news && item.news !== '' ? (
-                                                    <a href={item.news} target="_blank" rel={rel}>
-                                                        <p />
-                                                    </a>
-                                                ) : (
-                                                    ''
-                                                )}
-                                            </td>
-                                            <td className={item.chg_pct > 0 ? styles.red : styles.green}>
-                                                <span>{item.chg_pct}</span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
+            <div className={`${styles.box} clearfix`}>
+                <div className={`${styles.title} clearfix`}>
+                    <div className={styles.title_name}>股票名称</div>
+                    <div className={styles.raise}>增减仓（万）</div>
                 </div>
+                <div className={styles.tabs}>
+                    <ul>
+                        {tabs.map((item, index) => (
+                            <li
+                                key={index}
+                                className={current === index ? styles.current : ''}
+                                data-index={index}
+                                onClick={this.handleTabsChange}>
+                                {item.tab}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                {loading ? (
+                    <div className={styles.loading} />
+                ) : (
+                    <div className={styles.table}>
+                        <table>
+                            <tbody>
+                                {data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td style={{ width: '107px' }}>
+                                            <a
+                                                href={
+                                                    index < 3
+                                                        ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
+                                                        : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
+                                                              3,
+                                                          )}/`
+                                                }
+                                                target="_blank"
+                                                rel={rel}>
+                                                {item.name.slice(0, 6)}
+                                            </a>
+                                            {item.news && item.news !== '' ? (
+                                                <a href={item.news} target="_blank" rel={rel}>
+                                                    <p />
+                                                </a>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </td>
+                                        <td className={item.chg_pct > 0 ? styles.red : styles.green}>
+                                            <span>{item.chg_pct}</span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         );
     }
@@ -154,9 +149,7 @@ class FundsFlow extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-FundsFlow.propTypes = {
-    content: PropTypes.object,
-};
+FundsFlow.propTypes = {};
 
 /**
  * 定义组件默认属性

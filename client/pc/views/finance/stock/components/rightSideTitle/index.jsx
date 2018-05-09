@@ -8,7 +8,7 @@ class RightSideTitle extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
+        const content = this.props.content[0];
 
         return (
             <div className={styles.title}>
@@ -34,7 +34,7 @@ class RightSideTitle extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-RightSideTitle.propTypes = { content: PropTypes.object };
+RightSideTitle.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

@@ -22,6 +22,7 @@ class HotSpots extends React.PureComponent {
             hotSpotsTitle,
             hotSpotsSubTitle1,
             hotSpotsSubTitle2,
+            industryTitle,
             industry,
             singleStockTitle,
             marketRadar,
@@ -30,8 +31,6 @@ class HotSpots extends React.PureComponent {
         } = content;
 
         const data = [marketRadar, track, fiveDays];
-
-        console.log(content.fiveDays);
 
         return (
             <div className={`${styles.hot_spots} clearfix`}>
@@ -67,16 +66,26 @@ class HotSpots extends React.PureComponent {
                 </div>
                 <div className={styles.col_R}>
                     <div className={styles.data_box}>
-                        <TableTitle title={industry.title} url={industry.url} more={industry.more} />
+                        <Chip
+                            id="10120"
+                            type="static"
+                            title="行业概念资金流向标题"
+                            groupName="操盘热点"
+                            content={industryTitle}>
+                            <TableTitle />
+                        </Chip>
                         <Industry tabs={industry.tabs} data={industry.data} max={8} />
                     </div>
                     <div className={styles.data_box}>
-                        <TableTitle
-                            title={singleStockTitle.title}
-                            url={singleStockTitle.url}
-                            more={singleStockTitle.more}
-                        />
-                        <SingleStock tabs={singleStockTitle.tabs} content={data} />
+                        <Chip
+                            id="10088"
+                            type="static"
+                            title="个股资金流向标题"
+                            groupName="操盘热点"
+                            content={singleStockTitle}>
+                            <TableTitle />
+                        </Chip>
+                        <SingleStock tabs={singleStockTitle[0].tabs} content={data} />
                     </div>
                 </div>
             </div>

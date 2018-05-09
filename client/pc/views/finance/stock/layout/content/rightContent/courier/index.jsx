@@ -1,134 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import { rel } from '../../../../../../../utils/rel';
+import CourierTitle from './courierTitle/';
+import CourierContent from './courierContent/';
 
 class Courier extends React.PureComponent {
-    state = {
-        current: 0,
-        currentCol: '',
-    };
-
-    /**
-     * 处理鼠标浮动
-     */
-    handleTabsOver = index => {
-        this.setState({ current: index });
-    };
-
-    handleListEnter = index => {
-        this.setState({ currentCol: index });
-    };
-
-    handleListLeave = index => {
-        this.setState({ currentCol: index });
-    };
-
     /**
      * 渲染组件
      */
     render() {
-        const { current, currentCol } = this.state;
         const { content } = this.props;
-        const types = {
-            指数型: 'risk',
-            股票型: 'risk',
-            混合型: 'risk',
-        };
-        const list0 = [];
-        const list1 = [];
-
-        content[0].content.map((item, index) => {
-            list0.push(
-                <dd
-                    key={index}
-                    onMouseEnter={() => this.handleListEnter(index)}
-                    onMouseLeave={this.handleListLeave}
-                    className={index === currentCol ? styles.over : styles.out}>
-                    <div className={styles.col}>
-                        <span className={styles.income}>{item.income}</span>
-                        <span className={`${styles.type} ${styles[types[item.type]]}`}>{item.type}</span>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            {item.name}
-                        </a>
-                    </div>
-                    <p>
-                        <span>推荐理由：</span>
-                        {item.recommend}
-                    </p>
-                    <div className={styles.shop} hidden={index !== currentCol}>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            <div className={styles.btn} />
-                        </a>
-                    </div>
-                </dd>,
-            );
-
-            return list0;
-        });
-
-        content[1].content.map((item, index) => {
-            list1.push(
-                <dd
-                    key={index}
-                    onMouseEnter={() => this.handleListEnter(index)}
-                    onMouseLeave={this.handleListLeave}
-                    className={`${index === currentCol ? styles.over : styles.out} clearfix`}>
-                    <div className={styles.bar_L}>
-                        <h6>
-                            <a href={item.url} target="_blank" rel={rel}>
-                                {item.name}
-                            </a>
-                        </h6>
-                        <p>
-                            <span>推荐理由：</span>
-                            {item.recommend}
-                        </p>
-                    </div>
-                    <div className={styles.bar_R}>
-                        <span className={styles.tip}>累计收益超</span>
-                        <span className={styles.income}>{item.income}</span>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            预约
-                        </a>
-                    </div>
-                </dd>,
-            );
-
-            return list1;
-        });
+        const { courierTitle, courier } = content;
 
         return (
             <div className={styles.courier}>
-                <div className={styles.caption}>
-                    <a href="//finance.ifeng.com/zhuanti/" target="_blank" rel={rel} title="理财速递">
-                        理财速递
-                    </a>
-                </div>
-                <div className={styles.title}>
-                    <ul className={`${styles.title_tabs} clearfix`}>
-                        {content.map((item, index) => (
-                            <li
-                                key={index}
-                                className={index === current ? styles.current : ''}
-                                onMouseEnter={() => this.handleTabsOver(index)}>
-                                {item.title}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className={styles.content}>
-                    <dl>
-                        {current === 0 ? (
-                            <dt className="clearfix">
-                                <span className={styles.content_title}>类型　&nbsp;&nbsp;近一年收益</span>产品名称
-                            </dt>
-                        ) : (
-                            <dt className="clearfix">产品名称</dt>
-                        )}
-                        {current === 0 ? list0 : list1}
-                    </dl>
-                </div>
+                <Chip id="10119" type="static" title="理财速递标题" groupName="正文" content={courierTitle}>
+                    <CourierTitle />
+                </Chip>
+                <Chip id="10082" type="static" title="理财速递" groupName="正文" content={courier}>
+                    <CourierContent />
+                </Chip>
             </div>
         );
     }
@@ -137,7 +30,7 @@ class Courier extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Courier.propTypes = { content: PropTypes.array };
+Courier.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性

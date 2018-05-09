@@ -1,57 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { rel } from '../../../../../utils/rel';
+import Chip from 'Chip';
+import Title from './title/';
+import SubTitle from './subTitle/';
+import Link from './link/';
 
 class Tab extends React.PureComponent {
-    handleMouseOver = index => {
-        const { content, handleTabsChange } = this.props;
-
-        if (content.title.length > 1) {
-            handleTabsChange(index);
-        }
-    };
-
     /**
      * 渲染组件
      */
     render() {
-        const { content, current } = this.props;
-        const title = content.title;
-        const subTitle = content.subTitle;
-        const ad = content.ad;
+        const { title, subTitle, newsLiveTabLink, current, handleTabsChange } = this.props;
 
         return (
             <div className={styles.tab}>
-                {title.map((item, index) => (
-                    <h4
-                        key={index}
-                        className={`${styles[`title${index}`]} ${
-                            title.length === 1 || current === index ? styles.current : ''
-                        }`}
-                        onMouseEnter={() => this.handleMouseOver(index)}>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            {item.title}
-                        </a>
-                    </h4>
-                ))}
-                {subTitle ? (
-                    <div className={styles.sub_title}>
-                        {subTitle.map((item, index) => (
-                            <a key={index} href={item.url} target="_blank" rel={rel}>
-                                {item.title}
-                            </a>
-                        ))}
-                    </div>
+                {title ? (
+                    <Chip
+                        id={title.id}
+                        type={title.type}
+                        title={title.title}
+                        groupName={title.groupName}
+                        content={title.content}>
+                        <Title current={current} handleTabsChange={handleTabsChange} />
+                    </Chip>
                 ) : (
                     ''
                 )}
-                {ad ? (
-                    <div className={styles.ad}>
-                        <a href={ad.url} target="_blank" rel={rel}>
-                            <span>{ad.title}</span>
-                        </a>
-                    </div>
+                {subTitle ? (
+                    <Chip
+                        id={subTitle.id}
+                        type={subTitle.type}
+                        title={subTitle.title}
+                        groupName={subTitle.groupName}
+                        content={subTitle.content}>
+                        <SubTitle />
+                    </Chip>
+                ) : (
+                    ''
+                )}
+                {newsLiveTabLink ? (
+                    <Chip
+                        id={newsLiveTabLink.id}
+                        type={newsLiveTabLink.type}
+                        title={newsLiveTabLink.title}
+                        groupName={newsLiveTabLink.groupName}
+                        content={newsLiveTabLink.content}>
+                        <Link />
+                    </Chip>
                 ) : (
                     ''
                 )}
@@ -64,7 +60,9 @@ class Tab extends React.PureComponent {
  * 定义组件属性类型
  * */
 Tab.propTypes = {
-    content: PropTypes.object,
+    title: PropTypes.object,
+    subTitle: PropTypes.object,
+    newsLiveTabLink: PropTypes.object,
     current: PropTypes.number,
     handleTabsChange: PropTypes.func,
 };
@@ -72,7 +70,9 @@ Tab.propTypes = {
 /**
  * 定义组件默认属性
  * */
-Tab.defaultProps = {};
+Tab.defaultProps = {
+    current: 0,
+};
 
 export { Tab };
 export default Tab;

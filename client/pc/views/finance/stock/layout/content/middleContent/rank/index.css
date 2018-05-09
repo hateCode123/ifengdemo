@@ -1,136 +1,134 @@
-.rank_box {
-    & .rank {
-        height: 173px;
-        overflow: hidden;
+.rank {
+    height: 173px;
+    overflow: hidden;
+    border-bottom: 1px solid #efefef;
+    & .title {
+        height: 25px;
+        background: #fafafa;
+        padding-left: 65px;
         border-bottom: 1px solid #efefef;
-        & .title {
-            height: 25px;
+        & .title_name {
+            float: left;
+            display: block;
+            width: 77px;
+            margin-right: 31px;
+            text-align: center;
+            color: #2b2b2b;
+            line-height: 25px;
+            text-decoration: none;
+        }
+        & .raise {
+            cursor: pointer;
+            display: block;
+            width: 56px;
+            height: 21px;
+            margin-top: 2px;
+            float: left;
+            padding-left: 9px;
+            line-height: 21px;
+            color: #2b2b2b;
+            text-decoration: none;
+        }
+        & .raise_up {
+            cursor: pointer;
+            display: block;
+            width: 56px;
+            height: 21px;
+            margin-top: 2px;
+            background: url(./g_17.png) no-repeat;
+            float: left;
+            padding-left: 9px;
+            line-height: 21px;
+            color: #2b2b2b;
+            text-decoration: none;
+        }
+        & .raise_down {
+            cursor: pointer;
+            display: block;
+            width: 56px;
+            height: 21px;
+            margin-top: 2px;
+            float: left;
+            padding-left: 9px;
+            line-height: 21px;
+            color: #2b2b2b;
+            text-decoration: none;
+            background: url(./mor_02.png) no-repeat;
+        }
+    }
+    & .tabs {
+        width: 64px;
+        border-right: 1px solid #e7e8e9;
+        float: left;
+        overflow: hidden;
+        & li {
             background: #fafafa;
-            padding-left: 65px;
-            border-bottom: 1px solid #efefef;
-            & .title_name {
-                float: left;
-                display: block;
-                width: 77px;
-                margin-right: 31px;
-                text-align: center;
-                color: #2b2b2b;
-                line-height: 25px;
-                text-decoration: none;
-            }
-            & .raise {
-                cursor: pointer;
-                display: block;
-                width: 56px;
-                height: 21px;
-                margin-top: 2px;
-                float: left;
-                padding-left: 9px;
-                line-height: 21px;
-                color: #2b2b2b;
-                text-decoration: none;
-            }
-            & .raise_up {
-                cursor: pointer;
-                display: block;
-                width: 56px;
-                height: 21px;
-                margin-top: 2px;
-                background: url(./g_17.png) no-repeat;
-                float: left;
-                padding-left: 9px;
-                line-height: 21px;
-                color: #2b2b2b;
-                text-decoration: none;
-            }
-            & .raise_down {
-                cursor: pointer;
-                display: block;
-                width: 56px;
-                height: 21px;
-                margin-top: 2px;
-                float: left;
-                padding-left: 9px;
-                line-height: 21px;
-                color: #2b2b2b;
-                text-decoration: none;
-                background: url(./mor_02.png) no-repeat;
-            }
-        }
-        & .tabs {
             width: 64px;
-            border-right: 1px solid #e7e8e9;
-            float: left;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #666666;
+            cursor: pointer;
+            background: url(./g_19.png) repeat-x left bottom;
             overflow: hidden;
-            & li {
-                background: #fafafa;
-                width: 64px;
-                height: 30px;
-                text-align: center;
-                line-height: 30px;
-                color: #666666;
-                cursor: pointer;
-                background: url(./g_19.png) repeat-x left bottom;
-                overflow: hidden;
-            }
-            & li.current {
-                background: #f54343;
-                color: #FFF;
-                background: url(./g_18.png) repeat-x left bottom;
-            }
         }
-        & .loading {
-            background: url(./loading.gif);
-            width: 150px;
-            height: 29px;
-            margin: 75px 0 0 70px;
+        & li.current {
+            background: #f54343;
+            color: #FFF;
+            background: url(./g_18.png) repeat-x left bottom;
+        }
+    }
+    & .loading {
+        background: url(./loading.gif);
+        width: 150px;
+        height: 29px;
+        margin: 75px 0 0 70px;
+        border: 0;
+    }
+    & .table {
+        width: 175px;
+        overflow: hidden;
+        float: left;
+        background: url(./g_20.png) repeat-y left -1px;
+        & table {
+            width: 100%;
             border: 0;
-        }
-        & .table {
-            width: 175px;
-            overflow: hidden;
-            float: left;
-            background: url(./g_20.png) repeat-y left -1px;
-            & table {
-                width: 100%;
-                border: 0;
-                & tbody tr {
-                    & td {
-                        text-indent: 5px;
-                        line-height: 30px;
-                        height: 30px;
-                        overflow: hidden;
-                        & a {
-                            color: #2b2b2b;
-                            text-decoration: none;
-                            & p {
-                                display: inline-block;
-                                background: url(./g_01a.png);
-                                width: 34px;
-                                height: 16px;
-                            }
-                        }
-                        & a:hover {
-                            color: #f54343;
-                        }
-                        & span {
-                            display: block;
-                            font-size: 14px;
-                            text-align: right;
-                            padding-right: 10px;
-                            width: 58px;
-                            height: 27px;
-                            line-height: 27px;
+            & tbody tr {
+                & td {
+                    text-indent: 5px;
+                    line-height: 30px;
+                    height: 30px;
+                    overflow: hidden;
+                    & a {
+                        color: #2b2b2b;
+                        text-decoration: none;
+                        & p {
+                            display: inline-block;
+                            background: url(./g_01a.png);
+                            width: 34px;
+                            height: 16px;
                         }
                     }
-                    & .red span {
-                        background: #fff5f5;
+                    & a:hover {
                         color: #f54343;
                     }
-                    & .green span {
-                        background: #eafcea;
-                        color: #44a492;
+                    & span {
+                        display: block;
+                        font-size: 14px;
+                        text-align: right;
+                        padding-right: 10px;
+                        width: 58px;
+                        height: 27px;
+                        line-height: 27px;
                     }
+                }
+                & .red span {
+                    background: #fff5f5;
+                    color: #f54343;
+                }
+                & .green span {
+                    background: #eafcea;
+                    color: #44a492;
                 }
             }
         }

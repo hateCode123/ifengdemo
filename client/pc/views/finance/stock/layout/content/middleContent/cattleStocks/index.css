@@ -1,5 +1,4 @@
-.cattle_stocks {
-    height: 262px;
+.box {
     & .stock_box {
         & .tabs {
             width: 240px;
@@ -42,7 +41,7 @@
             border: 1px solid #dddddd;
             padding-left: 5px;
         }
-        &>a{
+        &>a {
             display: block;
             width: 50px;
             height: 22px;

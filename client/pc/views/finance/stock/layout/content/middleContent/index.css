@@ -4,6 +4,9 @@
     float: left;
     margin-right: 30px;
     overflow: hidden;
+    & .cattle_stocks {
+        height: 262px;
+    }
     & .space16 {
         height: 16px;
         overflow: hidden;

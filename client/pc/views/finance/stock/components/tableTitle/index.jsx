@@ -8,7 +8,8 @@ class TableTitle extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { title, url, more } = this.props;
+        const { content } = this.props;
+        const { title, url, more } = content[0];
 
         return (
             <div className={`${styles.title_box} clearfix`}>
@@ -29,9 +30,7 @@ class TableTitle extends React.PureComponent {
  * 定义组件属性类型
  * */
 TableTitle.propTypes = {
-    title: PropTypes.string,
-    url: PropTypes.string,
-    more: PropTypes.string,
+    content: PropTypes.array,
 };
 
 /**

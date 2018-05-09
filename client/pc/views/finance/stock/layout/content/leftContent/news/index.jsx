@@ -11,12 +11,24 @@ class News extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+        const title = {
+            id: '10050',
+            type: 'static',
+            title: '公司要闻主标题',
+            groupName: '正文',
+            content: content.newsTab,
+        };
+        const subTitle = {
+            id: '10117',
+            type: 'static',
+            title: '公司要闻子标题',
+            groupName: '正文',
+            content: content.newsSubTab,
+        };
 
         return (
             <div className={styles.news}>
-                <Chip id="10050" type="static" title="公司要闻标题" groupName="正文" content={content.newsTab}>
-                    <Tab />
-                </Chip>
+                <Tab title={title} subTitle={subTitle} />
                 <NewsList content={content.news.list} limit={8} />
             </div>
         );

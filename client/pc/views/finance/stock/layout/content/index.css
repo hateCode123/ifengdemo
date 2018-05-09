@@ -2,4 +2,8 @@
     composes: clearfix from global;
     width: 1000px;
     margin: 0 auto;
+    & .col_R {
+        width: 570px;
+        float: left;
+    }
 }

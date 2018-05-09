@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import { Tab } from '../../../../components/tab';
 import StockNews from './stockNews/';
 import Live from './live/';
@@ -22,11 +21,30 @@ class NewsLive extends React.PureComponent {
         const { current } = this.state;
         const { content } = this.props;
 
+        const title = {
+            id: '10049',
+            type: 'static',
+            title: '要闻直播主标题',
+            groupName: '正文',
+            content: content.newsLiveTab,
+        };
+
+        const newsLiveTabLink = {
+            id: '10115',
+            type: 'static',
+            title: '要闻直播标题外链',
+            groupName: '正文',
+            content: content.newsLiveTabLink,
+        };
+
         return (
             <div className={styles.news_live}>
-                <Chip id="10049" type="static" title="要闻直播标题" groupName="正文" content={content.newsLiveTab}>
-                    <Tab current={current} handleTabsChange={this.handleTabsChange} />
-                </Chip>
+                <Tab
+                    current={current}
+                    title={title}
+                    newsLiveTabLink={newsLiveTabLink}
+                    handleTabsChange={this.handleTabsChange}
+                />
                 {current === 0 ? (
                     <div>
                         <div className={styles.stock_news}>

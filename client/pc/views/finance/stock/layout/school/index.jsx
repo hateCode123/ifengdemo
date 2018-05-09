@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import HeadTitle from '../../components/headTitle/';
 import { Ad } from '../../../../../components/ad';
 import ResearchSearch from './researchSearch/';
@@ -32,16 +33,32 @@ class School extends React.PureComponent {
 
         return (
             <div className={`${styles.school} clearfix`}>
-                <HeadTitle content={content.schoolTitle}>
-                    <ResearchSearch />
-                </HeadTitle>
+                <Chip id="10069" type="static" title="高手学堂标题" groupName="高手学堂" content={content.schoolTitle}>
+                    <HeadTitle>
+                        <ResearchSearch />
+                    </HeadTitle>
+                </Chip>
                 <div className={styles.col_L}>
                     <div className={styles.box}>
-                        <Caption content={content.schoolSubTitle1} />
+                        <Chip
+                            id="10072"
+                            type="static"
+                            title="高手操盘日志标题"
+                            groupName="高手学堂"
+                            content={content.schoolSubTitle1}>
+                            <Caption />
+                        </Chip>
                         {logsList.length > 0 ? <NewsList content={logsList} limit={6} /> : ''}
                     </div>
                     <div className={styles.box}>
-                        <Caption content={content.schoolSubTitle2} />
+                        <Chip
+                            id="10073"
+                            type="static"
+                            title="股民学校标题"
+                            groupName="高手学堂"
+                            content={content.schoolSubTitle2}>
+                            <Caption />
+                        </Chip>
                         {schoolList.length > 0 ? <NewsList content={schoolList} limit={6} /> : ''}
                     </div>
                     <div className={styles.ad}>
@@ -50,20 +67,26 @@ class School extends React.PureComponent {
                 </div>
                 <div className={styles.col_R}>
                     <div>
-                        <TableTitle
-                            title={starAnalystTitle.title}
-                            url={starAnalystTitle.url}
-                            more={starAnalystTitle.more}
-                        />
-                        <StarAnalyst tabs={starAnalystTitle.tabs} content={starAnalyst} />
+                        <Chip
+                            id="10092"
+                            type="static"
+                            title="明星分析师标题"
+                            groupName="高手学堂"
+                            content={starAnalystTitle}>
+                            <TableTitle />
+                        </Chip>
+                        <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalyst} />
                     </div>
                     <div className={styles.data_box}>
-                        <TableTitle
-                            title={stockPickingTitle.title}
-                            url={stockPickingTitle.url}
-                            more={stockPickingTitle.more}
-                        />
-                        <StockPicking tabs={stockPickingTitle.tabs} content={data} />
+                        <Chip
+                            id="10094"
+                            type="static"
+                            title="研报选股标题"
+                            groupName="高手学堂"
+                            content={stockPickingTitle}>
+                            <TableTitle />
+                        </Chip>
+                        <StockPicking tabs={stockPickingTitle[0].tabs} content={data} />
                     </div>
                 </div>
             </div>

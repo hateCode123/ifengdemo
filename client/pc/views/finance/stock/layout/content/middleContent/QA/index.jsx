@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import { jsonp, loadScript } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
 import { MidTitle } from '../../../../components/midTitle';
+import QaTabs from './QATabs/';
 import QaForm from './QAForm/';
 
 class Qa extends React.PureComponent {
@@ -136,47 +138,32 @@ class Qa extends React.PureComponent {
      */
     render() {
         const { current, qaers } = this.state;
-        const { content, tabs } = this.props;
-        const { title, url } = content;
+        const { tabs } = this.props;
         const currentUser = tabs[current];
 
         return (
-            <div className={styles.qa}>
-                <MidTitle title={title} url={url} />
-                <div>
-                    <ul className={`${styles.tabs} clearfix`}>
-                        {tabs.map((item, index) => (
-                            <li
-                                key={index}
-                                className={current === index ? styles.current : ''}
-                                onMouseEnter={() => this.handleMouseOver(index)}>
-                                {item.name}
-                            </li>
-                        ))}
-                    </ul>
-                    <div className={styles.qa_box}>
-                        <a
-                            href={
-                                qaers[currentUser.name] && current < 3 ? qaers[currentUser.name].url : tabs[current].url
+            <div>
+                <Chip id="10105" type="static" title="分析师" groupName="正文" content={tabs}>
+                    <QaTabs current={current} handleMouseOver={this.handleMouseOver} />
+                </Chip>
+                <div className={styles.qa_box}>
+                    <a
+                        href={qaers[currentUser.name] && current < 3 ? qaers[currentUser.name].url : tabs[current].url}
+                        target="_blank"
+                        rel={rel}>
+                        <img
+                            className={styles.user}
+                            src={
+                                qaers[currentUser.name] && current < 3 ? qaers[currentUser.name].img : tabs[current].src
                             }
                             target="_blank"
-                            rel={rel}>
-                            <img
-                                className={styles.user}
-                                src={
-                                    qaers[currentUser.name] && current < 3
-                                        ? qaers[currentUser.name].img
-                                        : tabs[current].src
-                                }
-                                target="_blank"
-                                rel={rel}
-                            />
-                        </a>
-                        <QaForm answerUserName={currentUser.name} />
-                    </div>
-                    <div className={styles.qalist}>
-                        <dl>{this.getQaList(currentUser.name)}</dl>
-                    </div>
+                            rel={rel}
+                        />
+                    </a>
+                    <QaForm answerUserName={currentUser.name} />
+                </div>
+                <div className={styles.qalist}>
+                    <dl>{this.getQaList(currentUser.name)}</dl>
                 </div>
             </div>
         );
@@ -187,7 +174,6 @@ class Qa extends React.PureComponent {
  * 定义组件属性类型
  * */
 Qa.propTypes = {
-    content: PropTypes.object,
     tabs: PropTypes.array,
 };
 

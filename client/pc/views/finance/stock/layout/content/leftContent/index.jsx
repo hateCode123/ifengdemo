@@ -22,7 +22,7 @@ class LeftContent extends React.PureComponent {
                     <Headline />
                 </Chip>
                 <div className={styles.space10} />
-                <Broadcast />
+                <Broadcast content={content.broadcast} />
                 <div className={styles.space20} />
                 <NewsLive content={content.newsLive} />
                 <div className={styles.space10} />

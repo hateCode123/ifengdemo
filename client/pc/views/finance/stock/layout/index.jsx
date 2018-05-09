@@ -23,6 +23,9 @@ class Layout extends React.PureComponent {
          * 组件分发数据
          */
         const { content } = this.props;
+
+        console.log(content.stockPlate);
+
         const headerData = {
             nav: content.nav,
             topAd: content.topAd,
@@ -33,14 +36,19 @@ class Layout extends React.PureComponent {
             nav: content.navigation,
             subNav: content.subNavigation,
         };
-        const stockPlate = content.stockPlate;
+        const stockPlate = {
+            stockPlateStyle: content.stockPlateStyle,
+            stockPlate: content.stockPlate,
+        };
         const animationPic = content.animationPic;
         const jumpLink = content.jumpLink;
         const contentData = {
             leftContent: {
                 headline: content.headline,
+                broadcast: content.broadcast,
                 newsLive: {
                     newsLiveTab: content.newsLiveTab,
+                    newsLiveTabLink: content.newsLiveTabLink,
                     stockNews1: content.stockNews1,
                     stockNews2: content.stockNews2,
                     stockNews3: content.stockNews3,
@@ -48,10 +56,12 @@ class Layout extends React.PureComponent {
                 },
                 news: {
                     newsTab: content.newsTab,
+                    newsSubTab: content.newsSubTab,
                     news: content.news,
                 },
                 answer: {
                     answerTab: content.answerTab,
+                    answerSubTab: content.answerSubTab,
                     answerList: content.answerList,
                 },
                 leftAsideAd: content.leftAsideAd,
@@ -66,22 +76,19 @@ class Layout extends React.PureComponent {
                 QaTabs: content.QATabs,
             },
             rightContent: {
-                subject: {
-                    subjectTitle: content.subjectTitle,
-                    subject: content.subject,
+                subjectTitle: content.subjectTitle,
+                subject: content.subject,
+                marketTitle: content.marketTitle,
+                market: content.market,
+                courier: {
+                    courierTitle: content.courierTitle,
+                    courier: content.courier,
                 },
-                market: {
-                    marketTitle: content.marketTitle,
-                    market: content.market,
-                },
-                courier: content.courier,
                 playItem: content.playItem,
                 rightSideAd: content.rightSideAd,
                 linkList: content.linkList,
-                dayStock: {
-                    dayStockTitle: content.dayStockTitle,
-                    dayStock: content.dayStock,
-                },
+                dayStockTitle: content.dayStockTitle,
+                dayStock: content.dayStock,
             },
         };
         const hotSpotsData = {
@@ -90,6 +97,7 @@ class Layout extends React.PureComponent {
             marketAnalysis: content.marketAnalysis,
             hotSpotsSubTitle2: content.hotSpotsSubTitle2,
             hotPlate: content.hotPlate,
+            industryTitle: content.industryTitle,
             industry: content.industry,
             singleStockTitle: content.singleStockTitle,
             marketRadar: content.marketRadar,
@@ -127,7 +135,14 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <AnimationPic content={animationPic} />
-                        <StockPlate content={stockPlate} />
+                        <Chip
+                            id="10086"
+                            type="static"
+                            title="股票展示"
+                            groupName="导航栏"
+                            content={stockPlate.stockPlateStyle}>
+                            <StockPlate stockPlate={stockPlate.stockPlate} />
+                        </Chip>
                         <div className={styles.search_box}>
                             <StockSearch />
                             <Chip id="10044" type="static" title="导航跳转链接" groupName="导航栏" content={jumpLink}>

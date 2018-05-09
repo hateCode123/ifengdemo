@@ -1,0 +1,26 @@
+.title {
+    background: #fff;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    float: left;
+    padding-top: 6px;
+    padding-right: 3px;
+    & a {
+        color: #222222;
+        font-family: '微软雅黑';
+        font-size: 22px;
+        text-decoration: none;
+    }
+}
+
+.title1 {
+    margin-left: 12px;
+}
+
+.current {
+    border-top: 2px solid #f54343;
+    & a {
+        color: #f54343;
+    }
+}

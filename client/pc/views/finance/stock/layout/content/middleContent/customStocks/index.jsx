@@ -53,78 +53,73 @@ class CustomStocks extends React.PureComponent {
      */
     render() {
         const { titles, current, data } = this.state;
-        const { content } = this.props;
-        const { title, url } = content;
 
         return (
-            <div className={styles.custom_stocks}>
-                <MidTitle title={title} url={url} />
-                <div className={styles.box}>
-                    <ul className="clearfix">
-                        {titles.map((item, index) => (
-                            <li
-                                key={index}
-                                className={current === index ? styles.current : ''}
-                                data-index={index}
-                                onMouseEnter={this.handleMouseOver}>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                    {current === 0 ? (
-                        <div className={styles.stock_box}>
-                            <div className={styles.stock}>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th width="65">股票名称</th>
-                                            <th width="50">股价</th>
-                                            <th width="65">涨跌幅</th>
-                                            <th>研报</th>
+            <div className={styles.box}>
+                <ul className="clearfix">
+                    {titles.map((item, index) => (
+                        <li
+                            key={index}
+                            className={current === index ? styles.current : ''}
+                            data-index={index}
+                            onMouseEnter={this.handleMouseOver}>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+                {current === 0 ? (
+                    <div className={styles.stock_box}>
+                        <div className={styles.stock}>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="65">股票名称</th>
+                                        <th width="50">股价</th>
+                                        <th width="65">涨跌幅</th>
+                                        <th>研报</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <a
+                                                    href={`//finance.ifeng.com/app/hq/stock/${item[0]}/`}
+                                                    target="_blank"
+                                                    rel={rel}>
+                                                    {item[1]}
+                                                </a>
+                                            </td>
+                                            <td className={item[3] > 0 ? styles.red : styles.green}>{item[2]}</td>
+                                            <td className={item[3] > 0 ? styles.red : styles.green}>{item[3]}%</td>
+                                            <td>
+                                                <a
+                                                    href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${item[0].slice(
+                                                        2,
+                                                    )}`}
+                                                    target="_blank"
+                                                    rel={rel}>
+                                                    研报
+                                                </a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {data.map((item, index) => (
-                                            <tr key={index}>
-                                                <td>
-                                                    <a
-                                                        href={`//finance.ifeng.com/app/hq/stock/${item[0]}/`}
-                                                        target="_blank"
-                                                        rel={rel}>
-                                                        {item[1]}
-                                                    </a>
-                                                </td>
-                                                <td className={item[3] > 0 ? styles.red : styles.green}>{item[2]}</td>
-                                                <td className={item[3] > 0 ? styles.red : styles.green}>{item[3]}%</td>
-                                                <td>
-                                                    <a
-                                                        href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${item[0].slice(
-                                                            2,
-                                                        )}`}
-                                                        target="_blank"
-                                                        rel={rel}>
-                                                        研报
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                        <tr>
-                                            {data.length > 0 ? (
-                                                <td />
-                                            ) : (
-                                                <td className={styles.tip} colSpan="5">
-                                                    无最近访问股票，以上是热门股票
-                                                </td>
-                                            )}
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    ))}
+                                    <tr>
+                                        {data.length > 0 ? (
+                                            <td />
+                                        ) : (
+                                            <td className={styles.tip} colSpan="5">
+                                                无最近访问股票，以上是热门股票
+                                            </td>
+                                        )}
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    ) : (
-                        <MyStocks />
-                    )}
-                </div>
+                    </div>
+                ) : (
+                    <MyStocks />
+                )}
             </div>
         );
     }
@@ -133,9 +128,7 @@ class CustomStocks extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-CustomStocks.propTypes = {
-    content: PropTypes.object,
-};
+CustomStocks.propTypes = {};
 
 /**
  * 定义组件默认属性

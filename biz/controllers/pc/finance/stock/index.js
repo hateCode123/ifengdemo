@@ -19,26 +19,35 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
+        // 页面公用导航
+        let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+
         // 股票导航
         let navigation = KVProxy.getStaticFragment(10038).then(...handleJsonByKey(ctx, 'content'));
 
         // 股票子导航
         let subNavigation = KVProxy.getStaticFragment(10040).then(...handleJsonByKey(ctx, 'content'));
 
+        // 股票显示样式
+        let stockPlateStyle = KVProxy.getStaticFragment(10086).then(...handleJsonByKey(ctx, 'content'));
+
         // 股票显示
-        let stockPlate = KVProxy.getStaticFragment(10086).then(...handleJsonByKey(ctx, 'content'));
+        let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/zq/caterank.html').then(...handleData(ctx));
 
         // 动画
         let animationPic = KVProxy.getStaticFragment(10085).then(...handleJsonByKey(ctx, 'content'));
 
         // 跳转链接
-        let jumpLink = KVProxy.getStaticFragment(10044).then(...handleJsonByKey(ctx, 'content'));
+        let jumpLink = KVProxy.getStaticFragment(10044).then(...handleJs(ctx, 'content'));
 
         // 头条新闻
         let headline = KVProxy.getRecommendFragment(20018).then(...handleJsonByKey(ctx, 'data'));
 
-        // 直播标题
+        // 要闻直播标题
         let newsLiveTab = KVProxy.getStaticFragment(10049).then(...handleJsonByKey(ctx, 'content'));
+
+        // 要闻直播标题外链
+        let newsLiveTabLink = KVProxy.getStaticFragment(10115).then(...handleJsonByKey(ctx, 'content'));
 
         // 直播 Logo
         let liveLogo = KVProxy.getStaticFragment(10052).then(...handleJsonByKey(ctx, 'content'));
@@ -50,14 +59,23 @@ exports.list = {
 
         let stockNews3 = SearchProxy.list('1-62-84-', '*', '*', '1', 12, 6, '', '*').then(...handleJson(ctx));
 
+        // 轮播新闻
+        let broadcast = SearchProxy.list('1-62-84-', '*', '*', '1', 18, 10, '', '*').then(...handleJson(ctx));
+
         // 公司要闻标题
         let newsTab = KVProxy.getStaticFragment(10050).then(...handleJsonByKey(ctx, 'content'));
+
+        // 公司要闻子标题
+        let newsSubTab = KVProxy.getStaticFragment(10117).then(...handleJsonByKey(ctx, 'content'));
 
         // 公司要闻
         let news = SearchProxy.list('1-62-83-', '*', '*', '1', 0, 24, '', '*').then(...handleJson(ctx));
 
         // 牛人解盘标题
         let answerTab = KVProxy.getStaticFragment(10051).then(...handleJsonByKey(ctx, 'content'));
+
+        // 牛人解盘子标题
+        let answerSubTab = KVProxy.getStaticFragment(10118).then(...handleJsonByKey(ctx, 'content'));
 
         // 牛人解盘
         let answerList = KVProxy.getRecommendFragment(20019).then(...handleJsonByKey(ctx, 'data'));
@@ -95,6 +113,9 @@ exports.list = {
         // 理财超市
         let market = KVProxy.getStaticFragment(10080).then(...handleJs(ctx, 'content'));
 
+        // 理财速递标题
+        let courierTitle = KVProxy.getStaticFragment(10119).then(...handleJsonByKey(ctx, 'content'));
+
         // 理财速递
         let courier = KVProxy.getStaticFragment(10082).then(...handleJsonByKey(ctx, 'content'));
 
@@ -124,6 +145,9 @@ exports.list = {
 
         // 热点板块
         let hotPlate = SearchProxy.list('1-62-87-', '*', '*', '1', 0, 100, '', '*').then(...handleJson(ctx));
+
+        // 行业概念资金流向标题
+        let industryTitle = KVProxy.getStaticFragment(10120).then(...handleJsonByKey(ctx, 'content'));
 
         // 行业概念资金流向
         let industry = KVProxy.getStaticFragment(10087).then(...handleJsonByKey(ctx, 'content'));
@@ -182,21 +206,30 @@ exports.list = {
         // 底部合作链接
         let cooperation = KVProxy.getStaticFragment(10074).then(...handleJs(ctx, 'content'));
 
+        // 底部公用版权
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+
         [
+            nav,
             navigation,
             subNavigation,
+            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
             headline,
             newsLiveTab,
+            newsLiveTabLink,
             stockNews1,
             stockNews2,
             stockNews3,
+            broadcast,
             liveLogo,
             newsTab,
+            newsSubTab,
             news,
             answerTab,
+            answerSubTab,
             answerList,
             bannerPic,
             cattleStocksTitle,
@@ -209,6 +242,7 @@ exports.list = {
             subject,
             marketTitle,
             market,
+            courierTitle,
             courier,
             playItem,
             linkList,
@@ -219,6 +253,7 @@ exports.list = {
             hotSpotsSubTitle2,
             marketAnalysis,
             hotPlate,
+            industryTitle,
             industry,
             singleStockTitle,
             marketRadar,
@@ -238,21 +273,28 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
+            footer
         ] = await Promise.all([
+            nav,
             navigation,
             subNavigation,
+            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
             headline,
             newsLiveTab,
+            newsLiveTabLink,
             stockNews1,
             stockNews2,
             stockNews3,
+            broadcast,
             liveLogo,
             newsTab,
+            newsSubTab,
             news,
             answerTab,
+            answerSubTab,
             answerList,
             bannerPic,
             cattleStocksTitle,
@@ -265,6 +307,7 @@ exports.list = {
             subject,
             marketTitle,
             market,
+            courierTitle,
             courier,
             playItem,
             linkList,
@@ -275,6 +318,7 @@ exports.list = {
             hotSpotsSubTitle2,
             marketAnalysis,
             hotPlate,
+            industryTitle,
             industry,
             singleStockTitle,
             marketRadar,
@@ -294,23 +338,30 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
+            footer
         ]);
 
         let allData = {
+            nav,
             navigation,
             subNavigation,
+            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
             headline,
             newsLiveTab,
+            newsLiveTabLink,
             stockNews1,
             stockNews2,
             stockNews3,
+            broadcast,
             liveLogo,
             newsTab,
+            newsSubTab,
             news,
             answerTab,
+            answerSubTab,
             answerList,
             bannerPic,
             cattleStocksTitle,
@@ -323,6 +374,7 @@ exports.list = {
             subject,
             marketTitle,
             market,
+            courierTitle,
             courier,
             playItem,
             linkList,
@@ -333,6 +385,7 @@ exports.list = {
             hotSpotsSubTitle2,
             marketAnalysis,
             hotPlate,
+            industryTitle,
             industry,
             singleStockTitle,
             marketRadar,
@@ -352,6 +405,7 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
+            footer
         };
 
         await ctx.html('finance_stock', {

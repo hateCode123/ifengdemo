@@ -9,10 +9,10 @@ class HeadTitle extends React.PureComponent {
      */
     render() {
         const { content, children } = this.props;
-        const { subTitle } = content;
+        const subTitle = content.slice(1);
         const subTitleList = [];
 
-        subTitle.map((item, index) => {
+        subTitle.forEach((item, index) => {
             subTitleList.push(
                 <a key={index} href={item.url} target="_blank" rel={rel}>
                     {item.title}
@@ -20,8 +20,6 @@ class HeadTitle extends React.PureComponent {
             );
 
             subTitleList.push(index === subTitle.length - 1 ? '' : '|');
-
-            return subTitleList;
         });
 
         return (
@@ -29,7 +27,7 @@ class HeadTitle extends React.PureComponent {
                 <div className={styles.sub_title}>{subTitleList}</div>
                 {children}
                 <div className={styles.title}>
-                    <a>{content.title}</a>
+                    <a>{content[0].title}</a>
                 </div>
             </div>
         );
@@ -40,7 +38,7 @@ class HeadTitle extends React.PureComponent {
  * 定义组件属性类型
  * */
 HeadTitle.propTypes = {
-    content: PropTypes.object,
+    content: PropTypes.array,
     children: PropTypes.object,
 };
 

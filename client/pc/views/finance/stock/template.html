@@ -8,91 +8,7 @@
     <script>
         var allData = <%- JSON.stringify(allData) %>;
         var jsonData = {
-            nav: [{
-                url: '//www.ifeng.com/',
-                title: '首页'
-            }, {
-                url: '//news.ifeng.com/',
-                title: '资讯'
-            }, {
-                url: '//v.ifeng.com/',
-                title: '视频'
-            }, {
-                url: '//zhibo.ifeng.com/',
-                title: '直播'
-            }, {
-                url: '//finance.ifeng.com/',
-                title: '财经'
-            }, {
-                url: '//ent.ifeng.com/',
-                title: '娱乐'
-            }, {
-                url: '//sports.ifeng.com/',
-                title: '体育'
-            }, {
-                url: '//fashion.ifeng.com/',
-                title: '时尚'
-            }, {
-                url: '//auto.ifeng.com/',
-                title: '汽车'
-            }, {
-                url: '//house.ifeng.com/',
-                title: '房产'
-            }, {
-                url: '//tech.ifeng.com/',
-                title: '科技'
-            }, {
-                url: '//book.ifeng.com/',
-                title: '读书'
-            }, {
-                url: '//games.ifeng.com/',
-                title: '游戏'
-            }, {
-                url: '//culture.ifeng.com/',
-                title: '文化'
-            }, {
-                url: '//news.ifeng.com/history/',
-                title: '历史'
-            }, {
-                url: '//news.ifeng.com/mil/',
-                title: '军事'
-            }, {
-                url: '//lehuo.ifeng.com/',
-                title: '乐活'
-            }, {
-                url: '//fo.ifeng.com/',
-                title: '佛教'
-            }, {
-                url: '//travel.ifeng.com/',
-                title: '旅游'
-            }, {
-                url: '//imall.ifeng.com/',
-                title: '匠选'
-            }, {
-                url: '//guoxue.ifeng.com/',
-                title: '国学'
-            }, {
-                url: '//digi.ifeng.com/',
-                title: '数码'
-            }, {
-                url: '//health.ifeng.com/',
-                title: '健康'
-            }, {
-                url: '//home.ifeng.com/',
-                title: '家居'
-            }, {
-                url: '//cp.ifeng.com/?aid=45',
-                title: '彩票'
-            }, {
-                url: '//gongyi.ifeng.com/',
-                title: '公益'
-            }, {
-                url: '//jiu.ifeng.com/',
-                title: '酒业'
-            }, {
-                url: '//dol.deliver.ifeng.com/c?z=ifeng&amp;la=0&amp;si=2&amp;cg=1&amp;c=1&amp;ci=2&amp;or=7549&amp;l=28704&amp;bg=28703&amp;b=37275&amp;u=http://audi-future.ifeng.com/',
-                title: '未来'
-            }],
+            nav: allData.nav,
             topAd: {
                 data: {
                     title: 'topAd'
@@ -114,18 +30,23 @@
             },
             navigation: allData.navigation,
             subNavigation: allData.subNavigation,
+            stockPlateStyle: allData.stockPlateStyle,
             stockPlate: allData.stockPlate,
             animationPic: allData.animationPic,
             jumpLink: allData.jumpLink,
             headline: allData.headline,
             newsLiveTab: allData.newsLiveTab,
+            newsLiveTabLink: allData.newsLiveTabLink,
             stockNews1: allData.stockNews1,
             stockNews2: allData.stockNews2,
             stockNews3: allData.stockNews3,
+            broadcast: allData.broadcast,
             liveLogo: allData.liveLogo,
             newsTab: allData.newsTab,
+            newsSubTab: allData.newsSubTab,
             news: allData.news,
             answerTab: allData.answerTab,
+            answerSubTab: allData.answerSubTab,
             answerList: allData.answerList,
             leftAsideAd: {
                 data: {
@@ -146,6 +67,7 @@
             hotSpotsSubTitle2: allData.hotSpotsSubTitle2,
             marketAnalysis: allData.marketAnalysis,
             hotPlate: allData.hotPlate,
+            industryTitle: allData.industryTitle,
             industry: allData.industry,
             singleStockTitle: allData.singleStockTitle,
             marketRadar: allData.marketRadar,
@@ -182,6 +104,7 @@
             subject: allData.subject,
             marketTitle: allData.marketTitle,
             market: allData.market,
+            courierTitle: allData.courierTitle,
             courier: allData.courier,
             playItem: allData.playItem,
             rightSideAd: {
@@ -202,117 +125,7 @@
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
                 callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
             },
-            footer: `        <style>
-            .footer {
-                width: 1000px;
-                margin: 0 auto;
-                border-top: 1px solid #ccc
-            }
-
-            .footer a {
-                color: #000;
-                font-size: 12px;
-                text-decoration: none
-            }
-
-            .footer a:hover {
-                color: #f54343;
-                text-decoration: underline
-            }
-
-            .footer .footlink {
-                position: relative;
-                height: 28px;
-                padding-top: 15px;
-                border-top: 1px solid #fff;
-                overflow: hidden;
-                color: #000;
-                line-height: 28px;
-                font-size: 12px
-            }
-
-            .footer .fk_l {
-                text-align: center;
-            }
-
-            .footer .fk_r {
-                position: absolute;
-                width: 100px;
-                right: 0;
-                top: 15px;
-            }
-
-            .footer .fk_l a {
-                padding: 0 7px;
-                border-right: 1px solid #000
-            }
-
-            .footer .fk_l .nolpad {
-                padding-left: 0
-            }
-
-            .footer .fk_l .noborder {
-                border: none
-            }
-
-            .footer .fk_r ul {
-                overflow: hidden;
-                margin: 0;
-                padding: 0;
-                list-style: none
-            }
-
-            .footer .fk_r ul li {
-                float: left;
-                height: 28px;
-                overflow: hidden
-            }
-
-            .footer .fk_r ul .l_bg001 {
-                background: url(http://p2.ifengimg.com/a/2016_21/nav0416_14_fd540caa-fd540caadc.gif) no-repeat left 9px;
-                padding-left: 19px
-            }
-
-            .footer .fk_r ul .l_bg002 {
-                background: url(http://p2.ifengimg.com/a/2016_21/nav0416_17-68c300b50b.gif) no-repeat left 9px;
-                padding-left: 17px;
-                margin-left: 18px
-            }
-
-            .footer .copyright {
-                font-family: Arial, "宋体";
-                color: #666;
-                height: 28px;
-                text-align: center;
-                overflow: hidden;
-                line-height: 28px
-            }
-
-            .footer .copyright span {
-                padding-right: 12px;
-                font-size: 12px
-            }
-        </style>
-        <div id="footer" class="footer mt02">
-            <div class="footlink clearfix">
-                <div class="fk_l">
-                    <a class="nolpad" href="http://www.ifeng.com/corp/about/intro/" target="_blank">凤凰新媒体介绍</a>
-                    <a href="http://ir.ifeng.com/" target="_blank">投资者关系 Investor Relations</a>
-                    <a href="http://biz.ifeng.com/" target="_blank">广告服务</a>
-                    <a href="http://career.ifeng.com/" target="_blank">诚征英才</a>
-                    <a href="http://www.ifeng.com/corp/privacy/" target="_blank">保护隐私权</a>
-                    <a href="http://www.ifeng.com/corp/exemption/" target="_blank">免责条款</a>
-                    <a href="http://www.ifeng.com/corp/feedback/" target="_blank">意见反馈</a>
-                    <a href="http://phtv.ifeng.com/intro/" target="_blank" class="noborder">凤凰卫视介绍</a>
-                </div>
-
-            </div>
-            <div class="copyright">
-                <span>凤凰新媒体</span>
-                <span>版权所有</span>
-                <span>Copyright © 2016 Phoenix New Media Limited All Rights Reserved.</span>
-            </div>
-        </div>`,
+            footer: allData.footer,
             qrCode: {
                 url: '//y2.ifengimg.com/a/2016_10/63901608d827c5e.jpg',
                 title: '凤凰证券',

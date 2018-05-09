@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
-import { MidTitle } from '../../../../components/midTitle';
 import DataBox from './dataBox/';
 
 class CattleStocks extends React.PureComponent {
@@ -39,37 +38,8 @@ class CattleStocks extends React.PureComponent {
             },
         ],
         current: 0,
-        nowTime: '',
         searchTxt: '',
     };
-
-    componentDidMount() {
-        const refreshCalendarClock = () => {
-            const now = new Date();
-            let time = '';
-            let hours = now.getHours();
-
-            if (hours < 10) {
-                hours = `0${hours}`;
-            }
-            time += `${hours}:`;
-            let minutes = now.getMinutes();
-
-            if (minutes < 10) {
-                minutes = `0${minutes}`;
-            }
-            time += minutes;
-
-            this.setState({
-                nowTime: time,
-            });
-        };
-
-        refreshCalendarClock();
-        setInterval(() => {
-            refreshCalendarClock();
-        }, 1000);
-    }
 
     handleMouseOver = index => {
         this.setState({ current: index });
@@ -106,13 +76,10 @@ class CattleStocks extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { dataStock, nowTime, current } = this.state;
-        const { content } = this.props;
-        const { title, url } = content;
+        const { dataStock, current } = this.state;
 
         return (
-            <div className={styles.cattle_stocks}>
-                <MidTitle title={title} url={url} nowTime={nowTime} />
+            <div className={styles.box}>
                 <div className={styles.stock_box}>
                     <ul className={`${styles.tabs} clearfix`}>
                         {dataStock.map((item, index) => (
@@ -141,9 +108,7 @@ class CattleStocks extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-CattleStocks.propTypes = {
-    content: PropTypes.object,
-};
+CattleStocks.propTypes = {};
 
 /**
  * 定义组件默认属性

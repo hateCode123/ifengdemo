@@ -9,7 +9,8 @@ class Caption extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const { title, subTitle } = content;
+        const title = content[0];
+        const subTitle = content.slice(1);
 
         return (
             <div className={`${styles.caption} clearfix`}>
@@ -37,7 +38,9 @@ class Caption extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Caption.propTypes = { content: PropTypes.object };
+Caption.propTypes = {
+    content: PropTypes.array,
+};
 
 /**
  * 定义组件默认属性

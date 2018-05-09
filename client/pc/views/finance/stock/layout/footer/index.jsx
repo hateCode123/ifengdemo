@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import { Ad } from '../../../../../components/ad/';
 import Footer from '../../../../../components/footer/';
 
@@ -22,7 +23,9 @@ class BottomFooter extends React.PureComponent {
         );
         const footer = (
             <div key="footer" className={styles.footer}>
-                <Footer content={content.footer} />
+                <Chip id="10114" type="static" title="底部公用版权" groupName="底部" content={content.footer}>
+                    <Footer />
+                </Chip>
             </div>
         );
 
