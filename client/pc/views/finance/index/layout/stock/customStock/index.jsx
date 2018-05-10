@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { jsonp, loadScript } from '@ifeng/ui_base';
+import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../utils/rel';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 
