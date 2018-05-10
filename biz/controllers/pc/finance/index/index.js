@@ -1,7 +1,16 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
+const {
+    KVProxy,
+    SearchProxy
+} = require('../../../../providers/ucmsapiProxy');
+const {
+    jsonParse,
+    handleData,
+    handleJson,
+    handleJsonByKey,
+    handleJs
+} = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/index',
@@ -10,6 +19,9 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
+        // 页面公用导航
+        let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+
         // console.log('getStaticFragment 10002...');
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
@@ -79,7 +91,11 @@ exports.list = {
         // 返回财经视频数据
         let financeVideo = SearchProxy.list('1-78-', '*', '*', '1', 0, 3, 'id:desc', '*').then(...handleJson(ctx));
 
+        // 底部公用版权
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+
         [
+            nav,
             navigation,
             bannerPic,
             headline,
@@ -103,7 +119,9 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         ] = await Promise.all([
+            nav,
             navigation,
             bannerPic,
             headline,
@@ -127,12 +145,11 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         ]);
 
-        // console.dir(otherData, { depth: null });
         let allData = {
-            // navigation: JSON.parse(navigation).content,
-            // bannerPic: JSON.parse(bannerPic).data,
+            nav,
             navigation,
             bannerPic,
             headline,
@@ -156,8 +173,11 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         };
 
-        await ctx.html('finance_index', { allData });
+        await ctx.html('finance_index', {
+            allData
+        });
     },
 };

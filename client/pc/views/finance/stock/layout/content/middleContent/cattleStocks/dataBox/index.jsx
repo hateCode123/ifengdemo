@@ -72,7 +72,6 @@ class DataBox extends React.PureComponent {
                 <div className={styles.data_box}>
                     <span className={`${styles[prices[current].style]} clearfix`}>
                         <img src={prices[current].arrowImg} width="11" height="10" />
-                        {'  '}
                         <div className={styles.price}>{prices[current].price}</div>
                         <span>{` ${prices[current].width} (${prices[current].percent}%)`}</span>
                         <a

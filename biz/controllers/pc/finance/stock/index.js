@@ -22,6 +22,9 @@ exports.list = {
         // 页面公用导航
         let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
 
+        // 搜索
+        let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
+
         // 股票导航
         let navigation = KVProxy.getStaticFragment(10038).then(...handleJsonByKey(ctx, 'content'));
 
@@ -211,6 +214,7 @@ exports.list = {
 
         [
             nav,
+            search,
             navigation,
             subNavigation,
             stockPlateStyle,
@@ -276,6 +280,7 @@ exports.list = {
             footer
         ] = await Promise.all([
             nav,
+            search,
             navigation,
             subNavigation,
             stockPlateStyle,
@@ -343,6 +348,7 @@ exports.list = {
 
         let allData = {
             nav,
+            search,
             navigation,
             subNavigation,
             stockPlateStyle,
