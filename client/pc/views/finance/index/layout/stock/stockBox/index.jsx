@@ -49,9 +49,9 @@ class StockBox extends React.PureComponent {
             data: {
                 l: codeList.join(','),
                 f: 'json',
-                e: 'dddddd(json_q)',
+                e: 'getResult(json_q)',
             },
-            jsonpCallback: 'dddddd',
+            jsonpCallback: 'getResult',
         });
 
         for (let a = 0; a < Object.keys(result).length; a++) {

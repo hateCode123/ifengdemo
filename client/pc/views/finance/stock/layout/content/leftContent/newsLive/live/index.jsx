@@ -101,10 +101,10 @@ class Live extends React.PureComponent {
     /**
      * 初始化数据
      */
-    getLiveData = () => {
+    getLiveData = async () => {
         const today = this.getToday();
 
-        jsonp('//api3.finance.ifeng.com/live/getday', {
+        const data = await jsonp('//api3.finance.ifeng.com/live/getday', {
             data: {
                 beg: Date.parse(`${today} 00:00:00`) / 1000,
                 end: Date.parse(`${today} 23:59:59`) / 1000,
@@ -113,21 +113,21 @@ class Live extends React.PureComponent {
             },
             jsonp: 'cb',
             jsonpCallback: 'getLiveData',
-        }).then(data => {
-            this.setState({
-                liveData: data.data.slice(0, 10),
-                lastid: `t${data.data[0].id}`,
-            });
+        });
+
+        this.setState({
+            liveData: data.data.slice(0, 10),
+            lastid: `t${data.data[0].id}`,
         });
     };
 
     /**
      * 刷新直播数据
      */
-    refresh = () => {
+    refresh = async () => {
         const { lastid } = this.state;
 
-        jsonp('//api3.finance.ifeng.com/live/getnew', {
+        const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
             data: {
                 lastid,
                 level: 1,
@@ -135,16 +135,16 @@ class Live extends React.PureComponent {
             },
             jsonp: 'cb',
             jsonpCallback: 'addNewData',
-        }).then(data => {
-            if (data) {
-                const { liveData } = this.state;
-
-                this.setState({
-                    liveData: data.concat(liveData).slice(0, 10),
-                    lastid: `t${data[0].id}`,
-                });
-            }
         });
+
+        if (data) {
+            const { liveData } = this.state;
+
+            this.setState({
+                liveData: data.concat(liveData).slice(0, 10),
+                lastid: `t${data[0].id}`,
+            });
+        }
     };
 
     /**

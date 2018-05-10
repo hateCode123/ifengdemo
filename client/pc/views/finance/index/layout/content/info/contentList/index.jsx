@@ -24,7 +24,7 @@ class ContentList extends React.PureComponent {
     /**
      * 获取评论数
      */
-    componentDidMount() {
+    async componentDidMount() {
         const { content } = this.props;
         const docUrl = [];
         const count = [];
@@ -35,20 +35,20 @@ class ContentList extends React.PureComponent {
             return docUrl;
         });
 
-        jsonp('//comment.ifeng.com/get.php', {
+        const data = await jsonp('//comment.ifeng.com/get.php', {
             data: {
                 job: 4,
                 format: 'js',
                 callback: 'getAllComment1',
                 docurl: docUrl.join('|'),
             },
-        }).then(data => {
-            data.forEach(item => {
-                count.push(item.count);
-            });
-
-            this.setState({ counts: count });
         });
+
+        data.forEach(item => {
+            count.push(item.count);
+        });
+
+        this.setState({ counts: count });
     }
 
     /**

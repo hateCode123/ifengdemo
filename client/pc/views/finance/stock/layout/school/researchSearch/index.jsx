@@ -16,25 +16,25 @@ class ResearchSearch extends React.PureComponent {
         this.setState({ option: val });
     };
 
-    handleKeyup = e => {
+    handleKeyup = async e => {
         const { checked } = this.state;
         const val = e.target.value;
 
         if (checked === 'title') {
             this.setState({ option: val });
         } else if (checked === 'report') {
-            jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
+            const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
                 data: {
                     t: 'report',
                     q: val,
                     cb: 'suggestCallback(suggest_json)',
                 },
                 jsonpCallback: 'suggestCallback',
-            }).then(data => {
-                this.setState({
-                    option: data[0].c,
-                    type: data[0].t,
-                });
+            });
+
+            this.setState({
+                option: data[0].c,
+                type: data[0].t,
             });
         }
     };

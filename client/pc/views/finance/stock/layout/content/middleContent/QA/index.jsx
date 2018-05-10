@@ -27,7 +27,7 @@ class Qa extends React.PureComponent {
         });
     };
 
-    getQaData = index => {
+    getQaData = async index => {
         const { qaers, alist } = this.state;
         const { tabs } = this.props;
         const currentUser = tabs[index];
@@ -35,41 +35,41 @@ class Qa extends React.PureComponent {
         const list = {};
 
         if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
-            jsonp('http://app.finance.ifeng.com/gszb/user_ol.php', {
+            const userData = await jsonp('http://app.finance.ifeng.com/gszb/user_ol.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type,
                     cb: `updateAnalyzerInfo${index}`,
                 },
                 jsonpCallback: `updateAnalyzerInfo${index}`,
-            }).then(data => {
-                qa[currentUser.name] = {
-                    url: '',
-                    img: '',
-                };
+            });
 
-                qa[currentUser.name].url = data[0].url;
-                qa[currentUser.name].img = data[0].image;
+            qa[currentUser.name] = {
+                url: '',
+                img: '',
+            };
 
-                const qaobj = Object.assign({}, qaers, qa);
+            qa[currentUser.name].url = userData[0].url;
+            qa[currentUser.name].img = userData[0].image;
 
-                jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
-                    data: {
-                        name: currentUser.name,
-                        type: currentUser.type ? currentUser.type : '',
-                        callback: 'getQAData',
-                    },
-                    jsonpCallback: 'getQAData',
-                }).then(data => {
-                    list[currentUser.name] = data.a_content;
+            const qaobj = Object.assign({}, qaers, qa);
 
-                    const listobj = Object.assign({}, alist, list);
+            const data = await jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
+                data: {
+                    name: currentUser.name,
+                    type: currentUser.type ? currentUser.type : '',
+                    callback: 'getQAData',
+                },
+                jsonpCallback: 'getQAData',
+            });
 
-                    this.setState({
-                        qaers: qaobj,
-                        alist: listobj,
-                    });
-                });
+            list[currentUser.name] = data.a_content;
+
+            const listobj = Object.assign({}, alist, list);
+
+            this.setState({
+                qaers: qaobj,
+                alist: listobj,
             });
         } else if (!qaers[currentUser.name] && !alist[currentUser.name] && index === tabs.length - 1) {
             qa[currentUser.name] = {
@@ -82,22 +82,22 @@ class Qa extends React.PureComponent {
 
             const qaobj = Object.assign({}, qaers, qa);
 
-            jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
+            const data = await jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type ? currentUser.type : '',
                     callback: 'getQAData',
                 },
                 jsonpCallback: 'getQAData',
-            }).then(data => {
-                list[currentUser.name] = data.a_content;
+            });
 
-                const listobj = Object.assign({}, alist, list);
+            list[currentUser.name] = data.a_content;
 
-                this.setState({
-                    qaers: qaobj,
-                    alist: listobj,
-                });
+            const listobj = Object.assign({}, alist, list);
+
+            this.setState({
+                qaers: qaobj,
+                alist: listobj,
             });
         }
     };

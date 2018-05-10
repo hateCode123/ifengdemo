@@ -10,17 +10,17 @@ class StockSearch extends React.PureComponent {
         data: [],
     };
 
-    getList = str => {
-        jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
+    getList = async str => {
+        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {
                 t: 'all',
                 q: str,
                 cb: 'suggestCallback(suggest_json)',
             },
             jsonpCallback: 'suggestCallback',
-        }).then(data => {
-            this.setState({ data });
         });
+
+        this.setState({ data });
     };
 
     handleMouseOver = index => {

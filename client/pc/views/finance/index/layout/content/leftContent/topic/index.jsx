@@ -12,26 +12,26 @@ class Topic extends React.PureComponent {
      * 请求 Topic
      */
     componentDidMount() {
-        const getData = () => {
-            jsonp('//api3.finance.ifeng.com/live/getnew', {
-                data: {
-                    level: 1,
-                    dist: 1,
-                    cb: 'setNewCont',
-                },
-                jsonp: 'cb',
-                jsonpCallback: 'setNewCont',
-                timeout: 10000,
-            }).then(data => {
-                this.setState({ topic: data[0].title[0] });
-            });
-        };
-
-        getData();
+        this.getData();
         setInterval(() => {
-            getData();
+            this.getData();
         }, 30000);
     }
+
+    getData = async () => {
+        const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
+            data: {
+                level: 1,
+                dist: 1,
+                cb: 'setNewCont',
+            },
+            jsonp: 'cb',
+            jsonpCallback: 'setNewCont',
+            timeout: 10000,
+        });
+
+        this.setState({ topic: data[0].title[0] });
+    };
 
     /**
      * 渲染组件

@@ -11,19 +11,19 @@ class StockSearch extends React.PureComponent {
         type: 'all',
     };
 
-    getList = str => {
+    getList = async str => {
         const { type } = this.state;
 
-        jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
+        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {
                 t: type,
                 q: str,
                 cb: 'suggestCallback(suggest_json)',
             },
             jsonpCallback: 'suggestCallback',
-        }).then(data => {
-            this.setState({ data });
         });
+
+        this.setState({ data });
     };
 
     handleSelect = e => {
@@ -49,7 +49,9 @@ class StockSearch extends React.PureComponent {
     handleKeyup = e => {
         const val = e.target.value;
 
-        this.getList(val);
+        if (val !== '') {
+            this.getList(val);
+        }
     };
 
     handleKeydown = e => {
