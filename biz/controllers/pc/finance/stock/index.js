@@ -56,11 +56,11 @@ exports.list = {
         let broadcast = KVProxy.getCustom('finance_22005_10736_22').then(...handleJson(ctx));
 
         // 股市要闻
-        let stockNews1 = KVProxy.getCustom('finance_22005_10736_6').then(...handleJson(ctx));
+        let stockNews1 = KVProxy.getCustom('finance_22005_10736_4').then(...handleJson(ctx));
 
-        let stockNews2 = SearchProxy.list('1-62-84-', '*', '*', '1', 6, 6, '', '*').then(...handleJson(ctx));
+        let stockNews2 = KVProxy.getCustom('finance_22005_10736_5').then(...handleJson(ctx));
 
-        let stockNews3 = SearchProxy.list('1-62-84-', '*', '*', '1', 12, 6, '', '*').then(...handleJson(ctx));
+        let stockNews3 = KVProxy.getCustom('finance_22005_10736_6').then(...handleJson(ctx));
 
         // 公司要闻标题
         let newsTab = KVProxy.getStaticFragment(10050).then(...handleJsonByKey(ctx, 'content'));
@@ -69,7 +69,7 @@ exports.list = {
         let newsSubTab = KVProxy.getStaticFragment(10117).then(...handleJsonByKey(ctx, 'content'));
 
         // 公司要闻
-        let news = SearchProxy.list('1-62-83-', '*', '*', '1', 0, 24, '', '*').then(...handleJson(ctx));
+        let news = KVProxy.getCustom('finance_22005_10736_23').then(...handleJson(ctx));
 
         // 牛人解盘标题
         let answerTab = KVProxy.getStaticFragment(10051).then(...handleJsonByKey(ctx, 'content'));
@@ -141,10 +141,10 @@ exports.list = {
         let hotSpotsSubTitle2 = KVProxy.getStaticFragment(10071).then(...handleJsonByKey(ctx, 'content'));
 
         // 操盘分析
-        let marketAnalysis = SearchProxy.list('1-62-85-', '*', '*', '1', 0, 100, '', '*').then(...handleJson(ctx));
+        let marketAnalysis = KVProxy.getCustom('finance_22005_10736_13').then(...handleJson(ctx));
 
         // 热点板块
-        let hotPlate = SearchProxy.list('1-62-87-', '*', '*', '1', 0, 100, '', '*').then(...handleJson(ctx));
+        let hotPlate = KVProxy.getCustom('finance_22005_10736_14').then(...handleJson(ctx));
 
         // 行业概念资金流向标题
         let industryTitle = KVProxy.getStaticFragment(10120).then(...handleJsonByKey(ctx, 'content'));
@@ -174,10 +174,10 @@ exports.list = {
         let schoolSubTitle2 = KVProxy.getStaticFragment(10073).then(...handleJsonByKey(ctx, 'content'));
 
         // 高手操盘日志
-        let logs = SearchProxy.list('1-67-96-', '*', '*', '1', 0, 10, '', '*').then(...handleJson(ctx));
+        let logs = KVProxy.getCustom('finance_22005_10736_19').then(...handleJson(ctx));
 
         // 股民学校
-        let school = SearchProxy.list('1-67-101-', '*', '*', '1', 0, 10, '', '*').then(...handleJson(ctx));
+        let school = KVProxy.getCustom('finance_22005_10736_15').then(...handleJson(ctx));
 
         // 明星分析师标题
         let starAnalystTitle = KVProxy.getStaticFragment(10092).then(...handleJsonByKey(ctx, 'content'));

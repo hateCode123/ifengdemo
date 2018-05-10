@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { jsonp, loadScript } from '@ifeng/ui_base';
+import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
-import { MidTitle } from '../../../../components/midTitle';
 import QaTabs from './QATabs/';
 import QaForm from './QAForm/';
 
@@ -54,13 +53,15 @@ class Qa extends React.PureComponent {
 
                 const qaobj = Object.assign({}, qaers, qa);
 
-                loadScript('http://app.finance.ifeng.com/gszb/a_data.php', {
+                jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
                     data: {
                         name: currentUser.name,
                         type: currentUser.type ? currentUser.type : '',
+                        callback: 'getQAData',
                     },
+                    jsonpCallback: 'getQAData',
                 }).then(data => {
-                    list[currentUser.name] = a_data.a_content;
+                    list[currentUser.name] = data.a_content;
 
                     const listobj = Object.assign({}, alist, list);
 
@@ -81,13 +82,15 @@ class Qa extends React.PureComponent {
 
             const qaobj = Object.assign({}, qaers, qa);
 
-            loadScript('http://app.finance.ifeng.com/gszb/a_data.php', {
+            jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type ? currentUser.type : '',
+                    callback: 'getQAData',
                 },
+                jsonpCallback: 'getQAData',
             }).then(data => {
-                list[currentUser.name] = a_data.a_content;
+                list[currentUser.name] = data.a_content;
 
                 const listobj = Object.assign({}, alist, list);
 
