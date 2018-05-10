@@ -52,15 +52,15 @@ exports.list = {
         // 直播 Logo
         let liveLogo = KVProxy.getStaticFragment(10052).then(...handleJsonByKey(ctx, 'content'));
 
+        // 轮播新闻
+        let broadcast = KVProxy.getCustom('finance_22005_10736_22').then(...handleJson(ctx));
+
         // 股市要闻
-        let stockNews1 = SearchProxy.list('1-62-84-', '*', '*', '1', 0, 6, '', '*').then(...handleJson(ctx));
+        let stockNews1 = KVProxy.getCustom('finance_22005_10736_6').then(...handleJson(ctx));
 
         let stockNews2 = SearchProxy.list('1-62-84-', '*', '*', '1', 6, 6, '', '*').then(...handleJson(ctx));
 
         let stockNews3 = SearchProxy.list('1-62-84-', '*', '*', '1', 12, 6, '', '*').then(...handleJson(ctx));
-
-        // 轮播新闻
-        let broadcast = SearchProxy.list('1-62-84-', '*', '*', '1', 18, 10, '', '*').then(...handleJson(ctx));
 
         // 公司要闻标题
         let newsTab = KVProxy.getStaticFragment(10050).then(...handleJsonByKey(ctx, 'content'));

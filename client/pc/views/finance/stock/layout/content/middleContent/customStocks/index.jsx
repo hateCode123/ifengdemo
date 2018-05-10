@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp, cookie } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
-import { MidTitle } from '../../../../components/midTitle';
 import MyStocks from './myStocks/';
 
 class CustomStocks extends React.PureComponent {
     state = {
         titles: ['最近访问股', '我的自选股'],
         current: 0,
+        isLastest: true,
         data: [],
     };
 
@@ -25,9 +25,37 @@ class CustomStocks extends React.PureComponent {
 
     getCookie = async () => {
         const userSawList = cookie.get('user_saw_stock_map');
-        const list = userSawList.split(',').map(item => item.split(':1'));
-        const data = list.map(item => item[0].split(':'));
-        const code = data.map(item => `s_${item[0]}`).join(',');
+        let data = [];
+        let code = '';
+        let isLastest = true;
+
+        if (userSawList === '') {
+            const stockData = await jsonp('http://apiapp.finance.ifeng.com/hotstockrank', {
+                data: {
+                    type: 'wx',
+                    callback: 'test',
+                },
+                jsonpCallback: 'test',
+            });
+
+            stockData.slice(0, 4).forEach(item => {
+                const d = [];
+
+                d.push(item.code);
+                d.push(item.name);
+
+                data.push(d);
+            });
+
+            code = data.map(item => item[0]).join(',');
+            isLastest = false;
+        } else {
+            const list = userSawList.split(',').map(item => item.split(':1'));
+
+            data = list.map(item => item[0].split(':'));
+            code = data.map(item => item[0]).join(',');
+            isLastest = true;
+        }
 
         const stockData = await jsonp('//hq.finance.ifeng.com/q.php', {
             data: {
@@ -39,20 +67,23 @@ class CustomStocks extends React.PureComponent {
         });
 
         data.forEach(item => {
-            const code = `s_${item[0]}`;
+            const code = item[0];
 
-            item.push(stockData[code][0]);
-            item.push(stockData[code][3]);
+            item.push(stockData[code][0].toFixed(2));
+            item.push(stockData[code][3].toFixed(2));
         });
 
-        this.setState({ data });
+        this.setState({
+            isLastest,
+            data,
+        });
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { titles, current, data } = this.state;
+        const { titles, current, isLastest, data } = this.state;
 
         return (
             <div className={styles.box}>
@@ -94,9 +125,9 @@ class CustomStocks extends React.PureComponent {
                                             <td className={item[3] > 0 ? styles.red : styles.green}>{item[3]}%</td>
                                             <td>
                                                 <a
-                                                    href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${item[0].slice(
-                                                        2,
-                                                    )}`}
+                                                    href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${
+                                                        item[0]
+                                                    }`}
                                                     target="_blank"
                                                     rel={rel}>
                                                     研报
@@ -105,7 +136,7 @@ class CustomStocks extends React.PureComponent {
                                         </tr>
                                     ))}
                                     <tr>
-                                        {data.length > 0 ? (
+                                        {isLastest ? (
                                             <td />
                                         ) : (
                                             <td className={styles.tip} colSpan="5">

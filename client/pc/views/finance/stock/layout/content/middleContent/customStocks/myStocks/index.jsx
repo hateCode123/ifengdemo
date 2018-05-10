@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 import { rel } from '../../../../../../../../utils/rel';
-import { jsonp, cookie } from '@ifeng/ui_base';
+import { jsonp } from '@ifeng/ui_base';
 
 class MyStocks extends React.PureComponent {
     state = {
@@ -44,13 +44,24 @@ class MyStocks extends React.PureComponent {
     };
 
     getMyStock = async () => {
-        const data = await jsonp('//app.finance.ifeng.com/custom/api/youfeng2.php?callback=?', {
+        const myStockInfo = await jsonp('//apiapp.finance.ifeng.com/mystock/get');
+        const data = myStockInfo.stockinfo;
+        const code = data.map(item => item.code).join(',');
+
+        const myStockData = await jsonp('//hq.finance.ifeng.com/q.php', {
             data: {
-                sid: cookie.get('sid'),
-                iter_type: 'mystock',
-                req_type: 'json',
-                req_num: 4,
+                l: code,
+                f: 'json',
+                e: 'getVal(json_q)',
             },
+            jsonpCallback: 'getVal',
+        });
+
+        data.forEach(item => {
+            const code = item.code;
+
+            item.price = myStockData[code][0].toFixed(2);
+            item.ext = myStockData[code][3].toFixed(2);
         });
 
         this.setState({ data });
@@ -59,7 +70,7 @@ class MyStocks extends React.PureComponent {
     getTable = () => {
         const { data } = this.state;
 
-        if (data === null) {
+        if (data.length === 0) {
             return (
                 <div className={styles.add}>
                     <p className={styles.tip}>您尚未添加自选股</p>
@@ -67,6 +78,45 @@ class MyStocks extends React.PureComponent {
                         添加股票
                     </a>
                 </div>
+            );
+        } else {
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="65">股票名称</th>
+                            <th width="50">股价</th>
+                            <th width="65">涨跌幅</th>
+                            <th>研报</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((item, index) => (
+                            <tr key={index}>
+                                <td>
+                                    <a
+                                        href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
+                                        target="_blank"
+                                        rel={rel}>
+                                        {item.name}
+                                    </a>
+                                </td>
+                                <td className={item.ext > 0 ? styles.red : styles.green}>{item.price}</td>
+                                <td className={item.ext > 0 ? styles.red : styles.green}>{item.ext}%</td>
+                                <td>
+                                    <a
+                                        href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${
+                                            item.code
+                                        }`}
+                                        target="_blank"
+                                        rel={rel}>
+                                        研报
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             );
         }
     };
