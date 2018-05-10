@@ -6,7 +6,7 @@ import Ad from '../../../../../components/ad/';
 import Logo from './logo/';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '../../../../../components/userInfo/';
-import Search from './search/';
+import Search from '../../../../../components/search/';
 
 /**
  * 定义 Header 组件
@@ -40,7 +40,9 @@ class Header extends React.PureComponent {
                 <div className={styles.h_theLogo}>
                     <Logo content={logoData} />
                 </div>
-                <Search />
+                <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+                    <Search />
+                </Chip>
             </div>
         );
 

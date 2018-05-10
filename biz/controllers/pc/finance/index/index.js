@@ -22,6 +22,9 @@ exports.list = {
         // 页面公用导航
         let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
 
+        // 搜索
+        let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
+
         // console.log('getStaticFragment 10002...');
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
@@ -96,6 +99,7 @@ exports.list = {
 
         [
             nav,
+            search,
             navigation,
             bannerPic,
             headline,
@@ -122,6 +126,7 @@ exports.list = {
             footer,
         ] = await Promise.all([
             nav,
+            search,
             navigation,
             bannerPic,
             headline,
@@ -150,6 +155,7 @@ exports.list = {
 
         let allData = {
             nav,
+            search,
             navigation,
             bannerPic,
             headline,
