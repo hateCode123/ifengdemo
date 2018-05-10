@@ -1,0 +1,20 @@
+.link {
+    background: #fff;
+    float: right;
+    padding-left: 2px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 29px;
+    overflow: hidden;
+    & a {
+        color: #222222;
+        margin-right: 0;
+        text-decoration: none;
+        & span {
+            color: #222222;
+        }
+    }
+    & a:hover span {
+        color: #f54343;
+    }
+}

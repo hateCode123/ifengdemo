@@ -1,0 +1,67 @@
+.box {
+    & ul {
+        border-bottom: 1px solid #efefef;
+        & li {
+            background: #fafafa;
+            width: 120px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            float: left;
+            color: #2b2b2b;
+            cursor: pointer;
+        }
+        & li.current {
+            background: #f54343;
+            color: #FFF;
+        }
+    }
+    & .stock_box {
+        height: 180px;
+        overflow: hidden;
+        & .stock {
+            background: url(./g_25.png) repeat left 1px;
+            & table {
+                width: 100%;
+                border: 0;
+                & thead tr th {
+                    border-bottom: 1px solid #dddddd;
+                    height: 30px;
+                    text-align: center;
+                    background: #FFF;
+                    color: #666666;
+                }
+                & tbody tr {
+                    & td {
+                        height: 30px;
+                        text-align: center;
+                        color: #666666;
+                        & a {
+                            color: #2b2b2b;
+                        }
+                        & a:hover {
+                            color: #f54343;
+                            text-decoration: none;
+                        }
+                    }
+                    & td.red {
+                        text-align: right;
+                        padding-right: 10px;
+                        color: #f54343;
+                        font-size: 14px;
+                    }
+                    & td.green {
+                        text-align: right;
+                        padding-right: 10px;
+                        color: #44a492;
+                        font-size: 14px;
+                    }
+                }
+                & .tip {
+                    text-align: center;
+                    color: #BA2636;
+                }
+            }
+        }
+    }
+}

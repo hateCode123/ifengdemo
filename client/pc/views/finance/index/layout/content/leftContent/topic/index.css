@@ -1,0 +1,26 @@
+.time {
+    margin-top: 5px;
+    background: url(./time01.jpg) no-repeat;
+    width: 400px;
+    height: 36px;
+    & .RunTopic {
+        height: 36px;
+        overflow: hidden;
+        & li {
+            height: 36px;
+            line-height: 36px;
+            font-size: 14px;
+            & a {
+                color: #000;
+            }
+            & a:hover {
+                color: #f54343;
+            }
+        }
+    }
+    & ul {
+        & li {
+            padding-left: 72px;
+        }
+    }
+}

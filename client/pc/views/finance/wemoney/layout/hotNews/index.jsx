@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { rel } from '../../../../../../utils/rel';
+import { rel } from '../../../../../../../utils/rel';
 
 /**
  * 定义 HotNews 组件

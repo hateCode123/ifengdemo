@@ -1,0 +1,44 @@
+.animationPic {
+    position: relative;
+    overflow: hidden;
+    height: 0px;
+    animation: open 1s linear, close 1s linear 6s;
+    animation-fill-mode: forwards;
+    & a {
+        width: 1000px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+    }
+    & .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        width: 30px;
+        height: 30px;
+        z-index: 100;
+    }
+}
+
+@keyframes open {
+    from {
+        height: 0;
+    }
+    to {
+        height: 200px;
+    }
+}
+
+@keyframes close {
+    from {
+        height: 200px;
+    }
+    to {
+        height: 0;
+    }
+}

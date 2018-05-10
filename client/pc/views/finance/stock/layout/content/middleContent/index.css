@@ -1,0 +1,18 @@
+.col_M {
+    width: 240px;
+    height: 1441px;
+    float: left;
+    margin-right: 30px;
+    overflow: hidden;
+    & .cattle_stocks {
+        height: 262px;
+    }
+    & .space16 {
+        height: 16px;
+        overflow: hidden;
+    }
+    & .space20 {
+        height: 19px;
+        overflow: hidden;
+    }
+}

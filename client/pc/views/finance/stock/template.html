@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="always" name="referrer">
+    <title></title>
+    <script>
+        var allData = <%- JSON.stringify(allData) %>;
+        var jsonData = {
+            nav: allData.nav,
+            topAd: {
+                data: {
+                    title: 'topAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
+            },
+            logo: {
+                url: '//finance.ifeng.com/stock/',
+                title: '凤凰网股票',
+                src: '//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoStock.png',
+                width: 161,
+                height: 27
+            },
+            logo_ad: {
+                src: '//y1.ifengimg.com/a/2015/0810/hots.png',
+                width: 149,
+                height: 27,
+            },
+            navigation: allData.navigation,
+            subNavigation: allData.subNavigation,
+            stockPlateStyle: allData.stockPlateStyle,
+            stockPlate: allData.stockPlate,
+            animationPic: allData.animationPic,
+            jumpLink: allData.jumpLink,
+            headline: allData.headline,
+            newsLiveTab: allData.newsLiveTab,
+            newsLiveTabLink: allData.newsLiveTabLink,
+            stockNews1: allData.stockNews1,
+            stockNews2: allData.stockNews2,
+            stockNews3: allData.stockNews3,
+            broadcast: allData.broadcast,
+            liveLogo: allData.liveLogo,
+            newsTab: allData.newsTab,
+            newsSubTab: allData.newsSubTab,
+            news: allData.news,
+            answerTab: allData.answerTab,
+            answerSubTab: allData.answerSubTab,
+            answerList: allData.answerList,
+            leftAsideAd: {
+                data: {
+                    title: 'leftAsideAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("leftAsideAd"); $(elm).html(data.title)}'
+            },
+            bannerPic: allData.bannerPic,
+            cattleStocksTitle: allData.cattleStocksTitle,
+            rankTitle: allData.rankTitle,
+            fundsFlowTitle: allData.fundsFlowTitle,
+            customStocksTitle: allData.customStocksTitle,
+            QATitle: allData.QATitle,
+            QATabs: allData.QATabs,
+            hotSpotsTitle: allData.hotSpotsTitle,
+            hotSpotsSubTitle1: allData.hotSpotsSubTitle1,
+            hotSpotsSubTitle2: allData.hotSpotsSubTitle2,
+            marketAnalysis: allData.marketAnalysis,
+            hotPlate: allData.hotPlate,
+            industryTitle: allData.industryTitle,
+            industry: allData.industry,
+            singleStockTitle: allData.singleStockTitle,
+            marketRadar: allData.marketRadar,
+            track: allData.track,
+            fiveDays: allData.fiveDays,
+            hotSpotsAd: {
+                data: {
+                    title: 'hotSpotsAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("hotSpotsAd"); $(elm).html(data.title)}'
+            },
+            schoolTitle: allData.schoolTitle,
+            schoolSubTitle1: allData.schoolSubTitle1,
+            schoolSubTitle2: allData.schoolSubTitle2,
+            logs: allData.logs,
+            school: allData.school,
+            starAnalystTitle: allData.starAnalystTitle,
+            starAnalyst: allData.starAnalyst,
+            stockPickingTitle: allData.stockPickingTitle,
+            stockPickingData0: allData.stockPickingData0,
+            stockPickingData1: allData.stockPickingData1,
+            stockPickingData2: allData.stockPickingData2,
+            stockPickingData3: allData.stockPickingData3,
+            stockPickingData4: allData.stockPickingData4,
+            schoolAd: {
+                data: {
+                    title: 'schoolAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("schoolAd"); $(elm).html(data.title)}'
+            },
+            subjectTitle: allData.subjectTitle,
+            subject: allData.subject,
+            marketTitle: allData.marketTitle,
+            market: allData.market,
+            courierTitle: allData.courierTitle,
+            courier: allData.courier,
+            playItem: allData.playItem,
+            rightSideAd: {
+                data: {
+                    title: 'rightSideAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("rightSideAd"); $(elm).html(data.title)}'
+            },
+            linkList: allData.linkList,
+            dayStockTitle: allData.dayStockTitle,
+            dayStock: allData.dayStock,
+            cooperation: allData.cooperation,
+            bottomAd: {
+                data: {
+                    title: 'bottomAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            footer: allData.footer,
+            qrCode: {
+                url: '//y2.ifengimg.com/a/2016_10/63901608d827c5e.jpg',
+                title: '凤凰证券',
+                width: 110,
+                height: 144
+            },
+        };
+
+    </script>
+    {{#each htmlWebpackPlugin.files.css}}
+    <link href="{{.}}" rel="stylesheet"> {{/each}}
+</head>
+
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.chunks}}
+    <script src="{{entry}}" type="text/javascript"></script>
+    {{/each}}
+</body>
+
+</html>
