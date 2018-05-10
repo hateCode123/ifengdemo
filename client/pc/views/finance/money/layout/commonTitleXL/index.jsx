@@ -7,11 +7,16 @@ import { rel } from '../../../../../utils/rel';
 
 class CommonTitleXL extends React.PureComponent {
     render() {
-        const { content } = this.props;
-        // {"title":"境内掘金","more":[{"txt":"更多基金","url":"https://etrade.fengfd.com/","newOpen":true,"icon":true}]}
-        const moreDom = (content.more).map((item, i) => {
+        const { content, config } = this.props;
+
+        const moreDom = content.more.map((item, i) => {
             return item.newOpen ? (
-                <a className={item.icon ? style.moreIcon : style.more} key={i} href={item.url} rel={rel} target="_blank">
+                <a
+                    className={item.icon ? style.moreIcon : style.more}
+                    key={i}
+                    href={item.url}
+                    rel={rel}
+                    target="_blank">
                     {item.txt}
                 </a>
             ) : (
@@ -20,9 +25,9 @@ class CommonTitleXL extends React.PureComponent {
                 </a>
             );
         });
-        
+
         return (
-            <div className={style.title_04}>
+            <div className={`${style.title_04} ${config.img}`}>
                 <div>{moreDom}</div>
                 {content.title}
             </div>
@@ -33,33 +38,11 @@ class CommonTitleXL extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-CommonTitleXL.propTypes = { content: PropTypes.object };
+CommonTitleXL.propTypes = { content: PropTypes.object, config: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
 CommonTitleXL.defaultProps = {};
-
-// class CommonTitleXL extends React.PureComponent {
-//     render() {
-//         const { content } = this.props;
-
-//         return (
-//             // <Chip id="10039" type="static" title="理财产品" groupName="首屏" content={content}>
-//                 <CommonTitleXL />
-//             // </Chip>
-//         );
-//     }
-// }
-
-// /**
-//  * 定义组件属性类型
-//  * */
-// CommonTitleXL.propTypes = { content: PropTypes.object };
-
-// /**
-//  * 定义组件默认属性
-//  * */
-// CommonTitleXL.defaultProps = {};
 export { CommonTitleXL };
 export default CommonTitleXL;

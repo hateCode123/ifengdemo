@@ -22,10 +22,12 @@
 .more:hover {
     color: #f54343 !important;
 }
-
+/* 
 .bg02 {
     background: url(./images/l_06.png) no-repeat left bottom;
 }
+
+.bg03{ background:url(./images/l_07.png) no-repeat left bottom;} */
 
 .title_04 {
     height: 34px;
@@ -34,5 +36,5 @@
     font-size: 28px;
     font-family: Microsoft YaHei;
     font-weight: bold;
-    composes: bg02;
+    
 }

@@ -49,13 +49,19 @@ class NewsListLeftInner extends React.PureComponent {
         const { content } = this.props;
         const list = showData =>
             showData.map((item, index) => {
-                return (
+                return index === 0 ? (
                     <li key={index}>
                         <h3>
-                            <a href={item.url} rel={rel}  target="_blank">
+                            <a href={item.url} rel={rel} target="_blank">
                                 {item.title}
                             </a>
                         </h3>
+                    </li>
+                ) : (
+                    <li key={index}>
+                        <a href={item.url} rel={rel} target="_blank">
+                            {item.title}
+                        </a>
                     </li>
                 );
             });
@@ -66,7 +72,11 @@ class NewsListLeftInner extends React.PureComponent {
         const Arr = [topList, bottomList];
 
         const contentDom = Arr.map((item, i) => {
-            return <ul key={i} className={style.box_02}>{list(item)}</ul>;
+            return (
+                <ul key={i} className={style.box_02}>
+                    {list(item)}
+                </ul>
+            );
         });
 
         const changeBtn = () => {
@@ -76,7 +86,7 @@ class NewsListLeftInner extends React.PureComponent {
         return (
             <div className={`${style.b_box} ${style.huh_box}`}>
                 <div className={style.title}>
-                    <a rel={rel} title="要闻"  target="_blank">
+                    <a rel={rel} title="要闻" target="_blank">
                         要闻
                     </a>
                 </div>
@@ -96,7 +106,6 @@ NewsListLeftInner.propTypes = { content: PropTypes.array };
  * 定义组件默认属性
  * */
 NewsListLeftInner.defaultProps = {};
-
 
 class NewsListLeft extends React.PureComponent {
     render() {

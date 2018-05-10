@@ -28,7 +28,7 @@ exports.financeWemoney = {
         const sudiContent01 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
 
         const haiwaitaojinTitle = KVProxy.getStaticFragment(10110).then(...handleJsonByKey(ctx, 'content'));
-        const sudiTitle02 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
+        const sudiTitle02 = KVProxy.getStaticFragment(10127).then(...handleJsonByKey(ctx, 'content'));
         const sudiContent02 = KVProxy.getStaticFragment(10111).then(...handleJsonByKey(ctx, 'content'));
 
         const jingneiHuobiHotFunds = KVProxy.getCustom('finance_22005_516_1294').then(...handleJson(ctx)); // 境内 货币
@@ -57,6 +57,18 @@ exports.financeWemoney = {
 
         const cnlcFinance = KVProxy.getCustom('finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
         const cnlcListFinance = KVProxy.getCustom('finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
+
+        const partnerTitle = KVProxy.getStaticFragment(10046).then(...handleJsonByKey(ctx, 'content')); 
+
+        const partnerList = KVProxy.getStaticFragment(10123).then(...handleJsonByKey(ctx, 'content'));
+
+        const bottomWeiXin = KVProxy.getStaticFragment(10124).then(...handleJsonByKey(ctx, 'content'));
+
+        const bottomProc = KVProxy.getStaticFragment(10125).then(...handleJsonByKey(ctx, 'content'));
+
+        const bottomLink = KVProxy.getStaticFragment(10126).then(...handleJsonByKey(ctx, 'content'));
+
+        const banner = KVProxy.getStaticFragment(10128).then(...handleJsonByKey(ctx, 'content'));
 
         const otherData = await Promise.all([
             navigation,
@@ -93,6 +105,12 @@ exports.financeWemoney = {
             cnlcListPrivate,
             cnlcFinance,
             cnlcListFinance,
+            partnerTitle,
+            partnerList,
+            bottomWeiXin,
+            bottomProc,
+            bottomLink,
+            banner,
         ]);
 
         const allData = {
@@ -130,6 +148,12 @@ exports.financeWemoney = {
             cnlcListPrivate: otherData[31],
             cnlcFinance: otherData[32],
             cnlcListFinance: otherData[33],
+            partnerTitle: otherData[34],
+            partnerList: otherData[35],
+            bottomWeiXin: otherData[36],
+            bottomProc: otherData[37],
+            bottomLink: otherData[38],
+            banner: otherData[39],
         };
 
         await ctx.html('finance_money', { allData });

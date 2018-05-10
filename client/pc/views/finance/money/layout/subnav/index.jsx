@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Chip from 'Chip';
+
 import styles from './style.css';
 
-class SubNavigation extends React.PureComponent {
+class SubNavigationInner extends React.PureComponent {
     /**
      * 渲染组件
      */
@@ -19,6 +21,23 @@ class SubNavigation extends React.PureComponent {
     }
 }
 
+SubNavigationInner.propTypes = { content: PropTypes.array };
+
+SubNavigationInner.defaultProps = {};
+
+class SubNavigation extends React.PureComponent {
+    render() {
+        const { content } = this.props;
+
+        return (
+            <div className="w1000">
+                <Chip id="10020" type="static" title="logo下小字导航" groupName="导航" content={content}>
+                    <SubNavigationInner />
+                </Chip>
+            </div>
+        );
+    }
+}
 /**
  * 定义组件属性类型
  * */

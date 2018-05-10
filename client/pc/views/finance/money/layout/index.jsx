@@ -1,19 +1,29 @@
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import '../reset.css';
-import JueJin from './jueJin/';
-import Market from './market/';
+import style from './style.css';
+
+import Banner from './banner/';
 import Navigation from './nav/';
+import SubNavigation from './subnav/';
+
+import TopLinkTable from './topLinkTable/';
+import Market from './market/';
+
 // import Collapse from './collapse/';
 import NewsListDownSlider from './newsListDownSlider/';
 import NewsListLeft from './newsListLeft/';
-import Rediantuijian from './rediantuijian/';
-import style from './style.css';
-import SubNavigation from './subnav/';
+
+import JueJin from './jueJin/';
 import TaoJin from './taoJin/';
-import TopLinkTable from './topLinkTable/';
+import Rediantuijian from './rediantuijian/';
+
 import Cnlc from './cnlc/';
+import Partner from './partner/';
+import Bottom from './bottom/';
+import FixedBar from './fixedBar/';
 
 class Layout extends React.PureComponent {
     /**
@@ -23,46 +33,24 @@ class Layout extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        // const { content } = this.state;
-        /**
-         * 导航
-         */
-        const nav = (
-            <div className="g_col">
-                <div className="w1000">
-                    <Navigation content={content.navigation} />
-                </div>
-            </div>
-        );
-
-        /**
-         * 二级导航
-         */
-        const subnav = (
-            <div className="w1000">
-                <SubNavigation content={content.subNavigation} />
-            </div>
-        );
-
         return (
             <div>
-                {nav}
-                {subnav}
+                <Banner content={content} />
+                <Navigation content={content.navigation} />
+                <SubNavigation content={content.subNavigation} />
 
                 <div className="space20 " />
                 {/* <Collapse content={content.collapse} /> */}
 
-                {/* todo <!--凰家理财超市开始--> */}
+                {/* todo 压顶动态碎片 */}
                 <div className="w1000">
                     <div className="col" style={{ position: 'relative' }} />
                 </div>
-                {/*  <!--凰家理财超市结束--> */}
-                {/* <!--首屏部分 begin--> */}
+
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
                         {/*todo  <!--焦点图--> */}
                         <div className={style.fpic06} />
-                        {/* // id="tabSlide02" // onmouseover="onindex()" // onmouseout="outindex()" // cmpp-type="r" */}
 
                         <NewsListDownSlider content={content.newsListDownSlider} />
                         <NewsListLeft content={content.newsListLeft} />
@@ -80,6 +68,10 @@ class Layout extends React.PureComponent {
                 </div>
 
                 <Cnlc content={content} />
+                <Partner content={content} />
+                <Bottom content={content} />
+                888888888
+                <FixedBar content={content.fixedBar} />
 
                 <ChipEdit />
             </div>

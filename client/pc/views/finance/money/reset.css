@@ -140,12 +140,15 @@ a:active {
     & .g_col{ width:100%; background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_01.png)repeat-x;}
     & .w1000{ width:1000px; margin:0 auto;} 
 
-
-    & .title_04{ height:34px; line-height:28px; font-size:28px;font-family:Microsoft YaHei; font-weight:bold;}
  
+    & .bg02 {
+    background: url(./images/l_06.png) no-repeat left bottom;
+}
+
+& .bg03{ background:url(./images/l_07.png) no-repeat left bottom;}
+
     & .bg01{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_05.png) no-repeat left bottom;}
-    & .bg02{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_06.png) no-repeat left bottom;}
-    & .bg03{ background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_07.png) no-repeat left bottom;}
+    
     & .more{ line-height:18px; 
         /* background:url(../images/g36.png)     no-repeat 53px center; */
          width:63px; float:right; font-size:12px;}

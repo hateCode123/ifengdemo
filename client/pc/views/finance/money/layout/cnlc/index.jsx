@@ -38,11 +38,11 @@ class Cnlc extends React.PureComponent {
             },
         ],
         uiConfig: [
-            { current: 0, top: 0 },
-            { current: 0, top: 0 },
-            { current: 0, top: 0 },
-            { current: 0, top: 0 },
-            { current: 0, top: 0 },
+            { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
+            { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
+            { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
+            { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
+            { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
         ],
     };
     handleTabsChange = v => {
@@ -51,15 +51,12 @@ class Cnlc extends React.PureComponent {
         });
     };
     changeUiConfig = obj => {
-       
         const i = this.state.current;
         const arr = [...this.state.uiConfig];
         arr[i] = { ...obj };
- 
+
         this.setState({
             uiConfig: [...arr],
-        },()=> {
-            console.log(this.state.uiConfig)
         });
     };
     render() {
@@ -74,9 +71,9 @@ class Cnlc extends React.PureComponent {
         });
 
         return (
-            <div className={style.cnlc}>
+            <div className={style.cnlc} id="fxs">
                 <Chip id="10047" type="static" title="分析师答疑title" groupName="" content={content.cnlcTitle}>
-                    <CommonTitleXL />
+                    <CommonTitleXL config={{ img: 'bg02' }} />
                 </Chip>
                 <div className={style.fxsdy}>
                     <ul className={style.labe_04}>{tabDom}</ul>

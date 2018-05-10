@@ -47,7 +47,7 @@ class Taojin extends React.PureComponent {
                     <Licaisudi
                         content={{
                             title: content.sudiTitle02,
-                            titleChipConfig: { id: '10045', group: '首屏', name: '理财速递title' },
+                            titleChipConfig: { id: '10127', group: '首屏', name: '理财速递title' },
                             content: content.sudiContent02,
                             contentChipConfig: { id: '10111', group: '首屏', name: '海外理财速递content' },
                         }}

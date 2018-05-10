@@ -10,18 +10,25 @@ class CnlcTabControlArea extends React.PureComponent {
     state = {
         current: 0,
         top: 0,
+        answerUser: '全部专家',
+        textArea: '',
     };
     componentDidMount() {
         this.setState({
             current: this.props.config.current,
             top: this.props.config.top,
+            answerUser: this.props.config.answerUser,
+            textArea: this.props.config.textArea,
         });
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.config && nextProps.config !== this.props.config) {
+          
             this.setState({
                 current: nextProps.config.current,
                 top: nextProps.config.top,
+                answerUser: nextProps.config.answerUser,
+                textArea: nextProps.config.textArea,
             });
         }
     }
@@ -29,28 +36,28 @@ class CnlcTabControlArea extends React.PureComponent {
         this.props.handle({
             current: this.state.current,
             top: this.state.top,
+            answerUser: this.state.answerUser,
+            textArea: this.state.textArea,
+        });
+    };
+    changeState = obj => {
+        this.setState({ ...obj }, () => {
+            this.handleCallback();
         });
     };
     changeCurrent = v => {
-        this.setState(
-            {
-                current: v,
-            },
-            () => {
-                this.handleCallback();
-            },
-        );
+        this.changeState({ current: v });
     };
     changeTop = v => {
-        this.setState(
-            {
-                top: v,
-            },
-            () => {
-                this.handleCallback();
-            },
-        );
+        this.changeState({ top: v });
     };
+    changeAnswerUser = event => {
+        this.changeState({ answerUser: event.target.value });
+    };
+    changeTextarea = event => {
+        this.changeState({ textArea: event.target.value });
+    };
+
     changeToPre = () => {
         const { top } = this.state;
         if (top < 0) {
@@ -75,9 +82,10 @@ class CnlcTabControlArea extends React.PureComponent {
             return '';
         }
     };
+
     render() {
         const { content, analy } = this.props;
-        const { current, top } = this.state;
+        const { current, top, answerUser, textArea } = this.state;
 
         // content ={
         //     Stype: "fund",
@@ -105,7 +113,7 @@ class CnlcTabControlArea extends React.PureComponent {
         const avatarList = analyst.map((item, v) => {
             return v === 0 ? (
                 <li
-                    key={`analyst${v}`}
+                    key={`${contentData.Stype}${v}`}
                     className={v === current ? style.current : null}
                     style={{ paddingBottom: '8px' }}
                     onClick={() => this.changeCurrent(v)}>
@@ -114,7 +122,7 @@ class CnlcTabControlArea extends React.PureComponent {
                 </li>
             ) : (
                 <li
-                    key={`analyst${v}`}
+                    key={`${contentData.Stype}${v}`}
                     onClick={() => this.changeCurrent(v)}
                     className={v === current ? style.current : null}>
                     <img src={item.img || ''} width="40" height="40" />
@@ -126,7 +134,7 @@ class CnlcTabControlArea extends React.PureComponent {
         const qaCell = data =>
             data.map((item, v) => {
                 return (
-                    <dl key={`qaCell${v}`}>
+                    <dl key={`qaCell${contentData.Stype}${v}`}>
                         <dt>
                             {item.qu || ''}: {item.q || ''}[{item.qd || ''}]
                         </dt>
@@ -139,7 +147,7 @@ class CnlcTabControlArea extends React.PureComponent {
 
         const list = qa.map((item, v) => {
             return (
-                <div key={`qa${v}`} className={v === current ? style.show : style.hidden}>
+                <div key={`qa${contentData.Stype}${v}`} className={v === current ? style.show : style.hidden}>
                     <div className={style.jied}>{qaCell(item.qaList || [])}</div>
                     <div id="count1" className={style.zongj}>
                         累积回答了
@@ -172,7 +180,7 @@ class CnlcTabControlArea extends React.PureComponent {
         const nameList = analyData.nameList || [];
         const fenxDom = analystRight.map((item, v) => {
             return (
-                <div className={style.fenx_peo} key={v}>
+                <div className={style.fenx_peo} key={`${analyData.Stype}${v}`}>
                     <div id="askUser">
                         <a
                             href={`http://app.finance.ifeng.com/gszb/a_list.php?user=${item.name}&type=${
@@ -196,7 +204,7 @@ class CnlcTabControlArea extends React.PureComponent {
         const qaListRightDom = data =>
             data.map((item, v) => {
                 return (
-                    <div id="askQuestion" key={v}>
+                    <div id="askQuestion" key={`${analyData.Stype}${v}`}>
                         <div className={style.fen_wen} style={{ paddingTop: '9px' }}>
                             <span>Q:</span>
                             {this.cutString(item.q, 40)}
@@ -212,16 +220,16 @@ class CnlcTabControlArea extends React.PureComponent {
         const qaRightDom = qaRight.map((item, v) => {
             const dom = qaListRightDom(item.qaList || []);
 
-            return <div key={v}> {dom}</div>;
+            return <div key={`${analyData.Stype}${v}`}> {dom}</div>;
         });
 
         const selectDom = nameList.map((item, v) => {
             return v === 0 ? (
-                <option key={v} value={`{item.name||''}专家`}>
+                <option key={`${analyData.Stype}${v}`} value={`${item.name || ''}专家`}>
                     -------全部专家-------
                 </option>
             ) : (
-                <option key={v} value={item.name || ''}>
+                <option key={`${analyData.Stype}${v}`} value={item.name || ''}>
                     {item.name || ''}
                 </option>
             );
@@ -264,9 +272,7 @@ class CnlcTabControlArea extends React.PureComponent {
                     <div className={style.title_07}>
                         <div className={style.mored}>
                             <a
-                                href={`http://app.finance.ifeng.com/gszb/a_list.php?user=全部&type=${
-                                    analyData.Stype
-                                }`}
+                                href={`http://app.finance.ifeng.com/gszb/a_list.php?user=全部&type=${analyData.Stype}`}
                                 target="_blank"
                                 rel={rel}
                                 title="今日在线分析师">
@@ -276,30 +282,27 @@ class CnlcTabControlArea extends React.PureComponent {
                     </div>
                     <div className={style.fenx}>
                         {fenxDom}
-
                         {qaRightDom}
-
-                        {/* todo form表单重写 */}
                         <form
                             action="http://app.finance.ifeng.com/gszb/question.php"
                             method="post"
                             className={style.chaformlwl}>
                             <div className={style.shuru}>
                                 提问对象：
-                                <select name="name">{selectDom}</select>
+                                <select value={answerUser} onChange={this.changeAnswerUser} name="name">
+                                    {selectDom}
+                                </select>
                                 <textarea
                                     name="question"
-                                    onChange={e => {
-                                        console.log(e);
-                                    }}
+                                    value={textArea}
+                                    onChange={this.changeTextarea}
                                     id="input01"
-                                    value="请在此输入您的问题"
-                                    className={style.input01}>
-                                    请在此输入您的问题
-                                </textarea>
+                                    placeholder="请在此输入您的问题"
+                                    className={style.input01}
+                                />
                             </div>
-                            <input id="answer_user_id" type="hidden" name="answer_user" value="全部专家" />
-                            <input type="hidden" name="type" value="fund" />
+                            <input id="answer_user_id" type="hidden" name="answer_user" value={answerUser} />
+                            <input type="hidden" name="type" value={analyData.Stype} />
                             <input type="hidden" name="question_user" value="凤凰网友" />
                             <div className={style.tijiao}>
                                 <input type="submit" name="Submit3" value="提交" className={style.butt02} />
