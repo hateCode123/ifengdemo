@@ -31,13 +31,9 @@ class CustomStock extends React.PureComponent {
                 num: 2,
             });
 
-            const nameList = data.stockinfo.map(item => {
-                return item.name;
-            });
+            const nameList = data.stockinfo.map(item => item.name);
 
-            const codeList = data.stockinfo.map(item => {
-                return item.code;
-            });
+            const codeList = data.stockinfo.map(item => item.code);
 
             const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
                 data: {

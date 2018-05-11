@@ -1,7 +1,16 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
+const {
+    KVProxy,
+    SearchProxy
+} = require('../../../../providers/ucmsapiProxy');
+const {
+    jsonParse,
+    handleData,
+    handleJson,
+    handleJsonByKey,
+    handleJs
+} = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/index',
@@ -10,7 +19,13 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
-        // console.log('getStaticFragment 10002...');
+        // 页面公用导航
+        let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+
+        // 搜索
+        let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
+
+        // 财经首页导航
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
         // console.log('getRecommendFragment 20002...');
@@ -64,7 +79,7 @@ exports.list = {
         // console.log('getRecommendFragment 10016...');
         let courier = KVProxy.getStaticFragment(10016).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 10017...');
+        // 投顾产品
         let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
 
         // console.log('getCustom 17007_719_68...');
@@ -79,7 +94,12 @@ exports.list = {
         // 返回财经视频数据
         let financeVideo = SearchProxy.list('1-78-', '*', '*', '1', 0, 3, 'id:desc', '*').then(...handleJson(ctx));
 
+        // 底部公用版权
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+
         [
+            nav,
+            search,
             navigation,
             bannerPic,
             headline,
@@ -103,7 +123,10 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         ] = await Promise.all([
+            nav,
+            search,
             navigation,
             bannerPic,
             headline,
@@ -127,12 +150,12 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         ]);
 
-        // console.dir(otherData, { depth: null });
         let allData = {
-            // navigation: JSON.parse(navigation).content,
-            // bannerPic: JSON.parse(bannerPic).data,
+            nav,
+            search,
             navigation,
             bannerPic,
             headline,
@@ -156,8 +179,11 @@ exports.list = {
             stockMarket,
             comicBook,
             financeVideo,
+            footer,
         };
 
-        await ctx.html('finance_index', { allData });
+        await ctx.html('finance_index', {
+            allData
+        });
     },
 };

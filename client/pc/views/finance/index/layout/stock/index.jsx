@@ -46,7 +46,7 @@ class Stock extends React.PureComponent {
                                 <Chip
                                     id="10018"
                                     type="static"
-                                    title="股票超市"
+                                    title="股票栏理财超市静态碎片"
                                     groupName="股票栏"
                                     content={content.stockMarket}>
                                     <StockMarket />
@@ -57,7 +57,12 @@ class Stock extends React.PureComponent {
                         <div className={styles.sub_box}>{getBox()}</div>
                     </div>
                 </div>
-                <Chip id="10017" type="static" title="投顾产品" groupName="股票栏" content={content.production}>
+                <Chip
+                    id="10017"
+                    type="static"
+                    title="股票栏产品静态碎片"
+                    groupName="股票栏"
+                    content={content.production}>
                     <Production />
                 </Chip>
             </div>

@@ -40,7 +40,9 @@ class StockSearch extends React.PureComponent {
     handleKeyup = e => {
         const val = e.target.value;
 
-        this.getList(val);
+        if (val !== '') {
+            this.getList(val);
+        }
     };
 
     handleKeydown = e => {

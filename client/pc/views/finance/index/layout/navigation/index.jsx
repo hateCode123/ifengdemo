@@ -10,20 +10,13 @@ class Navigation extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        // const navList = JSON.parse( content.navigation );
-        const navigation = [];
-
-        content.map((item, index) => {
-            navigation.push(
-                <li key={index} className={index === 0 ? styles.pa : ''}>
-                    <a target="_blank" rel={rel} title={item.title}>
-                        {item.title}
-                    </a>
-                </li>,
-            );
-
-            return navigation;
-        });
+        const navigation = content.map((item, index) => (
+            <li key={index} className={index === 0 ? styles.pa : ''}>
+                <a target="_blank" rel={rel} title={item.title}>
+                    {item.title}
+                </a>
+            </li>
+        ));
 
         return (
             <div className={styles.col_box}>

@@ -32,7 +32,7 @@ class CourierContent extends React.PureComponent {
         const { content } = this.props;
         const tabs = [content[0].tab, content[4].tab];
         const content0 = content.slice(0, 4);
-        const content1 = content.slice(4, 4);
+        const content1 = content.slice(4);
         const types = {
             指数型: 'risk',
             股票型: 'risk',
@@ -100,7 +100,7 @@ class CourierContent extends React.PureComponent {
                                 key={index}
                                 className={index === current ? styles.current : ''}
                                 onMouseEnter={() => this.handleTabsOver(index)}>
-                                {item.tab}
+                                {item}
                             </li>
                         ))}
                     </ul>
