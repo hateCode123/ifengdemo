@@ -23,6 +23,10 @@ import Rediantuijian from './rediantuijian/';
 import Cnlc from './cnlc/';
 import Partner from './partner/';
 import Bottom from './bottom/';
+
+import Header from './header/';
+import BottomFooter from './footer/';
+
 import FixedBar from './fixedBar/';
 
 class Layout extends React.PureComponent {
@@ -33,8 +37,21 @@ class Layout extends React.PureComponent {
     render() {
         const { content } = this.props;
 
+        const headerData = {
+            nav: content.nav,
+            // topAd: content.topAd,
+            // logo: content.logo,
+            // logoAd: content.logo_ad,
+        };
+
+        const footerData = {
+            // bottomAd: content.bottomAd,
+            footer: content.footer,
+        };
+
         return (
             <div>
+                  <Header content={headerData} />
                 <Banner content={content} />
                 <Navigation content={content.navigation} />
                 <SubNavigation content={content.subNavigation} />
@@ -70,7 +87,7 @@ class Layout extends React.PureComponent {
                 <Cnlc content={content} />
                 <Partner content={content} />
                 <Bottom content={content} />
-                888888888
+                <BottomFooter content={footerData} />
                 <FixedBar content={content.fixedBar} />
 
                 <ChipEdit />

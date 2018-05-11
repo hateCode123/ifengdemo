@@ -69,6 +69,12 @@ exports.financeWemoney = {
         const bottomLink = KVProxy.getStaticFragment(10126).then(...handleJsonByKey(ctx, 'content'));
 
         const banner = KVProxy.getStaticFragment(10128).then(...handleJsonByKey(ctx, 'content'));
+        // 底部公用版权
+        const footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+
+        // 页面公用导航
+        const nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+
 
         const otherData = await Promise.all([
             navigation,
@@ -111,6 +117,8 @@ exports.financeWemoney = {
             bottomProc,
             bottomLink,
             banner,
+            footer,
+            nav,
         ]);
 
         const allData = {
@@ -154,6 +162,8 @@ exports.financeWemoney = {
             bottomProc: otherData[37],
             bottomLink: otherData[38],
             banner: otherData[39],
+            footer: otherData[40],
+            nav: otherData[41],
         };
 
         await ctx.html('finance_money', { allData });
