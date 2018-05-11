@@ -13,9 +13,15 @@ class Search extends React.PureComponent {
     componentDidMount() {}
 
     handleSelect = e => {
+        const { data } = this.state;
         const selectVal = e.target.value;
 
-        this.setState({ current: selectVal });
+        this.input.value = data[selectVal].keyword;
+
+        this.setState({
+            current: selectVal,
+            searchTxt: data[selectVal].keyword,
+        });
     };
 
     handleKeyUp = e => {
@@ -98,6 +104,7 @@ class Search extends React.PureComponent {
                         <input
                             type="text"
                             defaultValue={searchTxt}
+                            ref={input => (this.input = input)}
                             className={styles.text}
                             onKeyUp={this.handleKeyUp}
                             onKeyDown={this.handleKeydown}
