@@ -16,11 +16,11 @@
                 color: #fc5521;
             }
     </style>
-    <title></title>
+    <!-- <title></title> -->
     <script>
-        var allData = <%- JSON.stringify(allData) %>;
-        console.log("allData",allData)
-        var jsonData = allData;
+        var finance_money_allData = <%- JSON.stringify(allData) %>;
+       
+        var __jsonData__ = finance_money_allData;
        
     </script>
     {{#each htmlWebpackPlugin.files.css}}

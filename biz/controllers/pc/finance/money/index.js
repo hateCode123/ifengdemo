@@ -74,7 +74,11 @@ exports.financeWemoney = {
 
         // 页面公用导航
         const nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
-
+        // 搜索
+        const search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
+        // 幻灯
+        const slider = KVProxy.getStaticFragment(10130).then(...handleJsonByKey(ctx, 'content'));
+ 
 
         const otherData = await Promise.all([
             navigation,
@@ -119,6 +123,8 @@ exports.financeWemoney = {
             banner,
             footer,
             nav,
+            search,
+            slider,
         ]);
 
         const allData = {
@@ -164,6 +170,8 @@ exports.financeWemoney = {
             banner: otherData[39],
             footer: otherData[40],
             nav: otherData[41],
+            search: otherData[42],
+            slider: otherData[43],
         };
 
         await ctx.html('finance_money', { allData });

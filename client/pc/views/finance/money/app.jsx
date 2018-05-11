@@ -4,6 +4,6 @@ import 'core-js';
 import Layout from './layout/';
 
 const render = function() {
-    ReactDOM.render(<Layout content={jsonData}/>, document.getElementById('root'));
+    ReactDOM.render(<Layout content={__jsonData__} />, document.getElementById('root'));
 };
 render();

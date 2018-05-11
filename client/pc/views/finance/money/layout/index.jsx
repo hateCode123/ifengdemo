@@ -13,6 +13,7 @@ import TopLinkTable from './topLinkTable/';
 import Market from './market/';
 
 // import Collapse from './collapse/';
+import Slider from './slider/';
 import NewsListDownSlider from './newsListDownSlider/';
 import NewsListLeft from './newsListLeft/';
 
@@ -51,7 +52,7 @@ class Layout extends React.PureComponent {
 
         return (
             <div>
-                  <Header content={headerData} />
+                <Header content={headerData} />
                 <Banner content={content} />
                 <Navigation content={content.navigation} />
                 <SubNavigation content={content.subNavigation} />
@@ -66,9 +67,7 @@ class Layout extends React.PureComponent {
 
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
-                        {/*todo  <!--焦点图--> */}
-                        <div className={style.fpic06} />
-
+                        <Slider content={content.slider} />
                         <NewsListDownSlider content={content.newsListDownSlider} />
                         <NewsListLeft content={content.newsListLeft} />
                     </div>

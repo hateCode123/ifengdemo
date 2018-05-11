@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
 import Chip from 'Chip';
+import Search from '../../../../../components/search/';
 
 class Logo extends React.PureComponent {
     createMarkup = () => {
@@ -29,7 +30,9 @@ class Banner extends React.PureComponent {
                 <Chip id="10128" type="static" title="logo" groupName="导航" content={content.banner}>
                     <Logo />
                 </Chip>
-                {/* todo 引入公用组件-搜索组件 */}
+                <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+                    <Search />
+                </Chip>
             </div>
         );
     }

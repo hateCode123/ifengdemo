@@ -6,7 +6,7 @@ import Chip from 'Chip';
 // import Logo from './logo/';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '../../../../../components/userInfo/';
-// import Search from './search/';
+// import Search from '../../../../../components/search/';
 
 /**
  * 定义 Header 组件
@@ -24,7 +24,7 @@ class Header extends React.PureComponent {
 
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
-                <Chip id="7" type="static" title="导航" groupName="头部" content={content.nav}>
+                <Chip id="10108" type="static" title="导航" groupName="头部" content={content.nav}>
                     <Nav limit={18} />
                 </Chip>
                 <UserInfo />
@@ -40,11 +40,14 @@ class Header extends React.PureComponent {
         //         <div className={styles.h_theLogo}>
         //             <Logo content={logoData} />
         //         </div>
-        //         <Search />
+        //         <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+        //             <Search />
+        //         </Chip>
         //     </div>
         // );
 
         // return [topNav, topAd, topSearch];
+
         return topNav;
     }
 }
