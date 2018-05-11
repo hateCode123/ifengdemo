@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class StockList extends React.PureComponent {
-    handleMouseOver = index => {
+    handleMouseOver = e => {
+        const index = Number(e.target.attributes['data-index'].value);
         const { handleTabsChange } = this.props;
 
         handleTabsChange(index);
@@ -21,8 +22,9 @@ class StockList extends React.PureComponent {
                 {content.map((item, index) => (
                     <li
                         key={index}
+                        data-index={index}
                         className={current === index ? styles.current : ''}
-                        onMouseEnter={() => this.handleMouseOver(index)}>
+                        onMouseEnter={this.handleMouseOver}>
                         {item}
                     </li>
                 ))}

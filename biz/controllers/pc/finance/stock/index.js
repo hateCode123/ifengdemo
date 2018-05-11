@@ -32,7 +32,7 @@ exports.list = {
         let subNavigation = KVProxy.getStaticFragment(10040).then(...handleJsonByKey(ctx, 'content'));
 
         // 股票显示样式
-        let stockPlateStyle = KVProxy.getStaticFragment(10086).then(...handleJsonByKey(ctx, 'content'));
+        let stockPlateStyle = KVProxy.getStaticFragment(10086).then(...handleJs(ctx, 'content'));
 
         // 股票显示
         let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/zq/caterank.html').then(...handleData(ctx));
