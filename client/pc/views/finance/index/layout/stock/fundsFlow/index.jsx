@@ -20,7 +20,7 @@ class FundsFlow extends React.PureComponent {
      */
     async componentDidMount() {
         const datas = [];
-        const data = await jsonp('http://i.finance.ifeng.com/moneyflow/flow/So');
+        const data = await jsonp('//i.finance.ifeng.com/moneyflow/flow/So');
 
         data.forEach((item, index) => {
             if ([0, 1, 10, 11].includes(index)) {
@@ -54,7 +54,7 @@ class FundsFlow extends React.PureComponent {
                         </li>
                     </ul>
                     <div className={styles.more}>
-                        <a href="http://finance.ifeng.com/zjlx/" target="_blank" rel={rel} title="查看更多">
+                        <a href="//finance.ifeng.com/zjlx/" target="_blank" rel={rel} title="查看更多">
                             查看更多&gt;&gt;
                         </a>
                     </div>

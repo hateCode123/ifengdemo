@@ -14,7 +14,7 @@ class StockSearch extends React.PureComponent {
     getList = async str => {
         const { type } = this.state;
 
-        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
+        const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {
                 t: type,
                 q: str,
@@ -40,7 +40,7 @@ class StockSearch extends React.PureComponent {
         const { current, data } = this.state;
 
         window.open(
-            `http://finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
                 data[current !== null ? current : 0].c
             }`,
         );
@@ -84,7 +84,7 @@ class StockSearch extends React.PureComponent {
                     break;
                 case 13:
                     window.open(
-                        `http://finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+                        `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
                             data[current !== null ? current : 0].c
                         }`,
                     );
@@ -115,7 +115,7 @@ class StockSearch extends React.PureComponent {
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
 
-            window.open(`http://finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
         }
     };
 
@@ -125,7 +125,7 @@ class StockSearch extends React.PureComponent {
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
 
-            window.open(`http://finance.ifeng.com/zjlx/${stock.c}`);
+            window.open(`//finance.ifeng.com/zjlx/${stock.c}`);
         }
     };
 

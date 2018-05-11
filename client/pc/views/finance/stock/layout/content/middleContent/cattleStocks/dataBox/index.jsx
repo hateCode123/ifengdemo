@@ -17,7 +17,7 @@ class DataBox extends React.PureComponent {
         const codeList = dataStock.map(item => item.code);
         const price = [];
 
-        const data = await jsonp('http://hq.finance.ifeng.com/q.php', {
+        const data = await jsonp('//hq.finance.ifeng.com/q.php', {
             data: {
                 l: codeList.join(','),
                 f: 'json',

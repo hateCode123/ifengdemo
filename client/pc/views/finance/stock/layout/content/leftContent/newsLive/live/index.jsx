@@ -166,7 +166,7 @@ class Live extends React.PureComponent {
                     </span>
                     <a href="#" target="_blank" rel={rel}>
                         <Chip id="10052" type="static" title="直播Logo" groupName="正文" content={content}>
-                            <img src={content.url} title={content.title} alt={content.title} />
+                            <img src={content[0].url} title={content[0].title} alt={content[0].title} />
                         </Chip>
                     </a>
                 </div>

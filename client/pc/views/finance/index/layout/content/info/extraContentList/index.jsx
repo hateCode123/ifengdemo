@@ -5,7 +5,7 @@ import { rel } from '../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
 
-class ContentList extends React.PureComponent {
+class ExtraContentList extends React.PureComponent {
     state = {
         isOver: false,
         counts: [],
@@ -70,8 +70,10 @@ class ContentList extends React.PureComponent {
             广告: 'ad',
         };
 
+        console.log(content[0]);
+
         return (
-            <div className={styles.contentList}>
+            <div className={styles.ExtraContentList}>
                 {content.map((item, index) => (
                     <div
                         key={index}
@@ -79,9 +81,14 @@ class ContentList extends React.PureComponent {
                         onMouseEnter={this.handleMouseOver}
                         onMouseLeave={this.handleMouseOver}
                         style={listStyle}>
-                        {item.thumbnail ? (
-                            <a href={item.pcUrl} target="_blank" rel={rel} className={styles.imgBox}>
-                                <img src={item.thumbnail} width="144" height="96" className={styles.trans} />
+                        {item.thumbnails !== '' ? (
+                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                                <img
+                                    src={JSON.parse(item.thumbnails).image[0].url}
+                                    width="144"
+                                    height="96"
+                                    className={styles.trans}
+                                />
                             </a>
                         ) : (
                             ''
@@ -101,11 +108,11 @@ class ContentList extends React.PureComponent {
                                     ''
                                 )}
                                 {item.source ? <span className={styles.source}>{item.source}</span> : ''}
-                                {item.createdTime ? (
+                                {item.newsTime !== '' ? (
                                     <span className={styles.date}>
-                                        {Number(item.createdTime.split('-')[0]) < 2018
+                                        {Number(item.newsTime.split('-')[0]) < 2018
                                             ? 'item.createdTime'
-                                            : `${item.createdTime.split('-')[1]}-${item.createdTime.split('-')[2]}`}
+                                            : `${item.newsTime.split('-')[1]}-${item.newsTime.split('-')[2]}`}
                                     </span>
                                 ) : (
                                     ''
@@ -115,7 +122,7 @@ class ContentList extends React.PureComponent {
                         {item.commentUrl ? (
                             <div className={styles.comment}>
                                 <a
-                                    href={`http://gentie.ifeng.com/view.html?docUrl=${item.commentUrl}&docName=${
+                                    href={`//gentie.ifeng.com/view.html?docUrl=${item.commentUrl}&docName=${
                                         item.title
                                     }&skey=${this.getSkey(item.title, item.pcUrl)}&pcUrl&=${item.pcUrl}`}
                                     target="_blank"
@@ -136,12 +143,12 @@ class ContentList extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-ContentList.propTypes = { content: PropTypes.array };
+ExtraContentList.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性
  * */
-ContentList.defaultProps = {};
+ExtraContentList.defaultProps = {};
 
-export { ContentList };
-export default ContentList;
+export { ExtraContentList };
+export default ExtraContentList;

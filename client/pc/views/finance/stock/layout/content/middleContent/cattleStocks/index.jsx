@@ -47,7 +47,7 @@ class CattleStocks extends React.PureComponent {
 
     handleChange = async e => {
         const val = e.target.value;
-        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
+        const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {
                 t: 'all',
                 q: val,
@@ -62,13 +62,13 @@ class CattleStocks extends React.PureComponent {
     handleStockSearch = () => {
         const { searchTxt } = this.state;
 
-        window.open(`http://finance.ifeng.com/app/hq/${searchTxt.t}/${searchTxt.c}/index.shtml`);
+        window.open(`//finance.ifeng.com/app/hq/${searchTxt.t}/${searchTxt.c}/index.shtml`);
     };
 
     handleFundsSearch = () => {
         const { searchTxt } = this.state;
 
-        window.open(`http://finance.ifeng.com/zjlx/${searchTxt.c}`);
+        window.open(`//finance.ifeng.com/zjlx/${searchTxt.c}`);
     };
 
     /**

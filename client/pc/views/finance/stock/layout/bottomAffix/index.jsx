@@ -76,11 +76,11 @@ class BottomAffix extends React.PureComponent {
         if (flag === 0) {
             const quote = this.state.quote;
 
-            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
+            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
         } else if (flag === 1) {
             const funds = this.state.funds;
 
-            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
+            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
         }
     };
 

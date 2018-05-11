@@ -40,7 +40,7 @@ class StockBox extends React.PureComponent {
 
         const codeList = stock.map(item => item.code);
 
-        const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
+        const result = await jsonp('//hq.finance.ifeng.com/q.php', {
             data: {
                 l: codeList.join(','),
                 f: 'json',
@@ -81,7 +81,7 @@ class StockBox extends React.PureComponent {
             <div className={styles.stock_box}>
                 {stock.map((item, index) => (
                     <div key={index} className={`${styles.stock_container} ${styles[`box${index}`]}`}>
-                        <a href={`http://finance.ifeng.com/app/hq/${item.type}/${item.code}`}>
+                        <a href={`//finance.ifeng.com/app/hq/${item.type}/${item.code}`}>
                             <div className={styles.text}>{item.name}</div>
                             <div className={`${styles.price} ${prices.length > 0 ? styles[prices[index].style] : ''}`}>
                                 {prices.length > 0 ? prices[index].price : ''}

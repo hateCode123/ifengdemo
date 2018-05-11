@@ -27,7 +27,7 @@ class CustomStock extends React.PureComponent {
                 });
             });
 
-            const data = await jsonp('https://apiapp.finance.ifeng.com/mystock/get', {
+            const data = await jsonp('//apiapp.finance.ifeng.com/mystock/get', {
                 num: 2,
             });
 
@@ -35,13 +35,13 @@ class CustomStock extends React.PureComponent {
 
             const codeList = data.stockinfo.map(item => item.code);
 
-            const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
+            const result = await jsonp('//hq.finance.ifeng.com/q.php', {
                 data: {
                     l: codeList.join(','),
                     f: 'json',
-                    e: 'dddddd(json_q)',
+                    e: 'getStock(json_q)',
                 },
-                jsonpCallback: 'dddddd',
+                jsonpCallback: 'getStock',
             });
 
             const customStock = [];
@@ -58,13 +58,13 @@ class CustomStock extends React.PureComponent {
                 }
 
                 customStock.push({
-                    url: `http://finance.ifeng.com/app/hq/stock/${codeList[a]}`,
+                    url: `//finance.ifeng.com/app/hq/stock/${codeList[a]}`,
                     name: nameList[a],
                     price: result[codeList[a]][0],
                     index: result[codeList[a]][2],
                     percent: result[codeList[a]][3],
                     style,
-                    report: `http://app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${
+                    report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${
                         codeList[a]
                     }`,
                 });

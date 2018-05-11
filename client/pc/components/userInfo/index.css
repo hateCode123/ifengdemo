@@ -11,6 +11,9 @@
         margin-left: 6px;
         cursor: pointer;
     }
+    & .login_in:hover {
+        text-decoration: underline;
+    }
     & a {
         color: #666;
     }
@@ -33,6 +36,7 @@
             width: 85px;
             color: #2b2b2b;
             text-align: right;
+            cursor: pointer;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;

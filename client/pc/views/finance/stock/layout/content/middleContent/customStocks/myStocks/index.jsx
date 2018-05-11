@@ -135,7 +135,7 @@ class MyStocks extends React.PureComponent {
                     ) : (
                         <div className={styles.login}>
                             <a onClick={this.handleLoginIn}>登录</a>
-                            <a href="https://id.ifeng.com/user/register/" target="_blank" rel={rel}>
+                            <a href="//id.ifeng.com/user/register/" target="_blank" rel={rel}>
                                 注册
                             </a>
                             <LoginDialog id={this.loginId} />

@@ -35,7 +35,7 @@ class Qa extends React.PureComponent {
         const list = {};
 
         if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
-            const userData = await jsonp('http://app.finance.ifeng.com/gszb/user_ol.php', {
+            const userData = await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type,
@@ -54,7 +54,7 @@ class Qa extends React.PureComponent {
 
             const qaobj = Object.assign({}, qaers, qa);
 
-            const data = await jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
+            const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type ? currentUser.type : '',
@@ -82,7 +82,7 @@ class Qa extends React.PureComponent {
 
             const qaobj = Object.assign({}, qaers, qa);
 
-            const data = await jsonp('http://app.finance.ifeng.com/gszb/a_data.php', {
+            const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
                 data: {
                     name: currentUser.name,
                     type: currentUser.type ? currentUser.type : '',

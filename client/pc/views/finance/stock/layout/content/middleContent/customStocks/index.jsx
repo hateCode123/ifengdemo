@@ -30,7 +30,7 @@ class CustomStocks extends React.PureComponent {
         let isLastest = true;
 
         if (userSawList === '') {
-            const stockData = await jsonp('http://apiapp.finance.ifeng.com/hotstockrank', {
+            const stockData = await jsonp('//apiapp.finance.ifeng.com/hotstockrank', {
                 data: {
                     type: 'wx',
                     callback: 'test',

@@ -67,32 +67,47 @@ exports.list = {
         // console.log('getRecommendFragment 20010...');
         let meeting = KVProxy.getRecommendFragment(20010).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 10015...');
+        // 底部合作链接
         let cooperation = KVProxy.getStaticFragment(10015).then(...handleJs(ctx, 'content'));
 
-        // console.log('getRecommendFragment 17007_719_68...');
+        // 信息流首页抓取数据
         let customList = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
-        // console.log('getRecommendFragment 10014...');
+        // 信息流宏观抓取数据
+        let macroList = KVProxy.getCustom('finance_22005_10736_24').then(...handleJson(ctx));
+
+        // 信息流股票抓取数据
+        let stockList = KVProxy.getCustom('finance_22005_10736_30').then(...handleJson(ctx));
+
+        // 信息流imarkets 抓取数据
+        let imarketsList = KVProxy.getCustom('finance_22005_10736_25').then(...handleJson(ctx));
+
+        // 信息流公司抓取数据
+        let companyList = KVProxy.getCustom('finance_22005_10736_29').then(...handleJson(ctx));
+
+        // 信息流Wemoney 抓取数据
+        let wemoneyList = KVProxy.getCustom('finance_22005_10736_26').then(...handleJson(ctx));
+
+        // 理财超市
         let market = KVProxy.getStaticFragment(10014).then(...handleJs(ctx, 'content'));
 
-        // console.log('getRecommendFragment 10016...');
+        // 理财速递
         let courier = KVProxy.getStaticFragment(10016).then(...handleJsonByKey(ctx, 'content'));
 
         // 投顾产品
         let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
 
-        // console.log('getCustom 17007_719_68...');
+        // 每日要闻
         let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
 
-        // console.log('getRecommendFragment 10018...');
+        // 股票超市静态碎片
         let stockMarket = KVProxy.getStaticFragment(10018).then(...handleJs(ctx, 'content'));
 
         // 返回连环话数据
-        let comicBook = SearchProxy.list('1-68-', '*', '*', '1', 0, 1, 'newsTime:desc', '*').then(...handleJson(ctx));
+        let comicBook = KVProxy.getCustom('finance_22005_10736_27').then(...handleJson(ctx));
 
         // 返回财经视频数据
-        let financeVideo = SearchProxy.list('1-78-', '*', '*', '1', 0, 3, 'id:desc', '*').then(...handleJson(ctx));
+        let financeVideo = KVProxy.getCustom('finance_22005_10736_28').then(...handleJson(ctx));
 
         // 底部公用版权
         let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
@@ -116,6 +131,11 @@ exports.list = {
             meeting,
             cooperation,
             customList,
+            macroList,
+            stockList,
+            imarketsList,
+            companyList,
+            wemoneyList,
             market,
             courier,
             production,
@@ -143,6 +163,11 @@ exports.list = {
             meeting,
             cooperation,
             customList,
+            macroList,
+            stockList,
+            imarketsList,
+            companyList,
+            wemoneyList,
             market,
             courier,
             production,
@@ -172,6 +197,11 @@ exports.list = {
             meeting,
             cooperation,
             customList,
+            macroList,
+            stockList,
+            imarketsList,
+            companyList,
+            wemoneyList,
             market,
             courier,
             production,

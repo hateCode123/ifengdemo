@@ -22,7 +22,7 @@ class Courier extends React.PureComponent {
     };
 
     handleListLeave = index => {
-        this.setState({ currentCol: 'index' });
+        this.setState({ currentCol: index });
     };
 
     /**
@@ -31,13 +31,16 @@ class Courier extends React.PureComponent {
     render() {
         const { current, currentCol } = this.state;
         const { content } = this.props;
+        const tabs = [content[0].tab, content[4].tab];
+        const content0 = content.slice(0, 4);
+        const content1 = content.slice(4);
         const types = {
             指数型: 'risk',
             股票型: 'risk',
             混合型: 'warning',
         };
 
-        const list0 = content[0].content.map((item, index) => (
+        const list0 = content0.map((item, index) => (
             <dd
                 key={index}
                 onMouseEnter={() => this.handleListEnter(index)}
@@ -62,7 +65,7 @@ class Courier extends React.PureComponent {
             </dd>
         ));
 
-        const list1 = content[1].content.map((item, index) => (
+        const list1 = content1.map((item, index) => (
             <dd
                 key={index}
                 onMouseEnter={() => this.handleListEnter(index)}
@@ -94,12 +97,12 @@ class Courier extends React.PureComponent {
                 <BoxTitle url="//finance.ifeng.com/zhuanti/" title="理财速递" />
                 <div className={styles.title}>
                     <ul className={`${styles.title_tabs} clearfix`}>
-                        {content.map((item, index) => (
+                        {tabs.map((item, index) => (
                             <li
                                 key={index}
                                 className={index === current ? styles.current : ''}
                                 onMouseEnter={() => this.handleTabsOver(index)}>
-                                {item.title}
+                                {item}
                             </li>
                         ))}
                     </ul>
