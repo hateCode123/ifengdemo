@@ -50,9 +50,9 @@ class CustomStocks extends React.PureComponent {
             code = data.map(item => item[0]).join(',');
             isLastest = false;
         } else {
-            const list = userSawList.split(',').map(item => item.split(':1'));
+            const list = userSawList.split(',').map(item => item.split(':'));
 
-            data = list.map(item => item[0].split(':'));
+            data = list.map(item => item.slice(0, 2));
             code = data.map(item => item[0]).join(',');
             isLastest = true;
         }

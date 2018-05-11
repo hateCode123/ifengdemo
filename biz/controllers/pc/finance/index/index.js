@@ -25,7 +25,7 @@ exports.list = {
         // 搜索
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10002...');
+        // 财经首页导航
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
         // console.log('getRecommendFragment 20002...');
@@ -79,7 +79,7 @@ exports.list = {
         // console.log('getRecommendFragment 10016...');
         let courier = KVProxy.getStaticFragment(10016).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 10017...');
+        // 投顾产品
         let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
 
         // console.log('getCustom 17007_719_68...');

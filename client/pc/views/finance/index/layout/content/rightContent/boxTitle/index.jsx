@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
-import TitleAd from './titleAd/';
 import { rel } from '../../../../../../../utils/rel';
 
 class BoxTitle extends React.PureComponent {
@@ -10,7 +8,7 @@ class BoxTitle extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { url, title, titleAd } = this.props;
+        const { url, title } = this.props;
 
         return (
             <div className={styles.box_title}>
@@ -19,18 +17,7 @@ class BoxTitle extends React.PureComponent {
                         {title}
                     </a>
                 </span>
-                {titleAd ? (
-                    <Chip
-                        id={titleAd.id}
-                        type={titleAd.type}
-                        title={titleAd.title}
-                        groupName={titleAd.groupName}
-                        content={titleAd.content}>
-                        <TitleAd />
-                    </Chip>
-                ) : (
-                    ''
-                )}
+                {this.props.children}
             </div>
         );
     }
@@ -42,7 +29,7 @@ class BoxTitle extends React.PureComponent {
 BoxTitle.propTypes = {
     url: PropTypes.string,
     title: PropTypes.string,
-    titleAd: PropTypes.object,
+    children: PropTypes.object,
 };
 
 /**

@@ -9,6 +9,7 @@ import ThinkTank from './thinkTank/';
 import Meeting from './meeting/';
 import Market from './market/';
 import Courier from './courier/';
+import TitleAd from './titleAd/';
 
 class RightContent extends React.PureComponent {
     /**
@@ -17,20 +18,13 @@ class RightContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        const titleAd = {
-            content: content.titleAd,
-            id: '10012',
-            type: 'static',
-            title: '财经视频广告',
-            groupName: '正文',
-        };
-
-        /**
-         * 国子策数据源不确定，先用推荐位代替
-         */
         return (
             <div className={styles.col_R}>
-                <BoxTitle url="#" title="财经视频" titleAd={titleAd} />
+                <BoxTitle url="#" title="财经视频">
+                    <Chip id="10012" type="static" title="财经视频广告" groupName="正文" content={content.titleAd}>
+                        <TitleAd />
+                    </Chip>
+                </BoxTitle>
                 <FinanceVideo content={content.financeVideo} />
                 <Ad content={content.asideAd1} styleName={styles.box_1} />
                 <div className={styles.box_finance}>
@@ -50,11 +44,11 @@ class RightContent extends React.PureComponent {
                 <div className={styles.ad_box}>
                     <Ad content={content.asideAd3} styleName={styles.box_3} />
                 </div>
-                <Chip id="10014" type="static" title="理财超市" groupName="正文" content={content.market}>
+                <Chip id="10014" type="static" title="理财超市静态碎片" groupName="正文" content={content.market}>
                     <Market />
                 </Chip>
                 <Ad content={content.asideAd4} styleName={styles.box_4} />
-                <Chip id="10016" type="static" title="理财速递" groupName="正文" content={content.courier}>
+                <Chip id="10016" type="static" title="理财速递静态碎片" groupName="正文" content={content.courier}>
                     <Courier />
                 </Chip>
                 <Ad content={content.asideAd5} styleName={styles.box_5} />

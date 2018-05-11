@@ -13,7 +13,7 @@ class TitleAd extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createMarkup()} />;
+        return <span style={{ float: 'right' }} dangerouslySetInnerHTML={this.createMarkup()} />;
     }
 }
 

@@ -13,7 +13,7 @@ class Production extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createMarkup()} />;
+        return <div style={{ overflow: 'hidden' }} dangerouslySetInnerHTML={this.createMarkup()} />;
     }
 }
 
