@@ -36,68 +36,58 @@ class Courier extends React.PureComponent {
             股票型: 'risk',
             混合型: 'warning',
         };
-        const list0 = [];
-        const list1 = [];
 
-        content[0].content.map((item, index) => {
-            list0.push(
-                <dd
-                    key={index}
-                    onMouseEnter={() => this.handleListEnter(index)}
-                    onMouseLeave={this.handleListLeave}
-                    className={index === currentCol ? styles.over : styles.out}>
-                    <div className={styles.col}>
-                        <span className={styles.income}>{item.income}</span>
-                        <span className={`${styles.type} ${styles[types[item.type]]}`}>{item.type}</span>
+        const list0 = content[0].content.map((item, index) => (
+            <dd
+                key={index}
+                onMouseEnter={() => this.handleListEnter(index)}
+                onMouseLeave={this.handleListLeave}
+                className={index === currentCol ? styles.over : styles.out}>
+                <div className={styles.col}>
+                    <span className={styles.income}>{item.income}</span>
+                    <span className={`${styles.type} ${styles[types[item.type]]}`}>{item.type}</span>
+                    <a href={item.url} target="_blank" rel={rel}>
+                        {item.name}
+                    </a>
+                </div>
+                <p>
+                    <span>推荐理由：</span>
+                    {item.recommend}
+                </p>
+                <div className={styles.shop} hidden={index !== currentCol}>
+                    <a href={item.url} target="_blank" rel={rel}>
+                        <div className={styles.btn} />
+                    </a>
+                </div>
+            </dd>
+        ));
+
+        const list1 = content[1].content.map((item, index) => (
+            <dd
+                key={index}
+                onMouseEnter={() => this.handleListEnter(index)}
+                onMouseLeave={this.handleListLeave}
+                className={`${index === currentCol ? styles.over : styles.out} clearfix`}>
+                <div className={styles.bar_L}>
+                    <h6>
                         <a href={item.url} target="_blank" rel={rel}>
                             {item.name}
                         </a>
-                    </div>
+                    </h6>
                     <p>
                         <span>推荐理由：</span>
                         {item.recommend}
                     </p>
-                    <div className={styles.shop} hidden={index !== currentCol}>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            <div className={styles.btn} />
-                        </a>
-                    </div>
-                </dd>,
-            );
-
-            return list0;
-        });
-
-        content[1].content.map((item, index) => {
-            list1.push(
-                <dd
-                    key={index}
-                    onMouseEnter={() => this.handleListEnter(index)}
-                    onMouseLeave={this.handleListLeave}
-                    className={`${index === currentCol ? styles.over : styles.out} clearfix`}>
-                    <div className={styles.bar_L}>
-                        <h6>
-                            <a href={item.url} target="_blank" rel={rel}>
-                                {item.name}
-                            </a>
-                        </h6>
-                        <p>
-                            <span>推荐理由：</span>
-                            {item.recommend}
-                        </p>
-                    </div>
-                    <div className={styles.bar_R}>
-                        <span className={styles.tip}>累计收益超</span>
-                        <span className={styles.income}>{item.income}</span>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            预约
-                        </a>
-                    </div>
-                </dd>,
-            );
-
-            return list1;
-        });
+                </div>
+                <div className={styles.bar_R}>
+                    <span className={styles.tip}>累计收益超</span>
+                    <span className={styles.income}>{item.income}</span>
+                    <a href={item.url} target="_blank" rel={rel}>
+                        预约
+                    </a>
+                </div>
+            </dd>
+        ));
 
         return (
             <div className={styles.courier}>

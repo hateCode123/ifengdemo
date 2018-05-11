@@ -26,14 +26,9 @@ class ContentList extends React.PureComponent {
      */
     async componentDidMount() {
         const { content } = this.props;
-        const docUrl = [];
         const count = [];
 
-        content.map(item => {
-            docUrl.push(item.commentUrl);
-
-            return docUrl;
-        });
+        const docUrl = content.map(item => item.commentUrl);
 
         const data = await jsonp('//comment.ifeng.com/get.php', {
             data: {

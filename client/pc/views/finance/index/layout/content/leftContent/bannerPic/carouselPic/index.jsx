@@ -24,13 +24,9 @@ class CarouselPic extends React.PureComponent {
                 </p>
             </div>,
         ];
-        const dotList = [];
-
-        content.map((item, index) => {
-            dotList.push(<li key={index} className={index === currentPage ? styles.current : ''} />);
-
-            return dotList;
-        });
+        const dotList = content.map((item, index) => (
+            <li key={index} className={index === currentPage ? styles.current : ''} />
+        ));
 
         const dot = (
             <ul key="dot" className={styles.dotList}>

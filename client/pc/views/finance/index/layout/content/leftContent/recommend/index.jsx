@@ -9,19 +9,13 @@ class Recommend extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const recommendList = [];
-
-        content.map(item => {
-            recommendList.push(
-                <li key={item.id}>
-                    <a href={item.url} target="_blank" rel={rel} title={item.title}>
-                        {item.title}
-                    </a>
-                </li>,
-            );
-
-            return recommendList;
-        });
+        const recommendList = content.map(item => (
+            <li key={item.id}>
+                <a href={item.url} target="_blank" rel={rel} title={item.title}>
+                    {item.title}
+                </a>
+            </li>
+        ));
 
         return (
             <div className={styles.recommend}>

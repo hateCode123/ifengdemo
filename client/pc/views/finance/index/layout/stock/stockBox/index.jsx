@@ -36,14 +36,9 @@ class StockBox extends React.PureComponent {
      */
     async componentDidMount() {
         const { stock } = this.state;
-        const codeList = [];
         const price = [];
 
-        stock.map(item => {
-            codeList.push(item.code);
-
-            return codeList;
-        });
+        const codeList = stock.map(item => item.code);
 
         const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
             data: {

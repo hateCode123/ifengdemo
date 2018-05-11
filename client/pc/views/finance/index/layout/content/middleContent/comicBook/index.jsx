@@ -11,7 +11,7 @@ class ComicBook extends React.PureComponent {
         const { content } = this.props;
         const data = {};
 
-        if (content && content.list) {
+        if (content && content.list && content.list.length > 0) {
             const datas = content.list[0];
 
             data.url = datas.url;
