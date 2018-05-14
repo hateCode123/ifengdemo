@@ -6,6 +6,11 @@ import { rel } from '../../../../../../../utils/rel';
 
 class Courier extends React.PureComponent {
     state = {
+        types: {
+            指数型: 'risk',
+            股票型: 'risk',
+            混合型: 'warning',
+        },
         current: 0,
         currentCol: '',
     };
@@ -29,16 +34,11 @@ class Courier extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, currentCol } = this.state;
+        const { types, current, currentCol } = this.state;
         const { content } = this.props;
         const tabs = [content[0].tab, content[4].tab];
         const content0 = content.slice(0, 4);
         const content1 = content.slice(4);
-        const types = {
-            指数型: 'risk',
-            股票型: 'risk',
-            混合型: 'warning',
-        };
 
         const list0 = content0.map((item, index) => (
             <dd
@@ -47,7 +47,7 @@ class Courier extends React.PureComponent {
                 onMouseLeave={this.handleListLeave}
                 className={index === currentCol ? styles.over : styles.out}>
                 <div className={styles.col}>
-                    <span className={styles.income}>{item.income}</span>
+                    <span className={styles.income0}>{item.income}</span>
                     <span className={`${styles.type} ${styles[types[item.type]]}`}>{item.type}</span>
                     <a href={item.url} target="_blank" rel={rel}>
                         {item.name}
@@ -84,7 +84,7 @@ class Courier extends React.PureComponent {
                 </div>
                 <div className={styles.bar_R}>
                     <span className={styles.tip}>累计收益超</span>
-                    <span className={styles.income}>{item.income}</span>
+                    <span className={styles.income1}>{item.income}</span>
                     <a href={item.url} target="_blank" rel={rel}>
                         预约
                     </a>

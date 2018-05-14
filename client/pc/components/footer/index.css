@@ -47,9 +47,8 @@
     text-align: center;
     overflow: hidden;
     line-height: 28px;
-}
-
-.item {
-    padding-right: 12px;
-    font-size: 12px;
+    & span {
+        padding-right: 12px;
+        font-size: 12px;
+    }
 }

@@ -23,7 +23,7 @@ class Header extends React.PureComponent {
         };
 
         const topNav = (
-            <div className={styles.h_mainNavNew} key="topNav">
+            <div className={styles.main_nav} key="topNav">
                 <Chip id="10108" type="static" title="导航" groupName="头部" content={content.nav}>
                     <Nav limit={18} />
                 </Chip>
@@ -36,8 +36,8 @@ class Header extends React.PureComponent {
             </div>
         );
         const topSearch = (
-            <div className={styles.h_searchDiv} key="topSearch">
-                <div className={styles.h_theLogo}>
+            <div className={styles.search} key="topSearch">
+                <div className={styles.logo}>
                     <Logo content={logoData} />
                 </div>
                 <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>

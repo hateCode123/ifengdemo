@@ -62,49 +62,53 @@
                     color: #fff;
                 }
             }
-            & .caption {
-                position: absolute;
-                left: -138px;
-                top: 0px;
-                background: #fff;
-                & .search {
-                    width: 176px;
-                    height: 42px;
-                    padding: 10px 0px 0px 12px;
-                    background: url('./g56.png') no-repeat;
-                    & input {
-                        float: left;
-                        width: 106px;
-                        height: 30px;
-                        line-height: 30px;
-                        border: 0px;
-                        padding-left: 7px;
-                        margin-right: 1px;
-                    }
-                    & a {
-                        display: block;
-                        width: 48px;
-                        height: 28px;
-                        line-height: 28px;
-                        overflow: hidden;
-                        border: none;
-                        text-align: center;
-                        color: #ffffff;
-                        cursor: pointer;
-                        float: right;
-                        text-decoration: none;
-                        background: none;
-                    }
-                }
-            }
-            & .show {
-                display: block;
-            }
-            & .hide {
-                display: none;
-            }
         }
     }
+}
+
+.caption {
+    position: absolute;
+    left: -138px;
+    top: 0px;
+    background: #fff;
+}
+
+.search {
+    width: 176px;
+    height: 42px;
+    padding: 10px 0px 0px 12px;
+    background: url('./g56.png') no-repeat;
+    & input {
+        float: left;
+        width: 106px;
+        height: 30px;
+        line-height: 30px;
+        border: 0px;
+        padding-left: 7px;
+        margin-right: 1px;
+    }
+    & a {
+        display: block;
+        width: 48px;
+        height: 28px;
+        line-height: 28px;
+        overflow: hidden;
+        border: none;
+        text-align: center;
+        color: #ffffff;
+        cursor: pointer;
+        float: right;
+        text-decoration: none;
+        background: none;
+    }
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
 
 .fdockbar {

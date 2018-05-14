@@ -15,10 +15,11 @@
         cursor: pointer;
         margin-top: -1px;
     }
-    & .current {
-        color: #ff2838;
-        border-top: solid 3px #ff2838;
-    }
+}
+
+.current {
+    color: #ff2838;
+    border-top: solid 3px #ff2838;
 }
 
 .fix {

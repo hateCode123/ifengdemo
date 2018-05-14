@@ -26,9 +26,9 @@ class Footer extends React.PureComponent {
                     </div>
                 </div>
                 <div className={styles.copyright}>
-                    <span className={styles.item}>{copyrightData.text0}</span>
-                    <span className={styles.item}>{copyrightData.text1}</span>
-                    <span className={styles.item}>{copyrightData.text2}</span>
+                    <span>{copyrightData.text0}</span>
+                    <span>{copyrightData.text1}</span>
+                    <span>{copyrightData.text2}</span>
                 </div>
             </div>
         );

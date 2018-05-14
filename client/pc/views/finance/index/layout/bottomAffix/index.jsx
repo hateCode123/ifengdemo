@@ -8,6 +8,7 @@ import styles from './index.css';
  */
 class BottomAffix extends React.PureComponent {
     state = {
+        text: '代码/拼音/名称',
         isShow: false,
         quoteShow: false,
         fundsShow: false,
@@ -42,6 +43,24 @@ class BottomAffix extends React.PureComponent {
      */
     backToTop = () => {
         scrollTo(0, 0);
+    };
+
+    handleFocus = e => {
+        const val = e.target.value;
+
+        this.setState({
+            text: val === '代码/拼音/名称' ? '' : val,
+        });
+    };
+
+    handleBlur = e => {
+        const val = e.target.value;
+
+        setTimeout(() => {
+            this.setState({
+                text: val === '' ? '代码/拼音/名称' : val,
+            });
+        }, 150);
     };
 
     handleQuoteShow = () => {
@@ -88,7 +107,7 @@ class BottomAffix extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { isShow, quoteShow, fundsShow } = this.state;
+        const { text, isShow, quoteShow, fundsShow } = this.state;
 
         const bottomAffix = (
             <div className={styles.affix_box}>
@@ -106,8 +125,10 @@ class BottomAffix extends React.PureComponent {
                                     <div className={styles.search}>
                                         <input
                                             className="quote"
-                                            placeholder="代码/拼音/名称"
+                                            value={text}
                                             onChange={this.handleQuoteChange}
+                                            onFocus={this.handleFocus}
+                                            onBlur={this.handleBlur}
                                         />
                                         <a onClick={this.handleQuoteSearch}>搜索</a>
                                     </div>
@@ -126,8 +147,10 @@ class BottomAffix extends React.PureComponent {
                                     <div className={styles.search}>
                                         <input
                                             className="funds"
-                                            placeholder="代码/拼音/名称"
+                                            value={text}
                                             onChange={this.handleFundsChange}
+                                            onFocus={this.handleFocus}
+                                            onBlur={this.handleBlur}
                                         />
                                         <a onClick={this.handleFundsSearch}>搜索</a>
                                     </div>

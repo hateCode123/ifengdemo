@@ -4,21 +4,24 @@
     position: relative;
     overflow: hidden;
     margin-top: 19px;
-    & .prevSlide {
-        left: 0px;
-    }
-    & .nextSlide {
-        right: 0px;
-    }
-    & .prevSlide,
-    & .nextSlide {
-        width: 36px;
-        height: 60px;
-        position: absolute;
-        top: 70px;
-        z-index: 10;
-        cursor: pointer;
-    }
+}
+
+.prevSlide {
+    left: 0px;
+}
+
+.nextSlide {
+    right: 0px;
+}
+
+.prevSlide,
+.nextSlide {
+    width: 36px;
+    height: 60px;
+    position: absolute;
+    top: 70px;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .left {
