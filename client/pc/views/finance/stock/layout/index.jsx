@@ -35,10 +35,7 @@ class Layout extends React.PureComponent {
             nav: content.navigation,
             subNav: content.subNavigation,
         };
-        const stockPlate = {
-            stockPlateStyle: content.stockPlateStyle,
-            stockPlate: content.stockPlate,
-        };
+        const stockPlate = content.stockPlate;
         const animationPic = content.animationPic;
         const jumpLink = content.jumpLink;
         const contentData = {
@@ -134,13 +131,8 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <AnimationPic content={animationPic} />
-                        <Chip
-                            id="10086"
-                            type="static"
-                            title="股票展示"
-                            groupName="导航栏"
-                            content={stockPlate.stockPlateStyle}>
-                            <StockPlate stockPlate={stockPlate.stockPlate} />
+                        <Chip id="10086" type="static" title="股票展示" groupName="导航栏" content={stockPlate}>
+                            <StockPlate stockPlate={stockPlate} />
                         </Chip>
                         <div className={styles.search_box}>
                             <StockSearch />

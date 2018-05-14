@@ -63,18 +63,22 @@ class FundsFlow extends React.PureComponent {
      * 获取数据
      */
     getData = async type => {
-        const data = await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
-            data: {
-                type,
-            },
-            jsonpCallback: 'getZijinRank',
-        });
-
-        if (data.data.length > 0) {
-            this.setState({
-                loading: false,
-                data: data.data.slice(0, 6),
+        try {
+            const data = await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
+                data: {
+                    type,
+                },
+                jsonpCallback: 'getZijinRank',
             });
+
+            if (data.data.length > 0) {
+                this.setState({
+                    loading: false,
+                    data: data.data.slice(0, 6),
+                });
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 

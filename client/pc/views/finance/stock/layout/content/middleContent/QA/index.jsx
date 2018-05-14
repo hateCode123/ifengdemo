@@ -28,77 +28,81 @@ class Qa extends React.PureComponent {
     };
 
     getQaData = async index => {
-        const { qaers, alist } = this.state;
-        const { tabs } = this.props;
-        const currentUser = tabs[index];
-        const qa = {};
-        const list = {};
+        try {
+            const { qaers, alist } = this.state;
+            const { tabs } = this.props;
+            const currentUser = tabs[index];
+            const qa = {};
+            const list = {};
 
-        if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
-            const userData = await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
-                data: {
-                    name: currentUser.name,
-                    type: currentUser.type,
-                    cb: `updateAnalyzerInfo${index}`,
-                },
-                jsonpCallback: `updateAnalyzerInfo${index}`,
-            });
+            if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
+                const userData = await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
+                    data: {
+                        name: currentUser.name,
+                        type: currentUser.type,
+                        cb: `updateAnalyzerInfo${index}`,
+                    },
+                    jsonpCallback: `updateAnalyzerInfo${index}`,
+                });
 
-            qa[currentUser.name] = {
-                url: '',
-                img: '',
-            };
+                qa[currentUser.name] = {
+                    url: '',
+                    img: '',
+                };
 
-            qa[currentUser.name].url = userData[0].url;
-            qa[currentUser.name].img = userData[0].image;
+                qa[currentUser.name].url = userData[0].url;
+                qa[currentUser.name].img = userData[0].image;
 
-            const qaobj = Object.assign({}, qaers, qa);
+                const qaobj = Object.assign({}, qaers, qa);
 
-            const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
-                data: {
-                    name: currentUser.name,
-                    type: currentUser.type ? currentUser.type : '',
-                    callback: 'getQAData',
-                },
-                jsonpCallback: 'getQAData',
-            });
+                const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
+                    data: {
+                        name: currentUser.name,
+                        type: currentUser.type ? currentUser.type : '',
+                        callback: 'getQAData',
+                    },
+                    jsonpCallback: 'getQAData',
+                });
 
-            list[currentUser.name] = data.a_content;
+                list[currentUser.name] = data.a_content;
 
-            const listobj = Object.assign({}, alist, list);
+                const listobj = Object.assign({}, alist, list);
 
-            this.setState({
-                qaers: qaobj,
-                alist: listobj,
-            });
-        } else if (!qaers[currentUser.name] && !alist[currentUser.name] && index === tabs.length - 1) {
-            qa[currentUser.name] = {
-                url: '',
-                img: '',
-            };
+                this.setState({
+                    qaers: qaobj,
+                    alist: listobj,
+                });
+            } else if (!qaers[currentUser.name] && !alist[currentUser.name] && index === tabs.length - 1) {
+                qa[currentUser.name] = {
+                    url: '',
+                    img: '',
+                };
 
-            qa[currentUser.name].url = tabs[tabs.length - 1].url;
-            qa[currentUser.name].img = tabs[tabs.length - 1].src;
+                qa[currentUser.name].url = tabs[tabs.length - 1].url;
+                qa[currentUser.name].img = tabs[tabs.length - 1].src;
 
-            const qaobj = Object.assign({}, qaers, qa);
+                const qaobj = Object.assign({}, qaers, qa);
 
-            const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
-                data: {
-                    name: currentUser.name,
-                    type: currentUser.type ? currentUser.type : '',
-                    callback: 'getQAData',
-                },
-                jsonpCallback: 'getQAData',
-            });
+                const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
+                    data: {
+                        name: currentUser.name,
+                        type: currentUser.type ? currentUser.type : '',
+                        callback: 'getQAData',
+                    },
+                    jsonpCallback: 'getQAData',
+                });
 
-            list[currentUser.name] = data.a_content;
+                list[currentUser.name] = data.a_content;
 
-            const listobj = Object.assign({}, alist, list);
+                const listobj = Object.assign({}, alist, list);
 
-            this.setState({
-                qaers: qaobj,
-                alist: listobj,
-            });
+                this.setState({
+                    qaers: qaobj,
+                    alist: listobj,
+                });
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 

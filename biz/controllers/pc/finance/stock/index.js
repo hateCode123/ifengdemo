@@ -37,11 +37,8 @@ exports.list = {
         // 股票子导航
         let subNavigation = KVProxy.getStaticFragment(10040).then(...handleJsonByKey(ctx, 'content'));
 
-        // 股票显示样式
-        let stockPlateStyle = KVProxy.getStaticFragment(10086).then(...handleJs(ctx, 'content'));
-
         // 股票显示
-        let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/zq/caterank.html').then(...handleData(ctx));
+        let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/caterank.json').then(...handleJs(ctx));
 
         // 动画
         let animationPic = KVProxy.getStaticFragment(10085).then(...handleJsonByKey(ctx, 'content'));
@@ -228,7 +225,6 @@ exports.list = {
             logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
@@ -297,7 +293,6 @@ exports.list = {
             logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
@@ -368,7 +363,6 @@ exports.list = {
             logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,

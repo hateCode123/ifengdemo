@@ -18,16 +18,20 @@ class FundsFlow extends React.PureComponent {
      * 请求数据
      */
     async componentDidMount() {
-        const datas = [];
-        const data = await jsonp('//i.finance.ifeng.com/moneyflow/flow/So');
+        try {
+            const datas = [];
+            const data = await jsonp('//i.finance.ifeng.com/moneyflow/flow/So');
 
-        data.forEach((item, index) => {
-            if ([0, 1, 10, 11].includes(index)) {
-                datas.push(item);
-            }
-        });
+            data.forEach((item, index) => {
+                if ([0, 1, 10, 11].includes(index)) {
+                    datas.push(item);
+                }
+            });
 
-        this.setState({ flow: datas });
+            this.setState({ flow: datas });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**

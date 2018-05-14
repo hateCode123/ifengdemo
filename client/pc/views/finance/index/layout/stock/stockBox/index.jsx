@@ -35,40 +35,44 @@ class StockBox extends React.PureComponent {
      * 请求数据
      */
     async componentDidMount() {
-        const { stock } = this.state;
-        const price = [];
+        try {
+            const { stock } = this.state;
+            const price = [];
 
-        const codeList = stock.map(item => item.code);
+            const codeList = stock.map(item => item.code);
 
-        const result = await jsonp('//hq.finance.ifeng.com/q.php', {
-            data: {
-                l: codeList.join(','),
-                f: 'json',
-                e: 'getResult(json_q)',
-            },
-            jsonpCallback: 'getResult',
-        });
-
-        codeList.forEach(item => {
-            let style = '';
-
-            if (result[item][2] > 0) {
-                style = 'red';
-            } else if (result[item][2] < 0) {
-                style = 'green';
-            } else {
-                style = 'black';
-            }
-
-            price.push({
-                price: result[item][0],
-                index: result[item][2],
-                percent: result[item][3],
-                style,
+            const result = await jsonp('//hq.finance.ifeng.com/q.php', {
+                data: {
+                    l: codeList.join(','),
+                    f: 'json',
+                    e: 'getResult(json_q)',
+                },
+                jsonpCallback: 'getResult',
             });
-        });
 
-        this.setState({ prices: price });
+            codeList.forEach(item => {
+                let style = '';
+
+                if (result[item][2] > 0) {
+                    style = 'red';
+                } else if (result[item][2] < 0) {
+                    style = 'green';
+                } else {
+                    style = 'black';
+                }
+
+                price.push({
+                    price: result[item][0],
+                    index: result[item][2],
+                    percent: result[item][3],
+                    style,
+                });
+            });
+
+            this.setState({ prices: price });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**

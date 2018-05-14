@@ -46,17 +46,21 @@ class CattleStocks extends React.PureComponent {
     };
 
     handleChange = async e => {
-        const val = e.target.value;
-        const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
-            data: {
-                t: 'all',
-                q: val,
-                cb: 'suggestCallback(suggest_json)',
-            },
-            jsonpCallback: 'suggestCallback',
-        });
+        try {
+            const val = e.target.value;
+            const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
+                data: {
+                    t: 'all',
+                    q: val,
+                    cb: 'suggestCallback(suggest_json)',
+                },
+                jsonpCallback: 'suggestCallback',
+            });
 
-        this.setState({ searchTxt: data[0] });
+            this.setState({ searchTxt: data[0] });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     handleStockSearch = () => {

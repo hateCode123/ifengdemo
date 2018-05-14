@@ -26,18 +26,22 @@ class Topic extends React.PureComponent {
     }
 
     getData = async () => {
-        const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
-            data: {
-                level: 1,
-                dist: 1,
-                cb: 'setNewCont',
-            },
-            jsonp: 'cb',
-            jsonpCallback: 'setNewCont',
-            timeout: 10000,
-        });
+        try {
+            const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
+                data: {
+                    level: 1,
+                    dist: 1,
+                    cb: 'setNewCont',
+                },
+                jsonp: 'cb',
+                jsonpCallback: 'setNewCont',
+                timeout: 10000,
+            });
 
-        this.setState({ topic: data[0].title[0] });
+            this.setState({ topic: data[0].title[0] });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     /**

@@ -25,25 +25,29 @@ class ExtraContentList extends React.PureComponent {
      * 获取评论数
      */
     async componentDidMount() {
-        const { content } = this.props;
-        const count = [];
+        try {
+            const { content } = this.props;
+            const count = [];
 
-        const docUrl = content.map(item => item.commentUrl);
+            const docUrl = content.map(item => item.commentUrl);
 
-        const data = await jsonp('//comment.ifeng.com/get.php', {
-            data: {
-                job: 4,
-                format: 'js',
-                callback: 'getAllComment1',
-                docurl: docUrl.join('|'),
-            },
-        });
+            const data = await jsonp('//comment.ifeng.com/get.php', {
+                data: {
+                    job: 4,
+                    format: 'js',
+                    callback: 'getAllComment1',
+                    docurl: docUrl.join('|'),
+                },
+            });
 
-        data.forEach(item => {
-            count.push(item.count);
-        });
+            data.forEach(item => {
+                count.push(item.count);
+            });
 
-        this.setState({ counts: count });
+            this.setState({ counts: count });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
