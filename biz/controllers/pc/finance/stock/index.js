@@ -25,6 +25,12 @@ exports.list = {
         // 搜索
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
+        // Logo
+        let logo = KVProxy.getStaticFragment(10133).then(...handleJsonByKey(ctx, 'content'));
+
+        // Logo Ad
+        let logoAd = KVProxy.getStaticFragment(10134).then(...handleJsonByKey(ctx, 'content'));
+
         // 股票导航
         let navigation = KVProxy.getStaticFragment(10038).then(...handleJsonByKey(ctx, 'content'));
 
@@ -210,11 +216,16 @@ exports.list = {
         let cooperation = KVProxy.getStaticFragment(10074).then(...handleJs(ctx, 'content'));
 
         // 底部公用版权
-        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
+
+        // 二维码
+        let qrCode = KVProxy.getStaticFragment(10136).then(...handleJsonByKey(ctx, 'content'));
 
         [
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
             stockPlateStyle,
@@ -277,10 +288,13 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         ] = await Promise.all([
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
             stockPlateStyle,
@@ -343,12 +357,15 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         ]);
 
         let allData = {
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
             stockPlateStyle,
@@ -411,7 +428,8 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         };
 
         await ctx.html('finance_stock', {

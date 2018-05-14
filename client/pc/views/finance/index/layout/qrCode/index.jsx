@@ -25,7 +25,7 @@ class QrCode extends React.PureComponent {
      */
     render() {
         const { isShow } = this.state;
-        const { content } = this.props;
+        const content = this.props.content[0];
 
         const qrCode = (
             <div className={styles.qrCode} style={{ display: isShow ? 'block' : 'none' }}>
@@ -49,7 +49,7 @@ class QrCode extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-QrCode.propTypes = { content: PropTypes.object };
+QrCode.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

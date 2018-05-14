@@ -25,6 +25,12 @@ exports.list = {
         // 搜索
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
+        // Logo
+        let logo = KVProxy.getStaticFragment(10131).then(...handleJsonByKey(ctx, 'content'));
+
+        // Logo Ad
+        let logoAd = KVProxy.getStaticFragment(10132).then(...handleJsonByKey(ctx, 'content'));
+
         // 财经首页导航
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
@@ -112,9 +118,14 @@ exports.list = {
         // 底部公用版权
         let footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
 
+        // 二维码
+        let qrCode = KVProxy.getStaticFragment(10135).then(...handleJsonByKey(ctx, 'content'));
+
         [
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             bannerPic,
             headline,
@@ -144,9 +155,12 @@ exports.list = {
             comicBook,
             financeVideo,
             footer,
+            qrCode,
         ] = await Promise.all([
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             bannerPic,
             headline,
@@ -176,11 +190,14 @@ exports.list = {
             comicBook,
             financeVideo,
             footer,
+            qrCode,
         ]);
 
         let allData = {
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             bannerPic,
             headline,
@@ -210,6 +227,7 @@ exports.list = {
             comicBook,
             financeVideo,
             footer,
+            qrCode,
         };
 
         await ctx.html('finance_index', {

@@ -29,7 +29,7 @@ class Layout extends React.PureComponent {
             search: content.search,
             topAd: content.topAd,
             logo: content.logo,
-            logoAd: content.logo_ad,
+            logoAd: content.logoAd,
         };
         const navigationData = {
             nav: content.navigation,
@@ -162,7 +162,9 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
-                <QrCode content={qrCode} />
+                <Chip id="10136" type="static" title="二维码" groupName="二维码" content={qrCode}>
+                    <QrCode />
+                </Chip>
                 <BottomAffix />
                 <ChipEdit />
             </div>

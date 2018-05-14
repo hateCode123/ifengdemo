@@ -70,8 +70,6 @@ class ExtraContentList extends React.PureComponent {
             广告: 'ad',
         };
 
-        console.log(content[0]);
-
         return (
             <div className={styles.ExtraContentList}>
                 {content.map((item, index) => (

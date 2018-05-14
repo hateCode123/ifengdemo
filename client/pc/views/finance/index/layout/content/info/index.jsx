@@ -8,6 +8,7 @@ import Ad from '../../../../../../components/ad/';
 
 class Info extends React.PureComponent {
     state = {
+        tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
         listNum: 5,
     };
@@ -38,7 +39,7 @@ class Info extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, listNum } = this.state;
+        const { tabs, current, listNum } = this.state;
         const { content } = this.props;
         const data = content.content[current];
         const contentList = [];
@@ -72,7 +73,7 @@ class Info extends React.PureComponent {
 
         return (
             <div className={styles.info}>
-                <Tabs content={content.tabs} current={current} handleTabsChange={this.handleTabsChange} />
+                <Tabs content={tabs} current={current} handleTabsChange={this.handleTabsChange} />
                 <div className={styles.content}>
                     <div className={styles.list}>
                         {contentList}
