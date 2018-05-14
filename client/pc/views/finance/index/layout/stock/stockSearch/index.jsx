@@ -5,6 +5,15 @@ import { jsonp } from '@ifeng/ui_base';
 
 class StockSearch extends React.PureComponent {
     state = {
+        type: {
+            stock: '股票',
+            fund: '基金',
+            hkstock: '港股',
+            usstock: '美股',
+            forex: '外汇',
+            bond: '债券',
+        },
+        searchTxt: '代码/拼音',
         current: null,
         isShow: false,
         data: [],
@@ -37,8 +46,10 @@ class StockSearch extends React.PureComponent {
         );
     };
 
-    handleKeyup = e => {
+    handleChange = e => {
         const val = e.target.value;
+
+        this.setState({ searchTxt: val });
 
         if (val !== '') {
             this.getList(val);
@@ -85,13 +96,23 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handleFocus = () => {
-        this.setState({ isShow: true });
+    handleFocus = e => {
+        const val = e.target.value;
+
+        this.setState({
+            searchTxt: val === '代码/拼音' ? '' : val,
+            isShow: true,
+        });
     };
 
-    handleBlur = () => {
+    handleBlur = e => {
+        const val = e.target.value;
+
         setTimeout(() => {
-            this.setState({ isShow: false });
+            this.setState({
+                searchTxt: val === '' ? '代码/拼音' : val,
+                isShow: false,
+            });
         }, 150);
     };
 
@@ -109,23 +130,14 @@ class StockSearch extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, isShow, data } = this.state;
-        const type = {
-            stock: '股票',
-            fund: '基金',
-            hkstock: '港股',
-            usstock: '美股',
-            forex: '外汇',
-            bond: '债券',
-        };
+        const { type, current, searchTxt, isShow, data } = this.state;
 
         return (
             <div className={`${styles.search_box} clearfix`}>
                 <div className={styles.text}>
                     <input
-                        id="searchInput"
-                        placeholder="代码/拼音"
-                        onKeyUp={this.handleKeyup}
+                        value={searchTxt}
+                        onChange={this.handleChange}
                         onKeyDown={this.handleKeydown}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}

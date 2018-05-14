@@ -8,22 +8,14 @@ class Histogram extends React.PureComponent {
      */
     getStyle = tenDayList => {
         const styles = [];
-        let d = 0;
 
         // 柱状图每只最大值
-        let flowMax = 0;
+        const flowMax = Math.max(...tenDayList.map(item => Math.abs(item)));
 
-        for (let i = 0; i < tenDayList.length; i++) {
-            d = Math.abs(tenDayList[i]);
-            if (d > flowMax) {
-                flowMax = d;
-            }
-        }
-        for (let i = 0; i < tenDayList.length; i++) {
-            d = tenDayList[i];
-            const height = Math.abs(12 * (d / flowMax));
+        tenDayList.forEach(item => {
+            const height = Math.abs(12 * (item / flowMax));
 
-            if (d > 0) {
+            if (item > 0) {
                 styles.push({
                     color: 'red',
                     style: { height: `${height}px`, marginTop: `${12 - height}px` },
@@ -34,7 +26,7 @@ class Histogram extends React.PureComponent {
                     style: { height: `${height}px`, marginTop: '12px' },
                 });
             }
-        }
+        });
 
         return styles;
     };

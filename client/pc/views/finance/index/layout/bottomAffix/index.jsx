@@ -56,12 +56,12 @@ class BottomAffix extends React.PureComponent {
         this.setState({ fundsShow: !fundsShow });
     };
 
-    handleMouseOver = flag => {
-        if (flag === 0) {
-            this.setState({ quoteShow: false });
-        } else if (flag === 1) {
-            this.setState({ fundsShow: false });
-        }
+    handleQuoteMouseOver = () => {
+        this.setState({ quoteShow: false });
+    };
+
+    handleFundsMouseOver = () => {
+        this.setState({ fundsShow: false });
     };
 
     handleQuoteChange = e => {
@@ -72,16 +72,16 @@ class BottomAffix extends React.PureComponent {
         this.setState({ funds: e.target.value });
     };
 
-    handleSearch = flag => {
-        if (flag === 0) {
-            const quote = this.state.quote;
+    handleQuoteSearch = () => {
+        const quote = this.state.quote;
 
-            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
-        } else if (flag === 1) {
-            const funds = this.state.funds;
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
+    };
 
-            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
-        }
+    handleFundsSearch = () => {
+        const funds = this.state.funds;
+
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
     };
 
     /**
@@ -102,14 +102,14 @@ class BottomAffix extends React.PureComponent {
                                 </a>
                                 <div
                                     className={`${styles.caption} ${quoteShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={() => this.handleMouseOver(0)}>
+                                    onMouseLeave={this.handleQuoteMouseOver}>
                                     <div className={styles.search}>
                                         <input
                                             className="quote"
                                             placeholder="代码/拼音/名称"
                                             onChange={this.handleQuoteChange}
                                         />
-                                        <a onClick={() => this.handleSearch(0)}>搜索</a>
+                                        <a onClick={this.handleQuoteSearch}>搜索</a>
                                     </div>
                                 </div>
                             </td>
@@ -122,14 +122,14 @@ class BottomAffix extends React.PureComponent {
                                 </a>
                                 <div
                                     className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={() => this.handleMouseOver(1)}>
+                                    onMouseLeave={this.handleFundsMouseOver}>
                                     <div className={styles.search}>
                                         <input
                                             className="funds"
                                             placeholder="代码/拼音/名称"
                                             onChange={this.handleFundsChange}
                                         />
-                                        <a onClick={() => this.handleSearch(1)}>搜索</a>
+                                        <a onClick={this.handleFundsSearch}>搜索</a>
                                     </div>
                                 </div>
                             </td>

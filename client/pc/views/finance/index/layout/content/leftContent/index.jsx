@@ -28,7 +28,6 @@ class LeftContent extends React.PureComponent {
                 <Chip id="20004" type="recommend" title="推荐" groupName="正文" content={content.recommend}>
                     <Recommend />
                 </Chip>
-                <div className={styles.col_R} />
             </div>
         );
     }

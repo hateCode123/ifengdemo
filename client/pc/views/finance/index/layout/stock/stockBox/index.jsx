@@ -49,24 +49,24 @@ class StockBox extends React.PureComponent {
             jsonpCallback: 'getResult',
         });
 
-        for (let a = 0; a < Object.keys(result).length; a++) {
+        codeList.forEach(item => {
             let style = '';
 
-            if (result[codeList[a]][2] > 0) {
+            if (result[item][2] > 0) {
                 style = 'red';
-            } else if (result[codeList[a]][2] < 0) {
+            } else if (result[item][2] < 0) {
                 style = 'green';
             } else {
                 style = 'black';
             }
 
             price.push({
-                price: result[codeList[a]][0],
-                index: result[codeList[a]][2],
-                percent: result[codeList[a]][3],
+                price: result[item][0],
+                index: result[item][2],
+                percent: result[item][3],
                 style,
             });
-        }
+        });
 
         this.setState({ prices: price });
     }

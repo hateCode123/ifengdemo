@@ -18,6 +18,13 @@ class Topic extends React.PureComponent {
         }, 30000);
     }
 
+    /**
+     * 卸载定时器
+     */
+    componentWillUnmount() {
+        clearInterval();
+    }
+
     getData = async () => {
         const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
             data: {

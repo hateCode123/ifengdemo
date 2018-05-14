@@ -6,6 +6,7 @@ import Title from './title/';
 class Headline extends React.PureComponent {
     state = {
         isOver: false,
+        isShow: false,
         data: this.props.content,
     };
 
@@ -14,8 +15,13 @@ class Headline extends React.PureComponent {
      */
     handleOver = () => {
         const { isOver } = this.state;
+        const { content } = this.props;
+        const isShow = !isOver && content.length > 8;
 
-        this.setState({ isOver: !isOver });
+        this.setState({
+            isOver: !isOver,
+            isShow,
+        });
     };
 
     /**
@@ -35,8 +41,7 @@ class Headline extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { data, isOver } = this.state;
-        const { content } = this.props;
+        const { data, isShow } = this.state;
 
         return (
             <div className={styles.box} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
@@ -46,11 +51,7 @@ class Headline extends React.PureComponent {
                     <Title title={data[4]} text={data[5]} />
                     <Title title={data[6]} text={data[7]} />
                 </div>
-                <div
-                    className={styles.hyh}
-                    style={{ display: isOver && content.length > 8 ? 'block' : 'none' }}
-                    onClick={this.handleChange}
-                />
+                <div className={`${styles.hyh} ${isShow ? styles.show : styles.hide}`} onClick={this.handleChange} />
             </div>
         );
     }

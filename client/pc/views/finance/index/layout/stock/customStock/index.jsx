@@ -7,6 +7,13 @@ import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 
 class CustomStock extends React.PureComponent {
     state = {
+        tabs: [
+            { title: '股票名称', width: 68 },
+            { title: '股价', width: 80 },
+            { title: '涨跌幅', width: 82 },
+            { title: '涨跌', width: 72 },
+            { title: '研报', width: '' },
+        ],
         customStock: [],
         userInfo: auth.isLogin() ? auth.getUserInfo() : null,
     };
@@ -46,29 +53,27 @@ class CustomStock extends React.PureComponent {
 
             const customStock = [];
 
-            for (let a = 0; a < Object.keys(result).length; a++) {
+            codeList.forEach((item, index) => {
                 let style = '';
 
-                if (result[codeList[a]][2] > 0) {
+                if (result[item][2] > 0) {
                     style = 'red';
-                } else if (result[codeList[a]][2] < 0) {
+                } else if (result[item][2] < 0) {
                     style = 'green';
                 } else {
                     style = 'black';
                 }
 
                 customStock.push({
-                    url: `//finance.ifeng.com/app/hq/stock/${codeList[a]}`,
-                    name: nameList[a],
-                    price: result[codeList[a]][0],
-                    index: result[codeList[a]][2],
-                    percent: result[codeList[a]][3],
+                    url: `//finance.ifeng.com/app/hq/stock/${item}`,
+                    name: nameList[index],
+                    price: result[item][0],
+                    index: result[item][2],
+                    percent: result[item][3],
                     style,
-                    report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${
-                        codeList[a]
-                    }`,
+                    report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${item}`,
                 });
-            }
+            });
 
             this.setState({ customStock });
         } catch (e) {
@@ -91,15 +96,8 @@ class CustomStock extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { customStock } = this.state;
+        const { tabs, customStock } = this.state;
         const isLogin = auth.isLogin();
-        const tabs = [
-            { title: '股票名称', width: 68 },
-            { title: '股价', width: 80 },
-            { title: '涨跌幅', width: 82 },
-            { title: '涨跌', width: 72 },
-            { title: '研报', width: '' },
-        ];
         let tip = '';
 
         if (isLogin) {

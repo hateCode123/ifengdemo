@@ -10,4 +10,10 @@
         height: 24px;
         cursor: pointer;
     }
+    & .show {
+        display: block;
+    }
+    & .hide {
+        display: none;
+    }
 }
