@@ -110,7 +110,7 @@ exports.list = {
         let financeVideo = KVProxy.getCustom('finance_22005_10736_28').then(...handleJson(ctx));
 
         // 底部公用版权
-        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
 
         [
             nav,
