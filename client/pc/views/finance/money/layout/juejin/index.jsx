@@ -6,7 +6,7 @@ import '../../reset.css';
 import { rel } from '../../../../../utils/rel';
 import CommonTitleL from './../commonTitleL/';
 import Licaisudi from './../licaisudi/';
-import HotFunds from '../hotFunds/';
+import HotFunds from '../hotfunds/';
 
 class Juejin extends React.PureComponent {
     /**
