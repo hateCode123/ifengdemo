@@ -174,13 +174,17 @@ exports.list = {
         let singleStockTitle = KVProxy.getStaticFragment(10088).then(...handleJsonByKey(ctx, 'content'));
 
         // 市场雷达
-        let marketRadar = KVProxy.getStaticFragment(10089).then(...handleJsonByKey(ctx, 'content'));
+        let marketRadarTabs = KVProxy.getStaticFragment(10089).then(...handleJsonByKey(ctx, 'content'));
+        let marketRadar = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/marketradar.json').then(...handleJs(ctx));
 
         // 大单追踪
-        let track = KVProxy.getStaticFragment(10090).then(...handleJsonByKey(ctx, 'content'));
+        let trackTabs = KVProxy.getStaticFragment(10090).then(...handleJsonByKey(ctx, 'content'));
+        let track = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/bigtrack.json').then(...handleJs(ctx));
 
         // 5日增减仓
-        let fiveDays = KVProxy.getStaticFragment(10091).then(...handleJsonByKey(ctx, 'content'));
+        let fiveDaysTabs = KVProxy.getStaticFragment(10091).then(...handleJsonByKey(ctx, 'content'));
+        let fiveDaysBuy = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_buy.json').then(...handleJs(ctx));
+        let fiveDaysSell = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_sell.json').then(...handleJs(ctx));
 
         // 高手学堂标题
         let schoolTitle = KVProxy.getStaticFragment(10069).then(...handleJsonByKey(ctx, 'content'));
@@ -283,9 +287,13 @@ exports.list = {
             gnin,
             gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
@@ -355,9 +363,13 @@ exports.list = {
             gnin,
             gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
@@ -429,9 +441,13 @@ exports.list = {
             gnin,
             gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
