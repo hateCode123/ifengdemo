@@ -135,9 +135,7 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <AnimationPic content={animationPic} />
-                        <Chip id="10086" type="static" title="股票展示" groupName="导航栏" content={stockPlate}>
-                            <StockPlate stockPlate={stockPlate} />
-                        </Chip>
+                        <StockPlate content={stockPlate} />
                         <div className={styles.search_box}>
                             <StockSearch />
                             <Chip id="10044" type="static" title="导航跳转链接" groupName="导航栏" content={jumpLink}>
