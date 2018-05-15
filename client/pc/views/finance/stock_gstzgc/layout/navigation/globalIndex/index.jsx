@@ -31,7 +31,7 @@ class GlobalIndex extends React.PureComponent {
     };
 
     /**
-     * 请求数据
+     * 请求数据,map调整，5000setInterval
      */
     async componentDidMount() {
         const { stock } = this.state;
