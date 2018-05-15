@@ -34,43 +34,43 @@ exports.list = {
         // 财经首页导航
         let navigation = KVProxy.getStaticFragment(10002).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20002...');
+        // 焦点图
         let bannerPic = KVProxy.getRecommendFragment(20002).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 20003...');
+        // 头条新闻
         let headline = KVProxy.getRecommendFragment(20003).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getStaticFragment 10011...');
+        // 头条新闻多拼新闻
         let extraNews = KVProxy.getStaticFragment(10011).then(...handleJs(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20004...');
+        // 推荐新闻
         let recommend = KVProxy.getRecommendFragment(20004).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 10008...');
+        // 大咖说
         let talking = KVProxy.getStaticFragment(10008).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 10009...');
+        // 财商教育
         let finance = KVProxy.getStaticFragment(10009).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 10010...');
+        // 炒股大赛
         let stocks = KVProxy.getStaticFragment(10010).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20005...');
+        // 大咖说新闻列表
         let talkingList = KVProxy.getRecommendFragment(20005).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 20006...');
+        // 财商教育新闻列表
         let financeList = KVProxy.getRecommendFragment(20006).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 20007...');
+        // 炒股大赛新闻列表
         let stocksList = KVProxy.getRecommendFragment(20007).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 10012...');
+        // 标题广告
         let titleAd = KVProxy.getStaticFragment(10012).then(...handleJs(ctx, 'content'));
 
-        // console.log('getRecommendFragment 20008...');
+        // 研究院
         let institute = KVProxy.getRecommendFragment(20008).then(...handleJsonByKey(ctx, 'data'));
 
-        // console.log('getRecommendFragment 20010...');
+        // 专题会议
         let meeting = KVProxy.getRecommendFragment(20010).then(...handleJsonByKey(ctx, 'data'));
 
         // 底部合作链接
