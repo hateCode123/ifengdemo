@@ -17,8 +17,8 @@ import Slider from './slider/';
 import NewsListDownSlider from './newsListDownSlider/';
 import NewsListLeft from './newsListLeft/';
 
-import JueJin from './jueJin/';
-import TaoJin from './taoJin/';
+import JueJin from './juejin/';
+import TaoJin from './taojin/';
 import Rediantuijian from './rediantuijian/';
 
 import Cnlc from './cnlc/';
