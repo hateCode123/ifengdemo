@@ -1,0 +1,128 @@
+.zdph {
+    margin-top: 10px;
+}
+.zdph_table {
+    composes: clearfix from global;
+    height: 203px;
+    overflow: hidden;
+    border-bottom: 1px solid #cccccc;
+}
+.table_head {
+    height: 25px;
+    background: #d8ebfe;
+    padding-left: 65px;
+    & .gpmc {
+        float: left;
+        display: block;
+        width: 167px;
+        text-align: center;
+        color: #2b2b2b;
+        line-height: 25px;
+        text-decoration: none;
+    }
+    & .zdf {
+        cursor: pointer;
+        display: block;
+        width: 56px;
+        height: 21px;
+        margin-top: 2px;
+
+        float: left;
+        padding-left: 9px;
+        line-height: 21px;
+        color: #2b2b2b;
+        text-decoration: none;
+    }
+    & .zdf_01 {
+        display: block;
+        width: 56px;
+        height: 21px;
+        margin-top: 2px;
+        float: left;
+        padding-left: 9px;
+        line-height: 21px;
+        color: #2b2b2b;
+        text-decoration: none;
+    }
+    & .zdf_02 {
+        display: block;
+        width: 56px;
+        height: 21px;
+        margin-top: 2px;
+        float: left;
+        padding-left: 9px;
+        line-height: 21px;
+        color: #2b2b2b;
+        text-decoration: none;
+        background: url(http://y2.ifengimg.com/38716b164e0f5e63/2013/0908/mor_02.png) no-repeat;
+    }
+}
+.tr_title {
+    width: 64px;
+    border-right: 1px solid #e7e8e9;
+    float: left;
+    overflow: hidden;
+    & li {
+        background: #d8ebfe;
+        width: 64px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        color: #666666;
+        cursor: pointer;
+        background: url(http://y2.ifengimg.com/a/2013/0903/g_19.png) repeat-x left bottom;
+        overflow: hidden;
+    }
+    & .cur {
+        background: #73ade5;
+        color: #fff;
+        background: url(http://y2.ifengimg.com/a/2013/0903/g_18.png) repeat-x left bottom;
+    }
+}
+.table_content {
+    width: 235px;
+    overflow: hidden;
+    float: left;
+    background: url(http://p0.ifengimg.com/fe/cj-tzgc/images/g_20_9696f9bd.png) repeat-y left -1px;
+    & .td1 {
+        width: 167px;
+    }
+    & td {
+        text-align: center;
+        line-height: 30px;
+        height: 30px;
+        overflow: hidden;
+        & a {
+            color: #2b2b2b;
+            text-decoration: none;
+            & img {
+                vertical-align: middle;
+                padding-left: 3px;
+            }
+        }
+        & span {
+            display: block;
+            width: 58px;
+            height: 27px;
+            line-height: 27px;
+        }
+    }
+    & .red {
+        color: #f54343;
+    }
+    & .green {
+        color: #017f01;
+    }
+    /* & .black {
+        color: #222;
+    } */
+}
+.loading_img {
+    border: opx;
+    width: 150px;
+    height: 29px;
+    margin-left: 10px;
+    margin-top: 75px;
+}
+
+/* tr */

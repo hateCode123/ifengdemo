@@ -1,5 +1,5 @@
-const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
-const { handleJson, handleJsonByKey } = require('../../../../../services/common/common');
+﻿const { KVProxy } = require('../../../../providers/ucmsapiProxy');
+const { handleJson, handleJsonByKey } = require('../../../../services/common/common');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 

@@ -1,0 +1,28 @@
+.data {
+    composes: clearfix from global;
+    font-size: 14px;
+    display: block;
+    padding: 12px 0 0;
+    height: 21px;
+    color: #bd2436;
+    font: Arial;
+    & img {
+        width: 11px;
+        height: 10px;
+    }
+    & a {
+        float: right;
+        font-size: 12px;
+        margin-top: 0;
+    }
+}
+
+.red {
+    color: #bd2436;
+}
+.green {
+    color: #017f01;
+}
+.black {
+    color: #222;
+}

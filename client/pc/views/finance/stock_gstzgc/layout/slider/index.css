@@ -1,0 +1,38 @@
+.slide {
+    width: 640px;
+    height: 280px;
+    border: 1px solid #eee;
+    & [ifeng_ui_pc_sliders-dots-item] {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background: #fff;
+        margin: 0px 2px 0px 6px;
+        cursor: pointer;
+        position: relative;
+        top: 18px;
+    }
+
+    & [ifeng_ui_pc_sliders-dots-item='current'] {
+        background: #2e60a7;
+    }
+
+    & [ifeng_ui_pc_sliders-title] {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        line-height: 38px;
+        padding: 0 10px;
+        color: #fff;
+        font-size: 14px;
+    }
+    & [ifeng_ui_pc_sliders-link] :hover {
+        text-decoration: underline;
+    }
+}
