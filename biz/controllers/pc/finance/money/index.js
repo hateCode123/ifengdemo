@@ -70,8 +70,7 @@ exports.financeWemoney = {
 
         const banner = KVProxy.getStaticFragment(10128).then(...handleJsonByKey(ctx, 'content'));
         // 底部公用版权
-        const footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
-
+        const footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
         // 页面公用导航
         const nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
         // 搜索

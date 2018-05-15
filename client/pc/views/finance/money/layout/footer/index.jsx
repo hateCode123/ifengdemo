@@ -14,6 +14,7 @@ class BottomFooter extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+       
         // const { bottomAd } = content;
 
         // const BottomAd = (
