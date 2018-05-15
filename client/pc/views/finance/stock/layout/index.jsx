@@ -100,9 +100,13 @@ class Layout extends React.PureComponent {
             gnin: content.gnin,
             gnout: content.gnout,
             singleStockTitle: content.singleStockTitle,
+            marketRadarTabs: content.marketRadarTabs,
             marketRadar: content.marketRadar,
+            trackTabs: content.trackTabs,
             track: content.track,
-            fiveDays: content.fiveDays,
+            fiveDaysTabs: content.fiveDaysTabs,
+            fiveDaysBuy: content.fiveDaysBuy,
+            fiveDaysSell: content.fiveDaysSell,
             hotSpotsAd: content.hotSpotsAd,
         };
         const schoolData = {
