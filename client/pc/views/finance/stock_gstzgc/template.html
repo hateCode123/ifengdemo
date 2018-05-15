@@ -6,7 +6,23 @@
     <meta content="always" name="referrer">
     <title></title>
     <script>
-        let jsonData = <%- JSON.stringify(allData) %>;
+        let _jsonData_ = <%- JSON.stringify(allData) %>;
+        let jsonData = { ..._jsonData_,
+            hardAd: {
+                data: {
+                    title: '硬广'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
+            },
+            bottomAd: {
+                data: {
+                    title: 'bottomAd'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+        }
 
     </script>
     <!-- 硬广 -->
