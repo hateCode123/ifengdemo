@@ -1,0 +1,92 @@
+.flow_box {
+    composes: clearfix from global;
+    margin-top: 18px;
+    overflow: hidden;
+}
+
+.tabs {
+    float: left;
+    width: 74px;
+}
+
+.list .item {
+    cursor: pointer;
+    width: 56px;
+    height: 20px;
+    line-height: 20px;
+    color: #f54343;
+    border-radius: 4px;
+    border: solid 1px #f54343;
+    padding-left: 11px;
+    margin-bottom: 6px;
+}
+
+.list .current {
+    background: url('./licurr.jpg') no-repeat;
+    color: #fff;
+    width: 63px;
+    border: none;
+}
+
+.more a {
+    color: #f54343;
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.table {
+    float: left;
+    width: 425px;
+    margin-left: 15px;
+}
+
+.head {
+    width: 425px;
+    & tbody tr th {
+        background: #fdebeb;
+        border-bottom: solid 1px #fccfd0;
+        height: 24px;
+        line-height: 24px;
+        color: #666;
+    }
+}
+
+.list {
+    & td {
+        color: #222;
+        height: 24px;
+        line-height: 24px;
+        border-bottom: 1px solid #ebebeb;
+    }
+}
+
+.histogram {
+    padding-left: 33px;
+    color: #222;
+    height: 24px;
+    line-height: 24px;
+    border-bottom: 1px solid #ebebeb;
+    & a {
+        & .red {
+            background: #ff2a00;
+            width: 8px;
+        }
+        & .green {
+            background: #029d3f;
+            width: 8px;
+        }
+        & div {
+            float: left;
+            border-right: 3px solid #fff;
+            font-size: 0px;
+        }
+    }
+}
+
+.red {
+    color: #ff433d !important;
+}
+
+.green {
+    color: #54b59c !important;
+}

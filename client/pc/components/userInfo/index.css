@@ -1,0 +1,87 @@
+.login {
+    float: right;
+    width: 158px;
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+    color: #666;
+    overflow: hidden;
+    & .login_in {
+        color: #666;
+        margin-left: 6px;
+        cursor: pointer;
+    }
+    & .login_in:hover {
+        text-decoration: underline;
+    }
+    & a {
+        color: #666;
+    }
+    & a:hover {
+        text-decoration: underline;
+    }
+}
+
+.login_after {
+    float: right;
+    margin-top: 6px;
+    width: 140px;
+    font-family: microsoft yahei;
+    font-size: 12px;
+    & .login_info {
+        width: 125px;
+        display: block;
+        & .login_name {
+            float: left;
+            width: 85px;
+            color: #2b2b2b;
+            text-align: right;
+            cursor: pointer;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        & .login_name:hover {
+            color: #f54343;
+        }
+        & .login_option {
+            color: #004276;
+            background: url('./spritesize47_w1000_h2000.png') no-repeat;
+            padding: 5px 8px;
+            display: block;
+            float: left;
+        }
+        & .up {
+            background-position: 6px -298px;
+        }
+        & .down {
+            background-position: 6px -198px;
+        }
+    }
+    & .login_out {
+        color: #333;
+        background: none;
+        padding-left: 5px;
+        float: left;
+        cursor: pointer;
+        & .login_out:hover {
+            color: #f54343;
+        }
+    }
+    & .options {
+        border: 1px solid #dedede;
+        position: absolute;
+        top: 32px;
+        right: 42px;
+        background: #fff;
+        padding: 0 12px;
+        z-index: 99;
+        & li {
+            padding: 7px 0 10px;
+            background: red url('./spritesize47_w1000_h2000.png') no-repeat -500px -68px;
+            & a {
+                color: #333;
+            }
+        }
+    }
+}

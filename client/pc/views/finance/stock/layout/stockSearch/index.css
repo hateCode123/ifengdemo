@@ -1,0 +1,96 @@
+.search_box {
+    width: 450px;
+    float: left;
+    & .text {
+        position: relative;
+        width: 400px;
+        line-height: 22px;
+        font-size: 12px;
+        z-index: 65;
+        color: #2b2b2b;
+        & .stockList {
+            position: absolute;
+            top: 23px;
+            left: 0;
+            width: 300px;
+            border: 1px solid #195184;
+            background: #fff;
+            z-index: 999;
+            & table {
+                width: 100%;
+                border: 0;
+                & tbody {
+                    & tr td {
+                        border-bottom: 1px solid #ececec;
+                        height: 21px !important;
+                        height: 20px;
+                        padding-left: 12px;
+                        text-align: left;
+                        color: #333;
+                    }
+                    & .current {
+                        background: #194e80;
+                        cursor: pointer;
+                        & td {
+                            color: #fff;
+                            background: #194e80;
+                        }
+                    }
+                }
+            }
+        }
+        & .tip {
+            float: left;
+            margin-right: 10px;
+            color: #2b2b2b;
+            text-decoration: none;
+        }
+        & input {
+            margin-right: 9px;
+            width: 164px;
+            height: 20px;
+            line-height: 20px;
+            float: left;
+            border: 1px solid #dddddd;
+            padding-left: 6px;
+            color: #999;
+        }
+        & select {
+            float: left;
+            margin-right: 10px;
+            height: 22px;
+            line-height: 22px;
+        }
+        & .q_btn {
+            float: left;
+            border: none;
+            background: url(./g_03.png) left top no-repeat;
+            height: 22px;
+            width: 62px;
+            cursor: pointer;
+        }
+        & .f_btn {
+            float: left;
+            border: none;
+            background: url(./62fc144eb7de0e5.png) left top no-repeat;
+            height: 22px;
+            width: 74px;
+            cursor: pointer;
+            position: absolute;
+            margin-left: 10px;
+        }
+    }
+    & .btn {
+        width: 17px;
+        height: 18px;
+        float: left;
+        & .search {
+            display: block;
+            border: none;
+            background: none;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+    }
+}

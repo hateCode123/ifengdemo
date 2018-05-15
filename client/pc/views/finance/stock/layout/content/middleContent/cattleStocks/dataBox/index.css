@@ -1,0 +1,28 @@
+.data_box {
+    &>span {
+        display: block;
+        height: 30px;
+        width: 240px;
+        font-size: 14px;
+        display: block;
+        padding: 12px 0 0;
+        color: #f54343;
+        & .price {
+            display: inline;
+            font-weight: bold;
+        }
+        &>a {
+            float: right;
+            font-size: 12px;
+            margin-top: 0;
+        }
+    }
+    &>span.green {
+        color: #44a492;
+    }
+    &>p a img {
+        display: block;
+        width: 240px;
+        height: 130px;
+    }
+}

@@ -1,0 +1,77 @@
+.list_menu {
+    float: left;
+    width: 774px;
+    height: 24px;
+    line-height: 24px;
+    & li {
+        float: left;
+        background: url(./line.gif) no-repeat left center;
+        padding: 0 9px 0 9px;
+        & a {
+            color: #2b2b2b;
+        }
+        & a:hover {
+            color: #f54343;
+        }
+    }
+    & li:first-child {
+        background: none;
+        padding-left: 2px;
+    }
+}
+
+.morehNew {
+    width: 48px;
+    float: left;
+    & ul {
+        width: 48px;
+        & li {
+            color: #2b2b2b;
+            height: 24px;
+            line-height: 24px;
+            background: url(./more_arrow.gif) no-repeat 33px center;
+            border: solid 1px #fff;
+            & a {
+                height: 24px;
+                line-height: 24px;
+                color: #2b2b2b;
+                display: block;
+                width: 40px;
+                padding-left: 8px;
+            }
+            & a:hover {
+                color: #f54343;
+                text-decoration: underline;
+            }
+        }
+        & li:hover {
+            background: url(./more_arrow.gif) no-repeat 33px center;
+            border: solid 1px #ddd;
+            color: #f54343;
+            & .more {
+                display: block;
+            }
+        }
+        & .more {
+            display: none;
+            position: absolute;
+            width: 169px;
+            background: #fff url(./nav_more_line.jpg) no-repeat -1px top;
+            border: solid 1px #ddd;
+            border-top: none;
+            height: 104px;
+            margin-left: -1px;
+            padding-left: 9px;
+            overflow: hidden;
+
+            & li {
+                width: 40px;
+                background: none;
+                padding-left: 0;
+                float: left;
+                border: #fff;
+                margin-top: 8px;
+            }
+        }
+    }
+}

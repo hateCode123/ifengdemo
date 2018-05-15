@@ -1,0 +1,5 @@
+.tab {
+    composes: clearfix from global;
+    overflow: hidden;
+    border-top: 1px solid #dddddd;
+}

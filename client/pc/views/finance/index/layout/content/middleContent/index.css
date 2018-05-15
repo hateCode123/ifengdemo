@@ -1,0 +1,27 @@
+.col_M {
+    width: 213px;
+    float: left;
+    border-left: 1px solid #e3e3e3;
+    border-right: none;
+    margin-left: 29px;
+    margin-top: 3px;
+    padding-bottom: 0px;
+}
+
+.box {
+    width: 198px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.talking {
+    margin-top: 0px;
+}
+
+.finance {
+    margin-top: 30px;
+}
+
+.stocks {
+    margin-top: 30px;
+}

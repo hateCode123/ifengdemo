@@ -1,0 +1,73 @@
+.box {
+    padding: 0 0 20px 15px;
+}
+
+.picTxt {
+    width: 198px;
+    & h3 {
+        font-size: 14px;
+        font-weight: normal;
+        padding-top: 6px;
+        padding-left: 1px;
+        line-height: 22px;
+        & a {
+            color: #3b3b3b;
+            display: block;
+            width: 198px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        & a:hover {
+            color: #f54343;
+        }
+    }
+}
+
+.pic {
+    width: 198px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    & a {
+        & span {
+            width: 71px;
+            height: 20px;
+            display: block;
+            border: 1px solid #fff;
+            position: absolute;
+            bottom: 5px;
+            left: 6px;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+    }
+}
+
+.trans {
+    width: 198px;
+    height: 120px;
+    display: block;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-backface-visibility: hidden;
+}
+
+.trans:hover {
+    transform: scale(1.04, 1.04);
+    -ms-transform: scale(1.04, 1.04);
+    -webkit-transform: scale(1.04, 1.04);
+}
+
+.txt {
+    color: #999999;
+    padding-top: 6px;
+    line-height: 18px;
+    & span {
+        padding-left: 18px;
+    }
+}

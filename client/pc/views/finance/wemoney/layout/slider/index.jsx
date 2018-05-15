@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 
 import slick from 'slick-carousel/slick/slick.css';
 import slickTheme from 'slick-carousel/slick/slick-theme.css';
-import { rel } from '../../../../../../utils/rel';
+import { rel } from '../../../../../../../utils/rel';
 
 class SimpleSlider extends React.PureComponent {
     render() {

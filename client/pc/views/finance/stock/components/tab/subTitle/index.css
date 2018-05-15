@@ -1,0 +1,15 @@
+.sub_title {
+    line-height: 30px;
+    padding-top: 6px;
+    padding-left: 26px;
+    float: left;
+    & a {
+        color: #222222;
+        margin-right: 13px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    & a:hover {
+        color: #f54343;
+    }
+}

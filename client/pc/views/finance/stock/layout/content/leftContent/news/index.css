@@ -1,0 +1,16 @@
+.news {
+    composes: clearfix from global;
+    position: relative;
+    padding-bottom: 1px;
+    overflow: hidden;
+    margin-top: 14px;
+    & .hyh {
+        position: absolute;
+        right: 0px;
+        bottom: 10px;
+        background: url(./hyh.png) no-repeat;
+        width: 51px;
+        height: 24px;
+        cursor: pointer;
+    }
+}

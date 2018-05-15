@@ -1,0 +1,28 @@
+.col_box {
+    & .content {
+        width: 100%;
+        background: url('./c_01.png') repeat-x;
+        & .col {
+            width: 1000px;
+            margin: 0 auto;
+            & .search_box {
+                position: relative;
+                height: 33px;
+                border-bottom: 1px solid #dddddd;
+                padding-top: 15px;
+            }
+        }
+        & .space20 {
+            height: 19px;
+            overflow: hidden;
+        }
+        & .space30 {
+            height: 30px;
+            overflow: hidden;
+        }
+    }
+    & .space25 {
+        height: 25px;
+        overflow: hidden;
+    }
+}

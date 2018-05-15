@@ -1,0 +1,29 @@
+.tabs {
+    width: 640px;
+    height: 40px;
+    border: solid 1px #eeeeee;
+    background: #fff;
+    & li {
+        width: 106px;
+        float: left;
+        font-size: 18px;
+        color: #212121;
+        font-weight: bold;
+        line-height: 38px;
+        font-family: '微软雅黑';
+        text-align: center;
+        cursor: pointer;
+        margin-top: -1px;
+    }
+}
+
+.current {
+    color: #ff2838;
+    border-top: solid 3px #ff2838;
+}
+
+.fix {
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+}

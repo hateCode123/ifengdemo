@@ -1,0 +1,108 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './index.css';
+import Chip from 'Chip';
+import HeadTitle from '../../components/headTitle/';
+import { Ad } from '../../../../../components/ad';
+import ResearchSearch from './researchSearch/';
+import Caption from '../../components/caption';
+import NewsList from '../../components/newsList';
+import TableTitle from '../../components/tableTitle/';
+import StarAnalyst from './starAnalyst/';
+import StockPicking from './stockPicking/';
+
+class School extends React.PureComponent {
+    /**
+     * 渲染组件
+     */
+    render() {
+        const { content } = this.props;
+        const logsList = content.logs.list;
+        const schoolList = content.school.list;
+        const {
+            starAnalystTitle,
+            starAnalyst,
+            stockPickingTitle,
+            stockPickingData0,
+            stockPickingData1,
+            stockPickingData2,
+            stockPickingData3,
+            stockPickingData4,
+        } = content;
+        const data = [stockPickingData0, stockPickingData1, stockPickingData2, stockPickingData3, stockPickingData4];
+
+        return (
+            <div className={`${styles.school} clearfix`}>
+                <Chip id="10069" type="static" title="高手学堂标题" groupName="高手学堂" content={content.schoolTitle}>
+                    <HeadTitle>
+                        <ResearchSearch />
+                    </HeadTitle>
+                </Chip>
+                <div className={styles.col_L}>
+                    <div className={styles.box}>
+                        <Chip
+                            id="10072"
+                            type="static"
+                            title="高手操盘日志标题"
+                            groupName="高手学堂"
+                            content={content.schoolSubTitle1}>
+                            <Caption />
+                        </Chip>
+                        {logsList.length > 0 ? <NewsList content={logsList} limit={6} /> : ''}
+                    </div>
+                    <div className={styles.box}>
+                        <Chip
+                            id="10073"
+                            type="static"
+                            title="股民学校标题"
+                            groupName="高手学堂"
+                            content={content.schoolSubTitle2}>
+                            <Caption />
+                        </Chip>
+                        {schoolList.length > 0 ? <NewsList content={schoolList} limit={6} /> : ''}
+                    </div>
+                    <div className={styles.ad}>
+                        <Ad content={content.schoolAd} styleName={styles.ad_box} />
+                    </div>
+                </div>
+                <div className={styles.col_R}>
+                    <div>
+                        <Chip
+                            id="10092"
+                            type="static"
+                            title="明星分析师标题"
+                            groupName="高手学堂"
+                            content={starAnalystTitle}>
+                            <TableTitle />
+                        </Chip>
+                        <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalyst} />
+                    </div>
+                    <div className={styles.data_box}>
+                        <Chip
+                            id="10094"
+                            type="static"
+                            title="研报选股标题"
+                            groupName="高手学堂"
+                            content={stockPickingTitle}>
+                            <TableTitle />
+                        </Chip>
+                        <StockPicking tabs={stockPickingTitle[0].tabs} content={data} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+/**
+ * 定义组件属性类型
+ * */
+School.propTypes = { content: PropTypes.object };
+
+/**
+ * 定义组件默认属性
+ * */
+School.defaultProps = {};
+
+export { School };
+export default School;

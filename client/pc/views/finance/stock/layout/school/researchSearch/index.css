@@ -1,0 +1,57 @@
+.researchSearch {
+    float: right;
+    width: 380px;
+    overflow: hidden;
+    margin-top: 11px;
+    & .box {
+        width: 400px;
+        line-height: 22px;
+        font-size: 12px;
+        z-index: 65;
+        color: #2b2b2b;
+        float: left;
+        & .title {
+            float: left;
+            margin-right: 10px;
+            color: #2b2b2b;
+            text-decoration: none;
+        }
+        & .option {
+            & > select {
+                width: 104px;
+                float: left;
+            }
+            & > input {
+                width: 100px;
+                height: 18px;
+                float: left;
+                display: inline;
+                color: rgb(153, 153, 153);
+            }
+        }
+        & .radio {
+            float: left;
+            padding-right: 5px;
+            line-height: 20px;
+            height: 20px;
+            vertical-align: middle;
+            & > input {
+                margin: 0 2px 0 2px;
+                vertical-align: middle;
+            }
+        }
+        & .search_btn > button {
+            display: block;
+            float: left;
+            border: none;
+            background: url(./g49.png) no-repeat left -22px;
+            height: 22px;
+            line-height: 22px;
+            color: #fff;
+            width: 42px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}

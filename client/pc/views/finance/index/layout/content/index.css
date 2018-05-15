@@ -1,0 +1,30 @@
+.col {
+    composes: clearfix from global;
+    width: 1000px;
+    margin: 25px auto 0;
+}
+
+.col_L {
+    composes: clearfix from global;
+    width: 671px;
+    float: left;
+}
+
+.ad {
+    width: 640px;
+    height: 90px;
+    margin: 36px 0px;
+}
+
+.box {
+    width: 640px;
+    height: 90px;
+    float: right;
+    text-align: center;
+    line-height: 90px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}

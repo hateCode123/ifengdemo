@@ -1,0 +1,10 @@
+.caption {
+    height: 29px;
+    & a {
+        font-size: 16px;
+        color: #2b2b2b;
+        text-decoration: none;
+        font-family: '微软雅黑';
+        font-weight: bold;
+    }
+}

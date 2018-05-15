@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="always" name="referrer">
+    <title></title>
+    <script>
+        var allData = <%- JSON.stringify(allData) %>;
+        var jsonData = {
+            nav: allData.nav,
+            search: allData.search,
+            topAd: {
+                data: {
+                    title: '顶部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
+            },
+            logo: allData.logo,
+            logoAd: allData.logoAd,
+            navigation: allData.navigation,
+            stockMarket: allData.stockMarket,
+            production: allData.production,
+            bannerPic: allData.bannerPic,
+            headline: allData.headline,
+            dayNews: allData.dayNews,
+            extraNews: allData.extraNews,
+            recommend: allData.recommend,
+            middleAd: {
+                data: {
+                    title: '中部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            comicBook: allData.comicBook,
+            talking: allData.talking,
+            talkingList: allData.talkingList,
+            finance: allData.finance,
+            financeList: allData.financeList,
+            stocks: allData.stocks,
+            stocksList: allData.stocksList,
+            titleAd: allData.titleAd,
+            financeVideo: [{
+                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
+                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
+                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
+            }, {
+                url: '//finance.ifeng.com/a/20171208/15853609_0.shtml',
+                src: '////p1.ifengimg.com/937637d0d37b9a40/2017/39/89ca464b7a87993.jpg',
+                title: '比特币在国外监管如何？',
+            }, {
+                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
+                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
+                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
+            }, ],
+            institute: allData.institute,
+            meeting: allData.meeting,
+            market: allData.market,
+            courier: allData.courier,
+            asideAd1: {
+                data: {
+                    title: '侧边广告 1'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd2: {
+                data: {
+                    title: '侧边广告 2'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd3: {
+                data: {
+                    title: '侧边广告 3'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd4: {
+                data: {
+                    title: '侧边广告 4'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd5: {
+                data: {
+                    title: '侧边广告 5'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            asideAd6: {
+                data: {
+                    title: '侧边广告 6'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            info: {
+                content: [
+                    allData.customList,
+                    allData.macroList.list,
+                    allData.stockList.list,
+                    allData.imarketsList.list,
+                    allData.companyList.list,
+                    allData.wemoneyList.list,
+                ],
+                softAd: [{
+                    url: '#',
+                    thumbnail: 'http://ued.ifeng.com/test/wt/18year/1yue/finance/images/tab_tu.jpg',
+                    title: '取消微观领域的汇兑逐步取消微观领域的汇兑限制',
+                    type: 'ad',
+                    custom: {
+                        articleTag: '广告'
+                    },
+                }],
+                hardAd: {
+                    data: {
+                        title: '硬广'
+                    },
+                    preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                    callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+                }
+            },
+            cooperation: allData.cooperation,
+            bottomAd: {
+                data: {
+                    title: '底部广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
+            },
+            footer: allData.footer,
+            qrCode: allData.qrCode,
+        };
+
+    </script>
+    {{#each htmlWebpackPlugin.files.css}}
+    <link href="{{.}}" rel="stylesheet"> {{/each}}
+</head>
+
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.chunks}}
+    <script src="{{entry}}" type="text/javascript"></script>
+    {{/each}}
+</body>
+
+</html>
