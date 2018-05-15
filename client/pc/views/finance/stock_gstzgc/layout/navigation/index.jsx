@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Nav from './nav';
-import GlobalIndex from './GlobalIndex';
+import GlobalIndex from './globalIndex';
 
 class Navigation extends React.PureComponent {
     /**
