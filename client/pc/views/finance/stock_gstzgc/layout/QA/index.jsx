@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { jsonp, loadScript } from '@ifeng/ui_base';
-import QaForm from './QAForm/';
+import QaForm from './QAform/';
 import { rel } from '../../../../../utils/rel';
 import TitleR from '../titleR';
 

@@ -10,7 +10,7 @@ import Navigation from './navigation/';
 import Topic from './topic/';
 import { Recommend } from './recommend';
 import { HeadlineNews } from './headlineNews';
-import PaperContent from './PaperContent';
+import PaperContent from './paperContent';
 import TitleR from './titleR';
 import { Live } from './live';
 import Hq from './hq';
