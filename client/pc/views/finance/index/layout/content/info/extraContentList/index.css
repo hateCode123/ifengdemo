@@ -39,7 +39,7 @@
     -webkit-transform: scale(1.04, 1.04);
 }
 
-& .text {
+.text {
     height: 26px;
     overflow: hidden;
     & a {
