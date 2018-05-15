@@ -13,18 +13,22 @@ class ThinkTank extends React.PureComponent {
      * 请求数据
      */
     async componentDidMount() {
-        const { content } = this.props;
+        try {
+            const { content } = this.props;
 
-        if (!content) {
-            const data = await jsonp('//lark.ifeng.com/lark/topic_list.jhtml?topic.categoryId=1421', {
-                data: {
-                    offset: 0,
-                    limit: 1,
-                    pageSize: 1,
-                },
-            });
+            if (!content) {
+                const data = await jsonp('//lark.ifeng.com/lark/topic_list.jhtml?topic.categoryId=1421', {
+                    data: {
+                        offset: 0,
+                        limit: 1,
+                        pageSize: 1,
+                    },
+                });
 
-            this.setState({ data: data.data.data[0] });
+                this.setState({ data: data.data.data[0] });
+            }
+        } catch (e) {
+            console.log(e);
         }
     }
 

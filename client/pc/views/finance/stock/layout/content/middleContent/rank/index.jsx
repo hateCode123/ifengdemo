@@ -86,18 +86,22 @@ class Rank extends React.PureComponent {
      * 获取数据
      */
     getData = async type => {
-        const data = await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
-            data: {
-                type,
-            },
-            jsonpCallback: 'getStockRank',
-        });
-
-        if (data.data.length > 0) {
-            this.setState({
-                loading: false,
-                data: data.data.slice(0, 5),
+        try {
+            const data = await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
+                data: {
+                    type,
+                },
+                jsonpCallback: 'getStockRank',
             });
+
+            if (data.data.length > 0) {
+                this.setState({
+                    loading: false,
+                    data: data.data.slice(0, 5),
+                });
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 

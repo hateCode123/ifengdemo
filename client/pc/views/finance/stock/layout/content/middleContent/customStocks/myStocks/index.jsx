@@ -44,27 +44,31 @@ class MyStocks extends React.PureComponent {
     };
 
     getMyStock = async () => {
-        const myStockInfo = await jsonp('//apiapp.finance.ifeng.com/mystock/get');
-        const data = myStockInfo.stockinfo;
-        const code = data.map(item => item.code).join(',');
+        try {
+            const myStockInfo = await jsonp('//apiapp.finance.ifeng.com/mystock/get');
+            const data = myStockInfo.stockinfo;
+            const code = data.map(item => item.code).join(',');
 
-        const myStockData = await jsonp('//hq.finance.ifeng.com/q.php', {
-            data: {
-                l: code,
-                f: 'json',
-                e: 'getVal(json_q)',
-            },
-            jsonpCallback: 'getVal',
-        });
+            const myStockData = await jsonp('//hq.finance.ifeng.com/q.php', {
+                data: {
+                    l: code,
+                    f: 'json',
+                    e: 'getVal(json_q)',
+                },
+                jsonpCallback: 'getVal',
+            });
 
-        data.forEach(item => {
-            const code = item.code;
+            data.forEach(item => {
+                const code = item.code;
 
-            item.price = myStockData[code][0].toFixed(2);
-            item.ext = myStockData[code][3].toFixed(2);
-        });
+                item.price = myStockData[code][0].toFixed(2);
+                item.ext = myStockData[code][3].toFixed(2);
+            });
 
-        this.setState({ data });
+            this.setState({ data });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     getTable = () => {
@@ -135,7 +139,7 @@ class MyStocks extends React.PureComponent {
                     ) : (
                         <div className={styles.login}>
                             <a onClick={this.handleLoginIn}>登录</a>
-                            <a href="https://id.ifeng.com/user/register/" target="_blank" rel={rel}>
+                            <a href="//id.ifeng.com/user/register/" target="_blank" rel={rel}>
                                 注册
                             </a>
                             <LoginDialog id={this.loginId} />

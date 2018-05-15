@@ -12,37 +12,22 @@ class Nav extends React.PureComponent {
      */
     render() {
         const { content, limit } = this.props;
-        const list = [];
-        const navMoreData = [];
-        const moreList = [];
 
-        content.map((item, index) => {
-            if (index < limit) {
-                list.push(
-                    <li key={Math.random()}>
-                        <a href={item.url} target="_blank" rel={rel}>
-                            {item.title}
-                        </a>
-                    </li>,
-                );
-            } else {
-                navMoreData.push(item);
-            }
+        const list = content.slice(0, limit).map((item, index) => (
+            <li key={index}>
+                <a href={item.url} target="_blank" rel={rel}>
+                    {item.title}
+                </a>
+            </li>
+        ));
 
-            return list;
-        });
-
-        navMoreData.map(item => {
-            moreList.push(
-                <li key={Math.random()}>
-                    <a href={item.url} target="_blank" rel={rel}>
-                        {item.title}
-                    </a>
-                </li>,
-            );
-
-            return moreList;
-        });
+        const moreList = content.slice(limit).map(item => (
+            <li key={Math.random()}>
+                <a href={item.url} target="_blank" rel={rel}>
+                    {item.title}
+                </a>
+            </li>
+        ));
 
         const nav = (
             <ul key="nav" className={styles.list_menu}>

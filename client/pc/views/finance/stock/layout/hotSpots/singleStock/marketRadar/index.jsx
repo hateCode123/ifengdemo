@@ -8,8 +8,7 @@ class MarketRadar extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
-        const { tabs, data } = content;
+        const { tabs, content } = this.props;
 
         return (
             <div className={styles.data_box}>
@@ -24,18 +23,27 @@ class MarketRadar extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {content.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
-                                <td>{item.type}</td>
-                                <td className={styles.price}>{item.price}</td>
-                                <td className={item.fouds > 0 ? styles.red : styles.green}>{item.newPrice}</td>
                                 <td>
-                                    {item.news ? (
-                                        <a href={item.news.url} target="_blank" rel={rel} title={item.news.text}>
-                                            {item.news.text.length > 20
-                                                ? `${item.news.text.slice(0, 20)}...`
-                                                : item.news.text}
+                                    {item.name ? (
+                                        <a
+                                            href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
+                                            target="_blank"
+                                            rel={rel}>
+                                            {item.name}
+                                        </a>
+                                    ) : (
+                                        ''
+                                    )}
+                                </td>
+                                <td>{item.kindname}</td>
+                                <td className={styles.price}>{item.amount}</td>
+                                <td className={item.chgpct > 0 ? styles.red : styles.green}>{item.last}</td>
+                                <td>
+                                    {item.ybinfo ? (
+                                        <a href={item.ybinfo[1]} target="_blank" rel={rel} title={item.ybinfo[2]}>
+                                            {item.ybinfo[0] ? item.ybinfo[0] : '暂无研报'}
                                         </a>
                                     ) : (
                                         ''
@@ -54,7 +62,8 @@ class MarketRadar extends React.PureComponent {
  * 定义组件属性类型
  * */
 MarketRadar.propTypes = {
-    content: PropTypes.object,
+    tabs: PropTypes.array,
+    content: PropTypes.array,
 };
 
 /**

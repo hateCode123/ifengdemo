@@ -24,59 +24,63 @@ class CustomStocks extends React.PureComponent {
     };
 
     getCookie = async () => {
-        const userSawList = cookie.get('user_saw_stock_map');
-        let data = [];
-        let code = '';
-        let isLastest = true;
+        try {
+            const userSawList = cookie.get('user_saw_stock_map');
+            let data = [];
+            let code = '';
+            let isLastest = true;
 
-        if (userSawList === '') {
-            const stockData = await jsonp('http://apiapp.finance.ifeng.com/hotstockrank', {
+            if (userSawList === '') {
+                const stockData = await jsonp('//apiapp.finance.ifeng.com/hotstockrank', {
+                    data: {
+                        type: 'wx',
+                        callback: 'test',
+                    },
+                    jsonpCallback: 'test',
+                });
+
+                stockData.slice(0, 4).forEach(item => {
+                    const d = [];
+
+                    d.push(item.code);
+                    d.push(item.name);
+
+                    data.push(d);
+                });
+
+                code = data.map(item => item[0]).join(',');
+                isLastest = false;
+            } else {
+                const list = userSawList.split(',').map(item => item.split(':'));
+
+                data = list.map(item => item.slice(0, 2));
+                code = data.map(item => item[0]).join(',');
+                isLastest = true;
+            }
+
+            const stockData = await jsonp('//hq.finance.ifeng.com/q.php', {
                 data: {
-                    type: 'wx',
-                    callback: 'test',
+                    l: code,
+                    f: 'json',
+                    e: 'getVal(json_q)',
                 },
-                jsonpCallback: 'test',
+                jsonpCallback: 'getVal',
             });
 
-            stockData.slice(0, 4).forEach(item => {
-                const d = [];
+            data.forEach(item => {
+                const code = item[0];
 
-                d.push(item.code);
-                d.push(item.name);
-
-                data.push(d);
+                item.push(stockData[code][0].toFixed(2));
+                item.push(stockData[code][3].toFixed(2));
             });
 
-            code = data.map(item => item[0]).join(',');
-            isLastest = false;
-        } else {
-            const list = userSawList.split(',').map(item => item.split(':'));
-
-            data = list.map(item => item.slice(0, 2));
-            code = data.map(item => item[0]).join(',');
-            isLastest = true;
+            this.setState({
+                isLastest,
+                data,
+            });
+        } catch (e) {
+            console.log(e);
         }
-
-        const stockData = await jsonp('//hq.finance.ifeng.com/q.php', {
-            data: {
-                l: code,
-                f: 'json',
-                e: 'getVal(json_q)',
-            },
-            jsonpCallback: 'getVal',
-        });
-
-        data.forEach(item => {
-            const code = item[0];
-
-            item.push(stockData[code][0].toFixed(2));
-            item.push(stockData[code][3].toFixed(2));
-        });
-
-        this.setState({
-            isLastest,
-            data,
-        });
     };
 
     /**

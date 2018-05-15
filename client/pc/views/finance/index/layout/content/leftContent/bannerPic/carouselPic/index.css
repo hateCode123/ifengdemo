@@ -6,20 +6,23 @@
     & img {
         display: block;
     }
-    & .trans {
-        transition: all 0.3s ease;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        -webkit-backface-visibility: hidden;
-    }
-    & .trans:hover {
-        transform: scale(1.04, 1.04);
-        -ms-transform: scale(1.04, 1.04);
-        -webkit-transform: scale(1.04, 1.04);
-    }
 }
+
+.trans {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-backface-visibility: hidden;
+}
+
+.trans:hover {
+    transform: scale(1.04, 1.04);
+    -ms-transform: scale(1.04, 1.04);
+    -webkit-transform: scale(1.04, 1.04);
+}
+
 .text {
     width: 300px;
     height: 36px;
@@ -30,6 +33,7 @@
     filter: alpha(opacity=75);
     opacity: 0.75;
 }
+
 .title {
     font-size: 14px;
     text-indent: 10px;
@@ -45,6 +49,7 @@
         font-size: 14px;
     }
 }
+
 .dotList {
     right: 16px;
     bottom: 18px;
@@ -60,7 +65,8 @@
         background: #ffffff;
         overflow: hidden;
     }
-    & .current {
-        background: #ff2838;
-    }
+}
+
+.current {
+    background: #ff2838 !important;
 }

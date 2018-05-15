@@ -17,18 +17,8 @@
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
                 callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
             },
-            logo: {
-                url: '//finance.ifeng.com/stock/',
-                title: '凤凰网股票',
-                src: '//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoStock.png',
-                width: 161,
-                height: 27
-            },
-            logo_ad: {
-                src: '//y1.ifengimg.com/a/2015/0810/hots.png',
-                width: 149,
-                height: 27,
-            },
+            logo: allData.logo,
+            logoAd: allData.logoAd,
             navigation: allData.navigation,
             subNavigation: allData.subNavigation,
             stockPlateStyle: allData.stockPlateStyle,
@@ -70,10 +60,18 @@
             hotPlate: allData.hotPlate,
             industryTitle: allData.industryTitle,
             industry: allData.industry,
+            hyin: allData.hyin,
+            hyout: allData.hyout,
+            gnin: allData.gnin,
+            gnout: allData.gnout,
             singleStockTitle: allData.singleStockTitle,
+            marketRadarTabs: allData.marketRadarTabs,
             marketRadar: allData.marketRadar,
+            trackTabs: allData.trackTabs,
             track: allData.track,
-            fiveDays: allData.fiveDays,
+            fiveDaysTabs: allData.fiveDaysTabs,
+            fiveDaysBuy: allData.fiveDaysBuy,
+            fiveDaysSell: allData.fiveDaysSell,
             hotSpotsAd: {
                 data: {
                     title: 'hotSpotsAd'
@@ -127,12 +125,7 @@
                 callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
             },
             footer: allData.footer,
-            qrCode: {
-                url: '//y2.ifengimg.com/a/2016_10/63901608d827c5e.jpg',
-                title: '凤凰证券',
-                width: 110,
-                height: 144
-            },
+            qrCode: allData.qrCode,
         };
 
     </script>

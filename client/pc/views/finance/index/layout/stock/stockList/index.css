@@ -11,9 +11,10 @@
         line-height: 19px;
         text-align: center;
     }
-    & .current {
-        background: #f54343;
-        color: #fff;
-        cursor: pointer;
-    }
+}
+
+.current {
+    background: #f54343;
+    color: #fff;
+    cursor: pointer;
 }

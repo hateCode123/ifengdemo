@@ -1,13 +1,22 @@
 .box {
     margin-top: 20px;
     position: relative;
-    & .hyh {
-        position: absolute;
-        right: 0px;
-        bottom: 10px;
-        background: url(./hyh.png) no-repeat;
-        width: 51px;
-        height: 24px;
-        cursor: pointer;
-    }
+}
+
+.hyh {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    background: url(./hyh.png) no-repeat;
+    width: 51px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }

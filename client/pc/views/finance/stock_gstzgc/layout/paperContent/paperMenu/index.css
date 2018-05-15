@@ -1,0 +1,38 @@
+.menuMd {
+    width: 640px;
+    height: 40px;
+    overflow: hidden;
+    margin-top: 20px;
+    & ul {
+        width: 645px;
+        overflow: hidden;
+        & li {
+            width: 210px;
+            height: 40px;
+            line-height: 40px;
+            font-family: Microsoft YaHei;
+            font-size: 18px;
+            color: #2a2a2a;
+            text-align: center;
+            background: #eee;
+            float: left;
+            margin-right: 5px;
+            & a {
+                display: block;
+                color: #2a2a2a;
+            }
+            & :hover {
+                background: #2f5fa8;
+                text-decoration: none;
+                color: #fff;
+            }
+        }
+
+        & .current {
+            background: #2f5fa8;
+            & a {
+                color: #fff;
+            }
+        }
+    }
+}

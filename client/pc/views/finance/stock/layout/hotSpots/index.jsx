@@ -24,13 +24,28 @@ class HotSpots extends React.PureComponent {
             hotSpotsSubTitle2,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
         } = content;
 
-        const data = [marketRadar, track, fiveDays];
+        const industryData = {
+            industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
+        };
+        const data = { marketRadarTabs, marketRadar, trackTabs, track, fiveDaysTabs, fiveDaysBuy, fiveDaysSell };
 
         return (
             <div className={`${styles.hot_spots} clearfix`}>
@@ -74,7 +89,14 @@ class HotSpots extends React.PureComponent {
                             content={industryTitle}>
                             <TableTitle />
                         </Chip>
-                        <Industry tabs={industry.tabs} data={industry.data} max={8} />
+                        <Chip
+                            id="10087"
+                            type="static"
+                            title="行业概念资金流向数据"
+                            groupName="操盘热点"
+                            content={industryData}>
+                            <Industry />
+                        </Chip>
                     </div>
                     <div className={styles.data_box}>
                         <Chip

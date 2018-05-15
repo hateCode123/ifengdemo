@@ -23,19 +23,23 @@ class ResearchSearch extends React.PureComponent {
         if (checked === 'title') {
             this.setState({ option: val });
         } else if (checked === 'report') {
-            const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
-                data: {
-                    t: 'report',
-                    q: val,
-                    cb: 'suggestCallback(suggest_json)',
-                },
-                jsonpCallback: 'suggestCallback',
-            });
+            try {
+                const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
+                    data: {
+                        t: 'report',
+                        q: val,
+                        cb: 'suggestCallback(suggest_json)',
+                    },
+                    jsonpCallback: 'suggestCallback',
+                });
 
-            this.setState({
-                option: data[0].c,
-                type: data[0].t,
-            });
+                this.setState({
+                    option: data[0].c,
+                    type: data[0].t,
+                });
+            } catch (e) {
+                console.log(e);
+            }
         }
     };
 
@@ -49,11 +53,11 @@ class ResearchSearch extends React.PureComponent {
         const { option, type, checked } = this.state;
 
         if (checked === 'title') {
-            window.open(`http://app.finance.ifeng.com/report/search.php?titletxt=${option}&yb_search_type=title`);
+            window.open(`//app.finance.ifeng.com/report/search.php?titletxt=${option}&yb_search_type=title`);
         } else if (checked === 'org') {
-            window.open(`http://app.finance.ifeng.com/report/search.php?org_code=${option}&yb_search_type=org`);
+            window.open(`//app.finance.ifeng.com/report/search.php?org_code=${option}&yb_search_type=org`);
         } else if (checked === 'report') {
-            window.open(`http://finance.ifeng.com/app/hq/${type}/${option}/index.shtml`);
+            window.open(`//finance.ifeng.com/app/hq/${type}/${option}/index.shtml`);
         }
     };
 

@@ -17,20 +17,9 @@
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
                 callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
             },
-            logo: {
-                url: '//finance.ifeng.com/',
-                title: '凤凰网财经',
-                src: '//p0.ifengimg.com/37780e23b9ea2d8b/2017/38/logoFinance.png',
-                width: 161,
-                height: 27
-            },
-            logo_ad: {
-                src: '//p1.ifengimg.com/a/2016_23/26a9c07a77f503f.jpg',
-                width: 172,
-                height: 18,
-            },
+            logo: allData.logo,
+            logoAd: allData.logoAd,
             navigation: allData.navigation,
-            stock: {},
             stockMarket: allData.stockMarket,
             production: allData.production,
             bannerPic: allData.bannerPic,
@@ -113,14 +102,13 @@
                 callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
             },
             info: {
-                tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
                 content: [
                     allData.customList,
-                    allData.customList,
-                    allData.customList,
-                    allData.customList,
-                    allData.customList,
-                    allData.customList,
+                    allData.macroList.list,
+                    allData.stockList.list,
+                    allData.imarketsList.list,
+                    allData.companyList.list,
+                    allData.wemoneyList.list,
                 ],
                 softAd: [{
                     url: '#',
@@ -148,12 +136,7 @@
                 callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
             },
             footer: allData.footer,
-            qrCode: {
-                url: 'http://p3.ifengimg.com/a/2016/0516/5fe93593da14bccsize17_w120_h164.png',
-                title: '凤凰新闻客户端',
-                width: 120,
-                height: 164
-            },
+            qrCode: allData.qrCode,
         };
 
     </script>

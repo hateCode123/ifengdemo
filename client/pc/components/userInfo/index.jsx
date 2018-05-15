@@ -78,18 +78,13 @@ class UserInfo extends React.PureComponent {
         if (isLogin) {
             return (
                 <div className={styles.login_after}>
-                    <a
-                        className={styles.login_info}
-                        href="javascript:void(0);"
-                        target="_blank"
-                        rel={rel}
-                        onClick={this.handleOptionList}>
+                    <span className={styles.login_info} onClick={this.handleOptionList}>
                         <span className={styles.login_name}>{userInfo.userName}</span>
                         <span className={`${styles.login_option} ${isShow ? styles.up : styles.down}`}>&nbsp;</span>
-                    </a>
-                    <a className={styles.login_out} onClick={this.handleLoginOut}>
+                    </span>
+                    <span className={styles.login_out} onClick={this.handleLoginOut}>
                         退出
-                    </a>
+                    </span>
                     {this.getOptionList()}
                 </div>
             );
@@ -99,9 +94,9 @@ class UserInfo extends React.PureComponent {
                     <a href="https://id.ifeng.com/user/register/" target="_blank" rel={rel}>
                         注册
                     </a>
-                    <a className={styles.login_in} onClick={this.handleLoginIn}>
+                    <span className={styles.login_in} onClick={this.handleLoginIn}>
                         登录
-                    </a>
+                    </span>
                     <LoginDialog id={this.loginId} />
                 </div>
             );

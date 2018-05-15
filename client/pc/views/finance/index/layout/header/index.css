@@ -1,4 +1,4 @@
-.h_mainNavNew {
+.main_nav {
     width: 980px;
     height: 26px;
     margin: 0 auto;
@@ -28,7 +28,7 @@
     margin: 0 auto;
 }
 
-.h_searchDiv {
+.search {
     width: 1000px;
     margin: 0 auto;
     height: 26px;
@@ -36,10 +36,9 @@
     padding-bottom: 10px;
 }
 
-.h_theLogo {
+.logo {
     float: left;
     font-size: 12px;
-
     & a img {
         position: relative;
         left: 0;

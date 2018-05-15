@@ -29,16 +29,13 @@ class Layout extends React.PureComponent {
             search: content.search,
             topAd: content.topAd,
             logo: content.logo,
-            logoAd: content.logo_ad,
+            logoAd: content.logoAd,
         };
         const navigationData = {
             nav: content.navigation,
             subNav: content.subNavigation,
         };
-        const stockPlate = {
-            stockPlateStyle: content.stockPlateStyle,
-            stockPlate: content.stockPlate,
-        };
+        const stockPlate = content.stockPlate;
         const animationPic = content.animationPic;
         const jumpLink = content.jumpLink;
         const contentData = {
@@ -98,10 +95,18 @@ class Layout extends React.PureComponent {
             hotPlate: content.hotPlate,
             industryTitle: content.industryTitle,
             industry: content.industry,
+            hyin: content.hyin,
+            hyout: content.hyout,
+            gnin: content.gnin,
+            gnout: content.gnout,
             singleStockTitle: content.singleStockTitle,
+            marketRadarTabs: content.marketRadarTabs,
             marketRadar: content.marketRadar,
+            trackTabs: content.trackTabs,
             track: content.track,
-            fiveDays: content.fiveDays,
+            fiveDaysTabs: content.fiveDaysTabs,
+            fiveDaysBuy: content.fiveDaysBuy,
+            fiveDaysSell: content.fiveDaysSell,
             hotSpotsAd: content.hotSpotsAd,
         };
         const schoolData = {
@@ -134,14 +139,7 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <AnimationPic content={animationPic} />
-                        <Chip
-                            id="10086"
-                            type="static"
-                            title="股票展示"
-                            groupName="导航栏"
-                            content={stockPlate.stockPlateStyle}>
-                            <StockPlate stockPlate={stockPlate.stockPlate} />
-                        </Chip>
+                        <StockPlate content={stockPlate} />
                         <div className={styles.search_box}>
                             <StockSearch />
                             <Chip id="10044" type="static" title="导航跳转链接" groupName="导航栏" content={jumpLink}>
@@ -162,7 +160,9 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
-                <QrCode content={qrCode} />
+                <Chip id="10136" type="static" title="二维码" groupName="二维码" content={qrCode}>
+                    <QrCode />
+                </Chip>
                 <BottomAffix />
                 <ChipEdit />
             </div>

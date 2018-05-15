@@ -1,0 +1,15 @@
+.nav {
+    composes: clearfix from global;
+    & .bg {
+        background: url('./list_01.gif') no-repeat right center;
+    }
+    & li {
+        font-size: 14px;
+        color: #2e5ea8;
+        height: 40px;
+        line-height: 40px;
+        padding-right: 22px;
+        float: left;
+        margin-right: 22px;
+    }
+}

@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Tabs from './tabs/';
-import ContentList from './contentList/';
+import IndexContentList from './indexContentList/';
+import ExtraContentList from './extraContentList/';
 import Ad from '../../../../../../components/ad/';
 
 class Info extends React.PureComponent {
     state = {
+        tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
         listNum: 5,
     };
@@ -15,7 +17,10 @@ class Info extends React.PureComponent {
      * 切换栏目操作
      */
     handleTabsChange = (num, tabsTop) => {
-        this.setState({ current: num });
+        this.setState({
+            current: num,
+            listNum: 5,
+        });
 
         scrollTo(0, tabsTop);
     };
@@ -34,20 +39,32 @@ class Info extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, listNum } = this.state;
+        const { tabs, current, listNum } = this.state;
         const { content } = this.props;
         const data = content.content[current];
         const contentList = [];
 
-        if (data) {
+        if (data && current === 0) {
             for (let i = 0; i < listNum; i++) {
                 const num = i < 6 ? 3 : 5;
                 const len = i < 5 ? 3 : 5;
 
                 contentList.push(
                     <div key={i}>
-                        <ContentList content={data.slice(i * num, i * num + len)} />
-                        {i < 5 ? <ContentList content={content.softAd} /> : ''}
+                        <IndexContentList content={data.slice(i * num, i * num + len)} />
+                        {i < 5 ? <IndexContentList content={content.softAd} /> : ''}
+                        {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
+                    </div>,
+                );
+            }
+        } else if (data && current !== 0) {
+            for (let i = 0; i < listNum; i++) {
+                const num = i < 6 ? 4 : 5;
+                const len = i < 5 ? 4 : 5;
+
+                contentList.push(
+                    <div key={i}>
+                        <ExtraContentList content={data.slice(i * num, i * num + len)} />
                         {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
                     </div>,
                 );
@@ -56,7 +73,7 @@ class Info extends React.PureComponent {
 
         return (
             <div className={styles.info}>
-                <Tabs content={content.tabs} current={current} handleTabsChange={this.handleTabsChange} />
+                <Tabs content={tabs} current={current} handleTabsChange={this.handleTabsChange} />
                 <div className={styles.content}>
                     <div className={styles.list}>
                         {contentList}

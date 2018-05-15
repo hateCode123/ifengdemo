@@ -8,8 +8,7 @@ class Track extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
-        const { tabs, data } = content;
+        const { tabs, content } = this.props;
 
         return (
             <div className={styles.data_box}>
@@ -25,27 +24,35 @@ class Track extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {content.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.time}</td>
-                                <td>{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
-                                <td className={item.type === '买盘' ? styles.red : styles.green}>{item.type}</td>
-                                <td className={styles.price}>{item.price}</td>
+                                <td>{item.hqtime}</td>
                                 <td>
-                                    {item.details ? (
-                                        <a href={item.details} target="_blank" rel={rel}>
-                                            查看
+                                    {item.name ? (
+                                        <a
+                                            href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
+                                            target="_blank"
+                                            rel={rel}>
+                                            {item.name}
                                         </a>
                                     ) : (
                                         ''
                                     )}
                                 </td>
+                                <td className={item.opttype === '买盘' ? styles.red : styles.green}>{item.opttype}</td>
+                                <td className={styles.price}>{item.amount}</td>
                                 <td>
-                                    {item.news ? (
-                                        <a href={item.news.url} target="_blank" rel={rel} title={item.news.text}>
-                                            {item.news.text.length > 16
-                                                ? `${item.news.text.slice(0, 16)}...`
-                                                : item.news.text}
+                                    <a
+                                        href={`//app.finance.ifeng.com/hq/stock_bill.php?code=${item.code}`}
+                                        target="_blank"
+                                        rel={rel}>
+                                        查看
+                                    </a>
+                                </td>
+                                <td>
+                                    {item.ybinfo ? (
+                                        <a href={item.ybinfo[1]} target="_blank" rel={rel} title={item.ybinfo[2]}>
+                                            {item.ybinfo[0] ? item.ybinfo[0] : '暂无研报'}
                                         </a>
                                     ) : (
                                         ''
@@ -64,7 +71,8 @@ class Track extends React.PureComponent {
  * 定义组件属性类型
  * */
 Track.propTypes = {
-    content: PropTypes.object,
+    tabs: PropTypes.array,
+    content: PropTypes.array,
 };
 
 /**

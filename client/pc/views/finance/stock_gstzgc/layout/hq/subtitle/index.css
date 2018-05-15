@@ -1,0 +1,17 @@
+.title_02 {
+    height: 29px;
+    & span {
+        float: right;
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #666666;
+        font-weight: normal;
+        line-height: 25px;
+    }
+    & a {
+        font-size: 16px;
+        color: #3969b3;
+        text-decoration: none;
+        font-family: '微软雅黑';
+    }
+}

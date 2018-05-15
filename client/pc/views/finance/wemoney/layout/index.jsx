@@ -6,11 +6,13 @@ import '../reset.css';
 import styles from './index.css';
 
 import Navigation from './navigation/';
-import SimpleSlider from './slider/';
+import SimpleSlider from './slide/';
 import HotNews from './hotNews/';
 import AdAside from './adAside/';
 import NewsList from './newslist/';
 import GoTop from './goTop/';
+import { Header } from './header';
+import { BottomFooter } from './footer';
 
 /*
 import Header from './components/header/';
@@ -30,20 +32,38 @@ class Layout extends React.PureComponent {
 
         console.log(content);
 
+        const headerData = {
+            nav: content.nav,
+            logo: content.logo,
+        };
+
+        const hotNewsData = {
+            hotNewsTitle: content.hotNewsTitle,
+            hotNews: content.hotNews,
+        };
+
+        const footerData = {
+            copyright: content.copyright,
+        };
+
         return (
             <div>
-                <div>公用头部导航</div>
+                <Header content={headerData} />
                 <Navigation content={content.navigation} />
 
                 <div className={styles.bodyCon}>
                     <div className={styles.bodyMes}>
                         <div className={styles.bodyLeftCon}>
-                            <SimpleSlider content={content.slider} />
-                            <NewsList content={content.info} />
+                            <Chip id="10006" type="static" title="轮播" content={content.slider}>
+                                <SimpleSlider />
+                            </Chip>
+                            <Chip id="10007" type="static" title="新闻列表" content={content.info}>
+                                <NewsList />
+                            </Chip>
                         </div>
 
                         <div className={styles.bodyRightCon}>
-                            <HotNews content={content.hotNews} />
+                            <HotNews content={hotNewsData} />
                             <AdAside content={content.adAside1} />
                             <AdAside content={content.adAside2} />
                             <AdAside content={content.adAside3} />
@@ -52,7 +72,7 @@ class Layout extends React.PureComponent {
                         </div>
                     </div>
                 </div>
-                <div>底部版权</div>
+                <BottomFooter content={footerData} />
                 <GoTop />
                 <ChipEdit />
             </div>

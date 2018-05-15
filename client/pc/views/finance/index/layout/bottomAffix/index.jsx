@@ -8,6 +8,7 @@ import styles from './index.css';
  */
 class BottomAffix extends React.PureComponent {
     state = {
+        text: '代码/拼音/名称',
         isShow: false,
         quoteShow: false,
         fundsShow: false,
@@ -44,6 +45,24 @@ class BottomAffix extends React.PureComponent {
         scrollTo(0, 0);
     };
 
+    handleFocus = e => {
+        const val = e.target.value;
+
+        this.setState({
+            text: val === '代码/拼音/名称' ? '' : val,
+        });
+    };
+
+    handleBlur = e => {
+        const val = e.target.value;
+
+        setTimeout(() => {
+            this.setState({
+                text: val === '' ? '代码/拼音/名称' : val,
+            });
+        }, 150);
+    };
+
     handleQuoteShow = () => {
         const { quoteShow } = this.state;
 
@@ -56,12 +75,12 @@ class BottomAffix extends React.PureComponent {
         this.setState({ fundsShow: !fundsShow });
     };
 
-    handleMouseOver = flag => {
-        if (flag === 0) {
-            this.setState({ quoteShow: false });
-        } else if (flag === 1) {
-            this.setState({ fundsShow: false });
-        }
+    handleQuoteMouseOver = () => {
+        this.setState({ quoteShow: false });
+    };
+
+    handleFundsMouseOver = () => {
+        this.setState({ fundsShow: false });
     };
 
     handleQuoteChange = e => {
@@ -72,23 +91,23 @@ class BottomAffix extends React.PureComponent {
         this.setState({ funds: e.target.value });
     };
 
-    handleSearch = flag => {
-        if (flag === 0) {
-            const quote = this.state.quote;
+    handleQuoteSearch = () => {
+        const quote = this.state.quote;
 
-            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
-        } else if (flag === 1) {
-            const funds = this.state.funds;
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
+    };
 
-            window.open(`http://app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
-        }
+    handleFundsSearch = () => {
+        const funds = this.state.funds;
+
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { isShow, quoteShow, fundsShow } = this.state;
+        const { text, isShow, quoteShow, fundsShow } = this.state;
 
         const bottomAffix = (
             <div className={styles.affix_box}>
@@ -102,14 +121,16 @@ class BottomAffix extends React.PureComponent {
                                 </a>
                                 <div
                                     className={`${styles.caption} ${quoteShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={() => this.handleMouseOver(0)}>
+                                    onMouseLeave={this.handleQuoteMouseOver}>
                                     <div className={styles.search}>
                                         <input
                                             className="quote"
-                                            placeholder="代码/拼音/名称"
+                                            value={text}
                                             onChange={this.handleQuoteChange}
+                                            onFocus={this.handleFocus}
+                                            onBlur={this.handleBlur}
                                         />
-                                        <a onClick={() => this.handleSearch(0)}>搜索</a>
+                                        <a onClick={this.handleQuoteSearch}>搜索</a>
                                     </div>
                                 </div>
                             </td>
@@ -122,14 +143,16 @@ class BottomAffix extends React.PureComponent {
                                 </a>
                                 <div
                                     className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={() => this.handleMouseOver(1)}>
+                                    onMouseLeave={this.handleFundsMouseOver}>
                                     <div className={styles.search}>
                                         <input
                                             className="funds"
-                                            placeholder="代码/拼音/名称"
+                                            value={text}
                                             onChange={this.handleFundsChange}
+                                            onFocus={this.handleFocus}
+                                            onBlur={this.handleBlur}
                                         />
-                                        <a onClick={() => this.handleSearch(1)}>搜索</a>
+                                        <a onClick={this.handleFundsSearch}>搜索</a>
                                     </div>
                                 </div>
                             </td>

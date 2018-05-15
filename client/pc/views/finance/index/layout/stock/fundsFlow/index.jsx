@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
-import Histogram from './histogram/';
 
 class FundsFlow extends React.PureComponent {
     state = {
@@ -19,17 +18,62 @@ class FundsFlow extends React.PureComponent {
      * 请求数据
      */
     async componentDidMount() {
-        const datas = [];
-        const data = await jsonp('http://i.finance.ifeng.com/moneyflow/flow/So');
+        try {
+            const datas = [];
+            const data = await jsonp('//i.finance.ifeng.com/moneyflow/flow/So');
 
-        data.forEach((item, index) => {
-            if ([0, 1, 10, 11].includes(index)) {
-                datas.push(item);
+            data.forEach((item, index) => {
+                if ([0, 1, 10, 11].includes(index)) {
+                    datas.push(item);
+                }
+            });
+
+            this.setState({ flow: datas });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * 组建柱状图样式
+     */
+    getStyle = tenDayList => {
+        const styles = [];
+
+        // 柱状图每只最大值
+        const flowMax = Math.max(...tenDayList.map(item => Math.abs(item)));
+
+        tenDayList.forEach(item => {
+            const height = Math.abs(12 * (item / flowMax));
+
+            if (item > 0) {
+                styles.push({
+                    color: 'red',
+                    style: { height: `${height}px`, marginTop: `${12 - height}px` },
+                });
+            } else {
+                styles.push({
+                    color: 'green',
+                    style: { height: `${height}px`, marginTop: '12px' },
+                });
             }
         });
 
-        this.setState({ flow: datas });
-    }
+        return styles;
+    };
+
+    /**
+     * 获取柱状图数据
+     */
+    getData = tenDayList => {
+        const style = this.getStyle(tenDayList);
+
+        return tenDayList.map((item, index) => (
+            <a key={index} title={item}>
+                <div className={styles[style[index].color]} style={style[index].style} />
+            </a>
+        ));
+    };
 
     /**
      * 渲染组件
@@ -54,7 +98,7 @@ class FundsFlow extends React.PureComponent {
                         </li>
                     </ul>
                     <div className={styles.more}>
-                        <a href="http://finance.ifeng.com/zjlx/" target="_blank" rel={rel} title="查看更多">
+                        <a href="//finance.ifeng.com/zjlx/" target="_blank" rel={rel} title="查看更多">
                             查看更多&gt;&gt;
                         </a>
                     </div>
@@ -100,7 +144,7 @@ class FundsFlow extends React.PureComponent {
                                         style={{ textAlign: 'center' }}>
                                         <span>{item.last}</span>
                                     </td>
-                                    <Histogram content={item.tenDayList} />
+                                    <td className={styles.histogram}>{this.getData(item.tenDayList)}</td>
                                 </tr>
                             ))}
                         </tbody>

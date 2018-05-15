@@ -25,17 +25,20 @@ exports.list = {
         // 搜索
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
+        // Logo
+        let logo = KVProxy.getStaticFragment(10133).then(...handleJsonByKey(ctx, 'content'));
+
+        // Logo Ad
+        let logoAd = KVProxy.getStaticFragment(10134).then(...handleJsonByKey(ctx, 'content'));
+
         // 股票导航
         let navigation = KVProxy.getStaticFragment(10038).then(...handleJsonByKey(ctx, 'content'));
 
         // 股票子导航
         let subNavigation = KVProxy.getStaticFragment(10040).then(...handleJsonByKey(ctx, 'content'));
 
-        // 股票显示样式
-        let stockPlateStyle = KVProxy.getStaticFragment(10086).then(...handleJsonByKey(ctx, 'content'));
-
         // 股票显示
-        let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/zq/caterank.html').then(...handleData(ctx));
+        let stockPlate = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/caterank.json').then(...handleJs(ctx));
 
         // 动画
         let animationPic = KVProxy.getStaticFragment(10085).then(...handleJsonByKey(ctx, 'content'));
@@ -152,20 +155,36 @@ exports.list = {
         // 行业概念资金流向标题
         let industryTitle = KVProxy.getStaticFragment(10120).then(...handleJsonByKey(ctx, 'content'));
 
-        // 行业概念资金流向
+        // 行业概念资金流向 tabs 与图片数据
         let industry = KVProxy.getStaticFragment(10087).then(...handleJsonByKey(ctx, 'content'));
+
+        // 股票显示
+        let hyin = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_hyin.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let hyout = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_hyout.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let gnin = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_gnin.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let gnout = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_gnout.json').then(...handleJs(ctx));
 
         // 个股资金流向标题
         let singleStockTitle = KVProxy.getStaticFragment(10088).then(...handleJsonByKey(ctx, 'content'));
 
         // 市场雷达
-        let marketRadar = KVProxy.getStaticFragment(10089).then(...handleJsonByKey(ctx, 'content'));
+        let marketRadarTabs = KVProxy.getStaticFragment(10089).then(...handleJsonByKey(ctx, 'content'));
+        let marketRadar = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/marketradar.json').then(...handleJs(ctx));
 
         // 大单追踪
-        let track = KVProxy.getStaticFragment(10090).then(...handleJsonByKey(ctx, 'content'));
+        let trackTabs = KVProxy.getStaticFragment(10090).then(...handleJsonByKey(ctx, 'content'));
+        let track = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/bigtrack.json').then(...handleJs(ctx));
 
         // 5日增减仓
-        let fiveDays = KVProxy.getStaticFragment(10091).then(...handleJsonByKey(ctx, 'content'));
+        let fiveDaysTabs = KVProxy.getStaticFragment(10091).then(...handleJsonByKey(ctx, 'content'));
+        let fiveDaysBuy = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_buy.json').then(...handleJs(ctx));
+        let fiveDaysSell = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_sell.json').then(...handleJs(ctx));
 
         // 高手学堂标题
         let schoolTitle = KVProxy.getStaticFragment(10069).then(...handleJsonByKey(ctx, 'content'));
@@ -210,14 +229,18 @@ exports.list = {
         let cooperation = KVProxy.getStaticFragment(10074).then(...handleJs(ctx, 'content'));
 
         // 底部公用版权
-        let footer = KVProxy.getStaticFragment(10114).then(...handleJs(ctx, 'content'));
+        let footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
+
+        // 二维码
+        let qrCode = KVProxy.getStaticFragment(10136).then(...handleJsonByKey(ctx, 'content'));
 
         [
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
@@ -259,10 +282,18 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
@@ -277,13 +308,15 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         ] = await Promise.all([
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
@@ -325,10 +358,18 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
@@ -343,15 +384,17 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         ]);
 
         let allData = {
             nav,
             search,
+            logo,
+            logoAd,
             navigation,
             subNavigation,
-            stockPlateStyle,
             stockPlate,
             animationPic,
             jumpLink,
@@ -393,10 +436,18 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
             schoolTitle,
             schoolSubTitle1,
             schoolSubTitle2,
@@ -411,7 +462,8 @@ exports.list = {
             stockPickingData3,
             stockPickingData4,
             cooperation,
-            footer
+            footer,
+            qrCode,
         };
 
         await ctx.html('finance_stock', {

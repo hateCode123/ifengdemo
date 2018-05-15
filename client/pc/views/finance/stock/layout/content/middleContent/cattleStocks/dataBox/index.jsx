@@ -13,43 +13,47 @@ class DataBox extends React.PureComponent {
      * 视频抓牛股数据请求
      */
     getData = async () => {
-        const { dataStock } = this.props;
-        const codeList = dataStock.map(item => item.code);
-        const price = [];
+        try {
+            const { dataStock } = this.props;
+            const codeList = dataStock.map(item => item.code);
+            const price = [];
 
-        const data = await jsonp('http://hq.finance.ifeng.com/q.php', {
-            data: {
-                l: codeList.join(','),
-                f: 'json',
-                e: 'getStockData(json_q)',
-            },
-            jsonpCallback: 'getStockData',
-        });
+            const data = await jsonp('//hq.finance.ifeng.com/q.php', {
+                data: {
+                    l: codeList.join(','),
+                    f: 'json',
+                    e: 'getStockData(json_q)',
+                },
+                jsonpCallback: 'getStockData',
+            });
 
-        for (let a = 0; a < Object.keys(data).length; a++) {
-            let style = '';
-            let arrowImg = '';
+            for (let a = 0; a < Object.keys(data).length; a++) {
+                let style = '';
+                let arrowImg = '';
 
-            if (data[codeList[a]][3] > 0) {
-                style = 'red';
-                arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon10.gif';
-            } else if (data[codeList[a]][3] < 0) {
-                style = 'green';
-                arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon16.gif';
-            } else {
-                style = 'black';
+                if (data[codeList[a]][3] > 0) {
+                    style = 'red';
+                    arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon10.gif';
+                } else if (data[codeList[a]][3] < 0) {
+                    style = 'green';
+                    arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon16.gif';
+                } else {
+                    style = 'black';
+                }
+
+                price.push({
+                    price: data[codeList[a]][0],
+                    width: data[codeList[a]][2],
+                    percent: data[codeList[a]][3],
+                    style,
+                    arrowImg,
+                });
             }
 
-            price.push({
-                price: data[codeList[a]][0],
-                width: data[codeList[a]][2],
-                percent: data[codeList[a]][3],
-                style,
-                arrowImg,
-            });
+            this.setState({ prices: price });
+        } catch (e) {
+            console.log(e);
         }
-
-        this.setState({ prices: price });
     };
 
     componentDidMount() {

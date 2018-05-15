@@ -102,48 +102,56 @@ class Live extends React.PureComponent {
      * 初始化数据
      */
     getLiveData = async () => {
-        const today = this.getToday();
+        try {
+            const today = this.getToday();
 
-        const data = await jsonp('//api3.finance.ifeng.com/live/getday', {
-            data: {
-                beg: Date.parse(`${today} 00:00:00`) / 1000,
-                end: Date.parse(`${today} 23:59:59`) / 1000,
-                level: 1,
-                dist: 1,
-            },
-            jsonp: 'cb',
-            jsonpCallback: 'getLiveData',
-        });
+            const data = await jsonp('//api3.finance.ifeng.com/live/getday', {
+                data: {
+                    beg: Date.parse(`${today} 00:00:00`) / 1000,
+                    end: Date.parse(`${today} 23:59:59`) / 1000,
+                    level: 1,
+                    dist: 1,
+                },
+                jsonp: 'cb',
+                jsonpCallback: 'getLiveData',
+            });
 
-        this.setState({
-            liveData: data.data.slice(0, 10),
-            lastid: `t${data.data[0].id}`,
-        });
+            this.setState({
+                liveData: data.data.slice(0, 10),
+                lastid: `t${data.data[0].id}`,
+            });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     /**
      * 刷新直播数据
      */
     refresh = async () => {
-        const { lastid } = this.state;
+        try {
+            const { lastid } = this.state;
 
-        const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
-            data: {
-                lastid,
-                level: 1,
-                dist: 1,
-            },
-            jsonp: 'cb',
-            jsonpCallback: 'addNewData',
-        });
-
-        if (data) {
-            const { liveData } = this.state;
-
-            this.setState({
-                liveData: data.concat(liveData).slice(0, 10),
-                lastid: `t${data[0].id}`,
+            const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
+                data: {
+                    lastid,
+                    level: 1,
+                    dist: 1,
+                },
+                jsonp: 'cb',
+                jsonpCallback: 'addNewData',
             });
+
+            if (data) {
+                const { liveData } = this.state;
+
+                this.setState({
+                    liveData: data.concat(liveData).slice(0, 10),
+                    lastid: `t${data[0].id}`,
+                });
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 
@@ -166,7 +174,7 @@ class Live extends React.PureComponent {
                     </span>
                     <a href="#" target="_blank" rel={rel}>
                         <Chip id="10052" type="static" title="直播Logo" groupName="正文" content={content}>
-                            <img src={content.url} title={content.title} alt={content.title} />
+                            <img src={content[0].url} title={content[0].title} alt={content[0].title} />
                         </Chip>
                     </a>
                 </div>

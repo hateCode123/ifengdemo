@@ -8,17 +8,18 @@
     <script>
         var __jsonData__ = <%- JSON.stringify(allData) %>;
         var jsonData = {
-            nav: [],
-            navMore: [],
+            nav: __jsonData__.commonNav,
             navigation: __jsonData__.navigation,
             slider: __jsonData__.slider,
             info: __jsonData__.info,
+            hotNewsTitle: __jsonData__.hotNewsTitle,
             hotNews: __jsonData__.hotNews,
             adAside1: __jsonData__.adAside1,
             adAside2: __jsonData__.adAside2,
             adAside3: __jsonData__.adAside3,
             adAside4: __jsonData__.adAside4,
             adAside5: __jsonData__.adAside5,
+            copyright: __jsonData__.copyright,
         };
 
     </script>

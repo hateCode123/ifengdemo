@@ -16,15 +16,13 @@ class Search extends React.PureComponent {
         const { data } = this.state;
         const selectVal = e.target.value;
 
-        this.input.value = data[selectVal].keyword;
-
         this.setState({
             current: selectVal,
             searchTxt: data[selectVal].keyword,
         });
     };
 
-    handleKeyUp = e => {
+    handleChange = e => {
         const val = e.target.value;
 
         this.setState({ searchTxt: val });
@@ -71,7 +69,7 @@ class Search extends React.PureComponent {
         const val = e.target.value;
 
         if (data[current].keyword === val) {
-            e.target.value = '';
+            this.setState({ searchTxt: '' });
         }
     };
 
@@ -80,7 +78,7 @@ class Search extends React.PureComponent {
         const val = e.target.value;
 
         if (val === '') {
-            e.target.value = data[current].keyword;
+            this.setState({ searchTxt: data[current].keyword });
         }
     };
 
@@ -103,10 +101,9 @@ class Search extends React.PureComponent {
                     <div className={styles.text}>
                         <input
                             type="text"
-                            defaultValue={searchTxt}
-                            ref={input => (this.input = input)}
+                            value={searchTxt}
                             className={styles.text}
-                            onKeyUp={this.handleKeyUp}
+                            onChange={this.handleChange}
                             onKeyDown={this.handleKeydown}
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}

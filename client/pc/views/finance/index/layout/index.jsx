@@ -23,7 +23,7 @@ class Layout extends React.PureComponent {
             search: content.search,
             topAd: content.topAd,
             logo: content.logo,
-            logoAd: content.logo_ad,
+            logoAd: content.logoAd,
         };
         const stockData = {
             stock: content.stock,
@@ -79,18 +79,14 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <Stock content={stockData} />
                 <Content content={contentData} />
-                <Chip
-                    key="cooperation"
-                    id="10015"
-                    type="static"
-                    title="底部合作链接"
-                    groupName="底部"
-                    content={cooperation}>
+                <Chip id="10015" type="static" title="底部合作链接" groupName="底部" content={cooperation}>
                     <Cooperation />
                 </Chip>
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
-                <QrCode content={qrCode} />
+                <Chip id="10135" type="static" title="二维码" groupName="二维码" content={qrCode}>
+                    <QrCode />
+                </Chip>
                 <BottomAffix />
                 <ChipEdit />
             </div>

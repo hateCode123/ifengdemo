@@ -9,57 +9,77 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-        // console.log('getStaticFragment 10003...');
-        const navigation = KVProxy.getStaticFragment(10003).then(...handleJson(ctx));
+        //通用导航
+        let commonNav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10006...');
-        const slider = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
+        // 导航
+        let navigation = KVProxy.getStaticFragment(10003).then(...handleJson(ctx));
 
-        // console.log('getStaticFragment 10004...');
-        const adAside1 = KVProxy.getStaticFragment(10021).then(...handleJson(ctx));
+        // 轮播
+        let slider = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10004...');
-        const adAside2 = KVProxy.getStaticFragment(10022).then(...handleJson(ctx));
+        // 广告
+        let adAside1 = KVProxy.getStaticFragment(10021).then(...handleJson(ctx));
+        let adAside2 = KVProxy.getStaticFragment(10022).then(...handleJson(ctx));
+        let adAside3 = KVProxy.getStaticFragment(10023).then(...handleJson(ctx));
+        let adAside4 = KVProxy.getStaticFragment(10024).then(...handleJson(ctx));
+        let adAside5 = KVProxy.getStaticFragment(10025).then(...handleJson(ctx));
 
-        // console.log('getStaticFragment 10004...');
-        const adAside3 = KVProxy.getStaticFragment(10023).then(...handleJson(ctx));
+        // 热门新闻标题
+        let hotNewsTitle = KVProxy.getStaticFragment(10122).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10004...');
-        const adAside4 = KVProxy.getStaticFragment(10024).then(...handleJson(ctx));
+        // 热门新闻
+        let hotNews = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10004...');
-        const adAside5 = KVProxy.getStaticFragment(10025).then(...handleJson(ctx));
+        // 新闻列表
+        let info = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10005...');
-        const hotNews = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
+        // 版权
+        let copyright = KVProxy.getStaticFragment(10121).then(...handleJsonByKey(ctx, 'content'));
 
-        // console.log('getStaticFragment 10007...');
-        const info = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
+        // console.log("11111 : ", otherData)
 
-        const otherData = await Promise.all([
+        [
+            commonNav,
             navigation,
             slider,
             info,
+            hotNewsTitle,
             hotNews,
             adAside1,
             adAside2,
             adAside3,
             adAside4,
             adAside5,
+            copyright,
+        ] = await Promise.all([
+            commonNav,
+            navigation,
+            slider,
+            info,
+            hotNewsTitle,
+            hotNews,
+            adAside1,
+            adAside2,
+            adAside3,
+            adAside4,
+            adAside5,
+            copyright,
         ]);
 
-        // console.log("11111 : ", otherData)
-
         const allData = {
-            navigation: otherData[0],
-            slider: otherData[1],
-            info: otherData[2],
-            hotNews: otherData[3],
-            adAside1: otherData[4],
-            adAside2: otherData[5],
-            adAside3: otherData[6],
-            adAside4: otherData[7],
-            adAside5: otherData[8],
+            commonNav,
+            navigation,
+            slider,
+            info,
+            hotNewsTitle,
+            hotNews,
+            adAside1,
+            adAside2,
+            adAside3,
+            adAside4,
+            adAside5,
+            copyright,
         };
 
         await ctx.html('finance_wemoney', {

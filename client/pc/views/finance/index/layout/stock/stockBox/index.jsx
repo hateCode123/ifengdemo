@@ -35,40 +35,44 @@ class StockBox extends React.PureComponent {
      * 请求数据
      */
     async componentDidMount() {
-        const { stock } = this.state;
-        const price = [];
+        try {
+            const { stock } = this.state;
+            const price = [];
 
-        const codeList = stock.map(item => item.code);
+            const codeList = stock.map(item => item.code);
 
-        const result = await jsonp('http://hq.finance.ifeng.com/q.php', {
-            data: {
-                l: codeList.join(','),
-                f: 'json',
-                e: 'getResult(json_q)',
-            },
-            jsonpCallback: 'getResult',
-        });
-
-        for (let a = 0; a < Object.keys(result).length; a++) {
-            let style = '';
-
-            if (result[codeList[a]][2] > 0) {
-                style = 'red';
-            } else if (result[codeList[a]][2] < 0) {
-                style = 'green';
-            } else {
-                style = 'black';
-            }
-
-            price.push({
-                price: result[codeList[a]][0],
-                index: result[codeList[a]][2],
-                percent: result[codeList[a]][3],
-                style,
+            const result = await jsonp('//hq.finance.ifeng.com/q.php', {
+                data: {
+                    l: codeList.join(','),
+                    f: 'json',
+                    e: 'getResult(json_q)',
+                },
+                jsonpCallback: 'getResult',
             });
-        }
 
-        this.setState({ prices: price });
+            codeList.forEach(item => {
+                let style = '';
+
+                if (result[item][2] > 0) {
+                    style = 'red';
+                } else if (result[item][2] < 0) {
+                    style = 'green';
+                } else {
+                    style = 'black';
+                }
+
+                price.push({
+                    price: result[item][0],
+                    index: result[item][2],
+                    percent: result[item][3],
+                    style,
+                });
+            });
+
+            this.setState({ prices: price });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -81,7 +85,7 @@ class StockBox extends React.PureComponent {
             <div className={styles.stock_box}>
                 {stock.map((item, index) => (
                     <div key={index} className={`${styles.stock_container} ${styles[`box${index}`]}`}>
-                        <a href={`http://finance.ifeng.com/app/hq/${item.type}/${item.code}`}>
+                        <a href={`//finance.ifeng.com/app/hq/${item.type}/${item.code}`}>
                             <div className={styles.text}>{item.name}</div>
                             <div className={`${styles.price} ${prices.length > 0 ? styles[prices[index].style] : ''}`}>
                                 {prices.length > 0 ? prices[index].price : ''}

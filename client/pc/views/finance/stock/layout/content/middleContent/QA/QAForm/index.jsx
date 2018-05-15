@@ -26,7 +26,7 @@ class QaForm extends React.PureComponent {
             <form
                 className={styles.form_box}
                 name="askMsgForm"
-                action="http://app.finance.ifeng.com/gszb/question.php"
+                action="//app.finance.ifeng.com/gszb/question.php"
                 method="post">
                 <input type="hidden" name="question_user" value={questionUserName} />
                 <input type="hidden" name="answer_user" value={answerUserName} />

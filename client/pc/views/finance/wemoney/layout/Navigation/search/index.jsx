@@ -12,29 +12,40 @@ class Search extends React.PureComponent {
         this.handleSearch = this.handleSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleOnFocus = this.handleOnFocus.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
     }
 
-    handleOnFocus() {
-        this.setState({ value: '' });
-    }
+    handleOnFocus = e => {
+        if (e.target.value === 'search') {
+            this.setState({ value: '' });
+        }
+    };
 
-    handleChange(event) {
+    handleChange = event => {
         this.setState({ value: event.target.value });
-    }
+    };
 
-    handleSearch() {
+    handleSearch = () => {
         const keyword = this.state.value;
-        const searchUrl = 'http://zhannei.baidu.com/cse/search?p=0&s=16378496155419916178&entry=1&area=2&q=';
+        const searchUrl = '//zhannei.baidu.com/cse/search?p=0&s=16378496155419916178&entry=1&area=2&q=';
 
-        window.addEventListener('open', window.open(searchUrl + keyword));
-    }
+        window.open(searchUrl + keyword);
+    };
 
-    onKeyPress(event) {
-        if (event.key === 'Enter') {
+    handleBlur = e => {
+        const val = e.target.value;
+
+        if (val === '') {
+            this.setState({ value: 'search' });
+        }
+    };
+
+    onKeyPress = e => {
+        if (e.key === 'Enter') {
             this.handleSearch();
         }
-    }
+    };
 
     /**
      * 渲染组件
@@ -47,7 +58,7 @@ class Search extends React.PureComponent {
                     value={this.state.value}
                     onChange={this.handleChange}
                     onFocus={this.handleOnFocus}
-                    onBlur={this.handleOnBlur}
+                    onBlur={this.handleBlur}
                     onKeyPress={this.onKeyPress}
                 />
                 <span onClick={this.handleSearch}>搜索</span>

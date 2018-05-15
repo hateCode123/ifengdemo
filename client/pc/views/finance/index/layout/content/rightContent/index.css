@@ -4,33 +4,39 @@
     margin-left: 29px;
     margin-top: 3px;
     overflow: hidden;
-    & .box_finance {
-        margin: 30px 0;
-        & .list {
-            width: 300px;
-            margin-top: 20px;
-        }
-    }
-    & .meeting {
-        margin-top: 32px;
-    }
-    & .ad_box {
-        margin-top: 28px;
-    }
-    & .box_market {
-        width: 298px;
-        height: 418px;
-        border: 1px solid #ccc;
-        margin-top: 36px;
-        text-align: center;
-    }
-    & .box_courier {
-        width: 298px;
-        height: 501px;
-        border: 1px solid #ccc;
-        margin-top: 20px;
-        text-align: center;
-    }
+}
+
+.box_finance {
+    margin: 30px 0;
+}
+
+.list {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.meeting {
+    margin-top: 32px;
+}
+
+.ad_box {
+    margin-top: 28px;
+}
+
+.box_market {
+    width: 298px;
+    height: 418px;
+    border: 1px solid #ccc;
+    margin-top: 36px;
+    text-align: center;
+}
+
+.box_courier {
+    width: 298px;
+    height: 501px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .box_1 {

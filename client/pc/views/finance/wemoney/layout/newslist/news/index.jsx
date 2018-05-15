@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { rel } from '../../../../../../../../utils/rel';
+import { rel } from '../../../../../../utils/rel';
 
 class News extends React.PureComponent {
     /**
@@ -14,32 +14,30 @@ class News extends React.PureComponent {
 
         return (
             <div className={styles.contentList}>
-                <Chip id="10007" type="static" title="wemoney信息流" groupName="文章" content={content}>
-                    {content.map((item, index) => (
-                        <div key={index} className={styles.list}>
-                            {item.poster ? (
-                                <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
-                                    <img src={item.poster} width="144" height="96" className={styles.trans} />
+                {content.map((item, index) => (
+                    <div key={index} className={styles.list}>
+                        {item.poster ? (
+                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                                <img src={item.poster} width="144" height="96" className={styles.trans} />
+                            </a>
+                        ) : (
+                            ''
+                        )}
+                        <div className={styles.list_text}>
+                            <p className={styles.text}>
+                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
+                                    {item.title}
                                 </a>
-                            ) : (
-                                ''
-                            )}
-                            <div className={styles.list_text}>
-                                <p className={styles.text}>
-                                    <a href={item.url} target="_blank" rel={rel} title={item.title}>
-                                        {item.title}
-                                    </a>
-                                </p>
-                                <p className={styles.time}>
-                                    <span className={styles[`${item.typeStyle}`]}>{item.type}</span>
-                                    <span className={styles.source}>{item.source}</span>
-                                    <span className={styles.date}>{item.date}</span>
-                                    <span className={styles.date}>{item.time}</span>
-                                </p>
-                            </div>
+                            </p>
+                            <p className={styles.time}>
+                                <span className={styles[`${item.typeStyle}`]}>{item.type}</span>
+                                <span className={styles.source}>{item.source}</span>
+                                <span className={styles.date}>{item.date}</span>
+                                <span className={styles.date}>{item.time}</span>
+                            </p>
                         </div>
-                    ))}
-                </Chip>
+                    </div>
+                ))}
             </div>
         );
     }

@@ -5,22 +5,35 @@ import { jsonp } from '@ifeng/ui_base';
 
 class StockSearch extends React.PureComponent {
     state = {
+        type: {
+            stock: '股票',
+            fund: '基金',
+            hkstock: '港股',
+            usstock: '美股',
+            forex: '外汇',
+            bond: '债券',
+        },
+        searchTxt: '代码/拼音',
         current: null,
         isShow: false,
         data: [],
     };
 
     getList = async str => {
-        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
-            data: {
-                t: 'all',
-                q: str,
-                cb: 'suggestCallback(suggest_json)',
-            },
-            jsonpCallback: 'suggestCallback',
-        });
+        try {
+            const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
+                data: {
+                    t: 'all',
+                    q: str,
+                    cb: 'suggestCallback(suggest_json)',
+                },
+                jsonpCallback: 'suggestCallback',
+            });
 
-        this.setState({ data });
+            this.setState({ data });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     handleMouseOver = index => {
@@ -31,14 +44,16 @@ class StockSearch extends React.PureComponent {
         const { current, data } = this.state;
 
         window.open(
-            `http://finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
                 data[current !== null ? current : 0].c
             }`,
         );
     };
 
-    handleKeyup = e => {
+    handleChange = e => {
         const val = e.target.value;
+
+        this.setState({ searchTxt: val });
 
         if (val !== '') {
             this.getList(val);
@@ -75,7 +90,7 @@ class StockSearch extends React.PureComponent {
                     break;
                 case 13:
                     window.open(
-                        `http://finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+                        `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
                             data[current !== null ? current : 0].c
                         }`,
                     );
@@ -85,13 +100,23 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handleFocus = () => {
-        this.setState({ isShow: true });
+    handleFocus = e => {
+        const val = e.target.value;
+
+        this.setState({
+            searchTxt: val === '代码/拼音' ? '' : val,
+            isShow: true,
+        });
     };
 
-    handleBlur = () => {
+    handleBlur = e => {
+        const val = e.target.value;
+
         setTimeout(() => {
-            this.setState({ isShow: false });
+            this.setState({
+                searchTxt: val === '' ? '代码/拼音' : val,
+                isShow: false,
+            });
         }, 150);
     };
 
@@ -101,7 +126,7 @@ class StockSearch extends React.PureComponent {
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
 
-            window.open(`http://finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
         }
     };
 
@@ -109,23 +134,14 @@ class StockSearch extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, isShow, data } = this.state;
-        const type = {
-            stock: '股票',
-            fund: '基金',
-            hkstock: '港股',
-            usstock: '美股',
-            forex: '外汇',
-            bond: '债券',
-        };
+        const { type, current, searchTxt, isShow, data } = this.state;
 
         return (
             <div className={`${styles.search_box} clearfix`}>
                 <div className={styles.text}>
                     <input
-                        id="searchInput"
-                        placeholder="代码/拼音"
-                        onKeyUp={this.handleKeyup}
+                        value={searchTxt}
+                        onChange={this.handleChange}
                         onKeyDown={this.handleKeydown}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
