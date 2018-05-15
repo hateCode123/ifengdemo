@@ -6,6 +6,7 @@ import { rel } from '../../../../../../utils/rel';
 class Industry extends React.PureComponent {
     state = {
         current: 0,
+        max: 8,
     };
 
     handleMouseOver = index => {
@@ -16,49 +17,60 @@ class Industry extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current } = this.state;
-        const { tabs, data, max } = this.props;
+        const { current, max } = this.state;
+        const { industry, hyin, hyout, gnin, gnout } = this.props.content;
+        const { tabs, tableTabs, image, imageUrl } = industry[0];
+        const data = [hyin, hyout, gnin, gnout];
         const datas = data[current];
 
-        const diff = max - datas.data.length;
+        const diff = max - datas.length;
 
         for (let a = 0; a < diff; a++) {
-            datas.data.push({});
+            datas.push({});
         }
 
         return (
             <div className={styles.data_box}>
                 <ul className={`${styles.tabs} clearfix`}>
-                    {data.map((item, index) => (
+                    {tabs.map((item, index) => (
                         <li
                             key={index}
                             className={current === index ? styles.current : ''}
                             onMouseEnter={() => this.handleMouseOver(index)}>
-                            {item.title}
+                            {item}
                         </li>
                     ))}
                 </ul>
                 <div className={styles.data}>
-                    <a href={datas.url} target="_blank" rel={rel}>
-                        <img src={datas.src} />
+                    <a href={imageUrl[current]} target="_blank" rel={rel}>
+                        <img src={image[current]} />
                     </a>
                     <table>
                         <thead>
                             <tr>
-                                <th width="100">{tabs[0]}</th>
-                                <th width="95">{tabs[1]}</th>
-                                <th width="60">{tabs[2]}</th>
-                                <th>{tabs[3]}</th>
+                                <th width="100">{tableTabs[0]}</th>
+                                <th width="95">{tableTabs[1]}</th>
+                                <th width="60">{tableTabs[2]}</th>
+                                <th>{tableTabs[3]}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {datas.data.map((item, index) => (
+                            {datas.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
-                                    <td className={item.fouds > 0 ? styles.red : styles.green}>{item.fouds}</td>
                                     <td>
-                                        {item.details ? (
-                                            <a href={item.details} target="_blank" rel={rel}>
+                                        <a href={`//app.finance.ifeng.com/list/stock_cate.php?c=${item.symbol}`}>
+                                            {item.name}
+                                        </a>
+                                    </td>
+                                    <td className={item.amount > 0 ? styles.red : styles.green}>{item.amount}</td>
+                                    <td>
+                                        {item.code ? (
+                                            <a
+                                                href={`http://app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=${
+                                                    item.code
+                                                }`}
+                                                target="_blank"
+                                                rel={rel}>
                                                 查看
                                             </a>
                                         ) : (
@@ -66,15 +78,9 @@ class Industry extends React.PureComponent {
                                         )}
                                     </td>
                                     <td>
-                                        {item.comment ? (
-                                            <a
-                                                href={item.comment.url}
-                                                target="_blank"
-                                                rel={rel}
-                                                title={item.comment.text}>
-                                                {item.comment.text.length > 22
-                                                    ? `${item.comment.text.slice(0, 22)}...`
-                                                    : item.comment.text}
+                                        {item.ybinfo ? (
+                                            <a href={item.ybinfo[1]} target="_blank" rel={rel} title={item.ybinfo[2]}>
+                                                {item.ybinfo[0] ? item.ybinfo[0] : '暂无研报'}
                                             </a>
                                         ) : (
                                             ''
@@ -94,9 +100,7 @@ class Industry extends React.PureComponent {
  * 定义组件属性类型
  * */
 Industry.propTypes = {
-    tabs: PropTypes.array,
-    data: PropTypes.array,
-    max: PropTypes.number,
+    content: PropTypes.object,
 };
 
 /**

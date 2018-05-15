@@ -155,8 +155,20 @@ exports.list = {
         // 行业概念资金流向标题
         let industryTitle = KVProxy.getStaticFragment(10120).then(...handleJsonByKey(ctx, 'content'));
 
-        // 行业概念资金流向
+        // 行业概念资金流向 tabs 与图片数据
         let industry = KVProxy.getStaticFragment(10087).then(...handleJsonByKey(ctx, 'content'));
+
+        // 股票显示
+        let hyin = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_hyin.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let hyout = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_hyout.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let gnin = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_gnin.json').then(...handleJs(ctx));
+
+        // 股票显示
+        let gnout = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/zijin_gnout.json').then(...handleJs(ctx));
 
         // 个股资金流向标题
         let singleStockTitle = KVProxy.getStaticFragment(10088).then(...handleJsonByKey(ctx, 'content'));
@@ -266,6 +278,10 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
             marketRadar,
             track,
@@ -334,6 +350,10 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
             marketRadar,
             track,
@@ -404,6 +424,10 @@ exports.list = {
             hotPlate,
             industryTitle,
             industry,
+            hyin,
+            hyout,
+            gnin,
+            gnout,
             singleStockTitle,
             marketRadar,
             track,
