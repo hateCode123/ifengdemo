@@ -1,0 +1,28 @@
+.h_mainNavNew {
+    width: 980px;
+    height: 26px;
+    margin: 0 auto;
+    padding: 7px 10px 3px;
+    font-family: '宋体';
+    position: relative;
+    z-index: 999;
+    background: #fff;
+}
+
+.h_searchDiv {
+    width: 1000px;
+    margin: 0 auto;
+    height: 32px;
+    padding-top: 18px;
+}
+
+.h_theLogo {
+    float: left;
+    font-size: 12px;
+
+    & a img {
+        float: left;
+        padding-top: 2px;
+        margin-right: 14px;
+    }
+}
