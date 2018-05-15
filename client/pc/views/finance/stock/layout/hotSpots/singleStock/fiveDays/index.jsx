@@ -8,9 +8,7 @@ class FiveDays extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { type, content } = this.props;
-        const { tabs, data1, data2 } = content;
-        const data = type === 0 ? data1 : data2;
+        const { current, tabs, content } = this.props;
 
         return (
             <div className={styles.data_box}>
@@ -25,18 +23,27 @@ class FiveDays extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {content.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.name ? <a href={item.name.url}>{item.name.name}</a> : ''}</td>
-                                <td className={type === 0 ? styles.red : styles.green}>{item.price}</td>
-                                <td className={item.percent > 0 ? styles.red : styles.green}>{item.percent}</td>
-                                <td className={item.percent > 0 ? styles.red : styles.green}>{item.newPrice}</td>
                                 <td>
-                                    {item.news ? (
-                                        <a href={item.news.url} target="_blank" rel={rel} title={item.news.text}>
-                                            {item.news.text.length > 16
-                                                ? `${item.news.text.slice(0, 16)}...`
-                                                : item.news.text}
+                                    {item.name ? (
+                                        <a
+                                            href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
+                                            target="_blank"
+                                            rel={rel}>
+                                            {item.name}
+                                        </a>
+                                    ) : (
+                                        ''
+                                    )}
+                                </td>
+                                <td className={current === 2 ? styles.red : styles.green}>{item.value}</td>
+                                <td className={item.chgpct > 0 ? styles.red : styles.green}>{item.chgpct}</td>
+                                <td className={item.chgpct > 0 ? styles.red : styles.green}>{item.last}</td>
+                                <td>
+                                    {item.ybinfo ? (
+                                        <a href={item.ybinfo[1]} target="_blank" rel={rel} title={item.ybinfo[2]}>
+                                            {item.ybinfo[0] ? item.ybinfo[0] : '暂无研报'}
                                         </a>
                                     ) : (
                                         ''
@@ -55,8 +62,9 @@ class FiveDays extends React.PureComponent {
  * 定义组件属性类型
  * */
 FiveDays.propTypes = {
-    type: PropTypes.number,
-    content: PropTypes.object,
+    current: PropTypes.number,
+    tabs: PropTypes.array,
+    content: PropTypes.array,
 };
 
 /**

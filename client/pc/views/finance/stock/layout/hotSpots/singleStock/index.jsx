@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import MarketRadar from './marketRadar/';
 import Track from './track/';
 import FiveDays from './fiveDays/';
@@ -20,15 +21,33 @@ class SingleStock extends React.PureComponent {
     render() {
         const { current } = this.state;
         const { tabs, content } = this.props;
+        const { marketRadarTabs, marketRadar, trackTabs, track, fiveDaysTabs, fiveDaysBuy, fiveDaysSell } = content;
 
         let list = null;
 
         if (current === 0) {
-            list = <MarketRadar content={content[0]} />;
+            list = (
+                <Chip id="10089" type="static" title="市场雷达" groupName="操盘热点" content={marketRadar}>
+                    <MarketRadar tabs={marketRadarTabs[0].tabs} />
+                </Chip>
+            );
         } else if (current === 1) {
-            list = <Track content={content[1]} />;
+            list = (
+                <Chip id="10090" type="static" title="大单追踪" groupName="操盘热点" content={track}>
+                    <Track tabs={trackTabs[0].tabs} />
+                </Chip>
+            );
         } else {
-            list = <FiveDays type={current === 2 ? 0 : 1} content={content[2]} />;
+            list = (
+                <Chip
+                    id="10091"
+                    type="static"
+                    title="5日增减仓"
+                    groupName="操盘热点"
+                    content={current === 2 ? fiveDaysBuy : fiveDaysSell}>
+                    <FiveDays current={current} tabs={fiveDaysTabs[0].tabs} />
+                </Chip>
+            );
         }
 
         return (
@@ -54,7 +73,7 @@ class SingleStock extends React.PureComponent {
  * */
 SingleStock.propTypes = {
     tabs: PropTypes.array,
-    content: PropTypes.array,
+    content: PropTypes.object,
 };
 
 /**

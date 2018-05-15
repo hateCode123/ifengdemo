@@ -29,9 +29,13 @@ class HotSpots extends React.PureComponent {
             gnin,
             gnout,
             singleStockTitle,
+            marketRadarTabs,
             marketRadar,
+            trackTabs,
             track,
-            fiveDays,
+            fiveDaysTabs,
+            fiveDaysBuy,
+            fiveDaysSell,
         } = content;
 
         const industryData = {
@@ -41,7 +45,7 @@ class HotSpots extends React.PureComponent {
             gnin,
             gnout,
         };
-        const data = [marketRadar, track, fiveDays];
+        const data = { marketRadarTabs, marketRadar, trackTabs, track, fiveDaysTabs, fiveDaysBuy, fiveDaysSell };
 
         return (
             <div className={`${styles.hot_spots} clearfix`}>
