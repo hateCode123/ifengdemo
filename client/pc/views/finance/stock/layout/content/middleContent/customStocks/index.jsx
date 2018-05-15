@@ -70,8 +70,12 @@ class CustomStocks extends React.PureComponent {
             data.forEach(item => {
                 const code = item[0];
 
-                item.push(stockData[code][0].toFixed(2));
-                item.push(stockData[code][3].toFixed(2));
+                if (stockData[code].length > 0) {
+                    item.push(stockData[code][0].toFixed(2));
+                    item.push(stockData[code][3].toFixed(2));
+                } else {
+                    item.push('', '');
+                }
             });
 
             this.setState({
@@ -126,7 +130,10 @@ class CustomStocks extends React.PureComponent {
                                                 </a>
                                             </td>
                                             <td className={item[3] > 0 ? styles.red : styles.green}>{item[2]}</td>
-                                            <td className={item[3] > 0 ? styles.red : styles.green}>{item[3]}%</td>
+                                            <td className={item[3] > 0 ? styles.red : styles.green}>
+                                                {item[3]}
+                                                {`${item[3] === '' ? '' : '%'}`}
+                                            </td>
                                             <td>
                                                 <a
                                                     href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${
