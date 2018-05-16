@@ -4,3 +4,4 @@ devtmp/*
 tmp
 logs
 .vscode
+.idea
