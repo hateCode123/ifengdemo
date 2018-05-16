@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Recommend from '../recommend/';
-import Search from './Search/';
+import Search from './search/';
 
 /**
  * 定义 Navigation 组件

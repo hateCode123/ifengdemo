@@ -9,7 +9,7 @@ import TopAd from './topAd/';
 import Navigation from './navigation/';
 import Topic from './topic/';
 import { Recommend } from './recommend';
-import { HeadlineNews } from './headlineNews';
+import { HeadlineNews } from './HeadlineNews';
 import PaperContent from './paperContent';
 import TitleR from './titleR';
 import { Live } from './live';
