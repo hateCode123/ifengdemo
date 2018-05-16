@@ -7,9 +7,22 @@
     "apiPrefix": "",
     "cacheURL": false,
     "statistics": false,
-    "logs": {
-        "level": "debug"
-    },
+    "logs": [
+        {
+            "type": "rotating-file",
+            "path": "/data/logs/out.log",
+            "level": "info",
+            "period": "1d",
+            "count": 30
+        },
+        {
+            "type": "rotating-file",
+            "path": "/data/logs/err.log",
+            "level": "error",
+            "period": "1d",
+            "count": 30
+        }
+    ],
     "redisHosts": [
 
     ],
