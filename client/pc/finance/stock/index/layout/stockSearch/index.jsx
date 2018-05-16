@@ -36,7 +36,9 @@ class StockSearch extends React.PureComponent {
         this.setState({ type: selectVal });
     };
 
-    handleMouseOver = index => {
+    handleMouseOver = e => {
+        const index = Number(e.target.attributes['data-index'].value);
+
         this.setState({ current: index });
     };
 
@@ -156,8 +158,9 @@ class StockSearch extends React.PureComponent {
                                     {data.map((item, index) => (
                                         <tr
                                             key={index}
+                                            data-index={index}
                                             className={current === index ? styles.current : ''}
-                                            onMouseEnter={() => this.handleMouseOver(index)}
+                                            onMouseEnter={this.handleMouseOver}
                                             onClick={this.handleClick}>
                                             <td>{item.s}</td>
                                             <td>{item.n}</td>

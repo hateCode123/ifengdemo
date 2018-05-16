@@ -45,7 +45,7 @@ class Tabs extends React.PureComponent {
      */
     render() {
         const { isFixed } = this.state;
-        const { content, current, handleTabsChange } = this.props;
+        const { content, current } = this.props;
 
         return (
             <ul id="tabs" className={`${styles.tabs} ${isFixed ? styles.fix : ''}`}>

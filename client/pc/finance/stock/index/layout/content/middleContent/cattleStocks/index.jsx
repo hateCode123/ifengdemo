@@ -41,7 +41,9 @@ class CattleStocks extends React.PureComponent {
         searchTxt: '',
     };
 
-    handleMouseOver = index => {
+    handleMouseOver = e => {
+        const index = Number(e.target.attributes['data-index'].value);
+
         this.setState({ current: index });
     };
 
@@ -88,8 +90,9 @@ class CattleStocks extends React.PureComponent {
                         {dataStock.map((item, index) => (
                             <li
                                 key={index}
+                                data-index={index}
                                 className={current === index ? styles.current : ''}
-                                onMouseEnter={() => this.handleMouseOver(index)}>
+                                onMouseEnter={this.handleMouseOver}>
                                 <a href={item.url} target="_blank" rel={rel}>
                                     {item.title}
                                 </a>
