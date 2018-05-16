@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Chip from 'Chip';
 import { rel } from '../../../../../../utils/rel';
 
 class Industry extends React.PureComponent {
@@ -42,9 +43,16 @@ class Industry extends React.PureComponent {
                     ))}
                 </ul>
                 <div className={styles.data}>
-                    <a href={imageUrl[current]} target="_blank" rel={rel}>
-                        <img src={image[current]} />
-                    </a>
+                    <Chip
+                        id="10087"
+                        type="static"
+                        title="行业概念资金流向数据"
+                        groupName="操盘热点"
+                        content={industry}>
+                        <a href={imageUrl[current]} target="_blank" rel={rel}>
+                            <img src={image[current]} />
+                        </a>
+                    </Chip>
                     <table>
                         <thead>
                             <tr>

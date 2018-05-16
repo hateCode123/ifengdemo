@@ -22,14 +22,29 @@ class School extends React.PureComponent {
         const {
             starAnalystTitle,
             starAnalyst,
+            starSrank,
+            starMrank,
+            starLrank,
             stockPickingTitle,
-            stockPickingData0,
-            stockPickingData1,
-            stockPickingData2,
-            stockPickingData3,
-            stockPickingData4,
+            stockpool,
+            stockpoolData,
+            chgpctest,
+            chgpctestData,
+            levelup,
+            levelupData,
+            firstfocus,
+            firstfocusData,
+            focusest,
+            focusestData,
         } = content;
-        const data = [stockPickingData0, stockPickingData1, stockPickingData2, stockPickingData3, stockPickingData4];
+        const starAnalystData = [starAnalyst, starSrank, starMrank, starLrank];
+        const stockPickingData = [
+            [stockpool, stockpoolData],
+            [chgpctest, chgpctestData],
+            [levelup, levelupData],
+            [firstfocus, firstfocusData],
+            [focusest, focusestData],
+        ];
 
         return (
             <div className={`${styles.school} clearfix`}>
@@ -75,7 +90,7 @@ class School extends React.PureComponent {
                             content={starAnalystTitle}>
                             <TableTitle />
                         </Chip>
-                        <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalyst} />
+                        <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalystData} />
                     </div>
                     <div className={styles.data_box}>
                         <Chip
@@ -86,7 +101,7 @@ class School extends React.PureComponent {
                             content={stockPickingTitle}>
                             <TableTitle />
                         </Chip>
-                        <StockPicking tabs={stockPickingTitle[0].tabs} content={data} />
+                        <StockPicking tabs={stockPickingTitle[0].tabs} content={stockPickingData} />
                     </div>
                 </div>
             </div>

@@ -56,15 +56,15 @@ class StockPicking extends React.PureComponent {
 
         if (stockData) {
             if (current === 0) {
-                list = <RecommendStock stockData={stockData} content={data} />;
+                list = <RecommendStock stockData={stockData} tabs={data[0][0].tabs} content={data[1]} />;
             } else if (current === 1) {
-                list = <Target stockData={stockData} content={data} />;
+                list = <Target stockData={stockData} tabs={data[0][0].tabs} content={data[1]} />;
             } else if (current === 2) {
-                list = <Rating stockData={stockData} content={data} />;
+                list = <Rating stockData={stockData} tabs={data[0][0].tabs} content={data[1]} />;
             } else if (current === 3) {
-                list = <FirstAttention stockData={stockData} content={data} />;
+                list = <FirstAttention stockData={stockData} tabs={data[0][0].tabs} content={data[1]} />;
             } else if (current === 4) {
-                list = <HighestAttention stockData={stockData} content={data} />;
+                list = <HighestAttention stockData={stockData} tabs={data[0][0].tabs} content={data[1]} />;
             }
         }
 
