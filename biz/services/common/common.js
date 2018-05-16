@@ -32,15 +32,16 @@ const jsonParse = (jsonStr, ctx) => {
 const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false) => {
     return result => {
         // console.log('success.response.costtime:', result.response.costtime);
-        // console.log('success.response:', result.response.return);
-
+        // console.log('success.response:');
+  
         // 统计rpc时间
         if (config.default.statistics) {
-            if (singleType) {
-                ctx.rpcTimeList[0].push(result.response.costtime);
-            } else {
-                ctx.rpcTimeList[1].push(result.response.costtime);
-            }
+    
+            // if (singleType) {
+            //     ctx.rpcTimeList[0].push(result.response.costtime);
+            // } else {
+            //     ctx.rpcTimeList[1].push(result.response.costtime);
+            // }
         }
 
         try {
@@ -60,6 +61,7 @@ const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false
                     try {
                         return jsonParse(result.response.return[key], ctx);
                     } catch (err) {
+                        logger.error(`Something error with: ${result.callInfo}`);
                         logger.error(err);
 
                         return result.response.return[key];
@@ -71,6 +73,7 @@ const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false
 
             return result.response.return;
         } catch (err) {
+            logger.error(`Something error with: ${result.callInfo}`);
             logger.error(err);
 
             return null;
@@ -141,6 +144,16 @@ const handleJs = (ctx, key, singleType = false) => {
     return [success(ctx, true, key, singleType, true), error(ctx, singleType)];
 };
 
+/**
+ * @param {Object} ctx http请求上下文
+ * @param {String|Boolean} key 取rpc返回的json数据，key键对应的值返回 ，一般为字符串
+ * @param {Boolean} singleType 因为rpc请求有单个执行的，有多个并行执行的，为了统计rpc响应时间,当单个执行rpc请求时请传入true
+ * @return {Array} 
+ */
+const handleStringByKey = (ctx, key, singleType = false) => {
+    return [success(ctx, true, key, singleType, true), error(ctx, singleType)];
+};
+
 // 导出处理函数
 module.exports = {
     jsonParse,
@@ -149,5 +162,6 @@ module.exports = {
     handleData,
     handleJson,
     handleJsonByKey,
-    handleJs
+    handleJs,
+    handleStringByKey
 };
