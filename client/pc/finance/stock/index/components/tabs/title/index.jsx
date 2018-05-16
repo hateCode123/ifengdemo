@@ -4,8 +4,9 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Title extends React.PureComponent {
-    handleMouseOver = index => {
+    handleMouseOver = e => {
         const { content, handleTabsChange } = this.props;
+        const index = Number(e.target.attributes['data-index'].value);
 
         if (content.length > 1) {
             handleTabsChange(index);
@@ -21,10 +22,11 @@ class Title extends React.PureComponent {
         return content.map((item, index) => (
             <h4
                 key={index}
+                data-index={index}
                 className={`${styles.title} ${styles[`title${index}`]} ${
                     content.length === 1 || current === index ? styles.current : ''
                 }`}
-                onMouseEnter={() => this.handleMouseOver(index)}>
+                onMouseEnter={this.handleMouseOver}>
                 <a href={item.url} target="_blank" rel={rel}>
                     {item.title}
                 </a>
