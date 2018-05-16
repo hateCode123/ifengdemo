@@ -206,24 +206,32 @@ exports.list = {
 
         // 明星分析师数据
         let starAnalyst = KVProxy.getStaticFragment(10093).then(...handleJsonByKey(ctx, 'content'));
+        let starSrank = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/star_s_rank.json').then(...handleJs(ctx));
+        let starMrank = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/star_m_rank.json').then(...handleJs(ctx));
+        let starLrank = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/star_l_rank.json').then(...handleJs(ctx));
 
         // 研报选股标题
         let stockPickingTitle = KVProxy.getStaticFragment(10094).then(...handleJsonByKey(ctx, 'content'));
 
         // 机构荐股池
-        let stockPickingData0 = KVProxy.getStaticFragment(10095).then(...handleJsonByKey(ctx, 'content'));
+        let stockpool = KVProxy.getStaticFragment(10095).then(...handleJsonByKey(ctx, 'content'));
+        let stockpoolData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_stockpool.json').then(...handleJs(ctx));
 
         // 目标涨幅最大
-        let stockPickingData1 = KVProxy.getStaticFragment(10096).then(...handleJsonByKey(ctx, 'content'));
+        let chgpctest = KVProxy.getStaticFragment(10096).then(...handleJsonByKey(ctx, 'content'));
+        let chgpctestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_chgpctest.json').then(...handleJs(ctx));
 
         // 评级调高个股
-        let stockPickingData2 = KVProxy.getStaticFragment(10097).then(...handleJsonByKey(ctx, 'content'));
+        let levelup = KVProxy.getStaticFragment(10097).then(...handleJsonByKey(ctx, 'content'));
+        let levelupData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_levelup.json').then(...handleJs(ctx));
 
         // 机构首次关注股
-        let stockPickingData3 = KVProxy.getStaticFragment(10098).then(...handleJsonByKey(ctx, 'content'));
+        let firstfocus = KVProxy.getStaticFragment(10098).then(...handleJsonByKey(ctx, 'content'));
+        let firstfocusData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_firstfocus.json').then(...handleJs(ctx));
 
         // 机构关注度最高
-        let stockPickingData4 = KVProxy.getStaticFragment(10099).then(...handleJsonByKey(ctx, 'content'));
+        let focusest = KVProxy.getStaticFragment(10099).then(...handleJsonByKey(ctx, 'content'));
+        let focusestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_focusest.json').then(...handleJs(ctx));
 
         // 底部合作链接
         let cooperation = KVProxy.getStaticFragment(10074).then(...handleJs(ctx, 'content'));
@@ -301,12 +309,20 @@ exports.list = {
             school,
             starAnalystTitle,
             starAnalyst,
+            starSrank,
+            starMrank,
+            starLrank,
             stockPickingTitle,
-            stockPickingData0,
-            stockPickingData1,
-            stockPickingData2,
-            stockPickingData3,
-            stockPickingData4,
+            stockpool,
+            stockpoolData,
+            chgpctest,
+            chgpctestData,
+            levelup,
+            levelupData,
+            firstfocus,
+            firstfocusData,
+            focusest,
+            focusestData,
             cooperation,
             footer,
             qrCode,
@@ -377,12 +393,20 @@ exports.list = {
             school,
             starAnalystTitle,
             starAnalyst,
+            starSrank,
+            starMrank,
+            starLrank,
             stockPickingTitle,
-            stockPickingData0,
-            stockPickingData1,
-            stockPickingData2,
-            stockPickingData3,
-            stockPickingData4,
+            stockpool,
+            stockpoolData,
+            chgpctest,
+            chgpctestData,
+            levelup,
+            levelupData,
+            firstfocus,
+            firstfocusData,
+            focusest,
+            focusestData,
             cooperation,
             footer,
             qrCode,
@@ -455,12 +479,20 @@ exports.list = {
             school,
             starAnalystTitle,
             starAnalyst,
+            starSrank,
+            starMrank,
+            starLrank,
             stockPickingTitle,
-            stockPickingData0,
-            stockPickingData1,
-            stockPickingData2,
-            stockPickingData3,
-            stockPickingData4,
+            stockpool,
+            stockpoolData,
+            chgpctest,
+            chgpctestData,
+            levelup,
+            levelupData,
+            firstfocus,
+            firstfocusData,
+            focusest,
+            focusestData,
             cooperation,
             footer,
             qrCode,

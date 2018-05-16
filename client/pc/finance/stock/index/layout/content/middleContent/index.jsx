@@ -21,6 +21,10 @@ class MiddleContent extends React.PureComponent {
         }, 1000);
     }
 
+    componentWillUnmount() {
+        clearInterval();
+    }
+
     /**
      * 获取当前时间
      */

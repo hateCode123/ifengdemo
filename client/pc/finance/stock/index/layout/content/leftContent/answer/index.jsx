@@ -50,7 +50,7 @@ class Answer extends React.PureComponent {
         };
 
         const subTitle = {
-            id: '10117',
+            id: '10118',
             type: 'static',
             title: '牛人解盘子标题',
             groupName: '正文',
