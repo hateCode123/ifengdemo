@@ -1,0 +1,6 @@
+/*理财产品*/
+.caption01 {
+    background: #fff;
+    composes: w240 from global;
+    composes: fl from global;
+}

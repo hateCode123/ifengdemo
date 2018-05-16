@@ -1,0 +1,17 @@
+@charset "utf-8";
+ 
+ 
+.l_left{
+  
+    width:400px; float:left; margin-right:30px;
+}
+ 
+.l_right{ width:570px; float:left;}
+
+/*焦点图*/
+.fpic06{width:400px; height:180px;position:relative; overflow:hidden;margin-bottom: 30px;}
+
+
+
+
+

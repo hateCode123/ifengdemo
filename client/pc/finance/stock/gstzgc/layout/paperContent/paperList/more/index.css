@@ -1,0 +1,13 @@
+.more {
+    width: 638px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    border: 1px solid #eee;
+    margin-top: 20px;
+    & a {
+        color: #999;
+    }
+}

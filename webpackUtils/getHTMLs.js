@@ -2,19 +2,19 @@ const glob = require('glob');
 const isWin = require('./isWin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function getHTML (globPath, extendName) {
-    
+module.exports = function getHTML(globPath, extendName) {
+
     const files = glob.sync(globPath);
     return files.map(file => {
-    
+
         // const paths = file.split(isWin() ? '/' : '/');
         // const entryName =  paths[paths.length - 2];
-        
-        let path = file.replace('./client/pc/views/','').replace('./client/mobile/views/','');
+
+        let path = file.replace('./client/pc/', '').replace('./client/mobile/', '');
         let paths = path.split('/');
         paths.pop();
         let entryName = paths.join('_');
-        
+
         const conf = {
             filename: `${entryName}${extendName}.html`,
             template: file,

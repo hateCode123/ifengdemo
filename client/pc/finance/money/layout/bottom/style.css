@@ -1,0 +1,31 @@
+
+/*底部*/
+.box_10{width:1000px;margin:40px auto 0px;border-top:2px solid #f54343;composes:clearfix from global;}
+.box_10z{float:left;width:300px;border-right:1px solid #ebebeb;margin-top:30px;}
+.box_10z01{float:left;width:300px;border-right:1px solid #ebebeb;margin-top:27px;margin-left:49px;}
+.box_10z02{float:left;width:274px;margin-top:27px;margin-left:51px;}
+
+.box_10z p{line-height:24px;color:#666;padding-left:2px;}
+
+/* 左侧 */
+/* 
+.flog01{width:102px;height:20px;}
+.flog01 img{display:block;width:102px;height:20px;}
+.wei{width:102px;height:102px;padding-top:13px;padding-bottom:5px;}
+.wei img{display:block;width:102px;height:102px;} */
+
+/* 中间 */
+
+
+.box_10z01 h4{font-size:18px;font-family:Microsoft YaHei;font-weight:bold;}
+.box_10z01 ul{padding-top:9px;padding-left:1px;}
+.box_10z01 ul li{line-height:26px;color:#666;}
+.box_10z01 ul li a{color:#666;}
+ 
+/* 右侧 */
+
+.box_10z02 h4{font-size:18px;font-family:Microsoft YaHei;font-weight:bold;}
+.box_10z02 ul{width:219px;padding-top:9px;overflow:hidden;}
+.box_10z02 ul li{color:#666666;height:26px;line-height:26px;float:left;margin-right:25px;word-break:keep-all;}
+.box_10z02 ul li a{color:#666;}
+.box_10z02 ul li a:hover{color:#222;text-decoration:none;}

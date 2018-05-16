@@ -1,0 +1,50 @@
+.h_mainNavNew {
+    width: 980px;
+    height: 26px;
+    margin: 0 auto;
+    padding: 7px 10px 3px;
+    font-family: '宋体';
+    position: relative;
+    z-index: 999;
+    background: #fff;
+}
+
+.box {
+    width: 1000px;
+    height: 90px;
+    float: right;
+    text-align: center;
+    line-height: 90px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+/* .ad {
+    width: 1000px;
+    height: 91px;
+    margin: 0 auto;
+}
+
+.h_searchDiv {
+    width: 1000px;
+    margin: 0 auto;
+    height: 37px;
+    padding: 19px 0 0;
+    background: #fff;
+}
+
+.h_theLogo {
+    float: left;
+    font-size: 12px;
+
+    & a img {
+        position: relative;
+        left: 0;
+        top: 0;
+        right: 361px;
+        float: left;
+    }
+} */

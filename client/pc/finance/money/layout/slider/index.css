@@ -1,0 +1,19 @@
+
+.fpic06{width:400px; height:180px;position:relative; overflow:hidden;margin-bottom: 30px;}
+.fpic06 .text {width:400px; height:34px; background:rgba(0, 0, 0, .5); position:absolute; bottom:0px; left:0px ;  }
+.fpic06  [ifeng_ui_pc_sliders-dots]{
+    bottom:15px;
+}
+.fpic06 p{font-size:14px;  text-indent:10px; width:300px; height:34px; line-height:34px;  position:absolute; bottom:0px; left:0px ; }
+.bigPic04 {position: relative;}
+.bigPic04 a img{ display:block;}
+#prevSlide02,#nextSlide02{width:36px;height:60px;position:absolute;top:70px;left:0px;z-index:10;text-align:center;cursor:pointer}
+#prevSlide02 img,#nextSlide02 img{position:absolute;top:0;left:0;z-index:12}
+.btnBg{ width:36px; height:60px; filter:alpha(opacity=60); -moz-opacity:0.6; opacity:0.6; background:#000; position:absolute; left:0px; top:0px; z-index:11;display: none;}
+.btnBgHover{width:36px;height:60px;filter:alpha(opacity=100);-moz-opacity:1;opacity:1;background:#000;position:absolute;left:0;top:0;z-index:11;display: none;}
+#nextSlide02{left:365px}
+#nextSlide02 img{left: 0;}
+.dotList04{position:absolute;right:10px;top:162px; height:9px; overflow:hidden;width:88px;}
+.fpic06 [ifeng_ui_pc_sliders-dots-item]{ width:20px;height:2px; margin:0 0 0 2px; cursor:pointer; background:#d3cecb; overflow:hidden}
+.fpic06 [ifeng_ui_pc_sliders-dots-item='current']{ background:#f54343; } 
+.cWhite a, .cWhite a:visited,.cWhite a:hover{color:#fff;}

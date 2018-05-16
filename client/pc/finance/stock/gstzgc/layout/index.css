@@ -1,0 +1,41 @@
+.col_w1000 {
+    composes: clearfix from global;
+    width: 1000px;
+    margin: 0 auto;
+}
+.col_w480 {
+    width: 480px;
+    margin-top: 20px;
+}
+.fl {
+    composes: col_w480;
+    float: left;
+}
+.fr {
+    composes: col_w480;
+    float: right;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+.mt30 {
+    margin-top: 30px;
+}
+.fl640 {
+    composes: mt40;
+    width: 640px;
+    float: left;
+}
+.fr300 {
+    composes: mt40;
+    width: 300px;
+    float: right;
+}
+.foot {
+    composes: mt40;
+    background: url(./g45.png) repeat-x #f5f5f5;
+    width: 100%;
+    min-width: 1000px;
+    padding-top: 2px;
+}

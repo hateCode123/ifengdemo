@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0b1972bc-7926-4455-9a84-64f11f94c838" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/biz/controllers/pc/finance/stock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/biz/controllers/pc/finance/stock/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/g_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/myStocks/g_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/myStocks/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/customStock/myStocks/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/app.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/components/asideContentTitle/icon_att.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/components/asideContentTitle/icon_att.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/components/asideContentTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/components/asideContentTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/components/asideContentTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/components/asideContentTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/bottomAffix/g52a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/bottomAffix/g52a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/bottomAffix/g53a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/bottomAffix/g53a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/bottomAffix/g56.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/bottomAffix/g56.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/bottomAffix/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/bottomAffix/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/bottomAffix/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/bottomAffix/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/extraContentList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/extraContentList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/extraContentList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/extraContentList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/extraContentList/ly_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/extraContentList/ly_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/extraContentList/ly_hover.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/extraContentList/ly_hover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/indexContentList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/indexContentList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/indexContentList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/indexContentList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/indexContentList/ly_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/indexContentList/ly_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/indexContentList/ly_hover.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/indexContentList/ly_hover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/more.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/more.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/tabs/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/tabs/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/info/tabs/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/info/tabs/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/carouselPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/carouselPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/carouselPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/carouselPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/left.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/left.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/bannerPic/right.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/bannerPic/right.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/datenew.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/datenew.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/extraNews/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/extraNews/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/newsList/dian01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/newsList/dian01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/newsList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/newsList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/dateNews/newsList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/dateNews/newsList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/headline/hyh.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/headline/hyh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/headline/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/headline/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/headline/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/headline/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/headline/title/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/headline/title/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/headline/title/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/headline/title/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/recommend/dian01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/recommend/dian01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/recommend/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/recommend/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/recommend/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/recommend/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/recommend/tuij.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/recommend/tuij.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/topic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/topic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/topic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/topic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/leftContent/topic/time01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/leftContent/topic/time01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/caption/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/caption/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/caption/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/caption/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/caption/line03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/caption/line03.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/comicBook/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/comicBook/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/comicBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/comicBook/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/titleList/dian01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/titleList/dian01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/titleList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/titleList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/middleContent/titleList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/middleContent/titleList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/boxTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/boxTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/boxTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/boxTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/courier/gs_05.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/courier/gs_05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/courier/icon.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/courier/icon.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/courier/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/courier/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/courier/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/courier/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/carouselPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/carouselPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/carouselPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/carouselPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/yg.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/yg.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/financeVideo/zg.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/financeVideo/zg.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/market/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/market/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/meeting/dian01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/meeting/dian01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/meeting/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/meeting/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/meeting/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/meeting/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/thinkTank/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/thinkTank/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/thinkTank/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/thinkTank/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/thinkTank/jx.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/thinkTank/jx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/content/rightContent/titleAd/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/content/rightContent/titleAd/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/cooperation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/cooperation/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/footer/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/footer/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/footer/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/footer/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/header/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/header/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/header/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/header/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/header/logo/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/header/logo/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/header/logo/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/header/logo/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/navigation/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/navigation/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/navigation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/navigation/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/navigation/line05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/navigation/line05.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/qrCode/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/qrCode/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/qrCode/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/qrCode/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/customStock/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/customStock/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/customStock/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/customStock/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/fundsFlow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/fundsFlow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/fundsFlow/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/fundsFlow/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/fundsFlow/licurr.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/fundsFlow/licurr.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/production/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/production/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockBox/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockBox/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockBox/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockBox/line07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockBox/line07.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockMarket/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockMarket/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockSearch/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockSearch/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockSearch/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockSearch/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/layout/stock/stockSearch/sos.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/layout/stock/stockSearch/sos.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/index/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/index/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/app.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/caption/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/caption/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/caption/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/caption/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/headTitle/g59.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/g59.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/headTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/headTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/midTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/midTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/midTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/midTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/newsList/c_04.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/newsList/c_04.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/newsList/hyh.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/newsList/hyh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/newsList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/newsList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/newsList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/newsList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/rightSideTitle/g36.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/rightSideTitle/g36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/rightSideTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/rightSideTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/rightSideTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/rightSideTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/link/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/link/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/link/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/link/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/subTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/subTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/subTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/subTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/title/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/title/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tab/title/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tabs/title/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tableTitle/g36.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tableTitle/g36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tableTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tableTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/components/tableTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/components/tableTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/animationPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/animationPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/animationPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/animationPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/bottomAffix/g52a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/bottomAffix/g52a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/bottomAffix/g53a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/bottomAffix/g53a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/bottomAffix/g56.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/bottomAffix/g56.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/bottomAffix/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/bottomAffix/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/bottomAffix/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/bottomAffix/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/c_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/c_01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/carouselPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/carouselPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/carouselPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/carouselPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/left.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/left.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/bannerPic/right.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/bannerPic/right.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/answerList/c_04.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/answerList/c_04.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/answerList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/answerList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/answerList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/answerList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/hyh.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/hyh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/answer/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/answer/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/broadcast/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/broadcast/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/broadcast/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/broadcast/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/headline/hyh.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/headline/hyh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/headline/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/headline/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/headline/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/headline/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/headline/title/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/headline/title/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/headline/title/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/headline/title/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/news/hyh.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/news/hyh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/news/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/news/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/news/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/news/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/list00_ae674d2a.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/list00_ae674d2a.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/list00w_55f2ebc0.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/list00w_55f2ebc0.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/list11_08d16303.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/list11_08d16303.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/live/list22_c7fb455f.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/live/list22_c7fb455f.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/stockNews/c_04.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/stockNews/c_04.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/stockNews/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/stockNews/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/leftContent/newsLive/stockNews/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/leftContent/newsLive/stockNews/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/QAForm/g_05.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/QAForm/g_05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/QAForm/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/QAForm/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/QAForm/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/QAForm/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/QATabs/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/QATabs/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/QATabs/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/QATabs/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/g_21.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/g_21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/g_22.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/g_22.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/QA/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/QA/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/cattleStocks/dataBox/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/cattleStocks/dataBox/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/cattleStocks/dataBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/cattleStocks/dataBox/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/cattleStocks/g_05.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/cattleStocks/g_05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/cattleStocks/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/cattleStocks/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/cattleStocks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/cattleStocks/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/g_01a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/g_01a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/g_18.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/g_18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/g_19.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/g_19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/g_20.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/g_20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/fundsFlow/loading.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/fundsFlow/loading.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/g_01a.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/g_01a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/g_17.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/g_17.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/g_18.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/g_18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/g_19.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/g_19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/g_20.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/g_20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/loading.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/loading.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/middleContent/rank/mor_02.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/middleContent/rank/mor_02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierContent/gs_05.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierContent/gs_05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierContent/icon_3.gif" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierContent/icon_3.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierTitle/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierTitle/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/courierTitle/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/courierTitle/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/courier/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/courier/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/dayStock/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/dayStock/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/linkList/g_12.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/linkList/g_12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/linkList/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/linkList/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/linkList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/linkList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/market/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/market/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/playItem/g30.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/playItem/g30.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/playItem/g31.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/playItem/g31.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/playItem/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/playItem/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/playItem/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/playItem/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/content/rightContent/subject/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/content/rightContent/subject/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/cooperation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/cooperation/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/footer/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/footer/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/footer/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/footer/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/header/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/header/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/header/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/header/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/header/logo/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/header/logo/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/header/logo/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/header/logo/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/g_25.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/g_25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/industry/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/industry/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/industry/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/industry/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/fiveDays/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/fiveDays/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/fiveDays/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/fiveDays/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/marketRadar/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/marketRadar/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/marketRadar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/marketRadar/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/track/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/track/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/hotSpots/singleStock/track/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/hotSpots/singleStock/track/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/jumpLink/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/jumpLink/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/nav/c_02.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/nav/c_02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/nav/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/nav/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/nav/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/nav/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/nav/line05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/nav/line05.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/subNav/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/subNav/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/navigation/subNav/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/navigation/subNav/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/qrCode/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/qrCode/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/qrCode/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/qrCode/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/g_25.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/g_25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/researchSearch/g49.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/researchSearch/g49.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/researchSearch/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/researchSearch/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/researchSearch/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/researchSearch/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/starAnalyst/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/starAnalyst/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/starAnalyst/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/starAnalyst/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/firstAttention/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/firstAttention/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/firstAttention/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/firstAttention/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/highestAttention/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/highestAttention/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/highestAttention/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/highestAttention/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/rating/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/rating/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/rating/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/rating/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/recommendStock/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/recommendStock/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/recommendStock/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/recommendStock/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/target/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/target/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/school/stockPicking/target/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/school/stockPicking/target/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockPlate/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockPlate/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockPlate/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockPlate/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockSearch/62fc144eb7de0e5.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockSearch/62fc144eb7de0e5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockSearch/g_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockSearch/g_03.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockSearch/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockSearch/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockSearch/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockSearch/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/layout/stockSearch/sos.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/layout/stockSearch/sos.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/finance/stock/index/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pc/views/finance/stock_gstzgc/layout/paperContent/paperList/more/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pc/views/finance/stock_gstzgc/layout/paperContent/paperList/more/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpackUtils/getEntry.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpackUtils/getEntry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpackUtils/getHTMLs.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpackUtils/getHTMLs.js" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/devtmp/" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>url(</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>url(./</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\workspace\web-channel\client\pc\finance\index</dir>
+      <dir>C:\workspace\web-channel\client\pc\finance\stock\index</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.css" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+              <item name="middleContent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-channel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-channel" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/pc/finance/index/layout/content" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="C:\workspace\web-channel\node_modules\eslint" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\workspace\web-channel\client\pc\finance\stock\index\layout\content\rightContent\courier" />
+      <recent name="C:\workspace\web-channel\client\pc\finance\stock\index\layout\content\rightContent" />
+      <recent name="C:\workspace\web-channel\client\pc\finance\stock\index\layout\content\middleContent\cattleStocks" />
+      <recent name="C:\workspace\web-channel\client\pc\finance\stock\index\layout\content\middleContent\customStock" />
+      <recent name="C:\workspace\web-channel\client\pc\finance\stock\index\layout\content\middleContent\QA" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b1972bc-7926-4455-9a84-64f11f94c838" name="Default" comment="" />
+      <created>1526378734564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1526378734564</updated>
+      <workItem from="1526378739190" duration="3098000" />
+      <workItem from="1526382357391" duration="870000" />
+      <workItem from="1526431551623" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3981000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18020834" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.4968085" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/pc/finance/index/app.jsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/pc/finance/stock/index/app.jsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/pc/finance/stock/index/components/headTitle/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
