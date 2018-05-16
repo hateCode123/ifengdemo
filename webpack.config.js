@@ -23,7 +23,7 @@ const pcCssConfig = {
             loader: 'postcss-loader',
             options: {
                 sourceMap: true,
-                plugins: function() {
+                plugins: function () {
                     return [
                         postImport(),
                         nextcss({
@@ -62,11 +62,13 @@ const mobileCssConfig = {
             loader: 'postcss-loader',
             options: {
                 sourceMap: true,
-                plugins: function() {
+                plugins: function () {
                     return [
                         postImport(),
                         aspectRatioMini(),
-                        writeSvg({utf8: false}),
+                        writeSvg({
+                            utf8: false
+                        }),
                         pxToViewport({
                             viewportWidth: 750,
                             viewportHeight: 1334,
@@ -93,16 +95,16 @@ const mobileCssConfig = {
 };
 
 const fileExtend = {
-    pc_view : '',
+    pc_view: '',
     pc_edit: '_edit',
     mobile_view: '_mobile',
     mobile_edit: '_mobile_edit'
 };
 
-const createConfig = function(type, platform, cssConfig) {
+const createConfig = function (type, platform, cssConfig) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.jsx' : './client/mobile/views/**/app.jsx'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
             filename: `js/[name]_${platform}_${type}.js`,
@@ -112,19 +114,14 @@ const createConfig = function(type, platform, cssConfig) {
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
             alias: {
-                Chip:
-                    type === 'view'
-                        ? '@ifeng/visualediting/src/components/ChipView'
-                        : '@ifeng/visualediting/src/components/Chip',
-                ChipEdit:
-                    type === 'view'
-                        ? '@ifeng/visualediting/src/components/ChipEditView'
-                        : '@ifeng/visualediting/src/components/ChipEdit',
+                Chip: type === 'view' ?
+                    '@ifeng/visualediting/src/components/ChipView' : '@ifeng/visualediting/src/components/Chip',
+                ChipEdit: type === 'view' ?
+                    '@ifeng/visualediting/src/components/ChipEditView' : '@ifeng/visualediting/src/components/ChipEdit',
             },
         },
         module: {
-            rules: [
-                {
+            rules: [{
                     test: /\.jsx?$/,
                     use: {
                         loader: 'babel-loader',
@@ -155,21 +152,22 @@ const createConfig = function(type, platform, cssConfig) {
                 commoncss,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
-                    use: [
-                        {
-                            loader: 'url-loader',
-                            options: {
-                                limit: 100,
-                                name: 'asset/[name].[ext]',
-                            },
+                    use: [{
+                        loader: 'url-loader',
+                        options: {
+                            limit: 100,
+                            name: 'asset/[name].[ext]',
                         },
-                    ],
+                    }, ],
                 },
                 // {
                 //     test: /\.ejs$/,
                 //     use: ['f.lib.ejs-loader', 'f.lib.ejs-src-loader'],
                 // },
-                { test: /\.html$/, loader: 'handlebars-loader' },
+                {
+                    test: /\.html$/,
+                    loader: 'handlebars-loader'
+                },
             ],
         },
 
@@ -185,11 +183,10 @@ const createConfig = function(type, platform, cssConfig) {
                 minChunks: 2,
             }),
             new webpack.NamedModulesPlugin(),
-            ...getHTMLs(platform === 'pc' ? './client/pc/views/**/template.html' : './client/mobile/views/**/template.html', fileExtend[`${platform}_${type}`]),
+            ...getHTMLs(platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html', fileExtend[`${platform}_${type}`]),
         ],
     };
 };
 // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
 module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
 // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig)];
-
