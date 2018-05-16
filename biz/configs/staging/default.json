@@ -11,7 +11,7 @@
         {
             "type": "rotating-file",
             "path": "/data/logs/out.log",
-            "level": "info",
+            "level": "debug",
             "period": "1d",
             "count": 30
         },
