@@ -110,7 +110,7 @@ const fileExtend = {
 const createConfig = function(type, platform, cssConfig) {
     return {
         devtool: 'source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/views/**/app.jsx' : './client/mobile/views/**/app.jsx'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: `[name].${platform}_${type}.[chunkhash:5].js`,
@@ -202,7 +202,7 @@ const createConfig = function(type, platform, cssConfig) {
                 allChunks: true
             }),
             new CleanPlugin(['dist']),
-            ...getHTMLs(platform === 'pc' ? './client/pc/views/**/template.html' : './client/mobile/views/**/template.html', fileExtend[`${platform}_${type}`]),
+            ...getHTMLs(platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html', fileExtend[`${platform}_${type}`]),
         ],
     };
 };
