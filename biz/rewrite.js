@@ -9,7 +9,7 @@ const { KVProxy } = require('./providers/ucmsapiProxy');
 const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('./services/common/common');
 
 module.exports = async (ctx, next) => {
-    // logger.debug(ctx.url);
+    logger.debug(ctx.url);
     logger.debug(ctx.header);
     let type = '';
     const deviceType = ctx.headers['devicetype'] ? ctx.headers['devicetype'] : 'pc';
@@ -32,12 +32,25 @@ module.exports = async (ctx, next) => {
     //     return await rewrite(/\/r(.*)/, partten)(ctx, next);
     // }
 
-    if (deviceType === 'pc' && !/(^\/api\/)|(^\/heartbeat)|(^\/pc\/)/.test(ctx.url)) {
+    if (/(^\/pc\/)/.test(ctx.url)) {
+        return await next();
+    }
+
+    if (/(^\/mobile\/)/.test(ctx.url)) {
+        return await rewrite('/mobile/(.*)', '/pc/$1')(ctx, next);
+    }
+
+    if (/(^\/api\/)|(^\/heartbeat)/.test(ctx.url)) {
+        return await next();
+    }
+
+    if (deviceType === 'pc') {
         return await rewrite(/(.*)/, '/pc$1')(ctx, next);
     }
 
-    if (deviceType === 'phone' && !/(^\/api\/)|(^\/heartbeat)|(^\/mobile\/)/.test(ctx.url)) {
-        return await rewrite(/(.*)/, '/mobile$1')(ctx, next);
+    if (deviceType === 'phone') {
+        // return await rewrite(/(.*)/, '/mobile$1')(ctx, next);
+        return await rewrite(/(.*)/, '/pc$1')(ctx, next);
     }
 
     return await next();
