@@ -4,9 +4,9 @@ Object.defineProperty(exports, '__esModule', {
     value: true,
 });
 
-var _Collapse = require('./Collapse');
+const _Collapse = require('./Collapse');
 
-var _Collapse2 = _interopRequireDefault(_Collapse);
+const _Collapse2 = _interopRequireDefault(_Collapse);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };

@@ -15,7 +15,7 @@ module.exports = async(ctx, next) => {
 
     // 底页面 rewrite
     if (/^\/r\//.test(ctx.url)) {
-        let id = ctx.url.match(/r\/([0-9]+)/)[1];
+        const id = ctx.url.match(/r\/([0-9]+)/)[1];
         let docData = {};
 
         docData = await KVProxy.getDocument(parseInt(id)).then(...handleJson(ctx, true));
@@ -26,7 +26,7 @@ module.exports = async(ctx, next) => {
 
         type = 'content';
 
-        let partten = deviceType === 'pc' ? `/${type}$1` : `/mobile/${type}$1`;
+        const partten = deviceType === 'pc' ? `/${type}$1` : `/mobile/${type}$1`;
 
         return await rewrite(/\/r(.*)/, partten)(ctx, next);
     }

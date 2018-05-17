@@ -34,9 +34,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== '' &&
-                                        stockData[`s_${item.code}`] &&
-                                        stockData[`s_${item.code}`][3] > 0
+                                        stockData !== ''
+                                        && stockData[`s_${item.code}`]
+                                        && stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
@@ -44,9 +44,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== '' &&
-                                        stockData[`s_${item.code}`] &&
-                                        stockData[`s_${item.code}`][3] > 0
+                                        stockData !== ''
+                                        && stockData[`s_${item.code}`]
+                                        && stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>

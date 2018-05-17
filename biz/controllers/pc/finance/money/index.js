@@ -77,7 +77,6 @@ exports.financeWemoney = {
         const search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
         // 幻灯
         const slider = KVProxy.getStaticFragment(10130).then(...handleJsonByKey(ctx, 'content'));
- 
 
         const otherData = await Promise.all([
             navigation,

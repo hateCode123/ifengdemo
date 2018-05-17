@@ -193,7 +193,7 @@ exports.list = {
             qrCode,
         ]);
 
-        let allData = {
+        const allData = {
             nav,
             search,
             logo,

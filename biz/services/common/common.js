@@ -11,7 +11,7 @@ const config = require('../../configs');
 const jsonParse = (jsonStr, ctx) => {
     if (config.default.statistics) {
         const start = Timers.time();
-        let json = JSON.parse(jsonStr);
+        const json = JSON.parse(jsonStr);
 
         ctx.parseTime.push(Timers.timeEnd(start));
 
