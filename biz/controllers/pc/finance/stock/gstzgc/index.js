@@ -17,7 +17,7 @@ exports.financeWemoney = {
         // 搜索
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
-        // 顶部通栏广告
+        // 顶部logo
         let logo = KVProxy.getStaticFragment(10107).then(...handleStringByKey(ctx, 'content'));
 
         // 顶部通栏广告

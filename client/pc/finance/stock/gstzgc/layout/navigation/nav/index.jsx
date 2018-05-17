@@ -13,21 +13,13 @@ class Nav extends React.PureComponent {
 
         const creatList = () => (
             <ul className={styles.nav}>
-                {content.map((item, index, content) => {
-                    return index < content.length - 1 ? (
-                        <li key={index} className={styles.bg}>
-                            <a href={item.url} target="_blank" rel={rel}>
-                                <span>{item.title}</span>
-                            </a>
-                        </li>
-                    ) : (
-                        <li key={index}>
-                            <a href={item.url} target="_blank" rel={rel}>
-                                <span>{item.title}</span>
-                            </a>
-                        </li>
-                    );
-                })}
+                {content.map((item, index) => (
+                    <li key={index} className={styles.bg}>
+                        <a href={item.url} target="_blank" rel={rel}>
+                            <span>{item.title}</span>
+                        </a>
+                    </li>
+                ))}
             </ul>
         );
 

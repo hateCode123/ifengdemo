@@ -1,7 +1,9 @@
 .nav {
     composes: clearfix from global;
     & .bg {
-        background: url('./list_01.gif') no-repeat right center;
+        &:nth-last-child(n + 2) {
+            background: url('./list_01.gif') no-repeat right center;
+        }
     }
     & li {
         font-size: 14px;
