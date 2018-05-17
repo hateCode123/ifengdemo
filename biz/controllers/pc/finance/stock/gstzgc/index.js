@@ -1,5 +1,5 @@
 ﻿const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
-const { handleJson, handleJsonByKey } = require('../../../../../services/common/common');
+const { handleJson, handleJsonByKey, handleStringByKey } = require('../../../../../services/common/common');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 
@@ -18,7 +18,7 @@ exports.financeWemoney = {
         let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
 
         // 顶部通栏广告
-        let logo = KVProxy.getStaticFragment(10107).then(...handleJsonByKey(ctx, 'content'));
+        let logo = KVProxy.getStaticFragment(10107).then(...handleStringByKey(ctx, 'content'));
 
         // 顶部通栏广告
         let topAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
@@ -26,20 +26,8 @@ exports.financeWemoney = {
         // 投资观察A股指数和导航
         let navigation = KVProxy.getStaticFragment(10028).then(...handleJsonByKey(ctx, 'content'));
 
-        // 新闻头条1
-        let headlineNews1 = KVProxy.getStaticFragment(10030).then(...handleJson(ctx));
-
-        // 新闻头条2
-        let headlineNews2 = KVProxy.getStaticFragment(10031).then(...handleJson(ctx));
-
-        // 新闻头条3
-        let headlineNews3 = KVProxy.getStaticFragment(10032).then(...handleJson(ctx));
-
-        // 新闻头条4
-        let headlineNews4 = KVProxy.getStaticFragment(10033).then(...handleJson(ctx));
-
-        // 新闻头条5
-        let headlineNews5 = KVProxy.getStaticFragment(10034).then(...handleJson(ctx));
+        // 头条新闻
+        let headline = KVProxy.getRecommendFragment(20035).then(...handleJsonByKey(ctx, 'data'));
 
         // 视频解盘
         let videoAnalysis = KVProxy.getStaticFragment(10036).then(...handleJson(ctx));
@@ -48,7 +36,7 @@ exports.financeWemoney = {
         let stockCompetition = KVProxy.getStaticFragment(10037).then(...handleJson(ctx));
 
         // 轮播
-        let sliderData = KVProxy.getStaticFragment(10116).then(...handleJsonByKey(ctx, 'content'));
+        let sliderData = KVProxy.getRecommendFragment(20036).then(...handleJsonByKey(ctx, 'data'));
 
         // 文章列表导航
         let paperMenu = KVProxy.getStaticFragment(10041).then(...handleJsonByKey(ctx, 'content'));
@@ -75,10 +63,10 @@ exports.financeWemoney = {
         let ssComMore = KVProxy.getStaticFragment(10055).then(...handleJsonByKey(ctx, 'content'));
 
         // 牛人解盘标题
-        let nrjpTitle = KVProxy.getStaticFragment(10057).then(...handleJsonByKey(ctx, 'content'));
+        let nrjpTitle = KVProxy.getStaticFragment(10057).then(...handleStringByKey(ctx, 'content'));
 
         // 牛人解盘;
-        let nrjp = KVProxy.getStaticFragment(10056).then(...handleJsonByKey(ctx, 'content'));
+        let nrjp = KVProxy.getStaticFragment(10056).then(...handleStringByKey(ctx, 'content'));
 
         // 7*24小时直播标题
         let liveTitle = KVProxy.getStaticFragment(10058).then(...handleJsonByKey(ctx, 'content'));
@@ -119,7 +107,7 @@ exports.financeWemoney = {
         let wxPublic = KVProxy.getStaticFragment(10068).then(...handleJson(ctx));
 
         // 版权合作
-        let cooperation = KVProxy.getStaticFragment(10112).then(...handleJsonByKey(ctx, 'content'));
+        let cooperation = KVProxy.getStaticFragment(10112).then(...handleStringByKey(ctx, 'content'));
 
         // 版权
         let copyright = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
@@ -130,11 +118,7 @@ exports.financeWemoney = {
             logo,
             topAd,
             navigation,
-            headlineNews1,
-            headlineNews2,
-            headlineNews3,
-            headlineNews4,
-            headlineNews5,
+            headline,
             videoAnalysis,
             stockCompetition,
             sliderData,
@@ -168,11 +152,7 @@ exports.financeWemoney = {
             logo,
             topAd,
             navigation,
-            headlineNews1,
-            headlineNews2,
-            headlineNews3,
-            headlineNews4,
-            headlineNews5,
+            headline,
             videoAnalysis,
             stockCompetition,
             sliderData,
@@ -208,11 +188,7 @@ exports.financeWemoney = {
             logo,
             topAd,
             navigation,
-            headlineNews1,
-            headlineNews2,
-            headlineNews3,
-            headlineNews4,
-            headlineNews5,
+            headline,
             videoAnalysis,
             stockCompetition,
             sliderData,

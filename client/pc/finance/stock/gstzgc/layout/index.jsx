@@ -9,7 +9,7 @@ import TopAd from './topAd/';
 import Navigation from './navigation/';
 import Topic from './topic/';
 import { Recommend } from './recommend';
-import { HeadlineNews } from './HeadlineNews';
+import { Headline } from './headline';
 import PaperContent from './paperContent';
 import TitleR from './titleR';
 import { Live } from './live';
@@ -18,7 +18,7 @@ import ClickRank from './clickRank';
 import { Qa } from './QA';
 import { Header } from './header';
 import { BottomFooter } from './footer';
-import { SimpleSlider } from './slider';
+import { Slide } from './slide';
 
 class Layout extends React.PureComponent {
     /**
@@ -33,14 +33,6 @@ class Layout extends React.PureComponent {
             nav: content.nav,
             search: content.search,
             logo: content.logo,
-        };
-
-        const headlineNews = {
-            headlineNews1: content.headlineNews1,
-            headlineNews2: content.headlineNews2,
-            headlineNews3: content.headlineNews3,
-            headlineNews4: content.headlineNews4,
-            headlineNews5: content.headlineNews5,
         };
 
         const paperData = {
@@ -98,14 +90,15 @@ class Layout extends React.PureComponent {
                 <div className={styles.col_w1000}>
                     <div className={styles.fl}>
                         <Topic />
-                        <HeadlineNews content={headlineNews} />
+                        <Chip id="20035" type="recommend" title="头条新闻" groupName="文章" content={content.headline}>
+                            <Headline />
+                        </Chip>
                     </div>
                     <div className={styles.fr}>
                         <Chip
                             id={content.videoAnalysis.id}
                             type="static"
                             title="视频解盘"
-                            groupName="文章"
                             content={content.videoAnalysis.content}>
                             <Recommend />
                         </Chip>
@@ -113,7 +106,6 @@ class Layout extends React.PureComponent {
                             id={content.stockCompetition.id}
                             type="static"
                             title="炒股大赛"
-                            groupName="文章"
                             content={content.stockCompetition.content}>
                             <Recommend />
                         </Chip>
@@ -123,7 +115,7 @@ class Layout extends React.PureComponent {
                 <div className={styles.col_w1000}>
                     <div className={styles.fl640}>
                         <Chip id="10116" type="static" title="轮播" content={content.sliderData}>
-                            <SimpleSlider />
+                            <Slide />
                         </Chip>
                         <PaperContent content={paperData} />
                     </div>

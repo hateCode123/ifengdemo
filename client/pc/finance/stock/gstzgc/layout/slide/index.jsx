@@ -5,7 +5,7 @@ import Slides from '@ifeng/ui_pc_slides';
 import styles from './index.css';
 import PropTypes from 'prop-types';
 
-class SimpleSlider extends React.PureComponent {
+class Slide extends React.PureComponent {
     /**
      * 渲染组件
      */
@@ -38,12 +38,12 @@ class SimpleSlider extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-SimpleSlider.propTypes = { content: PropTypes.array };
+Slide.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性
  * */
-SimpleSlider.defaultProps = {};
+Slide.defaultProps = {};
 
-export { SimpleSlider };
-export default SimpleSlider;
+export { Slide };
+export default Slide;
