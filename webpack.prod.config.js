@@ -25,7 +25,7 @@ const pcCssConfig = {
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-            'css-loader?modules&localIdentName=[local]-[hash:base64:5]',
+            'css-loader?modules&localIdentName=[local]-[hash:base64]',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -65,7 +65,7 @@ const mobileCssConfig = {
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-            'css-loader?modules&localIdentName=[local]-[hash:base64:5]',
+            'css-loader?modules&localIdentName=[local]-[hash:base64]',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -113,10 +113,10 @@ const createConfig = function(type, platform, cssConfig) {
         entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: `[name].${platform}_${type}.[chunkhash:5].js`,
+            filename: `[name].${platform}_${type}.[chunkhash].js`,
             publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
             publicPath: env === 'pre_development'? '/' : ('//p0.ifengimg.com/fe/zl/test/live/' + appName + '/'),
-            chunkFilename: `[name].${platform}_${type}.[chunkhash:5].js`,
+            chunkFilename: `[name].${platform}_${type}.[chunkhash].js`,
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
@@ -198,7 +198,7 @@ const createConfig = function(type, platform, cssConfig) {
                 minChunks: 2,
             }),
             new ExtractTextPlugin({
-                filename:'[name].[contenthash:5].css',
+                filename:'[name].[contenthash].css',
                 allChunks: true
             }),
             new CleanPlugin(['dist']),
