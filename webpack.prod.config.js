@@ -1,7 +1,6 @@
 const path = require('path');
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
 const webpack = require('webpack');
 // const px2rem = require('postcss-px2rem');
 const nextcss = require('postcss-cssnext');
@@ -11,6 +10,7 @@ const pxToViewport = require('postcss-px-to-viewport');
 const viewPortUnits = require('postcss-viewport-units');
 const writeSvg = require('postcss-write-svg');
 const CleanPlugin = require('clean-webpack-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -53,9 +53,7 @@ const commoncss = {
     include: /node_modules/,
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: [
-            'css-loader',
-        ],
+        use: ['css-loader'],
     }),
 };
 
@@ -74,7 +72,7 @@ const mobileCssConfig = {
                         return [
                             postImport(),
                             aspectRatioMini(),
-                            writeSvg({utf8: false}),
+                            writeSvg({ utf8: false }),
                             pxToViewport({
                                 viewportWidth: 750,
                                 viewportHeight: 1334,
@@ -89,7 +87,7 @@ const mobileCssConfig = {
                                 browsers: ['last 2 versions', 'ie >= 9'],
                                 // browsers: ['chrome >= 56'],
                             }),
-                                // px2rem({
+                            // px2rem({
                             //     remUnit: 75,
                             // }),
                         ];
@@ -101,10 +99,10 @@ const mobileCssConfig = {
 };
 
 const fileExtend = {
-    pc_view : '',
+    pc_view: '',
     pc_edit: '_edit',
     mobile_view: '_mobile',
-    mobile_edit: '_mobile_edit'
+    mobile_edit: '_mobile_edit',
 };
 
 const createConfig = function(type, platform, cssConfig) {
@@ -114,8 +112,8 @@ const createConfig = function(type, platform, cssConfig) {
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: `[name].${platform}_${type}.[chunkhash].js`,
-            publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
-            publicPath: env === 'pre_development'? '/' : ('//p0.ifengimg.com/fe/zl/test/live/' + appName + '/'),
+            // publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
+            publicPath: env === 'pre_development' ? '/' : '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
             chunkFilename: `[name].${platform}_${type}.[chunkhash].js`,
         },
         resolve: {
@@ -187,7 +185,7 @@ const createConfig = function(type, platform, cssConfig) {
             //     analyzerPort: type === 'view' ? 8888 : 8887
             // }),
             new webpack.HashedModuleIdsPlugin(),
-            new WebpackMd5Hash(),
+            new WebpackChunkHash({ algorithm: 'md5' }),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipStaticUrl: JSON.stringify('https://ucms.ifeng.com/shard/static/edit/'),
@@ -198,14 +196,21 @@ const createConfig = function(type, platform, cssConfig) {
                 minChunks: 2,
             }),
             new ExtractTextPlugin({
-                filename:'[name].[contenthash].css',
-                allChunks: true
+                filename: '[name].[contenthash].css',
+                allChunks: true,
             }),
             new CleanPlugin(['dist']),
-            ...getHTMLs(platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html', fileExtend[`${platform}_${type}`]),
+            ...getHTMLs(
+                platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html',
+                fileExtend[`${platform}_${type}`],
+            ),
         ],
     };
 };
 
-module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
-
+module.exports = [
+    createConfig('view', 'pc', pcCssConfig),
+    createConfig('edit', 'pc', pcCssConfig),
+    createConfig('view', 'mobile', mobileCssConfig),
+    createConfig('edit', 'mobile', mobileCssConfig),
+];
