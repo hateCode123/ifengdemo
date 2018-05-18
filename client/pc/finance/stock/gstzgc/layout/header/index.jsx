@@ -5,7 +5,8 @@ import Chip from 'Chip';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '../../../../../components/userInfo/';
 import Search from '../../../../../components/search/';
-import { Recommend } from '../recommend';
+import { rel } from '../../../../../utils/rel';
+import logoUrl from './logo.jpg';
 
 /**
  * 定义 Header 组件
@@ -26,9 +27,12 @@ class Header extends React.PureComponent {
 
         const topSearch = (
             <div className={styles.h_searchDiv} key="topSearch">
-                <Chip id="10107" type="static" title="logo" content={content.logo}>
-                    <Recommend />
-                </Chip>
+                <div className={styles.h_theLogo}>
+                    <a href="//finance.ifeng.com/stock/" rel={rel} target="_blank">
+                        <img src={logoUrl} style={{ width: 127, height: 27 }} title="凤凰股票" alt="凤凰股票" />
+                    </a>
+                    <div className={styles.adv11}>投资观察</div>
+                </div>
                 <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
                     <Search />
                 </Chip>
