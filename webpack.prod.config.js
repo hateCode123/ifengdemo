@@ -25,7 +25,7 @@ const pcCssConfig = {
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-            'css-loader?modules&localIdentName=[local]-[hash:base64]',
+            'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -63,7 +63,7 @@ const mobileCssConfig = {
     use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-            'css-loader?modules&localIdentName=[local]-[hash:base64]',
+            'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -111,10 +111,10 @@ const createConfig = function(type, platform, cssConfig) {
         entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: `[name].${platform}_${type}.[chunkhash].js`,
+            filename: `[name].${platform}_${type}.[chunkhash:8].js`,
             // publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
             publicPath: env === 'pre_development' ? '/' : '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
-            chunkFilename: `[name].${platform}_${type}.[chunkhash].js`,
+            chunkFilename: `[name].${platform}_${type}.[chunkhash:8].js`,
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
@@ -167,7 +167,7 @@ const createConfig = function(type, platform, cssConfig) {
                             loader: 'url-loader',
                             options: {
                                 limit: 100,
-                                name: '[name].[ext]',
+                                name: '[name].[hash:8].[ext]',
                             },
                         },
                     ],
@@ -196,7 +196,7 @@ const createConfig = function(type, platform, cssConfig) {
                 minChunks: 2,
             }),
             new ExtractTextPlugin({
-                filename: '[name].[contenthash].css',
+                filename: '[name].[contenthash:8].css',
                 allChunks: true,
             }),
             new CleanPlugin(['dist']),
