@@ -1,5 +1,6 @@
 {
-    "appname": "app",
+    "appname": "web_channel",
+    "namespace": "dev_shank",
     "debug": true,
     "port": 3000,
     "outputStd": true,

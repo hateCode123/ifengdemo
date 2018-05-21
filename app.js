@@ -14,6 +14,8 @@ const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
 const _ = require('lodash');
+const prom = require('prom-client');
+const Router = require('koa-router');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -66,6 +68,44 @@ app.use(bodyParser());
 // 美化json格式输出
 app.use(json());
 
+const register = prom.register;
+
+
+const Histogram = prom.Histogram;
+const h = new Histogram({
+	name: `${config.default.namespace}_${config.default.appname}_requests`,
+	help: 'Example of a histogram',
+    labelNames: ['code'],
+    buckets: [1, 5, 15, 50, 100, 500]
+});
+
+
+const Counter = prom.Counter;
+const c = new Counter({
+    name: `${config.default.namespace}_${config.default.appname}_counter`,
+    help: 'Example of a counter',
+    labelNames: ['counter'],
+});
+
+const router = new Router();
+
+router.get('/metrics', (ctx, next) => {
+    // ctx.router available
+    // res.set('Content-Type', register.contentType);
+    console.log('=========================')
+    ctx.type = register.contentType;
+	ctx.body = register.metrics();
+});
+
+router.get('/metrics/counter', (ctx, next) => {
+    // res.set('Content-Type', register.contentType);
+    ctx.type = register.contentType;
+    ctx.body = register.getSingleMetricAsString('test_counter');
+});
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
+
 // 模板引擎设置
 app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { html: 'ejs' } }));
 
@@ -83,6 +123,7 @@ if (config.default.statistics) {
         ctx.parseTime = [];
         try {
             await next();
+            c.inc({ code: 200 });
         } catch (err) {
             logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
             logger.error(err);
@@ -96,6 +137,7 @@ if (config.default.statistics) {
             } else {
                 throw err;
             }
+            c.inc({ code: 500 });
         }
         const ms = new Date() - start;
 
@@ -122,6 +164,7 @@ if (config.default.statistics) {
         // logger.debug(`--> time router - ${ctx.routerTimeEnd}ms`);
         // logger.debug(`--> time rpc - ${rpcTime}ms`);
         // logger.debug(`--> time JSON.parse - ${ctx.parseTime}ms`);
+        h.observe(ms);
         logger.debug(
             `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
                 ctx.routerTimeEnd
