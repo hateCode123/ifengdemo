@@ -3,10 +3,13 @@
  * ctx对象新增 ctx.html(), ctx.json, ctx.jsonp()方法，使用说明请查看doc.md
  */
 const util = require('util');
+const {tracer} = require('../../common/jaeger');
 
 module.exports = (app, options = {}) => {
     // extend html function
     app.context.html = async function(tplName, data) {
+        this.spanrpc.finish();
+        const child = tracer._tracer.startSpan('render', { childOf: this.span });
         if (this.urlinfo && this.urlinfo.ctrlPath === 'mobile') {
             tplName += '_mobile';
         }
@@ -14,6 +17,7 @@ module.exports = (app, options = {}) => {
             tplName += '_edit';
         }
         await this.render(tplName, data);
+        child.finish();
     };
 
     // extend json function
