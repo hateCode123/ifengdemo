@@ -69,7 +69,8 @@ app.use(bodyParser());
 app.use(json());
 
 // 普罗米修斯 引入
-const { c, h } = require('./biz/common/prom');
+const { c, h ,router} = require('./biz/common/prom');
+app.use(router.routes(), router.allowedMethods());
 
 webapi(app);
 
@@ -141,7 +142,6 @@ if (config.default.statistics) {
             rpcTime += parseFloat(i);
         }
         rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
-        rpcTime = rpcTime.toFixed(3);
 
         let parseTime = 0;
 

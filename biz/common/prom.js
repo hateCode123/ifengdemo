@@ -35,5 +35,6 @@ const c = new Counter({
 
 module.exports = {
     c,
-    h
+    h,
+    router
 }
