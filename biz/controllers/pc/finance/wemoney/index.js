@@ -10,32 +10,32 @@ exports.financeWemoney = {
     type: 'html',
     handler: async ctx => {
         //通用导航
-        let commonNav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+        let commonNav = KVProxy.getStaticFragment(ctx,10108).then(...handleJsonByKey(ctx, 'content'));
 
         // 导航
-        let navigation = KVProxy.getStaticFragment(10003).then(...handleJson(ctx));
+        let navigation = KVProxy.getStaticFragment(ctx,10003).then(...handleJson(ctx));
 
         // 轮播
-        let slider = KVProxy.getStaticFragment(10006).then(...handleJsonByKey(ctx, 'content'));
+        let slider = KVProxy.getStaticFragment(ctx,10006).then(...handleJsonByKey(ctx, 'content'));
 
         // 广告
-        let adAside1 = KVProxy.getStaticFragment(10021).then(...handleJson(ctx));
-        let adAside2 = KVProxy.getStaticFragment(10022).then(...handleJson(ctx));
-        let adAside3 = KVProxy.getStaticFragment(10023).then(...handleJson(ctx));
-        let adAside4 = KVProxy.getStaticFragment(10024).then(...handleJson(ctx));
-        let adAside5 = KVProxy.getStaticFragment(10025).then(...handleJson(ctx));
+        let adAside1 = KVProxy.getStaticFragment(ctx,10021).then(...handleJson(ctx));
+        let adAside2 = KVProxy.getStaticFragment(ctx,10022).then(...handleJson(ctx));
+        let adAside3 = KVProxy.getStaticFragment(ctx,10023).then(...handleJson(ctx));
+        let adAside4 = KVProxy.getStaticFragment(ctx,10024).then(...handleJson(ctx));
+        let adAside5 = KVProxy.getStaticFragment(ctx,10025).then(...handleJson(ctx));
 
         // 热门新闻标题
-        let hotNewsTitle = KVProxy.getStaticFragment(10122).then(...handleJsonByKey(ctx, 'content'));
+        let hotNewsTitle = KVProxy.getStaticFragment(ctx,10122).then(...handleJsonByKey(ctx, 'content'));
 
         // 热门新闻
-        let hotNews = KVProxy.getStaticFragment(10005).then(...handleJsonByKey(ctx, 'content'));
+        let hotNews = KVProxy.getStaticFragment(ctx,10005).then(...handleJsonByKey(ctx, 'content'));
 
         // 新闻列表
-        let info = KVProxy.getStaticFragment(10007).then(...handleJsonByKey(ctx, 'content'));
+        let info = KVProxy.getStaticFragment(ctx,10007).then(...handleJsonByKey(ctx, 'content'));
 
         // 版权
-        let copyright = KVProxy.getStaticFragment(10121).then(...handleJsonByKey(ctx, 'content'));
+        let copyright = KVProxy.getStaticFragment(ctx,10121).then(...handleJs(ctx, 'content'));
 
         // console.log("11111 : ", otherData)
 

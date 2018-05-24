@@ -1,7 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { KVProxyWrapper,jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
+const { KVProxyWrapper,jsonParse, handleData, handleJson, handleJsonByKey, handleJs,handleStringByKey } = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/index',
@@ -10,12 +10,9 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
-        // let KVProxy = KVProxyWrapper(ctx);
-
         // 页面公用导航
 
-        let nav =  KVProxy.getStaticFragment(ctx,10108).then(...handleJsonByKey(ctx, 'content'));
-   
+        let nav = KVProxy.getStaticFragment(ctx,10108).then(...handleJsonByKey(ctx, 'content'));
 
         // 搜索
         let search = KVProxy.getStaticFragment(ctx,10129).then(...handleJsonByKey(ctx, 'content'));
@@ -33,7 +30,7 @@ exports.list = {
         let bannerPic = KVProxy.getRecommendFragment(ctx,20002).then(...handleJsonByKey(ctx, 'data'));
 
         // 头条新闻
-        let headline = KVProxy.getRecommendFragment(ctx,20003).then(...handleJsonByKey(ctx, 'data'));
+        let headline = KVProxy.getRecommendFragment(ctx,20003).then(...handleStringByKey(ctx, 'data'));
 
         // 头条新闻多拼新闻
         let extraNews = KVProxy.getStaticFragment(ctx,10011).then(...handleJs(ctx, 'content'));
@@ -51,22 +48,22 @@ exports.list = {
         let stocks = KVProxy.getStaticFragment(ctx,10010).then(...handleJsonByKey(ctx, 'content'));
 
         // 大咖说新闻列表
-        let talkingList = KVProxy.getRecommendFragment(ctx,20005).then(...handleJsonByKey(ctx, 'data'));
+        let talkingList = KVProxy.getRecommendFragment(ctx,20005).then(...handleStringByKey(ctx, 'data'));
 
         // 财商教育新闻列表
-        let financeList = KVProxy.getRecommendFragment(ctx,20006).then(...handleJsonByKey(ctx, 'data'));
+        let financeList = KVProxy.getRecommendFragment(ctx,20006).then(...handleStringByKey(ctx, 'data'));
 
         // 炒股大赛新闻列表
-        let stocksList = KVProxy.getRecommendFragment(ctx,20007).then(...handleJsonByKey(ctx, 'data'));
+        let stocksList = KVProxy.getRecommendFragment(ctx,20007).then(...handleStringByKey(ctx, 'data'));
 
         // 标题广告
         let titleAd = KVProxy.getStaticFragment(ctx,10012).then(...handleJs(ctx, 'content'));
 
         // 研究院
-        let institute = KVProxy.getRecommendFragment(ctx,20008).then(...handleJsonByKey(ctx, 'data'));
+        let institute = KVProxy.getRecommendFragment(ctx,20008).then(...handleStringByKey(ctx, 'data'));
 
         // 专题会议
-        let meeting = KVProxy.getRecommendFragment(ctx,20010).then(...handleJsonByKey(ctx, 'data'));
+        let meeting = KVProxy.getRecommendFragment(ctx,20010).then(...handleStringByKey(ctx, 'data'));
 
         // 底部合作链接
         let cooperation = KVProxy.getStaticFragment(ctx,10015).then(...handleJs(ctx, 'content'));

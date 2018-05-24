@@ -3,6 +3,7 @@ const logger = require('../../common/logger');
 const config = require('../../configs');
 const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
+
 /**
  * 使用该方法替代JSON.parse(),统计JSON.parse耗时
  * @param {String} jsonStr json格式字符串
@@ -10,20 +11,25 @@ const { tracer } = require('../../common/jaeger');
  * @return {Object}
  */
 const jsonParse = (jsonStr, ctx, parent) => {
-    const child = tracer._tracer.startSpan('JSON.parse()', { childOf: parent });
+    let context = {};
+
     if (config.default.statistics) {
-        const start = Timers.time();
-        let json = JSON.parse(jsonStr);
-        let endTime = Timers.timeEnd(start);
-        ctx.parseTime.push(endTime);
-        // child.log({ event: 'json_parse_end', json_parse_time: endTime });
-        child.finish();
-        return json;
-    } else {
-        // child.log({ event: 'json_parse_end' });
-        // child.finish();
-        // return JSON.parse(jsonStr);
+        context.start = Timers.time();
     }
+    if (config.default.statisticsJaeger) {
+        context.child = tracer._tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
+    }
+
+    let json = JSON.parse(jsonStr);
+
+    if (config.default.statistics) {
+        let endTime = Timers.timeEnd(context.start);
+        ctx.parseTime.push(endTime);
+    }
+    if (config.default.statisticsJaeger) {
+        context.child.finish();
+    }
+    return json;
 };
 
 /**
@@ -37,77 +43,41 @@ const jsonParse = (jsonStr, ctx, parent) => {
 
 const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false) => {
     return result => {
-        // const parent = tracer._tracer.startSpan('parent', { childOf: result.span });
-        // parent.log({ event: 'parent' });
-
-        //     // const child1 = tracer._tracer.startSpan('child1', { childOf: child });
-        //     // child1.log({ event: 'child1'});
-        //     //     const child2 = tracer._tracer.startSpan('child2', { childOf: child1 });
-        //     //     child2.log({ event: 'child2'});
-        //     //     child2.finish();
-        //     // child1.finish();
-        // let data = jsonParse(result.response.return,ctx,parent);
-        // data= jsonParse(data.content,ctx,parent)
-        // parent.finish();
-        // result.span.finish();
-        // return data 
-
-        //console.log(result.response)
-        // console.log('success.response.costtime:', result.response.costtime);
-        // console.log('success.response:');
-
         // 统计rpc时间
         if (config.default.statistics) {
-            // if (singleType) {
-            //     ctx.rpcTimeList[0].push(result.response.costtime);
-            // } else {
-            //     ctx.rpcTimeList[1].push(result.response.costtime);
-            // }
+            if (singleType) {
+                ctx.rpcTimeList[0].push(result.response.costtime);
+            } else {
+                ctx.rpcTimeList[1].push(result.response.costtime);
+            }
         }
 
+        let back = null;
+
         try {
-            // 不需要JSON.parse 直接返回
-            if (!jsonParseStatus) {
-                result.span.finish();
-                return result.response.return;
-            }
-            if (typeof result.response.return === 'string') {
-                result.response.return = jsonParse(result.response.return, ctx, result.span);
-            }
-
-            if (key) {
-                if (jsStatus) {
-                    result.span.finish();
-                    return result.response.return[key];
-                }
-                if (typeof result.response.return[key] === 'string') {
-                    try {
-                      
-                        let data = jsonParse(result.response.return[key], ctx, result.span);
-                        result.span.finish();
-                        return data;
-                    } catch (err) {
-                        logger.error(`Something error with: ${result.callInfo}`);
-                        logger.error(err);
-                        logger.error('1111111111');
-
-                        result.span.finish();
-                        return result.response.return[key];
+            if (jsonParseStatus) {
+                back = jsonParse(result.response.return, ctx, result.span);
+                if (key) {
+                    back = back[key];
+                    if (!jsStatus) {
+                        back = jsonParse(back, ctx, result.span);
                     }
                 }
-
-                result.span.finish();
-                return result.response.return[key];
+            } else {
+                // 不需要JSON.parse 直接返回
+                back = result.response.return;
             }
-
-            result.span.finish();
-            return result.response.return;
         } catch (err) {
             logger.error(`Something error with: ${result.callInfo}`);
             logger.error(err);
-            result.span.finish();
-            return null;
         }
+
+        // jaeger trance 结束
+        if (config.default.statisticsJaeger) {
+            result.span.finish();
+        }
+
+        return back;
     };
 };
 
@@ -184,10 +154,6 @@ const handleStringByKey = (ctx, key, singleType = false) => {
     return [success(ctx, true, key, singleType, true), error(ctx, singleType)];
 };
 
-const KVProxyWrapper = ctx => {
-    ctx.spanrpc = tracer._tracer.startSpan('KVProxy_rpc', { childOf: ctx.span });
-    return KVProxy;
-};
 // 导出处理函数
 module.exports = {
     jsonParse,
@@ -198,5 +164,4 @@ module.exports = {
     handleJsonByKey,
     handleJs,
     handleStringByKey,
-    KVProxyWrapper,
 };

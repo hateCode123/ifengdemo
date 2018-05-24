@@ -1,7 +1,7 @@
 /**
  * 后台服务入口
  */
-const {tracer} = require('./biz/common/jaeger')
+const { tracer } = require('./biz/common/jaeger');
 const Koa = require('koa');
 const http = require('http');
 const path = require('path');
@@ -15,12 +15,9 @@ const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
 const _ = require('lodash');
-const prom = require('prom-client');
-const Router = require('koa-router');
-const jaeger = require('./biz/common/jaeger')
+const jaeger = require('./biz/common/jaeger');
 
 const env = process.env.NODE_ENV || 'development';
-
 
 // 创建koa实例
 const app = new Koa();
@@ -57,40 +54,6 @@ if (env === 'development') {
     views = require('koa-views');
 }
 
-
-
-// ---------------------- jaeger-client -----------------------
-
-// const {initTracer,TChannelBridge,opentracing} = require('jaeger-client');
-// const TChannel = require('tchannel');
-
-// // const Context = require('some-conformant-context');
-
-
-// const jconfig = {
-//     serviceName: 'my-awesome-service',
-// };
-// const joptions = {
-//     tags: {
-//         'my-awesome-service.version': '1.1.2',
-//     },
-//     metrics: undefined,
-//     logger: logger,
-// };
-
-// const tracer = initTracer(jconfig, joptions);
-
-
-// ---------------------- jaeger-client end-----------------------
-
-
-
-
-
-
-
-
-
 // 捕获未知错误
 onerror(app);
 
@@ -105,39 +68,10 @@ app.use(bodyParser());
 // 美化json格式输出
 app.use(json());
 
-const register = prom.register;
+// 普罗米修斯 引入
+const { c, h } = require('./biz/common/prom');
 
-const Histogram = prom.Histogram;
-const h = new Histogram({
-    name: `${config.default.namespace}_${config.default.appname}_requests`,
-    help: 'Example of a histogram',
-    labelNames: ['code'],
-    buckets: [1, 5, 15, 50, 100, 500],
-});
-
-const Counter = prom.Counter;
-const c = new Counter({
-    name: `${config.default.namespace}_${config.default.appname}_counter`,
-    help: 'Example of a counter',
-    labelNames: ['counter'],
-});
-
-const router = new Router();
-
-router.get('/metrics', (ctx, next) => {
-    // ctx.router available
-    // res.set('Content-Type', register.contentType);
-    console.log('=========================');
-    ctx.type = register.contentType;
-    ctx.body = register.metrics();
-});
-
-router.get('/metrics/counter', (ctx, next) => {
-    // res.set('Content-Type', register.contentType);
-    ctx.type = register.contentType;
-    ctx.body = register.getSingleMetricAsString('test_counter');
-});
-app.use(router.routes()).use(router.allowedMethods());
+webapi(app);
 
 // 模板引擎设置
 app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { html: 'ejs' } }));
@@ -145,25 +79,39 @@ app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { htm
 // 静态资源设置
 app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
 
+// jaeger 开关
+if (config.default.statisticsJaeger) {
+    app.use(async (ctx, next) => {
+        // 监控锚点
+        const span = tracer._tracer.startSpan('http_request');
+        ctx.span = span;
+        await next();
+        ctx.span.finish();
+    });
+}
+
+// prometheus 开关
+if (config.default.statisticsProm) {
+    app.use(async (ctx, next) => {
+        await next();
+        c.inc({ code: 200 });
+        h.observe(ctx.requestTime);
+    });
+}
+
+// 本地统计 开关
 if (config.default.statistics) {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
-        
-        const span = tracer._tracer.startSpan('http_request');
-        ctx.span = span;
-        ctx.tracer = tracer;
-        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        // 请求进入
+        logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
-
         ctx.routerTimeStart = process.hrtime();
-        ctx.span.log({'event': 'request_start'});
         ctx.rpcTimeList = [[], []];
         ctx.parseTime = [];
         try {
             await next();
-            c.inc({ code: 200 });
         } catch (err) {
-            logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
             logger.error(err);
             if (ctx.method === 'POST') {
                 logger.error(ctx.request.body);
@@ -175,13 +123,12 @@ if (config.default.statistics) {
             } else {
                 throw err;
             }
-            c.inc({ code: 500 });
 
-            span.setTag(opentracing.Tags.ERROR, true);
-            span.log({'event': 'error', 'error.object': err, 'message': err.message, 'stack': err.stack});
-     
+            ctx.span || ctx.span.setTag(opentracing.Tags.ERROR, true);
+            ctx.span || ctx.span.log({ event: 'error', 'error.object': err, message: err.message, stack: err.stack });
         }
         const ms = new Date() - start;
+        ctx.requestTime = ms;
 
         if (!ctx.routerTimeEnd) {
             ctx.routerTimeEnd = Timers.timeEnd(ctx.routerTimeStart);
@@ -202,19 +149,11 @@ if (config.default.statistics) {
             parseTime += parseFloat(i);
         }
         parseTime = parseTime.toFixed(3);
-
-        // logger.debug(`--> time router - ${ctx.routerTimeEnd}ms`);
-        // logger.debug(`--> time rpc - ${rpcTime}ms`);
-        // logger.debug(`--> time JSON.parse - ${ctx.parseTime}ms`);
-        h.observe(ms);
-        logger.debug(
+        logger.info(
             `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
                 ctx.routerTimeEnd
             }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${ctx.parseTime.length}, ${parseTime}ms]`,
         );
-
-        ctx.span.log({'event': 'request_end'});
-        ctx.span.finish();
     });
 } else {
     // 监控请求响应时间，catch未知的错误
@@ -239,6 +178,7 @@ if (config.default.statistics) {
             }
         }
         const ms = new Date() - start;
+        ctx.requestTime = ms;
 
         logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });

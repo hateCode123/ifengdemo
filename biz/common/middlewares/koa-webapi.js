@@ -4,20 +4,28 @@
  */
 const util = require('util');
 const {tracer} = require('../../common/jaeger');
+const config = require('../../configs')
 
 module.exports = (app, options = {}) => {
     // extend html function
     app.context.html = async function(tplName, data) {
-        this.spanrpc.finish();
-        const child = tracer._tracer.startSpan('render', { childOf: this.span });
+        let child = null;
+        if (config.default.statisticsJaeger) {
+            this.spanrpc.finish();
+            child = tracer._tracer.startSpan('render', { childOf: this.span });
+        }
         if (this.urlinfo && this.urlinfo.ctrlPath === 'mobile') {
             tplName += '_mobile';
         }
         if (this.urlinfo && this.urlinfo.edit) {
             tplName += '_edit';
         }
+
         await this.render(tplName, data);
-        child.finish();
+
+        if (config.default.statisticsJaeger) {
+            child.finish();
+        }
     };
 
     // extend json function
