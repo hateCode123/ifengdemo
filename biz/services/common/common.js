@@ -154,6 +154,22 @@ const handleStringByKey = (ctx, key, singleType = false) => {
     return [success(ctx, true, key, singleType, true), error(ctx, singleType)];
 };
 
+const promiseAll = async (json)=>{
+    let allData  = {};
+    let mykeys = [];
+    let myvalues = []
+
+    for (let key in json) {
+        myvalues.push(json[key]);
+        mykeys.push(key)
+    }
+
+    let arr = await Promise.all(myvalues);
+    for (let i=0;i<arr.length; i++) {
+        allData[mykeys[i]] = arr[i]
+    }
+    return allData;
+}
 // 导出处理函数
 module.exports = {
     jsonParse,
@@ -164,4 +180,5 @@ module.exports = {
     handleJsonByKey,
     handleJs,
     handleStringByKey,
+    promiseAll,
 };

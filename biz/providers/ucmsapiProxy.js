@@ -9,6 +9,7 @@ const Tars = require('@tars/rpc').client;
 const path = require('path');
 const env = process.env.NODE_ENV || 'development';
 const {tracer} = require('../common/jaeger')
+const config = require('../configs')
 
 Tars.initialize(path.join(__dirname, `../configs/${env}/config.conf`));
 
@@ -114,7 +115,7 @@ Tarsapi.Result.create = function(is) {
     return Tarsapi.Result._readFrom(is);
 };
 Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
-    var child = tracer._tracer.startSpan(`SearchProxy.del(${id},${newsTime})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.del(${id},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -173,7 +174,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
 };
 
 Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
-    var child = tracer._tracer.startSpan(`SearchProxy.delData(${indexName},${type},${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.delData(${indexName},${type},${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, indexName);
@@ -233,7 +234,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
 };
 
 Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`SearchProxy.getById(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.getById(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -291,7 +292,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
 };
 
 Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`SearchProxy.getByIds(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.getByIds(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -359,7 +360,7 @@ Tarsapi.SearchProxy.prototype.list = function(
     sort,
     returnFields,
 ) {
-    var child = tracer._tracer.startSpan(
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(
         `SearchProxy.list(${searchPath},${specialChannelPath},${type},${status},${offset},${size},${sort},${returnFields})`,
         { childOf: ctx.spanrpc },
     );
@@ -427,7 +428,7 @@ Tarsapi.SearchProxy.prototype.list = function(
 };
 
 Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
-    var child = tracer._tracer.startSpan(`SearchProxy.listByQueryStr(${queryStr})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.listByQueryStr(${queryStr})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, queryStr);
@@ -485,7 +486,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
 };
 
 Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
-    var child = tracer._tracer.startSpan(`SearchProxy.put(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.put(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -545,7 +546,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
 };
 
 Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJson) {
-    var child = tracer._tracer.startSpan(`SearchProxy.putData(${indexName},${type},${id},${dataJson})`, {
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.putData(${indexName},${type},${id},${dataJson})`, {
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
@@ -608,7 +609,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
 };
 
 Tarsapi.SearchProxy.prototype.test = function(ctx, s) {
-    var child = tracer._tracer.startSpan(`SearchProxy.test(${s})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.test(${s})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, s);
@@ -666,7 +667,7 @@ Tarsapi.SearchProxy.prototype.test = function(ctx, s) {
 };
 
 Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
-    var child = tracer._tracer.startSpan(`SearchProxy.update(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.update(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -726,7 +727,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
 };
 
 Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, dataJson) {
-    var child = tracer._tracer.startSpan(`SearchProxy.updateData(${indexName},${type},${id},${dataJson})`, {
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.updateData(${indexName},${type},${id},${dataJson})`, {
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
@@ -789,7 +790,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
 };
 
 Tarsapi.KVProxy.prototype.del = function(ctx, enumValue, k) {
-    var child = tracer._tracer.startSpan(`KVProxy.del(${enumValue},${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.del(${enumValue},${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, enumValue);
@@ -848,7 +849,7 @@ Tarsapi.KVProxy.prototype.del = function(ctx, enumValue, k) {
 };
 
 Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`KVProxy.getAd(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getAd(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -906,7 +907,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
 };
 
 Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
-    var child = tracer._tracer.startSpan(`KVProxy.getAds(${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getAds(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ks);
@@ -964,7 +965,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
 };
 
 Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getCategories(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCategories(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -1022,7 +1023,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`KVProxy.getCategory(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCategory(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -1080,7 +1081,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`KVProxy.getCustom(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCustom(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -1138,7 +1139,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
 };
 
 Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
-    var child = tracer._tracer.startSpan(`KVProxy.getCustoms(${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCustoms(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ks);
@@ -1196,7 +1197,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
 };
 
 Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`KVProxy.getDocument(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDocument(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -1254,7 +1255,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getDocuments(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDocuments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -1312,7 +1313,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`KVProxy.getRecommendFragment(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getRecommendFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -1374,7 +1375,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getRecommendFragments(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getRecommendFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -1436,7 +1437,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -1494,7 +1495,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
 };
 
 Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
-    var child = tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ks);
@@ -1552,7 +1553,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
 };
 
 Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -1610,7 +1611,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
 };
 
 Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
-    var child = tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ks);
@@ -1668,7 +1669,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
 };
 
 Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
-    let child = tracer._tracer.startSpan(`KVProxy.getStaticFragment(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStaticFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -1730,7 +1731,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getStaticFragments(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStaticFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -1792,7 +1793,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`KVProxy.getStructuredFragment(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStructuredFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -1854,7 +1855,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getStructuredFragments(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStructuredFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -1916,7 +1917,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
-    var child = tracer._tracer.startSpan(`KVProxy.getVideo(${id})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getVideo(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -1974,7 +1975,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
 };
 
 Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
-    var child = tracer._tracer.startSpan(`KVProxy.getVideos(${ids})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getVideos(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeList(1, ids);
@@ -2032,7 +2033,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
 };
 
 Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putAd(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putAd(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2091,7 +2092,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
 };
 
 Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putCategory(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putCategory(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -2150,7 +2151,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
 };
 
 Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putCustom(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putCustom(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2209,7 +2210,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
 };
 
 Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putDocument(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putDocument(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -2268,7 +2269,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
 };
 
 Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putRecommendFragment(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putRecommendFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -2331,7 +2332,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
 };
 
 Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2390,7 +2391,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
 };
 
 Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2449,7 +2450,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
 };
 
 Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putStaticFragment(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putStaticFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -2512,7 +2513,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
 };
 
 Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putStructuredFragment(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putStructuredFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, id);
@@ -2575,7 +2576,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
 };
 
 Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
-    var child = tracer._tracer.startSpan(`KVProxy.putVideo(${id},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putVideo(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt64(1, id);
@@ -2634,7 +2635,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
 };
 
 Tarsapi.RedisProxy.prototype.blpop = function(ctx, time, ks) {
-    var child = tracer._tracer.startSpan(`RedisProxy.blpop(${time},${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.blpop(${time},${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
@@ -2693,7 +2694,7 @@ Tarsapi.RedisProxy.prototype.blpop = function(ctx, time, ks) {
 };
 
 Tarsapi.RedisProxy.prototype.brpop = function(ctx, time, ks) {
-    var child = tracer._tracer.startSpan(`RedisProxy.brpop(${time},${ks})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.brpop(${time},${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeInt32(1, time);
@@ -2752,7 +2753,7 @@ Tarsapi.RedisProxy.prototype.brpop = function(ctx, time, ks) {
 };
 
 Tarsapi.RedisProxy.prototype.del = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.del(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.del(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2810,7 +2811,7 @@ Tarsapi.RedisProxy.prototype.del = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.expire = function(ctx, k, exp) {
-    var child = tracer._tracer.startSpan(`RedisProxy.expire(${k},${exp})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.expire(${k},${exp})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2869,7 +2870,7 @@ Tarsapi.RedisProxy.prototype.expire = function(ctx, k, exp) {
 };
 
 Tarsapi.RedisProxy.prototype.get = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.get(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.get(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -2927,7 +2928,7 @@ Tarsapi.RedisProxy.prototype.get = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.getRange = function(ctx, k, startOffset, endOffset) {
-    var child = tracer._tracer.startSpan(`RedisProxy.getRange(${k},${startOffset},${endOffset})`, {
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.getRange(${k},${startOffset},${endOffset})`, {
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
@@ -2989,7 +2990,7 @@ Tarsapi.RedisProxy.prototype.getRange = function(ctx, k, startOffset, endOffset)
 };
 
 Tarsapi.RedisProxy.prototype.hgetAll = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.hgetAll(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.hgetAll(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3047,7 +3048,7 @@ Tarsapi.RedisProxy.prototype.hgetAll = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.hmset = function(ctx, k, hash) {
-    var child = tracer._tracer.startSpan(`RedisProxy.hmset(${k},${hash})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.hmset(${k},${hash})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3106,7 +3107,7 @@ Tarsapi.RedisProxy.prototype.hmset = function(ctx, k, hash) {
 };
 
 Tarsapi.RedisProxy.prototype.llen = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.llen(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.llen(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3164,7 +3165,7 @@ Tarsapi.RedisProxy.prototype.llen = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.lpop = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.lpop(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.lpop(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3222,7 +3223,7 @@ Tarsapi.RedisProxy.prototype.lpop = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.lpush = function(ctx, k, element) {
-    var child = tracer._tracer.startSpan(`RedisProxy.lpush(${k},${element})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.lpush(${k},${element})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3281,7 +3282,7 @@ Tarsapi.RedisProxy.prototype.lpush = function(ctx, k, element) {
 };
 
 Tarsapi.RedisProxy.prototype.rpop = function(ctx, k) {
-    var child = tracer._tracer.startSpan(`RedisProxy.rpop(${k})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.rpop(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3339,7 +3340,7 @@ Tarsapi.RedisProxy.prototype.rpop = function(ctx, k) {
 };
 
 Tarsapi.RedisProxy.prototype.rpush = function(ctx, k, element) {
-    var child = tracer._tracer.startSpan(`RedisProxy.rpush(${k},${element})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.rpush(${k},${element})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3398,7 +3399,7 @@ Tarsapi.RedisProxy.prototype.rpush = function(ctx, k, element) {
 };
 
 Tarsapi.RedisProxy.prototype.set = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`RedisProxy.set(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.set(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3457,7 +3458,7 @@ Tarsapi.RedisProxy.prototype.set = function(ctx, k, v) {
 };
 
 Tarsapi.RedisProxy.prototype.setex = function(ctx, k, v, exp) {
-    var child = tracer._tracer.startSpan(`RedisProxy.setex(${k},${v},${exp})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.setex(${k},${v},${exp})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);
@@ -3517,7 +3518,7 @@ Tarsapi.RedisProxy.prototype.setex = function(ctx, k, v, exp) {
 };
 
 Tarsapi.RedisProxy.prototype.setnx = function(ctx, k, v) {
-    var child = tracer._tracer.startSpan(`RedisProxy.setnx(${k},${v})`, { childOf: ctx.spanrpc });
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.setnx(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
         var os = new TarsStream.OutputStream();
         os.writeString(1, k);

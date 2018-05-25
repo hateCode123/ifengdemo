@@ -1,22 +1,24 @@
 /**
  * 后台服务入口
  */
+const logger = require('./biz/common/logger');
 const { tracer } = require('./biz/common/jaeger');
+const config = require('./biz/configs');
 const Koa = require('koa');
 const http = require('http');
 const path = require('path');
 const onerror = require('koa-onerror');
 const json = require('koa-json');
 const bodyParser = require('koa-bodyparser');
-const logger = require('./biz/common/logger');
+
 const Timers = require('./biz/common/utils/timers');
-const config = require('./biz/configs');
+
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
 const _ = require('lodash');
-const jaeger = require('./biz/common/jaeger');
-
+// 普罗米修斯
+const { c, h, router } = require('./biz/common/prom');
 const env = process.env.NODE_ENV || 'development';
 
 // 创建koa实例
@@ -68,10 +70,6 @@ app.use(bodyParser());
 // 美化json格式输出
 app.use(json());
 
-// 普罗米修斯 引入
-const { c, h ,router} = require('./biz/common/prom');
-app.use(router.routes(), router.allowedMethods());
-
 webapi(app);
 
 // 模板引擎设置
@@ -93,6 +91,7 @@ if (config.default.statisticsJaeger) {
 
 // prometheus 开关
 if (config.default.statisticsProm) {
+    app.use(router.routes(), router.allowedMethods());
     app.use(async (ctx, next) => {
         await next();
         c.inc({ code: 200 });
@@ -122,7 +121,8 @@ if (config.default.statistics) {
             if (isAjax) {
                 ctx.json(1, err.message);
             } else {
-                throw err;
+                ctx.status = 502;
+                // throw err;
             }
 
             ctx.span || ctx.span.setTag(opentracing.Tags.ERROR, true);
@@ -164,6 +164,7 @@ if (config.default.statistics) {
         try {
             await next();
         } catch (err) {
+            
             logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
             logger.error(err);
             if (ctx.method === 'POST') {
@@ -174,7 +175,8 @@ if (config.default.statistics) {
             if (isAjax) {
                 ctx.json(1, err.message);
             } else {
-                throw err;
+                ctx.status = 502;
+                // throw err;
             }
         }
         const ms = new Date() - start;
