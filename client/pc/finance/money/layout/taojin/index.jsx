@@ -18,14 +18,7 @@ class Taojin extends React.PureComponent {
 
         return (
             <div className={style.juej}>
-                <Chip
-                    id="10110"
-                    type="static"
-                    title="海外淘金title"
-                    groupName="首屏"
-                    content={content.haiwaitaojinTitle}>
-                    <CommonTitleL />
-                </Chip>
+                <CommonTitleL content={content.haiwaitaojinTitle} />
 
                 <div className="clearfix  pt20">
                     <div className="w240 fl" cmpp-type="s">
@@ -35,9 +28,9 @@ class Taojin extends React.PureComponent {
                             <HotFundsTable
                                 content={content.haiwaiHotfunds}
                                 head={[
-                                    { txt: '简称', tdKey: 'name' ,linkPrefix: '//etrade.fengfd.com/detail/' },
+                                    { txt: '简称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
                                     { txt: '近一个月收益', tdKey: 'oneMonth', postfix: '%' },
-                                    { txt: '操作', tdKey: false ,linkPrefix: '//etrade.fengfd.com/detail/' },
+                                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                                 ]}
                             />
                         </div>
@@ -46,9 +39,7 @@ class Taojin extends React.PureComponent {
                     <Licaisudi
                         content={{
                             title: content.sudiTitle02,
-                            titleChipConfig: { id: '10127', group: '首屏', name: '理财速递title' },
                             content: content.sudiContent02,
-                            contentChipConfig: { id: '10111', group: '首屏', name: '海外理财速递content' },
                         }}
                     />
                 </div>

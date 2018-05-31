@@ -78,7 +78,7 @@ class FixedBar extends React.PureComponent {
                         </tr>
                         <tr>
                             <td>
-                                <a id={style.sea_04} style={showGotoTop ? { display: 'block' } : { display: 'none' }}>
+                                <a href="#" id={style.sea_04} style={showGotoTop ? { display: 'block' } : { display: 'none' }}>
                                     <b> </b>
                                 </a>
                             </td>
@@ -92,7 +92,7 @@ class FixedBar extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-FixedBar.propTypes = { content: PropTypes.object };
+FixedBar.propTypes = { };
 
 /**
  * 定义组件默认属性

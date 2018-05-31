@@ -71,9 +71,8 @@ class Cnlc extends React.PureComponent {
 
         return (
             <div className={style.cnlc} id="fxs">
-                <Chip id="10047" type="static" title="分析师答疑title" groupName="" content={content.cnlcTitle}>
-                    <CommonTitleXL config={{ img: 'bg02' }} />
-                </Chip>
+                <CommonTitleXL config={{ img: 'bg02' }} content={content.cnlcTitle} />
+
                 <div className={style.fxsdy}>
                     <ul className={style.labe_04}>{tabDom}</ul>
                     <CnlcTabControlArea

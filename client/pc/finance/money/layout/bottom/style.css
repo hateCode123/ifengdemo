@@ -8,11 +8,11 @@
 .box_10z p{line-height:24px;color:#666;padding-left:2px;}
 
 /* 左侧 */
-/* 
+
 .flog01{width:102px;height:20px;}
 .flog01 img{display:block;width:102px;height:20px;}
 .wei{width:102px;height:102px;padding-top:13px;padding-bottom:5px;}
-.wei img{display:block;width:102px;height:102px;} */
+.wei img{display:block;width:102px;height:102px;}
 
 /* 中间 */
 
@@ -29,3 +29,4 @@
 .box_10z02 ul li{color:#666666;height:26px;line-height:26px;float:left;margin-right:25px;word-break:keep-all;}
 .box_10z02 ul li a{color:#666;}
 .box_10z02 ul li a:hover{color:#222;text-decoration:none;}
+

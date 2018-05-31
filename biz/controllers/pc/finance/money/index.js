@@ -12,29 +12,40 @@ exports.financeWemoney = {
         // 导航静态碎片
 
         const navigation = KVProxy.getStaticFragment(10019).then(...handleJsonByKey(ctx, 'content'));
-        const subNavigation = KVProxy.getStaticFragment(10020).then(...handleJsonByKey(ctx, 'content'));
+        const subNavigation = [];
+        // KVProxy.getStaticFragment(10020).then(...handleJsonByKey(ctx, 'content'));
         const collapse = KVProxy.getStaticFragment(10026).then(...handleJsonByKey(ctx, 'content'));
 
-        const topLinkTable = KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
-        const market = KVProxy.getStaticFragment(10035).then(...handleJson(ctx));
+        const topLinkTable = '';
+        //  KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
+        const market = {};
+        // KVProxy.getStaticFragment(10035).then(...handleJson(ctx));
         const jingneiQuanyiHotFunds = KVProxy.getCustom('finance_22005_516_1293').then(...handleJson(ctx)); // 境内 热门权益类
 
         const newsListDownSlider = KVProxy.getRecommendFragment('20013').then(...handleJsonByKey(ctx, 'data'));
         const newsListLeft = KVProxy.getRecommendFragment('20014').then(...handleJsonByKey(ctx, 'data'));
 
-        const jingneijuejinTitle = KVProxy.getStaticFragment(10039).then(...handleJsonByKey(ctx, 'content'));
-        const marketTitle = KVProxy.getStaticFragment(10042).then(...handleJsonByKey(ctx, 'content'));
-        const sudiTitle01 = KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
-        const sudiContent01 = KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
+        const jingneijuejinTitle = {};
+        //  KVProxy.getStaticFragment(10039).then(...handleJsonByKey(ctx, 'content'));
+        const marketTitle = {};
+        //  KVProxy.getStaticFragment(10042).then(...handleJsonByKey(ctx, 'content'));
+        const sudiTitle01 = {};
+        //  KVProxy.getStaticFragment(10045).then(...handleJsonByKey(ctx, 'content'));
+        const sudiContent01 = {};
+        // KVProxy.getStaticFragment(10048).then(...handleJsonByKey(ctx, 'content'));
 
-        const haiwaitaojinTitle = KVProxy.getStaticFragment(10110).then(...handleJsonByKey(ctx, 'content'));
-        const sudiTitle02 = KVProxy.getStaticFragment(10127).then(...handleJsonByKey(ctx, 'content'));
-        const sudiContent02 = KVProxy.getStaticFragment(10111).then(...handleJsonByKey(ctx, 'content'));
+        const haiwaitaojinTitle = {};
+        //  KVProxy.getStaticFragment(10110).then(...handleJsonByKey(ctx, 'content'));
+        const sudiTitle02 = {};
+        //  KVProxy.getStaticFragment(10127).then(...handleJsonByKey(ctx, 'content'));
+        const sudiContent02 = {};
+        //  KVProxy.getStaticFragment(10111).then(...handleJsonByKey(ctx, 'content'));
 
         const jingneiHuobiHotFunds = KVProxy.getCustom('finance_22005_516_1294').then(...handleJson(ctx)); // 境内 货币
         const haiwaiHotfunds = KVProxy.getCustom('finance_22005_516_1295').then(...handleJson(ctx)); // 海外基金
 
-        const rediantuijianTitle = KVProxy.getStaticFragment(10113).then(...handleJsonByKey(ctx, 'content'));
+        const rediantuijianTitle = {};
+        //  KVProxy.getStaticFragment(10113).then(...handleJsonByKey(ctx, 'content'));
 
         const rediantuijianTableStock = KVProxy.getCustom('finance_22005_516_1296').then(...handleJson(ctx)); // 热点推荐 股票型
         const rediantuijianTableMix = KVProxy.getCustom('finance_22005_516_1297').then(...handleJson(ctx)); // 热点推荐 混合型
@@ -45,7 +56,8 @@ exports.financeWemoney = {
         const cnlcJijin = KVProxy.getCustom('finance_22005_516_243').then(...handleJson(ctx)); // 分析师答疑 基金
         const cnlcListJijin = KVProxy.getCustom('finance_22005_516_244').then(...handleJson(ctx)); // 分析师答疑列表 基金
 
-        const cnlcTitle = KVProxy.getStaticFragment(10047).then(...handleJsonByKey(ctx, 'content')); 
+        const cnlcTitle = {};
+        //  KVProxy.getStaticFragment(10047).then(...handleJsonByKey(ctx, 'content'));
         const cnlcP2P = KVProxy.getCustom('finance_22005_516_245').then(...handleJson(ctx)); // 分析师答疑 P2p
         const cnlcListP2P = KVProxy.getCustom('finance_22005_516_249').then(...handleJson(ctx)); // 分析师答疑列表 P2p
 
@@ -58,17 +70,23 @@ exports.financeWemoney = {
         const cnlcFinance = KVProxy.getCustom('finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
         const cnlcListFinance = KVProxy.getCustom('finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
 
-        const partnerTitle = KVProxy.getStaticFragment(10046).then(...handleJsonByKey(ctx, 'content')); 
+        const partnerTitle = {};
+        // KVProxy.getStaticFragment(10046).then(...handleJsonByKey(ctx, 'content'));
 
-        const partnerList = KVProxy.getStaticFragment(10123).then(...handleJsonByKey(ctx, 'content'));
+        const partnerList = '';
+        //  KVProxy.getStaticFragment(10123).then(...handleJsonByKey(ctx, 'content'));
 
-        const bottomWeiXin = KVProxy.getStaticFragment(10124).then(...handleJsonByKey(ctx, 'content'));
+        const bottomWeiXin = '';
+        // KVProxy.getStaticFragment(10124).then(...handleJsonByKey(ctx, 'content'));
 
-        const bottomProc = KVProxy.getStaticFragment(10125).then(...handleJsonByKey(ctx, 'content'));
+        const bottomProc = '';
+        // KVProxy.getStaticFragment(10125).then(...handleJsonByKey(ctx, 'content'));
 
-        const bottomLink = KVProxy.getStaticFragment(10126).then(...handleJsonByKey(ctx, 'content'));
+        const bottomLink = '';
+        // KVProxy.getStaticFragment(10126).then(...handleJsonByKey(ctx, 'content'));
 
-        const banner = KVProxy.getStaticFragment(10128).then(...handleJsonByKey(ctx, 'content'));
+        const banner = '';
+        // || KVProxy.getStaticFragment(10128).then(...handleJsonByKey(ctx, 'content'));
         // 底部公用版权
         const footer = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
         // 页面公用导航
@@ -77,7 +95,10 @@ exports.financeWemoney = {
         const search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
         // 幻灯
         const slider = KVProxy.getStaticFragment(10130).then(...handleJsonByKey(ctx, 'content'));
- 
+        // 顶部通栏广告
+        const topAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
+        // 底部通栏广告
+        const bottomAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
 
         const otherData = await Promise.all([
             navigation,
@@ -124,6 +145,8 @@ exports.financeWemoney = {
             nav,
             search,
             slider,
+            topAd,
+            bottomAd,
         ]);
 
         const allData = {
@@ -171,8 +194,12 @@ exports.financeWemoney = {
             nav: otherData[41],
             search: otherData[42],
             slider: otherData[43],
+            topAd: otherData[44],
+            bottomAd: otherData[45],
         };
 
-        await ctx.html('finance_money', { allData });
+        await ctx.html('finance_money', {
+            allData,
+        });
     },
 };
