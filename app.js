@@ -99,8 +99,10 @@ if (config.default.statisticsProm) {
         h.observe(ctx.requestTime);
     });
 }
+
 app.use(async (ctx, next)=>{
-    if(ctx.header.host.indexOf('finance.ifeng.com')>-1){
+    logger.info('domain:' + ctx.header.domain);
+    if(ctx.header.domain.indexOf('finance.ifeng.com')>-1){
         ctx.url = `/finance`+ctx.url;
         ctx.originalUrl = `/finance`+ctx.originalUrl;
     }
