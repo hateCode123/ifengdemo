@@ -10,7 +10,7 @@ const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require
 
 module.exports = async (ctx, next) => {
     // logger.debug(ctx.url);
-    // logger.debug(ctx.header);
+    // console.dir(ctx.header,{depth:null});
     let type = '';
     const deviceType = ctx.headers['devicetype'] ? ctx.headers['devicetype'] : 'pc';
 

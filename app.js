@@ -43,6 +43,7 @@ if (env === 'development') {
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
+    app.use(koaStatic(path.join(__dirname, `./static`), { index: 'index.html' }));
 
     setTimeout(() => {
         io.sockets.emit('reload');
@@ -98,6 +99,14 @@ if (config.default.statisticsProm) {
         h.observe(ctx.requestTime);
     });
 }
+app.use(async (ctx, next)=>{
+    if(ctx.header.host.indexOf('finance.ifeng.com')>-1){
+        ctx.url = `/finance`+ctx.url;
+        ctx.originalUrl = `/finance`+ctx.originalUrl;
+    }
+
+    await next();
+});
 
 // 本地统计 开关
 if (config.default.statistics) {
@@ -186,8 +195,11 @@ if (config.default.statistics) {
     });
 }
 
+
+
+
 // 路由重写，根据项目需要在rewrite中添加重写规则
-app.use(rewrite);
+// app.use(rewrite);
 
 // 加载路由
 app.use(routers.routes(), routers.allowedMethods());

@@ -17,6 +17,26 @@ let routerList = [];
 // 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
 let rewriteList = {
     '/heartbeat': '/api/heartbeat',
+
+    '/finance': '/pc/finance/index',
+    '/finance/index.shtml': '/pc/finance/index',
+  
+    '/finance/stock': '/pc/finance/stock',
+    '/finance/stock/index.shtml': '/pc/finance/stock',
+
+    '/finance/stock': '/pc/finance/stock',
+    '/finance/stock/index.shtml': '/pc/finance/stock',
+
+    
+    '/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
+    '/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
+
+    '/finance/money': '/pc/finance/money',
+    '/finance/money/index.shtml': '/pc/finance/money',
+
+    '/finance/wemoney': '/pc/finance/wemoney',
+    '/finance/wemoney/index.shtml': '/pc/finance/wemoney',
+
     '/mobile/content/:id': '/content/:id',
     '/mobile/content/:id/edit': '/content/:id/edit',
 };

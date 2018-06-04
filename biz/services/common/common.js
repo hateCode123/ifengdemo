@@ -3,6 +3,7 @@ const logger = require('../../common/logger');
 const config = require('../../configs');
 const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
+const Tars = require('@tars/stream');
 
 /**
  * 使用该方法替代JSON.parse(),统计JSON.parse耗时
@@ -154,22 +155,136 @@ const handleStringByKey = (ctx, key, singleType = false) => {
     return [success(ctx, true, key, singleType, true), error(ctx, singleType)];
 };
 
-const promiseAll = async (json)=>{
-    let allData  = {};
+const promiseAll = async json => {
+    let allData = {};
     let mykeys = [];
-    let myvalues = []
+    let myvalues = [];
 
     for (let key in json) {
         myvalues.push(json[key]);
-        mykeys.push(key)
+        mykeys.push(key);
     }
 
     let arr = await Promise.all(myvalues);
-    for (let i=0;i<arr.length; i++) {
-        allData[mykeys[i]] = arr[i]
+    for (let i = 0; i < arr.length; i++) {
+        allData[mykeys[i]] = arr[i];
     }
     return allData;
+};
+
+
+const transfer = async (ctx, json) => {
+
+    let obj = {};
+    let keys = {};
+    let funcs = {};
+    let backData = {}
+
+    for (const item of json) {
+        backData[item[0]] = [];
+        keys[item[3]] = item[0];
+        funcs[item[3]] = item[4];
+        let key = item[1] + '.' + item[2];
+        if (!obj[key]) {
+            obj[key] = { keys: [], ids: [], handles: [] };
+        }
+        obj[key].keys.push(item[0]);
+        obj[key].ids.push(item[3]);
+        obj[key].handles.push(item[4]);
+    }
+    let allp = [];
+    for (const i in obj) {
+        let ids = getIds(obj[i].ids);
+        allp.push(KVProxy[getAction(i)](ctx, ids));
+    }
+    let data = await Promise.all(allp);
+    let allData = {};
+
+    for (const item of data) {
+        if (config.default.statistics) {
+            ctx.rpcTimeList[1].push(item.response.costtime);
+        }
+
+        allData = Object.assign(allData, item.response.return.value);
+    }
+
+    for (const i in allData) {
+        backData[keys[i]] =  funcs[i](ctx,allData[i]);
+    }
+
+    // jaeger trance 结束
+    if (config.default.statisticsJaeger) {
+
+        for (const item of data) {
+            item.span.finish();
+        }
+     
+    }
+
+    return backData;
+};
+
+function getIds(arr) {
+    let map = {
+        number: Tars.Int32,
+        string: Tars.String,
+        enum: Tars.Enum,
+    };
+    let type = typeof arr[0];
+    // if((arr[0]+'').indexOf('/')>0){
+    //     type = 'string'
+    // }
+    const ids = new Tars.List(map[type]);
+    for (const item of arr) {
+        ids.push(item);
+    }
+    return ids;
 }
+
+
+function getString(key){
+    return function (ctx, data){
+        return data;
+    }
+}
+
+function getJson(key){
+    return function (ctx, data){
+        return jsonParse(data,ctx)
+    }
+}
+
+
+function getJsonByKey(key){
+    return function (ctx, data){
+        let json =  jsonParse(data,ctx)
+        json = jsonParse(json[key],ctx);
+        return json;
+    }
+}
+
+function getStringByKey(key){
+    return function (ctx, data){
+        let json =  jsonParse(data,ctx)
+        return json[key];
+    }
+}
+
+function getAction(action) {
+    let key = {
+        'KVProxy.getAd': 'getAds',
+        'KVProxy.getCategory': 'getCategories',
+        'KVProxy.getCustom': 'getCustoms',
+        'KVProxy.getDocument': 'getDocuments',
+        'KVProxy.getRecommendFragment': 'getRecommendFragments',
+        'KVProxy.getSsiFragment': 'getSsiFragments',
+        'KVProxy.getStaticFragment': 'getStaticFragments',
+        'KVProxy.getStructuredFragment': 'getStructuredFragments',
+        'KVProxy.getVideo': 'getVideos',
+    };
+    return key[action];
+}
+
 // 导出处理函数
 module.exports = {
     jsonParse,
@@ -181,4 +296,8 @@ module.exports = {
     handleJs,
     handleStringByKey,
     promiseAll,
+    transfer,
+    getJson,
+    getJsonByKey,
+    getStringByKey
 };
