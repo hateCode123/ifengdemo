@@ -101,8 +101,10 @@ if (config.default.statisticsProm) {
 }
 
 app.use(async (ctx, next)=>{
-    logger.info('domain:' + ctx.header.domain);
-    if(ctx.header.domain.indexOf('finance.ifeng.com')>-1){
+    logger.error('domain:');
+    logger.error(ctx.header.domain);
+
+    if(ctx.header.domain && ctx.header.domain.indexOf('finance.ifeng.com')>-1){
         ctx.url = `/finance`+ctx.url;
         ctx.originalUrl = `/finance`+ctx.originalUrl;
     }
@@ -163,7 +165,7 @@ if (config.default.statistics) {
         logger.info(
             `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
                 ctx.routerTimeEnd
-            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${ctx.parseTime.length}, ${parseTime}ms]`,
+            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${ctx.parseTime.length}, ${parseTime}ms] - ${ctx.header.domain}`,
         );
     });
 } else {
