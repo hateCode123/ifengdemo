@@ -20,6 +20,13 @@ module.exports = (app, options = {}) => {
         if (this.urlinfo && this.urlinfo.edit) {
             tplName += '_edit';
         }
+        if (this.urlinfo.cdncache > 0) {
+            this.set('Cache-Control', `max-age=${this.urlinfo.cdncache}`);
+        } else if (this.urlinfo.cdncache === 0) {
+            this.set('Cache-Control', 'no-cache');
+        } else {
+            this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
+        }
 
         await this.render(tplName, data);
 
@@ -38,6 +45,15 @@ module.exports = (app, options = {}) => {
         } else {
             response = { code, message, data };
         }
+
+        if (this.urlinfo.cdncache > 0) {
+            this.set('Cache-Control', `max-age=${this.urlinfo.cdncache}`);
+        } else if (this.urlinfo.cdncache === 0) {
+            this.set('Cache-Control', 'no-cache');
+        } else {
+            this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
+        }
+
         this.type = contentType;
         this.body = response;
     };
@@ -51,7 +67,17 @@ module.exports = (app, options = {}) => {
         if (this.method !== 'GET') {
             return;
         }
+
+        if (this.urlinfo.cdncache > 0) {
+            this.set('Cache-Control', `max-age=${this.urlinfo.cdncache}`);
+        } else if (this.urlinfo.cdncache === 0) {
+            this.set('Cache-Control', 'no-cache');
+        } else {
+            this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
+        }
+        
         response = `${callback}(${JSON.stringify(data)})`;
+        
         this.type = contentType;
         this.body = response;
     };

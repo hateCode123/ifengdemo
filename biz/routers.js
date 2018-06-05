@@ -56,6 +56,9 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
     const schema = ctrlObj[i].schema;
 
     // 类型 (Sting)
+    const cdncache = ctrlObj[i].cdncache;
+
+    // 类型 (Sting)
     const type = ctrlObj[i].type;
 
     // 缓存时间 (Number)，单位s
@@ -97,7 +100,7 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
         if (_.isFunction(handler)) {
 
             // 将handler业务方法放入队列
-            meddlewareList.push(match(type, cache, edit, ctrlPath, handler));
+            meddlewareList.push(match(type, cache, edit, ctrlPath, handler, cdncache));
 
             // 将路由放入路由列表
             routerList.push({

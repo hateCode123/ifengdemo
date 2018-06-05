@@ -31,5 +31,6 @@
     ],
     "blacklist": [
         "/controllers/black/black.js"
-    ]
+    ],
+    "cdnCacheTime":120
 }

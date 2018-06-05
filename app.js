@@ -101,7 +101,6 @@ if (config.default.statisticsProm) {
 }
 
 app.use(async (ctx, next)=>{
-    logger.error(ctx.headers);
     logger.error(JSON.stringify(ctx.headers));
     if(ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com')>-1){
         ctx.url = `/finance`+ctx.url;
