@@ -14,7 +14,8 @@ exports.financeWemoney = {
         const navigation = KVProxy.getStaticFragment(10019).then(...handleJsonByKey(ctx, 'content'));
         const subNavigation = [];
         // KVProxy.getStaticFragment(10020).then(...handleJsonByKey(ctx, 'content'));
-        const collapse = KVProxy.getStaticFragment(10026).then(...handleJsonByKey(ctx, 'content'));
+        const collapse = "";
+        //  KVProxy.getStaticFragment(10026).then(...handleJsonByKey(ctx, 'content'));
 
         const topLinkTable = '';
         //  KVProxy.getStaticFragment(10029).then(...handleJson(ctx));
@@ -53,22 +54,32 @@ exports.financeWemoney = {
         const rediantuijianTableZhaiquan = KVProxy.getCustom('finance_22005_516_1299').then(...handleJson(ctx)); // 热点推荐 债券型
         const rediantuijianTableMoney = KVProxy.getCustom('finance_22005_516_1300').then(...handleJson(ctx)); // 热点推荐 货币型
 
-        const cnlcJijin = KVProxy.getCustom('finance_22005_516_243').then(...handleJson(ctx)); // 分析师答疑 基金
-        const cnlcListJijin = KVProxy.getCustom('finance_22005_516_244').then(...handleJson(ctx)); // 分析师答疑列表 基金
+        const cnlcJijin = {};
+        //  KVProxy.getCustom('finance_22005_516_243').then(...handleJson(ctx)); // 分析师答疑 基金
+        const cnlcListJijin = {};
+        // KVProxy.getCustom('finance_22005_516_244').then(...handleJson(ctx)); // 分析师答疑列表 基金
 
         const cnlcTitle = {};
         //  KVProxy.getStaticFragment(10047).then(...handleJsonByKey(ctx, 'content'));
-        const cnlcP2P = KVProxy.getCustom('finance_22005_516_245').then(...handleJson(ctx)); // 分析师答疑 P2p
-        const cnlcListP2P = KVProxy.getCustom('finance_22005_516_249').then(...handleJson(ctx)); // 分析师答疑列表 P2p
+        const cnlcP2P = {};
+        //  KVProxy.getCustom('finance_22005_516_245').then(...handleJson(ctx)); // 分析师答疑 P2p
+        const cnlcListP2P = {};
+        // KVProxy.getCustom('finance_22005_516_249').then(...handleJson(ctx)); // 分析师答疑列表 P2p
 
-        const cnlcTrust = KVProxy.getCustom('finance_22005_516_246').then(...handleJson(ctx)); // 分析师答疑 信托
-        const cnlcListTrust = KVProxy.getCustom('finance_22005_516_250').then(...handleJson(ctx)); // 分析师答疑列表 信托
+        const cnlcTrust = {};
+        //  KVProxy.getCustom('finance_22005_516_246').then(...handleJson(ctx)); // 分析师答疑 信托
+        const cnlcListTrust = {};
+        //  KVProxy.getCustom('finance_22005_516_250').then(...handleJson(ctx)); // 分析师答疑列表 信托
 
-        const cnlcPrivate = KVProxy.getCustom('finance_22005_516_247').then(...handleJson(ctx)); // 分析师答疑 私募
-        const cnlcListPrivate = KVProxy.getCustom('finance_22005_516_251').then(...handleJson(ctx)); // 分析师答疑列表 私募
+        const cnlcPrivate = {};
+        // KVProxy.getCustom('finance_22005_516_247').then(...handleJson(ctx)); // 分析师答疑 私募
+        const cnlcListPrivate = {};
+        //  KVProxy.getCustom('finance_22005_516_251').then(...handleJson(ctx)); // 分析师答疑列表 私募
 
-        const cnlcFinance = KVProxy.getCustom('finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
-        const cnlcListFinance = KVProxy.getCustom('finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
+        const cnlcFinance = {};
+        //  KVProxy.getCustom('finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
+        const cnlcListFinance = {} ;
+        // KVProxy.getCustom('finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
 
         const partnerTitle = {};
         // KVProxy.getStaticFragment(10046).then(...handleJsonByKey(ctx, 'content'));
@@ -99,6 +110,8 @@ exports.financeWemoney = {
         const topAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
         // 底部通栏广告
         const bottomAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
+
+        const topCollapse = KVProxy.getStaticFragment(10160).then(...handleJsonByKey(ctx,'content'));
 
         const otherData = await Promise.all([
             navigation,
@@ -147,6 +160,7 @@ exports.financeWemoney = {
             slider,
             topAd,
             bottomAd,
+            topCollapse,
         ]);
 
         const allData = {
@@ -196,7 +210,9 @@ exports.financeWemoney = {
             slider: otherData[43],
             topAd: otherData[44],
             bottomAd: otherData[45],
+            topCollapse: otherData[46],
         };
+        console.log(allData);
 
         await ctx.html('finance_money', {
             allData,

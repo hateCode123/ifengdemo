@@ -21,7 +21,7 @@ import JueJin from './juejin/';
 import TaoJin from './taojin/';
 import Rediantuijian from './rediantuijian/';
 
-import Cnlc from './cnlc/';
+// import Cnlc from './cnlc/';
 import Partner from './partner/';
 import Bottom from './bottom/';
 
@@ -30,11 +30,14 @@ import BottomFooter from './footer/';
 
 import FixedBar from './fixedBar/';
 
+import TopCollapse from './collapse/';
+
 class Layout extends React.PureComponent {
     /**
      * 渲染网页布局
      */
     state = {
+        showTopCollapse: false,
         subNavigation: [
             {
                 url: 'http://jr.ifeng.com/',
@@ -168,6 +171,10 @@ class Layout extends React.PureComponent {
             more: [],
         },
     };
+    componentDidMount() {
+        console.log('componentDidMount');
+        this.setState({ showTopCollapse: true });
+    }
     render() {
         const { content } = this.props;
         const {
@@ -186,7 +193,7 @@ class Layout extends React.PureComponent {
             __bottomProc,
             __bottomLink,
         } = this.state;
-        console.log(content);
+        console.log('content', content);
 
         const headerData = {
             nav: content.nav,
@@ -221,19 +228,19 @@ class Layout extends React.PureComponent {
             rediantuijianTableMoney: content.rediantuijianTableMoney,
         };
 
-        const cnlc = {
-            cnlcTitle: __cnlcTitle,
-            cnlcJijin: content.cnlcJijin,
-            cnlcListJijin: content.cnlcListJijin,
-            cnlcP2P: content.cnlcP2P,
-            cnlcListP2P: content.cnlcListP2P,
-            cnlcTrust: content.cnlcTrust,
-            cnlcListTrust: content.cnlcListTrust,
-            cnlcPrivate: content.cnlcPrivate,
-            cnlcListPrivate: content.cnlcListPrivate,
-            cnlcFinance: content.cnlcFinance,
-            cnlcListFinance: content.cnlcListFinance,
-        };
+        // const cnlc = {
+        //     cnlcTitle: __cnlcTitle,
+        //     cnlcJijin: content.cnlcJijin,
+        //     // cnlcListJijin: content.cnlcListJijin,
+        //     cnlcP2P: content.cnlcP2P,
+        //     // cnlcListP2P: content.cnlcListP2P,
+        //     cnlcTrust: content.cnlcTrust,
+        //     // cnlcListTrust: content.cnlcListTrust,
+        //     cnlcPrivate: content.cnlcPrivate,
+        //     // cnlcListPrivate: content.cnlcListPrivate,
+        //     cnlcFinance: content.cnlcFinance,
+        //     // cnlcListFinance: content.cnlcListFinance,
+        // };
 
         const partner = {
             partnerTitle: __partnerTitle,
@@ -244,6 +251,10 @@ class Layout extends React.PureComponent {
             footer: content.footer,
         };
 
+        const topCollapse = {
+            topCollapse: content.topCollapse,
+        };
+
         return (
             <div>
                 <Header content={headerData} />
@@ -252,12 +263,8 @@ class Layout extends React.PureComponent {
                 <SubNavigation content={subNavigation} />
 
                 <div className="space20 " />
-                {/* <Collapse content={content.collapse} /> */}
 
-                {/* todo 压顶动态碎片 */}
-                <div className="w1000">
-                    <div className="col" style={{ position: 'relative' }} />
-                </div>
+                <TopCollapse content={topCollapse} init={this.state.showTopCollapse} />
 
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
@@ -277,7 +284,7 @@ class Layout extends React.PureComponent {
                     </div>
                 </div>
 
-                <Cnlc content={cnlc} />
+                {/* <Cnlc content={cnlc} /> */}
                 <Partner content={partner} />
                 <Bottom />
                 <BottomFooter content={footerData} />

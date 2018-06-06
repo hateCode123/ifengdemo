@@ -7,6 +7,7 @@ import CommonTitleXL from './../commonTitleXL/';
 import { rel } from '../../../../utils/rel';
 
 class CnlcTabControlArea extends React.PureComponent {
+
     state = {
         current: 0,
         top: 0,
@@ -21,9 +22,8 @@ class CnlcTabControlArea extends React.PureComponent {
             textArea: this.props.config.textArea,
         });
     }
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.config && nextProps.config !== this.props.config) {
-
             this.setState({
                 current: nextProps.config.current,
                 top: nextProps.config.top,
