@@ -18,7 +18,7 @@ const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
 const _ = require('lodash');
 // 普罗米修斯
-const { c, h, router } = require('./biz/common/prom');
+const { c, p_request, p_rpc, p_parse, p_rander, router } = require('./biz/common/prom');
 const env = process.env.NODE_ENV || 'development';
 
 // 创建koa实例
@@ -94,30 +94,35 @@ if (config.default.statisticsJaeger) {
 if (config.default.statisticsProm) {
     app.use(router.routes(), router.allowedMethods());
     app.use(async (ctx, next) => {
+        ctx.p_rpc = p_rpc;
         await next();
-        c.inc({ code: 200 });
-        // h.observe(ctx.requestTime);
-        // h.set({'url':ctx.originalUrl});
-        //h.labels('status_code',ctx.status);
-    
-        h.observe(
-            {
-                url: ctx.originalUrl,
-                method: ctx.method,
-                request_time: ctx.requestTime,
-                status_code: ctx.status,
-                rpc_time: ctx.rpc_time,
-                parse_time: ctx.parse_time,
-            },
-            1,
-        );
+        try {
+            if(/(^\/pc)|(^\/mobile)|(^\/api)/.test(ctx.originalUrl)){
+                c.inc({ code: 200 });
+                p_request.observe(
+                    {
+                        url: ctx.originalUrl.replace(/\?.*/,''),
+                        method: ctx.method,
+                        status_code: ctx.status,
+                    },
+                    ctx.requestTime
+                );
+        
+                // p_rpc.observe(parseInt(ctx.rpc_time));
+                p_parse.observe(parseInt(ctx.parse_time));
+            }
+           
+        } catch (error) {
+            console.log(error);
+        }
+      
     });
 }
 
 app.use(async (ctx, next) => {
     if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
-        ctx.url = `/finance` + ctx.url;
-        ctx.originalUrl = `/finance` + ctx.originalUrl;
+        ctx.url = `/pc/finance` + ctx.url;
+        ctx.originalUrl = `/pc/finance` + ctx.originalUrl;
     }
     await next();
 });
@@ -172,8 +177,6 @@ if (config.default.statistics) {
             parseTime += parseFloat(i);
         }
         parseTime = parseTime.toFixed(3);
-        // h.observe({ rpc_time: rpcTime }, 1);
-        // h.observe({ parse_time: parseTime },1);
         ctx.rpc_time = rpcTime;
         ctx.parse_time = parseTime;
         logger.info(

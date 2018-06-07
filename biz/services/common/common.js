@@ -198,22 +198,49 @@ const transfer = async (ctx, json) => {
         allp.push(
             KVProxy[getAction(i)](ctx, ids).then(
                 result => {
-                    if (config.default.statistics) {
-                        ctx.rpcTimeList[1].push(result.response.costtime);
+                    try {
+                        if (config.default.statistics) {
+                            ctx.rpcTimeList[1].push(result.response.costtime);
+                        }
+                        // jaeger trance 结束
+                        if (config.default.statisticsJaeger) {
+                            result.span.finish();
+                        }
+                        if (config.default.statisticsProm) {
+                            ctx.p_rpc.observe(
+                                {
+                                    url: ctx.originalUrl.replace(/\?.*/,''),
+                                    rpc_func: result.callInfo.replace('[object Object]',''),
+                                },
+                                result.response.costtime
+                            );
+                        }
+                    } catch (error) {
+                        logger.error(error)
                     }
-                    // jaeger trance 结束
-                    if (config.default.statisticsJaeger) {
-                        result.span.finish();
-                    }
+                    
                     return result.response.return.value;
                 },
                 result => {
-                    if (config.default.statistics) {
-                        ctx.rpcTimeList[1].push(result.response.costtime);
-                    }
-                    // jaeger trance 结束
-                    if (config.default.statisticsJaeger) {
-                        result.span.finish();
+                    try {
+                        if (config.default.statistics) {
+                            ctx.rpcTimeList[1].push(result.response.costtime);
+                        }
+                        // jaeger trance 结束
+                        if (config.default.statisticsJaeger) {
+                            result.span.finish();
+                        }
+                        if (config.default.statisticsProm) {
+                            ctx.p_rpc.observe(
+                                {
+                                    url: ctx.originalUrl.replace(/\?.*/,''),
+                                    rpc_func: result.callInfo.replace('[object Object]',''),
+                                },
+                                result.response.costtime
+                            );
+                        }
+                    } catch (error) {
+                        logger.error(error)
                     }
                     logger.error(`Something error with: ${result.callInfo}`);
                     logger.error(result.response.error);
@@ -288,6 +315,7 @@ function getAction(action) {
         'KVProxy.getStaticFragment': 'getStaticFragments',
         'KVProxy.getStructuredFragment': 'getStructuredFragments',
         'KVProxy.getVideo': 'getVideos',
+        'KVProxy.getDynamicFragment': 'getDynamicFragments',
     };
     return key[action];
 }

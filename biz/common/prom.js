@@ -22,11 +22,29 @@ router.get('/metrics', (ctx, next) => {
 // });
 
 // 初始化http请求时间统计
-const h = new Histogram({
+const p_request = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_requests`,
-    help: 'Example of a histogram',
+    help: '统计相应整体时间',
     labelNames: ['url','method','request_time','status_code','rpc_time','parse_time','error'],
     // buckets: [1, 5, 15, 50, 100, 500],
+});
+
+// 初始化http请求时间统计
+const p_rpc = new Histogram({
+    name: `${config.default.namespace}_${config.default.appname}_rpc`,
+    help: '统计rpc时间',
+    labelNames: ['rpc_func','url'],
+});
+
+const p_parse = new Histogram({
+    name: `${config.default.namespace}_${config.default.appname}_parse`,
+    help: '统计rpc时间',
+    labelNames: ['parse_time'],
+});
+
+const p_rander= new Histogram({
+    name: `${config.default.namespace}_${config.default.appname}_rander`,
+    help: '页面渲染时间',
 });
 
 // 初始化http请求计数器
@@ -39,6 +57,9 @@ const c = new Counter({
 // 导出
 module.exports = {
     c,
-    h,
+    p_request,
+    p_rpc,
+    p_parse,
+    p_rander,
     router,
 };
