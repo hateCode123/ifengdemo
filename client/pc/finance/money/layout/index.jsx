@@ -1,7 +1,7 @@
 import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import Chip from 'Chip';
 import '../reset.css';
 import style from './style.css';
 
@@ -263,9 +263,9 @@ class Layout extends React.PureComponent {
                 <SubNavigation content={subNavigation} />
 
                 <div className="space20 " />
-
-                <TopCollapse content={topCollapse} init={this.state.showTopCollapse} />
-
+                <Chip id="10160" type="static" title="顶部隐藏广告" groupName="广告" content={topCollapse}>
+                    <TopCollapse init={this.state.showTopCollapse} />
+                </Chip>
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
                         <Slider content={content.slider} />

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { rel } from '../../../../utils/rel';
 import style from './style.css';
+
 import '../../reset.css';
 
 class TopCollapse extends React.PureComponent {
@@ -28,6 +29,8 @@ class TopCollapse extends React.PureComponent {
         const { open } = this.state;
 
         return (
+         
+           
             <div className="w1000">
                 <div className={style.col} style={{ position: 'relative' }}>
                     <div
@@ -46,6 +49,7 @@ class TopCollapse extends React.PureComponent {
                    
                 </div>
             </div>
+        
         );
     }
 }
