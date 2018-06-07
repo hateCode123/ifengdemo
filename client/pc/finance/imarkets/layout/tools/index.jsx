@@ -5,6 +5,7 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from './index.css';
+import Calendar from './calender';
 import Search from './Search';
 
 class Tools extends PureComponent{
@@ -13,7 +14,7 @@ class Tools extends PureComponent{
             <div className={ styles.tools_box }>
                 <div className={ styles.tools_main }>
                     {/* 财经日历 */}
-                    <div className={ styles.calendar }>7</div>
+                    <Calendar />
                     {/* 全球直播 */}
                     <a className={ styles.zhibo_link } href="http://finance.ifeng.com/gold/zhibo/" target="_blank">
                         <i className={ styles.earth } />
