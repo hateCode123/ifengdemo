@@ -12,7 +12,11 @@
         "eslint": "eslint ./client/**/*.js && eslint ./client/**/*.jsx",
         "eslint_fix": "eslint ./client/** --fix",
         "api_eslint": "eslint ./app.js && eslint ./biz/**/**/**.js",
-        "api_fix": "eslint ./app.js --fix && eslint ./biz/** --fix"
+        "api_fix": "eslint ./app.js --fix && eslint ./biz/** --fix",
+        "docker_create": "docker build -t web_channel -f dockerfilepre .",
+        "docker_start": "docker run --rm --name web_channel -p 3000:3000 -it web_channel:latest",
+        "docker_stop": "docker stop web_channel",
+        "docker_delete": "docker image rm web_channel"
     },
     "author": "",
     "license": "ISC",
@@ -43,6 +47,7 @@
         "react-loadable": "^5.3.1",
         "request": "^2.85.0",
         "request-promise": "^4.2.2",
+        "shimo-jaeger": "^2.5.11",
         "webpack": "^3.11.0",
         "write-file-webpack-plugin": "^4.2.0"
     },

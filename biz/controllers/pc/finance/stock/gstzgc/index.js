@@ -1,5 +1,5 @@
 ﻿const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
-const { handleJson, handleJsonByKey, handleStringByKey } = require('../../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 
@@ -11,213 +11,107 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-        // 通用导航
-        let nav = KVProxy.getStaticFragment(10108).then(...handleJsonByKey(ctx, 'content'));
+        let json = [
+            // 通用导航
+            ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
 
-        // 搜索
-        let search = KVProxy.getStaticFragment(10129).then(...handleJsonByKey(ctx, 'content'));
+            // 搜索
+            ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
 
-        // 顶部logo
-        let logo = KVProxy.getStaticFragment(10107).then(...handleStringByKey(ctx, 'content'));
+            // 顶部logo
+            ['logo', 'KVProxy', 'getStaticFragment', 10107, getStringByKey('content')],
 
-        // 顶部通栏广告
-        let topAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
+            // 顶部通栏广告
+            ['topAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
 
-        // 投资观察A股指数和导航
-        let navigation = KVProxy.getStaticFragment(10028).then(...handleJsonByKey(ctx, 'content'));
+            // 投资观察A股指数和导航
+            ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
 
-        // 头条新闻
-        let headline = KVProxy.getRecommendFragment(20035).then(...handleJsonByKey(ctx, 'data'));
+            // 头条新闻
+            ['headline', 'KVProxy', 'getRecommendFragment', 20035, getStringByKey('data')],
 
-        // 视频解盘
-        let videoAnalysis = KVProxy.getStaticFragment(10036).then(...handleJson(ctx));
+            // 视频解盘
+            ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getJson()],
 
-        // 炒股大赛
-        let stockCompetition = KVProxy.getStaticFragment(10037).then(...handleJson(ctx));
+            // 炒股大赛
+            ['stockCompetition', 'KVProxy', 'getStaticFragment', 10037, getJson()],
 
-        // 轮播
-        let sliderData = KVProxy.getRecommendFragment(20036).then(...handleJsonByKey(ctx, 'data'));
+            // 轮播
+            ['sliderData', 'KVProxy', 'getRecommendFragment', 20036, getStringByKey('data')],
 
-        // 文章列表导航
-        let paperMenu = KVProxy.getStaticFragment(10041).then(...handleJsonByKey(ctx, 'content'));
+            // 文章列表导航
+            ['paperMenu', 'KVProxy', 'getStaticFragment', 10041, getJsonByKey('content')],
 
-        // 最新文章
-        let newPaper = KVProxy.getCustom('finance_22005_10736_2').then(...handleJson(ctx));
+            // 最新文章
+            ['newPaper', 'KVProxy', 'getCustom', 'finance_22005_10736_2', getJson()],
 
-        // 最新文章2条静态碎片
-        let newPaperExtra = KVProxy.getStaticFragment(10043).then(...handleJsonByKey(ctx, 'content'));
+            // 最新文章2条静态碎片
+            ['newPaperExtra', 'KVProxy', 'getStaticFragment', 10043, getJsonByKey('content')],
 
-        // 更多最新文章
-        let newPaperMore = KVProxy.getStaticFragment(10053).then(...handleJsonByKey(ctx, 'content'));
+            // 更多最新文章
+            ['newPaperMore', 'KVProxy', 'getStaticFragment', 10053, getJsonByKey('content')],
 
-        // 投资情报
-        let investInfo = KVProxy.getCustom('finance_22005_10736_3').then(...handleJson(ctx));
+            // 投资情报
+            ['investInfo', 'KVProxy', 'getCustom', 'finance_22005_10736_3', getJson()],
 
-        // 更多投资情报
-        let investMore = KVProxy.getStaticFragment(10054).then(...handleJsonByKey(ctx, 'content'));
+            // 更多投资情报
+            ['investMore', 'KVProxy', 'getStaticFragment', 10054, getJsonByKey('content')],
 
-        // 上市公司
-        let ssComponey = KVProxy.getCustom('finance_22005_10736_1').then(...handleJson(ctx));
+            // 上市公司
+            ['ssComponey', 'KVProxy', 'getCustom', 'finance_22005_10736_1', getJson()],
 
-        // 更多上市公司
-        let ssComMore = KVProxy.getStaticFragment(10055).then(...handleJsonByKey(ctx, 'content'));
+            // 更多上市公司
+            ['ssComMore', 'KVProxy', 'getStaticFragment', 10055, getJsonByKey('content')],
 
-        // 牛人解盘标题
-        let nrjpTitle = KVProxy.getStaticFragment(10057).then(...handleStringByKey(ctx, 'content'));
+            // 牛人解盘标题
+            ['nrjpTitle', 'KVProxy', 'getStaticFragment', 10057, getStringByKey('content')],
 
-        // 牛人解盘;
-        let nrjp = KVProxy.getStaticFragment(10056).then(...handleStringByKey(ctx, 'content'));
+            // 牛人解盘;
+            ['nrjp', 'KVProxy', 'getStaticFragment', 10056, getStringByKey('content')],
 
-        // 7*24小时直播标题
-        let liveTitle = KVProxy.getStaticFragment(10058).then(...handleJsonByKey(ctx, 'content'));
+            // 7*24小时直播标题
+            ['liveTitle', 'KVProxy', 'getStaticFragment', 10058, getJsonByKey('content')],
 
-        // 行情标题
-        let hqTitle = KVProxy.getStaticFragment(10059).then(...handleJsonByKey(ctx, 'content'));
+            // 行情标题
+            ['hqTitle', 'KVProxy', 'getStaticFragment', 10059, getJsonByKey('content')],
 
-        // A股分析师答疑标题
-        let QATitle = KVProxy.getStaticFragment(10060).then(...handleJsonByKey(ctx, 'content'));
+            // A股分析师答疑标题
+            ['QATitle', 'KVProxy', 'getStaticFragment', 10060, getJsonByKey('content')],
 
-        // 点击排行标题
-        let clickRankTitle = KVProxy.getStaticFragment(10061).then(...handleJsonByKey(ctx, 'content'));
+            // 点击排行标题
+            ['clickRankTitle', 'KVProxy', 'getStaticFragment', 10061, getJsonByKey('content')],
 
-        // 点击排行;
-        let clickRank = KVProxy.getCustom('http://finance.ifeng.com/cmpp_12006/click/409.html').then(
-            ...handleJson(ctx),
-        );
+            // 点击排行;
+            ['clickRank', 'KVProxy', 'getCustom', 'http://finance.ifeng.com/cmpp_12006/click/409.html', getJson()],
 
-        // 视频抓牛股标题
-        let spzngTit = KVProxy.getStaticFragment(10063).then(...handleJsonByKey(ctx, 'content'));
+            // 视频抓牛股标题
+            ['spzngTit', 'KVProxy', 'getStaticFragment', 10063, getJsonByKey('content')],
 
-        // 涨跌排行标题
-        let zdphTit = KVProxy.getStaticFragment(10064).then(...handleJsonByKey(ctx, 'content'));
+            // 涨跌排行标题
+            ['zdphTit', 'KVProxy', 'getStaticFragment', 10064, getJsonByKey('content')],
 
-        // 资金流向标题
-        let zjlxTit = KVProxy.getStaticFragment(10065).then(...handleJsonByKey(ctx, 'content'));
+            // 资金流向标题
+            ['zjlxTit', 'KVProxy', 'getStaticFragment', 10065, getJsonByKey('content')],
 
-        // 自选股标题
-        let zxgTit = KVProxy.getStaticFragment(10066).then(...handleJsonByKey(ctx, 'content'));
+            // 自选股标题
+            ['zxgTit', 'KVProxy', 'getStaticFragment', 10066, getJsonByKey('content')],
 
-        // 分析师答疑
-        let QATabs = KVProxy.getStaticFragment(10106).then(...handleJsonByKey(ctx, 'content'));
+            // 分析师答疑
+            ['QATabs', 'KVProxy', 'getStaticFragment', 10106, getJsonByKey('content')],
 
-        // 微信公众号标题
-        let wxTitle = KVProxy.getStaticFragment(10062).then(...handleJsonByKey(ctx, 'content'));
+            // 微信公众号标题
+            ['wxTitle', 'KVProxy', 'getStaticFragment', 10062, getJsonByKey('content')],
 
-        // 微信公众号
-        let wxPublic = KVProxy.getStaticFragment(10068).then(...handleJson(ctx));
+            // 微信公众号
+            ['wxPublic', 'KVProxy', 'getStaticFragment', 10068, getJson()],
 
-        // 版权合作
-        let cooperation = KVProxy.getStaticFragment(10112).then(...handleStringByKey(ctx, 'content'));
+            // 版权合作
+            ['cooperation', 'KVProxy', 'getStaticFragment', 10112, getStringByKey('content')],
 
-        // 版权
-        let copyright = KVProxy.getStaticFragment(10114).then(...handleJsonByKey(ctx, 'content'));
-
-        [
-            nav,
-            search,
-            logo,
-            topAd,
-            navigation,
-            headline,
-            videoAnalysis,
-            stockCompetition,
-            sliderData,
-            paperMenu,
-            newPaper,
-            newPaperExtra,
-            investInfo,
-            ssComponey,
-            newPaperMore,
-            investMore,
-            ssComMore,
-            nrjpTitle,
-            nrjp,
-            liveTitle,
-            hqTitle,
-            QATitle,
-            clickRankTitle,
-            wxTitle,
-            spzngTit,
-            zdphTit,
-            zjlxTit,
-            zxgTit,
-            clickRank,
-            wxPublic,
-            QATabs,
-            cooperation,
-            copyright,
-        ] = await Promise.all([
-            nav,
-            search,
-            logo,
-            topAd,
-            navigation,
-            headline,
-            videoAnalysis,
-            stockCompetition,
-            sliderData,
-            paperMenu,
-            newPaper,
-            newPaperExtra,
-            investInfo,
-            ssComponey,
-            newPaperMore,
-            investMore,
-            ssComMore,
-            nrjpTitle,
-            nrjp,
-            liveTitle,
-            hqTitle,
-            QATitle,
-            clickRankTitle,
-            wxTitle,
-            spzngTit,
-            zdphTit,
-            zjlxTit,
-            zxgTit,
-            clickRank,
-            wxPublic,
-            QATabs,
-            cooperation,
-            copyright,
-        ]);
-
-        const allData = {
-            nav,
-            search,
-            logo,
-            topAd,
-            navigation,
-            headline,
-            videoAnalysis,
-            stockCompetition,
-            sliderData,
-            paperMenu,
-            newPaper,
-            newPaperExtra,
-            investInfo,
-            ssComponey,
-            newPaperMore,
-            investMore,
-            ssComMore,
-            nrjpTitle,
-            nrjp,
-            liveTitle,
-            hqTitle,
-            QATitle,
-            clickRankTitle,
-            wxTitle,
-            spzngTit,
-            zdphTit,
-            zjlxTit,
-            zxgTit,
-            clickRank,
-            wxPublic,
-            QATabs,
-            cooperation,
-            copyright,
-        };
-
+            // 版权
+            ['copyright', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
+        ];
+        let allData = await transfer(ctx, json);
         await ctx.html('finance_stock_gstzgc', {
             allData,
         });

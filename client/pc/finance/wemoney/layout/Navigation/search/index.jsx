@@ -17,7 +17,7 @@ class Search extends React.PureComponent {
     }
 
     handleOnFocus = e => {
-        if (e.target.value === 'search') {
+        if (e.currentTarget.value === 'search') {
             this.setState({ value: '' });
         }
     };
@@ -34,7 +34,7 @@ class Search extends React.PureComponent {
     };
 
     handleBlur = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (val === '') {
             this.setState({ value: 'search' });

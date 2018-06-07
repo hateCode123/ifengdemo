@@ -18,15 +18,21 @@ class Courier extends React.PureComponent {
     /**
      * 处理鼠标浮动
      */
-    handleTabsOver = index => {
+    handleTabsOver = e => {
+        const index = Number(e.currentTarget.attributes['data-index'].value);
+
         this.setState({ current: index });
     };
 
-    handleListEnter = index => {
+    handleListEnter = e => {
+        const index = Number(e.currentTarget.attributes['data-index'].value);
+
         this.setState({ currentCol: index });
     };
 
-    handleListLeave = index => {
+    handleListLeave = e => {
+        const index = Number(e.currentTarget.attributes['data-index'].value);
+
         this.setState({ currentCol: index });
     };
 
@@ -43,7 +49,8 @@ class Courier extends React.PureComponent {
         const list0 = content0.map((item, index) => (
             <dd
                 key={index}
-                onMouseEnter={() => this.handleListEnter(index)}
+                data-index={index}
+                onMouseEnter={this.handleListEnter}
                 onMouseLeave={this.handleListLeave}
                 className={index === currentCol ? styles.over : styles.out}>
                 <div className={styles.col}>
@@ -68,7 +75,8 @@ class Courier extends React.PureComponent {
         const list1 = content1.map((item, index) => (
             <dd
                 key={index}
-                onMouseEnter={() => this.handleListEnter(index)}
+                data-index={index}
+                onMouseEnter={this.handleListEnter}
                 onMouseLeave={this.handleListLeave}
                 className={`${index === currentCol ? styles.over : styles.out} clearfix`}>
                 <div className={styles.bar_L}>
@@ -100,8 +108,9 @@ class Courier extends React.PureComponent {
                         {tabs.map((item, index) => (
                             <li
                                 key={index}
+                                data-index={index}
                                 className={index === current ? styles.current : ''}
-                                onMouseEnter={() => this.handleTabsOver(index)}>
+                                onMouseEnter={this.handleTabsOver}>
                                 {item}
                             </li>
                         ))}

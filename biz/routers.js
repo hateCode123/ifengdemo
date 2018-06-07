@@ -12,11 +12,31 @@ const redis = require('./common/redis');
 const urlCache = require('./common/url-cache');
 const { match } = require('./common/url-match');
 
-let routerList = [];
+const routerList = [];
 
 // 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
-let rewriteList = {
+const rewriteList = {
     '/heartbeat': '/api/heartbeat',
+
+    '/finance': '/pc/finance/index',
+    '/finance/index.shtml': '/pc/finance/index',
+  
+    '/finance/stock': '/pc/finance/stock',
+    '/finance/stock/index.shtml': '/pc/finance/stock',
+
+    '/finance/stock': '/pc/finance/stock',
+    '/finance/stock/index.shtml': '/pc/finance/stock',
+
+    
+    '/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
+    '/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
+
+    '/finance/money': '/pc/finance/money',
+    '/finance/money/index.shtml': '/pc/finance/money',
+
+    '/finance/wemoney': '/pc/finance/wemoney',
+    '/finance/wemoney/index.shtml': '/pc/finance/wemoney',
+
     '/mobile/content/:id': '/content/:id',
     '/mobile/content/:id/edit': '/content/:id/edit',
 };
@@ -34,6 +54,9 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
 
     // joi 对象 (Object)
     const schema = ctrlObj[i].schema;
+
+    // 类型 (Sting)
+    const cdncache = ctrlObj[i].cdncache;
 
     // 类型 (Sting)
     const type = ctrlObj[i].type;
@@ -77,7 +100,7 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
         if (_.isFunction(handler)) {
 
             // 将handler业务方法放入队列
-            meddlewareList.push(match(type, cache, edit, ctrlPath, handler));
+            meddlewareList.push(match(type, cache, edit, ctrlPath, handler, cdncache));
 
             // 将路由放入路由列表
             routerList.push({
@@ -136,7 +159,7 @@ routerLoad('pc');
 routerLoad('mobile');
 
 for (const from in rewriteList) {
-    let item = getRouter(rewriteList[from]);
+    const item = getRouter(rewriteList[from]);
 
     if (!item) {
         continue;

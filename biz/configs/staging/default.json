@@ -7,7 +7,9 @@
     "viewsdir": "dist",
     "apiPrefix": "",
     "cacheURL": false,
-    "statistics": false,
+    "statistics": true,
+    "statisticsJaeger": true,
+    "statisticsProm": true,
     "logs": [
         {
             "type": "rotating-file",
@@ -29,5 +31,6 @@
     ],
     "blacklist": [
         "/controllers/black/black.js"
-    ]
+    ],
+    "cdnCacheTime":120
 }

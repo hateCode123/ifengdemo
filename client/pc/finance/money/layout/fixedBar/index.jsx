@@ -55,7 +55,7 @@ class FixedBar extends React.PureComponent {
                         <tr>
                             <td className={style.Focus}>
                                 <a id={style.sea_01} onClick={this.toggleShowForm}>
-                                    <b> </b>
+                                    <b />
                                     <p>查行情</p>
                                 </a>
 
@@ -69,7 +69,7 @@ class FixedBar extends React.PureComponent {
                         <tr>
                             <td className={style.Focus}>
                                 <a href="#fxs" id={style.sea_02}>
-                                    <b> </b>
+                                    <b />
                                     <p>
                                         理财师<br />答疑
                                     </p>

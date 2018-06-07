@@ -14,7 +14,7 @@ class NewsList extends React.PureComponent {
             <li key={index} className={styles.list}>
                 <a
                     className={index === 0 ? styles.bold : ''}
-                    href={item.url}
+                    href={item.commentUrl}
                     target="_blank"
                     rel={rel}
                     title={item.title}>

@@ -10,6 +10,7 @@ class CarouselPic extends React.PureComponent {
     render() {
         const { content, currentPage } = this.props;
         const picData = content[currentPage];
+        let dotList = '';
 
         const carouselPic = [
             <div key={picData.id} className={styles.bigPic}>
@@ -24,9 +25,11 @@ class CarouselPic extends React.PureComponent {
                 </p>
             </div>,
         ];
-        const dotList = content.map((item, index) => (
-            <li key={index} className={index === currentPage ? styles.current : ''} />
-        ));
+        if (content.length > 1) {
+            dotList = content.map((item, index) => (
+                <li key={index} className={index === currentPage ? styles.current : ''} />
+            ));
+        }
 
         const dot = (
             <ul key="dot" className={styles.dotList}>

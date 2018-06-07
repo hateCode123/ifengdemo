@@ -8,6 +8,8 @@
     "apiPrefix": "",
     "cacheURL": true,
     "statistics": true,
+    "statisticsJaeger": true,
+    "statisticsProm": true,
     "logs": {
         "level": "debug"
     },
@@ -18,5 +20,6 @@
     ],
     "blacklist": [
       "/controllers/black/black.js"
-    ]
+    ],
+    "cdnCacheTime":120
 }

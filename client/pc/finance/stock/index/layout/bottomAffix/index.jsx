@@ -46,7 +46,7 @@ class BottomAffix extends React.PureComponent {
     };
 
     handleFocus = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({
             text: val === '代码/拼音/名称' ? '' : val,
@@ -54,7 +54,7 @@ class BottomAffix extends React.PureComponent {
     };
 
     handleBlur = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         setTimeout(() => {
             this.setState({
@@ -84,11 +84,11 @@ class BottomAffix extends React.PureComponent {
     };
 
     handleQuoteChange = e => {
-        this.setState({ quote: e.target.value });
+        this.setState({ quote: e.currentTarget.value });
     };
 
     handleFundsChange = e => {
-        this.setState({ funds: e.target.value });
+        this.setState({ funds: e.currentTarget.value });
     };
 
     handleQuoteSearch = () => {

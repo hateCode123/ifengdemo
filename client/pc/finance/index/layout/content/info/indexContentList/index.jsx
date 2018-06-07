@@ -108,7 +108,7 @@ class IndexContentList extends React.PureComponent {
                                 {item.createdTime ? (
                                     <span className={styles.date}>
                                         {Number(item.createdTime.split('-')[0]) < 2018
-                                            ? 'item.createdTime'
+                                            ? item.createdTime
                                             : `${item.createdTime.split('-')[1]}-${item.createdTime.split('-')[2]}`}
                                     </span>
                                 ) : (

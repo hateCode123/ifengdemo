@@ -41,13 +41,15 @@ class CattleStocks extends React.PureComponent {
         searchTxt: '',
     };
 
-    handleMouseOver = index => {
+    handleMouseOver = e => {
+        const index = Number(e.currentTarget.attributes['data-index'].value);
+
         this.setState({ current: index });
     };
 
     handleChange = async e => {
         try {
-            const val = e.target.value;
+            const val = e.currentTarget.value;
             const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
                 data: {
                     t: 'all',
@@ -88,8 +90,9 @@ class CattleStocks extends React.PureComponent {
                         {dataStock.map((item, index) => (
                             <li
                                 key={index}
+                                data-index={index}
                                 className={current === index ? styles.current : ''}
-                                onMouseEnter={() => this.handleMouseOver(index)}>
+                                onMouseEnter={this.handleMouseOver}>
                                 <a href={item.url} target="_blank" rel={rel}>
                                     {item.title}
                                 </a>

@@ -9,7 +9,7 @@ class Search extends React.PureComponent {
     state = { searchTxt: '' };
 
     handleChange = async e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
             data: {

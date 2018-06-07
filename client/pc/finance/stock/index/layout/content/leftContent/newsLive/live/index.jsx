@@ -155,6 +155,10 @@ class Live extends React.PureComponent {
         }
     };
 
+    createMarkup = title => {
+        return { __html: this.getTitle(title) };
+    };
+
     /**
      * 渲染组件
      */
@@ -183,7 +187,7 @@ class Live extends React.PureComponent {
                         <li key={index}>
                             <span className={styles.time}>{this.getFormatTime(item.time, 'hh:mm:ss')}</span>
                             <span className={styles.devide}>|</span>
-                            {this.getTitle(item.title)}
+                            <span dangerouslySetInnerHTML={this.createMarkup(item.title)} />
                         </li>
                     ))}
                 </ul>
@@ -195,7 +199,7 @@ class Live extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Live.propTypes = { content: PropTypes.object };
+Live.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

@@ -1,0 +1,31 @@
+FROM docker.ifeng.com/library/node:8.9.0
+
+ENV NODE_ENV ""
+
+WORKDIR /ifeng-whale
+
+EXPOSE 3000
+
+RUN  mkdir -p /ifeng-whale
+
+COPY bin /ifeng-whale/bin
+COPY biz /ifeng-whale/biz
+COPY client /ifeng-whale/client
+COPY tests /ifeng-whale/tests
+COPY webpackUtils /ifeng-whale/webpackUtils
+COPY package.json /ifeng-whale
+COPY *.json /ifeng-whale/
+COPY *.js /ifeng-whale/
+# COPY . /ifeng-whale
+# VOLUME /d/work/ifeng_space/web_content /ifeng-whale
+
+# RUN npm config set registry http://npm.ifengcloud.ifeng.com
+# RUN npm --registry http://npm.ifengcloud.ifeng.com install --production
+RUN npm --registry http://npm.ifengcloud.ifeng.com install
+
+RUN mkdir -p /data/logs
+
+# RUN npm run build
+
+# CMD ["npm","--registry", "http://npm.ifengcloud.ifeng.com" "install","&&","npm","start"]
+CMD ["npm","run","pre"]
