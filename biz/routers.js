@@ -18,24 +18,13 @@ const routerList = [];
 const rewriteList = {
     '/heartbeat': '/api/heartbeat',
 
-    '/finance': '/pc/finance/index',
-    '/finance/index.shtml': '/pc/finance/index',
-  
-    '/finance/stock': '/pc/finance/stock',
-    '/finance/stock/index.shtml': '/pc/finance/stock',
-
-    '/finance/stock': '/pc/finance/stock',
-    '/finance/stock/index.shtml': '/pc/finance/stock',
-
+    '/pc/finance': '/pc/finance/index',
     
-    '/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
-    '/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
-
-    '/finance/money': '/pc/finance/money',
-    '/finance/money/index.shtml': '/pc/finance/money',
-
-    '/finance/wemoney': '/pc/finance/wemoney',
-    '/finance/wemoney/index.shtml': '/pc/finance/wemoney',
+    '/pc/finance/index.shtml': '/pc/finance/index',
+    '/pc/finance/stock/index.shtml': '/pc/finance/stock',
+    '/pc/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
+    '/pc/finance/money/index.shtml': '/pc/finance/money',
+    '/pc/finance/wemoney/index.shtml': '/pc/finance/wemoney',
 
     '/mobile/content/:id': '/content/:id',
     '/mobile/content/:id/edit': '/content/:id/edit',
