@@ -11,7 +11,9 @@ class SingleStock extends React.PureComponent {
         current: 0,
     };
 
-    handleMouseOver = index => {
+    handleMouseOver = e => {
+        const index = Number(e.currentTarget.attributes['data-index'].value);
+
         this.setState({ current: index });
     };
 
@@ -45,8 +47,9 @@ class SingleStock extends React.PureComponent {
                     {tabs.map((item, index) => (
                         <li
                             key={index}
+                            data-index={index}
                             className={current === index ? styles.current : ''}
-                            onMouseEnter={() => this.handleMouseOver(index)}>
+                            onMouseEnter={this.handleMouseOver}>
                             {item}
                         </li>
                     ))}

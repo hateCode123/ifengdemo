@@ -27,13 +27,13 @@ class Layout extends React.PureComponent {
         };
         const stockData = {
             stock: content.stock,
-            stockMarket: content.stockMarket,
             production: content.production,
         };
         const contentData = {
             leftContent: {
                 bannerPic: content.bannerPic,
                 headline: content.headline,
+                rights: content.rights,
                 dayNews: content.dayNews,
                 extraNews: content.extraNews,
                 recommend: content.recommend,

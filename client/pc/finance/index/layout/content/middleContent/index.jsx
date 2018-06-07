@@ -13,6 +13,8 @@ class MiddleContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
+        console.log(content.financeList);
+
         return (
             <div className={styles.col_M}>
                 <ComicBook content={content.comicBook} />
@@ -47,8 +49,8 @@ class MiddleContent extends React.PureComponent {
                             </Chip>
                         </div>
                         <Chip
-                            id="20006"
-                            type="recommend"
+                            id="10161"
+                            type="static"
                             title="财商教育新闻列表"
                             groupName="正文"
                             content={content.financeList}>

@@ -49,13 +49,4 @@
             }
         }
     }
-    & .hyh {
-        position: absolute;
-        right: 0px;
-        bottom: 10px;
-        background: url(./hyh.png) no-repeat;
-        width: 51px;
-        height: 24px;
-        cursor: pointer;
-    }
 }

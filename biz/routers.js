@@ -12,10 +12,10 @@ const redis = require('./common/redis');
 const urlCache = require('./common/url-cache');
 const { match } = require('./common/url-match');
 
-let routerList = [];
+const routerList = [];
 
 // 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
-let rewriteList = {
+const rewriteList = {
     '/heartbeat': '/api/heartbeat',
 
     '/finance': '/pc/finance/index',
@@ -159,7 +159,7 @@ routerLoad('pc');
 routerLoad('mobile');
 
 for (const from in rewriteList) {
-    let item = getRouter(rewriteList[from]);
+    const item = getRouter(rewriteList[from]);
 
     if (!item) {
         continue;

@@ -133,6 +133,7 @@ class Layout extends React.PureComponent {
             focusestData: content.focusestData,
             schoolAd: content.schoolAd,
         };
+
         const footerData = {
             bottomAd: content.bottomAd,
             footer: content.footer,

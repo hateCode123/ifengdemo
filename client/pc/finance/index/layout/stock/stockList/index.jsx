@@ -4,7 +4,7 @@ import styles from './index.css';
 
 class StockList extends React.PureComponent {
     handleMouseOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
         const { handleTabsChange } = this.props;
 
         handleTabsChange(index);

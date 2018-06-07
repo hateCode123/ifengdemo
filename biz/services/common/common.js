@@ -172,13 +172,11 @@ const promiseAll = async json => {
     return allData;
 };
 
-
 const transfer = async (ctx, json) => {
-
     let obj = {};
     let keys = {};
     let funcs = {};
-    let backData = {}
+    let backData = {};
 
     for (const item of json) {
         backData[item[0]] = [];
@@ -192,32 +190,37 @@ const transfer = async (ctx, json) => {
         obj[key].ids.push(item[3]);
         obj[key].handles.push(item[4]);
     }
-    console.log(keys);
+
     let allp = [];
     for (const i in obj) {
         let ids = getIds(obj[i].ids);
-    
-        allp.push(KVProxy[getAction(i)](ctx, ids).then((result)=>{
-            if (config.default.statistics) {
-                ctx.rpcTimeList[1].push(result.response.costtime);
-            }
-             // jaeger trance 结束
-            if (config.default.statisticsJaeger) {
-                result.span.finish();
-            }
-            return result.response.return.value;
-        },(result)=>{
-            if (config.default.statistics) {
-                ctx.rpcTimeList[1].push(result.response.costtime);
-            }
-             // jaeger trance 结束
-             if (config.default.statisticsJaeger) {
-                result.span.finish();
-            }
-            logger.error(`Something error with: ${result.callInfo}`);
-            logger.errror(result.response.error);
-            return [];
-        }));
+
+        allp.push(
+            KVProxy[getAction(i)](ctx, ids).then(
+                result => {
+                    if (config.default.statistics) {
+                        ctx.rpcTimeList[1].push(result.response.costtime);
+                    }
+                    // jaeger trance 结束
+                    if (config.default.statisticsJaeger) {
+                        result.span.finish();
+                    }
+                    return result.response.return.value;
+                },
+                result => {
+                    if (config.default.statistics) {
+                        ctx.rpcTimeList[1].push(result.response.costtime);
+                    }
+                    // jaeger trance 结束
+                    if (config.default.statisticsJaeger) {
+                        result.span.finish();
+                    }
+                    logger.error(`Something error with: ${result.callInfo}`);
+                    logger.error(result.response.error);
+                    return [];
+                },
+            ),
+        );
     }
     let data = await Promise.all(allp);
 
@@ -227,8 +230,7 @@ const transfer = async (ctx, json) => {
     }
 
     for (const i in allData) {
-        console.log(keys[i],i);
-        backData[keys[i]] =  funcs[i](ctx,allData[i]);
+        backData[keys[i]] = funcs[i](ctx, allData[i]);
     }
 
     return backData;
@@ -237,47 +239,42 @@ const transfer = async (ctx, json) => {
 function getIds(arr) {
     let map = {
         number: Tars.Int32,
-        string: Tars.String
+        string: Tars.String,
     };
     let type = typeof arr[0];
     const ids = new Tars.List(map[type]);
-    console.log(arr);
     arr = [...new Set(arr)];
-
     for (const item of arr) {
         ids.push(item);
     }
-
     return ids;
 }
 
-
-function getString(key){
-    return function (ctx, data){
+function getString(key) {
+    return function(ctx, data) {
         return data;
-    }
+    };
 }
 
-function getJson(key){
-    return function (ctx, data){
-        return jsonParse(data,ctx)
-    }
+function getJson(key) {
+    return function(ctx, data) {
+        return jsonParse(data, ctx);
+    };
 }
 
-
-function getJsonByKey(key){
-    return function (ctx, data){
-        let json =  jsonParse(data,ctx)
-        json = jsonParse(json[key],ctx);
+function getJsonByKey(key) {
+    return function(ctx, data) {
+        let json = jsonParse(data, ctx);
+        json = jsonParse(json[key], ctx);
         return json;
-    }
+    };
 }
 
-function getStringByKey(key){
-    return function (ctx, data){
-        let json =  jsonParse(data,ctx)
+function getStringByKey(key) {
+    return function(ctx, data) {
+        let json = jsonParse(data, ctx);
         return json[key];
-    }
+    };
 }
 
 function getAction(action) {
@@ -309,5 +306,5 @@ module.exports = {
     transfer,
     getJson,
     getJsonByKey,
-    getStringByKey
+    getStringByKey,
 };

@@ -1,13 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy } = require('../../../../providers/ucmsapiProxy');
-const {
-    jsonParse,
-    handleData,
-    handleJson,
-    handleJsonByKey,
-    handleStringByKey,
-} = require('../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
     path: '/pc/finance/money',
@@ -15,214 +9,110 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-        // 导航静态碎片
+        let json = [
+            // 导航静态碎片
+            ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
+            ['subNavigation', 'KVProxy', 'getStaticFragment', 10020, getJsonByKey('content')],
+            ['collapse', 'KVProxy', 'getStaticFragment', 10026, getJsonByKey('content')],
 
-        let navigation = KVProxy.getStaticFragment(ctx, 10019).then(...handleJsonByKey(ctx, 'content'));
-        let subNavigation = KVProxy.getStaticFragment(ctx, 10020).then(...handleJsonByKey(ctx, 'content'));
-        let collapse = KVProxy.getStaticFragment(ctx, 10026).then(...handleJsonByKey(ctx, 'content'));
+            ['topLinkTable', 'KVProxy', 'getStaticFragment', 10029, getJson()],
+            ['market', 'KVProxy', 'getStaticFragment', 10035, getJson()],
 
-        let topLinkTable = KVProxy.getStaticFragment(ctx, 10029).then(...handleJson(ctx));
-        let market = KVProxy.getStaticFragment(ctx, 10035).then(...handleJson(ctx));
-        let jingneiQuanyiHotFunds = KVProxy.getCustom(ctx, 'finance_22005_516_1293').then(...handleJson(ctx)); // 境内 热门权益类
+            // 境内 热门权益类
+            ['jingneiQuanyiHotFunds', 'KVProxy', 'getCustom', 'finance_22005_516_1293', getJson()],
 
-        let newsListDownSlider = KVProxy.getRecommendFragment(ctx, '20013').then(...handleStringByKey(ctx, 'data'));
-        let newsListLeft = KVProxy.getRecommendFragment(ctx, '20014').then(...handleStringByKey(ctx, 'data'));
+            ['newsListDownSlider', 'KVProxy', 'getRecommendFragment', 20013, getStringByKey('data')],
+            ['newsListLeft', 'KVProxy', 'getRecommendFragment', 20014, getStringByKey('data')],
 
-        let jingneijuejinTitle = KVProxy.getStaticFragment(ctx, 10039).then(...handleJsonByKey(ctx, 'content'));
-        let marketTitle = KVProxy.getStaticFragment(ctx, 10042).then(...handleJsonByKey(ctx, 'content'));
-        let sudiTitle01 = KVProxy.getStaticFragment(ctx, 10045).then(...handleJsonByKey(ctx, 'content'));
-        let sudiContent01 = KVProxy.getStaticFragment(ctx, 10048).then(...handleJsonByKey(ctx, 'content'));
+            ['jingneijuejinTitle', 'KVProxy', 'getStaticFragment', 10039, getJsonByKey('content')],
+            ['marketTitle', 'KVProxy', 'getStaticFragment', 10042, getJsonByKey('content')],
+            ['sudiTitle01', 'KVProxy', 'getStaticFragment', 10045, getJsonByKey('content')],
+            ['sudiContent01', 'KVProxy', 'getStaticFragment', 10048, getJsonByKey('content')],
 
-        let haiwaitaojinTitle = KVProxy.getStaticFragment(ctx, 10110).then(...handleJsonByKey(ctx, 'content'));
-        let sudiTitle02 = KVProxy.getStaticFragment(ctx, 10127).then(...handleJsonByKey(ctx, 'content'));
-        let sudiContent02 = KVProxy.getStaticFragment(ctx, 10111).then(...handleJsonByKey(ctx, 'content'));
+            ['haiwaitaojinTitle', 'KVProxy', 'getStaticFragment', 10110, getJsonByKey('content')],
+            ['sudiTitle02', 'KVProxy', 'getStaticFragment', 10127, getJsonByKey('content')],
+            ['sudiContent02', 'KVProxy', 'getStaticFragment', 10111, getJsonByKey('content')],
 
-        let jingneiHuobiHotFunds = KVProxy.getCustom(ctx, 'finance_22005_516_1294').then(...handleJson(ctx)); // 境内 货币
-        let haiwaiHotfunds = KVProxy.getCustom(ctx, 'finance_22005_516_1295').then(...handleJson(ctx)); // 海外基金
+            // 境内 货币
+            ['jingneiHuobiHotFunds', 'KVProxy', 'getCustom', 'finance_22005_516_1294', getJson()],
 
-        let rediantuijianTitle = KVProxy.getStaticFragment(ctx, 10113).then(...handleJsonByKey(ctx, 'content'));
+            // 海外基金
+            ['haiwaiHotfunds', 'KVProxy', 'getCustom', 'finance_22005_516_1295', getJson()],
 
-        let rediantuijianTableStock = KVProxy.getCustom(ctx, 'finance_22005_516_1296').then(...handleJson(ctx)); // 热点推荐 股票型
-        let rediantuijianTableMix = KVProxy.getCustom(ctx, 'finance_22005_516_1297').then(...handleJson(ctx)); // 热点推荐 混合型
-        let rediantuijianTableZhishu = KVProxy.getCustom(ctx, 'finance_22005_516_1298').then(...handleJson(ctx)); // 热点推荐 指数型
-        let rediantuijianTableZhaiquan = KVProxy.getCustom(ctx, 'finance_22005_516_1299').then(...handleJson(ctx)); // 热点推荐 债券型
-        let rediantuijianTableMoney = KVProxy.getCustom(ctx, 'finance_22005_516_1300').then(...handleJson(ctx)); // 热点推荐 货币型
+            ['rediantuijianTitle', 'KVProxy', 'getStaticFragment', 10113, getJsonByKey('content')],
 
-        let cnlcJijin = KVProxy.getCustom(ctx, 'finance_22005_516_243').then(...handleJson(ctx)); // 分析师答疑 基金
-        let cnlcListJijin = KVProxy.getCustom(ctx, 'finance_22005_516_244').then(...handleJson(ctx)); // 分析师答疑列表 基金
+            // 热点推荐 股票型
+            ['rediantuijianTableStock', 'KVProxy', 'getCustom', 'finance_22005_516_1296', getJson()],
 
-        let cnlcTitle = KVProxy.getStaticFragment(ctx, 10047).then(...handleJsonByKey(ctx, 'content'));
-        let cnlcP2P = KVProxy.getCustom(ctx, 'finance_22005_516_245').then(...handleJson(ctx)); // 分析师答疑 P2p
-        let cnlcListP2P = KVProxy.getCustom(ctx, 'finance_22005_516_249').then(...handleJson(ctx)); // 分析师答疑列表 P2p
+            // 热点推荐 混合型
+            ['rediantuijianTableMix', 'KVProxy', 'getCustom', 'finance_22005_516_1297', getJson()],
 
-        let cnlcTrust = KVProxy.getCustom(ctx, 'finance_22005_516_246').then(...handleJson(ctx)); // 分析师答疑 信托
-        let cnlcListTrust = KVProxy.getCustom(ctx, 'finance_22005_516_250').then(...handleJson(ctx)); // 分析师答疑列表 信托
+            // 热点推荐 指数型
+            ['rediantuijianTableZhishu', 'KVProxy', 'getCustom', 'finance_22005_516_1298', getJson()],
 
-        let cnlcPrivate = KVProxy.getCustom(ctx, 'finance_22005_516_247').then(...handleJson(ctx)); // 分析师答疑 私募
-        let cnlcListPrivate = KVProxy.getCustom(ctx, 'finance_22005_516_251').then(...handleJson(ctx)); // 分析师答疑列表 私募
+            // 热点推荐 债券型
+            ['rediantuijianTableZhaiquan', 'KVProxy', 'getCustom', 'finance_22005_516_1299', getJson()],
 
-        let cnlcFinance = KVProxy.getCustom(ctx, 'finance_22005_516_248').then(...handleJson(ctx)); // 分析师答疑 银行理财
-        let cnlcListFinance = KVProxy.getCustom(ctx, 'finance_22005_516_252').then(...handleJson(ctx)); // 分析师答疑列表 银行理财
+            // 热点推荐 货币型
+            ['rediantuijianTableMoney', 'KVProxy', 'getCustom', 'finance_22005_516_1300', getJson()],
 
-        let partnerTitle = KVProxy.getStaticFragment(ctx, 10046).then(...handleJsonByKey(ctx, 'content'));
+            // 分析师答疑 基金
+            ['cnlcJijin', 'KVProxy', 'getCustom', 'finance_22005_516_243', getJson()],
 
-        let partnerList = KVProxy.getStaticFragment(ctx, 10123).then(...handleStringByKey(ctx, 'content'));
+            // 分析师答疑列表 基金
+            ['cnlcListJijin', 'KVProxy', 'getCustom', 'finance_22005_516_244', getJson()],
 
-        let bottomWeiXin = KVProxy.getStaticFragment(ctx, 10124).then(...handleStringByKey(ctx, 'content'));
+            ['cnlcTitle', 'KVProxy', 'getStaticFragment', 10047, getJsonByKey('content')],
 
-        let bottomProc = KVProxy.getStaticFragment(ctx, 10125).then(...handleStringByKey(ctx, 'content'));
+            // 分析师答疑 P2p
+            ['cnlcP2P', 'KVProxy', 'getCustom', 'finance_22005_516_245', getJson()],
 
-        let bottomLink = KVProxy.getStaticFragment(ctx, 10126).then(...handleStringByKey(ctx, 'content'));
+            // 分析师答疑列表 P2p
+            ['cnlcListP2P', 'KVProxy', 'getCustom', 'finance_22005_516_249', getJson()],
 
-        let banner = KVProxy.getStaticFragment(ctx, 10128).then(...handleStringByKey(ctx, 'content'));
-        // 底部公用版权
-        let footer = KVProxy.getStaticFragment(ctx, 10114).then(...handleJsonByKey(ctx, 'content'));
-        // 页面公用导航
-        let nav = KVProxy.getStaticFragment(ctx, 10108).then(...handleJsonByKey(ctx, 'content'));
-        // 搜索
-        let search = KVProxy.getStaticFragment(ctx, 10129).then(...handleJsonByKey(ctx, 'content'));
-        // 幻灯
-        let slider = KVProxy.getStaticFragment(ctx, 10130).then(...handleJsonByKey(ctx, 'content'));
+            // 分析师答疑 信托
+            ['cnlcTrust', 'KVProxy', 'getCustom', 'finance_22005_516_246', getJson()],
 
-        [
-            navigation,
-            subNavigation,
-            collapse,
-            topLinkTable,
-            market,
-            jingneiQuanyiHotFunds,
-            newsListDownSlider,
-            newsListLeft,
-            jingneijuejinTitle,
-            marketTitle,
-            sudiTitle01,
-            sudiContent01,
-            haiwaitaojinTitle,
-            sudiTitle02,
-            sudiContent02,
-            jingneiHuobiHotFunds,
-            haiwaiHotfunds,
-            rediantuijianTitle,
-            rediantuijianTableStock,
-            rediantuijianTableMix,
-            rediantuijianTableZhishu,
-            rediantuijianTableZhaiquan,
-            rediantuijianTableMoney,
-            cnlcJijin,
-            cnlcListJijin,
-            cnlcTitle,
-            cnlcP2P,
-            cnlcListP2P,
-            cnlcTrust,
-            cnlcListTrust,
-            cnlcPrivate,
-            cnlcListPrivate,
-            cnlcFinance,
-            cnlcListFinance,
-            partnerTitle,
-            partnerList,
-            bottomWeiXin,
-            bottomProc,
-            bottomLink,
-            banner,
-            footer,
-            nav,
-            search,
-            slider,
-        ] = await Promise.all([
-            navigation,
-            subNavigation,
-            collapse,
-            topLinkTable,
-            market,
-            jingneiQuanyiHotFunds,
-            newsListDownSlider,
-            newsListLeft,
-            jingneijuejinTitle,
-            marketTitle,
-            sudiTitle01,
-            sudiContent01,
-            haiwaitaojinTitle,
-            sudiTitle02,
-            sudiContent02,
-            jingneiHuobiHotFunds,
-            haiwaiHotfunds,
-            rediantuijianTitle,
-            rediantuijianTableStock,
-            rediantuijianTableMix,
-            rediantuijianTableZhishu,
-            rediantuijianTableZhaiquan,
-            rediantuijianTableMoney,
-            cnlcJijin,
-            cnlcListJijin,
-            cnlcTitle,
-            cnlcP2P,
-            cnlcListP2P,
-            cnlcTrust,
-            cnlcListTrust,
-            cnlcPrivate,
-            cnlcListPrivate,
-            cnlcFinance,
-            cnlcListFinance,
-            partnerTitle,
-            partnerList,
-            bottomWeiXin,
-            bottomProc,
-            bottomLink,
-            banner,
-            footer,
-            nav,
-            search,
-            slider,
-        ]);
+            // 分析师答疑列表 信托
+            ['cnlcListTrust', 'KVProxy', 'getCustom', 'finance_22005_516_250', getJson()],
 
-        let allData = {
-            navigation,
-            subNavigation,
-            collapse,
-            topLinkTable,
-            market,
-            jingneiQuanyiHotFunds,
-            newsListDownSlider,
-            newsListLeft,
-            jingneijuejinTitle,
-            marketTitle,
-            sudiTitle01,
-            sudiContent01,
-            haiwaitaojinTitle,
-            sudiTitle02,
-            sudiContent02,
-            jingneiHuobiHotFunds,
-            haiwaiHotfunds,
-            rediantuijianTitle,
-            rediantuijianTableStock,
-            rediantuijianTableMix,
-            rediantuijianTableZhishu,
-            rediantuijianTableZhaiquan,
-            rediantuijianTableMoney,
-            cnlcJijin,
-            cnlcListJijin,
-            cnlcTitle,
-            cnlcP2P,
-            cnlcListP2P,
-            cnlcTrust,
-            cnlcListTrust,
-            cnlcPrivate,
-            cnlcListPrivate,
-            cnlcFinance,
-            cnlcListFinance,
-            partnerTitle,
-            partnerList,
-            bottomWeiXin,
-            bottomProc,
-            bottomLink,
-            banner,
-            footer,
-            nav,
-            search,
-            slider,
-        };
+            // 分析师答疑 私募
+            ['cnlcPrivate', 'KVProxy', 'getCustom', 'finance_22005_516_247', getJson()],
 
+            // 分析师答疑列表 私募
+            ['cnlcListPrivate', 'KVProxy', 'getCustom', 'finance_22005_516_251', getJson()],
+
+            // 分析师答疑 银行理财
+            ['cnlcFinance', 'KVProxy', 'getCustom', 'finance_22005_516_248', getJson()],
+
+            // 分析师答疑列表 银行理财
+            ['cnlcListFinance', 'KVProxy', 'getCustom', 'finance_22005_516_252', getJson()],
+
+            ['partnerTitle', 'KVProxy', 'getStaticFragment', 10046, getJsonByKey('content')],
+
+            ['partnerList', 'KVProxy', 'getStaticFragment', 10123, getStringByKey('content')],
+
+            ['bottomWeiXin', 'KVProxy', 'getStaticFragment', 10124, getStringByKey('content')],
+
+            ['bottomProc', 'KVProxy', 'getStaticFragment', 10125, getStringByKey('content')],
+
+            ['bottomLink', 'KVProxy', 'getStaticFragment', 10126, getStringByKey('content')],
+
+            ['banner', 'KVProxy', 'getStaticFragment', 10128, getStringByKey('content')],
+
+            // 底部公用版权
+            ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
+
+            // 页面公用导航
+            ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
+
+            // 搜索
+            ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
+
+            // 幻灯
+            ['slider', 'KVProxy', 'getStaticFragment', 10130, getJsonByKey('content')],
+        ];
+        let allData = await transfer(ctx, json);
         await ctx.html('finance_money', { allData });
     },
 };
