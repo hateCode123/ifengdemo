@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="always" name="referrer">
+    <title></title>
+    <script>
+        var allData = <%- JSON.stringify(allData) %>;
+    </script>
+    {{#each htmlWebpackPlugin.files.css}}
+    <link href="{{.}}" rel="stylesheet"> {{/each}}
+</head>
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.chunks}}
+    <script src="{{entry}}" type="text/javascript"></script>
+    {{/each}}
+</body>
+</html>

@@ -1,0 +1,35 @@
+.search_box {
+    float: right;
+    margin-top: 29px;
+}
+.search_text {
+    padding: 0 10px;
+    width: 173px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #fff;
+    color: #fff;
+    background: #64d4bb;
+    &::-webkit-input-placeholder {
+        color: #fff;
+    }
+    &::-moz-placeholder {
+        color:#fff;
+    }
+    &:-ms-input-placeholder {
+        color: #fff;
+    }
+    &:-moz-placeholder {
+        color: #fff;
+    }
+}
+.sousuo_btn {
+    margin-left: -1px;
+    width: 67px;
+    height: 27px;
+    border: none;
+    vertical-align: -9px;
+    background-color: transparent;
+    background-image: url('./sousuo-btn.jpg');
+    cursor: pointer;
+} 
