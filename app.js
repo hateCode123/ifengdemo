@@ -115,11 +115,10 @@ if (config.default.statisticsProm) {
 }
 
 app.use(async (ctx, next) => {
-    if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('d.finance.ifeng.com') > -1) {
-        ctx.url = `/finance/d` + ctx.url;
+    if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
+        ctx.url = `/finance` + ctx.url;
         ctx.originalUrl = `/finance` + ctx.originalUrl;
     }
-
     await next();
 });
 
