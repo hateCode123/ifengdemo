@@ -111,7 +111,12 @@ exports.financeWemoney = {
         // 底部通栏广告
         const bottomAd = KVProxy.getStaticFragment(10027).then(...handleJson(ctx));
 
-        const topCollapse = KVProxy.getStaticFragment(10160).then(...handleJsonByKey(ctx,'content'));
+        const topCollapse = KVProxy.getStaticFragment(10160).then(...handleJsonByKey(ctx, 'content'));
+
+        const picData = KVProxy.getDynamicFragment(10008).then(...handleJson(ctx, 'content'));
+
+        const newsData = KVProxy.getDynamicFragment(10009).then(...handleJson(ctx, 'content'));
+
 
         const otherData = await Promise.all([
             navigation,
@@ -161,6 +166,8 @@ exports.financeWemoney = {
             topAd,
             bottomAd,
             topCollapse,
+            picData,
+            newsData,
         ]);
 
         const allData = {
@@ -211,8 +218,10 @@ exports.financeWemoney = {
             topAd: otherData[44],
             bottomAd: otherData[45],
             topCollapse: otherData[46],
+            picData: otherData[47],
+            newsData: otherData[48],
         };
-        console.log(allData);
+     
 
         await ctx.html('finance_money', {
             allData,
