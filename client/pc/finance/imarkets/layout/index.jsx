@@ -7,6 +7,7 @@ import Header from './header';
 import Logo from './logo';
 import Tools from './tools';
 import Shares from './shares';
+import NewsDisplay from './news-display';
 
 class Layout extends PureComponent {
     render() {
@@ -30,6 +31,10 @@ class Layout extends PureComponent {
                 <div className={ `${ styles.main } clearfix` }>
                     {/* 股票信息 */}
                     <Shares />
+                    <div className={ styles.main_middle }>
+                        {/* 新闻展示 */}
+                        <NewsDisplay />
+                    </div>
                 </div>
             </Fragment>
         );

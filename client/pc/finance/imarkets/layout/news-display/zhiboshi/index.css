@@ -1,0 +1,12 @@
+.zhiboshi {
+    height: 36px;
+    margin-top: 12px;
+    background: url('./zbs.gif') no-repeat 9px center;
+    padding-left: 98px;
+    width: 426px;
+    line-height: 36px;
+}
+.link {
+    font-size: 14px;
+    color: #2B2B2B;
+}
