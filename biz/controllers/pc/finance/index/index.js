@@ -32,7 +32,7 @@ exports.list = {
         let headline = KVProxy.getRecommendFragment(20003).then(...handleJsonByKey(ctx, 'data'));
 
         // 客户权益
-        let rights = KVProxy.getStaticFragment(10018).then(...handleJs(ctx, 'content'));
+        let rights = KVProxy.getStaticFragment(10018).then(...handleJsonByKey(ctx, 'content'));
 
         // 今日要闻
         let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));

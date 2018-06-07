@@ -11,12 +11,6 @@ class Headline extends React.PureComponent {
         data: this.props.content,
     };
 
-    createMarkup = () => {
-        const { rights } = this.props;
-
-        return { __html: rights };
-    };
-
     /**
      * 鼠标移入移出操作
      */
@@ -50,19 +44,22 @@ class Headline extends React.PureComponent {
      */
     render() {
         const { data, isShow } = this.state;
-        const { limit } = this.props;
+        const { limit, rights } = this.props;
 
         return (
-            <div className={styles.box} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
-                <div>
+            <div className={styles.box}>
+                <div onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
                     <Chip id="20003" type="recommend" title="头条新闻" groupName="正文" content={data}>
                         <List limit={limit} />
                     </Chip>
-                    <Chip id="10018" type="static" title="财经客户权益" groupName="正文">
-                        <div dangerouslySetInnerHTML={this.createMarkup()} />
-                    </Chip>
+                    <div
+                        className={`${styles.hyh} ${isShow ? styles.show : styles.hide}`}
+                        onClick={this.handleChange}
+                    />
                 </div>
-                <div className={`${styles.hyh} ${isShow ? styles.show : styles.hide}`} onClick={this.handleChange} />
+                <Chip id="10018" type="static" title="财经客户权益" groupName="正文" content={rights}>
+                    <List limit={2} />
+                </Chip>
             </div>
         );
     }
@@ -73,7 +70,7 @@ class Headline extends React.PureComponent {
  * */
 Headline.propTypes = {
     content: PropTypes.array,
-    rights: PropTypes.string,
+    rights: PropTypes.array,
     limit: PropTypes.number,
 };
 
