@@ -204,11 +204,23 @@ exports.list = {
 
             // 机构荐股池
             ['stockpool', 'KVProxy', 'getStaticFragment', 10095, getJsonByKey('content')],
-            ['stockpoolData', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/yb_stockpool.json', getJson()],
+            [
+                'stockpoolData',
+                'KVProxy',
+                'getSsiFragment',
+                'finance.ifeng.com/app/json/zq/yb_stockpool.json',
+                getJson(),
+            ],
 
             // 目标涨幅最大
             ['chgpctest', 'KVProxy', 'getStaticFragment', 10096, getJsonByKey('content')],
-            ['chgpctestData', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/yb_chgpctest.json', getJson()],
+            [
+                'chgpctestData',
+                'KVProxy',
+                'getSsiFragment',
+                'finance.ifeng.com/app/json/zq/yb_chgpctest.json',
+                getJson(),
+            ],
 
             // 评级调高个股
             ['levelup', 'KVProxy', 'getStaticFragment', 10097, getJsonByKey('content')],
