@@ -8,6 +8,7 @@ import Logo from './logo';
 import Tools from './tools';
 import Shares from './shares';
 import NewsDisplay from './news-display';
+import NewsStream from './news-stream';
 
 class Layout extends PureComponent {
     render() {
@@ -34,6 +35,8 @@ class Layout extends PureComponent {
                     <div className={ styles.main_middle }>
                         {/* 新闻展示 */}
                         <NewsDisplay />
+                        {/* 新闻流 */}
+                        <NewsStream />
                     </div>
                 </div>
             </Fragment>
