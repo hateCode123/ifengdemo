@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
@@ -6,8 +6,9 @@ import ChipEdit from 'ChipEdit';
 import Header from './header';
 import Logo from './logo';
 import Tools from './tools';
+import Shares from './shares';
 
-class Layout extends React.PureComponent {
+class Layout extends PureComponent {
     render() {
         /**
          * 组件分发数据
@@ -26,6 +27,10 @@ class Layout extends React.PureComponent {
                 <Logo />
                 {/* 日历、直播、搜索 */}
                 <Tools />
+                <div className={ `${ styles.main } clearfix` }>
+                    {/* 股票信息 */}
+                    <Shares />
+                </div>
             </Fragment>
         );
     }
