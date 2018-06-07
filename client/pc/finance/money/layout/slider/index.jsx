@@ -11,7 +11,7 @@ class SliderInner extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        console.log('content',content)
+        console.log('content', content);
         const sliderTmpl = function sliderTmpl(item) {
             return (
                 <div className={style.bigPic04}>

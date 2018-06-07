@@ -136,16 +136,16 @@ if (config.default.statistics) {
         }
 
         let rpcTime = 0;
-        let rpcCount = ctx.rpcTimeList[0].length + ctx.rpcTimeList[1].length;
+        const rpcCount = ctx.rpcTimeList[0].length + ctx.rpcTimeList[1].length;
 
-        for (let i of ctx.rpcTimeList[0]) {
+        for (const i of ctx.rpcTimeList[0]) {
             rpcTime += parseFloat(i);
         }
         rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
 
         let parseTime = 0;
 
-        for (let i of ctx.parseTime) {
+        for (const i of ctx.parseTime) {
             parseTime += parseFloat(i);
         }
         parseTime = parseTime.toFixed(3);

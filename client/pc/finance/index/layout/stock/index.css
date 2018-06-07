@@ -29,3 +29,28 @@
     width: 244px;
     height: 20px;
 }
+
+.stockMarket {
+    float: left;
+    width: 60px;
+    height: 18px;
+    & a {
+        width: 60px;
+        height: 18px;
+        border: 1px solid #f54343;
+        color: #f54343;
+        text-align: center;
+        line-height: 18px;
+        display: block;
+    }
+    & a:hover {
+        width: 60px;
+        height: 18px;
+        background: #f54343;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+        line-height: 18px;
+        display: block;
+    }
+}

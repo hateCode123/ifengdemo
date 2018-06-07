@@ -35,13 +35,18 @@ class Topic extends React.PureComponent {
                 },
                 jsonp: 'cb',
                 jsonpCallback: 'setNewCont',
-                timeout: 10000,
             });
 
             this.setState({ topic: data[0].title[0] });
         } catch (e) {
             console.log(e);
         }
+    };
+
+    createMarkup = () => {
+        const { topic } = this.state;
+
+        return { __html: topic };
     };
 
     /**
@@ -55,7 +60,7 @@ class Topic extends React.PureComponent {
                 <ul className={styles.RunTopic}>
                     <li>
                         <a href="//finance.ifeng.com/gold/zhibo/" target="_blank" rel={rel} title={topic}>
-                            {topic}
+                            <span dangerouslySetInnerHTML={this.createMarkup()} />
                         </a>
                     </li>
                 </ul>

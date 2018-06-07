@@ -3,13 +3,40 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { rel } from '../../../../../../../utils/rel';
+import { jsonp } from '@ifeng/ui_base';
 
 class HighestAttention extends React.PureComponent {
+    state = {
+        stockData: {},
+    };
+
+    async componentDidMount() {
+        try {
+            const { content } = this.props;
+
+            const code = content.map(item => `s_${item.code}`);
+
+            const data = await jsonp('//hq.finance.ifeng.com/q.php', {
+                data: {
+                    l: code.join(','),
+                    f: 'json',
+                    e: 'suggestCallback(json_q)',
+                },
+                jsonpCallback: 'suggestCallback',
+            });
+
+            this.setState({ stockData: data });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     /**
      * 渲染组件
      */
     render() {
-        const { tabs, content, stockData } = this.props;
+        const { stockData } = this.state;
+        const { tabs, content } = this.props;
 
         return (
             <div className={styles.data_box}>
@@ -34,9 +61,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== '' &&
-                                        stockData[`s_${item.code}`] &&
-                                        stockData[`s_${item.code}`][3] > 0
+                                        stockData !== ''
+                                        && stockData[`s_${item.code}`]
+                                        && stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
@@ -44,9 +71,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== '' &&
-                                        stockData[`s_${item.code}`] &&
-                                        stockData[`s_${item.code}`][3] > 0
+                                        stockData !== ''
+                                        && stockData[`s_${item.code}`]
+                                        && stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>

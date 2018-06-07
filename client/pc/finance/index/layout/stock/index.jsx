@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import StockList from './stockList/';
-import StockMarket from './stockMarket/';
 import CustomStock from './customStock/';
 import FundsFlow from './fundsFlow/';
 import StockBox from './stockBox';
 import StockSearch from './stockSearch/';
 import Production from './production/';
+import { rel } from '../../../../utils/rel';
 
 class Stock extends React.PureComponent {
     state = {
@@ -43,14 +43,11 @@ class Stock extends React.PureComponent {
                         <div className={styles.box_top}>
                             <StockList handleTabsChange={this.handleTabsChange} current={current} />
                             <div className={styles.search}>
-                                <Chip
-                                    id="10018"
-                                    type="static"
-                                    title="股票栏理财超市静态碎片"
-                                    groupName="股票栏"
-                                    content={content.stockMarket}>
-                                    <StockMarket />
-                                </Chip>
+                                <div className={styles.stockMarket}>
+                                    <a href="//18.ifeng.com/" target="_blank" rel={rel}>
+                                        理财超市
+                                    </a>
+                                </div>
                                 <StockSearch />
                             </div>
                         </div>

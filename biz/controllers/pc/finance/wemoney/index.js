@@ -9,7 +9,7 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-        //通用导航
+        // 通用导航
         let commonNav = KVProxy.getStaticFragment(ctx,10108).then(...handleJsonByKey(ctx, 'content'));
 
         // 导航

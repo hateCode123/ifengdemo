@@ -101,13 +101,13 @@ exports.list = {
             courier: KVProxy.getStaticFragment(ctx, 10016).then(...handleJsonByKey(ctx, 'content')),
 
             // 投顾产品
-            production: KVProxy.getStaticFragment(ctx, 10017).then(...handleJs(ctx, 'content')),
+            production: KVProxy.getStaticFragment(ctx, 10017).then(...handleJsonByKey(ctx, 'content')),
+
+            // 客户权益
+            rights: KVProxy.getStaticFragment(ctx, 10018).then(...handleJs(ctx, 'content')),
 
             // 每日要闻
             dayNews: KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx)),
-
-            // 股票超市静态碎片
-            stockMarket: KVProxy.getStaticFragment(ctx, 10018).then(...handleJs(ctx, 'content')),
 
             // 返回连环话数据
             comicBook: KVProxy.getCustom(ctx, 'finance_22005_10736_27').then(...handleJson(ctx)),

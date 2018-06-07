@@ -52,7 +52,7 @@ class NewsListDownSliderInner extends React.PureComponent {
             if (index % 3 === 0) {
                 return (
                     <h2 key={index}>
-                        <a href={item.url} rel={rel}  target="_blank">
+                        <a href={item.url} rel={rel} target="_blank">
                             {item.title}
                         </a>
                     </h2>
@@ -60,7 +60,7 @@ class NewsListDownSliderInner extends React.PureComponent {
             } else if (index % 3 === 1) {
                 return (
                     <h3 key={index} className={style.box_01_1}>
-                        <a href={item.url} rel={rel}  target="_blank">
+                        <a href={item.url} rel={rel} target="_blank">
                             {item.title}
                         </a>
                     </h3>
@@ -68,7 +68,7 @@ class NewsListDownSliderInner extends React.PureComponent {
             } else if (index % 3 === 2) {
                 return (
                     <h3 key={index} className={style.box_01}>
-                        <a href={item.url} rel={rel}  target="_blank">
+                        <a href={item.url} rel={rel} target="_blank">
                             {item.title}
                         </a>
                     </h3>

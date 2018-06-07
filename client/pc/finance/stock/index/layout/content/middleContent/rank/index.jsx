@@ -67,7 +67,7 @@ class Rank extends React.PureComponent {
      */
     handleTabsChange = e => {
         const { tabs } = this.state;
-        const val = Number(e.target.attributes['data-index'].value);
+        const val = Number(e.currentTarget.attributes['data-index'].value);
 
         if (val === 2) {
             this.getData(tabs[val].type);

@@ -11,14 +11,14 @@ class ResearchSearch extends React.PureComponent {
     };
 
     handleSelect = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({ option: val });
     };
 
     handleKeyup = async e => {
         const { checked } = this.state;
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (checked === 'title') {
             this.setState({ option: val });
@@ -44,7 +44,7 @@ class ResearchSearch extends React.PureComponent {
     };
 
     handleChange = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({ checked: val });
     };

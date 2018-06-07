@@ -93,7 +93,7 @@
         "object-curly-spacing": ["error", "always"],
         "one-var": ["error", { "initialized": "never" }],
         "operator-assignment": ["error", "always"],
-        "operator-linebreak": ["error", "before", { "overrides": { "?": "ignore", ":": "ignore" } }],
+        "operator-linebreak": ["error", "before", { "overrides": { "&&": "ignore", "||": "ignore", "?": "ignore", ":": "ignore" } }],
         "quotes": ["error", "single"],
         "require-jsdoc": [
             "warn",

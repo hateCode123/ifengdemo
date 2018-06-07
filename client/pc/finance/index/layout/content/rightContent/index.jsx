@@ -20,11 +20,7 @@ class RightContent extends React.PureComponent {
 
         return (
             <div className={styles.col_R}>
-                <BoxTitle url="#" title="财经视频">
-                    <Chip id="10012" type="static" title="财经视频广告" groupName="正文" content={content.titleAd}>
-                        <TitleAd />
-                    </Chip>
-                </BoxTitle>
+                <BoxTitle url="#" title="财经视频" />
                 <FinanceVideo content={content.financeVideo} />
                 <Ad content={content.asideAd1} styleName={styles.box_1} />
                 <div className={styles.box_finance}>

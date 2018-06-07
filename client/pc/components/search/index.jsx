@@ -14,7 +14,7 @@ class Search extends React.PureComponent {
 
     handleSelect = e => {
         const { data } = this.state;
-        const selectVal = e.target.value;
+        const selectVal = e.currentTarget.value;
 
         this.setState({
             current: selectVal,
@@ -23,7 +23,7 @@ class Search extends React.PureComponent {
     };
 
     handleChange = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({ searchTxt: val });
     };
@@ -66,7 +66,7 @@ class Search extends React.PureComponent {
 
     handleFocus = e => {
         const { data, current } = this.state;
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (data[current].keyword === val) {
             this.setState({ searchTxt: '' });
@@ -75,7 +75,7 @@ class Search extends React.PureComponent {
 
     handleBlur = e => {
         const { data, current } = this.state;
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (val === '') {
             this.setState({ searchTxt: data[current].keyword });
