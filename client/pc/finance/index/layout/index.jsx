@@ -79,9 +79,7 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <Stock content={stockData} />
                 <Content content={contentData} />
-                <Chip id="10015" type="static" title="底部合作链接" groupName="底部" content={cooperation}>
-                    <Cooperation />
-                </Chip>
+                <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
                 <Chip id="10135" type="static" title="二维码" groupName="二维码" content={qrCode}>

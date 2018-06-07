@@ -1,15 +1,12 @@
 const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
-const {
-    KVProxy,
-    SearchProxy
-} = require('../../../../../providers/ucmsapiProxy');
+const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const {
     jsonParse,
     handleData,
     handleJson,
     handleJsonByKey,
-    handleJs
+    handleJs,
 } = require('../../../../../services/common/common');
 
 exports.list = {
@@ -44,10 +41,10 @@ exports.list = {
         let animationPic = KVProxy.getStaticFragment(10085).then(...handleJsonByKey(ctx, 'content'));
 
         // 跳转链接
-        let jumpLink = KVProxy.getStaticFragment(10044).then(...handleJs(ctx, 'content'));
+        let jumpLink = KVProxy.getStaticFragment(10044).then(...handleJsonByKey(ctx, 'content'));
 
         // 头条新闻
-        let headline = KVProxy.getRecommendFragment(20018).then(...handleJsonByKey(ctx, 'data'));
+        let headline = KVProxy.getStaticFragment(10162).then(...handleJsonByKey(ctx, 'content'));
 
         // 要闻直播标题
         let newsLiveTab = KVProxy.getStaticFragment(10049).then(...handleJsonByKey(ctx, 'content'));
@@ -84,7 +81,7 @@ exports.list = {
         let answerSubTab = KVProxy.getStaticFragment(10118).then(...handleJsonByKey(ctx, 'content'));
 
         // 牛人解盘
-        let answerList = KVProxy.getRecommendFragment(20019).then(...handleJsonByKey(ctx, 'data'));
+        let answerList = KVProxy.getStaticFragment(10163).then(...handleJsonByKey(ctx, 'content'));
 
         // 视频抓牛股标题
         let cattleStocksTitle = KVProxy.getStaticFragment(10100).then(...handleJsonByKey(ctx, 'content'));
@@ -131,11 +128,8 @@ exports.list = {
         // 跳转链接列表
         let linkList = KVProxy.getStaticFragment(10084).then(...handleJsonByKey(ctx, 'content'));
 
-        // 每日论股标题
-        let dayStockTitle = KVProxy.getStaticFragment(10078).then(...handleJsonByKey(ctx, 'content'));
-
         // 每日论股
-        let dayStock = KVProxy.getStaticFragment(10081).then(...handleJs(ctx, 'content'));
+        let dayStock = KVProxy.getRecommendFragment(20040).then(...handleJsonByKey(ctx, 'data'));
 
         // 操盘热点标题
         let hotSpotsTitle = KVProxy.getStaticFragment(10067).then(...handleJsonByKey(ctx, 'content'));
@@ -175,7 +169,9 @@ exports.list = {
 
         // 市场雷达
         let marketRadarTabs = KVProxy.getStaticFragment(10089).then(...handleJsonByKey(ctx, 'content'));
-        let marketRadar = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/marketradar.json').then(...handleJs(ctx));
+        let marketRadar = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/marketradar.json').then(
+            ...handleJs(ctx),
+        );
 
         // 大单追踪
         let trackTabs = KVProxy.getStaticFragment(10090).then(...handleJsonByKey(ctx, 'content'));
@@ -183,8 +179,12 @@ exports.list = {
 
         // 5日增减仓
         let fiveDaysTabs = KVProxy.getStaticFragment(10091).then(...handleJsonByKey(ctx, 'content'));
-        let fiveDaysBuy = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_buy.json').then(...handleJs(ctx));
-        let fiveDaysSell = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_sell.json').then(...handleJs(ctx));
+        let fiveDaysBuy = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_buy.json').then(
+            ...handleJs(ctx),
+        );
+        let fiveDaysSell = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/fiveday_sell.json').then(
+            ...handleJs(ctx),
+        );
 
         // 高手学堂标题
         let schoolTitle = KVProxy.getStaticFragment(10069).then(...handleJsonByKey(ctx, 'content'));
@@ -215,23 +215,33 @@ exports.list = {
 
         // 机构荐股池
         let stockpool = KVProxy.getStaticFragment(10095).then(...handleJsonByKey(ctx, 'content'));
-        let stockpoolData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_stockpool.json').then(...handleJs(ctx));
+        let stockpoolData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_stockpool.json').then(
+            ...handleJs(ctx),
+        );
 
         // 目标涨幅最大
         let chgpctest = KVProxy.getStaticFragment(10096).then(...handleJsonByKey(ctx, 'content'));
-        let chgpctestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_chgpctest.json').then(...handleJs(ctx));
+        let chgpctestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_chgpctest.json').then(
+            ...handleJs(ctx),
+        );
 
         // 评级调高个股
         let levelup = KVProxy.getStaticFragment(10097).then(...handleJsonByKey(ctx, 'content'));
-        let levelupData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_levelup.json').then(...handleJs(ctx));
+        let levelupData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_levelup.json').then(
+            ...handleJs(ctx),
+        );
 
         // 机构首次关注股
         let firstfocus = KVProxy.getStaticFragment(10098).then(...handleJsonByKey(ctx, 'content'));
-        let firstfocusData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_firstfocus.json').then(...handleJs(ctx));
+        let firstfocusData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_firstfocus.json').then(
+            ...handleJs(ctx),
+        );
 
         // 机构关注度最高
         let focusest = KVProxy.getStaticFragment(10099).then(...handleJsonByKey(ctx, 'content'));
-        let focusestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_focusest.json').then(...handleJs(ctx));
+        let focusestData = KVProxy.getSsiFragment('finance.ifeng.com/app/json/zq/yb_focusest.json').then(
+            ...handleJs(ctx),
+        );
 
         // 底部合作链接
         let cooperation = KVProxy.getStaticFragment(10074).then(...handleJs(ctx, 'content'));
@@ -281,7 +291,6 @@ exports.list = {
             courier,
             playItem,
             linkList,
-            dayStockTitle,
             dayStock,
             hotSpotsTitle,
             hotSpotsSubTitle1,
@@ -365,7 +374,6 @@ exports.list = {
             courier,
             playItem,
             linkList,
-            dayStockTitle,
             dayStock,
             hotSpotsTitle,
             hotSpotsSubTitle1,
@@ -451,7 +459,6 @@ exports.list = {
             courier,
             playItem,
             linkList,
-            dayStockTitle,
             dayStock,
             hotSpotsTitle,
             hotSpotsSubTitle1,
@@ -499,7 +506,7 @@ exports.list = {
         };
 
         await ctx.html('finance_stock_index', {
-            allData
+            allData,
         });
     },
 };

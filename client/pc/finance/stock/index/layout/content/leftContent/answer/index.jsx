@@ -23,7 +23,7 @@ class Answer extends React.PureComponent {
         return (
             <div className={`${styles.answer} clearfix`} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
                 <Tab title={title} />
-                <Chip id="20019" type="recommend" title="牛人解盘列表" groupName="正文">
+                <Chip id="10163" type="static" title="牛人解盘列表" groupName="正文">
                     <AnswerList data={content.answerList} />
                 </Chip>
             </div>

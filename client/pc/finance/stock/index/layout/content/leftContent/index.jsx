@@ -17,7 +17,7 @@ class LeftContent extends React.PureComponent {
 
         return (
             <div className={styles.col_L}>
-                <Chip id="20018" type="recommend" title="头条新闻" groupName="正文" content={content.headline}>
+                <Chip id="10162" type="static" title="头条新闻" groupName="正文" content={content.headline}>
                     <Headline />
                 </Chip>
                 <div className={styles.space10} />
