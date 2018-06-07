@@ -1312,6 +1312,112 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
+Tarsapi.KVProxy.prototype.getDynamicFragment = function (ctx, id) {
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDynamicFragment(${id})`, { childOf: ctx.spanrpc });
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeInt32(1, id);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readString(0, true, TarsStream.String);
+
+            return {request:data.request, 
+                response:response,
+                span: child,
+                callInfo: `KVProxy.getDynamicFragment(${id})`,
+            };
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { 
+                request : data.request, 
+                response : response,
+                span: child,
+                callInfo: `KVProxy.getDynamicFragment(${id})`,};
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {
+            request:data.request, 
+            response:response,
+            span: child,
+            callInfo: `KVProxy.getDynamicFragment(${id})`,
+        };
+    }
+
+    return this._worker.tars_invoke('getDynamicFragment', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
+Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
+    var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDynamicFragments(${ids})`, { childOf: ctx.spanrpc });
+    var _encode = function () { 
+        var os = new TarsStream.OutputStream();
+        os.writeList(1, ids);
+        return os.getBinBuffer();
+    }
+
+    var _decode = function (data) {
+        try {
+            var response = {arguments:{}};
+            var is = new TarsStream.InputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return   = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
+
+            return {
+                request:data.request, 
+                response:response,
+                span: child,
+                callInfo: `KVProxy.getDynamicFragments(${id})`,
+            };
+        } catch (e) {
+            var response = { };
+            response.costtime      = data.request.costtime;
+            response.error         = {};
+            response.error.code    = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { 
+                request : data.request, 
+                response : response,
+                span: child,
+                callInfo: `KVProxy.getDynamicFragments(${id})`,
+            };
+        }
+    }
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error    = data.error;
+
+        throw {
+            request:data.request, 
+            response:response,
+            span: child,
+            callInfo: `KVProxy.getDynamicFragments(${id})`,
+        };
+    }
+
+    return this._worker.tars_invoke('getDynamicFragments', _encode(), arguments.length != 0?arguments[arguments.length - 1]:undefined).then(_decode, _error);
+}
+
 Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getRecommendFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
