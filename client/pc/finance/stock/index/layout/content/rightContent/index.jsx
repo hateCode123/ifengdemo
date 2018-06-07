@@ -48,15 +48,7 @@ class RightContent extends React.PureComponent {
                     <LinkList />
                 </Chip>
                 <div className={styles.box}>
-                    <Chip
-                        id="10078"
-                        type="static"
-                        title="每日论股标题"
-                        groupName="正文"
-                        content={content.dayStockTitle}>
-                        <RightSideTitle />
-                    </Chip>
-                    <Chip id="10081" type="static" title="每日论股" groupName="正文" content={content.dayStock}>
+                    <Chip id="20040" type="recommend" title="每日论股" groupName="正文" content={content.dayStock}>
                         <DayStock />
                     </Chip>
                 </div>

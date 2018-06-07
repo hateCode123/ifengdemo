@@ -83,7 +83,6 @@ class Layout extends React.PureComponent {
                 playItem: content.playItem,
                 rightSideAd: content.rightSideAd,
                 linkList: content.linkList,
-                dayStockTitle: content.dayStockTitle,
                 dayStock: content.dayStock,
             },
         };
@@ -164,9 +163,7 @@ class Layout extends React.PureComponent {
                     <div className={styles.space30} />
                     <School content={schoolData} />
                 </div>
-                <Chip id="10015" type="static" title="底部合作链接" groupName="底部" content={cooperation}>
-                    <Cooperation />
-                </Chip>
+                <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
                 <Chip id="10136" type="static" title="二维码" groupName="二维码" content={qrCode}>

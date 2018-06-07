@@ -1,26 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './index.css';
+import { rel } from '../../../../../utils/rel';
 
 class JumpLink extends React.PureComponent {
-    /**
-     * 插入 html
-     */
-    createMarkup = () => {
-        return { __html: this.props.content };
-    };
-
     /**
      * 渲染组件
      */
     render() {
-        return <div style={{ float: 'right' }} dangerouslySetInnerHTML={this.createMarkup()} />;
+        const { content } = this.props;
+
+        return (
+            <div className={styles.link_box}>
+                <div className={styles.box}>
+                    {content.map((item, index) => (
+                        <a key={index} href={item.url} target="_blank" rel={rel} title={item.title}>
+                            {item.title}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        );
     }
 }
 
 /**
  * 定义组件属性类型
  * */
-JumpLink.propTypes = { content: PropTypes.string };
+JumpLink.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

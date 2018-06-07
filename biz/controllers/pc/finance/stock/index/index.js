@@ -10,41 +10,6 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
-        // const Tars = require('@tars/stream');
-        // const ids = new Tars.List(Tars.String);
-
-        // ids.push('finance.ifeng.com/app/json/zq/yb_levelup.json' );
-        // ids.push('finance.ifeng.com/app/json/zq/fiveday_buy.json' );
-        // ids.push('finance.ifeng.com/app/json/zq/yb_focusest.json');
-
-        // ids.push('financeifengcom/app/json/zq/star_s_rankjson');
-        // ids.push('financeifengcom/app/json/zq/star_m_rankjson');
-        // ids.push('financeifengcom/app/json/zq/star_l_rankjson');
-
-        // // ids.push(10108);
-        // // ids.push(10129);
-        // // ids.push(10133);
-        // try {
-        //     let data = await KVProxy.getSsiFragments(ctx,ids)
-        //     // console.log(data);
-        //     return (ctx.body = data.response.return);
-        // } catch (error) {
-        //     console.log(error)
-        //     console.log(error.response);
-        //     return (ctx.body = 'error');
-        // }
-
-        //     const Tars = require('@tars/stream');
-        //     const ids = new Tars.List(Tars.String);
-
-        //     ids.push('finance_22005_10736_22');
-        //     ids.push('finance_22005_10736_4');
-        //     ids.push('finance_22005_10736_5');
-        //     ids.push('finance_22005_10736_6');
-        //     console.log(ids);
-        //    let data =  await KVProxy.getCustoms(ids) //.then(...handleJsonByKey(ctx, 'content'));
-        //    return ctx.body = data.response.return;
-
         let json = [
             // 页面公用导航
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
@@ -71,10 +36,10 @@ exports.list = {
             ['animationPic', 'KVProxy', 'getStaticFragment', 10085, getJsonByKey('content')],
 
             // 跳转链接
-            ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getStringByKey('content')],
+            ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20018, getStringByKey('data')],
+            ['headline', 'KVProxy', 'getStaticFragment', 10162, getJsonByKey('content')],
 
             // 要闻直播标题
             ['newsLiveTab', 'KVProxy', 'getStaticFragment', 10049, getJsonByKey('content')],
@@ -111,7 +76,7 @@ exports.list = {
             ['answerSubTab', 'KVProxy', 'getStaticFragment', 10118, getJsonByKey('content')],
 
             // 牛人解盘
-            ['answerList', 'KVProxy', 'getRecommendFragment', 20019, getStringByKey('data')],
+            ['answerList', 'KVProxy', 'getStaticFragment', 10163, getJsonByKey('content')],
 
             // 视频抓牛股标题
             ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],
@@ -158,11 +123,8 @@ exports.list = {
             // 跳转链接列表
             ['linkList', 'KVProxy', 'getStaticFragment', 10084, getJsonByKey('content')],
 
-            // 每日论股标题
-            ['dayStockTitle', 'KVProxy', 'getStaticFragment', 10078, getJsonByKey('content')],
-
             // 每日论股
-            ['dayStock', 'KVProxy', 'getStaticFragment', 10081, getStringByKey('content')],
+            ['dayStock', 'KVProxy', 'getRecommendFragment', 20040, getStringByKey('data')],
 
             // 操盘热点标题
             ['hotSpotsTitle', 'KVProxy', 'getStaticFragment', 10067, getJsonByKey('content')],
