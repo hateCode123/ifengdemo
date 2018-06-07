@@ -17,11 +17,30 @@ const {
 
 exports.list = {
     path: '/pc/finance/index',
+    domain: 'finance.ifeng.com/index.shtml',
     method: 'get',
     type: 'html',
     cache: 0,
     edit: true,
     handler: async ctx => {
+        // let jsons = [
+        //     ['customList', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
+        //     ['stockList', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson()],
+        //     ['macroList', 'KVProxy', 'getCustom', 'finance_22005_10736_24', getJson()],
+        //     ['dayNews', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
+        //     ['wemoneyList', 'KVProxy', 'getCustom', 'finance_22005_10736_26', getJson()],
+        //     ['imarketsList', 'KVProxy', 'getCustom', 'finance_22005_10736_25', getJson()],
+        //     ['financeVideo', 'KVProxy', 'getCustom', 'finance_22005_10736_28', getJson()],
+        //     ['companyList', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson()],
+        //     ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
+        // ];
+        // let getCustoms = await transfer(ctx, jsons);
+
+        // // let single = await KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx));
+        // return (ctx.body = { getCustoms });
+
+        // let data = await KVProxy.getStaticFragment(ctx, 10156).then(...handleJson(ctx));
+        // console.log(data);
         //     let arr =  [
         //         ['nav',KVProxy,'getStaticFragment',10108,handleJsonByKey(ctx, 'content')],
         //         ['search',KVProxy,'getStaticFragment',10108,handleJsonByKey(ctx, 'content')],
@@ -92,22 +111,22 @@ exports.list = {
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
 
             // 信息流首页抓取数据
-            ['customList', 'KVProxy', 'getCustom', '17007_719_68', getJson(ctx)],
+            ['customList', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
 
             // 信息流宏观抓取数据
-            ['macroList', 'KVProxy', 'getCustom', 'finance_22005_10736_24', getJson(ctx)],
+            ['macroList', 'KVProxy', 'getCustom', 'finance_22005_10736_24', getJson()],
 
             // 信息流股票抓取数据
-            ['stockList', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson(ctx)],
+            ['stockList', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson()],
 
             // 信息流imarkets 抓取数据
-            ['imarketsList', 'KVProxy', 'getCustom', 'finance_22005_10736_25', getJson(ctx)],
+            ['imarketsList', 'KVProxy', 'getCustom', 'finance_22005_10736_25', getJson()],
 
             // 信息流公司抓取数据
-            ['companyList', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson(ctx)],
+            ['companyList', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson()],
 
             // 信息流Wemoney 抓取数据
-            ['wemoneyList', 'KVProxy', 'getCustom', 'finance_22005_10736_26', getJson(ctx)],
+            ['wemoneyList', 'KVProxy', 'getCustom', 'finance_22005_10736_26', getJson()],
 
             // 理财超市
             ['market', 'KVProxy', 'getStaticFragment', 10014, getStringByKey('content')],
@@ -119,16 +138,16 @@ exports.list = {
             ['production', 'KVProxy', 'getStaticFragment', 10017, getStringByKey('content')],
 
             // 每日要闻
-            ['dayNews', 'KVProxy', 'getCustom', '17007_719_68', getJson(ctx)],
+            ['dayNews', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
 
             // 股票超市静态碎片
             ['stockMarket', 'KVProxy', 'getStaticFragment', 10018, getStringByKey('content')],
 
             // 返回连环话数据
-            ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson(ctx)],
+            ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
 
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getCustom', 'finance_22005_10736_28', getJson(ctx)],
+            ['financeVideo', 'KVProxy', 'getCustom', 'finance_22005_10736_28', getJson()],
 
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
@@ -137,9 +156,7 @@ exports.list = {
             ['qrCode', 'KVProxy', 'getStaticFragment', 10135, getJsonByKey('content')],
         ];
 
-
         let allData = await transfer(ctx, json);
-       
         await ctx.html('finance_index', {
             allData,
         });

@@ -25,8 +25,8 @@ router.get('/metrics', (ctx, next) => {
 const h = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_requests`,
     help: 'Example of a histogram',
-    labelNames: ['liriqing','error'],
-    buckets: [1, 5, 15, 50, 100, 500],
+    labelNames: ['url','method','request_time','status_code','rpc_time','parse_time','error'],
+    // buckets: [1, 5, 15, 50, 100, 500],
 });
 
 // 初始化http请求计数器

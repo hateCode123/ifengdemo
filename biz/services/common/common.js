@@ -192,33 +192,43 @@ const transfer = async (ctx, json) => {
         obj[key].ids.push(item[3]);
         obj[key].handles.push(item[4]);
     }
+    console.log(keys);
     let allp = [];
     for (const i in obj) {
         let ids = getIds(obj[i].ids);
-        allp.push(KVProxy[getAction(i)](ctx, ids));
+    
+        allp.push(KVProxy[getAction(i)](ctx, ids).then((result)=>{
+            if (config.default.statistics) {
+                ctx.rpcTimeList[1].push(result.response.costtime);
+            }
+             // jaeger trance 结束
+            if (config.default.statisticsJaeger) {
+                result.span.finish();
+            }
+            return result.response.return.value;
+        },(result)=>{
+            if (config.default.statistics) {
+                ctx.rpcTimeList[1].push(result.response.costtime);
+            }
+             // jaeger trance 结束
+             if (config.default.statisticsJaeger) {
+                result.span.finish();
+            }
+            logger.error(`Something error with: ${result.callInfo}`);
+            logger.errror(result.response.error);
+            return [];
+        }));
     }
     let data = await Promise.all(allp);
+
     let allData = {};
-
     for (const item of data) {
-        if (config.default.statistics) {
-            ctx.rpcTimeList[1].push(item.response.costtime);
-        }
-
-        allData = Object.assign(allData, item.response.return.value);
+        allData = Object.assign(allData, item);
     }
 
     for (const i in allData) {
+        console.log(keys[i],i);
         backData[keys[i]] =  funcs[i](ctx,allData[i]);
-    }
-
-    // jaeger trance 结束
-    if (config.default.statisticsJaeger) {
-
-        for (const item of data) {
-            item.span.finish();
-        }
-     
     }
 
     return backData;
@@ -227,17 +237,17 @@ const transfer = async (ctx, json) => {
 function getIds(arr) {
     let map = {
         number: Tars.Int32,
-        string: Tars.String,
-        enum: Tars.Enum,
+        string: Tars.String
     };
     let type = typeof arr[0];
-    // if((arr[0]+'').indexOf('/')>0){
-    //     type = 'string'
-    // }
     const ids = new Tars.List(map[type]);
+    console.log(arr);
+    arr = [...new Set(arr)];
+
     for (const item of arr) {
         ids.push(item);
     }
+
     return ids;
 }
 

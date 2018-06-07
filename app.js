@@ -96,15 +96,29 @@ if (config.default.statisticsProm) {
     app.use(async (ctx, next) => {
         await next();
         c.inc({ code: 200 });
-        h.observe(ctx.requestTime);
+        // h.observe(ctx.requestTime);
+        // h.set({'url':ctx.originalUrl});
+        //h.labels('status_code',ctx.status);
+    
+        h.observe(
+            {
+                url: ctx.originalUrl,
+                method: ctx.method,
+                request_time: ctx.requestTime,
+                status_code: ctx.status,
+                rpc_time: ctx.rpc_time,
+                parse_time: ctx.parse_time,
+            },
+            1,
+        );
     });
 }
 
-app.use(async (ctx, next)=>{
+app.use(async (ctx, next) => {
     logger.error(JSON.stringify(ctx.headers));
-    if(ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com')>-1){
-        ctx.url = `/finance`+ctx.url;
-        ctx.originalUrl = `/finance`+ctx.originalUrl;
+    if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('d.finance.ifeng.com') > -1) {
+        ctx.url = `/finance/d` + ctx.url;
+        ctx.originalUrl = `/finance` + ctx.originalUrl;
     }
 
     await next();
@@ -160,10 +174,16 @@ if (config.default.statistics) {
             parseTime += parseFloat(i);
         }
         parseTime = parseTime.toFixed(3);
+        // h.observe({ rpc_time: rpcTime }, 1);
+        // h.observe({ parse_time: parseTime },1);
+        ctx.rpc_time = rpcTime;
+        ctx.parse_time = parseTime;
         logger.info(
             `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
                 ctx.routerTimeEnd
-            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${ctx.parseTime.length}, ${parseTime}ms] - ${ctx.header.domain}`,
+            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${
+                ctx.parseTime.length
+            }, ${parseTime}ms] - domain: ${ctx.header.domain || ''}`,
         );
     });
 } else {
@@ -175,7 +195,6 @@ if (config.default.statistics) {
         try {
             await next();
         } catch (err) {
-            
             logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
             logger.error(err);
             if (ctx.method === 'POST') {
@@ -196,9 +215,6 @@ if (config.default.statistics) {
         logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });
 }
-
-
-
 
 // 路由重写，根据项目需要在rewrite中添加重写规则
 // app.use(rewrite);
