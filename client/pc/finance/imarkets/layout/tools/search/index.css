@@ -10,18 +10,6 @@
     border: 1px solid #fff;
     color: #fff;
     background: #64d4bb;
-    &::-webkit-input-placeholder {
-        color: #fff;
-    }
-    &::-moz-placeholder {
-        color:#fff;
-    }
-    &:-ms-input-placeholder {
-        color: #fff;
-    }
-    &:-moz-placeholder {
-        color: #fff;
-    }
 }
 .sousuo_btn {
     margin-left: -1px;

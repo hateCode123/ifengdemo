@@ -1,5 +1,5 @@
 /**
- * 日历、全球直播和搜索
+ * 日历、直播nav和搜索
  */
 
 import React, { PureComponent } from 'react';
@@ -19,6 +19,17 @@ class Tools extends PureComponent{
                     <a className={ styles.zhibo_link } href="http://finance.ifeng.com/gold/zhibo/" target="_blank">
                         <i className={ styles.earth } />
                         <span className={ styles.link_title }>全球直播</span>
+                        <i className={ styles.play } />
+                    </a>
+                    {/* 凤凰汇客厅 */}
+                    <a className={ styles.zhibo_link } href="http://finance.ifeng.com/biz/special/fhhkt/" target="_blank">
+                        <img className={ styles.fhhkt } src={ require('./feng-huang-hui-ke-ting.png') } />
+                        <i className={ styles.play } />
+                    </a>
+                    {/* 行情中心 */}
+                    <a className={ styles.zhibo_link } href="http://finance.ifeng.com/gold/zhibo/" target="_blank">
+                        <i className={ styles.chart } />
+                        <span className={ styles.link_title }>行情中心</span>
                         <i className={ styles.play } />
                     </a>
                     {/* 跳转搜索 */}
