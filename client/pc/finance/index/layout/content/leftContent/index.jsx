@@ -21,13 +21,8 @@ class LeftContent extends React.PureComponent {
                 <Chip id="20002" type="recommend" title="焦点图" groupName="正文" content={content.bannerPic}>
                     <BannerPic />
                 </Chip>
-                <Chip id="20003" type="recommend" title="头条新闻" groupName="正文" content={content.headline}>
-                    <Headline />
-                </Chip>
+                <Headline content={content.headline} rights={content.rights} limit={6} />
                 <DateNews content={content.dayNews} extraNews={content.extraNews} />
-                <Chip id="20004" type="recommend" title="推荐" groupName="正文" content={content.recommend}>
-                    <Recommend />
-                </Chip>
             </div>
         );
     }

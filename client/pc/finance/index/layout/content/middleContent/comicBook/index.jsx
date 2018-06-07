@@ -17,7 +17,7 @@ class ComicBook extends React.PureComponent {
             data.url = datas.url;
             data.thumbnails = JSON.parse(datas.thumbnails).image[0].url;
             data.title = datas.title;
-            data.rank = datas.wemediaEAccountId;
+            data.rank = '';
             data.date = datas.newsTime.split(' ')[0];
         } else {
             data.url = '#';

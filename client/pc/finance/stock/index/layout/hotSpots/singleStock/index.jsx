@@ -12,7 +12,7 @@ class SingleStock extends React.PureComponent {
     };
 
     handleMouseOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ current: index });
     };

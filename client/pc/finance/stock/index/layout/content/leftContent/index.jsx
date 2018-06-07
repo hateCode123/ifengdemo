@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Headline from './headline/';
-import Broadcast from './broadcast/';
 import NewsLive from './newsLive/';
 import News from './news/';
 import Answer from './answer/';
@@ -22,8 +21,6 @@ class LeftContent extends React.PureComponent {
                     <Headline />
                 </Chip>
                 <div className={styles.space10} />
-                <Broadcast content={content.broadcast} />
-                <div className={styles.space20} />
                 <NewsLive content={content.newsLive} />
                 <div className={styles.space10} />
                 <News content={content.news} />

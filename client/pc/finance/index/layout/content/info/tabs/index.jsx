@@ -34,7 +34,7 @@ class Tabs extends React.PureComponent {
 
     handleClick = e => {
         const { handleTabsChange } = this.props;
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
         const tabsTop = this.tabsTop;
 
         handleTabsChange(index, tabsTop);
@@ -50,7 +50,11 @@ class Tabs extends React.PureComponent {
         return (
             <ul id="tabs" className={`${styles.tabs} ${isFixed ? styles.fix : ''}`}>
                 {content.map((item, index) => (
-                    <li key={index} className={index === current ? styles.current : ''} onClick={this.handleClick}>
+                    <li
+                        key={index}
+                        className={index === current ? styles.current : ''}
+                        data-index={index}
+                        onClick={this.handleClick}>
                         {item}
                     </li>
                 ))}

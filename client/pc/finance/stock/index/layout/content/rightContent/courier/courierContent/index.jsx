@@ -13,19 +13,19 @@ class CourierContent extends React.PureComponent {
      * 处理鼠标浮动
      */
     handleTabsOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ current: index });
     };
 
     handleListEnter = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ currentCol: index });
     };
 
     handleListLeave = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ currentCol: index });
     };

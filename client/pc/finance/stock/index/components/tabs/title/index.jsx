@@ -6,7 +6,7 @@ import { rel } from '../../../../../../utils/rel';
 class Title extends React.PureComponent {
     handleMouseOver = e => {
         const { content, handleTabsChange } = this.props;
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         if (content.length > 1) {
             handleTabsChange(index);

@@ -48,7 +48,7 @@ class FundsFlow extends React.PureComponent {
      */
     handleTabsChange = e => {
         const { tabs } = this.state;
-        const val = Number(e.target.attributes['data-index'].value);
+        const val = Number(e.currentTarget.attributes['data-index'].value);
 
         this.getData(tabs[val].type);
 

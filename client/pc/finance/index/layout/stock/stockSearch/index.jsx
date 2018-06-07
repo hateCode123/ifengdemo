@@ -37,7 +37,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleMouseOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ current: index });
     };
@@ -53,7 +53,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleChange = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({ searchTxt: val });
 
@@ -103,7 +103,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleFocus = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         this.setState({
             searchTxt: val === '代码/拼音' ? '' : val,
@@ -112,7 +112,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleBlur = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         setTimeout(() => {
             this.setState({

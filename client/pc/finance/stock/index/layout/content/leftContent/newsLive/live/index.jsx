@@ -195,7 +195,7 @@ class Live extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-Live.propTypes = { content: PropTypes.object };
+Live.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

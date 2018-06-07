@@ -42,14 +42,14 @@ class CattleStocks extends React.PureComponent {
     };
 
     handleMouseOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ current: index });
     };
 
     handleChange = async e => {
         try {
-            const val = e.target.value;
+            const val = e.currentTarget.value;
             const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
                 data: {
                     t: 'all',

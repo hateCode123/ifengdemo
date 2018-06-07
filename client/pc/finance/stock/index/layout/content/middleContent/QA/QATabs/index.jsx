@@ -5,7 +5,7 @@ import styles from './index.css';
 class Qa extends React.PureComponent {
     handleMouseOver = e => {
         const { handleMouseOver } = this.props;
-        const val = Number(e.target.attributes['data-index'].value);
+        const val = Number(e.currentTarget.attributes['data-index'].value);
 
         handleMouseOver(val);
     };

@@ -31,13 +31,13 @@ class StockSearch extends React.PureComponent {
     };
 
     handleSelect = e => {
-        const selectVal = e.target.value;
+        const selectVal = e.currentTarget.value;
 
         this.setState({ type: selectVal });
     };
 
     handleMouseOver = e => {
-        const index = Number(e.target.attributes['data-index'].value);
+        const index = Number(e.currentTarget.attributes['data-index'].value);
 
         this.setState({ current: index });
     };
@@ -53,7 +53,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleKeyup = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (val !== '') {
             this.getList(val);
@@ -101,7 +101,7 @@ class StockSearch extends React.PureComponent {
     };
 
     handleFocus = e => {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
 
         if (val) {
             this.getList(val);

@@ -1,16 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const {
-    KVProxy,
-    SearchProxy
-} = require('../../../../providers/ucmsapiProxy');
-const {
-    jsonParse,
-    handleData,
-    handleJson,
-    handleJsonByKey,
-    handleJs
-} = require('../../../../services/common/common');
+const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
+const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/index',
@@ -40,7 +31,13 @@ exports.list = {
         // 头条新闻
         let headline = KVProxy.getRecommendFragment(20003).then(...handleJsonByKey(ctx, 'data'));
 
-        // 头条新闻多拼新闻
+        // 客户权益
+        let rights = KVProxy.getStaticFragment(10018).then(...handleJs(ctx, 'content'));
+
+        // 今日要闻
+        let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
+
+        // 今日要闻多拼新闻
         let extraNews = KVProxy.getStaticFragment(10011).then(...handleJs(ctx, 'content'));
 
         // 推荐新闻
@@ -59,7 +56,7 @@ exports.list = {
         let talkingList = KVProxy.getRecommendFragment(20005).then(...handleJsonByKey(ctx, 'data'));
 
         // 财商教育新闻列表
-        let financeList = KVProxy.getRecommendFragment(20006).then(...handleJsonByKey(ctx, 'data'));
+        let financeList = KVProxy.getStaticFragment(10161).then(...handleJsonByKey(ctx, 'content'));
 
         // 炒股大赛新闻列表
         let stocksList = KVProxy.getRecommendFragment(20007).then(...handleJsonByKey(ctx, 'data'));
@@ -101,13 +98,7 @@ exports.list = {
         let courier = KVProxy.getStaticFragment(10016).then(...handleJsonByKey(ctx, 'content'));
 
         // 投顾产品
-        let production = KVProxy.getStaticFragment(10017).then(...handleJs(ctx, 'content'));
-
-        // 每日要闻
-        let dayNews = KVProxy.getCustom('17007_719_68').then(...handleJson(ctx));
-
-        // 股票超市静态碎片
-        let stockMarket = KVProxy.getStaticFragment(10018).then(...handleJs(ctx, 'content'));
+        let production = KVProxy.getStaticFragment(10017).then(...handleJsonByKey(ctx, 'content'));
 
         // 返回连环话数据
         let comicBook = KVProxy.getCustom('finance_22005_10736_27').then(...handleJson(ctx));
@@ -151,7 +142,7 @@ exports.list = {
             courier,
             production,
             dayNews,
-            stockMarket,
+            rights,
             comicBook,
             financeVideo,
             footer,
@@ -186,7 +177,7 @@ exports.list = {
             courier,
             production,
             dayNews,
-            stockMarket,
+            rights,
             comicBook,
             financeVideo,
             footer,
@@ -223,7 +214,7 @@ exports.list = {
             courier,
             production,
             dayNews,
-            stockMarket,
+            rights,
             comicBook,
             financeVideo,
             footer,
@@ -231,7 +222,7 @@ exports.list = {
         };
 
         await ctx.html('finance_index', {
-            allData
+            allData,
         });
     },
 };
