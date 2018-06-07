@@ -104,7 +104,7 @@ exports.list = {
             production: KVProxy.getStaticFragment(ctx, 10017).then(...handleJsonByKey(ctx, 'content')),
 
             // 客户权益
-            rights: KVProxy.getStaticFragment(ctx, 10018).then(...handleJs(ctx, 'content')),
+            rights: KVProxy.getStaticFragment(ctx, 10018).then(...handleJsonByKey(ctx, 'content')),
 
             // 每日要闻
             dayNews: KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx)),
