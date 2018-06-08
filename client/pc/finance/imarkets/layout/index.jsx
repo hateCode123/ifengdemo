@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
+import Ad from '../../../components/ad';
 import Header from './header';
 import Logo from './logo';
 import Tools from './tools';
@@ -10,6 +11,7 @@ import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from './news-stream';
 import Question from './question';
+import ArticleRankings from './article-rankings';
 
 class Layout extends PureComponent {
     render() {
@@ -42,6 +44,10 @@ class Layout extends PureComponent {
                     <div className={ styles.main_right }>
                         {/* 在线答疑 */}
                         <Question />
+                        {/* 广告 */}
+                        <Ad styleName={ styles.ad1 } />
+                        {/* 文章点击排行 */}
+                        <ArticleRankings />
                     </div>
                 </div>
             </Fragment>
