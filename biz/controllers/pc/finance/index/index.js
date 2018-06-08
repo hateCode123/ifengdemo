@@ -115,6 +115,7 @@ exports.list = {
         ];
 
         let allData = await transfer(ctx, json);
+        console.log(allData);
         await ctx.html('finance_index', {
             allData,
         });

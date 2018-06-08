@@ -26,15 +26,12 @@
 
     </script>
     <!-- 硬广 -->
-    {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{.}}" rel="stylesheet"> {{/each}}
+
 </head>
 
 <body>
     <div id="root"></div>
-    {{#each htmlWebpackPlugin.files.chunks}}
-    <script src="{{entry}}" type="text/javascript"></script>
-    {{/each}}
+
 </body>
 
 </html>
