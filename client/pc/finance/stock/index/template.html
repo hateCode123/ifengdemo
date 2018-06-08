@@ -28,10 +28,7 @@
             headline: allData.headline,
             newsLiveTab: allData.newsLiveTab,
             newsLiveTabLink: allData.newsLiveTabLink,
-            stockNews1: allData.stockNews1,
-            stockNews2: allData.stockNews2,
-            stockNews3: allData.stockNews3,
-            broadcast: allData.broadcast,
+            stockNews: allData.stockNews,
             liveLogo: allData.liveLogo,
             newsTab: allData.newsTab,
             newsSubTab: allData.newsSubTab,
@@ -135,16 +132,14 @@
             qrCode: allData.qrCode,
         };
 
-    </script>
-    {{#each htmlWebpackPlugin.files.css}}
+    </script> {{#each htmlWebpackPlugin.files.css}}
     <link href="{{.}}" rel="stylesheet"> {{/each}}
 </head>
 
 <body>
     <div id="root"></div>
     {{#each htmlWebpackPlugin.files.chunks}}
-    <script src="{{entry}}" type="text/javascript"></script>
-    {{/each}}
+    <script src="{{entry}}" type="text/javascript"></script> {{/each}}
 </body>
 
 </html>

@@ -45,9 +45,7 @@ class Layout extends React.PureComponent {
                 newsLive: {
                     newsLiveTab: content.newsLiveTab,
                     newsLiveTabLink: content.newsLiveTabLink,
-                    stockNews1: content.stockNews1,
-                    stockNews2: content.stockNews2,
-                    stockNews3: content.stockNews3,
+                    stockNews: content.stockNews,
                     liveLogo: content.liveLogo,
                 },
                 news: {

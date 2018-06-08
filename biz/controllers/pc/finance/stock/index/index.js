@@ -50,15 +50,8 @@ exports.list = {
             // 直播 Logo
             ['liveLogo', 'KVProxy', 'getStaticFragment', 10052, getJsonByKey('content')],
 
-            // 轮播新闻
-            ['broadcast', 'KVProxy', 'getCustom', 'finance_22005_10736_22', getJson()],
-
             // 股市要闻
-            ['stockNews1', 'KVProxy', 'getCustom', 'finance_22005_10736_4', getJson()],
-
-            ['stockNews2', 'KVProxy', 'getCustom', 'finance_22005_10736_5', getJson()],
-
-            ['stockNews3', 'KVProxy', 'getCustom', 'finance_22005_10736_6', getJson()],
+            ['stockNews', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson()],
 
             // 公司要闻标题
             ['newsTab', 'KVProxy', 'getStaticFragment', 10050, getJsonByKey('content')],
@@ -67,7 +60,7 @@ exports.list = {
             ['newsSubTab', 'KVProxy', 'getStaticFragment', 10117, getJsonByKey('content')],
 
             // 公司要闻
-            ['news', 'KVProxy', 'getCustom', 'finance_22005_10736_23', getJson()],
+            ['news', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson()],
 
             // 牛人解盘标题
             ['answerTab', 'KVProxy', 'getStaticFragment', 10051, getJsonByKey('content')],

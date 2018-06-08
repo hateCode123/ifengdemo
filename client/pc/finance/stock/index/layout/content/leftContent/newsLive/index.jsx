@@ -21,6 +21,16 @@ class NewsLive extends React.PureComponent {
         const { current } = this.state;
         const { content } = this.props;
 
+        let stockNews = [];
+
+        if (content.stockNews) {
+            stockNews = content.stockNews.list.slice(0, 18).map(item => ({
+                id: item.id,
+                url: item.url,
+                title: item.title,
+            }));
+        }
+
         const title = {
             id: '10049',
             type: 'static',
@@ -48,9 +58,9 @@ class NewsLive extends React.PureComponent {
                 {current === 0 ? (
                     <div>
                         <div className={styles.stock_news}>
-                            <StockNews content={content.stockNews1} />
-                            <StockNews content={content.stockNews2} />
-                            <StockNews content={content.stockNews3} />
+                            <StockNews content={stockNews.slice(0, 6)} />
+                            <StockNews content={stockNews.slice(6, 12)} />
+                            <StockNews content={stockNews.slice(12, 18)} />
                         </div>
                     </div>
                 ) : (
