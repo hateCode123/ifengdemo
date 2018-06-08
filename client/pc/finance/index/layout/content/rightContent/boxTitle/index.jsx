@@ -4,6 +4,12 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class BoxTitle extends React.PureComponent {
+    static propTypes = {
+        url: PropTypes.string,
+        title: PropTypes.string,
+        children: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -23,19 +29,4 @@ class BoxTitle extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-BoxTitle.propTypes = {
-    url: PropTypes.string,
-    title: PropTypes.string,
-    children: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-BoxTitle.defaultProps = {};
-
-export { BoxTitle };
 export default BoxTitle;

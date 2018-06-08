@@ -177,15 +177,4 @@ class BottomAffix extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-BottomAffix.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-BottomAffix.defaultProps = {};
-
-export { BottomAffix };
 export default BottomAffix;

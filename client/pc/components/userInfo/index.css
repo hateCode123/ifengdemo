@@ -46,7 +46,7 @@
         }
         & .login_option {
             color: #004276;
-            background: url('./spritesize47_w1000_h2000.png') no-repeat;
+            background: url('./spritesize.png') no-repeat;
             padding: 5px 8px;
             display: block;
             float: left;
@@ -78,7 +78,7 @@
         z-index: 99;
         & li {
             padding: 7px 0 10px;
-            background: red url('./spritesize47_w1000_h2000.png') no-repeat -500px -68px;
+            background: red url('./spritesize.png') no-repeat -500px -68px;
             & a {
                 color: #333;
             }

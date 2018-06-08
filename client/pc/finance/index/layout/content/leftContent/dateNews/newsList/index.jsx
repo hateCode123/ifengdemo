@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 
 class NewsList extends React.PureComponent {
+    static propTypes = {
+        data: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -25,15 +29,4 @@ class NewsList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-NewsList.propTypes = { data: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-NewsList.defaultProps = {};
-
-export { NewsList };
 export default NewsList;

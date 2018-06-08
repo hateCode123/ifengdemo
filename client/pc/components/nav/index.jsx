@@ -7,6 +7,11 @@ import { rel } from '../../utils/rel';
  * 定义 Nav 组件
  */
 class Nav extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        limit: PropTypes.number,
+    };
+
     /**
      * 渲染组件
      */
@@ -50,19 +55,6 @@ class Nav extends React.PureComponent {
         return [nav, navMore];
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-Nav.propTypes = {
-    content: PropTypes.array,
-    limit: PropTypes.number,
-};
-
-/**
- * 定义组件默认属性
- * */
-Nav.defaultProps = {};
 
 export { Nav };
 export default Nav;

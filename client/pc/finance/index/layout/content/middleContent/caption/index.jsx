@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Caption extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -36,24 +40,10 @@ class Caption extends React.PureComponent {
                             {content[0].title}
                         </a>
                     </h3>
-                    <p className={styles.abstract}>{content[0].abstract}</p>
                 </div>
             </div>
         );
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Caption.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Caption.defaultProps = {};
-
-export { Caption };
 export default Caption;

@@ -1,12 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 import { jsonp } from '@ifeng/ui_base';
 
 class Topic extends React.PureComponent {
-    state = { topic: '' };
+    state = {
+        topic: '',
+        titleLink: '',
+    };
 
     /**
      * 请求 Topic
@@ -37,7 +39,10 @@ class Topic extends React.PureComponent {
                 jsonpCallback: 'setNewCont',
             });
 
-            this.setState({ topic: data[0].title[0] });
+            this.setState({
+                topic: data[0].title[0],
+                titleLink: data[0].title_link,
+            });
         } catch (e) {
             console.log(e);
         }
@@ -53,13 +58,13 @@ class Topic extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { topic } = this.state;
+        const { topic, titleLink } = this.state;
 
         return (
             <div className={styles.time}>
                 <ul className={styles.RunTopic}>
                     <li>
-                        <a href="//finance.ifeng.com/gold/zhibo/" target="_blank" rel={rel} title={topic}>
+                        <a href={titleLink} target="_blank" rel={rel} title={topic}>
                             <span dangerouslySetInnerHTML={this.createMarkup()} />
                         </a>
                     </li>
@@ -69,15 +74,4 @@ class Topic extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Topic.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-Topic.defaultProps = {};
-
-export { Topic };
 export default Topic;

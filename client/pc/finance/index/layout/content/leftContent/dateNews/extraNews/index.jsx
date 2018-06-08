@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ExtraNews extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.string,
+    };
+
     /**
      * 插入 html
      */
@@ -17,15 +21,4 @@ class ExtraNews extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ExtraNews.propTypes = { content: PropTypes.string };
-
-/**
- * 定义组件默认属性
- * */
-ExtraNews.defaultProps = {};
-
-export { ExtraNews };
 export default ExtraNews;

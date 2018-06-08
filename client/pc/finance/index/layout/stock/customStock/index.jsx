@@ -34,48 +34,52 @@ class CustomStock extends React.PureComponent {
                 });
             });
 
-            const data = await jsonp('//apiapp.finance.ifeng.com/mystock/get', {
-                num: 2,
-            });
+            const isLogin = auth.isLogin();
 
-            const nameList = data.stockinfo.map(item => item.name);
-
-            const codeList = data.stockinfo.map(item => item.code);
-
-            const result = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: codeList.join(','),
-                    f: 'json',
-                    e: 'getStock(json_q)',
-                },
-                jsonpCallback: 'getStock',
-            });
-
-            const customStock = [];
-
-            codeList.forEach((item, index) => {
-                let style = '';
-
-                if (result[item][2] > 0) {
-                    style = 'red';
-                } else if (result[item][2] < 0) {
-                    style = 'green';
-                } else {
-                    style = 'black';
-                }
-
-                customStock.push({
-                    url: `//finance.ifeng.com/app/hq/stock/${item}`,
-                    name: nameList[index],
-                    price: result[item][0],
-                    index: result[item][2],
-                    percent: result[item][3],
-                    style,
-                    report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${item}`,
+            if (isLogin) {
+                const data = await jsonp('//apiapp.finance.ifeng.com/mystock/get', {
+                    num: 2,
                 });
-            });
 
-            this.setState({ customStock });
+                const nameList = data.stockinfo.map(item => item.name);
+
+                const codeList = data.stockinfo.map(item => item.code);
+
+                const result = await jsonp('//hq.finance.ifeng.com/q.php', {
+                    data: {
+                        l: codeList.join(','),
+                        f: 'json',
+                        e: 'getStock(json_q)',
+                    },
+                    jsonpCallback: 'getStock',
+                });
+
+                const customStock = [];
+
+                codeList.forEach((item, index) => {
+                    let style = '';
+
+                    if (result[item][2] > 0) {
+                        style = 'red';
+                    } else if (result[item][2] < 0) {
+                        style = 'green';
+                    } else {
+                        style = 'black';
+                    }
+
+                    customStock.push({
+                        url: `//finance.ifeng.com/app/hq/stock/${item}`,
+                        name: nameList[index],
+                        price: result[item][0],
+                        index: result[item][2],
+                        percent: result[item][3],
+                        style,
+                        report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${item}`,
+                    });
+                });
+
+                this.setState({ customStock });
+            }
         } catch (e) {
             console.log(e);
         }

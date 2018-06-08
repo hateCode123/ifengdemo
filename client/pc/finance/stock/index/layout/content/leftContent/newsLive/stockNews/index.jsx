@@ -11,9 +11,9 @@ class StockNews extends React.PureComponent {
 
         return (
             <ul className={styles.list}>
-                {content.list.map((item, index) => (
-                    <li key={index}>
-                        <a href={item.commentUrl}>{item.title}</a>
+                {content.map(item => (
+                    <li key={item.id}>
+                        <a href={item.url}>{item.title}</a>
                     </li>
                 ))}
             </ul>
@@ -24,7 +24,7 @@ class StockNews extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-StockNews.propTypes = { content: PropTypes.object };
+StockNews.propTypes = { content: PropTypes.array };
 
 /**
  * 定义组件默认属性

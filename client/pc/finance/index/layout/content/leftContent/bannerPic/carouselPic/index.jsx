@@ -4,12 +4,22 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 
 class CarouselPic extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        currentPage: PropTypes.number,
+    };
+
     /**
      * 渲染组件
      */
     render() {
         const { content, currentPage } = this.props;
         const picData = content[currentPage];
+
+        if (picData.thumbnails && JSON.parse(picData.thumbnails).image[0]) {
+            picData.thumbnail = JSON.parse(picData.thumbnails).image[0].url;
+        }
+
         let dotList = '';
 
         const carouselPic = [
@@ -25,6 +35,7 @@ class CarouselPic extends React.PureComponent {
                 </p>
             </div>,
         ];
+
         if (content.length > 1) {
             dotList = content.map((item, index) => (
                 <li key={index} className={index === currentPage ? styles.current : ''} />
@@ -41,18 +52,4 @@ class CarouselPic extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CarouselPic.propTypes = {
-    content: PropTypes.array,
-    currentPage: PropTypes.number,
-};
-
-/**
- * 定义组件默认属性
- * */
-CarouselPic.defaultProps = {};
-
-export { CarouselPic };
 export default CarouselPic;

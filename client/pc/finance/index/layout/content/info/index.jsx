@@ -7,6 +7,10 @@ import ExtraContentList from './extraContentList';
 import Ad from '../../../../../components/ad';
 
 class Info extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
@@ -92,15 +96,4 @@ class Info extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Info.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Info.defaultProps = {};
-
-export { Info };
 export default Info;

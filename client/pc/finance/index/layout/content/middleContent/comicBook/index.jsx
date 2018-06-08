@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class ComicBook extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -15,13 +19,16 @@ class ComicBook extends React.PureComponent {
             const datas = content.list[0];
 
             data.url = datas.url;
-            data.thumbnails = JSON.parse(datas.thumbnails).image[0].url;
+            data.thumbnails =
+                datas.thumbnails && JSON.parse(datas.thumbnails).image[0]
+                    ? JSON.parse(datas.thumbnails).image[0].url
+                    : '';
             data.title = datas.title;
             data.rank = '';
             data.date = datas.newsTime.split(' ')[0];
         } else {
-            data.url = '#';
-            data.thumbnails = '#';
+            data.url = '';
+            data.thumbnails = '';
             data.title = '';
             data.rank = '';
             data.date = '';
@@ -51,15 +58,4 @@ class ComicBook extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ComicBook.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-ComicBook.defaultProps = {};
-
-export { ComicBook };
 export default ComicBook;

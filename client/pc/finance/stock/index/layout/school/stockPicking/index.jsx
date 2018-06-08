@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
 import RecommendStock from './recommendStock/';
 import Target from './target';
 import Rating from './rating/';
@@ -9,6 +8,11 @@ import FirstAttention from './firstAttention/';
 import HighestAttention from './highestAttention';
 
 class StockPicking extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         current: 0,
     };
@@ -60,18 +64,4 @@ class StockPicking extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-StockPicking.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-StockPicking.defaultProps = {};
-
-export { StockPicking };
 export default StockPicking;

@@ -4,6 +4,11 @@ import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 
 class HeadTitle extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        children: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -34,18 +39,4 @@ class HeadTitle extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-HeadTitle.propTypes = {
-    content: PropTypes.array,
-    children: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-HeadTitle.defaultProps = {};
-
-export { HeadTitle };
 export default HeadTitle;

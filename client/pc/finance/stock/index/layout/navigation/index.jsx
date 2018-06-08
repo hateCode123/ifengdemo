@@ -4,9 +4,12 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Nav from './nav/';
 import SubNav from './subNav/';
-import { rel } from '../../../../../utils/rel';
 
 class Navigation extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -26,15 +29,4 @@ class Navigation extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Navigation.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Navigation.defaultProps = {};
-
-export { Navigation };
 export default Navigation;

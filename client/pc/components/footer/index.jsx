@@ -7,6 +7,10 @@ import { rel } from '../../utils/rel';
  * 定义 Footer 组件
  */
 class Footer extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -35,15 +39,4 @@ class Footer extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Footer.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Footer.defaultProps = {};
-
-export { Footer };
 export default Footer;

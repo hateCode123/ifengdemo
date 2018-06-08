@@ -5,6 +5,10 @@ import Chip from 'Chip';
 import { rel } from '../../../../../../utils/rel';
 
 class Industry extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         current: 0,
         max: 8,
@@ -102,17 +106,4 @@ class Industry extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Industry.propTypes = {
-    content: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-Industry.defaultProps = {};
-
-export { Industry };
 export default Industry;

@@ -11,10 +11,14 @@ class CarouselPic extends React.PureComponent {
         const { content, currentPage } = this.props;
         const picData = content[currentPage];
 
+        if (picData.thumbnails && JSON.parse(picData.thumbnails).image[0]) {
+            picData.thumbnail = JSON.parse(picData.thumbnails).image[0].url;
+        }
+
         const carouselPic = [
             <div key={picData.title} className={styles.bigPic}>
                 <a href={picData.url} className={styles.pic_img} target="_blank" rel={rel}>
-                    <img src={picData.src} width="300" height="170" className={styles.trans} />
+                    <img src={picData.thumbnail} width="300" height="170" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>
@@ -24,6 +28,7 @@ class CarouselPic extends React.PureComponent {
                 </p>
             </div>,
         ];
+
         const dotList = content.map((item, index) => (
             <li key={index} className={index === currentPage ? styles.current : ''} />
         ));

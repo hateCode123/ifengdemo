@@ -6,13 +6,16 @@ import NewsList from './newsList/';
 import ExtraNews from './extraNews/';
 
 class DateNews extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        extraNews: PropTypes.string,
+    };
+
     /**
      * 渲染组件
      */
     render() {
         const { content, extraNews } = this.props;
-
-        console.log(content);
 
         return (
             <div className={styles.box}>
@@ -35,18 +38,4 @@ class DateNews extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-DateNews.propTypes = {
-    content: PropTypes.array,
-    extraNews: PropTypes.string,
-};
-
-/**
- * 定义组件默认属性
- * */
-DateNews.defaultProps = {};
-
-export { DateNews };
 export default DateNews;

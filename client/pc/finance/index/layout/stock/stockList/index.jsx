@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class StockList extends React.PureComponent {
+    static propTypes = {
+        current: PropTypes.number,
+        handleTabsChange: PropTypes.func,
+    };
+
     handleMouseOver = e => {
         const index = Number(e.currentTarget.attributes['data-index'].value);
         const { handleTabsChange } = this.props;
@@ -33,18 +38,4 @@ class StockList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-StockList.propTypes = {
-    current: PropTypes.number,
-    handleTabsChange: PropTypes.func,
-};
-
-/**
- * 定义组件默认属性
- * */
-StockList.defaultProps = {};
-
-export { StockList };
 export default StockList;

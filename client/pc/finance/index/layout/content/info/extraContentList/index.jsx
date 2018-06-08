@@ -6,6 +6,10 @@ import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
 
 class ExtraContentList extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         isOver: false,
         counts: [],
@@ -142,15 +146,4 @@ class ExtraContentList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ExtraContentList.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-ExtraContentList.defaultProps = {};
-
-export { ExtraContentList };
 export default ExtraContentList;

@@ -12,6 +12,10 @@ import StarAnalyst from './starAnalyst/';
 import StockPicking from './stockPicking/';
 
 class School extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -109,15 +113,4 @@ class School extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-School.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-School.defaultProps = {};
-
-export { School };
 export default School;

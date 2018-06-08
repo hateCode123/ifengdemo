@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class Tabs extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        current: PropTypes.number,
+        handleTabsChange: PropTypes.func,
+    };
+
     state = {
         isFixed: false,
     };
@@ -63,19 +69,4 @@ class Tabs extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Tabs.propTypes = {
-    content: PropTypes.array,
-    current: PropTypes.number,
-    handleTabsChange: PropTypes.func,
-};
-
-/**
- * 定义组件默认属性
- * */
-Tabs.defaultProps = {};
-
-export { Tabs };
 export default Tabs;

@@ -5,6 +5,10 @@ import BoxTitle from '../boxTitle';
 import { rel } from '../../../../../../utils/rel';
 
 class Courier extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         types: {
             指数型: 'risk',
@@ -133,15 +137,4 @@ class Courier extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Courier.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Courier.defaultProps = {};
-
-export { Courier };
 export default Courier;

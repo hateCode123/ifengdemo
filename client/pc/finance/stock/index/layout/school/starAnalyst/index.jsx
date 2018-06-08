@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { rel } from '../../../../../../utils/rel';
 
 class StarAnalyst extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         current: 0,
     };
@@ -95,18 +99,4 @@ class StarAnalyst extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-StarAnalyst.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-StarAnalyst.defaultProps = {};
-
-export { StarAnalyst };
 export default StarAnalyst;

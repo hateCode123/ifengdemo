@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import styles from './index.css';
 import CarouselPic from './carouselPic/';
 
 class FinanceVideo extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         currentPage: 0,
         slideShow: false,
@@ -60,7 +63,7 @@ class FinanceVideo extends React.PureComponent {
 
         return (
             <div className={styles.financeVideo} onMouseEnter={this.bannerOver} onMouseLeave={this.bannerOver}>
-                <CarouselPic content={content} currentPage={currentPage} />
+                <CarouselPic content={content.data.slice(0, 3)} currentPage={currentPage} />
                 <div className={slideShow ? styles.prevSlide : styles.hidden} onClick={this.handleLeftClick}>
                     <a>
                         <div className={styles.left} />
@@ -78,15 +81,4 @@ class FinanceVideo extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-FinanceVideo.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-FinanceVideo.defaultProps = {};
-
-export { FinanceVideo };
 export default FinanceVideo;

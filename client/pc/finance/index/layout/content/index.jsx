@@ -8,6 +8,10 @@ import RightContent from './rightContent';
 import Info from './info';
 
 class Content extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -31,15 +35,4 @@ class Content extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Content.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Content.defaultProps = {};
-
-export { Content };
 export default Content;

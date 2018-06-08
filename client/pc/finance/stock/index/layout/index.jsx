@@ -18,6 +18,10 @@ import QrCode from './qrCode/';
 import BottomAffix from './bottomAffix/';
 
 class Layout extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         /**
          * 组件分发数据
@@ -45,9 +49,7 @@ class Layout extends React.PureComponent {
                 newsLive: {
                     newsLiveTab: content.newsLiveTab,
                     newsLiveTabLink: content.newsLiveTabLink,
-                    stockNews1: content.stockNews1,
-                    stockNews2: content.stockNews2,
-                    stockNews3: content.stockNews3,
+                    stockNews: content.stockNews,
                     liveLogo: content.liveLogo,
                 },
                 news: {
@@ -176,15 +178,4 @@ class Layout extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Layout.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Layout.defaultProps = {};
-
-export { Layout };
 export default Layout;
