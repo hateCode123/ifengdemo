@@ -11,11 +11,8 @@ import SubNavigation from './subnav/';
 
 import TopLinkTable from './topLinkTable/';
 import Market from './market/';
-
-// import Collapse from './collapse/';
 import Slider from './slider/';
 import NewsListDownSlider from './newsListDownSlider/';
-import NewsListLeft from './newsListLeft/';
 
 import JueJin from './juejin/';
 import TaoJin from './taojin/';
@@ -255,6 +252,8 @@ class Layout extends React.PureComponent {
             topCollapse: content.topCollapse,
         };
 
+        const slider = content.slider || [];
+
         return (
             <div>
                 <Header content={headerData} />
@@ -268,9 +267,9 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
-                        <Slider content={content.slider} />
-                        <NewsListDownSlider content={content.newsListDownSlider} />
-                        <NewsListLeft content={content.newsListLeft} />
+                        <Slider content={slider} />
+                        <NewsListDownSlider content={content.newsListDownSlider || []} />
+                     
                     </div>
                     <div className={style.l_right}>
                         <div className="clearfix">

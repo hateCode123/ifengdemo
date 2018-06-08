@@ -265,8 +265,14 @@ function getJson(key) {
 function getJsonByKey(key) {
     return function(ctx, data) {
         let json = jsonParse(data, ctx);
-        json = jsonParse(json[key], ctx);
-        return json;
+        try {
+            json = jsonParse(json[key], ctx);
+            return json;
+        } catch (error) {
+            console.log(error)
+        }
+        return json[key];
+       
     };
 }
 
@@ -288,6 +294,7 @@ function getAction(action) {
         'KVProxy.getStaticFragment': 'getStaticFragments',
         'KVProxy.getStructuredFragment': 'getStructuredFragments',
         'KVProxy.getVideo': 'getVideos',
+        'KVProxy.getDynamicFragment': 'getDynamicFragments',
     };
     return key[action];
 }
