@@ -16,7 +16,7 @@ const Timers = require('./biz/common/utils/timers');
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
-// const prevent = require('./biz/common/prevent');
+const prevent = require('./biz/common/prevent');
 const _ = require('lodash');
 // 普罗米修斯
 const { c, p_request, p_rpc, p_parse, p_rander, router } = require('./biz/common/prom');
@@ -126,7 +126,7 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-// app.use(prevent);
+
 
 // 本地统计 开关
 if (config.default.statistics) {
@@ -217,6 +217,7 @@ if (config.default.statistics) {
         logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });
 }
+app.use(prevent);
 
 // 路由重写，根据项目需要在rewrite中添加重写规则
 // app.use(rewrite);
