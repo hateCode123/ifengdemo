@@ -53,7 +53,6 @@ class Layout extends React.PureComponent {
             info: content.info,
             middleAd: content.middleAd,
             rightContent: {
-                titleAd: content.titleAd,
                 asideAd1: content.asideAd1,
                 asideAd2: content.asideAd2,
                 asideAd3: content.asideAd3,

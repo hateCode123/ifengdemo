@@ -61,14 +61,9 @@ class FinanceVideo extends React.PureComponent {
         const { currentPage, slideShow } = this.state;
         const { content } = this.props;
 
-        const data = content.data.slice(0, 3).map(item => ({
-            url: item.cmppUrl,
-            title: item.title,
-        }));
-
         return (
             <div className={styles.financeVideo} onMouseEnter={this.bannerOver} onMouseLeave={this.bannerOver}>
-                <CarouselPic content={data} currentPage={currentPage} />
+                <CarouselPic content={content.data.slice(0, 3)} currentPage={currentPage} />
                 <div className={slideShow ? styles.prevSlide : styles.hidden} onClick={this.handleLeftClick}>
                     <a>
                         <div className={styles.left} />

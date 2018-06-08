@@ -62,9 +62,6 @@ exports.list = {
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getStringByKey('data')],
 
-            // 标题广告
-            ['titleAd', 'KVProxy', 'getStaticFragment', 10012, getStringByKey('content')],
-
             // 研究院
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
 
