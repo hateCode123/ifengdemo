@@ -30,7 +30,7 @@ exports.financeWemoney = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
     // 搜索
             ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
-            ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getJsonByKey('data')],
+            ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getStringByKey('data')],
             // 境内 权益
             ['jingneiQuanyiHotFunds', 'KVProxy', 'getCustom', 'finance_22005_516_1293', getJson()],
             // 境内 货币
@@ -48,7 +48,7 @@ exports.financeWemoney = {
             // 热点推荐 货币型
             ['rediantuijianTableMoney', 'KVProxy', 'getCustom', 'finance_22005_516_1300', getJson()],
 
-            ['slider', 'KVProxy', 'getDynamicFragment', 10008, getJsonByKey('data')],
+            ['slider', 'KVProxy', 'getDynamicFragment', 10008, getStringByKey('data')],
             ['topCollapse', 'KVProxy', 'getStaticFragment', 10160, getJsonByKey('content')],
             // Logo
             ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
