@@ -22,48 +22,47 @@ const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
 
-const pcCssConfig = {
-    test: /\.css$/,
-    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-    use: [
-        MiniCssExtractPlugin.loader,
-        'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
-        {
-            loader: 'postcss-loader',
-            options: {
-                sourceMap: true,
-                plugins: function() {
-                    return [
-                        postImport(),
-                        nextcss({
-                            browsers: ['last 2 versions', 'ie >= 9'],
-                        }),
-                        // px2rem({
-                        //     remUnit: 75,
-                        // }),
-                    ];
+const pcCssConfig = function(level) {
+    return {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    sourceMap: true,
+                    plugins: function() {
+                        return [
+                            postImport(),
+                            nextcss({
+                                browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                            }),
+                            // px2rem({
+                            //     remUnit: 75,
+                            // }),
+                        ];
+                    },
                 },
             },
-        },
-    ],
+        ],
+    };
 };
 
 const commoncss = {
     test: /\.css$/,
     exclude: [path.resolve(__dirname, 'node_modules/@ifeng')],
     include: /node_modules/,
-    use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader'],
-    }),
+    use: [MiniCssExtractPlugin.loader, 'css-loader'],
 };
 
-const mobileCssConfig = {
-    test: /\.css$/,
-    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-    use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
+const mobileCssConfig = function(level) {
+    return {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
         use: [
+            MiniCssExtractPlugin.loader,
             'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
             {
                 loader: 'postcss-loader',
@@ -96,26 +95,39 @@ const mobileCssConfig = {
                 },
             },
         ],
-    }),
+    };
 };
 
 const fileExtend = {
     pc_view: '',
+    pc_view_low: '_low',
     pc_edit: '_edit',
     mobile_view: '_mobile',
     mobile_edit: '_mobile_edit',
 };
 
-const createConfig = function(type, platform, cssConfig) {
+const getAliasFrame = function getAliasFram(level) {
+    return level === ''
+        ? {}
+        : {
+              react: 'anujs/dist/ReactIE.js',
+              'react-dom': 'anujs/dist/ReactIE.js',
+              'prop-types': 'anujs/lib/ReactPropTypes',
+              devtools: 'anujs/lib/devtools',
+              'create-react-class': 'anujs/lib/createClass',
+          };
+};
+
+const createConfig = function(type, platform, cssConfig, level) {
     return {
         devtool: 'source-map',
         entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: `[name].${platform}_${type}.[chunkhash:8].js`,
+            filename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8].js`,
             // publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
             publicPath: env === 'pre_development' ? '/' : '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
-            chunkFilename: `[name].${platform}_${type}.[chunkhash:8].js`,
+            chunkFilename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8].js`,
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
@@ -128,9 +140,18 @@ const createConfig = function(type, platform, cssConfig) {
                     type === 'view'
                         ? '@ifeng/visualediting/src/components/ChipEditView'
                         : '@ifeng/visualediting/src/components/ChipEdit',
+                ...getAliasFrame(level),
             },
         },
         optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        ie8: level === '' ? false : true,
+                    },
+                    sourceMap: true,
+                }),
+            ],
             splitChunks: {
                 // cacheGroups: {
                 //     // base: {
@@ -173,9 +194,9 @@ const createConfig = function(type, platform, cssConfig) {
                                     'env',
                                     {
                                         targets: {
-                                            browsers: ['last 2 versions', 'ie >= 9'],
+                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
                                         },
-                                        modules: false,
+                                        modules: level === '' ? false : 'commonjs',
                                         useBuiltIns: true,
                                         debug: false,
                                     },
@@ -190,7 +211,7 @@ const createConfig = function(type, platform, cssConfig) {
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
-                cssConfig,
+                cssConfig(level),
                 commoncss,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
@@ -213,11 +234,12 @@ const createConfig = function(type, platform, cssConfig) {
         },
         mode: 'production',
         plugins: [
+            // new BundleAnalyzerPlugin(),
             // new BundleAnalyzerPlugin({ analyzerPort: type === 'view' ? 8888 : 8887 }),
             // new webpack.HashedModuleIdsPlugin(),
             // new WebpackChunkHash({ algorithm: 'md5' }),
             new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify('production'),
+                // 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
             }),
             // new webpack.optimize.CommonsChunkPlugin({
@@ -237,16 +259,16 @@ const createConfig = function(type, platform, cssConfig) {
             new CleanPlugin(['dist']),
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html',
-                fileExtend[`${platform}_${type}`],
+                fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
             ),
         ],
     };
 };
 
 module.exports = [
-    createConfig('view', 'pc', pcCssConfig),
-    createConfig('edit', 'pc', pcCssConfig),
-    createConfig('view', 'mobile', mobileCssConfig),
-    createConfig('edit', 'mobile', mobileCssConfig),
+    createConfig('view', 'pc', pcCssConfig, 'low'),
+    createConfig('view', 'pc', pcCssConfig, ''),
+    createConfig('edit', 'pc', pcCssConfig, ''),
+    createConfig('view', 'mobile', mobileCssConfig, ''),
+    createConfig('edit', 'mobile', mobileCssConfig, ''),
 ];
-//
