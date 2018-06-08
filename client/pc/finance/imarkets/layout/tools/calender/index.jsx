@@ -28,7 +28,7 @@ class Calender extends PureComponent{
     }
     componentWillUnmount(){
         clearTimeout(this.timer);
-        timer = null;
+        this.timer = null;
     }
     render(){
         return (

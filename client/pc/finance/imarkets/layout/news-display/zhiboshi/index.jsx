@@ -16,7 +16,7 @@ class Zhiboshi extends PureComponent{
     }
     componentWillUnmount(){
         clearInterval(this.timer);
-        timer = null;
+        this.timer = null;
     }
     // 删除文本内的标签
     deleteHtmlTag = (text) => text.replace(/<\/?[a-zA-Z]+>/g, '');

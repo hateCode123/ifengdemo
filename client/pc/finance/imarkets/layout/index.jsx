@@ -13,6 +13,7 @@ import NewsStream from './news-stream';
 import Question from './question';
 import ArticleRankings from './article-rankings';
 import HotTopic from './hot-topic';
+import SuspendedAd from '../components/suspended-ad';
 
 class Layout extends PureComponent {
     render() {
@@ -51,6 +52,8 @@ class Layout extends PureComponent {
                         <ArticleRankings />
                         {/* 热点专题 */}
                         <HotTopic />
+                        {/* 漂浮广告 */}
+                        <SuspendedAd />
                     </div>
                 </div>
             </Fragment>

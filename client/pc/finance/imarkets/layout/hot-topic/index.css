@@ -7,7 +7,7 @@
     line-height: 20px;
 }
 .list {
-    margin-left: 9px;
+    margin: 0 0 40px 9px;
     background: url('./line.jpg') no-repeat 10px 8px;
     & li {
         height: 30px;
