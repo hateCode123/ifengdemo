@@ -8,6 +8,10 @@ import TitleList from './titleList/';
 import { rel } from '../../../../../utils/rel';
 
 class MiddleContent extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -99,15 +103,4 @@ class MiddleContent extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-MiddleContent.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-MiddleContent.defaultProps = {};
-
-export { MiddleContent };
 export default MiddleContent;

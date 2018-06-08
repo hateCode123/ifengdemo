@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../utils/rel';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
@@ -103,16 +102,6 @@ class UserInfo extends React.PureComponent {
         }
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-UserInfo.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-UserInfo.defaultProps = {};
 
 export { UserInfo };
 export default UserInfo;

@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class ComicBook extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -51,15 +55,4 @@ class ComicBook extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ComicBook.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-ComicBook.defaultProps = {};
-
-export { ComicBook };
 export default ComicBook;

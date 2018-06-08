@@ -11,6 +11,10 @@ import Market from './market/';
 import Courier from './courier/';
 
 class RightContent extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -61,15 +65,4 @@ class RightContent extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-RightContent.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-RightContent.defaultProps = {};
-
-export { RightContent };
 export default RightContent;

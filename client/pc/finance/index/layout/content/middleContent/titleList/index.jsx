@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class TitleList extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -24,17 +28,4 @@ class TitleList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-TitleList.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-TitleList.defaultProps = {};
-
-export { TitleList };
 export default TitleList;

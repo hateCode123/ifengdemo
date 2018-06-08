@@ -5,6 +5,12 @@ import Chip from 'Chip';
 import List from './list';
 
 class Headline extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        rights: PropTypes.array,
+        limit: PropTypes.number,
+    };
+
     state = {
         isOver: false,
         isShow: false,
@@ -65,19 +71,4 @@ class Headline extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Headline.propTypes = {
-    content: PropTypes.array,
-    rights: PropTypes.array,
-    limit: PropTypes.number,
-};
-
-/**
- * 定义组件默认属性
- * */
-Headline.defaultProps = {};
-
-export { Headline };
 export default Headline;

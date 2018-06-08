@@ -4,6 +4,10 @@ import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 
 class Search extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         data: this.props.content,
         searchTxt: this.props.content[0].keyword,
@@ -117,18 +121,6 @@ class Search extends React.PureComponent {
         );
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-Search.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Search.defaultProps = {};
 
 export { Search };
 export default Search;

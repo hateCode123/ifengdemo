@@ -12,6 +12,10 @@ import Search from '../../../../components/search';
  * 定义 Header 组件
  */
 class Header extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -50,15 +54,4 @@ class Header extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Header.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Header.defaultProps = {};
-
-export { Header };
 export default Header;

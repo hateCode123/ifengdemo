@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import Topic from './topic';
 import BannerPic from './bannerPic';
 import Headline from './headline';
 import DateNews from './dateNews';
 
 class LeftContent extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -25,15 +28,4 @@ class LeftContent extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-LeftContent.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-LeftContent.defaultProps = {};
-
-export { LeftContent };
 export default LeftContent;

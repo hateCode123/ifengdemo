@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../utils/rel';
 
 class Navigation extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -30,15 +34,4 @@ class Navigation extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Navigation.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Navigation.defaultProps = {};
-
-export { Navigation };
 export default Navigation;

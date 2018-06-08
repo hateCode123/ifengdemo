@@ -5,6 +5,11 @@ import { rel } from '../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
 class ThinkTank extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        tip: PropTypes.string,
+    };
+
     state = {
         data: {},
     };
@@ -68,18 +73,4 @@ class ThinkTank extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ThinkTank.propTypes = {
-    content: PropTypes.array,
-    tip: PropTypes.string,
-};
-
-/**
- * 定义组件默认属性
- * */
-ThinkTank.defaultProps = {};
-
-export { ThinkTank };
 export default ThinkTank;

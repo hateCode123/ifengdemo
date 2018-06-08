@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import styles from './index.css';
 import CarouselPic from './carouselPic/';
 
 class BannerPic extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         currentPage: 0,
         slideShow: false,
@@ -76,15 +79,4 @@ class BannerPic extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-BannerPic.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-BannerPic.defaultProps = {};
-
-export { BannerPic };
 export default BannerPic;

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import styles from './index.css';
 import CarouselPic from './carouselPic/';
 
 class FinanceVideo extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         currentPage: 0,
         slideShow: false,
@@ -83,15 +86,4 @@ class FinanceVideo extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-FinanceVideo.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-FinanceVideo.defaultProps = {};
-
-export { FinanceVideo };
 export default FinanceVideo;

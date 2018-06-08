@@ -11,6 +11,10 @@ import Production from './production/';
 import { rel } from '../../../../utils/rel';
 
 class Stock extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         current: 0,
     };
@@ -67,15 +71,4 @@ class Stock extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Stock.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Stock.defaultProps = {};
-
-export { Stock };
 export default Stock;
