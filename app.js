@@ -16,6 +16,7 @@ const Timers = require('./biz/common/utils/timers');
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
+// const prevent = require('./biz/common/prevent');
 const _ = require('lodash');
 // 普罗米修斯
 const { c, p_request, p_rpc, p_parse, p_rander, router } = require('./biz/common/prom');
@@ -97,25 +98,23 @@ if (config.default.statisticsProm) {
         ctx.p_rpc = p_rpc;
         await next();
         try {
-            if(/(^\/pc)|(^\/mobile)|(^\/api)/.test(ctx.originalUrl)){
+            if (/(^\/pc)|(^\/mobile)|(^\/api)/.test(ctx.originalUrl)) {
                 c.inc({ code: 200 });
                 p_request.observe(
                     {
-                        url: ctx.originalUrl.replace(/\?.*/,''),
+                        url: ctx.originalUrl.replace(/\?.*/, ''),
                         method: ctx.method,
                         status_code: ctx.status,
                     },
-                    ctx.requestTime
+                    ctx.requestTime,
                 );
-        
+
                 // p_rpc.observe(parseInt(ctx.rpc_time));
                 p_parse.observe(parseInt(ctx.parse_time));
             }
-           
         } catch (error) {
             console.log(error);
         }
-      
     });
 }
 
@@ -126,6 +125,8 @@ app.use(async (ctx, next) => {
     }
     await next();
 });
+
+// app.use(prevent);
 
 // 本地统计 开关
 if (config.default.statistics) {

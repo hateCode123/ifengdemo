@@ -113,18 +113,17 @@ exports.list = {
             ['qrCode', 'KVProxy', 'getStaticFragment', 10135, getJsonByKey('content')],
         ];
 
-   
         await ctx.html('finance_index', {
-            allData:{},
+            allData: {},
         });
     },
 };
 
-
 exports.pc_finance_heartbeat = {
     path: '/pc/finance/heartbeat',
     method: 'get',
+    cdncache: 0,
     handler: async ctx => {
-        ctx.body = { success: true };
-    }
-}
+        ctx.json('')
+    },
+};
