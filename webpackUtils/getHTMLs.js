@@ -16,7 +16,7 @@ module.exports = function getHTML(globPath, extendName) {
         const conf = {
             filename: `${entryName}${extendName}.html`,
             template: file,
-            inject: 'body',
+            inject: false,
             hase: false,
             // minify: {
             //     // 压缩HTML文件

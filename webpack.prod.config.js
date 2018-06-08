@@ -213,7 +213,7 @@ const createConfig = function(type, platform, cssConfig) {
         },
         mode: 'production',
         plugins: [
-            new BundleAnalyzerPlugin({ analyzerPort: type === 'view' ? 8888 : 8887 }),
+            // new BundleAnalyzerPlugin({ analyzerPort: type === 'view' ? 8888 : 8887 }),
             // new webpack.HashedModuleIdsPlugin(),
             // new WebpackChunkHash({ algorithm: 'md5' }),
             new webpack.DefinePlugin({
@@ -246,6 +246,7 @@ const createConfig = function(type, platform, cssConfig) {
 module.exports = [
     createConfig('view', 'pc', pcCssConfig),
     createConfig('edit', 'pc', pcCssConfig),
-    // createConfig('view', 'mobile', mobileCssConfig),
-    // createConfig('edit', 'mobile', mobileCssConfig),
+    createConfig('view', 'mobile', mobileCssConfig),
+    createConfig('edit', 'mobile', mobileCssConfig),
 ];
+//
