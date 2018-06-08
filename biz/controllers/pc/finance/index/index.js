@@ -27,16 +27,25 @@ exports.list = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10002, getJsonByKey('content')],
 
             // 焦点图
-            ['bannerPic', 'KVProxy', 'getRecommendFragment', 20002, getJsonByKey('data')],
+            ['bannerPic', 'KVProxy', 'getDynamicFragment', 10005, getStringByKey('data')],
 
             // 头条新闻
             ['headline', 'KVProxy', 'getRecommendFragment', 20003, getStringByKey('data')],
 
-            // 头条新闻多拼新闻
+            // 客户权益
+            ['rights', 'KVProxy', 'getStaticFragment', 10018, getJsonByKey('content')],
+
+            // 每日要闻
+            ['dayNews', 'KVProxy', 'getDynamicFragment', 10006, getStringByKey('data')],
+
+            // 每日要闻多拼新闻
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
 
             // 推荐新闻
             ['recommend', 'KVProxy', 'getRecommendFragment', 20004, getJsonByKey('data')],
+
+            // 返回连环话数据
+            ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
 
             // 大咖说
             ['talking', 'KVProxy', 'getStaticFragment', 10008, getJsonByKey('content')],
@@ -45,7 +54,7 @@ exports.list = {
             ['finance', 'KVProxy', 'getStaticFragment', 10009, getJsonByKey('content')],
 
             // 炒股大赛
-            ['stocks', 'KVProxy', 'getStaticFragment', 10010, getJsonByKey('content')],
+            ['stocks', 'KVProxy', 'getCustom', 'finance_22005_10736_31', getJson()],
 
             // 大咖说新闻列表
             ['talkingList', 'KVProxy', 'getRecommendFragment', 20005, getStringByKey('data')],
@@ -53,14 +62,11 @@ exports.list = {
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getStringByKey('data')],
 
-            // 炒股大赛新闻列表
-            ['stocksList', 'KVProxy', 'getRecommendFragment', 20007, getStringByKey('data')],
-
             // 标题广告
             ['titleAd', 'KVProxy', 'getStaticFragment', 10012, getStringByKey('content')],
 
             // 研究院
-            ['institute', 'KVProxy', 'getRecommendFragment', 20008, getStringByKey('data')],
+            ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
 
             // 专题会议
             ['meeting', 'KVProxy', 'getRecommendFragment', 20010, getStringByKey('data')],
@@ -95,17 +101,8 @@ exports.list = {
             // 投顾产品
             ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
 
-            // 投顾产品
-            ['rights', 'KVProxy', 'getStaticFragment', 10018, getJsonByKey('content')],
-
-            // 每日要闻
-            ['dayNews', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
-
-            // 返回连环话数据
-            ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
-
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getCustom', 'finance_22005_10736_28', getJson()],
+            ['financeVideo', 'KVProxy', 'getDynamicFragment', 10007, getJson()],
 
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],

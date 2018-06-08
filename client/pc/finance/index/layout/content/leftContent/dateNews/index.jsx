@@ -12,8 +12,6 @@ class DateNews extends React.PureComponent {
     render() {
         const { content, extraNews } = this.props;
 
-        console.log(content);
-
         return (
             <div className={styles.box}>
                 <div className={styles.title}>

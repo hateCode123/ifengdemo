@@ -12,5 +12,8 @@
             color: #3b3a3b;
             font-size: 14px;
         }
+        & a:hover {
+            color: #f54343;
+        }
     }
 }

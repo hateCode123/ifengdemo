@@ -40,21 +40,8 @@
             finance: allData.finance,
             financeList: allData.financeList,
             stocks: allData.stocks,
-            stocksList: allData.stocksList,
             titleAd: allData.titleAd,
-            financeVideo: [{
-                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
-                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
-                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
-            }, {
-                url: '//finance.ifeng.com/a/20171208/15853609_0.shtml',
-                src: '////p1.ifengimg.com/937637d0d37b9a40/2017/39/89ca464b7a87993.jpg',
-                title: '比特币在国外监管如何？',
-            }, {
-                url: '//finance.ifeng.com/a/20180104/15902367_0.shtml',
-                src: '//p3.ifengimg.com/a/2018_01/46ac4991c2997b1_size1373_w1000_h561.png',
-                title: '华夏幸福荣膺“中国特色小镇运营商” 榜首',
-            }, ],
+            financeVideo: allData.financeVideo,
             institute: allData.institute,
             meeting: allData.meeting,
             market: allData.market,
@@ -139,16 +126,14 @@
             qrCode: allData.qrCode,
         };
 
-    </script>
-    {{#each htmlWebpackPlugin.files.css}}
+    </script> {{#each htmlWebpackPlugin.files.css}}
     <link href="{{.}}" rel="stylesheet"> {{/each}}
 </head>
 
 <body>
     <div id="root"></div>
     {{#each htmlWebpackPlugin.files.chunks}}
-    <script src="{{entry}}" type="text/javascript"></script>
-    {{/each}}
+    <script src="{{entry}}" type="text/javascript"></script> {{/each}}
 </body>
 
 </html>

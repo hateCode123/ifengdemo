@@ -288,6 +288,7 @@ function getAction(action) {
         'KVProxy.getStaticFragment': 'getStaticFragments',
         'KVProxy.getStructuredFragment': 'getStructuredFragments',
         'KVProxy.getVideo': 'getVideos',
+        'KVProxy.getDynamicFragment': 'getDynamicFragments',
     };
     return key[action];
 }

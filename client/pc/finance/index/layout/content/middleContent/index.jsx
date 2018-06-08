@@ -5,6 +5,7 @@ import Chip from 'Chip';
 import ComicBook from './comicBook/';
 import Caption from './caption/';
 import TitleList from './titleList/';
+import { rel } from '../../../../../utils/rel';
 
 class MiddleContent extends React.PureComponent {
     /**
@@ -13,7 +14,15 @@ class MiddleContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        console.log(content.financeList);
+        let stockData = [];
+
+        if (content.stocks) {
+            stockData = content.stocks.list.map(item => ({
+                id: item.id,
+                url: item.commentUrl,
+                title: item.title,
+            }));
+        }
 
         return (
             <div className={styles.col_M}>
@@ -57,23 +66,32 @@ class MiddleContent extends React.PureComponent {
                             <TitleList />
                         </Chip>
                         <div className={styles.stocks}>
-                            <Chip
-                                id="10010"
-                                type="static"
-                                title="炒股大赛标题栏"
-                                groupName="正文"
-                                content={content.stocks}>
-                                <Caption />
-                            </Chip>
+                            <div className={styles.caption}>
+                                <h5>
+                                    <a href="//ds.ifeng.com/" target="_blank" rel={rel} title="炒股大赛">
+                                        炒股大赛
+                                    </a>
+                                </h5>
+                            </div>
+                            <div className={styles.picTxt}>
+                                <div className={styles.box_pic}>
+                                    <a href="//ds.ifeng.com/" target="_blank" rel={rel} title="炒股大赛">
+                                        <span />
+                                    </a>
+                                    <h5>
+                                        <a href="//ds.ifeng.com/" target="_blank" rel={rel} title="炒股大赛">
+                                            凤凰网炒股大赛
+                                        </a>
+                                    </h5>
+                                </div>
+                                <h3 className={styles.title}>
+                                    <a href={stockData[0].url} target="_blank" rel={rel} title={stockData[0].title}>
+                                        {stockData[0].title}
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                        <Chip
-                            id="20007"
-                            type="recommend"
-                            title="炒股大赛新闻列表"
-                            groupName="正文"
-                            content={content.stocksList}>
-                            <TitleList />
-                        </Chip>
+                        <TitleList content={stockData.slice(1, 6)} />
                     </div>
                 </div>
             </div>

@@ -58,9 +58,14 @@ class FinanceVideo extends React.PureComponent {
         const { currentPage, slideShow } = this.state;
         const { content } = this.props;
 
+        const data = content.data.slice(0, 3).map(item => ({
+            url: item.cmppUrl,
+            title: item.title,
+        }));
+
         return (
             <div className={styles.financeVideo} onMouseEnter={this.bannerOver} onMouseLeave={this.bannerOver}>
-                <CarouselPic content={content} currentPage={currentPage} />
+                <CarouselPic content={data} currentPage={currentPage} />
                 <div className={slideShow ? styles.prevSlide : styles.hidden} onClick={this.handleLeftClick}>
                     <a>
                         <div className={styles.left} />
@@ -81,7 +86,7 @@ class FinanceVideo extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-FinanceVideo.propTypes = { content: PropTypes.array };
+FinanceVideo.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性

@@ -9,7 +9,6 @@ import ThinkTank from './thinkTank/';
 import Meeting from './meeting/';
 import Market from './market/';
 import Courier from './courier/';
-import TitleAd from './titleAd/';
 
 class RightContent extends React.PureComponent {
     /**
@@ -17,6 +16,16 @@ class RightContent extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
+
+        let instituteData = [];
+
+        if (content.institute) {
+            instituteData = content.institute.list.map(item => ({
+                url: item.url,
+                title: item.title,
+                thumbnail: '',
+            }));
+        }
 
         return (
             <div className={styles.col_R}>
@@ -26,9 +35,7 @@ class RightContent extends React.PureComponent {
                 <div className={styles.box_finance}>
                     <BoxTitle url="#" title="财经智库" />
                     <ul className={`${styles.list} clearfix`}>
-                        <Chip id="20008" type="recommend" title="研究院" groupName="正文" content={content.institute}>
-                            <ThinkTank tip="研究院" />
-                        </Chip>
+                        <ThinkTank tip="研究院" content={instituteData} />
                         <ThinkTank tip="国子策" />
                     </ul>
                 </div>

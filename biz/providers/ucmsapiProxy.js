@@ -1384,7 +1384,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
                 request:data.request, 
                 response:response,
                 span: child,
-                callInfo: `KVProxy.getDynamicFragments(${id})`,
+                callInfo: `KVProxy.getDynamicFragments(${ids})`,
             };
         } catch (e) {
             var response = { };
@@ -1397,7 +1397,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
                 request : data.request, 
                 response : response,
                 span: child,
-                callInfo: `KVProxy.getDynamicFragments(${id})`,
+                callInfo: `KVProxy.getDynamicFragments(${ids})`,
             };
         }
     }
@@ -1411,7 +1411,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
             request:data.request, 
             response:response,
             span: child,
-            callInfo: `KVProxy.getDynamicFragments(${id})`,
+            callInfo: `KVProxy.getDynamicFragments(${ids})`,
         };
     }
 

@@ -17,9 +17,7 @@ class LeftContent extends React.PureComponent {
         return (
             <div className={styles.col_L}>
                 <Topic />
-                <Chip id="20002" type="recommend" title="焦点图" groupName="正文" content={content.bannerPic}>
-                    <BannerPic />
-                </Chip>
+                <BannerPic content={content.bannerPic.slice(0, 5)} />
                 <Headline content={content.headline} rights={content.rights} limit={6} />
                 <DateNews content={content.dayNews} extraNews={content.extraNews} />
             </div>

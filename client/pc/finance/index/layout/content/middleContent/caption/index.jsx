@@ -36,7 +36,6 @@ class Caption extends React.PureComponent {
                             {content[0].title}
                         </a>
                     </h3>
-                    <p className={styles.abstract}>{content[0].abstract}</p>
                 </div>
             </div>
         );

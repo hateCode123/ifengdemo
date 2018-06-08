@@ -45,7 +45,6 @@ class Layout extends React.PureComponent {
                 finance: content.finance,
                 financeList: content.financeList,
                 stocks: content.stocks,
-                stocksList: content.stocksList,
             },
             info: content.info,
             middleAd: content.middleAd,

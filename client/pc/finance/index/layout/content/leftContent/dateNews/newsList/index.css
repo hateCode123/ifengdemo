@@ -9,6 +9,7 @@
         color: #3b3a3b;
     }
     & a:hover {
+        cursor: pointer;
         color: #f54343;
     }
 }
