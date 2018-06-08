@@ -12,6 +12,7 @@ import NewsDisplay from './news-display';
 import NewsStream from './news-stream';
 import Question from './question';
 import ArticleRankings from './article-rankings';
+import HotTopic from './hot-topic';
 
 class Layout extends PureComponent {
     render() {
@@ -48,6 +49,8 @@ class Layout extends PureComponent {
                         <Ad styleName={ styles.ad1 } />
                         {/* 文章点击排行 */}
                         <ArticleRankings />
+                        {/* 热点专题 */}
+                        <HotTopic />
                     </div>
                 </div>
             </Fragment>

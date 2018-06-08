@@ -31,6 +31,7 @@
     }
 }
 .news_list {
+    margin-bottom: 40px;
     padding-left: 18px;
     overflow: hidden;
     white-space: nowrap;
