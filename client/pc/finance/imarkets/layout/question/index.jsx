@@ -17,6 +17,8 @@ class Question extends PureComponent{
                     <HumanTab />
                 </div>
                 <SendQuestion />
+                {/* 已回答问题 */}
+                {/* 未回答问题 */}
             </Fragment>
         );
     }

@@ -1,7 +1,8 @@
 .q_box {
     position: relative;
-    padding-left: 51px;
-    height: 165px;
+    padding: 12px 0 0 51px;
+    height: 153px;
+    background-color: #f8f7f3;
 }
 .zai_xian_da_yi {
     position: absolute;
