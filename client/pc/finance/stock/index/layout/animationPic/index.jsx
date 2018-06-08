@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 
 class AnimationPic extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -21,17 +25,4 @@ class AnimationPic extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-AnimationPic.propTypes = {
-    content: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-AnimationPic.defaultProps = {};
-
-export { AnimationPic };
 export default AnimationPic;

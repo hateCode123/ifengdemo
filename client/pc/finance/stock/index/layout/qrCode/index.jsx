@@ -7,6 +7,10 @@ import styles from './index.css';
  * 定义 BottomAffix 组件
  */
 class QrCode extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         isShow: true,
     };
@@ -46,15 +50,4 @@ class QrCode extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-QrCode.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-QrCode.defaultProps = {};
-
-export { QrCode };
 export default QrCode;

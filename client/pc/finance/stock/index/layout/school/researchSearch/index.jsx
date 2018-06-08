@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 
@@ -234,15 +233,4 @@ class ResearchSearch extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-ResearchSearch.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-ResearchSearch.defaultProps = {};
-
-export { ResearchSearch };
 export default ResearchSearch;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 
@@ -201,15 +200,4 @@ class StockSearch extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-StockSearch.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-StockSearch.defaultProps = {};
-
-export { StockSearch };
 export default StockSearch;

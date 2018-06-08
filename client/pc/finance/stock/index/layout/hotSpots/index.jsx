@@ -11,6 +11,10 @@ import Industry from './industry/';
 import SingleStock from './singleStock/';
 
 class HotSpots extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -108,15 +112,4 @@ class HotSpots extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-HotSpots.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-HotSpots.defaultProps = {};
-
-export { HotSpots };
 export default HotSpots;

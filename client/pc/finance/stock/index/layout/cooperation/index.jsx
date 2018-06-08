@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
  * 定义 Cooperation 组件
  */
 class Cooperation extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.string,
+    };
+
     /**
      * 插入 Cooperation html
      */
@@ -20,15 +24,4 @@ class Cooperation extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Cooperation.propTypes = { content: PropTypes.string };
-
-/**
- * 定义组件默认属性
- * */
-Cooperation.defaultProps = {};
-
-export { Cooperation };
 export default Cooperation;
