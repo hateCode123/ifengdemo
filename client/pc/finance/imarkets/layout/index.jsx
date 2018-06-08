@@ -9,6 +9,7 @@ import Tools from './tools';
 import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from './news-stream';
+import Question from './question';
 
 class Layout extends PureComponent {
     render() {
@@ -37,6 +38,10 @@ class Layout extends PureComponent {
                         <NewsDisplay />
                         {/* 新闻流 */}
                         <NewsStream />
+                    </div>
+                    <div className={ styles.main_right }>
+                        {/* 在线答疑 */}
+                        <Question />
                     </div>
                 </div>
             </Fragment>

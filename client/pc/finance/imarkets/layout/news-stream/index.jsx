@@ -57,7 +57,7 @@ class NewsStream extends PureComponent{
 /**
  * 定义组件属性类型
  * */
-NewsStream.propTypes = { content: PropTypes.object };
+NewsStream.propTypes = {};
 
 /**
  * 定义组件默认属性
