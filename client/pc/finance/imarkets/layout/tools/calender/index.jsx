@@ -22,7 +22,7 @@ class Calender extends PureComponent{
             });
         }
         this.timer = setTimeout(this.changeDate, 1000); 
-    }
+    };
     componentDidMount(){
         this.timer = setTimeout(this.changeDate, 1000); 
     }

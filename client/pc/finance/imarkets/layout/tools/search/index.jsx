@@ -13,7 +13,7 @@ class Search extends PureComponent{
     handleSearchClick = (event)=>{
         const value = this.searchText.current.value;
         window.open(`http://search.ifeng.com/sofeng/search.action?q=${ value }&c=1`);
-    }
+    };
     // input有焦点时，如果值是search，值变成空
     handleSearchFocus = (event)=>{
         const current = this.searchText.current;
@@ -21,7 +21,7 @@ class Search extends PureComponent{
         if(value === 'search'){
             current.value = '';
         }
-    }
+    };
     // input失去焦点时，如果没有值，值为search
     handleSearchBlur = (event)=>{
         const current = this.searchText.current;
@@ -29,7 +29,7 @@ class Search extends PureComponent{
         if(value === ''){
             current.value = 'search';
         }
-    }
+    };
     render(){
         return (
             <div className={ styles.search_box }>

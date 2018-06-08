@@ -18,6 +18,8 @@ class Zhiboshi extends PureComponent{
         clearInterval(this.timer);
         timer = null;
     }
+    // 删除文本内的标签
+    deleteHtmlTag = (text) => text.replace(/<\/?[a-zA-Z]+>/g, '');
     // 获取新的直播间标题
     getNewTitle = async()=>{
         try{
@@ -44,7 +46,7 @@ class Zhiboshi extends PureComponent{
         }catch(err){
             console.error(err);
         }
-    }
+    };
     render(){
         return (
             <div className={ styles.zhiboshi }>
