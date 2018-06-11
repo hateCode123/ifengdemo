@@ -31,7 +31,7 @@ class SuspendedAd extends PureComponent{
     handleWindowScroll = (event)=>{
         const scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
         const current = this.adBox.current; 
-        const isFixed = scroll + 40 >= this.top
+        const isFixed = scroll + 40 >= this.top;
         if(isFixed !== this.state.isFixed){
             this.setState({
                 isFixed

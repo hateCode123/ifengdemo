@@ -18,7 +18,8 @@ class Zhiboshi extends PureComponent{
         clearInterval(this.timer);
         this.timer = null;
     }
-    // 删除文本内的标签
+    // 删除文本内的标签，测试文字：
+    // <div>韩国财长金东兖在东京讲话：</div><div>有很多迹象显示，朝鲜和韩国将发生改变</div><div>对话大门显然已敞开</div><div>这将对经济产生积极影响</div><div>聪明的国家搭建桥梁，愚蠢的国家建造围墙</div><div>亚洲国家必须要机智行事</div>
     deleteHtmlTag = (text) => text.replace(/<\/?[a-zA-Z]+>/g, '');
     // 获取新的直播间标题
     getNewTitle = async()=>{
@@ -34,7 +35,7 @@ class Zhiboshi extends PureComponent{
             });
             const infor = data[0];
             if(this.state.id !== infor.id){
-                let title = infor.title[0];
+                let title = this.deleteHtmlTag(infor.title[0]);
                 if(title.length > 26){
                     title = title.substring(0, 26) + '...';
                 }
