@@ -10,7 +10,7 @@ class FixedBar extends React.PureComponent {
         showGotoTop: true,
     };
     componentDidMount() {
-        this.unHandleScroll = addEventListener('scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
     }
 
     componentWillUnmount() {

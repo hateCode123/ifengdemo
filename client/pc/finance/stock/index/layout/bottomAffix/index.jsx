@@ -17,7 +17,7 @@ class BottomAffix extends React.PureComponent {
     };
 
     componentDidMount() {
-        this.unHandleScroll = addEventListener('scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
     }
 
     componentWillUnmount() {
