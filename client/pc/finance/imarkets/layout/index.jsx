@@ -13,6 +13,7 @@ import NewsStream from './news-stream';
 import Question from './question';
 import ArticleRankings from './article-rankings';
 import HotTopic from './hot-topic';
+import CalenderBox from './CalenderBox';
 import SuspendedAd from '../components/suspended-ad';
 import GoToTop from '../components/go-to-top';
 
@@ -53,6 +54,8 @@ class Layout extends PureComponent {
                         <ArticleRankings />
                         {/* 热点专题 */}
                         <HotTopic />
+                        {/* 日历 */}
+                        <CalenderBox />
                         {/* 漂浮广告 */}
                         <SuspendedAd />
                     </div>

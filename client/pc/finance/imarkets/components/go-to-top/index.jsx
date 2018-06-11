@@ -2,7 +2,7 @@
  * 返回顶部
  */
 
-import React, { PureComponent, createRef } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { addEventListener } from '@ifeng/ui_base';
 import styles from './index.css';
