@@ -15,6 +15,7 @@ import ArticleRankings from './article-rankings';
 import HotTopic from './hot-topic';
 import CalenderBox from './CalenderBox';
 import SuspendedAd from '../components/suspended-ad';
+import FooterBox from './footerbox';
 import GoToTop from '../components/go-to-top';
 
 class Layout extends PureComponent {
@@ -25,6 +26,10 @@ class Layout extends PureComponent {
         const { content } = this.props;
         const headerData = {
             nav: content.nav
+        };
+        const footerData = {
+            cooperation: content.cooperation,
+            footer: content.footer
         };
 
         return (
@@ -60,6 +65,8 @@ class Layout extends PureComponent {
                         <SuspendedAd />
                     </div>
                 </div>
+                {/* 底部 */}
+                <FooterBox content={ footerData } />
                 {/* 返回顶部 */}
                 <GoToTop />
             </Fragment>
