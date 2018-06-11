@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
+import { addEventListener } from '@ifeng/ui_base';
 
 class FixedBar extends React.PureComponent {
     state = {
@@ -9,10 +10,15 @@ class FixedBar extends React.PureComponent {
         showGotoTop: true,
     };
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener('scroll', this.handleScroll);
     }
+
+    componentWillUnmount() {
+        this.unHandleScroll();
+    }
+
     handleScroll = event => {
-        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        const scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
         let tag = true;
         if (scrollTop < 100) {
             tag = false;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import { addEventListener } from '@ifeng/ui_base';
 
 class Tabs extends React.PureComponent {
     static propTypes = {
@@ -14,12 +15,12 @@ class Tabs extends React.PureComponent {
     };
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener('scroll', this.handleScroll);
         this.tabsTop = document.getElementById('tabs').offsetTop;
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        this.unHandleScroll();
     }
 
     /**
