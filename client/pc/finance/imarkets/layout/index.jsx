@@ -14,6 +14,7 @@ import Question from './question';
 import ArticleRankings from './article-rankings';
 import HotTopic from './hot-topic';
 import SuspendedAd from '../components/suspended-ad';
+import GoToTop from '../components/go-to-top';
 
 class Layout extends PureComponent {
     render() {
@@ -56,6 +57,8 @@ class Layout extends PureComponent {
                         <SuspendedAd />
                     </div>
                 </div>
+                {/* 返回顶部 */}
+                <GoToTop />
             </Fragment>
         );
     }
