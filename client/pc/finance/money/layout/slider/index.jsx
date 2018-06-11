@@ -10,7 +10,22 @@ class SliderInner extends React.PureComponent {
      * 渲染组件
      */
     getData = data => {
-        return data.filter((item, i) => i < 5);
+        try {
+            const __data = data.filter((item, i) => i < 5);
+            const res = __data.map(item => {
+                console.log(item)
+                const thu = item.thumbnails ? JSON.parse(item.thumbnails) : {};
+                const img = thu.image || {};
+                const src = img && img.length > 0 ? img[0].url : '';
+                item.src = src;
+
+                return item;
+            });
+console.log(res)
+            return res;
+        } catch (e) {
+            console.log(e);
+        }
     };
     render() {
         const { content } = this.props;
@@ -18,12 +33,12 @@ class SliderInner extends React.PureComponent {
         const sliderTmpl = function sliderTmpl(item) {
             return (
                 <div className={style.bigPic04}>
-                    <a href={item.cmppUrl} target="_blank" rel={rel}>
-                        <img src={item.src} width="400" height="180" alt={item.alt} className={style.trans} />
+                    <a href={item.url} target="_blank" rel={rel}>
+                        <img src={item.src} width="400" height="180" alt={item.title} className={style.trans} />
                     </a>
                     <div className={style.text} />
                     <p className={style.cWhite}>
-                        <a href={item.cmppUrl} target="_blank" rel={rel}>
+                        <a href={item.url} target="_blank" rel={rel}>
                             {item.title}
                         </a>
                     </p>
@@ -39,7 +54,9 @@ class SliderInner extends React.PureComponent {
         };
         const __data = this.getData(content);
         const dom = (
-           <div className={style.fpic06}><Slides content={__data} config={config} /> </div> 
+            <div className={style.fpic06}>
+                <Slides content={__data} config={config} />{' '}
+            </div>
         );
 
         return __data.length > 0 ? dom : '';
