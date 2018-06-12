@@ -2,15 +2,34 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 
-// TODO: 在线答疑头像可以切换
 class HumanTab extends PureComponent{
+    maxIndex = null;  // 头像数组的最大值
+    state = {
+        index: 0      // 切换头像的数组
+    };
+    componentDidMount(){
+        this.maxIndex = this.props.content.length - 1;
+    }
+    // 向左切换
+    handleLeftClick = (event)=>{
+        this.setState({
+            index: this.state.index === 0 ? this.maxIndex : (this.state.index - 1)
+        });
+    };
+    // 向右切换
+    handleRightClick = (event)=>{
+        this.setState({
+            index: this.state.index === this.maxIndex ? 0 : (this.state.index + 1)
+        });
+    };
     render(){
+        const { image, name } = this.props.content[this.state.index];
         return (
             <div className={ styles.human_tab_box }>
-                <input className={ `${ styles.btn } ${ styles.btn_left }` } type="button" value="&lt;" />
-                <input className={ `${ styles.btn } ${ styles.btn_right }` } type="button" value="&gt;" />
-                <img className={ styles.head } src="http://p1.ifengimg.com/a/2017/0921/b38c49677cfc86bsize28_w119_h119.png" />
-                <p className={ styles.text }>郑晓嵘 KVB昆仑国际全球交易总监</p>
+                <input className={ `${ styles.btn } ${ styles.btn_left }` } type="button" value="&lt;" onClick={ this.handleLeftClick } />
+                <input className={ `${ styles.btn } ${ styles.btn_right }` } type="button" value="&gt;" onClick={ this.handleRightClick } />
+                <img className={ styles.head } src={ image } />
+                <p className={ styles.text }>{ name }</p>
             </div>
         );
     }

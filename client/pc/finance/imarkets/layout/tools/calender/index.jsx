@@ -4,7 +4,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class Calender extends PureComponent{

@@ -3,7 +3,7 @@
  */
 
 import React, { PureComponent, createRef } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class Search extends PureComponent{

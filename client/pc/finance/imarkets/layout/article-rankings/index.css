@@ -36,6 +36,12 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    & a {
+        color: #2b2b2b;
+        &:hover {
+            color: #ba2b36;
+        }
+    }
     & li {
         height: 30px;
         line-height: 30px;

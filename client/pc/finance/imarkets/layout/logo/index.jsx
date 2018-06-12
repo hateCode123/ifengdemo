@@ -3,7 +3,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 
 /* 配置flash大小的常量 */

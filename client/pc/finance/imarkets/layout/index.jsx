@@ -27,6 +27,12 @@ class Layout extends PureComponent {
         const headerData = {
             nav: content.nav
         };
+        const newDisplayData = {
+            topnews: content.topnews
+        };
+        const questionData = {
+            experts: content.experts
+        };
         const footerData = {
             cooperation: content.cooperation,
             footer: content.footer
@@ -46,13 +52,13 @@ class Layout extends PureComponent {
                     <Shares />
                     <div className={ styles.main_middle }>
                         {/* 新闻展示 */}
-                        <NewsDisplay />
+                        <NewsDisplay content={ newDisplayData } />
                         {/* 新闻流 */}
                         <NewsStream />
                     </div>
                     <div className={ styles.main_right }>
                         {/* 在线答疑 */}
-                        <Question />
+                        <Question content={ questionData } />
                         {/* 广告 */}
                         <Ad styleName={ styles.ad1 } />
                         {/* 文章点击排行 */}

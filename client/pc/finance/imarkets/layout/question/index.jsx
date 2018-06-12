@@ -10,11 +10,13 @@ import SendQuestion from './send-question';
 
 class Question extends PureComponent{
     render(){
+        const { content } = this.props;
+
         return (
             <Fragment>
                 <div className={ styles.q_box }>
                     <img className={ styles.zai_xian_da_yi } src={ require('./zai-xian-da-yi.png') } />
-                    <HumanTab />
+                    <HumanTab content={ content.experts } />
                 </div>
                 <SendQuestion />
                 {/* 已回答问题 */}
@@ -69,7 +71,7 @@ class Question extends PureComponent{
 /**
  * 定义组件属性类型
  * */
-Question.propTypes = {};
+Question.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性

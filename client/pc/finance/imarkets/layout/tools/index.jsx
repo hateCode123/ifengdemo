@@ -3,7 +3,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 import Calendar from './calender';
 import Search from './Search';
