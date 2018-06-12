@@ -217,7 +217,7 @@ if (config.default.statistics) {
         logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });
 }
-app.use(prevent);
+// app.use(prevent);
 
 // 路由重写，根据项目需要在rewrite中添加重写规则
 // app.use(rewrite);
