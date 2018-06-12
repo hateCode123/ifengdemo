@@ -115,9 +115,6 @@ a.ly {
         color: #ab8a52;
         text-decoration: none;
     }
-    &:visited {
-        color: #999;
-    }
 }
 .image_ad {
     & a, & img {
