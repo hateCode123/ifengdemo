@@ -99,14 +99,8 @@ a:hover {
 a:link {
     color: #004276;
 }
-a:visited {
-    color: #004276;
-}
 a:hover {
     color: #ba2636;
-}
-a:active {
-    color: #004276;
 }
 
 :global {
