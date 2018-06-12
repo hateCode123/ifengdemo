@@ -11,7 +11,6 @@ import Ad from '../../../../components/ad';
 class SuspendedAd extends PureComponent{
     adBox = createRef();          // 悬浮窗口
     unlistenerHandleWindowScroll = null;  // 事件解绑
-    top = null;                   // 记录当前DOM的位置
     state = {
         isFixed: false            // 是否悬浮
     };
@@ -19,7 +18,6 @@ class SuspendedAd extends PureComponent{
     componentDidMount(){
         // 记录当前DOM的位置
         const current = this.adBox.current;
-        this.top = current.offsetTop;
         // 绑定并初始化事件
         this.unlistenerHandleWindowScroll = addEventListener(window, 'scroll', this.handleWindowScroll);
         this.handleWindowScroll();
@@ -31,7 +29,7 @@ class SuspendedAd extends PureComponent{
     handleWindowScroll = (event)=>{
         const scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
         const current = this.adBox.current; 
-        const isFixed = scroll + 40 >= this.top;
+        const isFixed = scroll + 40 >= current.offsetTop;
         if(isFixed !== this.state.isFixed){
             this.setState({
                 isFixed

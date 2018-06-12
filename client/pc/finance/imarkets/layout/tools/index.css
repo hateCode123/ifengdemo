@@ -17,6 +17,7 @@
     height: 100%;
     line-height: 81px;
     color: #fff;
+    cursor: pointer;
     &:hover, &:visited {
         text-decoration: none;
         color: #fff;
@@ -24,6 +25,13 @@
     &:hover {
         background-color: #1a8068;
     }
+}
+.hangqingzhongxin {
+    margin: 0 auto 20px;
+    width: 1000px;
+    height: 460px;
+    border: none;
+    overflow: auto;
 }
 .play {
     position: absolute;
@@ -34,6 +42,14 @@
     width: 18px;
     height: 18px;
     background-image: url('./play.png');
+}
+.is_active {
+    & .play{
+        background-image: url('./bottom.jpg');
+    }
+    &:hover .play {
+        background-image: url('./play.png');
+    }
 }
 .earth, .chart {
     display: inline-block;
