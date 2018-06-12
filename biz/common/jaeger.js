@@ -4,7 +4,7 @@ let tracer = {};
 if (config.default.statisticsJaeger) {
     const Tracer = require('shimo-jaeger');
     tracer = new Tracer({
-        serviceName: config.default.appname,
+        serviceName: `${config.default.namespace}-${config.default.appname}`,
         options: {
             enables: ['koa', 'express', 'http'],
         },
