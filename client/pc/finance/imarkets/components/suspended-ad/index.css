@@ -1,7 +1,9 @@
-.ad_box {
-    top: 40px;
+.ad_box, .ad_fixed {
     width: 300px;
     height: 310px;
+}
+.ad_fixed {
+    top: 40px;
 }
 .ad {
     width: 100%;

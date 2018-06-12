@@ -9,10 +9,10 @@ import styles from './index.css';
 import Ad from '../../../../components/ad';
 
 class SuspendedAd extends PureComponent{
-    adBox = createRef();          // 悬浮窗口
+    adBox = createRef();                  // 悬浮窗口
     unlistenerHandleWindowScroll = null;  // 事件解绑
     state = {
-        isFixed: false            // 是否悬浮
+        isFixed: false                    // 是否悬浮
     };
 
     componentDidMount(){
@@ -38,8 +38,10 @@ class SuspendedAd extends PureComponent{
     };
     render(){
         return (
-            <div className={ styles.ad_box } ref={ this.adBox } style={ this.state.isFixed ? { position: 'fixed' } : null }>
-                <Ad styleName={ styles.ad } />
+            <div className={ styles.ad_box } ref={ this.adBox }>
+                <div className={ styles.ad_fixed } style={ this.state.isFixed ? { position: 'fixed' } : null }>
+                    <Ad styleName={ styles.ad } />
+                </div>
             </div>
         );
     }

@@ -8,7 +8,7 @@
     margin: 0 auto;
 }
 /* 通用的直播按钮样式 */
-.zhibo_link {
+a.zhibo_link {
     display: block;
     float: left;
     position: relative;
