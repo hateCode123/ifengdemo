@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Cooperation from './cooperation';
 import Ad from '../../../../components/ad';
-import Footer from '../../../../components/footer';
+import Footer from './footer';
 
 class FooterBox extends PureComponent{
     render(){
