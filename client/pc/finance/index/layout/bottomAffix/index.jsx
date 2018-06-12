@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import styles from './index.css';
+import { addEventListener } from '@ifeng/ui_base';
 
 /**
  * 定义 BottomAffix 组件
@@ -17,11 +17,11 @@ class BottomAffix extends React.PureComponent {
     };
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        this.unHandleScroll();
     }
 
     /**

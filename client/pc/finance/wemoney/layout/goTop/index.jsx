@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
+import { addEventListener } from '@ifeng/ui_base';
 
 /**
  * 定义 GoTop 组件
@@ -9,7 +8,11 @@ import Chip from 'Chip';
 class GoTop extends React.PureComponent {
     // 渲染之后
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll, false);
+        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        this.unHandleScroll();
     }
 
     handleScroll = () => {
