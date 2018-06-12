@@ -24,10 +24,10 @@
     }
 }
 .news_item_has_image {
-    padding: 13px 0 20px 164px;
+    padding: 20px 0 20px 164px;
 }
 .news_item_no_image {
-    padding: 13px 0 20px 0;
+    padding: 20px 0;
 }
 .news_item_has_image, .news_item_no_image {
     border-bottom: 1px solid #e7e7e7;

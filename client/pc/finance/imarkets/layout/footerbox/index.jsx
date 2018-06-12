@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Cooperation from './cooperation';
+import HtmlRegion from '../../components/html-region';
 import Ad from '../../../../components/ad';
 import Footer from './footer';
 
@@ -12,7 +12,7 @@ class FooterBox extends PureComponent{
             <div className={ styles.footerbox }>
                 {/* 底部合作链接 */}
                 <div className={ styles.cooperation }>
-                    <Cooperation content={ content.cooperation } />
+                    <HtmlRegion content={ content.cooperation } />
                 </div>
                 {/* 底部广告 */}
                 <Ad styleName={ styles.ad } />

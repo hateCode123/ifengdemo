@@ -23,7 +23,7 @@ exports.list = {
             // 顶部导航接口
             nav: KVProxy.getStaticFragment(ctx, 10108).then(...handleJsonByKey(ctx, 'content')),
             // 底部合作链接
-            cooperation: KVProxy.getStaticFragment(ctx, 10015).then(...handleJs(ctx, 'content')),
+            cooperation: KVProxy.getStaticFragment(ctx, 10164).then(...handleJs(ctx, 'content')),
             // 底部公用版权
             footer: KVProxy.getStaticFragment(ctx, 10114).then(...handleJsonByKey(ctx, 'content'))
         };
