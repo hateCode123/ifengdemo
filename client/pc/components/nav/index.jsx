@@ -26,8 +26,8 @@ class Nav extends React.PureComponent {
             </li>
         ));
 
-        const moreList = content.slice(limit).map(item => (
-            <li key={Math.random()}>
+        const moreList = content.slice(limit).map((item, index) => (
+            <li key={index}>
                 <a href={item.url} target="_blank" rel={rel}>
                     {item.title}
                 </a>
