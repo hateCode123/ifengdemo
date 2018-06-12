@@ -9,6 +9,7 @@ exports.list = {
     type: 'html',
     cache: 0,
     edit: true,
+    low: true,
     handler: async ctx => {
         let json = [
             // 页面公用导航

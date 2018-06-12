@@ -31,7 +31,7 @@ const rewriteList = {
 };
 
 // 处理路由中间件逻辑
-const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
+const middleware = (ctrlObj, i, path, edit,low, ctrlPath) => {
     // http请求类型，暂时只支持get和post
     const method = ctrlObj[i].method || 'get|post';
 
@@ -89,7 +89,7 @@ const middleware = (ctrlObj, i, path, edit, ctrlPath) => {
         if (_.isFunction(handler)) {
 
             // 将handler业务方法放入队列
-            meddlewareList.push(match(type, cache, edit, ctrlPath, handler, cdncache));
+            meddlewareList.push(match(type, cache, edit, low, ctrlPath, handler, cdncache));
 
             // 将路由放入路由列表
             routerList.push({
@@ -120,14 +120,21 @@ const routerLoad = ctrlPath => {
 
             // 是否需要编辑 (Boolean)
             const edit = ctrlObj[i].edit;
+            const low = ctrlObj[i].low;
 
             // url路径 (String)
             const path = config.default.apiPrefix + ctrlObj[i].path;
 
-            middleware(ctrlObj, i, path, false, ctrlPath);
+            middleware(ctrlObj, i, path, false, false, ctrlPath);
+
             if (edit) {
                 // 添加页面编辑中间件
-                middleware(ctrlObj, i, `${path}/edit`, edit, ctrlPath);
+                middleware(ctrlObj, i, `${path}/edit`, edit,false, ctrlPath);
+            }
+
+            if (low) {
+                // 添加页面编辑中间件
+                middleware(ctrlObj, i, `${path}/low`, false, low, ctrlPath);
             }
         }
     });

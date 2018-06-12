@@ -3,10 +3,8 @@ const isWin = require('./isWin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function getHTML(globPath, extendName) {
-
     const files = glob.sync(globPath);
     return files.map(file => {
-
         // const paths = file.split(isWin() ? '/' : '/');
         // const entryName =  paths[paths.length - 2];
 
@@ -25,11 +23,10 @@ module.exports = function getHTML(globPath, extendName) {
             //     removeComments: true, // 移除HTML中的注释
             //     collapseWhitespace: false, // 删除空白符与换行符
             // },
-            chunks: [entryName, 'vendor', 'manifest'],
+            chunks: [entryName],
         };
         return new HtmlWebpackPlugin(conf);
     });
-
-}
+};
 
 // getHTMLs('./views/*/template.ejs');

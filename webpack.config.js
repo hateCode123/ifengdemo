@@ -1,5 +1,5 @@
 const path = require('path');
-const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
+// const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const webpack = require('webpack');
 // const px2rem = require('postcss-px2rem');
 const nextcss = require('postcss-cssnext');
@@ -11,6 +11,8 @@ const writeSvg = require('postcss-write-svg');
 const CleanPlugin = require('clean-webpack-plugin');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
+const es3ifyPlugin = require('es3ify-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const pcCssConfig = {
     test: /\.css$/,
@@ -23,7 +25,7 @@ const pcCssConfig = {
             loader: 'postcss-loader',
             options: {
                 sourceMap: true,
-                plugins: function () {
+                plugins: function() {
                     return [
                         postImport(),
                         nextcss({
@@ -45,10 +47,7 @@ const commoncss = {
     test: /\.css$/,
     exclude: [path.resolve(__dirname, 'node_modules/@ifeng')],
     include: /node_modules/,
-    use: [
-        'style-loader',
-        'css-loader'
-    ],
+    use: ['style-loader', 'css-loader'],
 };
 
 const mobileCssConfig = {
@@ -62,12 +61,12 @@ const mobileCssConfig = {
             loader: 'postcss-loader',
             options: {
                 sourceMap: true,
-                plugins: function () {
+                plugins: function() {
                     return [
                         postImport(),
                         aspectRatioMini(),
                         writeSvg({
-                            utf8: false
+                            utf8: false,
                         }),
                         pxToViewport({
                             viewportWidth: 750,
@@ -97,31 +96,50 @@ const mobileCssConfig = {
 const fileExtend = {
     pc_view: '',
     pc_edit: '_edit',
+    pc_view_low: '_low',
     mobile_view: '_mobile',
-    mobile_edit: '_mobile_edit'
+    mobile_edit: '_mobile_edit',
 };
 
-const createConfig = function (type, platform, cssConfig) {
+const getAliasFrame = function getAliasFram(level) {
+    return level === ''
+        ? {}
+        : {
+              react: 'anujs/dist/ReactIE.js',
+              'react-dom': 'anujs/dist/ReactIE.js',
+              'prop-types': 'anujs/lib/ReactPropTypes',
+              devtools: 'anujs/lib/devtools',
+              'create-react-class': 'anujs/lib/createClass',
+          };
+};
+
+const createConfig = function(type, platform, cssConfig, level) {
     return {
         devtool: 'cheap-module-source-map',
         entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
-            filename: `js/[name]_${platform}_${type}.js`,
+            filename: `js/[name]_${platform}_${type}${level ? '_' + level : ''}.js`,
             publicPath: '/',
-            chunkFilename: `js/[name]_${platform}_${type}.js`,
+            chunkFilename: `js/[name]_${platform}_${type}${level ? '_' + level : ''}.js`,
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
             alias: {
-                Chip: type === 'view' ?
-                    '@ifeng/visualediting/src/components/ChipView' : '@ifeng/visualediting/src/components/Chip',
-                ChipEdit: type === 'view' ?
-                    '@ifeng/visualediting/src/components/ChipEditView' : '@ifeng/visualediting/src/components/ChipEdit',
+                Chip:
+                    type === 'view'
+                        ? '@ifeng/visualediting/src/components/ChipView'
+                        : '@ifeng/visualediting/src/components/Chip',
+                ChipEdit:
+                    type === 'view'
+                        ? '@ifeng/visualediting/src/components/ChipEditView'
+                        : '@ifeng/visualediting/src/components/ChipEdit',
+                ...getAliasFrame(level),
             },
         },
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.jsx?$/,
                     use: {
                         loader: 'babel-loader',
@@ -131,9 +149,9 @@ const createConfig = function (type, platform, cssConfig) {
                                     'env',
                                     {
                                         targets: {
-                                            browsers: ['last 2 versions', 'ie >= 9'],
+                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
                                         },
-                                        modules: false,
+                                        modules: level === '' ? false : 'commonjs',
                                         useBuiltIns: true,
                                         debug: false,
                                     },
@@ -152,41 +170,53 @@ const createConfig = function (type, platform, cssConfig) {
                 commoncss,
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
-                    use: [{
-                        loader: 'url-loader',
-                        options: {
-                            limit: 100,
-                            name: 'asset/[name].[ext]',
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 100,
+                                name: 'asset/[name].[ext]',
+                            },
                         },
-                    }, ],
+                    ],
+                },
+                {
+                    test: /\.ejs$/,
+                    use: ['handlebars-loader'],
                 },
                 // {
-                //     test: /\.ejs$/,
-                //     use: ['f.lib.ejs-loader', 'f.lib.ejs-src-loader'],
+                //     test: /\.html$/,
+                //     loader: 'handlebars-loader',
                 // },
-                {
-                    test: /\.html$/,
-                    loader: 'handlebars-loader'
-                },
             ],
         },
-
+        mode: 'development',
         plugins: [
-            new WriteFileWebpackPlugin(),
+            // new BundleAnalyzerPlugin(),
+            // new WriteFileWebpackPlugin(),
+            ...(level === '' ? [] : [new es3ifyPlugin()]),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('development'),
-                ChipStaticUrl: JSON.stringify('https://ucms.ifeng.com/shard/static/edit/'),
-                ChipRecommendUrl: JSON.stringify('https://ucms.ifeng.com/shard/recommend/edit/'),
+                ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: ['vendor', 'manifest'],
-                minChunks: 2,
-            }),
-            new webpack.NamedModulesPlugin(),
-            ...getHTMLs(platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html', fileExtend[`${platform}_${type}`]),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: ['vendor', 'manifest'],
+            //     minChunks: 2,
+            // }),
+            // new webpack.NamedModulesPlugin(),
+            ...getHTMLs(
+                platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
+                fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
+            ),
         ],
     };
 };
 // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
-module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig), createConfig('view', 'mobile', mobileCssConfig), createConfig('edit', 'mobile', mobileCssConfig)];
+module.exports = [
+    createConfig('view', 'pc', pcCssConfig, ''),
+    createConfig('view', 'pc', pcCssConfig, 'low'),
+    createConfig('edit', 'pc', pcCssConfig, ''),
+    createConfig('view', 'mobile', mobileCssConfig, ''),
+    createConfig('edit', 'mobile', mobileCssConfig, ''),
+];
 // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig)];

@@ -20,6 +20,11 @@ module.exports = (app, options = {}) => {
         if (this.urlinfo && this.urlinfo.edit) {
             tplName += '_edit';
         }
+
+        if (this.urlinfo && this.urlinfo.low) {
+            tplName += '_low';
+        }
+
         if (this.urlinfo.cdncache > 0) {
             this.set('Cache-Control', `max-age=${this.urlinfo.cdncache}`);
         } else if (this.urlinfo.cdncache === 0) {
