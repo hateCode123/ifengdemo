@@ -4,6 +4,7 @@
 
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Chip from 'Chip';
 import styles from './index.css';
 import HumanTab from './human-tab';
 import SendQuestion from './send-question';
@@ -16,7 +17,9 @@ class Question extends PureComponent{
             <Fragment>
                 <div className={ styles.q_box }>
                     <img className={ styles.zai_xian_da_yi } src={ require('./zai-xian-da-yi.png') } />
-                    <HumanTab content={ content.experts } />
+                    <Chip id="10166" type="static" title="答疑专家" groupName="在线答疑" content={ content.experts }>
+                        <HumanTab />
+                    </Chip>
                 </div>
                 <SendQuestion />
                 {/* 已回答问题 */}

@@ -4,6 +4,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Chip from 'Chip';
 import styles from './index.css';
 import HtmlRegion from '../../components/html-region';
 import Zhiboshi from './zhiboshi';
@@ -15,7 +16,9 @@ class NewsDisplay extends PureComponent{
         return (
             <div className={ styles.news_display_box }>
                 {/* 置顶新闻 */}
-                <HtmlRegion content={ content.topnews } />
+                <Chip id="10165" type="static" title="新闻" groupName="新闻展示" content={ content.topnews }>
+                    <HtmlRegion />
+                </Chip>
                 {/* 直播室链接 */}
                 <Zhiboshi />
             </div>
