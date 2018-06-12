@@ -1,22 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 /**
  * 定义 Cooperation 组件
  */
+import React from 'react';
+import PropTypes from 'prop-types';
+
 class Cooperation extends React.PureComponent {
     /**
      * 插入 Cooperation html
      */
-    createCooperation = () => {
+    createCooperation = ()=>{
         return { __html: this.props.content };
     };
-
     /**
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createCooperation()} />;
+        return <div dangerouslySetInnerHTML={ this.createCooperation() } />;
     }
 }
 
