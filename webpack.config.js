@@ -144,6 +144,7 @@ const createConfig = function(type, platform, cssConfig, level) {
                     use: {
                         loader: 'babel-loader',
                         options: {
+                            cacheDirectory: true,
                             presets: [
                                 [
                                     'env',

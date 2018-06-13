@@ -10,7 +10,7 @@ exports.list = {
     type: 'html',
     cache: 0,
     edit: true,
-    low:true,
+    low: true,
     handler: async ctx => {
         let json = [
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
@@ -116,7 +116,6 @@ exports.list = {
         ];
 
         let allData = await transfer(ctx, json);
-        console.log(allData);
         await ctx.html('finance_index', {
             allData,
         });

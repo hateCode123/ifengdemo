@@ -22,6 +22,10 @@ const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
 
+const os = require('os');
+
+console.log('cpus============>', os.cpus().length);
+
 const pcCssConfig = function(level) {
     return {
         test: /\.css$/,
@@ -146,6 +150,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
+                    parallel: os.cpus().length - 1,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
                     },
