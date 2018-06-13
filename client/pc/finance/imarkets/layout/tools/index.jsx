@@ -23,7 +23,7 @@ class Tools extends PureComponent{
                         {/* 财经日历 */}
                         <Calendar />
                         {/* 全球直播 */}
-                        <a className={ styles.zhibo_link } href="http://finance.ifeng.com/gold/zhibo/" target="_blank">
+                        <a className={ `${ styles.ml14 } ${ styles.zhibo_link }` } href="http://finance.ifeng.com/gold/zhibo/" target="_blank">
                             <i className={ styles.earth } />
                             <span className={ styles.link_title }>全球直播</span>
                             <i className={ styles.play } />

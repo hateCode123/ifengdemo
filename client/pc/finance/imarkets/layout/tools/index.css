@@ -12,19 +12,19 @@ a.zhibo_link {
     display: block;
     float: left;
     position: relative;
-    margin-left: 14px;
     padding: 0 43px 0 16px;
     height: 100%;
     line-height: 81px;
     color: #fff;
     cursor: pointer;
-    &:hover, &:visited {
+    &:hover {
         text-decoration: none;
         color: #fff;
-    }
-    &:hover {
         background-color: #1a8068;
     }
+}
+.ml14 {
+    margin-left: 14px;
 }
 .hangqingzhongxin {
     margin: 0 auto 20px;
