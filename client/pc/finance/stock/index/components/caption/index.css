@@ -15,18 +15,19 @@
             text-decoration: none;
         }
     }
-    & .sub_title {
-        float: left;
-        height: 30px;
-        line-height: 38px;
-        margin-left: 29px;
-        overflow: hidden;
-        & a {
-            color: #222222;
-            margin-right: 13px;
-        }
-        & a:hover {
-            color: #f54343;
-        }
+}
+
+.sub_title {
+    float: left;
+    height: 30px;
+    line-height: 38px;
+    margin-left: 29px;
+    overflow: hidden;
+    & a {
+        color: #222222;
+        margin-right: 13px;
+    }
+    & a:hover {
+        color: #f54343;
     }
 }

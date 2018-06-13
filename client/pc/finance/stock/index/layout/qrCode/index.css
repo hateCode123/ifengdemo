@@ -6,16 +6,17 @@
     height: 165px;
     left: 0;
     background-color: #fff;
-    & .closeBtn {
-        float: left;
-        color: #999;
-        cursor: pointer;
-        height: 18px;
-        line-height: 18px;
-        padding-left: 4px;
-    }
     & img {
         float: left;
         display: block;
     }
+}
+
+.closeBtn {
+    float: left;
+    color: #999;
+    cursor: pointer;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 4px;
 }

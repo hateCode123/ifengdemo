@@ -5,51 +5,54 @@
     margin-bottom: 23px;
     position: relative;
     overflow: hidden;
-    & .prevSlide,
-    & .nextSlide {
-        width: 35px;
-        height: 34px;
-        position: absolute;
-        top: 110px;
-        left: 0px;
-        z-index: 10;
-        text-align: center;
-        cursor: pointer;
-        & a {
-            & .left,
-            & .right {
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 12;
-            }
-            & .left {
-                width: 38px;
-                height: 60px;
-                background: url(./left.png) no-repeat;
-            }
+}
 
-            & .right {
-                width: 38px;
-                height: 60px;
-                background: url(./right.png) no-repeat;
-            }
-        }
-        & .btn {
-            width: 35px;
-            height: 34px;
-            filter: alpha(opacity=60);
-            -moz-opacity: 0.6;
-            opacity: 0.6;
-            background: #000;
+.prevSlide,
+.nextSlide {
+    width: 35px;
+    height: 34px;
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    z-index: 10;
+    text-align: center;
+    cursor: pointer;
+    & a {
+        & .left,
+        & .right {
             position: absolute;
-            left: 0px;
-            top: 0px;
-            z-index: 11;
-            display: none;
+            top: 0;
+            left: 0;
+            z-index: 12;
+        }
+        & .left {
+            width: 38px;
+            height: 60px;
+            background: url(./left.png) no-repeat;
+        }
+
+        & .right {
+            width: 38px;
+            height: 60px;
+            background: url(./right.png) no-repeat;
         }
     }
-    & .nextSlide {
-        left: 535px;
-    }
+}
+
+.btn {
+    width: 35px;
+    height: 34px;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    background: #000;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 11;
+    display: none;
+}
+
+.nextSlide {
+    left: 535px;
 }

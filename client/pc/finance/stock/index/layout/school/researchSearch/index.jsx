@@ -225,7 +225,9 @@ class ResearchSearch extends React.PureComponent {
                         {'公司 '}
                     </div>
                     <div className={styles.search_btn}>
-                        <button onClick={this.handleSearch}>查询</button>
+                        <button type="button" onClick={this.handleSearch}>
+                            查询
+                        </button>
                     </div>
                 </div>
             </div>
