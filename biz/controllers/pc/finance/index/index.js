@@ -67,7 +67,7 @@ exports.list = {
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
 
             // 专题会议
-            ['meeting', 'KVProxy', 'getRecommendFragment', 20010, getStringByKey('data')],
+            ['meeting', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
             // 底部合作链接
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
