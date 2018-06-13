@@ -146,17 +146,6 @@ class NewsStream extends PureComponent{
                             </div>
                         </div>
                     </li>
-                    {/* 广告 */}
-                    <li className={ `${ styles.news_item_no_image } clearfix` }>
-                        <div className={ styles.news_item_infor }>
-                            <h2 className={ styles.news_item_title }>
-                                <a href="#">111111步取消微观领域的汇兑逐步取消微观</a>
-                            </h2>
-                            <div className="clearfix">
-                                <b className={ styles.text2 }>广告</b>
-                            </div>
-                        </div>
-                    </li>
                     {/* 图片广告 */}
                     <li className={ styles.image_ad }>
                         <a href="#">
@@ -183,7 +172,7 @@ class NewsStream extends PureComponent{
                 </ul>
                 {/* 点击查看更多 */}
                 <div className={ styles.more_box }>
-                    <a className={ styles.more } role="button">点击查看更多</a>
+                    <a className={ styles.more } href="http://finance.ifeng.com/listpage/794/1/list.shtml" target="_blank">点击查看更多</a>
                 </div>
             </div>
         );

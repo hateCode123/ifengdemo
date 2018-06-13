@@ -25,7 +25,7 @@ exports.list = {
             // 顶部新闻
             topnews: KVProxy.getStaticFragment(ctx, 10165).then(...handleJsonByKey(ctx, 'content')),
             // 答疑专家
-            experts: KVProxy.getStaticFragment(ctx, 10166).then(...handleJsonByKey(ctx, 'content')),
+            // experts: KVProxy.getStaticFragment(ctx, 10166).then(...handleJsonByKey(ctx, 'content')),
             // 底部合作链接
             cooperation: KVProxy.getStaticFragment(ctx, 10164).then(...handleJs(ctx, 'content')),
             // 底部公用版权

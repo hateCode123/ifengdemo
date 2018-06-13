@@ -91,16 +91,13 @@
     color: #ff4245;
     border-color: #ff4245;
 }
-.text, .text2, a.ly {
+.text, a.ly {
     font-size: 12px;
     color: #999;
     font-family: '微软雅黑';
 }
 .text {
     margin-left: 10px; 
-}
-.text2 {
-    font-weight: normal;
 }
 a.ly {
     float: right;

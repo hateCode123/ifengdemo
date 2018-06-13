@@ -28,17 +28,6 @@ class Tools extends PureComponent{
                             <span className={ styles.link_title }>全球直播</span>
                             <i className={ styles.play } />
                         </a>
-                        {/* 凤凰汇客厅 */}
-                        <a className={ styles.zhibo_link } href="http://finance.ifeng.com/biz/special/fhhkt/" target="_blank">
-                            <img className={ styles.fhhkt } src={ require('./feng-huang-hui-ke-ting.png') } />
-                            <i className={ styles.play } />
-                        </a>
-                        {/* 行情中心 */}
-                        <a className={ styles.zhibo_link + (this.state.isActive ? ` ${ styles.is_active }` : '')  } onClick={ this.handleDisplayHangqingzhongxinClick }>
-                            <i className={ styles.chart } />
-                            <span className={ styles.link_title }>行情中心</span>
-                            <i className={ styles.play } />
-                        </a>
                         {/* 跳转搜索 */}
                         <Search />
                     </div>

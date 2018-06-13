@@ -11,7 +11,6 @@ import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from './news-stream';
 import Question from './question';
-import ArticleRankings from './article-rankings';
 import HotTopic from './hot-topic';
 import CalenderBox from './CalenderBox';
 import SuspendedAd from '../components/suspended-ad';
@@ -57,12 +56,10 @@ class Layout extends PureComponent {
                         <NewsStream />
                     </div>
                     <div className={ styles.main_right }>
-                        {/* 在线答疑 */}
-                        <Question content={ questionData } />
+                        {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
+                        {/* <Question content={ questionData } /> */}
                         {/* 广告 */}
                         <Ad styleName={ styles.ad1 } />
-                        {/* 文章点击排行 */}
-                        <ArticleRankings />
                         {/* 热点专题 */}
                         <HotTopic />
                         {/* 日历 */}
