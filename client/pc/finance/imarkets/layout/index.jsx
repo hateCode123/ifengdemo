@@ -29,8 +29,11 @@ class Layout extends PureComponent {
         const newDisplayData = {
             topnews: content.topnews
         };
-        const questionData = {
-            experts: content.experts
+        const newsStreamData = {
+            newsstream: content.newsstream
+        };
+        const hotTopicData = {
+            hottopic: content.hottopic
         };
         const footerData = {
             cooperation: content.cooperation,
@@ -53,7 +56,7 @@ class Layout extends PureComponent {
                         {/* 新闻展示 */}
                         <NewsDisplay content={ newDisplayData } />
                         {/* 新闻流 */}
-                        <NewsStream />
+                        <NewsStream content={ newsStreamData } />
                     </div>
                     <div className={ styles.main_right }>
                         {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
@@ -61,7 +64,7 @@ class Layout extends PureComponent {
                         {/* 广告 */}
                         <Ad styleName={ styles.ad1 } />
                         {/* 热点专题 */}
-                        <HotTopic />
+                        <HotTopic content={ hotTopicData } />
                         {/* 日历 */}
                         <CalenderBox />
                         {/* 漂浮广告 */}
