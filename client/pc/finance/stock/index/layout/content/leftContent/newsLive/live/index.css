@@ -51,13 +51,13 @@
         padding: 5px 0;
         margin: 0px;
         list-style: none;
-        & .time {
-            font-weight: normal;
-            color: #222222;
-        }
     }
 }
+.time {
+    font-weight: normal;
+    color: #222222;
+}
 
-.devide {
+.devides {
     padding: 0 7px;
 }

@@ -6,6 +6,10 @@ import StockNews from './stockNews/';
 import Live from './live/';
 
 class NewsLive extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         current: 0,
     };
@@ -71,15 +75,4 @@ class NewsLive extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-NewsLive.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-NewsLive.defaultProps = {};
-
-export { NewsLive };
 export default NewsLive;

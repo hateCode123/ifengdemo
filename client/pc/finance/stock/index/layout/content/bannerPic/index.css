@@ -17,26 +17,26 @@
     z-index: 10;
     text-align: center;
     cursor: pointer;
-    & a {
-        & .left,
-        & .right {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 12;
-        }
-        & .left {
-            width: 38px;
-            height: 60px;
-            background: url(./left.png) no-repeat;
-        }
+}
 
-        & .right {
-            width: 38px;
-            height: 60px;
-            background: url(./right.png) no-repeat;
-        }
-    }
+.left,
+.right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+
+.left {
+    width: 38px;
+    height: 60px;
+    background: url(./left.png) no-repeat;
+}
+
+.right {
+    width: 38px;
+    height: 60px;
+    background: url(./right.png) no-repeat;
 }
 
 .btn {

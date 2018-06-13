@@ -176,7 +176,7 @@ class Live extends React.PureComponent {
                     <span className={styles.refresh} onClick={this.refresh}>
                         刷新
                     </span>
-                    <a href="#" target="_blank" rel={rel}>
+                    <a href="//finance.ifeng.com/gold/zhibo/" target="_blank" rel={rel}>
                         <Chip id="10052" type="static" title="直播Logo" groupName="正文" content={content}>
                             <img src={content[0].url} title={content[0].title} alt={content[0].title} />
                         </Chip>
@@ -186,7 +186,7 @@ class Live extends React.PureComponent {
                     {liveData.map((item, index) => (
                         <li key={index}>
                             <span className={styles.time}>{this.getFormatTime(item.time, 'hh:mm:ss')}</span>
-                            <span className={styles.devide}>|</span>
+                            <span className={styles.devides}>|</span>
                             <span dangerouslySetInnerHTML={this.createMarkup(item.title)} />
                         </li>
                     ))}

@@ -64,13 +64,13 @@ class BannerPic extends React.PureComponent {
                     <CarouselPic content={content} currentPage={currentPage} />
                     <div className={slideShow ? styles.prevSlide : ''} onClick={this.handleLeftClick}>
                         <a>
-                            <div className={styles.left} />
+                            <div className={slideShow ? styles.left : ''} />
                         </a>
                         <div className={styles.btn} />
                     </div>
                     <div className={slideShow ? styles.nextSlide : ''} onClick={this.handleRightClick}>
                         <a>
-                            <div className={styles.right} />
+                            <div className={slideShow ? styles.right : ''} />
                         </a>
                         <div className={styles.btn} />
                     </div>

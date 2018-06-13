@@ -7,6 +7,7 @@ import DataBox from './dataBox/';
 
 class CattleStocks extends React.PureComponent {
     state = {
+        searchTxt: '代码/拼音/名称',
         dataStock: [
             {
                 title: '沪市',
@@ -38,7 +39,6 @@ class CattleStocks extends React.PureComponent {
             },
         ],
         current: 0,
-        searchTxt: '',
     };
 
     handleMouseOver = e => {
@@ -65,6 +65,22 @@ class CattleStocks extends React.PureComponent {
         }
     };
 
+    handleFocus = e => {
+        const val = e.currentTarget.value;
+
+        if (val === '代码/拼音/名称') {
+            this.setState({ searchTxt: '' });
+        }
+    };
+
+    handleBlur = e => {
+        const val = e.currentTarget.value;
+
+        if (val === '') {
+            this.setState({ searchTxt: '代码/拼音/名称' });
+        }
+    };
+
     handleStockSearch = () => {
         const { searchTxt } = this.state;
 
@@ -81,7 +97,7 @@ class CattleStocks extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { dataStock, current } = this.state;
+        const { searchTxt, dataStock, current } = this.state;
 
         return (
             <div className={styles.box}>
@@ -102,7 +118,12 @@ class CattleStocks extends React.PureComponent {
                     <DataBox dataStock={dataStock} current={current} />
                 </div>
                 <div className={`${styles.search} clearfix`}>
-                    <input placeholder="代码/拼音/名称" onKeyUp={this.handleChange} />
+                    <input
+                        value={searchTxt}
+                        onChange={this.handleChange}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur}
+                    />
                     <a onClick={this.handleStockSearch}>查行情</a>
                     <a onClick={this.handleFundsSearch}>查资金</a>
                 </div>

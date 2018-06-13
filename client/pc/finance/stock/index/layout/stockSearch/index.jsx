@@ -4,6 +4,7 @@ import { jsonp } from '@ifeng/ui_base';
 
 class StockSearch extends React.PureComponent {
     state = {
+        searchTxt: '代码/拼音/名称',
         current: null,
         isShow: false,
         data: [],
@@ -51,11 +52,15 @@ class StockSearch extends React.PureComponent {
         );
     };
 
-    handleKeyup = e => {
+    handleChange = e => {
         const val = e.currentTarget.value;
 
         if (val !== '') {
             this.getList(val);
+            this.setState({
+                searchTxt: val,
+                isShow: true,
+            });
         }
     };
 
@@ -102,16 +107,22 @@ class StockSearch extends React.PureComponent {
     handleFocus = e => {
         const val = e.currentTarget.value;
 
-        if (val) {
+        if (val === '代码/拼音/名称') {
+            this.setState({ searchTxt: '' });
+        } else if (val) {
             this.getList(val);
             this.setState({ isShow: true });
         }
     };
 
-    handleBlur = () => {
-        setTimeout(() => {
-            this.setState({ isShow: false });
-        }, 150);
+    handleBlur = e => {
+        const val = e.currentTarget.value;
+
+        if (val === '') {
+            this.setState({ searchTxt: '代码/拼音/名称' });
+        }
+
+        this.setState({ isShow: false });
     };
 
     handeleQuoteSearch = () => {
@@ -138,7 +149,7 @@ class StockSearch extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { current, isShow, data } = this.state;
+        const { searchTxt, current, isShow, data } = this.state;
         const type = {
             stock: '股票',
             fund: '基金',
@@ -176,8 +187,8 @@ class StockSearch extends React.PureComponent {
                     <a className={styles.tip}>股票查询</a>
                     <input
                         id="searchInput"
-                        placeholder="代码/拼音/名称"
-                        onKeyUp={this.handleKeyup}
+                        value={searchTxt}
+                        onChange={this.handleChange}
                         onKeyDown={this.handleKeydown}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
@@ -189,8 +200,8 @@ class StockSearch extends React.PureComponent {
                         <option value="forex">外汇</option>
                         <option value="bond">债券</option>
                     </select>
-                    <button className={styles.q_btn} onClick={this.handeleQuoteSearch} />
-                    <button className={styles.f_btn} onClick={this.handeleFundsSearch} />
+                    <button type="button" className={styles.q_btn} onClick={this.handeleQuoteSearch} />
+                    <button type="button" className={styles.f_btn} onClick={this.handeleFundsSearch} />
                 </div>
                 <div className={styles.btn}>
                     <a className={styles.search} onClick={this.handeleSearch} />
