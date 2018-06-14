@@ -22,9 +22,9 @@ const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
 
-// const HappyPack = require('happypack');
+const HappyPack = require('happypack');
 const os = require('os');
-// const halfCpuCount = Math.floor(os.cpus().length / 2);
+const halfCpuCount = Math.floor(os.cpus().length / 2);
 // const happyThreadPool = HappyPack.ThreadPool({ size: 9 });
 
 console.log('cpus============>', os.cpus().length);
@@ -265,34 +265,34 @@ const createConfig = function(type, platform, cssConfig, level) {
                 filename: '[name].[hash].css',
                 chunkFilename: '[id].[hash].css',
             }),
-            // new HappyPack({
-            //     id: 'babel',
-            //     loaders: [
-            //         {
-            //             loader: 'babel-loader',
-            //             options: {
-            //                 presets: [
-            //                     [
-            //                         'env',
-            //                         {
-            //                             targets: {
-            //                                 browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-            //                             },
-            //                             modules: level === '' ? false : 'commonjs',
-            //                             useBuiltIns: true,
-            //                             debug: false,
-            //                         },
-            //                     ],
-            //                     'react',
-            //                     'stage-2',
-            //                 ],
-            //                 plugins: ['transform-runtime'],
-            //             },
-            //         },
-            //     ],
-            //     threadPool: happyThreadPool,
-            //     verbose: true,
-            // }),
+            new HappyPack({
+                id: 'babel',
+                loaders: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                [
+                                    'env',
+                                    {
+                                        targets: {
+                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                                        },
+                                        modules: level === '' ? false : 'commonjs',
+                                        useBuiltIns: true,
+                                        debug: false,
+                                    },
+                                ],
+                                'react',
+                                'stage-2',
+                            ],
+                            plugins: ['transform-runtime'],
+                        },
+                    },
+                ],
+                // threadPool: happyThreadPool,
+                verbose: true,
+            }),
             new CleanPlugin(['dist']),
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html',
