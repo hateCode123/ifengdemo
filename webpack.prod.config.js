@@ -25,7 +25,7 @@ const env = process.env.NODE_ENV;
 const HappyPack = require('happypack');
 const os = require('os');
 // const halfCpuCount = Math.floor(os.cpus().length / 2);
-// const happyThreadPool = HappyPack.ThreadPool({ size: 9 });
+const happyThreadPool = HappyPack.ThreadPool({ size: 3 });
 
 console.log('cpus============>', os.cpus().length);
 
@@ -271,7 +271,6 @@ const createConfig = function(type, platform, cssConfig, level) {
                     {
                         loader: 'babel-loader',
                         options: {
-                            cacheDirectory: true,
                             presets: [
                                 [
                                     'env',
@@ -291,7 +290,7 @@ const createConfig = function(type, platform, cssConfig, level) {
                         },
                     },
                 ],
-                // threadPool: happyThreadPool,
+                threadPool: happyThreadPool,
                 verbose: true,
             }),
             new CleanPlugin(['dist']),
