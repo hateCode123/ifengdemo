@@ -303,9 +303,9 @@ const createConfig = function(type, platform, cssConfig, level) {
 };
 
 module.exports = [
-    createConfig('view', 'pc', pcCssConfig, 'low'),
+    // createConfig('view', 'pc', pcCssConfig, 'low'),
     createConfig('view', 'pc', pcCssConfig, ''),
-    createConfig('edit', 'pc', pcCssConfig, ''),
-    createConfig('view', 'mobile', mobileCssConfig, ''),
-    createConfig('edit', 'mobile', mobileCssConfig, ''),
+    // createConfig('edit', 'pc', pcCssConfig, ''),
+    // createConfig('view', 'mobile', mobileCssConfig, ''),
+    // createConfig('edit', 'mobile', mobileCssConfig, ''),
 ];
