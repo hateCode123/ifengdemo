@@ -21,14 +21,27 @@ class RightContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        let instituteData = [];
+        let instituteData = {};
+        let larkData = {};
 
         if (content.institute) {
-            instituteData = content.institute.list.map(item => ({
-                url: item.url,
-                title: item.title,
-                thumbnail: '',
-            }));
+            const data = content.institute.list[0];
+
+            instituteData = {
+                url: data.url,
+                title: data.title,
+                thumbnail: JSON.parse(data.thumbnails).image[0].url,
+            };
+        }
+
+        if (content.lark) {
+            const data = content.lark;
+
+            larkData = {
+                url: data.url,
+                title: data.title,
+                thumbnail: data.thumbnail,
+            };
         }
 
         return (
@@ -40,7 +53,7 @@ class RightContent extends React.PureComponent {
                     <BoxTitle url="#" title="财经智库" />
                     <ul className={`${styles.list} clearfix`}>
                         <ThinkTank tip="研究院" content={instituteData} />
-                        <ThinkTank tip="国子策" />
+                        <ThinkTank tip="国子策" content={larkData} />
                     </ul>
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />

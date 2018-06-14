@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 
-& .box {
+.box {
     & table {
         width: 100%;
         background: url(./g_25.png) repeat left 1px;

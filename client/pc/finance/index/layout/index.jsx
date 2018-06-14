@@ -45,7 +45,6 @@ class Layout extends React.PureComponent {
             middleContent: {
                 comicBook: content.comicBook,
                 talking: content.talking,
-                talkingList: content.talkingList,
                 finance: content.finance,
                 financeList: content.financeList,
                 stocks: content.stocks,
@@ -61,6 +60,7 @@ class Layout extends React.PureComponent {
                 asideAd6: content.asideAd6,
                 financeVideo: content.financeVideo,
                 institute: content.institute,
+                lark: content.lark,
                 meeting: content.meeting,
                 market: content.market,
                 courier: content.courier,

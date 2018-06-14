@@ -33,24 +33,6 @@ class MiddleContent extends React.PureComponent {
                 <ComicBook content={content.comicBook} />
                 <div className={styles.box}>
                     <div className={styles.box_inner}>
-                        <div className={styles.talking}>
-                            <Chip
-                                id="10008"
-                                type="static"
-                                title="大咖说标题栏"
-                                groupName="正文"
-                                content={content.talking}>
-                                <Caption />
-                            </Chip>
-                        </div>
-                        <Chip
-                            id="20005"
-                            type="recommend"
-                            title="大咖说新闻列表"
-                            groupName="正文"
-                            content={content.talkingList}>
-                            <TitleList />
-                        </Chip>
                         <div className={styles.finance}>
                             <Chip
                                 id="10009"

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 import { rel } from '../../../../../../../../utils/rel';
