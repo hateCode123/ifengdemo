@@ -24,7 +24,8 @@ const env = process.env.NODE_ENV;
 
 const HappyPack = require('happypack');
 const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: 1 });
+const halfCpuCount = Math.floor(os.cpus().length / 2);
+const happyThreadPool = HappyPack.ThreadPool({ size: halfCpuCount });
 
 console.log('cpus============>', os.cpus().length);
 
@@ -152,7 +153,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
-                    parallel: false,
+                    parallel: halfCpuCount,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
                     },
