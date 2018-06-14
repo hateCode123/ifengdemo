@@ -109,7 +109,9 @@ class StockSearch extends React.PureComponent {
 
         if (val === '代码/拼音/名称') {
             this.setState({ searchTxt: '' });
-        } else if (val) {
+        } else if (val === '') {
+            return;
+        } else {
             this.getList(val);
             this.setState({ isShow: true });
         }
