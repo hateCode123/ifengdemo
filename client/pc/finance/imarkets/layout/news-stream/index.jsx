@@ -17,7 +17,7 @@ class NewsStream extends PureComponent{
                 format: 'js'
             }
         });
-        const newsList = document.getElementById('news-stream-list').getElementsByTagName('li');;
+        const newsList = document.getElementById('news-stream-list').getElementsByTagName('li');
         for(let i = 0, j = 36; i < j; i++){
             const a = newsList[i].getElementsByTagName('a')[2];
             if(data[i].count !== 0){

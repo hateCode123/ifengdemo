@@ -31,6 +31,7 @@
 }
 .news_item_has_image, .news_item_no_image {
     border-bottom: 1px solid #e7e7e7;
+    font-family: '微软雅黑';
 }
 .image_link, .news_item_infor {
     float: left;
@@ -45,7 +46,7 @@
         float: left;
         width: 100%;
         transition: all .3s ease;
-        &:hover { 
+        &:hover {
             transform: scale(1.04, 1.04);
         }
     }
@@ -98,7 +99,7 @@
     font-family: '微软雅黑';
 }
 .ml10 {
-    margin-left: 10px; 
+    margin-left: 10px;
 }
 a.ly {
     float: right;
