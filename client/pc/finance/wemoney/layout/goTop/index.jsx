@@ -8,7 +8,7 @@ import { addEventListener } from '@ifeng/ui_base';
 class GoTop extends React.PureComponent {
     // 渲染之后
     componentDidMount() {
-        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener(window, 'scroll', this.handleScroll);
     }
 
     componentWillUnmount() {
