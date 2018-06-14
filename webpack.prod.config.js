@@ -24,7 +24,7 @@ const env = process.env.NODE_ENV;
 
 const HappyPack = require('happypack');
 const os = require('os');
-const halfCpuCount = Math.floor(os.cpus().length / 2);
+// const halfCpuCount = Math.floor(os.cpus().length / 2);
 // const happyThreadPool = HappyPack.ThreadPool({ size: 9 });
 
 console.log('cpus============>', os.cpus().length);
@@ -194,29 +194,29 @@ const createConfig = function(type, platform, cssConfig, level) {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    // use: 'happypack/loader?id=babel',
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                [
-                                    'env',
-                                    {
-                                        targets: {
-                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                                        },
-                                        modules: level === '' ? false : 'commonjs',
-                                        useBuiltIns: true,
-                                        debug: false,
-                                    },
-                                ],
-                                'react',
-                                'stage-2',
-                            ],
+                    use: 'happypack/loader?id=babel',
+                    // use: {
+                    //     loader: 'babel-loader',
+                    //     options: {
+                    //         presets: [
+                    //             [
+                    //                 'env',
+                    //                 {
+                    //                     targets: {
+                    //                         browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                    //                     },
+                    //                     modules: level === '' ? false : 'commonjs',
+                    //                     useBuiltIns: true,
+                    //                     debug: false,
+                    //                 },
+                    //             ],
+                    //             'react',
+                    //             'stage-2',
+                    //         ],
 
-                            plugins: ['transform-runtime'],
-                        },
-                    },
+                    //         plugins: ['transform-runtime'],
+                    //     },
+                    // },
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
