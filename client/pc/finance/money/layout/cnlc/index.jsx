@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
+
+import { jsonp, loadScript } from '@ifeng/ui_base';
+
 import style from './style.css';
 import '../../reset.css';
 import CommonTitleXL from './../commonTitleXL/';
@@ -12,30 +14,31 @@ class Cnlc extends React.PureComponent {
         tabContentConfig: [
             {
                 tabTxt: '基金',
-                content: this.props.content.cnlcListJijin || {},
+                content: {},
                 analy: this.props.content.cnlcJijin || {},
             },
             {
                 tabTxt: 'P2P',
-                content: this.props.content.cnlcListP2P || {},
+                content: {},
                 analy: this.props.content.cnlcP2P || {},
             },
             {
                 tabTxt: '信托',
-                content: this.props.content.cnlcListTrust || {},
+                content: {},
                 analy: this.props.content.cnlcTrust || {},
             },
             {
                 tabTxt: '私募',
-                content: this.props.content.cnlcListPrivate || {},
+                content: {},
                 analy: this.props.content.cnlcPrivate || {},
             },
             {
                 tabTxt: '银行理财',
-                content: this.props.content.cnlcListFinance || {},
+                content: {},
                 analy: this.props.content.cnlcFinance || {},
             },
         ],
+        type: ['fund', 'p2p', 'trust', 'pe', 'bank'],
         uiConfig: [
             { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
             { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
@@ -44,6 +47,54 @@ class Cnlc extends React.PureComponent {
             { current: 0, top: 0, answerUser: '全部专家', textArea: '' },
         ],
     };
+    dealData = (data, type) => {
+        //  把接口数据处理成cmpp里面输出的数据格式
+        return {
+            Stype: type,
+            analyst: [...data].map(item => {
+                return { name: item.name, img: item.img };
+            }),
+
+            qa: [...data].map(item => {
+                return {
+                    name: item.name,
+                    count: item.count,
+                    qaList: item.list.map(d => {
+                        return {
+                            a: d.answer,
+                            ad: d.answer_date,
+                            at: d.answer_time,
+                            au: d.answer_user,
+                            q: d.question,
+                            qd: d.question_date,
+                            qt: d.question_time,
+                            qu: d.question_user,
+                        };
+                    }),
+                };
+            }),
+        };
+    };
+
+    getData = async (TYPE, index) => {
+        const { type, current, tabContentConfig } = this.state;
+        let __i = index || current;
+        const __type = TYPE || 'trust';
+        const data = await jsonp(`http://app.finance.ifeng.com/gszb/ana_list.php?type=${__type}`);
+        let arr = [...tabContentConfig];
+        arr[__i].content = this.dealData(data, __type);
+        this.setState({ tabContentConfig: [...arr] }, () => {
+            console.log('tabContentConfig', tabContentConfig);
+        });
+    };
+    componentDidMount() {
+        const { type } = this.state;
+        type.map(async (item, i) => {
+            await this.getData(item, i);
+
+            return {};
+        });
+    }
     handleTabsChange = v => {
         this.setState({
             current: v,
@@ -71,9 +122,8 @@ class Cnlc extends React.PureComponent {
 
         return (
             <div className={style.cnlc} id="fxs">
-                <Chip id="10047" type="static" title="分析师答疑title" groupName="" content={content.cnlcTitle}>
-                    <CommonTitleXL config={{ img: 'bg02' }} />
-                </Chip>
+                <CommonTitleXL config={{ img: 'bg02' }} content={content.cnlcTitle} />
+
                 <div className={style.fxsdy}>
                     <ul className={style.labe_04}>{tabDom}</ul>
                     <CnlcTabControlArea

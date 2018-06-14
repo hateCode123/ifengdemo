@@ -4,22 +4,7 @@ import style from './style.css';
 import '../../reset.css';
 import Chip from 'Chip';
 import Search from '../../../../components/search/';
-
-class Logo extends React.PureComponent {
-    createMarkup = () => {
-        return { __html: this.props.content };
-    };
-    /**
-     * 渲染组件
-     */
-    render() {
-        return <div className={style.h_theLogo} dangerouslySetInnerHTML={this.createMarkup()} />;
-    }
-}
-
-Logo.propTypes = { content: PropTypes.string };
-
-Logo.defaultProps = {};
+import { rel } from '../../../../utils/rel';
 
 class Banner extends React.PureComponent {
     render() {
@@ -27,12 +12,23 @@ class Banner extends React.PureComponent {
 
         return (
             <div className={style.h_searchDiv}>
-                <Chip id="10128" type="static" title="logo" groupName="导航" content={content.banner}>
-                    <Logo />
-                </Chip>
-                <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
-                    <Search />
-                </Chip>
+                <div className={style.h_theLogo}>
+                    <a href="http://finance.ifeng.com/stock/" target="_blank" rel={rel} title="理财首页">
+                        <img
+                            src="http://p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
+                            width="161"
+                            height="27"
+                            alt="凤凰网理财"
+                        />
+                    </a>
+                    <img
+                        src="http://y1.ifengimg.com/a/2014/0922/lc/images/l_18.png"
+                        width="178"
+                        height="30"
+                        style={{ 'marginLeft': '15px' }}
+                    />
+                </div>
+                <Search content={content.search} />
             </div>
         );
     }

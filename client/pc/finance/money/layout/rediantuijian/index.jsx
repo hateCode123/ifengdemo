@@ -8,11 +8,7 @@ import HotFundsTable from '../hotfundsTable/';
 import CommonTitleL from './../commonTitleL/';
 
 class Rediantuijian extends React.PureComponent {
-    // rediantuijianTableStock,
-    // rediantuijianTableMix,
-    // rediantuijianTableZhishu,
-    // rediantuijianTableZhaiquan,
-    // rediantuijianTableMoney,
+    
     state = {
         current: 0,
         tabContentConfig: [
@@ -73,10 +69,10 @@ class Rediantuijian extends React.PureComponent {
                 title: [
                     { txt: '基金名称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
                     { txt: '基金代码', tdKey: 'code' },
-               
+
                     { txt: '万份收益', tdKey: 'unitInterest', postfix: '%' },
                     { txt: '7日年化收益率', tdKey: 'rateSevenDay', postfix: '%' },
-                   
+
                     { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableMoney || [],
@@ -114,15 +110,8 @@ class Rediantuijian extends React.PureComponent {
 
         return (
             <div className={style.rdtj}>
-                <Chip
-                    id="10113"
-                    type="static"
-                    title="热点推荐title"
-                    groupName="首屏"
-                    content={content.rediantuijianTitle}>
-                    <CommonTitleL />
-                </Chip>
-                {/* <Rediantuijian content={content} /> */}
+                <CommonTitleL content={content.rediantuijianTitle} />
+
                 <div style={{ marginTop: '18px' }}>
                     <ul className={style.labe_02}>{tabDom}</ul>
                     {tabContentDom}
