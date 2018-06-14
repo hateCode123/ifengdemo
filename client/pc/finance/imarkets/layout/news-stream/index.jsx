@@ -21,7 +21,7 @@ class NewsStream extends PureComponent{
         for(let i = 0, j = 36; i < j; i++){
             const a = newsList[i].getElementsByTagName('a')[2];
             if(data[i].count !== 0){
-                a.innerHTML = data[i].count + 'x';
+                a.innerText = data[i].count + 'x';
             }
         }
     }
