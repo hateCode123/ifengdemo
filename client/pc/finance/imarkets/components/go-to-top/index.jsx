@@ -33,7 +33,7 @@ class GoToTop extends PureComponent{
     // 判断返回顶部按钮的显示隐藏
     handleWindowScroll = (event)=>{
         const scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        const isDisplay = scroll >= 60; 
+        const isDisplay = scroll >= 60;
         if(isDisplay !== this.state.isDisplay){
             this.setState({
                 opacity: isDisplay ? styles.opacity_0_to_1 : styles.opacity_1_to_0,
@@ -60,7 +60,7 @@ class GoToTop extends PureComponent{
     };
     render(){
         return (
-            <input className={ `${ styles.go_to_top } ${ this.state.opacity }` } type="button" title="返回顶部" onClick={ this.handleGoToTopClick } />
+            <input className={ `${ styles.go_to_top } ${ this.state.opacity }` } type="button" onClick={ this.handleGoToTopClick } />
         );
     }
 }
