@@ -22,6 +22,12 @@ const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
 
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 });
+
+console.log('cpus============>', os.cpus().length);
+
 const pcCssConfig = function(level) {
     return {
         test: /\.css$/,
@@ -146,6 +152,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
+                    parallel: os.cpus().length - 1,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
                     },
@@ -186,28 +193,29 @@ const createConfig = function(type, platform, cssConfig, level) {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                [
-                                    'env',
-                                    {
-                                        targets: {
-                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                                        },
-                                        modules: level === '' ? false : 'commonjs',
-                                        useBuiltIns: true,
-                                        debug: false,
-                                    },
-                                ],
-                                'react',
-                                'stage-2',
-                            ],
+                    use: 'happypack/loader?id=babel',
+                    // use: {
+                    //     loader: 'babel-loader',
+                    //     options: {
+                    //         presets: [
+                    //             [
+                    //                 'env',
+                    //                 {
+                    //                     targets: {
+                    //                         browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                    //                     },
+                    //                     modules: level === '' ? false : 'commonjs',
+                    //                     useBuiltIns: true,
+                    //                     debug: false,
+                    //                 },
+                    //             ],
+                    //             'react',
+                    //             'stage-2',
+                    //         ],
 
-                            plugins: ['transform-runtime'],
-                        },
-                    },
+                    //         plugins: ['transform-runtime'],
+                    //     },
+                    // },
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
@@ -255,6 +263,34 @@ const createConfig = function(type, platform, cssConfig, level) {
                 // both options are optional
                 filename: '[name].[hash].css',
                 chunkFilename: '[id].[hash].css',
+            }),
+            new HappyPack({
+                id: 'babel',
+                loaders: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                [
+                                    'env',
+                                    {
+                                        targets: {
+                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                                        },
+                                        modules: level === '' ? false : 'commonjs',
+                                        useBuiltIns: true,
+                                        debug: false,
+                                    },
+                                ],
+                                'react',
+                                'stage-2',
+                            ],
+                            plugins: ['transform-runtime'],
+                        },
+                    },
+                ],
+                threadPool: happyThreadPool,
+                verbose: true,
             }),
             new CleanPlugin(['dist']),
             ...getHTMLs(

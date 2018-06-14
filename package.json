@@ -84,6 +84,7 @@
         "file-loader": "^1.1.9",
         "glob": "^7.1.2",
         "handlebars-loader": "^1.6.0",
+        "happypack": "^5.0.0-beta.4",
         "mocha": "^4.1.0",
         "nodemon": "^1.15.1",
         "postcss-aspect-ratio-mini": "0.0.2",

@@ -14,6 +14,10 @@ const getHTMLs = require('./webpackUtils/getHTMLs');
 const es3ifyPlugin = require('es3ify-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 });
+
 const pcCssConfig = {
     test: /\.css$/,
     // exclude: /node_modules/,
@@ -141,28 +145,30 @@ const createConfig = function(type, platform, cssConfig, level) {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                [
-                                    'env',
-                                    {
-                                        targets: {
-                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                                        },
-                                        modules: level === '' ? false : 'commonjs',
-                                        useBuiltIns: true,
-                                        debug: false,
-                                    },
-                                ],
-                                'react',
-                                'stage-2',
-                            ],
+                    use: 'happypack/loader?id=babel',
+                    // use: {
+                    //     loader: 'babel-loader',
+                    //     options: {
+                    //         cacheDirectory: true,
+                    //         presets: [
+                    //             [
+                    //                 'env',
+                    //                 {
+                    //                     targets: {
+                    //                         browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                    //                     },
+                    //                     modules: level === '' ? false : 'commonjs',
+                    //                     useBuiltIns: true,
+                    //                     debug: false,
+                    //                 },
+                    //             ],
+                    //             'react',
+                    //             'stage-2',
+                    //         ],
 
-                            plugins: ['transform-runtime'],
-                        },
-                    },
+                    //         plugins: ['transform-runtime'],
+                    //     },
+                    // },
                     // exclude: /node_modules/,
                     include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
                 },
@@ -204,6 +210,37 @@ const createConfig = function(type, platform, cssConfig, level) {
             //     minChunks: 2,
             // }),
             // new webpack.NamedModulesPlugin(),
+
+            new HappyPack({
+                id: 'babel',
+                loaders: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true,
+                            presets: [
+                                [
+                                    'env',
+                                    {
+                                        targets: {
+                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+                                        },
+                                        modules: level === '' ? false : 'commonjs',
+                                        useBuiltIns: true,
+                                        debug: false,
+                                    },
+                                ],
+                                'react',
+                                'stage-2',
+                            ],
+
+                            plugins: ['transform-runtime'],
+                        },
+                    },
+                ],
+                threadPool: happyThreadPool,
+                verbose: true,
+            }),
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
