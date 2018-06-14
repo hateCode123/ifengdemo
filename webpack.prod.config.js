@@ -24,7 +24,7 @@ const env = process.env.NODE_ENV;
 
 const HappyPack = require('happypack');
 const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 });
+const happyThreadPool = HappyPack.ThreadPool({ size: 1 });
 
 console.log('cpus============>', os.cpus().length);
 
