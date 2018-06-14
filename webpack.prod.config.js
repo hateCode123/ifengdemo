@@ -152,7 +152,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
-                    parallel: os.cpus().length - 1,
+                    parallel: false,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
                     },
