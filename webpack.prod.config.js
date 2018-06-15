@@ -153,6 +153,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
+                    cache: true,
                     parallel: os.cpus().length - 4,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
@@ -271,6 +272,7 @@ const createConfig = function(type, platform, cssConfig, level) {
                     {
                         loader: 'babel-loader',
                         options: {
+                            cacheDirectory: true,
                             presets: [
                                 [
                                     'env',
@@ -303,9 +305,9 @@ const createConfig = function(type, platform, cssConfig, level) {
 };
 
 module.exports = [
-    // createConfig('view', 'pc', pcCssConfig, 'low'),
+    createConfig('view', 'pc', pcCssConfig, 'low'),
     createConfig('view', 'pc', pcCssConfig, ''),
-    // createConfig('edit', 'pc', pcCssConfig, ''),
-    // createConfig('view', 'mobile', mobileCssConfig, ''),
-    // createConfig('edit', 'mobile', mobileCssConfig, ''),
+    createConfig('edit', 'pc', pcCssConfig, ''),
+    createConfig('view', 'mobile', mobileCssConfig, ''),
+    createConfig('edit', 'mobile', mobileCssConfig, ''),
 ];
