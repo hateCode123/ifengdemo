@@ -1,0 +1,10 @@
+.error_box {
+    background: #f54343;
+}
+
+.error {
+    height: 20px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+}
