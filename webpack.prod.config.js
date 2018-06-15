@@ -24,7 +24,8 @@ const env = process.env.NODE_ENV;
 
 const HappyPack = require('happypack');
 const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 });
+// const halfCpuCount = Math.floor(os.cpus().length / 2);
+const happyThreadPool = HappyPack.ThreadPool({ size: 3 });
 
 console.log('cpus============>', os.cpus().length);
 
@@ -152,7 +153,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
-                    parallel: os.cpus().length - 1,
+                    parallel: os.cpus().length - 4,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
                     },
@@ -302,9 +303,9 @@ const createConfig = function(type, platform, cssConfig, level) {
 };
 
 module.exports = [
-    createConfig('view', 'pc', pcCssConfig, 'low'),
+    // createConfig('view', 'pc', pcCssConfig, 'low'),
     createConfig('view', 'pc', pcCssConfig, ''),
-    createConfig('edit', 'pc', pcCssConfig, ''),
-    createConfig('view', 'mobile', mobileCssConfig, ''),
-    createConfig('edit', 'mobile', mobileCssConfig, ''),
+    // createConfig('edit', 'pc', pcCssConfig, ''),
+    // createConfig('view', 'mobile', mobileCssConfig, ''),
+    // createConfig('edit', 'mobile', mobileCssConfig, ''),
 ];

@@ -16,7 +16,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 // const HappyPack = require('happypack');
 const os = require('os');
-// const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 });
+const happyThreadPool = HappyPack.ThreadPool({ size: 1 });
 
 const pcCssConfig = {
     test: /\.css$/,
