@@ -5,6 +5,11 @@ import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../../utils/rel';
 
 class DataBox extends React.PureComponent {
+    static propTypes = {
+        dataStock: PropTypes.array,
+        current: PropTypes.number,
+    };
+
     state = {
         prices: [],
     };
@@ -100,18 +105,4 @@ class DataBox extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-DataBox.propTypes = {
-    dataStock: PropTypes.array,
-    current: PropTypes.number,
-};
-
-/**
- * 定义组件默认属性
- * */
-DataBox.defaultProps = {};
-
-export { DataBox };
 export default DataBox;

@@ -4,6 +4,14 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class SubTitle extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
+    static defaultProps = {
+        content: [],
+    };
+
     /**
      * 渲染组件
      */
@@ -22,19 +30,4 @@ class SubTitle extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-SubTitle.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-SubTitle.defaultProps = {
-    content: [],
-};
-
-export { SubTitle };
 export default SubTitle;

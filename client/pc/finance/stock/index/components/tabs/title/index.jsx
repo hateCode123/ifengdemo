@@ -4,6 +4,17 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Title extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        current: PropTypes.number,
+        handleTabsChange: PropTypes.func,
+    };
+
+    static defaultProps = {
+        content: [],
+        current: 0,
+    };
+
     handleMouseOver = e => {
         const { content, handleTabsChange } = this.props;
         const index = Number(e.currentTarget.attributes['data-index'].value);
@@ -35,22 +46,4 @@ class Title extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Title.propTypes = {
-    content: PropTypes.array,
-    current: PropTypes.number,
-    handleTabsChange: PropTypes.func,
-};
-
-/**
- * 定义组件默认属性
- * */
-Title.defaultProps = {
-    content: [],
-    current: 0,
-};
-
-export { Title };
 export default Title;

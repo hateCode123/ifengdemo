@@ -4,6 +4,10 @@ import styles from './index.css';
 import Title from './title/';
 
 class Headline extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -21,15 +25,4 @@ class Headline extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Headline.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Headline.defaultProps = {};
-
-export { Headline };
 export default Headline;

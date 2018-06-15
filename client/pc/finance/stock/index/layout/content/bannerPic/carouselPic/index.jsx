@@ -4,6 +4,11 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 
 class CarouselPic extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        currentPage: PropTypes.number,
+    };
+
     /**
      * 渲染组件
      */
@@ -38,18 +43,4 @@ class CarouselPic extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CarouselPic.propTypes = {
-    content: PropTypes.array,
-    currentPage: PropTypes.number,
-};
-
-/**
- * 定义组件默认属性
- * */
-CarouselPic.defaultProps = {};
-
-export { CarouselPic };
 export default CarouselPic;

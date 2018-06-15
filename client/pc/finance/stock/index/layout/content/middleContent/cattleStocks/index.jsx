@@ -131,15 +131,4 @@ class CattleStocks extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CattleStocks.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-CattleStocks.defaultProps = {};
-
-export { CattleStocks };
 export default CattleStocks;

@@ -166,15 +166,4 @@ class CustomStocks extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CustomStocks.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-CustomStocks.defaultProps = {};
-
-export { CustomStocks };
 export default CustomStocks;

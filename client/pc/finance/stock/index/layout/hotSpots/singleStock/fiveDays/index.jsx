@@ -5,6 +5,12 @@ import Chip from 'Chip';
 import { rel } from '../../../../../../../utils/rel';
 
 class FiveDays extends React.PureComponent {
+    static propTypes = {
+        current: PropTypes.number,
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -61,19 +67,4 @@ class FiveDays extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-FiveDays.propTypes = {
-    current: PropTypes.number,
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-FiveDays.defaultProps = {};
-
-export { FiveDays };
 export default FiveDays;

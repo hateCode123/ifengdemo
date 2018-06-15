@@ -6,6 +6,10 @@ import { rel } from '../../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
 class Live extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     state = {
         selected: true,
         liveData: [],
@@ -196,15 +200,4 @@ class Live extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Live.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Live.defaultProps = {};
-
-export { Live };
 export default Live;

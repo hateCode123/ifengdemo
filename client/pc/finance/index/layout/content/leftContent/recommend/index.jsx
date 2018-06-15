@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Recommend extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -25,17 +29,4 @@ class Recommend extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Recommend.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Recommend.defaultProps = {};
-
-export { Recommend };
 export default Recommend;

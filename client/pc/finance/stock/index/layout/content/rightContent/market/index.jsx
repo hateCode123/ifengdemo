@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Market extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.string,
+    };
+
     /**
      * 插入 html
      */
@@ -17,15 +21,4 @@ class Market extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Market.propTypes = { content: PropTypes.string };
-
-/**
- * 定义组件默认属性
- * */
-Market.defaultProps = {};
-
-export { Market };
 export default Market;

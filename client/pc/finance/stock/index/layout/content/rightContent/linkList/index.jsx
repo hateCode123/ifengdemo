@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 
 class LinkList extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -26,15 +30,4 @@ class LinkList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-LinkList.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-LinkList.defaultProps = {};
-
-export { LinkList };
 export default LinkList;

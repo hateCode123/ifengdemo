@@ -150,15 +150,4 @@ class MyStocks extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-MyStocks.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-MyStocks.defaultProps = {};
-
-export { MyStocks };
 export default MyStocks;

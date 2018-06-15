@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { Tab } from '../../../../components/tabs/';
-import { rel } from '../../../../../../../utils/rel';
 import AnswerList from './answerList/';
 
 class Answer extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -31,15 +34,4 @@ class Answer extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Answer.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Answer.defaultProps = {};
-
-export { Answer };
 export default Answer;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { MidTitle } from '../../../components/midTitle';
+import MidTitle from '../../../components/midTitle';
 import CattleStocks from './cattleStocks/';
 import Rank from './rank/';
 import FundsFlow from './fundsFlow/';
@@ -10,50 +10,14 @@ import CustomStocks from './customStocks/';
 import Qa from './QA/';
 
 class MiddleContent extends React.PureComponent {
-    state = {
-        nowTime: '',
-    };
-
-    componentDidMount() {
-        this.refreshCalendarClock();
-        setInterval(() => {
-            this.refreshCalendarClock();
-        }, 1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval();
-    }
-
-    /**
-     * 获取当前时间
-     */
-    refreshCalendarClock = () => {
-        const now = new Date();
-        let time = '';
-        let hours = now.getHours();
-
-        if (hours < 10) {
-            hours = `0${hours}`;
-        }
-        time += `${hours}:`;
-        let minutes = now.getMinutes();
-
-        if (minutes < 10) {
-            minutes = `0${minutes}`;
-        }
-        time += minutes;
-
-        this.setState({
-            nowTime: time,
-        });
+    static propTypes = {
+        content: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { nowTime } = this.state;
         const { content } = this.props;
 
         return (
@@ -65,7 +29,7 @@ class MiddleContent extends React.PureComponent {
                         title="视频抓牛股标题"
                         groupName="正文"
                         content={content.cattleStocksTitle}>
-                        <MidTitle nowTime={nowTime} />
+                        <MidTitle nowTime />
                     </Chip>
                     <CattleStocks />
                 </div>
@@ -112,15 +76,4 @@ class MiddleContent extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-MiddleContent.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-MiddleContent.defaultProps = {};
-
-export { MiddleContent };
 export default MiddleContent;

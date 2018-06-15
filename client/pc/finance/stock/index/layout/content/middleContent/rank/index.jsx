@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
@@ -186,15 +185,4 @@ class Rank extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Rank.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-Rank.defaultProps = {};
-
-export { Rank };
 export default Rank;

@@ -4,6 +4,12 @@ import styles from './index.css';
 import { rel } from '../../../../../../../../utils/rel';
 
 class Title extends React.PureComponent {
+    static propTypes = {
+        title: PropTypes.object,
+        text: PropTypes.object,
+        extra: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -38,19 +44,4 @@ class Title extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Title.propTypes = {
-    title: PropTypes.object,
-    text: PropTypes.object,
-    extra: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-Title.defaultProps = {};
-
-export { Title };
 export default Title;

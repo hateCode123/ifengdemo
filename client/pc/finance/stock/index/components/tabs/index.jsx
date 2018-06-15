@@ -7,6 +7,14 @@ import SubTitle from './subTitle/';
 import Link from './link/';
 
 class Tab extends React.PureComponent {
+    static propTypes = {
+        title: PropTypes.object,
+        subTitle: PropTypes.object,
+        newsLiveTabLink: PropTypes.object,
+        current: PropTypes.number,
+        handleTabsChange: PropTypes.func,
+    };
+
     /**
      * 渲染组件
      */
@@ -56,23 +64,4 @@ class Tab extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Tab.propTypes = {
-    title: PropTypes.object,
-    subTitle: PropTypes.object,
-    newsLiveTabLink: PropTypes.object,
-    current: PropTypes.number,
-    handleTabsChange: PropTypes.func,
-};
-
-/**
- * 定义组件默认属性
- * */
-Tab.defaultProps = {
-    current: 0,
-};
-
-export { Tab };
 export default Tab;

@@ -4,6 +4,10 @@ import styles from './index.css';
 import { cookie } from '@ifeng/ui_base';
 
 class QaForm extends React.PureComponent {
+    static propTypes = {
+        answerUserName: PropTypes.string,
+    };
+
     state = {
         questionUserName: '',
     };
@@ -41,17 +45,4 @@ class QaForm extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-QaForm.propTypes = {
-    answerUserName: PropTypes.string,
-};
-
-/**
- * 定义组件默认属性
- * */
-QaForm.defaultProps = {};
-
-export { QaForm };
 export default QaForm;

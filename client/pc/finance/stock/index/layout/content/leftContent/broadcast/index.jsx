@@ -5,6 +5,10 @@ import Slides from '@ifeng/ui_pc_slides';
 import { rel } from '../../../../../../../utils/rel';
 
 class Broadcast extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     sliderTmpl = item => {
         return (
             <div className={styles.item}>
@@ -45,17 +49,4 @@ class Broadcast extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Broadcast.propTypes = {
-    content: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-Broadcast.defaultProps = {};
-
-export { Broadcast };
 export default Broadcast;

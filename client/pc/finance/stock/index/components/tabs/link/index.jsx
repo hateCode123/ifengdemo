@@ -4,6 +4,14 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Link extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
+    static defaultProps = {
+        content: [],
+    };
+
     /**
      * 渲染组件
      */
@@ -20,19 +28,4 @@ class Link extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Link.propTypes = {
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Link.defaultProps = {
-    content: [],
-};
-
-export { Link };
 export default Link;
