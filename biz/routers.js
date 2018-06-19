@@ -40,126 +40,116 @@ const rewriteList = {
     // '/mobile/content/:id/edit': '/content/:id/edit',
 };
 
-
 // 自动加载controllers中的路由
 
-    glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
-        const urlPath = file.replace(__dirname, '');
+glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
+    const urlPath = file.replace(__dirname, '');
 
-        if (config.default.blacklist.indexOf(urlPath) > -1) {
-            // 处理路由黑名单，在黑名单中的路由不会被加载
-            return;
+    if (config.default.blacklist.indexOf(urlPath) > -1) {
+        // 处理路由黑名单，在黑名单中的路由不会被加载
+        return;
+    }
+
+    const ctrlObj = require(file);
+
+    for (const i in ctrlObj) {
+        if (!ctrlObj[i].path) {
+            continue;
         }
 
-        const ctrlObj = require(file);
+        // 是否需要编辑 (Boolean)
+        const edit = ctrlObj[i].edit;
+        const low = ctrlObj[i].low;
 
-        for (const i in ctrlObj) {
-            if (!ctrlObj[i].path) {
+        // url路径 (String)
+        const path = config.default.apiPrefix + ctrlObj[i].path;
+
+        // http请求类型，暂时只支持get和post
+        const method = ctrlObj[i].method || 'get|post';
+
+        // 业务方法，主要处理所有业务 (Function)
+        const handler = ctrlObj[i].handler;
+
+        // 中间件列表 (Function | Array )
+        const middleware = ctrlObj[i].middleware;
+
+        // joi 对象 (Object)
+        const schema = ctrlObj[i].schema;
+
+        // 类型 (Sting)
+        const cdncache = ctrlObj[i].cdncache;
+
+        // 类型 (Sting)
+        const type = ctrlObj[i].type;
+
+        // 缓存时间 (Number)，单位s
+        const cache = ctrlObj[i].cache || 0;
+        const meddlewareList = [];
+
+        if (_.isObject(schema)) {
+            // 添加joi验证中间件
+            meddlewareList.push(validate(schema, type));
+        }
+        if (config.default.cacheURL && cache > 0) {
+            if (!type) {
+                throw new Error(
+                    `router error;${path} Failed to load \nYou must set the type before you can use the cache`,
+                );
+            }
+
+            // 添加缓存中间件
+            meddlewareList.push(urlCache(cache, type, { engine: redis, prefix: 'app' }));
+        }
+        if (_.isFunction(middleware)) {
+            // 添加自定义中间件，处理单个中间件，传入类型 Function
+            meddlewareList.push(middleware);
+        }
+        if (_.isArray(middleware)) {
+            for (const item of middleware) {
+                if (_.isFunction(item)) {
+                    // 添加自定义中间件，处理多个中间件传入，传入类型 [ Function, Function...]
+                    meddlewareList.push(item);
+                }
+            }
+        }
+        const methodArr = method.toLowerCase().split('|');
+
+        for (const j in methodArr) {
+            const methodItem = methodArr[j].trim();
+
+            if (!methodItem) {
                 continue;
             }
+            if (_.isFunction(handler)) {
+                // 将路由放入路由列表
+                routerList.push({
+                    path,
+                    method: methodItem,
+                    handlers: [...meddlewareList, match(type, cache, false, false, handler, cdncache)],
+                });
 
-            // 是否需要编辑 (Boolean)
-            const edit = ctrlObj[i].edit;
-            const low = ctrlObj[i].low;
-
-            // url路径 (String)
-            const path = config.default.apiPrefix + ctrlObj[i].path;
-
-            // http请求类型，暂时只支持get和post
-            const method = ctrlObj[i].method || 'get|post';
-
-            // 业务方法，主要处理所有业务 (Function)
-            const handler = ctrlObj[i].handler;
-
-            // 中间件列表 (Function | Array )
-            const middleware = ctrlObj[i].middleware;
-
-            // joi 对象 (Object)
-            const schema = ctrlObj[i].schema;
-
-            // 类型 (Sting)
-            const cdncache = ctrlObj[i].cdncache;
-
-            // 类型 (Sting)
-            const type = ctrlObj[i].type;
-
-            // 缓存时间 (Number)，单位s
-            const cache = ctrlObj[i].cache || 0;
-            const meddlewareList = [];
-
-            if (_.isObject(schema)) {
-                // 添加joi验证中间件
-                meddlewareList.push(validate(schema, type));
-            }
-            if (config.default.cacheURL && cache > 0) {
-                if (!type) {
-                    throw new Error(
-                        `router error;${path} Failed to load \nYou must set the type before you can use the cache`,
-                    );
-                }
-
-                // 添加缓存中间件
-                meddlewareList.push(urlCache(cache, type, { engine: redis, prefix: 'app' }));
-            }
-            if (_.isFunction(middleware)) {
-                // 添加自定义中间件，处理单个中间件，传入类型 Function
-                meddlewareList.push(middleware);
-            }
-            if (_.isArray(middleware)) {
-                for (const item of middleware) {
-                    if (_.isFunction(item)) {
-                        // 添加自定义中间件，处理多个中间件传入，传入类型 [ Function, Function...]
-                        meddlewareList.push(item);
-                    }
-                }
-            }
-            const methodArr = method.toLowerCase().split('|');
-
-            for (const j in methodArr) {
-                const methodItem = methodArr[j].trim();
-
-                if (!methodItem) {
-                    continue;
-                }
-                if (_.isFunction(handler)) {
-                    
-                    // 将handler业务方法放入队列
-                    meddlewareList.push(match(type, cache, false, false, handler, cdncache));
+                // 添加页面编辑中间件
+                if (edit) {
                     // 将路由放入路由列表
                     routerList.push({
-                        path,
+                        path: `${path}/edit`,
                         method: methodItem,
-                        handlers: meddlewareList,
+                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache)],
                     });
-
-                    // 添加页面编辑中间件
-                    if (edit) {
-                        // 将handler业务方法放入队列
-                        meddlewareList.push(match(type, cache, edit, false, handler, cdncache));
-                        // 将路由放入路由列表
-                        routerList.push({
-                            path: `${path}/edit`,
-                            method: methodItem,
-                            handlers: meddlewareList,
-                        });
-                    }
-                    // 添加降级页中间件
-                    if (low) {
-                        // 将handler业务方法放入队列
-                        meddlewareList.push(match(type, cache, false, low, handler, cdncache));
-                        // 将路由放入路由列表
-                        routerList.push({
-                            path: `${path}/low`,
-                            method: methodItem,
-                            handlers: meddlewareList,
-                        });
-                    }
+                }
+                // 添加降级页中间件
+                if (low) {
+                    // 将路由放入路由列表
+                    routerList.push({
+                        path: `${path}/low`,
+                        method: methodItem,
+                        handlers: [...meddlewareList, match(type, cache, false, low, handler, cdncache)],
+                    });
                 }
             }
-          
         }
-    });
-
+    }
+});
 
 const getRouter = path => {
     for (const item of routerList) {

@@ -8,7 +8,7 @@ EXPOSE 3000
 
 COPY . /ifeng-whale
 
-RUN npm --registry https://registry.npm.taobao.org install --production
+# RUN npm --registry https://registry.npm.taobao.org install --production
 
 RUN  mkdir -p /data/logs
 

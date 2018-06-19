@@ -305,18 +305,13 @@ const createConfig = function(type, platform, cssConfig, level) {
     };
 };
 
-
-
-console.log('========================='+process.argv[process.argv.length-1]);
 let list = [];
-// list.push(createConfig('view', 'pc', pcCssConfig, ''));
 
 if(process.argv[process.argv.length-1]=='pc_low'){
     list.push(createConfig('view', 'pc', pcCssConfig, 'low'));
 }
 
 if(process.argv[process.argv.length-1]=='pc'){
-    console.log('===============123');
     list.push(createConfig('view', 'pc', pcCssConfig, ''));
 }
 
@@ -332,6 +327,7 @@ if(process.argv[process.argv.length-1]=='mobile_edit'){
     list.push(createConfig('edit', 'mobile', mobileCssConfig, ''));        
 }
 module.exports = list;
+
 // module.exports = [
 //     // createConfig('view', 'pc', pcCssConfig, 'low'),         // pc_low
 //     createConfig('view', 'pc', pcCssConfig, ''),            // pc
