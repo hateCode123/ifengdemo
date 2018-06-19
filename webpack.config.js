@@ -117,10 +117,10 @@ const getAliasFrame = function getAliasFram(level) {
           };
 };
 
-const createConfig = function(type, platform, cssConfig, level) {
+const createConfig = function(type, platform, cssConfig, level,filepath) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
+        entry: getEntrys(platform === 'pc' ? `./client/pc/**/app.jsx` : `./client/mobile/**/app.jsx`,filepath),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
             filename: `js/[name]_${platform}_${type}${level ? '_' + level : ''}.js`,
@@ -242,18 +242,52 @@ const createConfig = function(type, platform, cssConfig, level) {
                 verbose: true,
             }),
             ...getHTMLs(
-                platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html',
+                platform === 'pc' ? `./client/pc/**/template.html` : `./client/mobile/**/template.html`,
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
+                filepath
             ),
         ],
     };
 };
-// module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
-module.exports = [
-    createConfig('view', 'pc', pcCssConfig, ''),
-    createConfig('view', 'pc', pcCssConfig, 'low'),
-    createConfig('edit', 'pc', pcCssConfig, ''),
-    createConfig('view', 'mobile', mobileCssConfig, ''),
-    createConfig('edit', 'mobile', mobileCssConfig, ''),
-];
-// module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig)];
+
+
+let json = process.argv[process.argv.length-1]
+json = decodeURIComponent(json);
+json = JSON.parse(json);
+console.log(json);
+// { platform: [ 'pc', 'mobile' ],
+//   type: [ 'view', 'edit' ],
+//   path: [ 'finace/index', 'finace/money' ] }
+let list = [];
+if(json.platform.indexOf('pc')>-1 && json.type.indexOf('view')>-1){
+
+    list.push(createConfig('view', 'pc', pcCssConfig, '',json.path));
+}
+
+if(json.platform.indexOf('pc')>-1 && json.type.indexOf('low')>-1){
+    list.push(createConfig('view', 'pc', pcCssConfig, 'low',json.path));
+}
+
+if(json.platform.indexOf('pc')>-1 && json.type.indexOf('edit')>-1){
+    list.push(createConfig('edit', 'pc', pcCssConfig, '',json.path));
+}
+
+if(json.platform.indexOf('mobile')>-1 && json.type.indexOf('view')>-1){
+    list.push(createConfig('view', 'mobile', mobileCssConfig, '',json.path));
+}
+
+if(json.platform.indexOf('mobile')>-1 && json.type.indexOf('edit')>-1){
+    list.push(createConfig('edit', 'mobile', mobileCssConfig, '',json.path));
+}
+module.exports = list;
+
+// console.log(json);
+// // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('visualediting', 'pc', pcCssConfig)];
+// module.exports = [
+//     createConfig('view', 'pc', pcCssConfig, ''),
+//     createConfig('view', 'pc', pcCssConfig, 'low'),
+//     createConfig('edit', 'pc', pcCssConfig, ''),
+//     createConfig('view', 'mobile', mobileCssConfig, ''),
+//     createConfig('edit', 'mobile', mobileCssConfig, ''),
+// ];
+// // module.exports = [createConfig('view', 'pc', pcCssConfig), createConfig('edit', 'pc', pcCssConfig)];

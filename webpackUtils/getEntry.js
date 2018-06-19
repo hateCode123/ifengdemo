@@ -1,8 +1,27 @@
 const glob = require('glob');
 const isWin = require('./isWin');
+const _ = require('lodash');
 
-module.exports = function getEntrys(globPath) {
-    const files = glob.sync(globPath);
+module.exports = function getEntrys(globPath, filepath) {
+    // console.log('entry');
+    // console.log(filepath);
+    let files = glob.sync(globPath);
+    if (filepath !== '**') {
+        let list = [];
+        for (const item of files) {
+            for (const path of filepath) {
+                // console.log(item+'----'+path);
+                if (item.indexOf(path) > -1) {
+                    list.push(item)
+                }
+            }
+            
+        }
+        files = list;
+
+    }
+    console.log(files);
+
     let result = {};
     for (let file of files) {
         // const paths = file.split(isWin() ? '/' : '/');

@@ -1,9 +1,27 @@
 const glob = require('glob');
 const isWin = require('./isWin');
+const _ = require('lodash')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function getHTML(globPath, extendName) {
-    const files = glob.sync(globPath);
+module.exports = function getHTML(globPath, extendName, filepath) {
+    // console.log('html');
+    let files = glob.sync(globPath);
+    if (filepath !== '**') {
+        let list = [];
+        for (const item of files) {
+            for (const path of filepath) {
+                // console.log(item+'----'+path);
+                if (item.indexOf(path) > -1) {
+                    list.push(item)
+                }
+            }
+            
+        }
+        files = list;
+
+    }
+    console.log(files);;
+
     return files.map(file => {
         // const paths = file.split(isWin() ? '/' : '/');
         // const entryName =  paths[paths.length - 2];
