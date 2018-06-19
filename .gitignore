@@ -6,3 +6,4 @@ logs
 .vscode
 .idea
 tools
+bin/dev_webpack_config
