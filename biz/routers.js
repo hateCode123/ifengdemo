@@ -16,7 +16,7 @@ const routerList = [];
 
 // 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
 const rewriteList = {
-    // '/heartbeat': '/api/heartbeat',
+    '/heartbeat': '/api/heartbeat',
 
     // '/finance': '/pc/finance/index',
     // '/finance/index.shtml': '/pc/finance/index',
