@@ -237,6 +237,7 @@ const transfer = async (ctx, json) => {
 };
 
 function getIds(arr) {
+    console.log(arr);
     let map = {
         number: Tars.Int32,
         string: Tars.String,

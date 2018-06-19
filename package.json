@@ -7,7 +7,8 @@
         "uploadcdn": "node uploadcdn.js",
         "start": "node ./bin/dev.js",
         "pre": "node ./bin/pre.js",
-        "build": "webpack --config ./webpack.prod.config",
+        "build": "node ./bin/build.js",
+        "build:bak": "webpack --config ./webpack.prod.config",
         "test": "mocha -t 20000 tests --recursive --exit | bunyan",
         "eslint": "eslint ./client/**/*.js && eslint ./client/**/*.jsx",
         "eslint_fix": "eslint ./client/** --fix",
@@ -16,7 +17,8 @@
         "docker_create": "docker build -t web_channel -f dockerfilepre .",
         "docker_start": "docker run --rm --name web_channel -p 3000:3000 -it web_channel:latest",
         "docker_stop": "docker stop web_channel",
-        "docker_delete": "docker image rm web_channel"
+        "docker_delete": "docker image rm web_channel",
+        "start:dev": "webpack-dev-server"
     },
     "author": "",
     "license": "ISC",

@@ -1,3 +1,4 @@
+
 const path = require('path');
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -304,10 +305,37 @@ const createConfig = function(type, platform, cssConfig, level) {
     };
 };
 
-module.exports = [
-    createConfig('view', 'pc', pcCssConfig, 'low'),
-    createConfig('view', 'pc', pcCssConfig, ''),
-    createConfig('edit', 'pc', pcCssConfig, ''),
-    createConfig('view', 'mobile', mobileCssConfig, ''),
-    createConfig('edit', 'mobile', mobileCssConfig, ''),
-];
+
+
+console.log('========================='+process.argv[process.argv.length-1]);
+let list = [];
+// list.push(createConfig('view', 'pc', pcCssConfig, ''));
+
+if(process.argv[process.argv.length-1]=='pc_low'){
+    list.push(createConfig('view', 'pc', pcCssConfig, 'low'));
+}
+
+if(process.argv[process.argv.length-1]=='pc'){
+    console.log('===============123');
+    list.push(createConfig('view', 'pc', pcCssConfig, ''));
+}
+
+if(process.argv[process.argv.length-1]=='pc_edit'){
+    list.push(createConfig('edit', 'pc', pcCssConfig, ''));
+}
+
+if(process.argv[process.argv.length-1]=='mobile'){
+    list.push(createConfig('view', 'mobile', mobileCssConfig, '')); 
+}
+
+if(process.argv[process.argv.length-1]=='mobile_edit'){
+    list.push(createConfig('edit', 'mobile', mobileCssConfig, ''));        
+}
+module.exports = list;
+// module.exports = [
+//     // createConfig('view', 'pc', pcCssConfig, 'low'),         // pc_low
+//     createConfig('view', 'pc', pcCssConfig, ''),            // pc
+//     // createConfig('edit', 'pc', pcCssConfig, ''),            // pc_edit
+//     // createConfig('view', 'mobile', mobileCssConfig, ''),    // mobile
+//     // createConfig('edit', 'mobile', mobileCssConfig, ''), // mobile_edit
+// ];

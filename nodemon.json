@@ -1,7 +1,7 @@
 {
   "restartable": "rs",
   "ignore": [".git", "node_modules","logs","tests","views","client","devtmp","package.json","webpack.config.js"],
-  "verbose": true,
+  "verbose": false,
   "execMap": {
 
   },
