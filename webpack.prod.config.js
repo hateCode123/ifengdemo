@@ -1,4 +1,3 @@
-
 const path = require('path');
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -236,11 +235,11 @@ const createConfig = function(type, platform, cssConfig, level) {
                         },
                     ],
                 },
-                // {
-                //     test: /\.ejs$/,
-                //     use: ['f.lib.ejs-loader', 'f.lib.ejs-src-loader'],
-                // },
-                { test: /\.html$/, loader: 'handlebars-loader' },
+                {
+                    test: /\.ejs$/,
+                    use: ['handlebars-loader'],
+                },
+                // { test: /\.html$/, loader: 'handlebars-loader' },
             ],
         },
         mode: 'production',
@@ -298,7 +297,7 @@ const createConfig = function(type, platform, cssConfig, level) {
             }),
             new CleanPlugin(['dist']),
             ...getHTMLs(
-                platform === 'pc' ? './client/pc/**/template.html' : './client/mobile/**/template.html',
+                platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
             ),
         ],
@@ -307,24 +306,24 @@ const createConfig = function(type, platform, cssConfig, level) {
 
 let list = [];
 
-if(process.argv[process.argv.length-1]=='pc_low'){
+if (process.argv[process.argv.length - 1] === 'pc_low') {
     list.push(createConfig('view', 'pc', pcCssConfig, 'low'));
 }
 
-if(process.argv[process.argv.length-1]=='pc'){
+if (process.argv[process.argv.length - 1] === 'pc') {
     list.push(createConfig('view', 'pc', pcCssConfig, ''));
 }
 
-if(process.argv[process.argv.length-1]=='pc_edit'){
+if (process.argv[process.argv.length - 1] === 'pc_edit') {
     list.push(createConfig('edit', 'pc', pcCssConfig, ''));
 }
 
-if(process.argv[process.argv.length-1]=='mobile'){
-    list.push(createConfig('view', 'mobile', mobileCssConfig, '')); 
+if (process.argv[process.argv.length - 1] === 'mobile') {
+    list.push(createConfig('view', 'mobile', mobileCssConfig, ''));
 }
 
-if(process.argv[process.argv.length-1]=='mobile_edit'){
-    list.push(createConfig('edit', 'mobile', mobileCssConfig, ''));        
+if (process.argv[process.argv.length - 1] === 'mobile_edit') {
+    list.push(createConfig('edit', 'mobile', mobileCssConfig, ''));
 }
 module.exports = list;
 
