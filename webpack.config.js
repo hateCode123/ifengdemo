@@ -14,9 +14,9 @@ const getHTMLs = require('./webpackUtils/getHTMLs');
 const es3ifyPlugin = require('es3ify-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const HappyPack = require('happypack');
+// const HappyPack = require('happypack');
 const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: 1 });
+// const happyThreadPool = HappyPack.ThreadPool({ size: 1 });
 
 const pcCssConfig = {
     test: /\.css$/,
@@ -117,10 +117,10 @@ const getAliasFrame = function getAliasFram(level) {
           };
 };
 
-const createConfig = function(type, platform, cssConfig, level,filepath) {
+const createConfig = function(type, platform, cssConfig, level, filepath) {
     return {
         devtool: 'cheap-module-source-map',
-        entry: getEntrys(platform === 'pc' ? `./client/pc/**/app.jsx` : `./client/mobile/**/app.jsx`,filepath),
+        entry: getEntrys(platform === 'pc' ? `./client/pc/**/app.jsx` : `./client/mobile/**/app.jsx`, filepath),
         output: {
             path: path.resolve(__dirname, 'devtmp'),
             filename: `js/[name]_${platform}_${type}${level ? '_' + level : ''}.js`,
@@ -145,76 +145,8 @@ const createConfig = function(type, platform, cssConfig, level,filepath) {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    use: 'happypack/loader?id=babel',
-                    // use: {
-                    //     loader: 'babel-loader',
-                    //     options: {
-                    //         cacheDirectory: true,
-                    //         presets: [
-                    //             [
-                    //                 'env',
-                    //                 {
-                    //                     targets: {
-                    //                         browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                    //                     },
-                    //                     modules: level === '' ? false : 'commonjs',
-                    //                     useBuiltIns: true,
-                    //                     debug: false,
-                    //                 },
-                    //             ],
-                    //             'react',
-                    //             'stage-2',
-                    //         ],
-
-                    //         plugins: ['transform-runtime'],
-                    //     },
-                    // },
-                    // exclude: /node_modules/,
-                    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-                },
-                cssConfig,
-                commoncss,
-                {
-                    test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
-                    use: [
-                        {
-                            loader: 'url-loader',
-                            options: {
-                                limit: 100,
-                                name: 'asset/[name].[ext]',
-                            },
-                        },
-                    ],
-                },
-                // {
-                //     test: /\.ejs$/,
-                //     use: ['f.lib.ejs-loader', 'f.lib.ejs-src-loader'],
-                // },
-                {
-                    test: /\.html$/,
-                    loader: 'handlebars-loader',
-                },
-            ],
-        },
-        mode: 'development',
-        plugins: [
-            // new BundleAnalyzerPlugin(),
-            // new WriteFileWebpackPlugin(),
-            ...(level === '' ? [] : [new es3ifyPlugin()]),
-            new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify('development'),
-                ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
-            }),
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     name: ['vendor', 'manifest'],
-            //     minChunks: 2,
-            // }),
-            // new webpack.NamedModulesPlugin(),
-
-            new HappyPack({
-                id: 'babel',
-                loaders: [
-                    {
+                    // use: 'happypack/loader?id=babel',
+                    use: {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
@@ -237,21 +169,88 @@ const createConfig = function(type, platform, cssConfig, level,filepath) {
                             plugins: ['transform-runtime'],
                         },
                     },
-                ],
-                threadPool: happyThreadPool,
-                verbose: true,
+                    // exclude: /node_modules/,
+                    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
+                },
+                cssConfig,
+                commoncss,
+                {
+                    test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 100,
+                                name: 'asset/[name].[ext]',
+                            },
+                        },
+                    ],
+                },
+                {
+                    test: /\.ejs$/,
+                    use: ['handlebars-loader'],
+                },
+                // {
+                //     test: /\.html$/,
+                //     loader: 'handlebars-loader',
+                // },
+            ],
+        },
+        mode: 'development',
+        plugins: [
+            // new BundleAnalyzerPlugin(),
+            // new WriteFileWebpackPlugin(),
+            ...(level === '' ? [] : [new es3ifyPlugin()]),
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('development'),
+                ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
             }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: ['vendor', 'manifest'],
+            //     minChunks: 2,
+            // }),
+            // new webpack.NamedModulesPlugin(),
+
+            // new HappyPack({
+            //     id: 'babel',
+            //     loaders: [
+            //         {
+            //             loader: 'babel-loader',
+            //             options: {
+            //                 cacheDirectory: true,
+            //                 presets: [
+            //                     [
+            //                         'env',
+            //                         {
+            //                             targets: {
+            //                                 browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
+            //                             },
+            //                             modules: level === '' ? false : 'commonjs',
+            //                             useBuiltIns: true,
+            //                             debug: false,
+            //                         },
+            //                     ],
+            //                     'react',
+            //                     'stage-2',
+            //                 ],
+
+            //                 plugins: ['transform-runtime'],
+            //             },
+            //         },
+            //     ],
+            //     threadPool: happyThreadPool,
+            //     verbose: true,
+            // }),
             ...getHTMLs(
-                platform === 'pc' ? `./client/pc/**/template.html` : `./client/mobile/**/template.html`,
+                platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
-                filepath
+                filepath,
             ),
         ],
     };
 };
 
-
-let json = process.argv[process.argv.length-1]
+let json = process.argv[process.argv.length - 1];
 json = decodeURIComponent(json);
 json = JSON.parse(json);
 console.log(json);
@@ -259,25 +258,24 @@ console.log(json);
 //   type: [ 'view', 'edit' ],
 //   path: [ 'finace/index', 'finace/money' ] }
 let list = [];
-if(json.platform.indexOf('pc')>-1 && json.type.indexOf('view')>-1){
-
-    list.push(createConfig('view', 'pc', pcCssConfig, '',json.path));
+if (json.platform.indexOf('pc') > -1 && json.type.indexOf('view') > -1) {
+    list.push(createConfig('view', 'pc', pcCssConfig, '', json.path));
 }
 
-if(json.platform.indexOf('pc')>-1 && json.type.indexOf('low')>-1){
-    list.push(createConfig('view', 'pc', pcCssConfig, 'low',json.path));
+if (json.platform.indexOf('pc') > -1 && json.type.indexOf('low') > -1) {
+    list.push(createConfig('view', 'pc', pcCssConfig, 'low', json.path));
 }
 
-if(json.platform.indexOf('pc')>-1 && json.type.indexOf('edit')>-1){
-    list.push(createConfig('edit', 'pc', pcCssConfig, '',json.path));
+if (json.platform.indexOf('pc') > -1 && json.type.indexOf('edit') > -1) {
+    list.push(createConfig('edit', 'pc', pcCssConfig, '', json.path));
 }
 
-if(json.platform.indexOf('mobile')>-1 && json.type.indexOf('view')>-1){
-    list.push(createConfig('view', 'mobile', mobileCssConfig, '',json.path));
+if (json.platform.indexOf('mobile') > -1 && json.type.indexOf('view') > -1) {
+    list.push(createConfig('view', 'mobile', mobileCssConfig, '', json.path));
 }
 
-if(json.platform.indexOf('mobile')>-1 && json.type.indexOf('edit')>-1){
-    list.push(createConfig('edit', 'mobile', mobileCssConfig, '',json.path));
+if (json.platform.indexOf('mobile') > -1 && json.type.indexOf('edit') > -1) {
+    list.push(createConfig('edit', 'mobile', mobileCssConfig, '', json.path));
 }
 module.exports = list;
 

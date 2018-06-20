@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../../../utils/rel';
 
 class AnswerList extends React.PureComponent {
+    static propTypes = {
+        data: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -33,15 +37,4 @@ class AnswerList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-AnswerList.propTypes = { data: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-AnswerList.defaultProps = {};
-
-export { AnswerList };
 export default AnswerList;

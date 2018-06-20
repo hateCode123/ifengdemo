@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp, cookie } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
@@ -167,15 +166,4 @@ class CustomStocks extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CustomStocks.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-CustomStocks.defaultProps = {};
-
-export { CustomStocks };
 export default CustomStocks;

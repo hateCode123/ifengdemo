@@ -9,6 +9,7 @@ exports.list = {
     type: 'html',
     cache: 0,
     edit: true,
+    low: true,
     handler: async ctx => {
         let json = [
             // 页面公用导航
@@ -96,7 +97,7 @@ exports.list = {
             ['subjectTitle', 'KVProxy', 'getStaticFragment', 10076, getJsonByKey('content')],
 
             // 热点专题
-            ['subject', 'KVProxy', 'getStaticFragment', 10079, getStringByKey('content')],
+            ['subject', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
             // 理财超市标题
             ['marketTitle', 'KVProxy', 'getStaticFragment', 10077, getJsonByKey('content')],

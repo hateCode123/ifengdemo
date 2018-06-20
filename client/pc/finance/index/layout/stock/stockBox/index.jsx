@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
 
@@ -106,15 +105,4 @@ class StockBox extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-StockBox.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-StockBox.defaultProps = {};
-
-export { StockBox };
 export default StockBox;

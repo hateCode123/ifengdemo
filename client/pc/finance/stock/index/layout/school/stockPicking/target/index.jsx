@@ -6,6 +6,11 @@ import { rel } from '../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
 class Target extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         stockData: {},
     };
@@ -99,19 +104,4 @@ class Target extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Target.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-    stockData: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-Target.defaultProps = {};
-
-export { Target };
 export default Target;

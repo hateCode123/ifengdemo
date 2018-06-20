@@ -6,6 +6,11 @@ import { rel } from '../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
 class FirstAttention extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         stockData: {},
     };
@@ -61,9 +66,9 @@ class FirstAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== ''
-                                        && stockData[`s_${item.code}`]
-                                        && stockData[`s_${item.code}`][3] > 0
+                                        stockData !== '' &&
+                                        stockData[`s_${item.code}`] &&
+                                        stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
@@ -71,15 +76,13 @@ class FirstAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== ''
-                                        && stockData[`s_${item.code}`]
-                                        && stockData[`s_${item.code}`][3] > 0
+                                        stockData !== '' &&
+                                        stockData[`s_${item.code}`] &&
+                                        stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
-                                    {stockData[`s_${item.code}`]
-                                        ? `${stockData[`s_${item.code}`][3].toFixed(2)}%`
-                                        : ''}
+                                    {stockData[`s_${item.code}`] ? `${stockData[`s_${item.code}`][3].toFixed(2)}%` : ''}
                                 </td>
                                 <td className={`${styles.price} ${styles.red}`}>{item.mbzf}</td>
                                 <td>{item.investrating}</td>
@@ -101,19 +104,4 @@ class FirstAttention extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-FirstAttention.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-    stockData: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-FirstAttention.defaultProps = {};
-
-export { FirstAttention };
 export default FirstAttention;

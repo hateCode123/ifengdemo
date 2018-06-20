@@ -5,6 +5,11 @@ import Chip from 'Chip';
 import { rel } from '../../../../../../../utils/rel';
 
 class Track extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -70,18 +75,4 @@ class Track extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Track.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Track.defaultProps = {};
-
-export { Track };
 export default Track;

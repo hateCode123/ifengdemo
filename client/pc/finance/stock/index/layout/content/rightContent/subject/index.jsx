@@ -1,31 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './index.css';
+import { rel } from '../../../../../../../utils/rel';
 
 class Subject extends React.PureComponent {
-    /**
-     * 插入 html
-     */
-    createMarkup = () => {
-        return { __html: this.props.content };
+    static propTypes = {
+        content: PropTypes.array,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createMarkup()} />;
+        const { content } = this.props;
+        const pic = content[0];
+        const list = content.slice(1, 3);
+
+        return (
+            <div>
+                <div className={styles.pic_box}>
+                    <a href={pic.url} target="_blank" rel={rel} title={pic.title} className={styles.pic}>
+                        <img src={pic.banner} width="300" height="169" alt={pic.title} className={styles.trans} />
+                    </a>
+                </div>
+                <ul className={styles.list}>
+                    {list.map((item, index) => (
+                        <li key={index}>
+                            <a href={pic.url} target="_blank" rel={rel} title={item.title}>
+                                {item.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Subject.propTypes = { content: PropTypes.string };
-
-/**
- * 定义组件默认属性
- * */
-Subject.defaultProps = {};
-
-export { Subject };
 export default Subject;

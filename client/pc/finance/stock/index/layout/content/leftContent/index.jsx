@@ -9,6 +9,10 @@ import Answer from './answer/';
 import { Ad } from '../../../../../../components/ad';
 
 class LeftContent extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -34,15 +38,4 @@ class LeftContent extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-LeftContent.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-LeftContent.defaultProps = {};
-
-export { LeftContent };
 export default LeftContent;

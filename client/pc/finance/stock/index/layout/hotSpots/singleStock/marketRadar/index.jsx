@@ -5,6 +5,11 @@ import Chip from 'Chip';
 import { rel } from '../../../../../../../utils/rel';
 
 class MarketRadar extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -61,18 +66,4 @@ class MarketRadar extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-MarketRadar.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-MarketRadar.defaultProps = {};
-
-export { MarketRadar };
 export default MarketRadar;

@@ -43,13 +43,13 @@ function viewsMiddleware(path, { engineSource = consolidate, extension = 'html',
                                 debug('using `pretty` package to beautify HTML');
                                 html = pretty(html);
                             }
-                            
+
                             ctx.body = injectHtml(html);
                         });
                     }
                 });
             } catch (error) {
-                let html =  `
+                let html = `
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -84,7 +84,7 @@ ${error}
                 </body>
                 </html>
             `;
-            ctx.body = injectHtml(html);
+                ctx.body = injectHtml(html);
             }
         };
 
@@ -98,40 +98,40 @@ function isHtml(ext) {
 
 function injectHtml(html) {
     html = html.split('</head>');
-    return  html.join(`
+    return html.join(`
     <script src="/socket.io.js"></script>
     <script>
-    window.addEventListener('load',function(){
-        var socket = null;
-        if (/Firefox\\/\\s/.test(navigator.userAgent)){
-            socket = io.connect({transports:['xhr-polling']}); 
-        } 
-        else if (/MSIE (\d+.\d+);/.test(navigator.userAgent)){
-            socket = io.connect({transports:['xhr-polling','jsonp-polling']}); 
-        } 
-        else { 
-            socket = io.connect(); 
-        }
-
-        socket.on('reload', function () {
-            window.location.reload();
-        });
-
-        socket.on('connect_error', function (error) {
-            //console.log(error);
-        });
-
-        socket.on('reconnect_error', function (error) {
-            //console.log(error);
-        });
-
-        socket.on('reconnect_failed', function() {
-            //console.log(reconnect_failed);
-        });
-
-        socket.on('error', function (error) {
-            // console.log(error);
-        });
-        });
+    setTimeout(function(){
+            var socket = null;
+            if (/Firefox\\/\\s/.test(navigator.userAgent)){
+                socket = io.connect({transports:['xhr-polling']}); 
+            } 
+            else if (/MSIE (\d+.\d+);/.test(navigator.userAgent)){
+                socket = io.connect({transports:['xhr-polling','jsonp-polling']}); 
+            } 
+            else { 
+                socket = io.connect(); 
+            }
+    
+            socket.on('reload', function () {
+                window.location.reload();
+            });
+    
+            socket.on('connect_error', function (error) {
+                //console.log(error);
+            });
+    
+            socket.on('reconnect_error', function (error) {
+                //console.log(error);
+            });
+    
+            socket.on('reconnect_failed', function() {
+                //console.log(reconnect_failed);
+            });
+    
+            socket.on('error', function (error) {
+                // console.log(error);
+            });
+    }, 500);
     </script></head>`);
 }

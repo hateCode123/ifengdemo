@@ -7,20 +7,22 @@
     padding-left: 10px;
     margin-top: 1px;
     margin-bottom: 1px;
-    & .item {
-        padding-left: 0px;
-        list-style: none;
-        width: 370px;
-        height: 23px;
-        & .title {
-            font-weight: bold;
-        }
-        & a {
-            color: #2b2b2b;
-            padding-left: 8px;
-        }
-        & a:hover {
-            color: #f54343;
-        }
+}
+
+.item {
+    padding-left: 0px;
+    list-style: none;
+    width: 370px;
+    height: 23px;
+    & a {
+        color: #2b2b2b;
+        padding-left: 8px;
     }
+    & a:hover {
+        color: #f54343;
+    }
+}
+
+.title {
+    font-weight: bold;
 }

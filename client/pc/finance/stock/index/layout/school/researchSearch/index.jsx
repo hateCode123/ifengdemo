@@ -4,6 +4,7 @@ import { jsonp } from '@ifeng/ui_base';
 
 class ResearchSearch extends React.PureComponent {
     state = {
+        searchTxt: '',
         option: '',
         type: '',
         checked: 'org',
@@ -15,7 +16,7 @@ class ResearchSearch extends React.PureComponent {
         this.setState({ option: val });
     };
 
-    handleKeyup = async e => {
+    handleChange = async e => {
         const { checked } = this.state;
         const val = e.currentTarget.value;
 
@@ -42,10 +43,31 @@ class ResearchSearch extends React.PureComponent {
         }
     };
 
-    handleChange = e => {
+    handleFocus = e => {
+        const { checked } = this.state;
         const val = e.currentTarget.value;
 
-        this.setState({ checked: val });
+        if (val === (checked === 'title' ? '请输入标题关键字' : '代码/拼音/名称')) {
+            this.setState({ searchTxt: '' });
+        }
+    };
+
+    handleBlur = e => {
+        const { checked } = this.state;
+        const val = e.currentTarget.value;
+
+        if (val === '') {
+            this.setState({ searchTxt: checked === 'title' ? '请输入标题关键字' : '代码/拼音/名称' });
+        }
+    };
+
+    handleCheck = e => {
+        const val = e.currentTarget.value;
+
+        this.setState({
+            checked: val,
+            searchTxt: val === 'title' ? '请输入标题关键字' : '代码/拼音/名称',
+        });
     };
 
     handleSearch = () => {
@@ -64,7 +86,7 @@ class ResearchSearch extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { checked } = this.state;
+        const { searchTxt, checked } = this.state;
 
         return (
             <div className={styles.researchSearch}>
@@ -193,8 +215,10 @@ class ResearchSearch extends React.PureComponent {
                             </select>
                         ) : (
                             <input
-                                placeholder={checked === 'title' ? '请输入标题关键字' : '代码/拼音/名称'}
-                                onKeyUp={this.handleKeyup}
+                                value={searchTxt}
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
                             />
                         )}
                     </div>
@@ -204,7 +228,7 @@ class ResearchSearch extends React.PureComponent {
                             value="title"
                             checked={checked === 'title'}
                             name="yb_search_type"
-                            onChange={this.handleChange}
+                            onChange={this.handleCheck}
                         />
                         {'标题 '}
                         <input
@@ -212,7 +236,7 @@ class ResearchSearch extends React.PureComponent {
                             value="org"
                             checked={checked === 'org'}
                             name="yb_search_type"
-                            onChange={this.handleChange}
+                            onChange={this.handleCheck}
                         />
                         {'机构 '}
                         <input
@@ -220,12 +244,14 @@ class ResearchSearch extends React.PureComponent {
                             value="report"
                             checked={checked === 'report'}
                             name="yb_search_type"
-                            onChange={this.handleChange}
+                            onChange={this.handleCheck}
                         />
                         {'公司 '}
                     </div>
                     <div className={styles.search_btn}>
-                        <button onClick={this.handleSearch}>查询</button>
+                        <button type="button" onClick={this.handleSearch}>
+                            查询
+                        </button>
                     </div>
                 </div>
             </div>

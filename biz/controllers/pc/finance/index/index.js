@@ -49,7 +49,7 @@ exports.list = {
             ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
 
             // 大咖说
-            ['talking', 'KVProxy', 'getStaticFragment', 10008, getJsonByKey('content')],
+            ['talking', 'KVProxy', 'getCustom', 'finance_22005_10736_34', getJson()],
 
             // 财商教育
             ['finance', 'KVProxy', 'getStaticFragment', 10009, getJsonByKey('content')],
@@ -57,23 +57,23 @@ exports.list = {
             // 炒股大赛
             ['stocks', 'KVProxy', 'getCustom', 'finance_22005_10736_31', getJson()],
 
-            // 大咖说新闻列表
-            ['talkingList', 'KVProxy', 'getRecommendFragment', 20005, getStringByKey('data')],
-
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getStringByKey('data')],
 
             // 研究院
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
 
+            // 国子策
+            ['lark', 'KVProxy', 'getCustom', '22005_516_36328', getJson()],
+
             // 专题会议
-            ['meeting', 'KVProxy', 'getRecommendFragment', 20010, getStringByKey('data')],
+            ['meeting', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
             // 底部合作链接
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
 
             // 信息流首页抓取数据
-            ['customList', 'KVProxy', 'getCustom', '17007_719_68', getJson()],
+            ['customList', 'KVProxy', 'getCustom', '17007_719_76', getJson()],
 
             // 信息流宏观抓取数据
             ['macroList', 'KVProxy', 'getCustom', 'finance_22005_10736_24', getJson()],

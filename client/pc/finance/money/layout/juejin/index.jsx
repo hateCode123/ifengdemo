@@ -17,23 +17,13 @@ class Juejin extends React.PureComponent {
 
         return (
             <div className={style.juej}>
-                <Chip
-                    id="10039"
-                    type="static"
-                    title="境内掘金title"
-                    groupName="首屏"
-                    content={content.jingneijuejinTitle}>
-                    <CommonTitleL />
-                </Chip>
-
+                <CommonTitleL content={content.jingneijuejinTitle} />
                 <div className="clearfix  pt20">
                     <HotFunds content={content} />
                     <Licaisudi
                         content={{
                             title: content.sudiTitle01,
-                            titleChipConfig: { id: '10045', group: '首屏', name: '理财速递title' },
                             content: content.sudiContent01,
-                            contentChipConfig: { id: '10048', group: '首屏', name: '境内理财速递content' },
                         }}
                     />
                 </div>

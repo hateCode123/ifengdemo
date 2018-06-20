@@ -9,34 +9,7 @@ import { rel } from '../../../../utils/rel';
 
 class LicaisudiInner extends React.PureComponent {
     render() {
-        //    {
-        //        "first":{
-        //            "url" : "https://etrade.fengfd.com/detail/180012",
-        //            "title": "银华富裕主题混合",
-        //            "txt": "近一年涨幅：",
-        //            "perc": "53.95%",
-        //            "buyLink": "https://etrade.fengfd.com/detail/180012",
-        //            "buyTxt": "购买",
-        //        },
-        //        "second":{
-        //         "url" : "https://etrade.fengfd.com/detail/001878/",
-        //         "title": "嘉实沪港深精选股票",
-        //         "txt": "近一年涨幅：",
-        //         "perc": "47.46%",
-        //         "buyLink": "https://etrade.fengfd.com/detail/210004",
-        //         "buyTxt": "购买",
-        //     },
-        //     "third":{
-        //         "url" : "https://etrade.fengfd.com/detail/217027/",
-        //         "title": "招商央视财经50指数A",
-        //         "txt": "近一年涨幅：",
-        //         "perc": "47.84%",
-        //         "recTitle":"推荐理由：",
-        //         "recTxt":"中国“漂亮A50”崛起，长期价值投资的典范。"
-        //         "buyLink": "https://etrade.fengfd.com/detail/217027/",
-        //         "buyTxt": "购买",
-        //     }
-        //    }
+      
         const { content } = this.props;
 
         const first = content.first;
@@ -115,17 +88,11 @@ LicaisudiInner.defaultProps = {};
 class Licaisudi extends React.PureComponent {
     render() {
         const { content } = this.props;
-        const titleChipConfig = content.titleChipConfig;
-        const contentChipConfig = content.contentChipConfig;
-
+    
         return (
             <div className={style.wrap}>
-                <Chip id={titleChipConfig.id} type="static" title={titleChipConfig.name} groupName={titleChipConfig.group} content={content.title}>
-                    <CommonTitleM />
-                </Chip>
-                <Chip id={contentChipConfig.id} type="static" title={contentChipConfig.name} groupName={contentChipConfig.group} content={content.content}>
-                    <LicaisudiInner />
-                </Chip>
+                    <CommonTitleM content={content.title} />
+                    <LicaisudiInner content={content.content} />
             </div>
         );
     }

@@ -15,7 +15,7 @@ class Tabs extends React.PureComponent {
     };
 
     componentDidMount() {
-        this.unHandleScroll = addEventListener(document, 'scroll', this.handleScroll);
+        this.unHandleScroll = addEventListener(window, 'scroll', this.handleScroll);
         this.tabsTop = document.getElementById('tabs').offsetTop;
     }
 

@@ -6,6 +6,11 @@ import { rel } from '../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
 class HighestAttention extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         stockData: {},
     };
@@ -61,9 +66,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== ''
-                                        && stockData[`s_${item.code}`]
-                                        && stockData[`s_${item.code}`][3] > 0
+                                        stockData !== '' &&
+                                        stockData[`s_${item.code}`] &&
+                                        stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
@@ -71,9 +76,9 @@ class HighestAttention extends React.PureComponent {
                                 </td>
                                 <td
                                     className={
-                                        stockData !== ''
-                                        && stockData[`s_${item.code}`]
-                                        && stockData[`s_${item.code}`][3] > 0
+                                        stockData !== '' &&
+                                        stockData[`s_${item.code}`] &&
+                                        stockData[`s_${item.code}`][3] > 0
                                             ? styles.red
                                             : styles.green
                                     }>
@@ -99,19 +104,4 @@ class HighestAttention extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-HighestAttention.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-    stockData: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-HighestAttention.defaultProps = {};
-
-export { HighestAttention };
 export default HighestAttention;

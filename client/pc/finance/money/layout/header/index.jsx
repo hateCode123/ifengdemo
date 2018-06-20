@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-// import Ad from '../../../../../components/ad/';
+import Ad from '../../../../components/ad/';
 // import Logo from './logo/';
 import Nav from '../../../../components/nav/';
 import UserInfo from '../../../../components/userInfo/';
@@ -24,17 +24,15 @@ class Header extends React.PureComponent {
 
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
-                <Chip id="10108" type="static" title="导航" groupName="头部" content={content.nav}>
-                    <Nav limit={18} />
-                </Chip>
-                <UserInfo />
+                    <Nav limit={18} content={content.nav}/>
+                    <UserInfo />
             </div>
         );
-        // const topAd = (
-        //     <div key="topAd" className={styles.ad}>
-        //         <Ad content={content.topAd} styleName={styles.box} />
-        //     </div>
-        // );
+        const topAd = (
+            <div key="topAd" className={styles.ad}>
+                <Ad content={content.topAd} styleName={styles.box} />
+            </div>
+        );
         // const topSearch = (
         //     <div className={styles.h_searchDiv} key="topSearch">
         //         <div className={styles.h_theLogo}>
@@ -46,9 +44,9 @@ class Header extends React.PureComponent {
         //     </div>
         // );
 
-        // return [topNav, topAd, topSearch];
+        return [topNav, topAd];
 
-        return topNav;
+        // return topNav;
     }
 }
 

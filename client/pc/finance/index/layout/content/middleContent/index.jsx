@@ -18,10 +18,19 @@ class MiddleContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
+        let talkingData = [];
         let stockData = [];
 
+        if (content.talking) {
+            talkingData = content.talking.list.slice(0, 7).map(item => ({
+                id: item.id,
+                url: item.commentUrl,
+                title: item.title,
+            }));
+        }
+
         if (content.stocks) {
-            stockData = content.stocks.list.map(item => ({
+            stockData = content.stocks.list.slice(0, 6).map(item => ({
                 id: item.id,
                 url: item.commentUrl,
                 title: item.title,
@@ -34,23 +43,32 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.box}>
                     <div className={styles.box_inner}>
                         <div className={styles.talking}>
-                            <Chip
-                                id="10008"
-                                type="static"
-                                title="大咖说标题栏"
-                                groupName="正文"
-                                content={content.talking}>
-                                <Caption />
-                            </Chip>
+                            <div className={styles.caption}>
+                                <h5>
+                                    <a
+                                        href="//finance.ifeng.com/listpage/606/1/list.shtml"
+                                        target="_blank"
+                                        rel={rel}
+                                        title="大咖说">
+                                        大咖说
+                                    </a>
+                                </h5>
+                            </div>
+                            <div className={styles.picTxt}>
+                                <div className={styles.box_pic}>
+                                    <a href="//ds.ifeng.com/" target="_blank" rel={rel} title="炒股大赛" />
+                                    <h5>
+                                        <a href="//ds.ifeng.com/" target="_blank" rel={rel} title="炒股大赛" />
+                                    </h5>
+                                </div>
+                                <h3 className={styles.title}>
+                                    <a href={talkingData[0].url} target="_blank" rel={rel} title={talkingData[0].title}>
+                                        {talkingData[0].title}
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                        <Chip
-                            id="20005"
-                            type="recommend"
-                            title="大咖说新闻列表"
-                            groupName="正文"
-                            content={content.talkingList}>
-                            <TitleList />
-                        </Chip>
+                        <TitleList content={talkingData.slice(1, 7)} />
                         <div className={styles.finance}>
                             <Chip
                                 id="10009"

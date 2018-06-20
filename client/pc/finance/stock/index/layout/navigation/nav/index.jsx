@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 
 class Nav extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -24,15 +28,4 @@ class Nav extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Nav.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Nav.defaultProps = {};
-
-export { Nav };
 export default Nav;

@@ -16,19 +16,16 @@ class Meeting extends React.PureComponent {
         const pic = content[0];
         const list = content.slice(1, 7);
 
-        /**
-         * 国子策数据源不确定，先用推荐位代替
-         */
         return (
             <div>
                 <div className={styles.pic_box}>
                     <a href={pic.url} target="_blank" rel={rel} title={pic.title} className={styles.pic}>
-                        <img src={pic.thumbnail} width="300" height="169" alt={pic.title} className={styles.trans} />
+                        <img src={pic.banner} width="300" height="169" alt={pic.title} className={styles.trans} />
                     </a>
                 </div>
                 <ul className={styles.list}>
-                    {list.map(item => (
-                        <li key={item.id}>
+                    {list.map((item, index) => (
+                        <li key={index}>
                             <a href={pic.url} target="_blank" rel={rel} title={item.title}>
                                 {item.title}
                             </a>

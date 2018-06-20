@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import { Tab } from '../../../../components/tabs/';
 import NewsList from '../../../../components/newsList';
 
 class News extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -35,15 +38,4 @@ class News extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-News.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-News.defaultProps = {};
-
-export { News };
 export default News;

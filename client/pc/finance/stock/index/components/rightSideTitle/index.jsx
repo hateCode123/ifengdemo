@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 
 class RightSideTitle extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -31,15 +35,4 @@ class RightSideTitle extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-RightSideTitle.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-RightSideTitle.defaultProps = {};
-
-export { RightSideTitle };
 export default RightSideTitle;

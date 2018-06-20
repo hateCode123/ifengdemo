@@ -8,6 +8,10 @@ import QaTabs from './QATabs/';
 import QaForm from './QAForm/';
 
 class Qa extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+    };
+
     state = {
         qaers: {},
         alist: {},
@@ -175,17 +179,4 @@ class Qa extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Qa.propTypes = {
-    tabs: PropTypes.array,
-};
-
-/**
- * 定义组件默认属性
- * */
-Qa.defaultProps = {};
-
-export { Qa };
 export default Qa;

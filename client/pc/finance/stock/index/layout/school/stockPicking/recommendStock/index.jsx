@@ -6,6 +6,11 @@ import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../../../utils/rel';
 
 class RecommendStock extends React.PureComponent {
+    static propTypes = {
+        tabs: PropTypes.array,
+        content: PropTypes.array,
+    };
+
     state = {
         stockData: {},
     };
@@ -99,19 +104,4 @@ class RecommendStock extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-RecommendStock.propTypes = {
-    tabs: PropTypes.array,
-    content: PropTypes.array,
-    stockData: PropTypes.object,
-};
-
-/**
- * 定义组件默认属性
- * */
-RecommendStock.defaultProps = {};
-
-export { RecommendStock };
 export default RecommendStock;

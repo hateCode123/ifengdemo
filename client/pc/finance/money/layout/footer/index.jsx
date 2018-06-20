@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
+
 import { Ad } from '../../../../components/ad/';
 import Footer from '../../../../components/footer/';
 
@@ -15,23 +15,21 @@ class BottomFooter extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        // const { bottomAd } = content;
+        const { bottomAd } = content;
 
-        // const BottomAd = (
-        //     <div key="bottomAd" className={styles.ad}>
-        //         <Ad content={bottomAd} styleName={styles.box} />
-        //     </div>
-        // );
+        const BottomAd = (
+            <div key="bottomAd" className={styles.ad}>
+                <Ad content={bottomAd} styleName={styles.box} />
+            </div>
+        );
         const footer = (
             <div key="footer" className={styles.footer}>
-                <Chip id="10114" type="static" title="底部公用版权" groupName="底部" content={content.footer}>
-                    <Footer />
-                </Chip>
+                <Footer content={content.footer} />
             </div>
         );
 
-        // return [BottomAd, footer];
-        return footer;
+        return [BottomAd, footer];
+        // return footer;
     }
 }
 

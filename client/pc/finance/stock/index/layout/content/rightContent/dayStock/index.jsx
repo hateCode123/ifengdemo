@@ -4,6 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 
 class DayStock extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     /**
      * 渲染组件
      */
@@ -37,15 +41,4 @@ class DayStock extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-DayStock.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-DayStock.defaultProps = {};
-
-export { DayStock };
 export default DayStock;

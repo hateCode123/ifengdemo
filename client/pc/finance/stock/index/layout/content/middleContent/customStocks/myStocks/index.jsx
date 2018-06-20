@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 import { rel } from '../../../../../../../../utils/rel';
@@ -151,15 +150,4 @@ class MyStocks extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-MyStocks.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-MyStocks.defaultProps = {};
-
-export { MyStocks };
 export default MyStocks;

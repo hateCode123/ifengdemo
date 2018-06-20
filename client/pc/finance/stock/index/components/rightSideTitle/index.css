@@ -19,17 +19,18 @@
             font-weight: bold;
         }
     }
-    & .more {
-        line-height: 18px;
-        background: url(./g36.png) no-repeat right center;
-        width: 35px;
-        float: right;
-        & a {
-            color: #666666;
-        }
-        & a:hover {
-            color: #f54343;
-            text-decoration: none;
-        }
+}
+
+.more {
+    line-height: 18px;
+    background: url(./g36.png) no-repeat right center;
+    width: 35px;
+    float: right;
+    & a {
+        color: #666666;
+    }
+    & a:hover {
+        color: #f54343;
+        text-decoration: none;
     }
 }
