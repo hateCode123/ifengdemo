@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { Tab } from '../../../../components/tabs/';
+import Tab from '../../../../components/tabs/';
 import StockNews from './stockNews/';
 import Live from './live/';
 

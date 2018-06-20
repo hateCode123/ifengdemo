@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { Tab } from '../../../../components/tabs/';
+import Tab from '../../../../components/tabs/';
 import AnswerList from './answerList/';
 
 class Answer extends React.PureComponent {

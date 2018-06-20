@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { Tab } from '../../../../components/tabs/';
+import Tab from '../../../../components/tabs/';
 import NewsList from '../../../../components/newsList';
 
 class News extends React.PureComponent {
