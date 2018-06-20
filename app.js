@@ -10,9 +10,7 @@ const path = require('path');
 const onerror = require('koa-onerror');
 const json = require('koa-json');
 const bodyParser = require('koa-bodyparser');
-
 const Timers = require('./biz/common/utils/timers');
-
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
@@ -25,8 +23,6 @@ const env = process.env.NODE_ENV || 'development';
 // 创建koa实例
 const app = new Koa();
 let views = null;
-
-// const server = http.Server(app.callback());
 
 // 导出koa 实例，方便单元测试
 const server = app.listen(config.default.port || 3000, () => {
@@ -66,13 +62,11 @@ const webapi = require('./biz/common/middlewares/koa-webapi');
 
 webapi(app);
 
-// 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
-app.use(bodyParser());
+// // 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
+// app.use(bodyParser());
 
-// 美化json格式输出
-app.use(json());
-
-webapi(app);
+// // 美化json格式输出
+// app.use(json());
 
 // 模板引擎设置
 app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { html: 'ejs' } }));

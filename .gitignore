@@ -5,4 +5,5 @@ tmp
 logs
 .vscode
 .idea
-.tools
+tools
+bin/dev_webpack_config

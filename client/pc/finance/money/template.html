@@ -7,33 +7,71 @@
     <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
     <title>凤凰理财-财富人生从这里起航-凤凰网</title>
     <meta name="Keywords" content="理财,财富,银行,基金,外汇,黄金,保险,债券" />
-    <meta name="Description" content="凤凰网理财频道致力于面向全球华人提供准确及时的投资市场动态信息，以及全面专业的个性化理财指导服务，视野覆盖基金、银行、保险、外汇、期货、债券等不同市场领域。同时面向主流人群民生领域，提供周到、贴心、实用的消费理财资讯。" />
+    <meta name="Description" content="凤凰网理财频道致力于面向全球华人提供准确及时的投资市场动态信息，以及全面专业的个性化理财指导服务，视野覆盖基金、银行、保险、外汇、期货、债券等不同市场领域。同时面向主流人群民生领域，提供周到、贴心、实用的消费理财资讯。"
+    />
     <meta name="robots" content="all" />
     <style type="text/css">
-        .slick-dots li.slick-active button:before
-            {
-                opacity: 1;
-                color: #fc5521;
-            }
+        .slick-dots li.slick-active button:before {
+            opacity: 1;
+            color: #fc5521;
+        }
     </style>
     <!-- <title></title> -->
     <script>
         var finance_money_allData = <%- JSON.stringify(allData) %>;
-       
+
         var __jsonData__ = finance_money_allData;
-       
+
     </script>
     {{#each htmlWebpackPlugin.files.css}}
-        <link href="{{.}}" rel="stylesheet">
+    <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
+    <!--[if lt IE 8]>
+        <script>
+            if (typeof document.querySelector === 'undefined') {
+                document.querySelector = function (target) {
+                    return document.getElementsByTagName(target)[0] || null;
+                }
+            }
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script>
+            if (Object.defineProperty 
+            && Object.getOwnPropertyDescriptor 
+            && Object.getOwnPropertyDescriptor(Element.prototype, "textContent") 
+            && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
+            (function() {
+                var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
+                Object.defineProperty(Element.prototype, "textContent",
+                // Passing innerText or innerText.get directly does not work,
+                // wrapper function is required.
+                {
+                get: function() {
+                    return innerText.get.call(this);
+                },
+                set: function(s) {
+                    return innerText.set.call(this, s);
+                }
+                }
+            );
+            })();
+            }
+        </script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js"></script>
+        <script src="https://cdn.bootcss.com/es5-shim/4.5.10/es5-sham.min.js"></script>
+        <script src="http://cdn.bootcss.com/console-polyfill/0.3.0/index.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
     <div id="root"></div>
-    {{#each htmlWebpackPlugin.files.chunks}}
-        <script src="{{entry}}" type="text/javascript"></script>
+    {{#each htmlWebpackPlugin.files.js}}
+    <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-   
 </body>
 
 </html>

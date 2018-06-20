@@ -10,6 +10,7 @@ exports.list = {
     type: 'html',
     cache: 0,
     edit: true,
+    low: true,
     handler: async ctx => {
         let json = [
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
