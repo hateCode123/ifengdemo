@@ -4,6 +4,7 @@ const config = require('../../configs');
 const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
 const Tars = require('@tars/stream');
+const _ = require('lodash');
 
 /**
  * 使用该方法替代JSON.parse(),统计JSON.parse耗时
@@ -193,61 +194,65 @@ const transfer = async (ctx, json) => {
 
     let allp = [];
     for (const i in obj) {
-        let ids = getIds(obj[i].ids);
+        let ids_group = _.chunk(obj[i].ids,30);
+        for (const iterator of ids_group) {
+            let ids = getIds(iterator);
 
-        allp.push(
-            KVProxy[getAction(i)](ctx, ids).then(
-                result => {
-                    try {
-                        if (config.default.statistics) {
-                            ctx.rpcTimeList[1].push(result.response.costtime);
+            allp.push(
+                KVProxy[getAction(i)](ctx, ids).then(
+                    result => {
+                        try {
+                            if (config.default.statistics) {
+                                ctx.rpcTimeList[1].push(result.response.costtime);
+                            }
+                            // jaeger trance 结束
+                            if (config.default.statisticsJaeger) {
+                                result.span.finish();
+                            }
+                            if (config.default.statisticsProm) {
+                                ctx.p_rpc.observe(
+                                    {
+                                        url: ctx.originalUrl.replace(/\?.*/,''),
+                                        rpc_func: result.callInfo.replace('[object Object]',''),
+                                    },
+                                    result.response.costtime
+                                );
+                            }
+                        } catch (error) {
+                            logger.error(error)
                         }
-                        // jaeger trance 结束
-                        if (config.default.statisticsJaeger) {
-                            result.span.finish();
+                        
+                        return result.response.return.value;
+                    },
+                    result => {
+                        try {
+                            if (config.default.statistics) {
+                                ctx.rpcTimeList[1].push(result.response.costtime);
+                            }
+                            // jaeger trance 结束
+                            if (config.default.statisticsJaeger) {
+                                result.span.finish();
+                            }
+                            if (config.default.statisticsProm) {
+                                ctx.p_rpc.observe(
+                                    {
+                                        url: ctx.originalUrl.replace(/\?.*/,''),
+                                        rpc_func: result.callInfo.replace('[object Object]',''),
+                                    },
+                                    result.response.costtime
+                                );
+                            }
+                        } catch (error) {
+                            logger.error(error)
                         }
-                        if (config.default.statisticsProm) {
-                            ctx.p_rpc.observe(
-                                {
-                                    url: ctx.originalUrl.replace(/\?.*/,''),
-                                    rpc_func: result.callInfo.replace('[object Object]',''),
-                                },
-                                result.response.costtime
-                            );
-                        }
-                    } catch (error) {
-                        logger.error(error)
-                    }
-                    
-                    return result.response.return.value;
-                },
-                result => {
-                    try {
-                        if (config.default.statistics) {
-                            ctx.rpcTimeList[1].push(result.response.costtime);
-                        }
-                        // jaeger trance 结束
-                        if (config.default.statisticsJaeger) {
-                            result.span.finish();
-                        }
-                        if (config.default.statisticsProm) {
-                            ctx.p_rpc.observe(
-                                {
-                                    url: ctx.originalUrl.replace(/\?.*/,''),
-                                    rpc_func: result.callInfo.replace('[object Object]',''),
-                                },
-                                result.response.costtime
-                            );
-                        }
-                    } catch (error) {
-                        logger.error(error)
-                    }
-                    logger.error(`Something error with: ${result.callInfo}`);
-                    logger.error(result.response.error);
-                    return [];
-                },
-            ),
-        );
+                        logger.error(`Something error with: ${result.callInfo}`);
+                        logger.error(result.response.error);
+                        return [];
+                    },
+                ),
+            );
+        }
+    
     }
     let data = await Promise.all(allp);
 
