@@ -143,67 +143,14 @@
             qrCode: allData.qrCode
         };
 
-<<<<<<< HEAD
     </script> {{#each htmlWebpackPlugin.files.css}}
     <link href="{{.}}" rel="stylesheet"> {{/each}}
-=======
-    </script>
-    {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{path}}" rel="stylesheet"> 
-    {{/each}}
-    <!--[if lt IE 8]>
-        <script>
-            if (typeof document.querySelector === 'undefined') {
-                document.querySelector = function (target) {
-                    return document.getElementsByTagName(target)[0] || null;
-                }
-            }
-        </script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
-    <![endif]-->
-    <!--[if lt IE 9]>
-        <script>
-            if (Object.defineProperty 
-            && Object.getOwnPropertyDescriptor 
-            && Object.getOwnPropertyDescriptor(Element.prototype, "textContent") 
-            && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
-            (function() {
-                var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
-                Object.defineProperty(Element.prototype, "textContent",
-                // Passing innerText or innerText.get directly does not work,
-                // wrapper function is required.
-                {
-                get: function() {
-                    return innerText.get.call(this);
-                },
-                set: function(s) {
-                    return innerText.set.call(this, s);
-                }
-                }
-            );
-            })();
-            }
-        </script>
-    <![endif]-->
-    <!--[if lt IE 9]>
-        <script src="https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js"></script>
-        <script src="https://cdn.bootcss.com/es5-shim/4.5.10/es5-sham.min.js"></script>
-        <script src="http://cdn.bootcss.com/console-polyfill/0.3.0/index.min.js"></script>
-    <![endif]-->
-
->>>>>>> webpack4
 </head>
 
 <body>
     <div id="root"></div>
-<<<<<<< HEAD
     {{#each htmlWebpackPlugin.files.chunks}}
     <script src="{{entry}}" type="text/javascript"></script> {{/each}}
-=======
-    {{#each htmlWebpackPlugin.files.js}}
-    <script src="{{path}}" type="text/javascript"></script>
-    {{/each}}
->>>>>>> webpack4
 </body>
 
 </html>
