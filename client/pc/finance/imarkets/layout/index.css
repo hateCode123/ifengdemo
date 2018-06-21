@@ -1,0 +1,18 @@
+.main {
+    margin: 0 auto 50px;
+    width: 1000px;
+}
+.main_middle {
+    float: left;
+    margin-left: 21px;
+    width: 536px;
+}
+.main_right {
+    float: right;
+    width: 299px;
+}
+.ad1 {
+    margin-bottom: 42px;
+    width: 299px;
+    height: 600px;
+}

@@ -1,0 +1,19 @@
+.logo_box {
+    background: url('./logobg.jpg') no-repeat top center;
+}
+.logo_main {
+    width: 1000px;
+    height: 188px;
+    margin: 0 auto;
+}
+.logo_link {
+    display: block;
+    float: left;
+    margin: 49px 0 0 -23px;
+    width: 367px;
+    height: 86px;
+}
+.time {
+    float: right;
+    margin: 5px 15px 0 0;
+}
