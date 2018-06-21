@@ -1,15 +1,17 @@
-### a web application
+## 凤凰网网站底页项目
 
+#### 凤凰网网站底页项目，包含图文底页与幻灯底页两部分。
 
-# use docker to develop
-```
-npm run build
-sudo docker build docker.ifeng.com/demo/demo-whale:dev .
-sudo docker run --rm -p 3000:3000 docker.ifeng.com/demo/demo-whale:dev
-```
+##### 你可以在项目 [Wiki](https://git.ifengidc.com/whale/wiki/wikis/home) 中得到想知道的一切
 
-# docker compile image
+### 下载并运行项目
+
 ```
-sudo docker build -t docker.ifeng.com/demo/demo-whale:compile-v0.01 . -f dockerfile.compile
-sudo docker push docker.ifeng.com/demo/demo-whale:compile-v0.01 
+$ git clone https://git.ifengidc.com/whale/web-channel-finance.git
+
+$ cd web-channel-finance
+
+$ npm install
+
+$ npm start
 ```
