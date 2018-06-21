@@ -17,6 +17,7 @@ exports.list = {
     type: 'html',
     cache: 0,
     edit: true,
+    low: true,
     handler: async ctx => {
         // 页面公用导航
         const json = {
@@ -31,7 +32,7 @@ exports.list = {
             // 底部合作链接
             cooperation: KVProxy.getStaticFragment(ctx, 10164).then(...handleJs(ctx, 'content')),
             // 底部公用版权
-            footer: KVProxy.getStaticFragment(ctx, 10114).then(...handleJsonByKey(ctx, 'content'))
+            footer: KVProxy.getStaticFragment(ctx, 10114).then(...handleJsonByKey(ctx, 'content')),
         };
 
         const allData = await promiseAll(json);
