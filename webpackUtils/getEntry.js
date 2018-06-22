@@ -6,7 +6,7 @@ module.exports = function getEntrys(globPath, filepath) {
     // console.log('entry');
     // console.log(filepath);
     let files = glob.sync(globPath);
-    if (filepath !== '**') {
+    if (filepath && filepath !== '**') {
         let list = [];
         for (const item of files) {
             for (const path of filepath) {

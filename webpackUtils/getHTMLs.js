@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = function getHTML(globPath, extendName, filepath) {
     // console.log('html');
     let files = glob.sync(globPath);
-    if (filepath !== '**') {
+    if (filepath && filepath !== '**') {
         let list = [];
         for (const item of files) {
             for (const path of filepath) {
