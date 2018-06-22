@@ -11,7 +11,7 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
-        let json = [
+        const json = [
             // 通用导航
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
 
@@ -28,7 +28,7 @@ exports.financeWemoney = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20035, getStringByKey('data')],
+            ['headline', 'KVProxy', 'getRecommendFragment', 20035, getJsonByKey('data')],
 
             // 视频解盘
             ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getJson()],
@@ -37,7 +37,7 @@ exports.financeWemoney = {
             ['stockCompetition', 'KVProxy', 'getStaticFragment', 10037, getJson()],
 
             // 轮播
-            ['sliderData', 'KVProxy', 'getRecommendFragment', 20036, getStringByKey('data')],
+            ['sliderData', 'KVProxy', 'getRecommendFragment', 20036, getJsonByKey('data')],
 
             // 文章列表导航
             ['paperMenu', 'KVProxy', 'getStaticFragment', 10041, getJsonByKey('content')],
@@ -111,7 +111,7 @@ exports.financeWemoney = {
             // 版权
             ['copyright', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
         ];
-        let allData = await transfer(ctx, json);
+        const allData = await transfer(ctx, json);
         await ctx.html('finance_stock_gstzgc', {
             allData,
         });

@@ -11,7 +11,7 @@ exports.list = {
     edit: true,
     low: true,
     handler: async ctx => {
-        let json = [
+        const json = [
             // 页面公用导航
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
 
@@ -118,7 +118,7 @@ exports.list = {
             ['linkList', 'KVProxy', 'getStaticFragment', 10084, getJsonByKey('content')],
 
             // 每日论股
-            ['dayStock', 'KVProxy', 'getRecommendFragment', 20040, getStringByKey('data')],
+            ['dayStock', 'KVProxy', 'getRecommendFragment', 20040, getJsonByKey('data')],
 
             // 操盘热点标题
             ['hotSpotsTitle', 'KVProxy', 'getStaticFragment', 10067, getJsonByKey('content')],
@@ -244,7 +244,7 @@ exports.list = {
             ['qrCode', 'KVProxy', 'getStaticFragment', 10136, getJsonByKey('content')],
         ];
 
-        let allData = await transfer(ctx, json);
+        const allData = await transfer(ctx, json);
         // return ctx.body = allData;
         await ctx.html('finance_stock_index', {
             allData,
