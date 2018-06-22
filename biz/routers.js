@@ -18,26 +18,26 @@ const routerList = [];
 const rewriteList = {
     '/heartbeat': '/api/heartbeat',
 
-    // '/finance': '/pc/finance/index',
-    // '/finance/index.shtml': '/pc/finance/index',
+    '/pc/finance': '/pc/finance/index',
+    '/pc/finance/index.shtml': '/pc/finance/index',
 
-    // '/finance/stock': '/pc/finance/stock',
-    // '/finance/stock/index.shtml': '/pc/finance/stock',
+    '/pc/finance/stock': '/pc/finance/stock',
+    '/pc/finance/stock/index.shtml': '/pc/finance/stock',
 
-    // '/finance/stock': '/pc/finance/stock',
-    // '/finance/stock/index.shtml': '/pc/finance/stock',
+    '/pc/finance/stock': '/pc/finance/stock',
+    '/pc/finance/stock/index.shtml': '/pc/finance/stock',
 
-    // '/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
-    // '/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
+    '/pc/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
+    '/pc/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
 
-    // '/finance/money': '/pc/finance/money',
-    // '/finance/money/index.shtml': '/pc/finance/money',
+    '/pc/finance/money': '/pc/finance/money',
+    '/pc/finance/money/index.shtml': '/pc/finance/money',
 
-    // '/finance/wemoney': '/pc/finance/wemoney',
-    // '/finance/wemoney/index.shtml': '/pc/finance/wemoney',
+    '/pc/finance/wemoney': '/pc/finance/wemoney',
+    '/pc/finance/wemoney/index.shtml': '/pc/finance/wemoney',
 
-    // '/mobile/content/:id': '/content/:id',
-    // '/mobile/content/:id/edit': '/content/:id/edit',
+    '/mobile/content/:id': '/content/:id',
+    '/mobile/content/:id/edit': '/content/:id/edit',
 };
 
 // 自动加载controllers中的路由
