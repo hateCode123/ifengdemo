@@ -27,6 +27,9 @@ exports.list = {
             // 财经首页导航
             ['navigation', 'KVProxy', 'getStaticFragment', 10002, getJsonByKey('content')],
 
+            // 投顾产品
+            ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
+
             // 焦点图
             ['bannerPic', 'KVProxy', 'getDynamicFragment', 10005, getStringByKey('data')],
 
@@ -95,9 +98,6 @@ exports.list = {
 
             // 理财速递
             ['courier', 'KVProxy', 'getStaticFragment', 10016, getJsonByKey('content')],
-
-            // 投顾产品
-            ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
 
             // 返回财经视频数据
             ['financeVideo', 'KVProxy', 'getDynamicFragment', 10007, getJson()],

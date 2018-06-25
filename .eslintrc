@@ -76,7 +76,7 @@
         // ],
         "new-parens": "error",
         // "new-cap": [ "error", { "newIsCap": true, "capIsNew": true } ],
-        // "newline-after-var": ["error", "always"],
+        "newline-after-var": ["error", "always"],
         "newline-before-return": "error",
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         //"no-continue": "error",
