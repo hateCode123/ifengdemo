@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { rel } from '../../../../../../utils/rel';
+import { rel } from '../../../../utils/rel';
 
 class TitleList extends React.PureComponent {
     static propTypes = {

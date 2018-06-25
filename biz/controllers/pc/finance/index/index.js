@@ -110,6 +110,7 @@ exports.list = {
         ];
 
         const allData = await transfer(ctx, json);
+
         await ctx.html('finance_index', {
             allData,
         });

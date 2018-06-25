@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import StockList from './stockList/';
-import CustomStock from './customStock/';
-import FundsFlow from './fundsFlow/';
+import errorBoundary from '../../../../components/errorBoundary';
+import dataProcessing from '../../../../components/dataProcessing';
+import StockList from './stockList';
+import CustomStock from './customStock';
+import FundsFlow from './fundsFlow';
 import StockBox from './stockBox';
-import StockSearch from './stockSearch/';
-import Production from './production/';
+import StockSearch from './stockSearch';
+import Production from './production';
 import { rel } from '../../../../utils/rel';
 
 class Stock extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.object,
+        content: PropTypes.array,
     };
 
     state = {
@@ -58,17 +60,16 @@ class Stock extends React.PureComponent {
                         <div className={styles.sub_box}>{getBox()}</div>
                     </div>
                 </div>
-                <Chip
-                    id="10017"
-                    type="static"
-                    title="股票栏产品静态碎片"
-                    groupName="股票栏"
-                    content={content.production}>
-                    <Production />
-                </Chip>
+                {content === null ? (
+                    ''
+                ) : (
+                    <Chip id="10017" type="static" title="股票栏产品静态碎片" groupName="股票栏" content={content}>
+                        <Production />
+                    </Chip>
+                )}
             </div>
         );
     }
 }
 
-export default Stock;
+export default errorBoundary(dataProcessing(Stock));

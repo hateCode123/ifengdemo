@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Tabs from './tabs';
-import IndexContentList from './indexContentList';
-import ExtraContentList from './extraContentList';
+import ContentList from './contentList';
 import Ad from '../../../../../components/ad';
 
 class Info extends React.PureComponent {
@@ -48,27 +47,16 @@ class Info extends React.PureComponent {
         const data = content.content[current];
         const contentList = [];
 
-        if (data && current === 0) {
+        if (data) {
             for (let i = 0; i < listNum; i++) {
-                const num = i < 6 ? 3 : 5;
-                const len = i < 5 ? 3 : 5;
+                const index = current === 0 ? 3 : 4;
+                const num = i < 6 ? index : 5;
+                const len = i < 5 ? index : 5;
 
                 contentList.push(
                     <div key={i}>
-                        <IndexContentList content={data.slice(i * num, i * num + len)} />
-                        {i < 5 ? <IndexContentList content={content.softAd} /> : ''}
-                        {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
-                    </div>,
-                );
-            }
-        } else if (data && current !== 0) {
-            for (let i = 0; i < listNum; i++) {
-                const num = i < 6 ? 4 : 5;
-                const len = i < 5 ? 4 : 5;
-
-                contentList.push(
-                    <div key={i}>
-                        <ExtraContentList content={data.slice(i * num, i * num + len)} />
+                        <ContentList content={data.slice(i * num, i * num + len)} />
+                        {current === 0 && i < 5 ? <ContentList content={content.softAd} /> : ''}
                         {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
                     </div>,
                 );

@@ -4,8 +4,10 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 
-class IndexContentList extends React.PureComponent {
+class ContentList extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
     };
@@ -50,7 +52,7 @@ class IndexContentList extends React.PureComponent {
 
             this.setState({ counts: count });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 
@@ -79,7 +81,7 @@ class IndexContentList extends React.PureComponent {
         };
 
         return (
-            <div className={styles.IndexContentList}>
+            <div className={styles.ExtraContentList}>
                 {content.map((item, index) => (
                     <div
                         key={index}
@@ -87,16 +89,21 @@ class IndexContentList extends React.PureComponent {
                         onMouseEnter={this.handleMouseOver}
                         onMouseLeave={this.handleMouseOver}
                         style={listStyle}>
-                        {item.thumbnail !== '' ? (
-                            <a href={item.pcUrl} target="_blank" rel={rel} className={styles.imgBox}>
-                                <img src={item.thumbnail} width="144" height="96" className={styles.trans} />
+                        {item.thumbnails && item.thumbnails !== '' ? (
+                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                                <img
+                                    src={JSON.parse(item.thumbnails).image[0].url}
+                                    width="144"
+                                    height="96"
+                                    className={styles.trans}
+                                />
                             </a>
                         ) : (
                             ''
                         )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
-                                <a href={item.pcUrl} target="_blank" rel={rel} title={item.title}>
+                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                     {item.title}
                                 </a>
                             </p>
@@ -109,11 +116,11 @@ class IndexContentList extends React.PureComponent {
                                     ''
                                 )}
                                 {item.source ? <span className={styles.source}>{item.source}</span> : ''}
-                                {item.createdTime ? (
+                                {item.newsTime && item.newsTime !== '' ? (
                                     <span className={styles.date}>
-                                        {Number(item.createdTime.split('-')[0]) < 2018
-                                            ? item.createdTime
-                                            : `${item.createdTime.split('-')[1]}-${item.createdTime.split('-')[2]}`}
+                                        {Number(item.newsTime.split('-')[0]) < 2018
+                                            ? 'item.createdTime'
+                                            : `${item.newsTime.split('-')[1]}-${item.newsTime.split('-')[2]}`}
                                     </span>
                                 ) : (
                                     ''
@@ -141,4 +148,4 @@ class IndexContentList extends React.PureComponent {
     }
 }
 
-export default IndexContentList;
+export default errorBoundary(dataProcessing(ContentList));

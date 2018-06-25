@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 
 class ExtraNews extends React.PureComponent {
     static propTypes = {
@@ -21,4 +22,4 @@ class ExtraNews extends React.PureComponent {
     }
 }
 
-export default ExtraNews;
+export default dataProcessing(ExtraNews);

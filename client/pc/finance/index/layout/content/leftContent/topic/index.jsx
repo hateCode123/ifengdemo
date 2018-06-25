@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
-
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import { jsonp } from '@ifeng/ui_base';
 
 class Topic extends React.PureComponent {
@@ -72,4 +73,4 @@ class Topic extends React.PureComponent {
     }
 }
 
-export default Topic;
+export default errorBoundary(dataProcessing(Topic));

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 
 class NewsList extends React.PureComponent {
     static propTypes = {
@@ -18,7 +19,7 @@ class NewsList extends React.PureComponent {
             <li key={index} className={styles.list}>
                 <a
                     className={index === 0 ? styles.bold : ''}
-                    href={item.commentUrl}
+                    href={item.url}
                     target="_blank"
                     rel={rel}
                     title={item.title}>
@@ -29,4 +30,4 @@ class NewsList extends React.PureComponent {
     }
 }
 
-export default NewsList;
+export default dataProcessing(NewsList);

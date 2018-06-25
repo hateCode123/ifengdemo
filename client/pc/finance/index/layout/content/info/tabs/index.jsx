@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { addEventListener } from '@ifeng/ui_base';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 
 class Tabs extends React.PureComponent {
     static propTypes = {
@@ -70,4 +72,4 @@ class Tabs extends React.PureComponent {
     }
 }
 
-export default Tabs;
+export default errorBoundary(dataProcessing(Tabs));

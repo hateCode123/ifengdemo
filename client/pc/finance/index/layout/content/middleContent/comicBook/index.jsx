@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
+import errorBoundary from '../../../../../../components/errorBoundary';
 
 class ComicBook extends React.PureComponent {
     static propTypes = {
@@ -58,4 +59,4 @@ class ComicBook extends React.PureComponent {
     }
 }
 
-export default ComicBook;
+export default errorBoundary(ComicBook);

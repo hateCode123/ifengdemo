@@ -4,6 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import { Ad } from '../../../../components/ad';
 import Footer from '../../../../components/footer';
+import dataProcessing from '../../../../components/dataProcessing';
 
 /**
  * 定义 Footer 组件
@@ -37,4 +38,4 @@ class BottomFooter extends React.PureComponent {
     }
 }
 
-export default BottomFooter;
+export default dataProcessing(BottomFooter);

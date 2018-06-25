@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import CarouselPic from './carouselPic/';
 
 class FinanceVideo extends React.PureComponent {
@@ -81,4 +83,4 @@ class FinanceVideo extends React.PureComponent {
     }
 }
 
-export default FinanceVideo;
+export default errorBoundary(dataProcessing(FinanceVideo));

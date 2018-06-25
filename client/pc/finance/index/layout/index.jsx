@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
+import errorBoundary from '../../../components/errorBoundary';
 import Header from './header';
 import Navigation from './navigation';
 import Stock from './stock';
@@ -28,10 +29,6 @@ class Layout extends React.PureComponent {
             topAd: content.topAd,
             logo: content.logo,
             logoAd: content.logoAd,
-        };
-        const stockData = {
-            stock: content.stock,
-            production: content.production,
         };
         const contentData = {
             leftContent: {
@@ -79,7 +76,7 @@ class Layout extends React.PureComponent {
                 <Chip id="10002" type="static" title="财经导航" groupName="导航栏" content={content.navigation}>
                     <Navigation />
                 </Chip>
-                <Stock content={stockData} />
+                <Stock content={content.production} />
                 <Content content={contentData} />
                 <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
@@ -94,4 +91,4 @@ class Layout extends React.PureComponent {
     }
 }
 
-export default Layout;
+export default errorBoundary(Layout);

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '../../../../components/errorBoundary';
+import dataProcessing from '../../../../components/dataProcessing';
 
 class Navigation extends React.PureComponent {
     static propTypes = {
@@ -34,4 +36,4 @@ class Navigation extends React.PureComponent {
     }
 }
 
-export default Navigation;
+export default errorBoundary(dataProcessing(Navigation));

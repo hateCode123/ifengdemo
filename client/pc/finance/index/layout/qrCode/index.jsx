@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import dataProcessing from '../../../../components/dataProcessing';
 
 /**
  * 定义 BottomAffix 组件
@@ -50,4 +51,4 @@ class QrCode extends React.PureComponent {
     }
 }
 
-export default QrCode;
+export default dataProcessing(QrCode);

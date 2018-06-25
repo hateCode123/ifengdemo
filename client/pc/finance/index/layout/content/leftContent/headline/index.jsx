@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import List from './list';
 
 class Headline extends React.PureComponent {
@@ -71,4 +73,4 @@ class Headline extends React.PureComponent {
     }
 }
 
-export default Headline;
+export default errorBoundary(dataProcessing(Headline));

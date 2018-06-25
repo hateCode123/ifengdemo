@@ -101,7 +101,7 @@ class ExtraContentList extends React.PureComponent {
                         )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
-                                <a href={item.pcUrl} target="_blank" rel={rel} title={item.title}>
+                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                     {item.title}
                                 </a>
                             </p>
