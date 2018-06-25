@@ -25,7 +25,7 @@ var BJ_REPORT = (function(global) {
         repeat: 5, // 重复上报次数(对于同一个错误超过多少次不上报),
         offlineLog: false,
         offlineLogExp: 5,  // 离线日志过期时间 ， 默认5天
-        offlineLogAuto: false,  //是否自动询问服务器需要自动上报
+        offlineLogAuto: false  //是否自动询问服务器需要自动上报
     };
 
     var Offline_DB = {
@@ -143,7 +143,7 @@ var BJ_REPORT = (function(global) {
         getStore: function() {
             var transaction = this.db.transaction("logs", 'readwrite');
             return transaction.objectStore("logs");
-        },
+        }
 
     };
 

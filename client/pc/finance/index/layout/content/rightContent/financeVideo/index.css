@@ -5,57 +5,65 @@
     overflow: hidden;
     margin-top: 19px;
     margin-bottom: 30px;
+    & [ifeng_ui_pc_sliders-dots] {
+        position: absolute;
+        right: 5px;
+        top: 10px;
+        height: 3px;
+        line-height: 3px;
+        z-index: 10;
+        left: 0;
+        text-align: right;
+        font-size: 0;
+    }
 }
 
-.hidden {
-    display: none;
+.pic_img {
+    width: 300px;
+    height: 170px;
+    overflow: hidden;
+    & img {
+        display: block;
+    }
 }
 
-.prevSlide,
-.nextSlide {
-    width: 28px;
-    height: 28px;
+.trans {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-backface-visibility: hidden;
+}
+
+.trans:hover {
+    transform: scale(1.04, 1.04);
+    -ms-transform: scale(1.04, 1.04);
+    -webkit-transform: scale(1.04, 1.04);
+}
+
+.text {
+    width: 300px;
+    height: 34px;
+    background: #000;
     position: absolute;
-    top: 70px;
-    left: 0px;
-    z-index: 10;
-    text-align: center;
-    cursor: pointer;
-}
-
-.nextSlide {
-    left: 271px;
-}
-
-.left {
-    width: 6px;
-    height: 11px;
-    background: url(./zg.gif) no-repeat;
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    z-index: 12;
-}
-
-.right {
-    width: 6px;
-    height: 11px;
-    background: url(./yg.gif) no-repeat;
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    z-index: 12;
-}
-
-.btnBg {
-    width: 28px;
-    height: 28px;
+    bottom: 0px;
     filter: alpha(opacity=60);
     -moz-opacity: 0.6;
     opacity: 0.6;
-    background: #000;
+}
+
+.title {
+    font-size: 14px;
+    text-indent: 10px;
+    width: 300px;
+    height: 34px;
+    line-height: 34px;
     position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 11;
+    bottom: 0px;
+    & a {
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 14px;
+    }
 }

@@ -1,4 +1,5 @@
 .tabs {
+    position: relative;
     width: 640px;
     height: 40px;
     border: solid 1px #eeeeee;

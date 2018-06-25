@@ -1,82 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import CarouselPic from './carouselPic/';
+import Slides from '@ifeng/ui_pc_slides';
+import { rel } from '../../../../../../utils/rel';
 
 class BannerPic extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
     };
 
-    state = {
-        currentPage: 0,
-        slideShow: false,
-    };
-
-    /**
-     * 鼠标移入移出，侧边切换按钮显示
-     */
-    bannerOver = () => {
-        const { slideShow } = this.state;
-
-        this.setState({ slideShow: !slideShow });
-    };
-
-    /**
-     * 左切换按钮点击事件
-     */
-    handleLeftClick = () => {
-        const { currentPage } = this.state;
-        let num = currentPage;
-
-        if (num === 0) {
-            num = 3;
-        } else {
-            num--;
-        }
-
-        this.setState({ currentPage: num });
-    };
-
-    /**
-     * 右切换点击事件
-     */
-    handleRightClick = () => {
-        const { currentPage } = this.state;
-        let num = currentPage;
-
-        if (num === 3) {
-            num = 0;
-        } else {
-            num++;
-        }
-
-        this.setState({ currentPage: num });
+    sliderTmpl = item => {
+        return (
+            <div className={styles.bigPic}>
+                <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
+                    <img src={item.src} width="570" height="260" className={styles.trans} />
+                </a>
+                <div className={styles.text} />
+                <p className={styles.title}>
+                    <a href={item.url} target="_blank" rel={rel}>
+                        {item.title}
+                    </a>
+                </p>
+            </div>
+        );
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { currentPage, slideShow } = this.state;
         const { content } = this.props;
+
+        const config = {
+            arrows: 'hover',
+            autoplay: false,
+            direction: 'forward',
+            axis: 'horizonta',
+            sliderTmpl: this.sliderTmpl,
+        };
 
         return (
             <div>
-                <div className={styles.bannerPic} onMouseEnter={this.bannerOver} onMouseLeave={this.bannerOver}>
-                    <CarouselPic content={content} currentPage={currentPage} />
-                    <div className={slideShow ? styles.prevSlide : ''} onClick={this.handleLeftClick}>
-                        <a>
-                            <div className={slideShow ? styles.left : ''} />
-                        </a>
-                        <div className={styles.btn} />
-                    </div>
-                    <div className={slideShow ? styles.nextSlide : ''} onClick={this.handleRightClick}>
-                        <a>
-                            <div className={slideShow ? styles.right : ''} />
-                        </a>
-                        <div className={styles.btn} />
-                    </div>
+                <div className={styles.bannerPic}>
+                    <Slides content={content} config={config} />
                 </div>
             </div>
         );
