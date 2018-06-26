@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../components/dataProcessing';
 import { Ad } from '../../../../../components/ad/';
 import Footer from '../../../../../components/footer/';
 
@@ -37,4 +39,4 @@ class BottomFooter extends React.PureComponent {
     }
 }
 
-export default BottomFooter;
+export default errorBoundary(dataProcessing(BottomFooter));

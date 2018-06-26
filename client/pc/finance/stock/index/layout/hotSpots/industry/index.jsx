@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
 
 class Industry extends React.PureComponent {
@@ -106,4 +108,4 @@ class Industry extends React.PureComponent {
     }
 }
 
-export default Industry;
+export default errorBoundary(dataProcessing(Industry));

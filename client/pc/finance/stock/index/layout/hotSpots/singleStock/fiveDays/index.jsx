@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../utils/rel';
 
 class FiveDays extends React.PureComponent {
@@ -67,4 +69,4 @@ class FiveDays extends React.PureComponent {
     }
 }
 
-export default FiveDays;
+export default errorBoundary(dataProcessing(FiveDays));

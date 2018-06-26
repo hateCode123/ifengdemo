@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import MarketRadar from './marketRadar/';
 import Track from './track/';
 import FiveDays from './fiveDays/';
@@ -64,4 +66,4 @@ class SingleStock extends React.PureComponent {
     }
 }
 
-export default SingleStock;
+export default errorBoundary(dataProcessing(SingleStock));

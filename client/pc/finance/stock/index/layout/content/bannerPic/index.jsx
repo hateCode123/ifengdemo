@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Slides from '@ifeng/ui_pc_slides';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
 
 class BannerPic extends React.PureComponent {
@@ -32,7 +34,7 @@ class BannerPic extends React.PureComponent {
         const { content } = this.props;
 
         const config = {
-            arrows: true,
+            arrows: 'hover',
             autoplay: false,
             direction: 'forward',
             axis: 'horizonta',
@@ -50,4 +52,4 @@ class BannerPic extends React.PureComponent {
     }
 }
 
-export default BannerPic;
+export default errorBoundary(dataProcessing(BannerPic));

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../components/dataProcessing';
 import { rel } from '../../../../../utils/rel';
 
 class StockPlate extends React.PureComponent {
@@ -68,4 +70,4 @@ class StockPlate extends React.PureComponent {
     }
 }
 
-export default StockPlate;
+export default errorBoundary(dataProcessing(StockPlate));

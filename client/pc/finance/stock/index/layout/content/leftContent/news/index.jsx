@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 import Tab from '../../../../components/tabs/';
 import NewsList from '../../../../components/newsList';
 
@@ -38,4 +40,4 @@ class News extends React.PureComponent {
     }
 }
 
-export default News;
+export default errorBoundary(dataProcessing(News));

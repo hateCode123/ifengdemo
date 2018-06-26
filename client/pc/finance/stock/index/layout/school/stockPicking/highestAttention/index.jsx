@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../utils/rel';
 import { jsonp } from '@ifeng/ui_base';
 
@@ -104,4 +106,4 @@ class HighestAttention extends React.PureComponent {
     }
 }
 
-export default HighestAttention;
+export default errorBoundary(dataProcessing(HighestAttention));

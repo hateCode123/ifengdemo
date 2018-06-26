@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../../components/dataProcessing';
 
 class StockNews extends React.PureComponent {
     static propTypes = {
@@ -25,4 +27,4 @@ class StockNews extends React.PureComponent {
     }
 }
 
-export default StockNews;
+export default errorBoundary(dataProcessing(StockNews));

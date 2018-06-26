@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../components/dataProcessing';
 import Ad from '../../../../../components/ad/';
-import Logo from './logo/';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '../../../../../components/userInfo/';
 import Search from '../../../../../components/search/';
+import Logo from './logo/';
 
 /**
  * 定义 Header 组件
@@ -54,4 +56,4 @@ class Header extends React.PureComponent {
     }
 }
 
-export default Header;
+export default errorBoundary(dataProcessing(Header));

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../components/dataProcessing';
 import { rel } from '../../../../../utils/rel';
 
 class HeadTitle extends React.PureComponent {
@@ -39,4 +41,4 @@ class HeadTitle extends React.PureComponent {
     }
 }
 
-export default HeadTitle;
+export default errorBoundary(dataProcessing(HeadTitle));

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { jsonp } from '@ifeng/ui_base';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../utils/rel';
 
 class RecommendStock extends React.PureComponent {
@@ -104,4 +106,4 @@ class RecommendStock extends React.PureComponent {
     }
 }
 
-export default RecommendStock;
+export default errorBoundary(dataProcessing(RecommendStock));

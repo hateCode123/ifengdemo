@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../utils/rel';
 
 class Subject extends React.PureComponent {
@@ -37,4 +39,4 @@ class Subject extends React.PureComponent {
     }
 }
 
-export default Subject;
+export default errorBoundary(dataProcessing(Subject));

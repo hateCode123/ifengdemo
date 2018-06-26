@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
+import errorBoundary from '../../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../../components/dataProcessing';
 
 class PlayItem extends React.PureComponent {
     static propTypes = {
@@ -28,4 +30,4 @@ class PlayItem extends React.PureComponent {
     }
 }
 
-export default PlayItem;
+export default errorBoundary(dataProcessing(PlayItem));

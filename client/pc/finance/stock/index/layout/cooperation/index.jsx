@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import errorBoundary from '../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../components/dataProcessing';
 
 /**
  * 定义 Cooperation 组件
@@ -24,4 +26,4 @@ class Cooperation extends React.PureComponent {
     }
 }
 
-export default Cooperation;
+export default errorBoundary(dataProcessing(Cooperation));

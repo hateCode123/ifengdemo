@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '../../../../../../components/errorBoundary';
+import dataProcessing from '../../../../../../components/dataProcessing';
 import RecommendStock from './recommendStock/';
 import Target from './target';
 import Rating from './rating/';
@@ -64,4 +66,4 @@ class StockPicking extends React.PureComponent {
     }
 }
 
-export default StockPicking;
+export default errorBoundary(dataProcessing(StockPicking));
