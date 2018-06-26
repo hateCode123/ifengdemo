@@ -41,6 +41,7 @@ class FinanceVideo extends React.PureComponent {
             direction: 'forward',
             axis: 'horizonta',
             sliderTmpl: this.sliderTmpl,
+            dotCurrentStyle: styles.current,
         };
 
         return (

@@ -18,6 +18,10 @@
     }
 }
 
+.current {
+    background: #ff2838 !important;
+}
+
 .pic_img {
     width: 300px;
     height: 170px;

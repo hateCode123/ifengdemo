@@ -32,11 +32,12 @@ class BannerPic extends React.PureComponent {
         const { content } = this.props;
 
         const config = {
-            arrows: 'hover',
+            arrows: true,
             autoplay: false,
             direction: 'forward',
             axis: 'horizonta',
             sliderTmpl: this.sliderTmpl,
+            dotCurrentStyle: styles.current,
         };
 
         return (
