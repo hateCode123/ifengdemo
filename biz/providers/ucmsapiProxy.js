@@ -104,7 +104,7 @@ Tarsapi.Result.prototype.readFromObject = function(json) {
     !json.hasOwnProperty('data') || (this.data = json.data);
 };
 Tarsapi.Result.prototype.toBinBuffer = function() {
-    var os = new TarsStream.OutputStream();
+    var os = new TarsStream.TarsOutputStream();
     this._writeTo(os);
     return os.getBinBuffer();
 };
@@ -117,7 +117,7 @@ Tarsapi.Result.create = function(is) {
 Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.del(${id},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         os.writeString(2, newsTime);
         return os.getBinBuffer();
@@ -128,7 +128,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -176,7 +176,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
 Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.delData(${indexName},${type},${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
         os.writeString(2, type);
         os.writeInt64(3, id);
@@ -188,7 +188,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -236,7 +236,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
 Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.getById(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
     };
@@ -246,7 +246,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -294,7 +294,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
 Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.getByIds(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -304,7 +304,7 @@ Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int64, TarsStream.String));
@@ -365,7 +365,7 @@ Tarsapi.SearchProxy.prototype.list = function(
         { childOf: ctx.spanrpc },
     );
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, searchPath);
         os.writeString(2, specialChannelPath);
         os.writeString(3, type);
@@ -382,7 +382,7 @@ Tarsapi.SearchProxy.prototype.list = function(
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -430,7 +430,7 @@ Tarsapi.SearchProxy.prototype.list = function(
 Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.listByQueryStr(${queryStr})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, queryStr);
         return os.getBinBuffer();
     };
@@ -440,7 +440,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -488,7 +488,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
 Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.put(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         os.writeString(2, dataJson);
         os.writeString(3, newsTime);
@@ -500,7 +500,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -550,7 +550,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
         os.writeString(2, type);
         os.writeInt64(3, id);
@@ -563,7 +563,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -611,7 +611,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
 Tarsapi.SearchProxy.prototype.test = function(ctx, s) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.test(${s})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, s);
         return os.getBinBuffer();
     };
@@ -621,7 +621,7 @@ Tarsapi.SearchProxy.prototype.test = function(ctx, s) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -669,7 +669,7 @@ Tarsapi.SearchProxy.prototype.test = function(ctx, s) {
 Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`SearchProxy.update(${id},${dataJson},${newsTime})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         os.writeString(2, dataJson);
         os.writeString(3, newsTime);
@@ -681,7 +681,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -731,7 +731,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
         os.writeString(2, type);
         os.writeInt64(3, id);
@@ -744,7 +744,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, TXXXXarsapi.Result);
@@ -792,7 +792,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
 Tarsapi.KVProxy.prototype.del = function(ctx, enumValue, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.del(${enumValue},${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, enumValue);
         os.writeString(2, k);
         return os.getBinBuffer();
@@ -803,7 +803,7 @@ Tarsapi.KVProxy.prototype.del = function(ctx, enumValue, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -851,7 +851,7 @@ Tarsapi.KVProxy.prototype.del = function(ctx, enumValue, k) {
 Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getAd(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -861,7 +861,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -909,7 +909,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
 Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getAds(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
         return os.getBinBuffer();
     };
@@ -919,7 +919,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
@@ -967,7 +967,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
 Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCategories(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -977,7 +977,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
@@ -1025,7 +1025,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCategory(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
     };
@@ -1035,7 +1035,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1083,7 +1083,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCustom(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -1093,7 +1093,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1141,7 +1141,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
 Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getCustoms(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
         return os.getBinBuffer();
     };
@@ -1151,7 +1151,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
@@ -1199,7 +1199,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
 Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDocument(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
     };
@@ -1209,7 +1209,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1257,7 +1257,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDocuments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -1267,7 +1267,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int64, TarsStream.String));
@@ -1315,7 +1315,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.getDynamicFragment = function (ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDynamicFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function () { 
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
     }
@@ -1323,7 +1323,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function (ctx, id) {
     var _decode = function (data) {
         try {
             var response = {arguments:{}};
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return   = is.readString(0, true, TarsStream.String);
@@ -1367,7 +1367,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function (ctx, id) {
 Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getDynamicFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function () { 
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     }
@@ -1375,7 +1375,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
     var _decode = function (data) {
         try {
             var response = {arguments:{}};
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return   = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
@@ -1421,7 +1421,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function (ctx,ids) {
 Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getRecommendFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
     };
@@ -1431,7 +1431,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1483,7 +1483,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getRecommendFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -1493,7 +1493,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
@@ -1545,7 +1545,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -1555,7 +1555,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1603,7 +1603,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
 Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
         return os.getBinBuffer();
     };
@@ -1613,7 +1613,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
@@ -1661,7 +1661,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
 Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragment(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -1671,7 +1671,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1719,7 +1719,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
 Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getSsiFragments(${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
         return os.getBinBuffer();
     };
@@ -1729,7 +1729,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
@@ -1777,7 +1777,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
 Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStaticFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
     };
@@ -1787,7 +1787,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1839,7 +1839,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStaticFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -1849,7 +1849,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
@@ -1901,7 +1901,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStructuredFragment(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         return os.getBinBuffer();
     };
@@ -1911,7 +1911,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -1963,7 +1963,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getStructuredFragments(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -1973,7 +1973,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int32, TarsStream.String));
@@ -2025,7 +2025,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getVideo(${id})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         return os.getBinBuffer();
     };
@@ -2035,7 +2035,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -2083,7 +2083,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
 Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.getVideos(${ids})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
         return os.getBinBuffer();
     };
@@ -2093,7 +2093,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.Int64, TarsStream.String));
@@ -2141,7 +2141,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
 Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putAd(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2152,7 +2152,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2200,7 +2200,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
 Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putCategory(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2211,7 +2211,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2259,7 +2259,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
 Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putCustom(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2270,7 +2270,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2318,7 +2318,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
 Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putDocument(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2329,7 +2329,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2377,7 +2377,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
 Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putRecommendFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2388,7 +2388,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2440,7 +2440,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
 Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2451,7 +2451,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2499,7 +2499,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
 Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putSsiFragment(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2510,7 +2510,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2558,7 +2558,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
 Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putStaticFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2569,7 +2569,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2621,7 +2621,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
 Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putStructuredFragment(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2632,7 +2632,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2684,7 +2684,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
 Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`KVProxy.putVideo(${id},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt64(1, id);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -2695,7 +2695,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2743,7 +2743,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
 Tarsapi.RedisProxy.prototype.blpop = function(ctx, time, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.blpop(${time},${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
         return os.getBinBuffer();
@@ -2754,7 +2754,7 @@ Tarsapi.RedisProxy.prototype.blpop = function(ctx, time, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readList(0, true, TarsStream.List(TarsStream.String));
@@ -2802,7 +2802,7 @@ Tarsapi.RedisProxy.prototype.blpop = function(ctx, time, ks) {
 Tarsapi.RedisProxy.prototype.brpop = function(ctx, time, ks) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.brpop(${time},${ks})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeInt32(1, time);
         os.writeList(2, ks);
         return os.getBinBuffer();
@@ -2813,7 +2813,7 @@ Tarsapi.RedisProxy.prototype.brpop = function(ctx, time, ks) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readList(0, true, TarsStream.List(TarsStream.String));
@@ -2861,7 +2861,7 @@ Tarsapi.RedisProxy.prototype.brpop = function(ctx, time, ks) {
 Tarsapi.RedisProxy.prototype.del = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.del(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -2871,7 +2871,7 @@ Tarsapi.RedisProxy.prototype.del = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2919,7 +2919,7 @@ Tarsapi.RedisProxy.prototype.del = function(ctx, k) {
 Tarsapi.RedisProxy.prototype.expire = function(ctx, k, exp) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.expire(${k},${exp})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeInt32(2, exp);
         return os.getBinBuffer();
@@ -2930,7 +2930,7 @@ Tarsapi.RedisProxy.prototype.expire = function(ctx, k, exp) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -2978,7 +2978,7 @@ Tarsapi.RedisProxy.prototype.expire = function(ctx, k, exp) {
 Tarsapi.RedisProxy.prototype.get = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.get(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -2988,7 +2988,7 @@ Tarsapi.RedisProxy.prototype.get = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -3038,7 +3038,7 @@ Tarsapi.RedisProxy.prototype.getRange = function(ctx, k, startOffset, endOffset)
         childOf: ctx.spanrpc,
     });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeInt32(2, startOffset);
         os.writeInt32(3, endOffset);
@@ -3050,7 +3050,7 @@ Tarsapi.RedisProxy.prototype.getRange = function(ctx, k, startOffset, endOffset)
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -3098,7 +3098,7 @@ Tarsapi.RedisProxy.prototype.getRange = function(ctx, k, startOffset, endOffset)
 Tarsapi.RedisProxy.prototype.hgetAll = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.hgetAll(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -3108,7 +3108,7 @@ Tarsapi.RedisProxy.prototype.hgetAll = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
@@ -3156,7 +3156,7 @@ Tarsapi.RedisProxy.prototype.hgetAll = function(ctx, k) {
 Tarsapi.RedisProxy.prototype.hmset = function(ctx, k, hash) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.hmset(${k},${hash})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeMap(2, hash);
         return os.getBinBuffer();
@@ -3167,7 +3167,7 @@ Tarsapi.RedisProxy.prototype.hmset = function(ctx, k, hash) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -3215,7 +3215,7 @@ Tarsapi.RedisProxy.prototype.hmset = function(ctx, k, hash) {
 Tarsapi.RedisProxy.prototype.llen = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.llen(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -3225,7 +3225,7 @@ Tarsapi.RedisProxy.prototype.llen = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readInt64(0, true, TarsStream.Int64);
@@ -3273,7 +3273,7 @@ Tarsapi.RedisProxy.prototype.llen = function(ctx, k) {
 Tarsapi.RedisProxy.prototype.lpop = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.lpop(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -3283,7 +3283,7 @@ Tarsapi.RedisProxy.prototype.lpop = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -3331,7 +3331,7 @@ Tarsapi.RedisProxy.prototype.lpop = function(ctx, k) {
 Tarsapi.RedisProxy.prototype.lpush = function(ctx, k, element) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.lpush(${k},${element})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
         return os.getBinBuffer();
@@ -3342,7 +3342,7 @@ Tarsapi.RedisProxy.prototype.lpush = function(ctx, k, element) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readInt64(0, true, TarsStream.Int64);
@@ -3390,7 +3390,7 @@ Tarsapi.RedisProxy.prototype.lpush = function(ctx, k, element) {
 Tarsapi.RedisProxy.prototype.rpop = function(ctx, k) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.rpop(${k})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         return os.getBinBuffer();
     };
@@ -3400,7 +3400,7 @@ Tarsapi.RedisProxy.prototype.rpop = function(ctx, k) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
@@ -3448,7 +3448,7 @@ Tarsapi.RedisProxy.prototype.rpop = function(ctx, k) {
 Tarsapi.RedisProxy.prototype.rpush = function(ctx, k, element) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.rpush(${k},${element})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, element);
         return os.getBinBuffer();
@@ -3459,7 +3459,7 @@ Tarsapi.RedisProxy.prototype.rpush = function(ctx, k, element) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readInt64(0, true, TarsStream.Int64);
@@ -3507,7 +3507,7 @@ Tarsapi.RedisProxy.prototype.rpush = function(ctx, k, element) {
 Tarsapi.RedisProxy.prototype.set = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.set(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -3518,7 +3518,7 @@ Tarsapi.RedisProxy.prototype.set = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -3566,7 +3566,7 @@ Tarsapi.RedisProxy.prototype.set = function(ctx, k, v) {
 Tarsapi.RedisProxy.prototype.setex = function(ctx, k, v, exp) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.setex(${k},${v},${exp})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         os.writeInt32(3, exp);
@@ -3578,7 +3578,7 @@ Tarsapi.RedisProxy.prototype.setex = function(ctx, k, v, exp) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
@@ -3626,7 +3626,7 @@ Tarsapi.RedisProxy.prototype.setex = function(ctx, k, v, exp) {
 Tarsapi.RedisProxy.prototype.setnx = function(ctx, k, v) {
     var child = !config.default.statisticsJaeger?null:tracer._tracer.startSpan(`RedisProxy.setnx(${k},${v})`, { childOf: ctx.spanrpc });
     var _encode = function() {
-        var os = new TarsStream.OutputStream();
+        var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
         os.writeString(2, v);
         return os.getBinBuffer();
@@ -3637,7 +3637,7 @@ Tarsapi.RedisProxy.prototype.setnx = function(ctx, k, v) {
             var response = {
                 arguments: {},
             };
-            var is = new TarsStream.InputStream(data.response.sBuffer);
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
 
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
