@@ -7,3 +7,4 @@ logs
 .idea
 tools
 bin/dev_webpack_config
+.history

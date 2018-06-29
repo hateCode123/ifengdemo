@@ -46,27 +46,6 @@ class UserInfo extends React.PureComponent {
         this.setState({ isShow: !isShow });
     };
 
-    getOptionList = () => {
-        const { isShow } = this.state;
-
-        if (isShow) {
-            return (
-                <ul className={styles.options}>
-                    <li>
-                        <a href="//id.ifeng.com" target="_blank" rel={rel}>
-                            进入个人中心
-                        </a>
-                    </li>
-                    <li>
-                        <a href="//zmt.ifeng.com/" target="_blank" rel={rel}>
-                            进入我的大风号
-                        </a>
-                    </li>
-                </ul>
-            );
-        }
-    };
-
     /**
      * 渲染组件
      */
@@ -84,7 +63,22 @@ class UserInfo extends React.PureComponent {
                     <span className={styles.login_out} onClick={this.handleLoginOut}>
                         退出
                     </span>
-                    {this.getOptionList()}
+                    {isShow ? (
+                        <ul className={styles.options}>
+                            <li>
+                                <a href="//id.ifeng.com" target="_blank" rel={rel}>
+                                    进入个人中心
+                                </a>
+                            </li>
+                            <li>
+                                <a href="//zmt.ifeng.com/" target="_blank" rel={rel}>
+                                    进入我的大风号
+                                </a>
+                            </li>
+                        </ul>
+                    ) : (
+                        ''
+                    )}
                 </div>
             );
         } else {

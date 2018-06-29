@@ -11,15 +11,6 @@ const dataProcessing = WrappedComponent => {
                         flag = true;
 
                         return;
-                    } else if (
-                        item instanceof Array ||
-                        typeof item === 'string' ||
-                        typeof item === 'number' ||
-                        typeof item === 'boolean'
-                    ) {
-                        flag = false;
-                    } else {
-                        this.handleData(item);
                     }
                 }
             } else {

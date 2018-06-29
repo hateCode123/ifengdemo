@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
 
 class Search extends React.PureComponent {
     static propTypes = {
@@ -12,17 +11,31 @@ class Search extends React.PureComponent {
         data: this.props.content,
         searchTxt: this.props.content[0].keyword,
         current: 0,
+        isShow: false,
     };
 
-    componentDidMount() {}
+    handMouseLeave = () => {
+        this.setState({
+            isShow: false,
+        });
+    };
+
+    handleOptionShow = () => {
+        const { isShow } = this.state;
+
+        this.setState({
+            isShow: !isShow,
+        });
+    };
 
     handleSelect = e => {
-        const { data } = this.state;
-        const selectVal = e.currentTarget.value;
+        const { data, isShow } = this.state;
+        const selectVal = Number(e.currentTarget.attributes['value'].value);
 
         this.setState({
             current: selectVal,
             searchTxt: data[selectVal].keyword,
+            isShow: !isShow,
         });
     };
 
@@ -45,27 +58,12 @@ class Search extends React.PureComponent {
         if (type === 'sofeng') {
             window.open(`//search.ifeng.com/sofeng/search.action?q=${searchTxt}&c=1`);
         } else if (type === 'hq') {
-            const stock = await this.getList(searchTxt);
-
-            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}/index.shtml`);
+            window.open(`//app.finance.ifeng.com/hq/search.php?keyword=${searchTxt}`);
         } else if (type === 'car') {
             window.open(`//data.auto.ifeng.com/search/search.do?keywords=${searchTxt}`);
         } else if (type === 'video') {
             window.open(`//so.v.ifeng.com/video?q=${searchTxt}&c=5`);
         }
-    };
-
-    getList = async str => {
-        const data = await jsonp('http://app.finance.ifeng.com/hq/suggest_v2.php', {
-            data: {
-                t: 'all',
-                q: str,
-                cb: 'suggestCallback(suggest_json)',
-            },
-            jsonpCallback: 'suggestCallback',
-        });
-
-        return data[0];
     };
 
     handleFocus = e => {
@@ -90,32 +88,41 @@ class Search extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { data, searchTxt } = this.state;
+        const { data, current, searchTxt, isShow } = this.state;
 
         return (
             <div className={styles.search}>
-                <select name="type" className={styles.select} onChange={this.handleSelect}>
-                    {data.map((item, index) => (
-                        <option key={index} value={index}>
-                            {item.name}
-                        </option>
-                    ))}
-                </select>
-                <div className={styles.btn}>
-                    <div className={styles.text}>
-                        <input
-                            type="text"
-                            value={searchTxt}
-                            className={styles.text}
-                            onChange={this.handleChange}
-                            onKeyDown={this.handleKeydown}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                        />
+                <div className={styles.select}>
+                    <div className={styles.checked} onClick={this.handleOptionShow}>
+                        {data[current].name}
                     </div>
-                    <div className={styles.search_btn}>
-                        <button className={styles.btn} onClick={this.handleClick} />
-                    </div>
+                    {isShow ? (
+                        <ul onMouseLeave={this.handMouseLeave}>
+                            {data.map((item, index) => (
+                                <li key={index}>
+                                    <a href="javascript:void(0);" value={index} onClick={this.handleSelect}>
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        ''
+                    )}
+                </div>
+                <div className={styles.text}>
+                    <input
+                        type="text"
+                        value={searchTxt}
+                        className={styles.text}
+                        onChange={this.handleChange}
+                        onKeyDown={this.handleKeydown}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur}
+                    />
+                </div>
+                <div className={styles.search_btn}>
+                    <button className={styles.btn} onClick={this.handleClick} />
                 </div>
             </div>
         );
