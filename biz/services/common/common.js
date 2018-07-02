@@ -173,106 +173,105 @@ const promiseAll = async json => {
     return allData;
 };
 
-const transfer = async (ctx, json) => {
-    let obj = {};
-    let keys = {};
-    let funcs = {};
-    let backData = {};
+// const transfer = async (ctx, json) => {
+//     let obj = {};
+//     let keys = {};
+//     let funcs = {};
+//     let backData = {};
 
-    for (const item of json) {
-        backData[item[0]] = [];
-        keys[item[3]] = item[0];
-        funcs[item[3]] = item[4];
-        let key = item[1] + '.' + item[2];
-        if (!obj[key]) {
-            obj[key] = { keys: [], ids: [], handles: [] };
-        }
-        obj[key].keys.push(item[0]);
-        obj[key].ids.push(item[3]);
-        obj[key].handles.push(item[4]);
-    }
+//     for (const item of json) {
+//         backData[item[0]] = [];
+//         keys[item[3]] = item[0];
+//         funcs[item[3]] = item[4];
+//         let key = item[1] + '.' + item[2];
+//         if (!obj[key]) {
+//             obj[key] = { keys: [], ids: [], handles: [] };
+//         }
+//         obj[key].keys.push(item[0]);
+//         obj[key].ids.push(item[3]);
+//         obj[key].handles.push(item[4]);
+//     }
 
-    let allp = [];
-    for (const i in obj) {
-        let ids_group = _.chunk(obj[i].ids,30);
-        for (const iterator of ids_group) {
-            let ids = getIds(iterator);
-            allp.push(
-                KVProxy[getAction(i)](ctx, ids).then(
-                    result => {
-                        try {
-                            if (config.default.statistics) {
-                                ctx.rpcTimeList[1].push(result.response.costtime);
-                            }
-                            // jaeger trance 结束
-                            if (config.default.statisticsJaeger) {
-                                result.span.finish();
-                            }
-                            if (config.default.statisticsProm) {
-                                ctx.p_rpc.observe(
-                                    {
-                                        url: ctx.originalUrl.replace(/\?.*/,''),
-                                        rpc_func: result.callInfo.replace('[object Object]',''),
-                                    },
-                                    result.response.costtime
-                                );
-                            }
-                        } catch (error) {
-                            logger.error(error)
-                        }
-                        
-                        return result.response.return.value;
-                    },
-                    result => {
-                        try {
-                            if (config.default.statistics) {
-                                ctx.rpcTimeList[1].push(result.response.costtime);
-                            }
-                            // jaeger trance 结束
-                            if (config.default.statisticsJaeger) {
-                                result.span.finish();
-                            }
-                            if (config.default.statisticsProm) {
-                                ctx.p_rpc.observe(
-                                    {
-                                        url: ctx.originalUrl.replace(/\?.*/,''),
-                                        rpc_func: result.callInfo.replace('[object Object]',''),
-                                    },
-                                    result.response.costtime
-                                );
-                            }
-                        } catch (error) {
-                            logger.error(error)
-                        }
-                        logger.error(`Something error with: ${result.callInfo}`);
-                        logger.error(result.response.error);
-                        return [];
-                    },
-                ),
-            );
-        }
-    
-    }
-    let data = await Promise.all(allp);
+//     let allp = [];
+//     for (const i in obj) {
+//         let ids_group = _.chunk(obj[i].ids, 30);
+//         for (const iterator of ids_group) {
+//             let ids = getIds(iterator);
+//             allp.push(
+//                 KVProxy[getAction(i)](ctx, ids).then(
+//                     result => {
+//                         try {
+//                             if (config.default.statistics) {
+//                                 ctx.rpcTimeList[1].push(result.response.costtime);
+//                             }
+//                             // jaeger trance 结束
+//                             if (config.default.statisticsJaeger) {
+//                                 result.span.finish();
+//                             }
+//                             if (config.default.statisticsProm) {
+//                                 ctx.p_rpc.observe(
+//                                     {
+//                                         url: ctx.originalUrl.replace(/\?.*/, ''),
+//                                         rpc_func: result.callInfo.replace('[object Object]', ''),
+//                                     },
+//                                     result.response.costtime,
+//                                 );
+//                             }
+//                         } catch (error) {
+//                             logger.error(error);
+//                         }
 
-    let allData = {};
-    for (const item of data) {
-        allData = Object.assign(allData, item);
-    }
+//                         return result.response.return.value;
+//                     },
+//                     result => {
+//                         try {
+//                             if (config.default.statistics) {
+//                                 ctx.rpcTimeList[1].push(result.response.costtime);
+//                             }
+//                             // jaeger trance 结束
+//                             if (config.default.statisticsJaeger) {
+//                                 result.span.finish();
+//                             }
+//                             if (config.default.statisticsProm) {
+//                                 ctx.p_rpc.observe(
+//                                     {
+//                                         url: ctx.originalUrl.replace(/\?.*/, ''),
+//                                         rpc_func: result.callInfo.replace('[object Object]', ''),
+//                                     },
+//                                     result.response.costtime,
+//                                 );
+//                             }
+//                         } catch (error) {
+//                             logger.error(error);
+//                         }
+//                         logger.error(`Something error with: ${result.callInfo}`);
+//                         logger.error(result.response.error);
+//                         return [];
+//                     },
+//                 ),
+//             );
+//         }
+//     }
+//     let data = await Promise.all(allp);
 
-    for (const i in allData) {
-        backData[keys[i]] = funcs[i](ctx, allData[i]);
-    }
+//     let allData = {};
+//     for (const item of data) {
+//         allData = Object.assign(allData, item);
+//     }
 
-    return backData;
-};
+//     for (const i in allData) {
+//         backData[keys[i]] = funcs[i](ctx, allData[i]);
+//     }
+
+//     return backData;
+// };
 
 function getIds(arr) {
     // console.log(arr);
     const ids = new Tars.List(Tars.String);
     arr = [...new Set(arr)];
     for (const item of arr) {
-        ids.push(item+'');
+        ids.push(item + '');
     }
     return ids;
 }
@@ -296,10 +295,10 @@ function getJsonByKey(key) {
             json = jsonParse(json[key], ctx);
             return json;
         } catch (error) {
-            console.log(error)
+            console.log(json[key]);
+            console.log(error);
         }
         return json[key];
-       
     };
 }
 
@@ -310,21 +309,97 @@ function getStringByKey(key) {
     };
 }
 
-function getAction(action) {
-    let key = {
-        'KVProxy.getAd': 'getAds',
-        'KVProxy.getCategory': 'getCategories',
-        'KVProxy.getCustom': 'getCustoms',
-        'KVProxy.getDocument': 'getDocuments',
-        'KVProxy.getRecommendFragment': 'getRecommendFragments',
-        'KVProxy.getSsiFragment': 'getSsiFragments',
-        'KVProxy.getStaticFragment': 'getStaticFragments',
-        'KVProxy.getStructuredFragment': 'getStructuredFragments',
-        'KVProxy.getVideo': 'getVideos',
-        'KVProxy.getDynamicFragment': 'getDynamicFragments',
+// function getAction(action) {
+//     let key = {
+//         'KVProxy.getAd': 'getAds',
+//         'KVProxy.getCategory': 'getCategories',
+//         'KVProxy.getCustom': 'getCustoms',
+//         'KVProxy.getDocument': 'getDocuments',
+//         'KVProxy.getRecommendFragment': 'getRecommendFragments',
+//         'KVProxy.getSsiFragment': 'getSsiFragments',
+//         'KVProxy.getStaticFragment': 'getStaticFragments',
+//         'KVProxy.getStructuredFragment': 'getStructuredFragments',
+//         'KVProxy.getVideo': 'getVideos',
+//         'KVProxy.getDynamicFragment': 'getDynamicFragments',
+//     };
+//     // console.log(key[action]);
+//     return key[action];
+// }
+
+function getAction(key) {
+    let json = {
+        'KVProxy.getStructuredFragment': 'structuredFragment',
+        'KVProxy.getStaticFragment': 'staticFragment',
+        'KVProxy.getDynamicFragment': 'dynFragment',
+        'KVProxy.getSsiFragment': 'ssiFragment',
+        'KVProxy.getRecommendFragment': 'recommendFragment',
+        'KVProxy.getCustom': 'other',
     };
-    return key[action];
+    return json[key];
 }
+const transfer = async (ctx, json) => {
+    let obj = {};
+    let backData = {};
+
+    var map = new Tars.Map(Tars.String, Tars.List(Tars.String));
+
+    for (const item of json) {
+        backData[item[0]] = [];
+        let key = getAction(item[1] + '.' + item[2]);
+
+        if (!obj[key]) {
+            obj[key] = {};
+        }
+
+        obj[key][item[3]] = { name: item[0], handle: item[4] };
+    }
+    // console.log(obj);
+    for (const key in obj) {
+        const tar_list = new Tars.List(Tars.String);
+        for (const item of Object.keys(obj[key])) {
+            tar_list.push(item + '');
+        }
+        map.set(key, tar_list);
+    }
+    let result = '';
+
+    try {
+        result = await KVProxy.getAll(ctx, map);
+    } catch (error) {
+        logger.error(error);
+        return backData;
+    } finally {
+        console.log('finally');
+        if (config.default.statistics) {
+            ctx.rpcTimeList[1].push(result.response.costtime);
+        }
+        // jaeger trance 结束
+        if (config.default.statisticsJaeger) {
+            result.span.finish();
+        }
+        if (config.default.statisticsProm) {
+            ctx.p_rpc.observe(
+                {
+                    url: ctx.originalUrl.replace(/\?.*/, ''),
+                    rpc_func: result.callInfo.replace('[object Object]', ''),
+                },
+                result.response.costtime,
+            );
+        }
+    }
+
+    for (let key in result.response.return.value) {
+        let kvObj = result.response.return.value[key].value;
+        for (const id in kvObj) {
+            let itemkey = obj[key][id].name;
+            let handle = obj[key][id].handle;
+            // console.log(itemkey);
+            backData[itemkey] = handle(ctx, kvObj[id]);
+        }
+    }
+
+    return backData;
+};
 
 // 导出处理函数
 module.exports = {

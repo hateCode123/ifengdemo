@@ -53,7 +53,7 @@ exports.financeWemoney = {
             // 热点推荐 货币型
             ['rediantuijianTableMoney', 'KVProxy', 'getCustom', 'finance_22005_516_1300', getJson()],
 
-            ['slider', 'KVProxy', 'getDynamicFragment', 10008, getJsonByKey('data')],
+            ['slider', 'KVProxy', 'getDynamicFragment', 10008, getStringByKey('data')],
 
             ['topCollapse', 'KVProxy', 'getStaticFragment', 10160, getJsonByKey('content')],
 
