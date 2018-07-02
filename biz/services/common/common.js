@@ -197,8 +197,6 @@ const transfer = async (ctx, json) => {
         let ids_group = _.chunk(obj[i].ids,30);
         for (const iterator of ids_group) {
             let ids = getIds(iterator);
-            console.log(getAction(i));
-            console.log('=====================');
             allp.push(
                 KVProxy[getAction(i)](ctx, ids).then(
                     result => {

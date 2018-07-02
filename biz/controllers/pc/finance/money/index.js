@@ -20,7 +20,7 @@ exports.financeWemoney = {
         //     return ctx.body = all;
 
         let json = [
-            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getJsonByKey('content')],
+            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
 
