@@ -32,7 +32,8 @@ class HotNews extends React.PureComponent {
                 <div className={styles.hotSpecial}>
                     <Chip id="10122" type="static" title="热门新闻排行标题" content={content}>
                         <a href="">
-                            <span className={styles.hotTitle}>{hotNewsTitle[0].title}</span>
+                            {/* <span className={styles.hotTitle}>{hotNewsTitle[0].title}</span> */}
+                            <span className={styles.hotTitle}>{hotNewsTitle.title}</span>
                         </a>
                     </Chip>
                     <i className={styles.hotLineIcon} />

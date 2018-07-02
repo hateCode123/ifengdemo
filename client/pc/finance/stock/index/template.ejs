@@ -179,18 +179,6 @@
 
 <body>
     <div id="root"></div>
-    <script src="/bj-report.js"></script>
-    <script src="/bj-wrap.js"></script>
-    <script>
-        BJ_REPORT.init({
-            namespace: 'shank', // 命名空间
-            appname: 'web_channel_finance', // 项目名称
-            url: "http://172.30.156.158:3000/api/error/upload"
-        });
-
-        BJ_REPORT.tryJs().spyAll();
-    </script>
-
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
