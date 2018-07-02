@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component {
 
         console.error('error', error);
 
-        window.BJ_REPORT.report(error);
+        window && window.BJ_REPORT && window.BJ_REPORT.report(error);
     }
 
     render() {
