@@ -197,7 +197,8 @@ const transfer = async (ctx, json) => {
         let ids_group = _.chunk(obj[i].ids,30);
         for (const iterator of ids_group) {
             let ids = getIds(iterator);
-
+            console.log(getAction(i));
+            console.log('=====================');
             allp.push(
                 KVProxy[getAction(i)](ctx, ids).then(
                     result => {
@@ -270,12 +271,7 @@ const transfer = async (ctx, json) => {
 
 function getIds(arr) {
     // console.log(arr);
-    let map = {
-        number: Tars.Int32,
-        string: Tars.String,
-    };
-    let type = typeof arr[0];
-    const ids = new Tars.List(map.string);
+    const ids = new Tars.List(Tars.String);
     arr = [...new Set(arr)];
     for (const item of arr) {
         ids.push(item+'');
