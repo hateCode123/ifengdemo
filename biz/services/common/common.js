@@ -275,10 +275,10 @@ function getIds(arr) {
         string: Tars.String,
     };
     let type = typeof arr[0];
-    const ids = new Tars.List(map[type]);
+    const ids = new Tars.List(map.string);
     arr = [...new Set(arr)];
     for (const item of arr) {
-        ids.push(item);
+        ids.push(item+'');
     }
     return ids;
 }
