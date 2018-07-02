@@ -1,12 +1,7 @@
 // const redis = require('../../../../common/redis');
 // const logger = require('../../../../common/logger');
 // const { KVProxy } = require('../../../../providers/ucmsapiProxy');
-const {  
-    transfer,
-    getJson,
-    getJsonByKey,
-    getStringByKey,
-} = require('../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
     path: '/pc/finance/money',
@@ -14,20 +9,18 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     handler: async ctx => {
+        //     const Tars = require('@tars/stream');
 
-    //     const Tars = require('@tars/stream');
+        //     let jsons = [
+        //         ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getJsonByKey('data')],
+        //     ['slider', 'KVProxy', 'getDynamicFragment', 10008, getJson()],
+        // ]
 
-    //     let jsons = [      
-    //         ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getJsonByKey('data')],
-    //     ['slider', 'KVProxy', 'getDynamicFragment', 10008, getJson()],
-    // ]
+        //     let all = await transfer(ctx,jsons);
+        //     return ctx.body = all;
 
-    //     let all = await transfer(ctx,jsons);
-    //     return ctx.body = all;
-       
-        let json = [  
-
-            ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
+        let json = [
+            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getJsonByKey('content')],
 
             ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
 
@@ -69,15 +62,15 @@ exports.financeWemoney = {
 
             // Logo Ad
             ['topAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
-          
+
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
-             
+
             ['bottomAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
         ];
 
         let allData = await transfer(ctx, json);
- 
+
         await ctx.html('finance_money', {
             allData,
         });

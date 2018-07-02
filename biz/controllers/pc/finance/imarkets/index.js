@@ -22,7 +22,7 @@ exports.list = {
         // 页面公用导航
         const json = {
             // 顶部导航接口WW
-            nav: KVProxy.getStaticFragment(ctx, 10108).then(...handleJsonByKey(ctx, 'content')),
+            nav: KVProxy.getStructuredFragment(ctx, 20002).then(...handleJsonByKey(ctx, 'content')),
             // 顶部新闻
             topnews: KVProxy.getStaticFragment(ctx, 10165).then(...handleJsonByKey(ctx, 'content')),
             // 信息流

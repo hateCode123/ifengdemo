@@ -13,7 +13,7 @@ exports.financeWemoney = {
     handler: async ctx => {
         const json = [
             // 通用导航
-            ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
+            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getJsonByKey('content')],
 
             // 搜索
             ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],

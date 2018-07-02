@@ -11,7 +11,7 @@ exports.financeWemoney = {
     handler: async ctx => {
         let json = [
             // 通用导航
-            ['commonNav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
+            ['commonNav', 'KVProxy', 'getStructuredFragment', 20002, getJsonByKey('content')],
 
             // 导航
             ['navigation', 'KVProxy', 'getStaticFragment', 10003, getJson()],
