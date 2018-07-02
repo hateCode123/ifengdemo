@@ -8,7 +8,7 @@ import { rel } from '../../../../../../utils/rel';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     sliderTmpl = item => {

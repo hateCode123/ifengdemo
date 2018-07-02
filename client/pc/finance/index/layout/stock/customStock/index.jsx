@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getMyStockData, getStockData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 
@@ -36,22 +36,13 @@ class CustomStock extends React.PureComponent {
             const isLogin = auth.isLogin();
 
             if (isLogin) {
-                const data = await jsonp('//apiapp.finance.ifeng.com/mystock/get', {
-                    num: 2,
-                });
+                const data = await getMyStockData(2);
 
                 const nameList = data.stockinfo.map(item => item.name);
 
                 const codeList = data.stockinfo.map(item => item.code);
 
-                const result = await jsonp('//hq.finance.ifeng.com/q.php', {
-                    data: {
-                        l: codeList.join(','),
-                        f: 'json',
-                        e: 'getStock(json_q)',
-                    },
-                    jsonpCallback: 'getStock',
-                });
+                const result = await getStockData(codeList);
 
                 const customStock = [];
 
@@ -80,7 +71,7 @@ class CustomStock extends React.PureComponent {
                 this.setState({ customStock });
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

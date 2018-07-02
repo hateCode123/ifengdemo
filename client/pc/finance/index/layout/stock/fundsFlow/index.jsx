@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.css';
+import { getFundsFlowData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
-import { jsonp } from '@ifeng/ui_base';
 
 class FundsFlow extends React.PureComponent {
     state = {
@@ -19,7 +19,7 @@ class FundsFlow extends React.PureComponent {
     async componentDidMount() {
         try {
             const datas = [];
-            const data = await jsonp('//i.finance.ifeng.com/moneyflow/flow/So');
+            const data = await getFundsFlowData();
 
             data.forEach((item, index) => {
                 if ([0, 1, 10, 11].includes(index)) {
@@ -29,7 +29,7 @@ class FundsFlow extends React.PureComponent {
 
             this.setState({ flow: datas });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

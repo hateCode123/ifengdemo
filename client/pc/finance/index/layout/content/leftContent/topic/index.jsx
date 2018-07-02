@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './index.css';
+import { getTopicData } from '../../../../../../services/api';
 import { rel } from '../../../../../../utils/rel';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
-import { jsonp } from '@ifeng/ui_base';
 
 class Topic extends React.PureComponent {
     state = {
@@ -29,21 +29,13 @@ class Topic extends React.PureComponent {
 
     getData = async () => {
         try {
-            const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
-                data: {
-                    level: 1,
-                    dist: 1,
-                    cb: 'setNewCont',
-                },
-                jsonp: 'cb',
-                jsonpCallback: 'setNewCont',
-            });
+            const data = await getTopicData();
 
             this.setState({
                 topic: data[0].title[0],
             });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

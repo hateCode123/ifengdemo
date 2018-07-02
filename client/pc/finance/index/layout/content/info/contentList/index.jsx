@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { rel } from '../../../../../../utils/rel';
-import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
+import { rel } from '../../../../../../utils/rel';
 
 class ContentList extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
+        counts: PropTypes.array,
     };
 
     state = {
         isOver: false,
-        counts: [],
     };
 
     /**
@@ -28,40 +27,10 @@ class ContentList extends React.PureComponent {
     };
 
     /**
-     * 获取评论数
-     */
-    async componentDidMount() {
-        try {
-            const { content } = this.props;
-            const count = [];
-
-            const docUrl = content.map(item => item.commentUrl);
-
-            const data = await jsonp('//comment.ifeng.com/get.php', {
-                data: {
-                    job: 4,
-                    format: 'js',
-                    callback: 'getAllComment1',
-                    docurl: docUrl.join('|'),
-                },
-            });
-
-            data.forEach(item => {
-                count.push(item.count);
-            });
-
-            this.setState({ counts: count });
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    /**
      * 渲染组件
      */
     render() {
-        const { counts } = this.state;
-        const { content } = this.props;
+        const { content, counts } = this.props;
         const listStyle = {};
         const type = {
             置顶: 'category0',

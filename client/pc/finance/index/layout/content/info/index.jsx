@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import { getCommentCount } from '../../../../../services/api';
 import Tabs from './tabs';
 import ContentList from './contentList';
 import Ad from '../../../../../components/ad';
 
-class Info extends React.PureComponent {
+class Info extends React.Component {
     static propTypes = {
         content: PropTypes.object,
     };
@@ -14,12 +15,47 @@ class Info extends React.PureComponent {
         tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
         listNum: 5,
+        counts: [],
     };
+
+    async componentDidMount() {
+        try {
+            const { counts } = this.state;
+            const { content } = this.props;
+            const data = content.content[0];
+            const docUrl = data.map(item => item.commentUrl);
+            const count = await getCommentCount(docUrl);
+
+            counts[0] = count.map(item => item.count);
+
+            this.setState({ counts });
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     /**
      * 切换栏目操作
      */
-    handleTabsChange = (num, tabsTop) => {
+    handleTabsChange = async (num, tabsTop) => {
+        const { counts } = this.state;
+
+        // 获取文章评论数
+        if (!counts[num]) {
+            try {
+                const { content } = this.props;
+                const data = content.content[num];
+                const docUrl = data.map(item => item.commentUrl);
+                const count = await getCommentCount(docUrl);
+
+                counts[num] = count.map(item => item.count);
+
+                this.setState({ counts });
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
         this.setState({
             current: num,
             listNum: 5,
@@ -42,7 +78,7 @@ class Info extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { tabs, current, listNum } = this.state;
+        const { tabs, current, listNum, counts } = this.state;
         const { content } = this.props;
         const data = content.content[current];
         const contentList = [];
@@ -55,7 +91,7 @@ class Info extends React.PureComponent {
 
                 contentList.push(
                     <div key={i}>
-                        <ContentList content={data.slice(i * num, i * num + len)} />
+                        <ContentList content={data.slice(i * num, i * num + len)} counts={counts[current]} />
                         {current === 0 && i < 5 ? <ContentList content={content.softAd} /> : ''}
                         {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
                     </div>,

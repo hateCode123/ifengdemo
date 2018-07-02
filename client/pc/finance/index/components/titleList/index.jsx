@@ -16,8 +16,8 @@ class TitleList extends React.PureComponent {
 
         return (
             <ul className={styles.titleList}>
-                {content.map(item => (
-                    <li key={item.id}>
+                {content.map((item, index) => (
+                    <li key={index}>
                         <a href={item.url} target="_blank" rel={rel} title={item.title}>
                             {item.title}
                         </a>

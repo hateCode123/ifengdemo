@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
-
+import { getStockData } from '../../../../../services/api';
 class StockBox extends React.PureComponent {
     state = {
         stock: [
@@ -40,14 +39,7 @@ class StockBox extends React.PureComponent {
 
             const codeList = stock.map(item => item.code);
 
-            const result = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: codeList.join(','),
-                    f: 'json',
-                    e: 'getResult(json_q)',
-                },
-                jsonpCallback: 'getResult',
-            });
+            const result = await getStockData(codeList);
 
             codeList.forEach(item => {
                 let style = '';
@@ -70,7 +62,7 @@ class StockBox extends React.PureComponent {
 
             this.setState({ prices: price });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 
