@@ -9,7 +9,8 @@
         var allData = <%- JSON.stringify(allData) %>;
     </script>
     {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{.}}" rel="stylesheet"> {{/each}}
+    <link href="{{path}}" rel="stylesheet"> 
+    {{/each}}
         <!--[if lt IE 8]>
         <script>
             if (typeof document.querySelector === 'undefined') {
