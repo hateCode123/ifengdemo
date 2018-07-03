@@ -20,6 +20,8 @@ class ResearchSearch extends React.PureComponent {
         const { checked } = this.state;
         const val = e.currentTarget.value;
 
+        this.setState({ searchTxt: val });
+
         if (checked === 'title') {
             this.setState({ option: val });
         } else if (checked === 'report') {

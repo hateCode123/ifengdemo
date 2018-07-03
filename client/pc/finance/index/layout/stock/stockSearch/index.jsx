@@ -20,7 +20,7 @@ class StockSearch extends React.PureComponent {
 
     getList = async str => {
         try {
-            const data = await getFinanceData(str);
+            const data = await getFinanceData('all', str);
 
             this.setState({ data });
         } catch (e) {
