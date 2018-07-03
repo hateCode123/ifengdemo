@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import { getStockData } from '../../../../../../../services/api';
 import errorBoundary from '../../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../utils/rel';
-import { jsonp } from '@ifeng/ui_base';
 
 class Target extends React.PureComponent {
     static propTypes = {
@@ -23,18 +23,11 @@ class Target extends React.PureComponent {
 
             const code = content.map(item => `s_${item.code}`);
 
-            const data = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: code.join(','),
-                    f: 'json',
-                    e: 'suggestCallback(json_q)',
-                },
-                jsonpCallback: 'suggestCallback',
-            });
+            const data = await getStockData(code);
 
             this.setState({ stockData: data });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

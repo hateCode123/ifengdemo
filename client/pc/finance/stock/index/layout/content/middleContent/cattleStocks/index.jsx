@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getFinanceData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import DataBox from './dataBox/';
 
@@ -38,6 +38,7 @@ class CattleStocks extends React.PureComponent {
             },
         ],
         current: 0,
+        data: {},
     };
 
     handleMouseOver = e => {
@@ -49,18 +50,14 @@ class CattleStocks extends React.PureComponent {
     handleChange = async e => {
         try {
             const val = e.currentTarget.value;
-            const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
-                data: {
-                    t: 'all',
-                    q: val,
-                    cb: 'suggestCallback(suggest_json)',
-                },
-                jsonpCallback: 'suggestCallback',
-            });
+            const data = await getFinanceData('all', val);
 
-            this.setState({ searchTxt: data[0] });
+            this.setState({
+                searchTxt: val,
+                data: data[0],
+            });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 
@@ -81,15 +78,15 @@ class CattleStocks extends React.PureComponent {
     };
 
     handleStockSearch = () => {
-        const { searchTxt } = this.state;
+        const { data } = this.state;
 
-        window.open(`//finance.ifeng.com/app/hq/${searchTxt.t}/${searchTxt.c}/index.shtml`);
+        window.open(`//finance.ifeng.com/app/hq/${data.t}/${data.c}/index.shtml`);
     };
 
     handleFundsSearch = () => {
-        const { searchTxt } = this.state;
+        const { data } = this.state;
 
-        window.open(`//finance.ifeng.com/zjlx/${searchTxt.c}`);
+        window.open(`//finance.ifeng.com/zjlx/${data.c}`);
     };
 
     /**

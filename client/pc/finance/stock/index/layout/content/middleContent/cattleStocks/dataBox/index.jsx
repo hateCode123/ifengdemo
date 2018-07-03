@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getStockData } from '../../../../../../../../services/api';
 import { rel } from '../../../../../../../../utils/rel';
 
 class DataBox extends React.PureComponent {
@@ -23,14 +23,7 @@ class DataBox extends React.PureComponent {
             const codeList = dataStock.map(item => item.code);
             const price = [];
 
-            const data = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: codeList.join(','),
-                    f: 'json',
-                    e: 'getStockData(json_q)',
-                },
-                jsonpCallback: 'getStockData',
-            });
+            const data = await getStockData(codeList);
 
             for (let a = 0; a < Object.keys(data).length; a++) {
                 let style = '';
@@ -57,7 +50,7 @@ class DataBox extends React.PureComponent {
 
             this.setState({ prices: price });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

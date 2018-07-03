@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { jsonp } from '@ifeng/ui_base';
+import { getAnalyzerInfo, getQAData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import QaTabs from './QATabs/';
 import QaForm from './QAForm/';
@@ -40,14 +41,7 @@ class Qa extends React.PureComponent {
             const list = {};
 
             if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
-                const userData = await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
-                    data: {
-                        name: currentUser.name,
-                        type: currentUser.type,
-                        cb: `updateAnalyzerInfo${index}`,
-                    },
-                    jsonpCallback: `updateAnalyzerInfo${index}`,
-                });
+                const userData = await getAnalyzerInfo(currentUser.name, currentUser.type);
 
                 qa[currentUser.name] = {
                     url: '',
@@ -56,26 +50,6 @@ class Qa extends React.PureComponent {
 
                 qa[currentUser.name].url = userData[0].url;
                 qa[currentUser.name].img = userData[0].image;
-
-                const qaobj = Object.assign({}, qaers, qa);
-
-                const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
-                    data: {
-                        name: currentUser.name,
-                        type: currentUser.type ? currentUser.type : '',
-                        callback: 'getQAData',
-                    },
-                    jsonpCallback: 'getQAData',
-                });
-
-                list[currentUser.name] = data.a_content;
-
-                const listobj = Object.assign({}, alist, list);
-
-                this.setState({
-                    qaers: qaobj,
-                    alist: listobj,
-                });
             } else if (!qaers[currentUser.name] && !alist[currentUser.name] && index === tabs.length - 1) {
                 qa[currentUser.name] = {
                     url: '',
@@ -84,29 +58,22 @@ class Qa extends React.PureComponent {
 
                 qa[currentUser.name].url = tabs[tabs.length - 1].url;
                 qa[currentUser.name].img = tabs[tabs.length - 1].src;
-
-                const qaobj = Object.assign({}, qaers, qa);
-
-                const data = await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
-                    data: {
-                        name: currentUser.name,
-                        type: currentUser.type ? currentUser.type : '',
-                        callback: 'getQAData',
-                    },
-                    jsonpCallback: 'getQAData',
-                });
-
-                list[currentUser.name] = data.a_content;
-
-                const listobj = Object.assign({}, alist, list);
-
-                this.setState({
-                    qaers: qaobj,
-                    alist: listobj,
-                });
             }
+
+            const qaobj = Object.assign({}, qaers, qa);
+
+            const data = await getQAData(currentUser.name, currentUser.type ? currentUser.type : '');
+
+            list[currentUser.name] = data.a_content;
+
+            const listobj = Object.assign({}, alist, list);
+
+            this.setState({
+                qaers: qaobj,
+                alist: listobj,
+            });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

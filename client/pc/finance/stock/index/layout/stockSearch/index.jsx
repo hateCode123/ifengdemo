@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getFinanceData } from '../../../../../services/api';
 
 class StockSearch extends React.PureComponent {
     state = {
@@ -15,18 +15,11 @@ class StockSearch extends React.PureComponent {
         try {
             const { type } = this.state;
 
-            const data = await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
-                data: {
-                    t: type,
-                    q: str,
-                    cb: 'suggestCallback(suggest_json)',
-                },
-                jsonpCallback: 'suggestCallback',
-            });
+            const data = await getFinanceData(type, str);
 
             this.setState({ data });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

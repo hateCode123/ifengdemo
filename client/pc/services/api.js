@@ -1,5 +1,19 @@
 import { jsonp, ajax } from '@ifeng/ui_base';
 
+const createJsonpCallbackName = (str, num) => {
+    const md5 = require('md5');
+
+    num = num ? num : 0;
+    const jsonpCallbackName = `_${md5(`${str}_${num}`)}`;
+
+    if (window[jsonpCallbackName]) {
+        num++;
+        createJsonpCallbackName(str, num);
+    } else {
+        return jsonpCallbackName;
+    }
+};
+
 // 获取文章评论数
 const getCommentCount = async url => {
     return await jsonp('//comment.ifeng.com/get.php', {
@@ -32,7 +46,7 @@ const getTopicData = async () => {
 const getMyStockData = async num => {
     return await jsonp('//apiapp.finance.ifeng.com/mystock/get', {
         data: { num },
-        jsonpCallback: 'getMyStockData',
+        jsonpCallback: createJsonpCallbackName('getMyStockData'),
         cache: false,
     });
 };
@@ -45,7 +59,7 @@ const getStockData = async codeList => {
             f: 'json',
             e: 'getStock(json_q)',
         },
-        jsonpCallback: 'getStock',
+        jsonpCallback: createJsonpCallbackName('getStock'),
         cache: false,
     });
 };
@@ -59,16 +73,121 @@ const getFundsFlowData = async () => {
 };
 
 // 查询股票，资金，证券等数据
-const getFinanceData = async str => {
+const getFinanceData = async (type, str) => {
+    const callback = createJsonpCallbackName('getFinanceData');
+
     return await jsonp('//app.finance.ifeng.com/hq/suggest_v2.php', {
         data: {
-            t: 'all',
+            t: type,
             q: str,
-            cb: 'getFinanceData(suggest_json)',
+            cb: `${callback}(suggest_json)`,
         },
-        jsonpCallback: 'getFinanceData',
+        jsonpCallback: callback,
         cache: false,
     });
 };
 
-export { getCommentCount, getTopicData, getMyStockData, getStockData, getFundsFlowData, getFinanceData };
+// 获取24小时直播数据
+const getLiveData = async today => {
+    return await jsonp('//api3.finance.ifeng.com/live/getday', {
+        data: {
+            beg: Date.parse(`${today} 00:00:00`) / 1000,
+            end: Date.parse(`${today} 23:59:59`) / 1000,
+            level: 1,
+            dist: 1,
+        },
+        jsonp: 'cb',
+        jsonpCallback: 'getLiveData',
+        cache: false,
+    });
+};
+
+// 刷新24小时直播数据
+const refreshLiveData = async lastid => {
+    return await jsonp('//api3.finance.ifeng.com/live/getnew', {
+        data: {
+            lastid,
+            level: 1,
+            dist: 1,
+        },
+        jsonp: 'cb',
+        jsonpCallback: 'addNewData',
+        cache: false,
+    });
+};
+
+// 获取股票涨跌排行数据
+const getStockRank = async type => {
+    return await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
+        data: {
+            type,
+        },
+        jsonpCallback: 'getStockRank',
+        cache: false,
+    });
+};
+
+// 获取资金流向排行数据
+const getFundsFlowRank = async type => {
+    return await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
+        data: {
+            type,
+        },
+        jsonpCallback: 'getFundsFlowRank',
+        cache: false,
+    });
+};
+
+// 获取热门股票数据
+const getHotStockData = async () => {
+    return await jsonp('//apiapp.finance.ifeng.com/hotstockrank', {
+        data: {
+            type: 'wx',
+            callback: 'getHotStockData',
+        },
+        jsonpCallback: 'getHotStockData',
+        cache: false,
+    });
+};
+
+// 获取分析师数据
+const getAnalyzerInfo = async (name, type) => {
+    return await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
+        data: {
+            name,
+            type,
+            cb: createJsonpCallbackName('updateAnalyzerInfo'),
+        },
+        jsonpCallback: createJsonpCallbackName('updateAnalyzerInfo'),
+        cache: false,
+    });
+};
+
+// 获取分析师答疑数据
+const getQAData = async (name, type) => {
+    return await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
+        data: {
+            name,
+            type,
+            cb: createJsonpCallbackName('getQAData'),
+        },
+        jsonpCallback: createJsonpCallbackName('getQAData'),
+        cache: false,
+    });
+};
+
+export {
+    getCommentCount,
+    getTopicData,
+    getMyStockData,
+    getStockData,
+    getFundsFlowData,
+    getFinanceData,
+    getLiveData,
+    refreshLiveData,
+    getStockRank,
+    getFundsFlowRank,
+    getHotStockData,
+    getAnalyzerInfo,
+    getQAData,
+};

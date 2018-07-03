@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp, cookie } from '@ifeng/ui_base';
+import { cookie } from '@ifeng/ui_base';
+import { getHotStockData, getStockData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import MyStocks from './myStocks/';
 
@@ -30,13 +31,7 @@ class CustomStocks extends React.PureComponent {
             let isLastest = true;
 
             if (userSawList === '') {
-                const stockData = await jsonp('//apiapp.finance.ifeng.com/hotstockrank', {
-                    data: {
-                        type: 'wx',
-                        callback: 'test',
-                    },
-                    jsonpCallback: 'test',
-                });
+                const stockData = await getHotStockData();
 
                 stockData.slice(0, 4).forEach(item => {
                     const d = [];
@@ -47,24 +42,22 @@ class CustomStocks extends React.PureComponent {
                     data.push(d);
                 });
 
-                code = data.map(item => item[0]).join(',');
+                code = data.map(item => item[0]);
                 isLastest = false;
             } else {
                 const list = userSawList.split(',').map(item => item.split(':'));
 
                 data = list.map(item => item.slice(0, 2));
-                code = data.map(item => item[0]).join(',');
+                data.forEach((item, index) => {
+                    if (item[0] === '') {
+                        data.splice(index, 1);
+                    }
+                });
+                code = data.map(item => item[0]);
                 isLastest = true;
             }
 
-            const stockData = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: code,
-                    f: 'json',
-                    e: 'getVal(json_q)',
-                },
-                jsonpCallback: 'getVal',
-            });
+            const stockData = await getStockData(code);
 
             data.forEach(item => {
                 const code = item[0];
@@ -82,7 +75,7 @@ class CustomStocks extends React.PureComponent {
                 data,
             });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

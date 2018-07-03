@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getStockRank } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 
 class Rank extends React.PureComponent {
@@ -86,21 +86,16 @@ class Rank extends React.PureComponent {
      */
     getData = async type => {
         try {
-            const data = await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
-                data: {
-                    type,
-                },
-                jsonpCallback: 'getStockRank',
-            });
+            const data = await getStockRank(type);
 
-            if (data.data.length > 0) {
+            if (data.data && data.data.length > 0) {
                 this.setState({
                     loading: false,
                     data: data.data.slice(0, 5),
                 });
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

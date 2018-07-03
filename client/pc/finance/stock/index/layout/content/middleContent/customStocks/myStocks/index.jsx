@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './index.css';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
+import { getMyStockData, getStockData } from '../../../../../../../../services/api';
 import { rel } from '../../../../../../../../utils/rel';
-import { jsonp } from '@ifeng/ui_base';
 
 class MyStocks extends React.PureComponent {
     state = {
@@ -44,18 +44,11 @@ class MyStocks extends React.PureComponent {
 
     getMyStock = async () => {
         try {
-            const myStockInfo = await jsonp('//apiapp.finance.ifeng.com/mystock/get');
+            const myStockInfo = await getMyStockData();
             const data = myStockInfo.stockinfo;
-            const code = data.map(item => item.code).join(',');
+            const code = data.map(item => item.code);
 
-            const myStockData = await jsonp('//hq.finance.ifeng.com/q.php', {
-                data: {
-                    l: code,
-                    f: 'json',
-                    e: 'getVal(json_q)',
-                },
-                jsonpCallback: 'getVal',
-            });
+            const myStockData = await getStockData(code);
 
             data.forEach(item => {
                 const code = item.code;
@@ -66,7 +59,7 @@ class MyStocks extends React.PureComponent {
 
             this.setState({ data });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

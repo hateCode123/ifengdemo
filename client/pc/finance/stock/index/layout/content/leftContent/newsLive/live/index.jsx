@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import { getLiveData, refreshLiveData } from '../../../../../../../../services/api';
 import errorBoundary from '../../../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../../../utils/rel';
-import { jsonp } from '@ifeng/ui_base';
 
 class Live extends React.PureComponent {
     static propTypes = {
@@ -110,24 +110,14 @@ class Live extends React.PureComponent {
     getLiveData = async () => {
         try {
             const today = this.getToday();
-
-            const data = await jsonp('//api3.finance.ifeng.com/live/getday', {
-                data: {
-                    beg: Date.parse(`${today} 00:00:00`) / 1000,
-                    end: Date.parse(`${today} 23:59:59`) / 1000,
-                    level: 1,
-                    dist: 1,
-                },
-                jsonp: 'cb',
-                jsonpCallback: 'getLiveData',
-            });
+            const data = await getLiveData(today);
 
             this.setState({
                 liveData: data.data.slice(0, 10),
                 lastid: `t${data.data[0].id}`,
             });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 
@@ -137,16 +127,7 @@ class Live extends React.PureComponent {
     refresh = async () => {
         try {
             const { lastid } = this.state;
-
-            const data = await jsonp('//api3.finance.ifeng.com/live/getnew', {
-                data: {
-                    lastid,
-                    level: 1,
-                    dist: 1,
-                },
-                jsonp: 'cb',
-                jsonpCallback: 'addNewData',
-            });
+            const data = await refreshLiveData(lastid);
 
             if (data) {
                 const { liveData } = this.state;
@@ -157,7 +138,7 @@ class Live extends React.PureComponent {
                 });
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 

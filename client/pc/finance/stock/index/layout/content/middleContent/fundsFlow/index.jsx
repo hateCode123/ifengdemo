@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
+import { getFundsFlowRank } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 
 class FundsFlow extends React.PureComponent {
@@ -62,12 +62,7 @@ class FundsFlow extends React.PureComponent {
      */
     getData = async type => {
         try {
-            const data = await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
-                data: {
-                    type,
-                },
-                jsonpCallback: 'getZijinRank',
-            });
+            const data = await getFundsFlowRank(type);
 
             if (data.data.length > 0) {
                 this.setState({
@@ -76,7 +71,7 @@ class FundsFlow extends React.PureComponent {
                 });
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
 
