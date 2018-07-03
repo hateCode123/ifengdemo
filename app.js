@@ -115,9 +115,9 @@ if (config.default.statisticsProm) {
 app.use(async (ctx, next) => {
     ctx.set('sourcedevicetype', ctx.headers['devicetype']);
     let devicetype = ctx.headers['devicetype'] || 'pc';
-    devicetype = 'ie78';
-    ctx.headers['domain'] = 'finance.ifeng.com';
-    console.log(ctx.url);
+    // devicetype = 'ie78';
+    // ctx.headers['domain'] = 'finance.ifeng.com';
+    // console.log(ctx.url);
     if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
         if (devicetype == 'pc' || devicetype == 'mobile') {
             ctx.set('deviceType', devicetype);
