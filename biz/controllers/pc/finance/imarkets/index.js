@@ -1,41 +1,29 @@
-const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
-const { KVProxy, SearchProxy, getCustom } = require('../../../../providers/ucmsapiProxy');
-const {
-    promiseAll,
-    jsonParse,
-    handleData,
-    handleJson,
-    handleJsonByKey,
-    handleJs,
-    handleStringByKey,
-} = require('../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/imarkets',
     method: 'get',
     type: 'html',
-    cache: 0,
     edit: true,
     low: true,
     handler: async ctx => {
-        // 页面公用导航
-        const json = {
+        let json = [
             // 顶部导航接口WW
-            nav: KVProxy.getStructuredFragment(ctx, 20002).then(...handleJsonByKey(ctx, 'content')),
+            ['nav', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
             // 顶部新闻
-            topnews: KVProxy.getStaticFragment(ctx, 10165).then(...handleJsonByKey(ctx, 'content')),
+            ['topnews', 'KVProxy', 'getStaticFragment', '10165', getStringByKey('content')],
             // 信息流
-            newsstream: KVProxy.getCustom(ctx, 'finance_22005_10736_33').then(...handleJson(ctx)),
+            ['newsstream', 'KVProxy', 'getCustom', 'finance_22005_10736_33', getJson()],
             // 热点专题
-            hottopic: KVProxy.getCustom(ctx, 'cmpp_topic_list_finance').then(...handleJson(ctx)),
+            ['hottopic', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
             // 底部合作链接
-            cooperation: KVProxy.getStaticFragment(ctx, 10164).then(...handleJs(ctx, 'content')),
+            ['cooperation', 'KVProxy', 'getStaticFragment', '10164', getStringByKey('content')],
             // 底部公用版权
-            footer: KVProxy.getStaticFragment(ctx, 10114).then(...handleJsonByKey(ctx, 'content')),
-        };
+            ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
+        ];
 
-        const allData = await promiseAll(json);
+        const allData = await transfer(ctx, json);
         await ctx.html('finance_imarkets', {
             allData,
         });

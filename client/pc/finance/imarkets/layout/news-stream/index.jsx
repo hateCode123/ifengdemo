@@ -18,6 +18,7 @@ class NewsStream extends PureComponent{
             }
         });
         const newsList = document.getElementById('news-stream-list').getElementsByTagName('li');
+      
         for(let i = 0, j = 36; i < j; i++){
             const a = newsList[i].getElementsByTagName('a')[2];
             if(data[i].count !== 0){
@@ -30,26 +31,44 @@ class NewsStream extends PureComponent{
         const dom = [];
         for(let i = 0, j = 36; i < j; i++){
             const item = list[i];
-            const image = JSON.parse(item.thumbnails).image[0].url;
-            this.idList.push(item.id);
-            dom.push(
-                <li key={ `${ item.id }_${ item.creator }_${ item.newsTime }` } className={ `${ styles.news_item_has_image } clearfix` }>
-                    <a className={ styles.image_link } href={ item.url } target="_blank">
-                        <img src={ image } title={ item.title } />
-                    </a>
-                    <div className={ styles.news_item_infor }>
-                        <h2 className={ styles.news_item_title }>
-                            <a href={ item.url } target="_blank">{ item.title }</a>
-                        </h2>
-                        <div className="clearfix">
-                            {/* <b className={ `${ styles.tag } ${ styles.tag_top }` }>置顶</b> */}
-                            <span className={ styles.text }>{ item.source }</span>
-                            <time className={ `${ styles.ml10 } ${ styles.text }` }>{ item.newsTime }</time>
-                            <a className={ styles.ly } href="#">0</a>
+            try {
+                const image = JSON.parse(item.thumbnails).image[0].url;
+                dom.push(
+                    <li key={ `${ item.id }_${ item.creator }_${ item.newsTime }` } className={ `${ styles.news_item_has_image } clearfix` }>
+                        <a className={ styles.image_link } href={ item.url } target="_blank">
+                            <img src={ image } title={ item.title } />
+                        </a>
+                        <div className={ styles.news_item_infor }>
+                            <h2 className={ styles.news_item_title }>
+                                <a href={ item.url } target="_blank">{ item.title }</a>
+                            </h2>
+                            <div className="clearfix">
+                                {/* <b className={ `${ styles.tag } ${ styles.tag_top }` }>置顶</b> */}
+                                <span className={ styles.text }>{ item.source }</span>
+                                <time className={ `${ styles.ml10 } ${ styles.text }` }>{ item.newsTime }</time>
+                                <a className={ styles.ly } href="#">0</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            );
+                    </li>
+                );
+            } catch (error) {
+                dom.push(
+                    <li key={ `${ item.id }_${ item.creator }_${ item.newsTime }` } className={ `${ styles.news_item_no_image } clearfix` }>
+                        <div className={ styles.news_item_infor }>
+                            <h2 className={ styles.news_item_title }>
+                                <a href={ item.url } target="_blank">{ item.title }</a>
+                            </h2>
+                            <div className="clearfix">
+                                {/* <b className={ `${ styles.tag } ${ styles.tag_top }` }>置顶</b> */}
+                                <span className={ styles.text }>{ item.source }</span>
+                                <time className={ `${ styles.ml10 } ${ styles.text }` }>{ item.newsTime }</time>
+                                <a className={ styles.ly } href="#">0</a>
+                            </div>
+                        </div>
+                    </li>
+                );
+            }
+            this.idList.push(item.id);
         }
         return dom;
     }

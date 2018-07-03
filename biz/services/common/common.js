@@ -373,7 +373,6 @@ const transfer = async (ctx, json) => {
         logger.error(error);
         return backData;
     } finally {
-        console.log('finally');
         if (config.default.statistics) {
             ctx.rpcTimeList[1].push(result.response.costtime);
         }
