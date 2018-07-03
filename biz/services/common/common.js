@@ -334,6 +334,10 @@ function getAction(key) {
         'KVProxy.getSsiFragment': 'ssiFragment',
         'KVProxy.getRecommendFragment': 'recommendFragment',
         'KVProxy.getCustom': 'other',
+        'KVProxy.getAd': 'ad',
+        'KVProxy.getCategory': 'category',
+        'KVProxy.getDocument': 'documents',
+        'KVProxy.getVideo': 'video',
     };
     return json[key];
 }
