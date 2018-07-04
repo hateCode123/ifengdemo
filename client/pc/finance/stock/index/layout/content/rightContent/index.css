@@ -11,12 +11,12 @@
     float: left;
 }
 
-.ad {
+.ad0 {
     border: 1px solid #e7e7e7;
     margin: 6px 0px 10px;
 }
 
-.ad_box {
+.ad_box0 {
     clear: both;
     position: relative;
     margin: 0 auto;
@@ -24,4 +24,18 @@
     width: 298px;
     height: 94px;
     line-height: 94px;
+}
+
+.ad1 {
+    padding: 8px 0px 17px;
+}
+
+.ad_box1 {
+    clear: both;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    width: 300px;
+    height: 72px;
+    line-height: 72px;
 }

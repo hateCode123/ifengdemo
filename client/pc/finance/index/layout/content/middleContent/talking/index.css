@@ -41,14 +41,13 @@
     & > h5 {
         padding-top: 10px;
         & a {
+            cursor: pointer;
             color: #000;
             font-weight: normal;
             display: block;
         }
-        & span {
-            color: #999999;
-            font-weight: normal;
-            line-height: 22px;
+        & a:hover {
+            color: #f54343;
         }
     }
 }

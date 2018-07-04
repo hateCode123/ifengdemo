@@ -6,7 +6,6 @@ import Subject from './subject';
 import Market from './market';
 import Courier from './courier/';
 import PlayItem from './playItem/';
-import LinkList from './linkList/';
 import DayStock from './dayStock/';
 import { Ad } from '../../../../../../components/ad';
 import RightSideTitle from '../../../components/rightSideTitle';
@@ -45,12 +44,12 @@ class RightContent extends React.PureComponent {
                 <Chip id="10083" type="static" title="视频播放项" groupName="正文" content={content.playItem}>
                     <PlayItem />
                 </Chip>
-                <div className={styles.ad}>
-                    <Ad content={content.rightSideAd} styleName={styles.ad_box} />
+                <div className={styles.ad0}>
+                    <Ad content={content.rightSideAd} styleName={styles.ad_box0} />
                 </div>
-                <Chip id="10084" type="static" title="跳转链接列表" groupName="正文" content={content.linkList}>
-                    <LinkList />
-                </Chip>
+                <div className={styles.ad1}>
+                    <Ad content={content.rightSideAd} styleName={styles.ad_box1} />
+                </div>
                 <div className={styles.box}>
                     <Chip id="20040" type="recommend" title="每日论股" groupName="正文" content={content.dayStock}>
                         <DayStock />
