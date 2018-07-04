@@ -50,12 +50,19 @@ class CattleStocks extends React.PureComponent {
     handleChange = async e => {
         try {
             const val = e.currentTarget.value;
-            const data = await getFinanceData('all', val);
 
-            this.setState({
-                searchTxt: val,
-                data: data[0],
-            });
+            if (val !== '') {
+                const data = await getFinanceData('all', val);
+
+                this.setState({
+                    searchTxt: val,
+                    data: data[0],
+                });
+            } else {
+                this.setState({
+                    searchTxt: '',
+                });
+            }
         } catch (e) {
             console.error(e);
         }

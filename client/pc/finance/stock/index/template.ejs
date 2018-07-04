@@ -111,12 +111,19 @@
             courierTitle: allData.courierTitle,
             courier: allData.courier,
             playItem: allData.playItem,
-            rightSideAd: {
+            rightSideAd0: {
                 data: {
-                    title: 'rightSideAd'
+                    title: 'rightSideAd 1'
                 },
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("rightSideAd"); $(elm).html(data.title)}'
+                callback: 'function(elm, data) {console.log("rightSideAd 1"); $(elm).html(data.title)}'
+            },
+            rightSideAd1: {
+                data: {
+                    title: 'rightSideAd 2'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("rightSideAd 2"); $(elm).html(data.title)}'
             },
             linkList: allData.linkList,
             dayStock: allData.dayStock,

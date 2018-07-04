@@ -54,6 +54,11 @@ class StockSearch extends React.PureComponent {
                 searchTxt: val,
                 isShow: true,
             });
+        } else {
+            this.setState({
+                searchTxt: '',
+                isShow: false,
+            });
         }
     };
 

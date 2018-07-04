@@ -45,10 +45,10 @@ class RightContent extends React.PureComponent {
                     <PlayItem />
                 </Chip>
                 <div className={styles.ad0}>
-                    <Ad content={content.rightSideAd} styleName={styles.ad_box0} />
+                    <Ad content={content.rightSideAd0} styleName={styles.ad_box0} />
                 </div>
                 <div className={styles.ad1}>
-                    <Ad content={content.rightSideAd} styleName={styles.ad_box1} />
+                    <Ad content={content.rightSideAd1} styleName={styles.ad_box1} />
                 </div>
                 <div className={styles.box}>
                     <Chip id="20040" type="recommend" title="每日论股" groupName="正文" content={content.dayStock}>
