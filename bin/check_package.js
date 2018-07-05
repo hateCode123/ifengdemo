@@ -6,12 +6,7 @@ const _ = require('lodash');
 const chalk = require('chalk');
 const log = console.log;
 const npmPackageUrl = 'http://npm.ifengcloud.ifeng.com/-/verdaccio/packages';
-// console.dir(package, {depth: null});
-const n = require.resolve('request');
-// console.log('--------');
-// console.log(n);
-// console.log('--------');
-// return;
+
 (async () => {
     let list = await request.get({ url: npmPackageUrl, json: true });
     let npm_packages = {};
