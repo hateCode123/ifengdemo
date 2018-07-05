@@ -21,8 +21,8 @@ class School extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const logsList = content.logs.list;
-        const schoolList = content.school.list;
+        const logsList = content.logs;
+        const schoolList = content.school;
         const {
             starAnalystTitle,
             starAnalyst,
@@ -67,7 +67,7 @@ class School extends React.PureComponent {
                             content={content.schoolSubTitle1}>
                             <Caption />
                         </Chip>
-                        {logsList.length > 0 ? <NewsList content={logsList} limit={6} /> : ''}
+                        {logsList.length > 0 ? <NewsList content={logsList} /> : ''}
                     </div>
                     <div className={styles.box}>
                         <Chip
@@ -78,7 +78,7 @@ class School extends React.PureComponent {
                             content={content.schoolSubTitle2}>
                             <Caption />
                         </Chip>
-                        {schoolList.length > 0 ? <NewsList content={schoolList} limit={6} /> : ''}
+                        {schoolList.length > 0 ? <NewsList content={schoolList} /> : ''}
                     </div>
                     <div className={styles.ad}>
                         <Ad content={content.schoolAd} styleName={styles.ad_box} />

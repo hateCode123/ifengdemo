@@ -245,7 +245,38 @@ exports.list = {
         ];
 
         const allData = await transfer(ctx, json);
-        // return ctx.body = allData;
+
+        allData.stockNews = allData.stockNews.list.slice(0, 18).map(item => ({
+            id: item.id,
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.news = allData.news.list.slice(0, 8).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.marketAnalysis = allData.marketAnalysis.list.slice(0, 11).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.hotPlate = allData.hotPlate.list.slice(0, 11).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.logs = allData.logs.list.slice(0, 6).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.school = allData.school.list.slice(0, 6).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
         await ctx.html('finance_stock_index', {
             allData,
         });

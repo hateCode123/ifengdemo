@@ -27,15 +27,7 @@ class NewsLive extends React.PureComponent {
         const { current } = this.state;
         const { content } = this.props;
 
-        let stockNews = [];
-
-        if (content.stockNews) {
-            stockNews = content.stockNews.list.slice(0, 18).map(item => ({
-                id: item.id,
-                url: item.url,
-                title: item.title,
-            }));
-        }
+        const stockNews = content.stockNews;
 
         const title = {
             id: '10049',

@@ -20,8 +20,8 @@ class HotSpots extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const marketAnalysisList = content.marketAnalysis.list;
-        const hotPlateList = content.hotPlate.list;
+        const marketAnalysisList = content.marketAnalysis;
+        const hotPlateList = content.hotPlate;
         const {
             hotSpotsTitle,
             hotSpotsSubTitle1,
@@ -66,7 +66,7 @@ class HotSpots extends React.PureComponent {
                             content={hotSpotsSubTitle1}>
                             <Caption />
                         </Chip>
-                        {marketAnalysisList.length > 0 ? <NewsList content={marketAnalysisList} limit={11} /> : ''}
+                        {marketAnalysisList.length > 0 ? <NewsList content={marketAnalysisList} /> : ''}
                     </div>
                     <div className={styles.box}>
                         <Chip
@@ -77,7 +77,7 @@ class HotSpots extends React.PureComponent {
                             content={hotSpotsSubTitle2}>
                             <Caption />
                         </Chip>
-                        {hotPlateList.length > 0 ? <NewsList content={hotPlateList} limit={11} /> : ''}
+                        {hotPlateList.length > 0 ? <NewsList content={hotPlateList} /> : ''}
                     </div>
                     <div className={styles.ad}>
                         <Ad content={content.hotSpotsAd} styleName={styles.ad_box} />

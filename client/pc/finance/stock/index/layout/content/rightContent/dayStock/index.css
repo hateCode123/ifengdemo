@@ -48,6 +48,15 @@
     height: 166px;
 }
 
+.link {
+    position: absolute;
+    left: 125px;
+    top: 58px;
+    width: 51px;
+    height: 51px;
+    background: url(./link.png) no-repeat;
+}
+
 .trans {
     transition: all 0.3s ease;
 }

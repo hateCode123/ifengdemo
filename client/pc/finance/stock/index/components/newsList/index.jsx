@@ -8,14 +8,13 @@ import { rel } from '../../../../../utils/rel';
 class NewsList extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
-        limit: PropTypes.number,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content, limit } = this.props;
+        const { content } = this.props;
 
         return (
             <div className={styles.news_list} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
@@ -27,7 +26,7 @@ class NewsList extends React.PureComponent {
                     </p>
                     <div className={styles.list}>
                         <ul>
-                            {content.slice(1, limit).map((item, index) => (
+                            {content.slice(1, content.length).map((item, index) => (
                                 <li key={index}>
                                     <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                         {item.title}

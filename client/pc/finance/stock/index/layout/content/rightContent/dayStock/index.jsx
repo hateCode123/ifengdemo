@@ -33,6 +33,7 @@ class DayStock extends React.PureComponent {
                                     <a href={item.url} target="_blank" rel={rel}>
                                         <img src={item.thumbnail} width="300" height="166" className={styles.trans} />
                                     </a>
+                                    <div className={styles.link} />
                                 </div>
                             </li>
                         ))}

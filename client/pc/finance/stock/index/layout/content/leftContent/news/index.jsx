@@ -34,7 +34,7 @@ class News extends React.PureComponent {
         return (
             <div className={styles.news}>
                 <Tab title={title} subTitle={subTitle} />
-                <NewsList content={content.news.list} limit={8} />
+                <NewsList content={content.news} />
             </div>
         );
     }
