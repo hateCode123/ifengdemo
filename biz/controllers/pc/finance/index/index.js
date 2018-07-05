@@ -76,24 +76,6 @@ exports.list = {
             // 底部合作链接
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
 
-            // 信息流首页抓取数据
-            ['customList', 'KVProxy', 'getCustom', '17007_719_76', getJson()],
-
-            // 信息流宏观抓取数据
-            ['macroList', 'KVProxy', 'getCustom', 'finance_22005_10736_24', getJson()],
-
-            // 信息流股票抓取数据
-            ['stockList', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson()],
-
-            // 信息流imarkets 抓取数据
-            ['imarketsList', 'KVProxy', 'getCustom', 'finance_22005_10736_25', getJson()],
-
-            // 信息流公司抓取数据
-            ['companyList', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson()],
-
-            // 信息流Wemoney 抓取数据
-            ['wemoneyList', 'KVProxy', 'getCustom', 'finance_22005_10736_26', getJson()],
-
             // 理财超市
             ['market', 'KVProxy', 'getStaticFragment', 10014, getStringByKey('content')],
 

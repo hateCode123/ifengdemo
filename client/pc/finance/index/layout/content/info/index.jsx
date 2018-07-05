@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { getCommentCount } from '../../../../../services/api';
+import {
+    getCommentCount,
+    getCustomList,
+    getMacroList,
+    getStockList,
+    getImarketsList,
+    getCompanyList,
+    getWemoneyList,
+} from '../../../../../services/api';
 import Tabs from './tabs';
 import ContentList from './contentList';
 import Ad from '../../../../../components/ad';
@@ -15,20 +23,29 @@ class Info extends React.Component {
         tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
         listNum: 5,
+        datas: [],
         counts: [],
     };
 
     async componentDidMount() {
         try {
-            const { counts } = this.state;
-            const { content } = this.props;
-            const data = content.content[0];
-            const docUrl = data.map(item => item.commentUrl);
-            const count = await getCommentCount(docUrl);
+            const { datas, counts } = this.state;
+            const data = await getCustomList();
 
-            counts[0] = count.map(item => item.count);
+            if (data.data) {
+                const docUrl = data.data.map(item => item.commentUrl);
+                const count = await getCommentCount(docUrl);
 
-            this.setState({ counts });
+                datas[0] = data.data;
+                counts[0] = count.map(item => item.count);
+
+                this.setState({
+                    datas,
+                    counts,
+                });
+            } else {
+                datas[0] = [];
+            }
         } catch (e) {
             console.error(e);
         }
@@ -38,14 +55,39 @@ class Info extends React.Component {
      * 切换栏目操作
      */
     handleTabsChange = async (num, tabsTop) => {
-        const { counts } = this.state;
+        const { datas, counts } = this.state;
+        let data = [];
+
+        // 获取信息流数据
+        if (!datas[num]) {
+            try {
+                if (num === 1) {
+                    data = await getMacroList();
+                } else if (num === 2) {
+                    data = await getStockList();
+                } else if (num === 3) {
+                    data = await getImarketsList();
+                } else if (num === 4) {
+                    data = await getCompanyList();
+                } else {
+                    data = await getWemoneyList();
+                }
+
+                if (data.data) {
+                    datas[num] = data.data.list;
+
+                    this.setState({ datas });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
 
         // 获取文章评论数
         if (!counts[num]) {
             try {
-                const { content } = this.props;
-                const data = content.content[num];
-                const docUrl = data.map(item => item.commentUrl);
+                const info = data.data ? data.data.list : [];
+                const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 
                 counts[num] = count.map(item => item.count);
@@ -78,12 +120,11 @@ class Info extends React.Component {
      * 渲染组件
      */
     render() {
-        const { tabs, current, listNum, counts } = this.state;
+        const { tabs, current, listNum, datas, counts } = this.state;
         const { content } = this.props;
-        const data = content.content[current];
         const contentList = [];
 
-        if (data) {
+        if (datas) {
             for (let i = 0; i < listNum; i++) {
                 const index = current === 0 ? 3 : 4;
                 const num = i < 6 ? index : 5;
@@ -91,7 +132,10 @@ class Info extends React.Component {
 
                 contentList.push(
                     <div key={i}>
-                        <ContentList content={data.slice(i * num, i * num + len)} counts={counts[current]} />
+                        <ContentList
+                            content={datas[current] ? datas[current].slice(i * num, i * num + len) : []}
+                            counts={counts[current]}
+                        />
                         {current === 0 && i < 5 ? <ContentList content={content.softAd} /> : ''}
                         {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
                     </div>,

@@ -26,6 +26,7 @@
     "dependencies": {
         "@ifeng/ui_base": "^1.0.7",
         "@ifeng/ui_pc_auth": "^1.0.6",
+        "@ifeng/ui_pc_lazyLoad": "^1.0.1",
         "@ifeng/ui_pc_slides": "^1.0.4",
         "@ifeng/visualediting": "1.0.4",
         "@tars/rpc": "2.0.2",

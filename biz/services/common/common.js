@@ -284,7 +284,13 @@ function getString(key) {
 
 function getJson(key) {
     return function(ctx, data) {
-        return jsonParse(data, ctx);
+        try {
+            return jsonParse(data, ctx);
+        } catch (error) {
+            console.error(data);
+            console.error(error);
+            return null;
+        }
     };
 }
 
@@ -297,6 +303,7 @@ function getJsonByKey(key) {
         } catch (error) {
             console.log(json[key]);
             console.log(error);
+            console.log(data);
         }
         return json[key];
     };
@@ -304,8 +311,14 @@ function getJsonByKey(key) {
 
 function getStringByKey(key) {
     return function(ctx, data) {
-        let json = jsonParse(data, ctx);
-        return json[key];
+        try {
+            let json = jsonParse(data, ctx);
+            return json[key];
+        } catch (error) {
+            console.error(error);
+            console.error(data);
+            return null;
+        }
     };
 }
 

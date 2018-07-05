@@ -14,33 +14,7 @@ const createJsonpCallbackName = (str, num) => {
     }
 };
 
-// 获取文章评论数
-const getCommentCount = async url => {
-    return await jsonp('//comment.ifeng.com/get.php', {
-        data: {
-            job: 4,
-            format: 'js',
-            callback: 'getAllComment1',
-            docurl: url.join('|'),
-        },
-        jsonCallback: 'getAllComment1',
-        cache: false,
-    });
-};
-
-// 获取 7 * 24 数据
-const getTopicData = async () => {
-    return await jsonp('//api3.finance.ifeng.com/live/getnew', {
-        data: {
-            level: 1,
-            dist: 1,
-            cb: 'setNewCont',
-        },
-        jsonp: 'cb',
-        jsonpCallback: 'setNewCont',
-        cache: false,
-    });
-};
+/* 公共 */
 
 // 获取自选股数据
 const getMyStockData = async num => {
@@ -64,14 +38,6 @@ const getStockData = async codeList => {
     });
 };
 
-// 获取资金流向数据
-const getFundsFlowData = async () => {
-    return await jsonp('//i.finance.ifeng.com/moneyflow/flow/So', {
-        jsonpCallback: 'getFundsFlowData',
-        cache: false,
-    });
-};
-
 // 查询股票，资金，证券等数据
 const getFinanceData = async (type, str) => {
     const callback = createJsonpCallbackName('getFinanceData');
@@ -86,6 +52,76 @@ const getFinanceData = async (type, str) => {
         cache: false,
     });
 };
+
+// 获取文章评论数
+const getCommentCount = async url => {
+    return await jsonp('//comment.ifeng.com/get.php', {
+        data: {
+            job: 4,
+            format: 'js',
+            callback: 'getAllComment1',
+            docurl: url.join('|'),
+        },
+        jsonCallback: 'getAllComment1',
+        cache: false,
+    });
+};
+
+/* 财首 */
+
+// 获取 7 * 24 数据
+const getTopicData = async () => {
+    return await jsonp('//api3.finance.ifeng.com/live/getnew', {
+        data: {
+            level: 1,
+            dist: 1,
+            cb: 'setNewCont',
+        },
+        jsonp: 'cb',
+        jsonpCallback: 'setNewCont',
+        cache: false,
+    });
+};
+
+// 获取资金流向数据
+const getFundsFlowData = async () => {
+    return await jsonp('//i.finance.ifeng.com/moneyflow/flow/So', {
+        jsonpCallback: 'getFundsFlowData',
+        cache: false,
+    });
+};
+
+// 获取信息流首页数据
+const getCustomList = async () => {
+    return await ajax('/c/api/finance/index/customList');
+};
+
+// 获取信息流宏观数据
+const getMacroList = async () => {
+    return await ajax('/c/api/finance/index/macroList');
+};
+
+// 获取信息流股票数据
+const getStockList = async () => {
+    return await ajax('/c/api/finance/index/stockList');
+};
+
+// 获取信息流 imarkets 数据
+const getImarketsList = async () => {
+    return await ajax('/c/api/finance/index/imarketsList');
+};
+
+// 获取信息流公司抓取数据
+const getCompanyList = async () => {
+    return await ajax('/c/api/finance/index/companyList');
+};
+
+// 获取信息流 Wemoney 数据
+const getWemoneyList = async () => {
+    return await ajax('/c/api/finance/index/wemoneyList');
+};
+
+/* 股首 */
 
 // 获取24小时直播数据
 const getLiveData = async today => {
@@ -177,12 +213,18 @@ const getQAData = async (name, type) => {
 };
 
 export {
-    getCommentCount,
-    getTopicData,
     getMyStockData,
     getStockData,
-    getFundsFlowData,
     getFinanceData,
+    getCommentCount,
+    getTopicData,
+    getFundsFlowData,
+    getCustomList,
+    getMacroList,
+    getStockList,
+    getImarketsList,
+    getCompanyList,
+    getWemoneyList,
     getLiveData,
     refreshLiveData,
     getStockRank,
