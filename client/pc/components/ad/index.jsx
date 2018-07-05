@@ -58,7 +58,7 @@ class Ad extends React.PureComponent {
  * */
 Ad.propTypes = {
     content: PropTypes.object,
-    styleName: PropTypes.string
+    styleName: PropTypes.string,
 };
 
 /**

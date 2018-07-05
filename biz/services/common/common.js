@@ -431,5 +431,6 @@ module.exports = {
     transfer,
     getJson,
     getJsonByKey,
+    getString,
     getStringByKey,
 };

@@ -1,7 +1,7 @@
 const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
-const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -113,9 +113,6 @@ exports.list = {
 
             // 视频播放项
             ['playItem', 'KVProxy', 'getStaticFragment', 10083, getJsonByKey('content')],
-
-            // 跳转链接列表
-            ['linkList', 'KVProxy', 'getStaticFragment', 10084, getJsonByKey('content')],
 
             // 每日论股
             ['dayStock', 'KVProxy', 'getRecommendFragment', 20040, getJsonByKey('data')],
@@ -242,6 +239,57 @@ exports.list = {
 
             // 二维码
             ['qrCode', 'KVProxy', 'getStaticFragment', 10136, getJsonByKey('content')],
+
+            // topAd
+            [
+                'topAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
+                getString(),
+            ],
+
+            // leftAsideAd
+            [
+                'leftAsideAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_stock_index_ad_button_02.inc.html',
+                getString(),
+            ],
+
+            // hotSpotsAd
+            [
+                'hotSpotsAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_stock_index_ad_button_03.inc.html',
+                getString(),
+            ],
+
+            // schoolAd
+            // ['schoolAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner06.inc.html', getString()],
+
+            // rightSideAd0
+            [
+                'rightSideAd0',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_stock_index_ad_pictext_01.inc.html',
+                getString(),
+            ],
+
+            // rightSideAd1
+            // ['rightSideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_text_01.inc.html', getString()],
+
+            // bottomAd
+            [
+                'bottomAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_ad_banner_bottom_1000x90.inc.html',
+                getString(),
+            ],
         ];
 
         const allData = await transfer(ctx, json);
@@ -253,6 +301,12 @@ exports.list = {
         }));
 
         allData.news = allData.news.list.slice(0, 8).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.subject = allData.subject.slice(0, 3).map(item => ({
+            banner: item.banner,
             url: item.url,
             title: item.title,
         }));

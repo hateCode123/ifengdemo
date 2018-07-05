@@ -28,6 +28,14 @@ class Layout extends React.PureComponent {
          */
         const { content } = this.props;
 
+        console.log(content.topAd);
+        console.log(content.leftAsideAd);
+        console.log(content.hotSpotsAd);
+        console.log(content.schoolAd);
+        console.log(content.rightSideAd0);
+        console.log(content.rightSideAd1);
+        console.log(content.bottomAd);
+
         const headerData = {
             nav: content.nav,
             search: content.search,

@@ -7,16 +7,67 @@
     <title></title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+        var topAd = {};
+        var leftAsideAd = {};
+        var hotSpotsAd = {};
+        var schoolAd = {};
+        var rightSideAd0 = {};
+        var rightSideAd1 = {};
+        var bottomAd = {};
+
+        try {
+            topAd = <%- allData.topAd %>;
+        } catch (e) {
+            topAd = {};
+            console.error(e);
+        }
+
+        try {
+            leftAsideAd = <%- allData.leftAsideAd %>;
+        } catch (e) {
+            leftAsideAd = {};
+            console.error(e);
+        }
+
+        try {
+            hotSpotsAd = <%- allData.hotSpotsAd %>;
+        } catch (e) {
+            hotSpotsAd = {};
+            console.error(e);
+        }
+
+/*         try {
+            schoolAd = <%- allData.schoolAd %>;
+        } catch (e) {
+            schoolAd = {};
+            console.error(e);
+        } */
+
+        try {
+            rightSideAd0 = <%- allData.rightSideAd0 %>;
+        } catch (e) {
+            rightSideAd0 = {};
+            console.error(e);
+        }
+
+/*         try {
+            rightSideAd1 = <%- allData.rightSideAd1 %>;
+        } catch (e) {
+            rightSideAd1 = {};
+            console.error(e);
+        } */
+
+        try {
+            bottomAd = <%- allData.bottomAd %>;
+        } catch (e) {
+            bottomAd = {};
+            console.error(e);
+        }
+
         var jsonData = {
             nav: allData.nav,
             search: allData.search,
-            topAd: {
-                data: {
-                    title: 'topAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
-            },
+            topAd: topAd,
             logo: allData.logo,
             logoAd: allData.logoAd,
             navigation: allData.navigation,
@@ -36,13 +87,7 @@
             answerTab: allData.answerTab,
             answerSubTab: allData.answerSubTab,
             answerList: allData.answerList,
-            leftAsideAd: {
-                data: {
-                    title: 'leftAsideAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("leftAsideAd"); $(elm).html(data.title)}'
-            },
+            leftAsideAd: leftAsideAd,
             bannerPic: allData.bannerPic,
             cattleStocksTitle: allData.cattleStocksTitle,
             rankTitle: allData.rankTitle,
@@ -69,13 +114,7 @@
             fiveDaysTabs: allData.fiveDaysTabs,
             fiveDaysBuy: allData.fiveDaysBuy,
             fiveDaysSell: allData.fiveDaysSell,
-            hotSpotsAd: {
-                data: {
-                    title: 'hotSpotsAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("hotSpotsAd"); $(elm).html(data.title)}'
-            },
+            hotSpotsAd: hotSpotsAd,
             schoolTitle: allData.schoolTitle,
             schoolSubTitle1: allData.schoolSubTitle1,
             schoolSubTitle2: allData.schoolSubTitle2,
@@ -97,13 +136,7 @@
             firstfocusData: allData.firstfocusData,
             focusest: allData.focusest,
             focusestData: allData.focusestData,
-            schoolAd: {
-                data: {
-                    title: 'schoolAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("schoolAd"); $(elm).html(data.title)}'
-            },
+            schoolAd: schoolAd,
             subjectTitle: allData.subjectTitle,
             subject: allData.subject,
             marketTitle: allData.marketTitle,
@@ -111,30 +144,11 @@
             courierTitle: allData.courierTitle,
             courier: allData.courier,
             playItem: allData.playItem,
-            rightSideAd0: {
-                data: {
-                    title: 'rightSideAd 1'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("rightSideAd 1"); $(elm).html(data.title)}'
-            },
-            rightSideAd1: {
-                data: {
-                    title: 'rightSideAd 2'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("rightSideAd 2"); $(elm).html(data.title)}'
-            },
-            linkList: allData.linkList,
+            rightSideAd0: rightSideAd0,
+            rightSideAd1: rightSideAd1,
             dayStock: allData.dayStock,
             cooperation: allData.cooperation,
-            bottomAd: {
-                data: {
-                    title: 'bottomAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-            },
+            bottomAd: bottomAd,
             footer: allData.footer,
             qrCode: allData.qrCode
         };
