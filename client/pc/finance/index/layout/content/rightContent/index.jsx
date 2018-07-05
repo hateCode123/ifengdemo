@@ -21,29 +21,6 @@ class RightContent extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        let instituteData = {};
-        let larkData = {};
-
-        if (content.institute) {
-            const data = content.institute.list[0];
-
-            instituteData = {
-                url: data.url,
-                title: data.title,
-                thumbnail: JSON.parse(data.thumbnails).image[0].url,
-            };
-        }
-
-        if (content.lark) {
-            const data = content.lark;
-
-            larkData = {
-                url: data.url,
-                title: data.title,
-                thumbnail: data.thumbnail,
-            };
-        }
-
         return (
             <div className={styles.col_R}>
                 <BoxTitle url="#" title="财经视频" />
@@ -52,8 +29,8 @@ class RightContent extends React.PureComponent {
                 <div className={styles.box_finance}>
                     <BoxTitle url="#" title="财经智库" />
                     <ul className={`${styles.list} clearfix`}>
-                        <ThinkTank tip="研究院" content={instituteData} />
-                        <ThinkTank tip="国子策" content={larkData} />
+                        <ThinkTank tip="研究院" content={content.institute} />
+                        <ThinkTank tip="国子策" content={content.lark} />
                     </ul>
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />

@@ -8,16 +8,14 @@ import { rel } from '../../../../../../utils/rel';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.object,
+        content: PropTypes.array,
     };
 
     sliderTmpl = item => {
-        let src = item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '';
-
         return (
             <div className={styles.bigPic}>
                 <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
-                    <img src={src} width="300" height="170" className={styles.trans} />
+                    <img src={item.thumbnails} width="300" height="170" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>
@@ -47,7 +45,7 @@ class FinanceVideo extends React.PureComponent {
         return (
             <div>
                 <div className={styles.financeVideo}>
-                    <Slides content={content.data.slice(0, 3)} config={config} />
+                    <Slides content={content} config={config} />
                 </div>
             </div>
         );

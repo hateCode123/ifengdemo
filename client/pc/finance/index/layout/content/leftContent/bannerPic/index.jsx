@@ -12,12 +12,10 @@ class BannerPic extends React.PureComponent {
     };
 
     sliderTmpl = item => {
-        let src = item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '';
-
         return (
             <div className={styles.bigPic}>
                 <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
-                    <img src={src} width="400" height="230" className={styles.trans} />
+                    <img src={item.thumbnails} width="400" height="230" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>

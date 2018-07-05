@@ -21,7 +21,7 @@ class ThinkTank extends React.PureComponent {
                     <div className={styles.box}>
                         <div>
                             <a href={content.url} target="_blank" rel={rel}>
-                                <img src={content.thumbnail} width="300" height="169" />
+                                <img src={content.thumbnails} width="300" height="169" />
                             </a>
                         </div>
                         <div className={styles.wrapper}>

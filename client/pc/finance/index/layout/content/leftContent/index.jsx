@@ -20,7 +20,7 @@ class LeftContent extends React.PureComponent {
         return (
             <div className={styles.col_L}>
                 <Topic />
-                <BannerPic content={content.bannerPic.slice(0, 5)} />
+                <BannerPic content={content.bannerPic} />
                 <Headline content={content.headline} rights={content.rights} limit={6} />
                 <DateNews content={content.dayNews} extraNews={content.extraNews} />
             </div>

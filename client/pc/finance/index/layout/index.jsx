@@ -37,7 +37,6 @@ class Layout extends React.PureComponent {
                 rights: content.rights,
                 dayNews: content.dayNews,
                 extraNews: content.extraNews,
-                recommend: content.recommend,
             },
             middleContent: {
                 comicBook: content.comicBook,

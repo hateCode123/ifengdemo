@@ -46,9 +46,6 @@ exports.list = {
             // 每日要闻多拼新闻
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
 
-            // 推荐新闻
-            ['recommend', 'KVProxy', 'getRecommendFragment', 20004, getJsonByKey('data')],
-
             // 返回连环话数据
             ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
 
@@ -63,6 +60,9 @@ exports.list = {
 
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
+
+            // 返回财经视频数据
+            ['financeVideo', 'KVProxy', 'getDynamicFragment', 10007, getJson()],
 
             // 研究院
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
@@ -82,9 +82,6 @@ exports.list = {
             // 理财速递
             ['courier', 'KVProxy', 'getStaticFragment', 10016, getJsonByKey('content')],
 
-            // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getDynamicFragment', 10007, getJson()],
-
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
@@ -93,6 +90,77 @@ exports.list = {
         ];
 
         const allData = await transfer(ctx, json);
+
+        allData.bannerPic = allData.bannerPic.slice(0, 5).map(item => ({
+            url: item.url,
+            thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
+            title: item.title,
+        }));
+
+        allData.dayNews = allData.dayNews.slice(0, 12).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        const comicBook = allData.comicBook.list[0];
+
+        allData.comicBook = {
+            url: comicBook.url,
+            thumbnails:
+                comicBook.thumbnails && JSON.parse(comicBook.thumbnails).image[0]
+                    ? JSON.parse(comicBook.thumbnails).image[0].url
+                    : '',
+            title: comicBook.title,
+            date: comicBook.newsTime.split(' ')[0],
+        };
+
+        const talkingTitle = allData.talking.list[0];
+        const talking = allData.talking.list.slice(1, 7).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.talking = [
+            {
+                url: talkingTitle.url,
+                title: talkingTitle.title,
+                name: talkingTitle.wemediaEAccountName,
+                img:
+                    talkingTitle.thumbnails && JSON.parse(talkingTitle.thumbnails).image[0]
+                        ? JSON.parse(talkingTitle.thumbnails).image[0].url
+                        : '',
+            },
+        ].concat(talking);
+
+        allData.stocks = allData.stocks.list.slice(0, 6).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+
+        allData.financeVideo = allData.financeVideo.data.slice(0, 3).map(item => ({
+            url: item.url,
+            thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
+            title: item.title,
+        }));
+
+        const institute = allData.institute.list[0];
+
+        allData.institute = {
+            url: institute.url,
+            thumbnails:
+                institute.thumbnails && institute.thumbnails !== ''
+                    ? JSON.parse(institute.thumbnails).image[0].url
+                    : '',
+            title: institute.title,
+        };
+
+        const lark = allData.lark;
+
+        allData.lark = {
+            url: lark.url,
+            thumbnails: lark.thumbnails && lark.thumbnails !== '' ? JSON.parse(lark.thumbnails).image[0].url : '',
+            title: lark.title,
+        };
 
         await ctx.html('finance_index', {
             allData,

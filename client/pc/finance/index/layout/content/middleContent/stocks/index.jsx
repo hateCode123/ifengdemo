@@ -8,7 +8,7 @@ import dataProcessing from '../../../../../../components/dataProcessing';
 
 class Stocks extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.object,
+        content: PropTypes.array,
     };
 
     /**
@@ -16,15 +16,6 @@ class Stocks extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        let stockData = [];
-
-        if (content) {
-            stockData = content.list.slice(0, 6).map(item => ({
-                id: item.id,
-                url: item.url,
-                title: item.title,
-            }));
-        }
 
         return (
             <React.Fragment>
@@ -48,13 +39,13 @@ class Stocks extends React.PureComponent {
                             </h5>
                         </div>
                         <h3 className={styles.title}>
-                            <a href={stockData[0].url} target="_blank" rel={rel} title={stockData[0].title}>
-                                {stockData[0].title}
+                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
+                                {content[0].title}
                             </a>
                         </h3>
                     </div>
                 </div>
-                <TitleList content={stockData.slice(1, 6)} />
+                <TitleList content={content.slice(1, 6)} />
             </React.Fragment>
         );
     }
