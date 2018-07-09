@@ -78,7 +78,7 @@ class Industry extends React.PureComponent {
                                     <td>
                                         {item.code ? (
                                             <a
-                                                href={`http://app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=${
+                                                href={`//app.finance.ifeng.com/hq/trade/cate_zijin_fc.php?code=${
                                                     item.code
                                                 }`}
                                                 target="_blank"

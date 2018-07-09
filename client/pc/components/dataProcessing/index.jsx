@@ -6,9 +6,15 @@ const dataProcessing = WrappedComponent => {
     return class extends React.PureComponent {
         handleData = props => {
             if (props) {
-                for (const item of Object.values(props)) {
-                    if (item === null) {
+                for (const [key, value] of Object.entries(props)) {
+                    if (value === null) {
                         flag = true;
+
+                        const error = new Error(`${WrappedComponent.name} - ${key}：数据为空！`);
+
+                        console.error(error);
+
+                        window && window.BJ_REPORT && window.BJ_REPORT.report(error);
 
                         return;
                     }

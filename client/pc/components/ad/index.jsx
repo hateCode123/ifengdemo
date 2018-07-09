@@ -9,38 +9,52 @@ const scriptLoadedGroups = {};
  * 定义 Ad 组件
  */
 class Ad extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+        styleName: PropTypes.string,
+    };
+
     async componentDidMount() {
         const { content } = this.props;
 
-        if (content.preload) {
-            let list = [];
-            let index = 0;
+        try {
+            if (content.preload) {
+                let list = [];
+                let index = 0;
 
-            if (typeof content.preload === 'string') {
-                list = [content.preload];
-            } else {
-                list = content.preload;
-            }
-
-            while (list.length > index) {
-                const scriptUrl = list[index];
-
-                console.log('load', scriptUrl);
-                if (!scriptLoadedGroups[scriptUrl]) {
-                    scriptLoadedGroups[scriptUrl] = loadScript(scriptUrl, { cache: false });
+                if (typeof content.preload === 'string') {
+                    list = [content.preload];
+                } else {
+                    list = content.preload;
                 }
-                await scriptLoadedGroups[scriptUrl];
-                ++index;
+
+                while (list.length > index) {
+                    const scriptUrl = list[index];
+
+                    console.log('load', scriptUrl);
+
+                    if (!scriptLoadedGroups[scriptUrl]) {
+                        scriptLoadedGroups[scriptUrl] = loadScript(scriptUrl, { cache: false });
+                    }
+                    await scriptLoadedGroups[scriptUrl];
+                    ++index;
+                }
             }
+
+            const callbackFn = new Function(`return ${content.callback}`)();
+
+            // console.log('elm', callbackFn);
+
+            callbackFn(this.container, content.data);
+
+            // console.log(this.container);
+        } catch (error) {
+            error.message = `AdError - ${error.message}`;
+
+            console.error(error);
+
+            window && window.BJ_REPORT && window.BJ_REPORT.report(error);
         }
-
-        const callbackFn = new Function(`return ${content.callback}`)();
-
-        // console.log('elm', callbackFn);
-
-        callbackFn(this.container, content.data);
-
-        // console.log(this.container);
     }
 
     /**
@@ -52,19 +66,6 @@ class Ad extends React.PureComponent {
         return <div className={styleName} adblock="true" ref={n => (this.container = n)} />;
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-Ad.propTypes = {
-    content: PropTypes.object,
-    styleName: PropTypes.string,
-};
-
-/**
- * 定义组件默认属性
- * */
-Ad.defaultProps = {};
 
 export { Ad };
 export default Ad;
