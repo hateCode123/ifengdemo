@@ -40,8 +40,10 @@ if (env === 'development') {
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
-    app.use(koaStatic(path.join(__dirname, `./static`), { index: 'index.html' }));
+    app.use(koaStatic(path.join(__dirname, './static'), { index: 'index.html' }));
 
+    // 静态资源设置
+    app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
     setTimeout(() => {
         io.sockets.emit('reload');
     }, 1000);
@@ -62,17 +64,22 @@ const webapi = require('./biz/common/middlewares/koa-webapi');
 
 webapi(app);
 
-// // 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
-// app.use(bodyParser());
+app.use(async (ctx, next) => {
+    // console.log(ctx.url);
+    if (ctx.url === '/heartbeat') {
+        return (ctx.body = { success: true });
+    }
+    await next();
+});
+
+// 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
+app.use(bodyParser());
 
 // // 美化json格式输出
 // app.use(json());
 
 // 模板引擎设置
 app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), { map: { html: 'ejs' } }));
-
-// 静态资源设置
-app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
 
 // jaeger 开关
 if (config.default.statisticsJaeger) {
