@@ -268,7 +268,7 @@ exports.list = {
             ],
 
             // schoolAd
-            // ['schoolAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner06.inc.html', getString()],
+            ['schoolAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner06.inc.html', getString()],
 
             // rightSideAd0
             [
@@ -280,7 +280,7 @@ exports.list = {
             ],
 
             // rightSideAd1
-            // ['rightSideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_text_01.inc.html', getString()],
+            ['rightSideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_text_01.inc.html', getString()],
 
             // bottomAd
             [

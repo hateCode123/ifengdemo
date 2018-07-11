@@ -7,62 +7,13 @@
     <title></title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
-        var topAd = {};
-        var leftAsideAd = {};
-        var hotSpotsAd = {};
-        var schoolAd = {};
-        var rightSideAd0 = {};
-        var rightSideAd1 = {};
-        var bottomAd = {};
-
-        try {
-            topAd = <%- allData.topAd %>;
-        } catch (e) {
-            topAd = {};
-            console.error(e);
-        }
-
-        try {
-            leftAsideAd = <%- allData.leftAsideAd %>;
-        } catch (e) {
-            leftAsideAd = {};
-            console.error(e);
-        }
-
-        try {
-            hotSpotsAd = <%- allData.hotSpotsAd %>;
-        } catch (e) {
-            hotSpotsAd = {};
-            console.error(e);
-        }
-
-/*         try {
-            schoolAd = <%- allData.schoolAd %>;
-        } catch (e) {
-            schoolAd = {};
-            console.error(e);
-        } */
-
-        try {
-            rightSideAd0 = <%- allData.rightSideAd0 %>;
-        } catch (e) {
-            rightSideAd0 = {};
-            console.error(e);
-        }
-
-/*         try {
-            rightSideAd1 = <%- allData.rightSideAd1 %>;
-        } catch (e) {
-            rightSideAd1 = {};
-            console.error(e);
-        } */
-
-        try {
-            bottomAd = <%- allData.bottomAd %>;
-        } catch (e) {
-            bottomAd = {};
-            console.error(e);
-        }
+        var topAd = <%- allData.topAd ? allData.topAd : 'topAd' %>;
+        var leftAsideAd = <%- allData.leftAsideAd ? allData.leftAsideAd : 'leftAsideAd' %>;
+        var hotSpotsAd = <%- allData.hotSpotsAd ? allData.hotSpotsAd : 'hotSpotsAd' %>;
+        var schoolAd = <%- allData.schoolAd ? allData.schoolAd : 'schoolAd' %>;
+        var rightSideAd0 = <%- allData.rightSideAd0 ? allData.rightSideAd0 : 'rightSideAd0' %>;
+        var rightSideAd1 = <%- allData.rightSideAd1 ? allData.rightSideAd1 : 'rightSideAd1' %>;
+        var bottomAd = <%- allData.bottomAd ? allData.bottomAd : 'bottomAd' %>;
 
         var jsonData = {
             nav: allData.nav,
@@ -154,6 +105,7 @@
         };
 
     </script>
+    <script src="https://c0.ifengimg.com/web/d/inice.js"></script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
@@ -203,6 +155,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
+    <script>IfengAmgr.start()</script>
 </body>
 
 </html>
