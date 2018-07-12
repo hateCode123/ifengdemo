@@ -7,9 +7,9 @@
     "viewsdir": "devtmp",
     "apiPrefix": "",
     "cacheURL": true,
-    "statistics": false,
-    "statisticsJaeger": false,
-    "statisticsProm": false,
+    "statistics": true,
+    "statisticsJaeger": true,
+    "statisticsProm": true,
     "logs": {
         "level": "debug"
     },
