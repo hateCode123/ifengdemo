@@ -64,13 +64,13 @@ const webapi = require('./biz/common/middlewares/koa-webapi');
 
 webapi(app);
 
-// app.use(async (ctx, next) => {
-//     // console.log(ctx.url);
-//     if (ctx.url === '/heartbeat') {
-//         return (ctx.body = { success: true });
-//     }
-//     await next();
-// });
+app.use(async (ctx, next) => {
+    // console.log(ctx.url);
+    if (ctx.url === '/heartbeat') {
+        return (ctx.body = { success: true });
+    }
+    await next();
+});
 
 // 对post请求参数进行解析，支持application/json 和 application/x-www-form-urlencoded 两种类型
 app.use(bodyParser());
