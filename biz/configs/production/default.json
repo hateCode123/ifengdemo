@@ -7,9 +7,9 @@
     "viewsdir": "dist",
     "apiPrefix": "",
     "cacheURL": true,
-    "statistics": false,
+    "statistics": true,
     "statisticsJaeger": false,
-    "statisticsProm": false,
+    "statisticsProm": true,
     "logs": [
         {
             "type": "rotating-file",
