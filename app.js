@@ -158,7 +158,7 @@ if (config.default.statistics) {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
         // 请求进入
-        // logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
         ctx.routerTimeStart = process.hrtime();
         ctx.rpcTimeList = [[], []];
@@ -205,18 +205,18 @@ if (config.default.statistics) {
         parseTime = parseTime.toFixed(3);
         ctx.rpc_time = rpcTime;
         ctx.parse_time = parseTime;
-        // logger.info(
-        //     `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
-        //         ctx.routerTimeEnd
-        //     }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${
-        //         ctx.parseTime.length
-        //     }, ${parseTime}ms] - domain: ${ctx.header.domain || ''}`,
-        // );
+        logger.info(
+            `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
+                ctx.routerTimeEnd
+            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${
+                ctx.parseTime.length
+            }, ${parseTime}ms] - domain: ${ctx.header.domain || ''}`,
+        );
     });
 } else {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
-        // logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
 
         try {
@@ -239,7 +239,7 @@ if (config.default.statistics) {
         const ms = new Date() - start;
         ctx.requestTime = ms;
 
-        // logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
+        logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });
 }
 // app.use(prevent);
