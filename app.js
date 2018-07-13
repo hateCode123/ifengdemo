@@ -132,7 +132,7 @@ app.use(async (ctx, next) => {
         if (devicetype === 'pc' || devicetype === 'mobile') {
             ctx.originalUrl = ctx.url = ctx.url.replace('/c/channel', '/pc/finance');
         } else if (devicetype === 'ie78') {
-            ctx.originalUrl = ctx.url = ctx.url.replace(/\/c\/(channel)\/([a-z]+)(\??.*)/, '/pc/finance/$1/low/$2');
+            ctx.originalUrl = ctx.url = ctx.url.replace(/\/c\/(channel)\/([a-z]+)(\??.*)/, '/pc/finance/$2/low$3');
         } else if (devicetype === 'ie6') {
             ctx.type = 'text/html';
 
