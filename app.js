@@ -121,25 +121,41 @@ if (config.default.statisticsProm) {
 
 app.use(async (ctx, next) => {
     ctx.set('sourcedevicetype', ctx.headers['devicetype']);
+
     let devicetype = ctx.headers['devicetype'] || 'pc';
+
+    ctx.set('deviceType', devicetype);
     // devicetype = 'ie78';
     // ctx.headers['domain'] = 'finance.ifeng.com';
-    // console.log(ctx.url);
+
+    if (/\/api/.test(ctx.url)) {
+        return await next();
+    }
+
     if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
-        if (devicetype == 'pc' || devicetype == 'mobile') {
-            ctx.set('deviceType', devicetype);
-            ctx.originalUrl = ctx.url = `/pc/finance` + ctx.url;
-        } else if (devicetype == 'ie78') {
-            ctx.set('deviceType', 'ie78');
-            let arr = ctx.url.split('?');
-            ctx.originalUrl = ctx.url = `/pc/finance${arr[0] == '/' ? `/index` : arr[0]}/low${
-                arr[1] ? `?${arr[1]}` : ''
-            }`;
-        } else if (devicetype == 'ie6') {
-            // ctx.originalUrl = ctx.url = ctx.url.replace(/\/c\/[a-z0-9A-Z]+/, `/${devicetype}/${type}/`);
-            ctx.type = 'text/html';
-            ctx.set('deviceType', 'ie6');
-            return (ctx.body = `<h1>ie6</h1>`);
+        if (/\/c\/finance/.test(ctx.url)) {
+            if (devicetype === 'pc' || devicetype === 'mobile') {
+                ctx.originalUrl = ctx.url = ctx.url.replace('/c', '/pc');
+            } else if (devicetype === 'ie78') {
+                ctx.originalUrl = ctx.url = ctx.url.replace(/\/c\/finance\/([a-z]+)(\??.*)/, '/pc/finance/$1/low/$2');
+            } else if (devicetype === 'ie6') {
+                ctx.type = 'text/html';
+
+                return (ctx.body = '<h1>ie6</h1>');
+            }
+        } else {
+            if (devicetype === 'pc' || devicetype === 'mobile') {
+                ctx.originalUrl = ctx.url = `/pc/finance` + ctx.url;
+            } else if (devicetype === 'ie78') {
+                let arr = ctx.url.split('?');
+                ctx.originalUrl = ctx.url = `/pc/finance${arr[0] == '/' ? `/index` : arr[0]}/low${
+                    arr[1] ? `?${arr[1]}` : ''
+                }`;
+            } else if (devicetype == 'ie6') {
+                ctx.type = 'text/html';
+
+                return (ctx.body = `<h1>ie6</h1>`);
+            }
         }
     }
     await next();
@@ -150,7 +166,7 @@ if (config.default.statistics) {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
         // 请求进入
-        logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        // logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
         ctx.routerTimeStart = process.hrtime();
         ctx.rpcTimeList = [[], []];
@@ -208,7 +224,7 @@ if (config.default.statistics) {
 } else {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
-        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        // logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
         const start = new Date();
 
         try {

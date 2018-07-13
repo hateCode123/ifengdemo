@@ -13,6 +13,9 @@ const _ = require('lodash');
  * @return {Object}
  */
 const jsonParse = (jsonStr, ctx, parent) => {
+    if (!jsonStr) {
+        return jsonStr;
+    }
     let context = {};
 
     if (config.default.statistics) {
