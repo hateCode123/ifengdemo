@@ -93,32 +93,32 @@ const getFundsFlowData = async () => {
 
 // 获取信息流首页数据
 const getCustomList = async () => {
-    return await ajax('/c/api/finance/index/customList');
+    return await ajax('/api/finance/index/customList');
 };
 
 // 获取信息流宏观数据
 const getMacroList = async () => {
-    return await ajax('/c/api/finance/index/macroList');
+    return await ajax('/api/finance/index/macroList');
 };
 
 // 获取信息流股票数据
 const getStockList = async () => {
-    return await ajax('/c/api/finance/index/stockList');
+    return await ajax('/api/finance/index/stockList');
 };
 
 // 获取信息流 imarkets 数据
 const getImarketsList = async () => {
-    return await ajax('/c/api/finance/index/imarketsList');
+    return await ajax('/api/finance/index/imarketsList');
 };
 
 // 获取信息流公司抓取数据
 const getCompanyList = async () => {
-    return await ajax('/c/api/finance/index/companyList');
+    return await ajax('/api/finance/index/companyList');
 };
 
 // 获取信息流 Wemoney 数据
 const getWemoneyList = async () => {
-    return await ajax('/c/api/finance/index/wemoneyList');
+    return await ajax('/api/finance/index/wemoneyList');
 };
 
 /* 股首 */
