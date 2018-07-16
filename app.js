@@ -19,6 +19,9 @@ const prevent = require('./biz/common/prevent');
 const _ = require('lodash');
 const uuid = require('uuid/v1');
 const moment = require('moment');
+const os = require('os');
+const hostname = os.hostname();
+const pid = process.pid;
 
 // 普罗米修斯
 const { c, p_request, p_rpc, p_parse, p_rander, router } = require('./biz/common/prom');
@@ -86,6 +89,8 @@ app.use(async (ctx, next) => {
     ctx.rpcTimeList = [[], []];
 
     ctx.set('shankTracerId', ctx.uuid);
+    ctx.set('hostname', hostname);
+    ctx.set('pid', pid);
 
     await next();
 });
