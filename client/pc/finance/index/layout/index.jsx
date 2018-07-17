@@ -54,6 +54,7 @@ class Layout extends React.PureComponent {
                 asideAd4: content.asideAd4,
                 asideAd5: content.asideAd5,
                 asideAd6: content.asideAd6,
+                asideAd7: content.asideAd7,
                 financeVideo: content.financeVideo,
                 institute: content.institute,
                 lark: content.lark,

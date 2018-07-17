@@ -57,14 +57,24 @@
 .box_3 {
     margin-top: 28px;
     width: 300px;
-    height: 314px;
+    height: 250px;
     text-align: center;
     border: 1px solid #ccc;
 }
 
-.box_4,
+.box_4 {
+    composes: clearfix from global;
+    width: 300px;
+    height: 60px;
+    overflow: hidden;
+    margin-top: 4px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
 .box_5,
-.box_6 {
+.box_6,
+.box_7 {
     margin-top: 18px;
     width: 300px;
     height: 250px;
