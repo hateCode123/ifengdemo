@@ -5,8 +5,8 @@ import Chip from 'Chip';
 import Ad from '../../../../components/ad/';
 // import Logo from './logo/';
 import Nav from '../../../../components/nav/';
-import UserInfo from '../../../../components/userInfo/';
-// import Search from '../../../../../components/search/';
+import UserInfo from '@ifeng/ui_pc_userInfo';
+// import Search from '@ifeng/ui_pc_search';
 
 /**
  * 定义 Header 组件
@@ -24,8 +24,8 @@ class Header extends React.PureComponent {
 
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
-                    <Nav limit={18} content={content.nav}/>
-                    <UserInfo />
+                <Nav limit={18} content={content.nav} />
+                <UserInfo />
             </div>
         );
         const topAd = (

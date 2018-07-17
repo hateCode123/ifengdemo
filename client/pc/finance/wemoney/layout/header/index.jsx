@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Nav from '../../../../components/nav/';
-import UserInfo from '../../../../components/userInfo/';
+import UserInfo from '@ifeng/ui_pc_userInfo';
 
 /**
  * 定义 Header 组件

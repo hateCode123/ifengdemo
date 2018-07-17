@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Nav from '../../../../components/nav';
-import UserInfo from '../../../../components/userInfo';
+import UserInfo from '@ifeng/ui_pc_userInfo';
 
 /**
  * 定义 Header 组件
@@ -16,10 +16,10 @@ class Header extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <div className={ styles.nav_box }>
-                <div className={ styles.main_nav }>
-                    <Chip id="10108" type="static" title="导航" groupName="头部" content={ content.nav }>
-                        <Nav limit={ 18 } />
+            <div className={styles.nav_box}>
+                <div className={styles.main_nav}>
+                    <Chip id="10108" type="static" title="导航" groupName="头部" content={content.nav}>
+                        <Nav limit={18} />
                     </Chip>
                     <UserInfo />
                 </div>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Nav from '../../../../../components/nav/';
-import UserInfo from '../../../../../components/userInfo/';
-import Search from '../../../../../components/search/';
+import UserInfo from '@ifeng/ui_pc_userInfo';
+import Search from '@ifeng/ui_pc_search';
 import { rel } from '../../../../../utils/rel';
 import logoUrl from './logo.jpg';
 

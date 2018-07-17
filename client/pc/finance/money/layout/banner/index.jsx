@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
 import Chip from 'Chip';
-import Search from '../../../../components/search/';
+import Search from '@ifeng/ui_pc_search';
 import { rel } from '../../../../utils/rel';
 
 class Banner extends React.PureComponent {
@@ -25,7 +25,7 @@ class Banner extends React.PureComponent {
                         src="http://y1.ifengimg.com/a/2014/0922/lc/images/l_18.png"
                         width="178"
                         height="30"
-                        style={{ 'marginLeft': '15px' }}
+                        style={{ marginLeft: '15px' }}
                     />
                 </div>
                 <Search content={content.search} />
