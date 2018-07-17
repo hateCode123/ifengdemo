@@ -125,7 +125,7 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                 routerList.push({
                     path,
                     method: methodItem,
-                    handlers: [...meddlewareList, match(type, cache, false, false, handler, cdncache)],
+                    handlers: [...meddlewareList, match(type, cache, false, false, handler, cdncache, path)],
                 });
 
                 // 添加页面编辑中间件
@@ -134,7 +134,7 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                     routerList.push({
                         path: `${path}/edit`,
                         method: methodItem,
-                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache)],
+                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache, `${path}/edit`)],
                     });
                 }
                 // 添加降级页中间件
@@ -143,7 +143,7 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                     routerList.push({
                         path: `${path}/low`,
                         method: methodItem,
-                        handlers: [...meddlewareList, match(type, cache, false, low, handler, cdncache)],
+                        handlers: [...meddlewareList, match(type, cache, false, low, handler, cdncache, `${path}/low`)],
                     });
                 }
             }

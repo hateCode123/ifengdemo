@@ -7,9 +7,9 @@
     "viewsdir": "devtmp",
     "apiPrefix": "",
     "cacheURL": true,
-    "statistics": false,
-    "statisticsJaeger": false,
-    "statisticsProm": false,
+    "statistics": true,
+    "statisticsJaeger": true,
+    "statisticsProm": true,
     "logs": {
         "level": "debug"
     },
@@ -18,8 +18,6 @@
         { "host": "10.21.7.23", "port": 7001 },
         { "host": "10.21.7.23", "port": 7002 }
     ],
-    "blacklist": [
-      "/controllers/black/black.js"
-    ],
-    "cdnCacheTime":120
+    "blacklist": ["/controllers/black/black.js"],
+    "cdnCacheTime": 120
 }

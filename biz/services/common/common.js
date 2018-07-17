@@ -13,6 +13,9 @@ const _ = require('lodash');
  * @return {Object}
  */
 const jsonParse = (jsonStr, ctx, parent) => {
+    if (!jsonStr) {
+        return jsonStr;
+    }
     let context = {};
 
     if (config.default.statistics) {
@@ -22,15 +25,25 @@ const jsonParse = (jsonStr, ctx, parent) => {
         context.child = tracer._tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
     }
 
-    let json = JSON.parse(jsonStr);
+    let json = null;
+
+    try {
+        json = JSON.parse(jsonStr);
+    } catch (error) {
+        console.log(jsonStr);
+        console.log(error);
+        json = jsonStr;
+    }
 
     if (config.default.statistics) {
         let endTime = Timers.timeEnd(context.start);
-        ctx.parseTime.push(endTime);
+
+        ctx.parseTimeList.push(endTime);
     }
     if (config.default.statisticsJaeger) {
         context.child.finish();
     }
+
     return json;
 };
 
@@ -167,9 +180,11 @@ const promiseAll = async json => {
     }
 
     let arr = await Promise.all(myvalues);
+
     for (let i = 0; i < arr.length; i++) {
         allData[mykeys[i]] = arr[i];
     }
+
     return allData;
 };
 
@@ -266,61 +281,69 @@ const promiseAll = async json => {
 //     return backData;
 // };
 
-function getIds(arr) {
+const getIds = arr => {
     // console.log(arr);
     const ids = new Tars.List(Tars.String);
+
     arr = [...new Set(arr)];
     for (const item of arr) {
-        ids.push(item + '');
+        ids.push(String(item));
     }
-    return ids;
-}
 
-function getString(key) {
-    return function(ctx, data) {
+    return ids;
+};
+
+const getString = key => {
+    return (ctx, data) => {
         return data;
     };
-}
+};
 
-function getJson(key) {
-    return function(ctx, data) {
+const getJson = key => {
+    return (ctx, data) => {
         try {
             return jsonParse(data, ctx);
         } catch (error) {
             console.error(data);
             console.error(error);
+
             return null;
         }
     };
-}
+};
 
-function getJsonByKey(key) {
-    return function(ctx, data) {
+const getJsonByKey = key => {
+    return (ctx, data) => {
         let json = jsonParse(data, ctx);
+
         try {
             json = jsonParse(json[key], ctx);
+
             return json;
         } catch (error) {
-            console.log(json[key]);
-            console.log(error);
-            console.log(data);
+            console.error(error);
+            console.error(json[key]);
+            console.error(data);
         }
+
         return json[key];
     };
-}
+};
 
-function getStringByKey(key) {
-    return function(ctx, data) {
+const getStringByKey = key => {
+    return (ctx, data) => {
         try {
             let json = jsonParse(data, ctx);
+
             return json[key];
         } catch (error) {
             console.error(error);
             console.error(data);
+
             return null;
         }
     };
-}
+};
 
 // function getAction(action) {
 //     let key = {
@@ -339,7 +362,7 @@ function getStringByKey(key) {
 //     return key[action];
 // }
 
-function getAction(key) {
+const getAction = key => {
     let json = {
         'KVProxy.getStructuredFragment': 'structuredFragment',
         'KVProxy.getStaticFragment': 'staticFragment',
@@ -351,18 +374,21 @@ function getAction(key) {
         'KVProxy.getCategory': 'category',
         'KVProxy.getDocument': 'documents',
         'KVProxy.getVideo': 'video',
+        'KVProxy.getSelectedPool': 'selectedPool',
     };
+
     return json[key];
-}
+};
+
 const transfer = async (ctx, json) => {
     let obj = {};
     let backData = {};
 
-    var map = new Tars.Map(Tars.String, Tars.List(Tars.String));
+    const map = new Tars.Map(Tars.String, Tars.List(Tars.String));
 
     for (const item of json) {
-        backData[item[0]] = [];
-        let key = getAction(item[1] + '.' + item[2]);
+        backData[item[0]] = '[]';
+        let key = getAction(`${item[1]}.${item[2]}`);
 
         if (!obj[key]) {
             obj[key] = {};
@@ -372,18 +398,34 @@ const transfer = async (ctx, json) => {
     }
     // console.log(obj);
     for (const key in obj) {
-        const tar_list = new Tars.List(Tars.String);
+        const tarList = new Tars.List(Tars.String);
+
         for (const item of Object.keys(obj[key])) {
-            tar_list.push(item + '');
+            tarList.push(String(item));
         }
-        map.set(key, tar_list);
+        map.set(key, tarList);
     }
     let result = '';
 
     try {
-        result = await KVProxy.getAll(ctx, map);
+        if (ctx.spanrpc) {
+            const carrier = {};
+
+            // const carrier = new Tars.Map(Tars.String, Tars.String);
+            tracer._tracer.inject(ctx.spanrpc, 'text_map', carrier);
+
+            // logger.info(`${ctx.uuid}: ${JSON.stringify(carrier)}`);
+
+            // 如果有span ，则传递给 tars
+            result = await KVProxy.getAllWithTracer(ctx, map, JSON.stringify(carrier));
+        } else {
+            result = await KVProxy.getAll(ctx, map);
+        }
+
+        //
     } catch (error) {
         logger.error(error);
+
         return backData;
     } finally {
         if (config.default.statistics) {
@@ -393,7 +435,7 @@ const transfer = async (ctx, json) => {
         if (config.default.statisticsJaeger) {
             result.span.finish();
         }
-        if (config.default.statisticsProm) {
+        if (config.default.statisticsProm && result.response) {
             ctx.p_rpc.observe(
                 {
                     url: ctx.originalUrl.replace(/\?.*/, ''),
@@ -403,12 +445,15 @@ const transfer = async (ctx, json) => {
             );
         }
     }
+    // console.dir(result.response.return.value, {depth: null});
 
     for (let key in result.response.return.value) {
         let kvObj = result.response.return.value[key].value;
+
         for (const id in kvObj) {
             let itemkey = obj[key][id].name;
             let handle = obj[key][id].handle;
+
             // console.log(itemkey);
             backData[itemkey] = handle(ctx, kvObj[id]);
         }
@@ -430,7 +475,7 @@ module.exports = {
     promiseAll,
     transfer,
     getJson,
-    getJsonByKey,
     getString,
+    getJsonByKey,
     getStringByKey,
 };

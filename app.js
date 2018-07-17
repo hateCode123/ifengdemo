@@ -3,6 +3,7 @@
  */
 const logger = require('./biz/common/logger');
 const { tracer } = require('./biz/common/jaeger');
+const { Tags } = require('opentracing');
 const config = require('./biz/configs');
 const Koa = require('koa');
 const http = require('http');
@@ -16,6 +17,12 @@ const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
 const prevent = require('./biz/common/prevent');
 const _ = require('lodash');
+const uuid = require('uuid/v1');
+const moment = require('moment');
+const os = require('os');
+const hostname = os.hostname();
+const pid = process.pid;
+
 // 普罗米修斯
 const { c, p_request, p_rpc, p_parse, p_rander, router } = require('./biz/common/prom');
 const env = process.env.NODE_ENV || 'development';
@@ -40,10 +47,10 @@ if (env === 'development') {
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
-    app.use(koaStatic(path.join(__dirname, './static'), { index: 'index.html' }));
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
+
     setTimeout(() => {
         io.sockets.emit('reload');
     }, 1000);
@@ -65,10 +72,26 @@ const webapi = require('./biz/common/middlewares/koa-webapi');
 webapi(app);
 
 app.use(async (ctx, next) => {
-    // console.log(ctx.url);
     if (ctx.url === '/heartbeat') {
         return (ctx.body = { success: true });
     }
+    // 初始化
+    ctx.start = new Date();
+    ctx.start2 = process.uptime() * 1000;
+    ctx.uuid = uuid();
+    ctx.schemaTime = 0;
+    ctx.parseTime = 0;
+    ctx.parseTimeList = [];
+    ctx.requestTime = 0;
+    ctx.rpcCount = 0;
+    ctx.rpcTime = 0;
+    ctx.routerTimeStart = process.hrtime();
+    ctx.rpcTimeList = [[], []];
+
+    ctx.set('shankTracerId', ctx.uuid);
+    ctx.set('hostname', hostname);
+    ctx.set('pid', pid);
+
     await next();
 });
 
@@ -103,122 +126,111 @@ if (config.default.statisticsProm) {
                 c.inc({ code: 200 });
                 p_request.observe(
                     {
-                        url: ctx.originalUrl.replace(/\?.*/, ''),
+                        url: ctx.urlinfo && ctx.urlinfo.path ? ctx.urlinfo.path : '未知路由',
                         method: ctx.method,
                         status_code: ctx.status,
                     },
-                    ctx.requestTime,
+                    ctx.time,
                 );
 
-                // p_rpc.observe(parseInt(ctx.rpc_time));
-                p_parse.observe(parseInt(ctx.parse_time));
+                // p_rpc.observe(parseInt(ctx.rpcTime));
+                p_parse.observe(parseInt(ctx.parseTime));
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     });
 }
 
-app.use(async (ctx, next) => {
-    ctx.set('sourcedevicetype', ctx.headers['devicetype']);
-    let devicetype = ctx.headers['devicetype'] || 'pc';
-    // devicetype = 'ie78';
-    // ctx.headers['domain'] = 'finance.ifeng.com';
-    // console.log(ctx.url);
-    if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
-        if (devicetype == 'pc' || devicetype == 'mobile') {
-            ctx.set('deviceType', devicetype);
-            ctx.originalUrl = ctx.url = `/pc/finance` + ctx.url;
-        } else if (devicetype == 'ie78') {
-            ctx.set('deviceType', 'ie78');
-            let arr = ctx.url.split('?');
-            ctx.originalUrl = ctx.url = `/pc/finance${arr[0] == '/' ? `/index` : arr[0]}/low${
-                arr[1] ? `?${arr[1]}` : ''
-            }`;
-        } else if (devicetype == 'ie6') {
-            // ctx.originalUrl = ctx.url = ctx.url.replace(/\/c\/[a-z0-9A-Z]+/, `/${devicetype}/${type}/`);
-            ctx.type = 'text/html';
-            ctx.set('deviceType', 'ie6');
-            return (ctx.body = `<h1>ie6</h1>`);
-        }
-    }
-    await next();
-});
+// 路由重写，根据项目需要在rewrite中添加重写规则
+app.use(rewrite);
 
 // 本地统计 开关
 if (config.default.statistics) {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
         // 请求进入
-        logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
-        const start = new Date();
-        ctx.routerTimeStart = process.hrtime();
-        ctx.rpcTimeList = [[], []];
-        ctx.parseTime = [];
+        // logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
+
         try {
             await next();
         } catch (err) {
             logger.error(err);
-            if (ctx.method === 'POST') {
-                logger.error(ctx.request.body);
+
+            switch (ctx.type) {
+                case 'json':
+                    ctx.json(1, err.message);
+                    break;
+                case 'jsonp':
+                    ctx.jsonp(1, err.message);
+                    break;
+                case 'html':
+                case 'xml':
+                case 'text':
+                default:
+                    ctx.status = 502;
             }
-            const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
 
-            if (isAjax) {
-                ctx.json(1, err.message);
-            } else {
-                ctx.status = 502;
-                // throw err;
+            if (ctx.span) {
+                ctx.span.setTag(Tags.ERROR, true);
+                ctx.span.log({ event: 'error', 'error.object': err, message: err.message, stack: err.stack });
             }
-
-            ctx.span || ctx.span.setTag(opentracing.Tags.ERROR, true);
-            ctx.span || ctx.span.log({ event: 'error', 'error.object': err, message: err.message, stack: err.stack });
         }
-        const ms = new Date() - start;
-        ctx.requestTime = ms;
+        ctx.time = new Date() - ctx.start;
+        ctx.time2 = process.uptime() * 1000 - ctx.start2;
 
-        if (!ctx.routerTimeEnd) {
-            ctx.routerTimeEnd = Timers.timeEnd(ctx.routerTimeStart);
-        }
-
-        let rpcTime = 0;
-        const rpcCount = ctx.rpcTimeList[0].length + ctx.rpcTimeList[1].length;
+        ctx.rpcCount = ctx.rpcTimeList[0].length + ctx.rpcTimeList[1].length;
 
         for (const i of ctx.rpcTimeList[0]) {
-            rpcTime += parseFloat(i);
+            ctx.rpcTime += parseFloat(i);
         }
-        rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
-        rpcTime = rpcTime.toFixed(3);
-        let parseTime = 0;
+        ctx.rpcTime += _.max(ctx.rpcTimeList[1]) || 0;
 
-        for (const i of ctx.parseTime) {
-            parseTime += parseFloat(i);
+        for (const i of ctx.parseTimeList) {
+            ctx.parseTime += parseFloat(i);
         }
-        parseTime = parseTime.toFixed(3);
-        ctx.rpc_time = rpcTime;
-        ctx.parse_time = parseTime;
-        logger.info(
-            `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms - router: ${
-                ctx.routerTimeEnd
-            }ms - rpc:[${rpcCount}, ${rpcTime}ms] - JSON.parse: [${
-                ctx.parseTime.length
-            }, ${parseTime}ms] - domain: ${ctx.header.domain || ''}`,
-        );
+        ctx.parseTime = ctx.parseTime.toFixed(3);
+
+        // logger.info(
+        //     `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ctx.time}ms - ${ctx.time2}ms - router: ${
+        //         ctx.routerTime
+        //     }ms - rpc:[${ctx.rpcCount}, ${ctx.rpcTime}ms] - getAll: ${
+        //         ctx.rpcTimeList[1][0]
+        //     }ms - schemaTime: ${ctx.schemaTime}ms - JSON.parse: [${ctx.parseTimeList.length}, ${
+        //         ctx.parseTime
+        //     }ms] - domain: ${ctx.header.domain || ''}`,
+        // );
+
+        logger.info({
+            kpi: {
+                path: ctx.originalUrl,
+                status: ctx.status,
+                time: ctx.time,
+                time2: ctx.time2,
+                router: Number(ctx.routerTime),
+                rpcTime: ctx.rpcTime,
+                rpcCount: ctx.rpcCount,
+                getAll: ctx.rpcTimeList[1][0],
+                parseTime: Number(ctx.parseTime),
+                schemaTime: Number(ctx.schemaTime),
+                parseCount: ctx.parseTimeList.length,
+                domain: ctx.header.domain,
+                shankTracerId: ctx.uuid,
+                serverTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+            },
+        });
     });
 } else {
     // 监控请求响应时间，catch未知的错误
     app.use(async (ctx, next) => {
-        logger.debug(`<-- ${ctx.method} ${ctx.originalUrl}`);
-        const start = new Date();
+        logger.info(`<-- ${ctx.method} ${ctx.originalUrl}`);
+        const start = process.uptime() * 1000;
 
         try {
             await next();
         } catch (err) {
             logger.error(`<-- ${ctx.method} ${ctx.originalUrl}`);
             logger.error(err);
-            if (ctx.method === 'POST') {
-                logger.error(ctx.request.body);
-            }
             const isAjax = ctx.headers['x-requested-with'] === 'XMLHttpRequest';
 
             if (isAjax) {
@@ -228,16 +240,14 @@ if (config.default.statistics) {
                 // throw err;
             }
         }
-        const ms = new Date() - start;
+        const ms = process.uptime() * 1000 - start;
+
         ctx.requestTime = ms;
 
         logger.debug(`--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ms}ms`);
     });
 }
 // app.use(prevent);
-
-// 路由重写，根据项目需要在rewrite中添加重写规则
-// app.use(rewrite);
 
 // 加载路由
 app.use(routers.routes(), routers.allowedMethods());
