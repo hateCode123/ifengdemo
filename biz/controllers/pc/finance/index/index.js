@@ -1,7 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 
 exports.list = {
     path: '/pc/finance/index',
@@ -32,7 +32,7 @@ exports.list = {
             ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
 
             // 焦点图
-            ['bannerPic', 'KVProxy', 'getDynamicFragment', 10005, getStringByKey('data')],
+            ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getJsonByKey('data')],
 
             // 头条新闻
             ['headline', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
@@ -41,7 +41,7 @@ exports.list = {
             ['rights', 'KVProxy', 'getStaticFragment', 10018, getJsonByKey('content')],
 
             // 每日要闻
-            ['dayNews', 'KVProxy', 'getDynamicFragment', 10006, getStringByKey('data')],
+            ['dayNews', 'KVProxy', 'getSelectedPool', 8, getJsonByKey('data')],
 
             // 每日要闻多拼新闻
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
@@ -62,7 +62,7 @@ exports.list = {
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
 
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getDynamicFragment', 10007, getJson()],
+            ['financeVideo', 'KVProxy', 'getSelectedPool', 12, getJsonByKey('data')],
 
             // 研究院
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
@@ -92,10 +92,10 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         allData.bannerPic =
-            allData.bannerPi &&
+            allData.bannerPic &&
             allData.bannerPic.slice(0, 5).map(item => ({
                 url: item.url,
-                thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
+                thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
                 title: item.title,
             }));
 
@@ -140,13 +140,19 @@ exports.list = {
                 url: item.url,
                 title: item.title,
             }));
-        allData.financeVideo =
-            allData.financeVideo.data &&
-            allData.financeVideo.data.slice(0, 3).map(item => ({
-                url: item.url,
-                thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
-                title: item.title,
-            }));
+        allData.financeVideo = allData.financeVideo
+            ? allData.financeVideo.slice(0, 3).map(item => ({
+                  url: item.url,
+                  thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
+                  title: item.title,
+              }))
+            : [
+                  {
+                      url: '',
+                      thumbnails: '',
+                      title: '',
+                  },
+              ];
 
         const institute = allData.institute.list[0];
 
