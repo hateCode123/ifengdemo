@@ -8,7 +8,7 @@
     "apiPrefix": "",
     "cacheURL": true,
     "statistics": true,
-    "statisticsJaeger": true,
+    "statisticsJaeger": false,
     "statisticsProm": true,
     "JaegerDebug": false,
     "JaegerSamplerType": "probabilistic",

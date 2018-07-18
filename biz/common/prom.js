@@ -117,9 +117,9 @@ const promInit = app => {
                     status_code: ctx.status,
                 };
 
-                p_request.observe(labelObj, ctx.time);
-                p_rander.observe(labelObj, ctx.time);
-                p_parse.observe(labelObj, parseInt(ctx.parseTime));
+                p_request.observe(labelObj, ctx.time || 0);
+                p_rander.observe(labelObj, ctx.randerTime || 0);
+                p_parse.observe(labelObj, parseInt(ctx.parseTime || 0));
             } catch (error) {
                 logger.error(error);
             }

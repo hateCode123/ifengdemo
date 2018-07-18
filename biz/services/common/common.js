@@ -422,7 +422,7 @@ const transfer = async (ctx, json) => {
     let rpc_span = null;
 
     try {
-        if (ctx.spanrpc) {
+        if (config.default.statisticsJaeger && ctx.spanrpc) {
             const carrier = {};
 
             // const carrier = new Tars.Map(Tars.String, Tars.String);
