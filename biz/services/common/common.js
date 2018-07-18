@@ -400,7 +400,7 @@ const transfer = async (ctx, json) => {
     const map = new Tars.Map(Tars.String, Tars.List(Tars.String));
 
     for (const item of json) {
-        backData[item[0]] = '[]';
+        backData[item[0]] = [];
         let key = getAction(`${item[1]}.${item[2]}`);
 
         if (!obj[key]) {
