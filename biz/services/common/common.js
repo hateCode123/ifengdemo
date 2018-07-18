@@ -48,9 +48,9 @@ const jsonParse = (jsonStr, ctx, parent) => {
     if (config.default.statistics) {
         context.start = Timers.time();
     }
-    if (config.default.statisticsJaeger) {
-        context.child = tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
-    }
+    // if (config.default.statisticsJaeger) {
+    //     context.child = tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
+    // }
 
     let json = null;
 
@@ -67,9 +67,9 @@ const jsonParse = (jsonStr, ctx, parent) => {
 
         ctx.parseTimeList.push(endTime);
     }
-    if (config.default.statisticsJaeger) {
-        context.child.finish();
-    }
+    // if (config.default.statisticsJaeger) {
+    //     context.child.finish();
+    // }
 
     return json;
 };

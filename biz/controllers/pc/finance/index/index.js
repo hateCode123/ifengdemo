@@ -91,11 +91,13 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.bannerPic = allData.bannerPic.slice(0, 5).map(item => ({
-            url: item.url,
-            thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
-            title: item.title,
-        }));
+        allData.bannerPic =
+            allData.bannerPi &&
+            allData.bannerPic.slice(0, 5).map(item => ({
+                url: item.url,
+                thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
+                title: item.title,
+            }));
 
         allData.dayNews = allData.dayNews.slice(0, 12).map(item => ({
             url: item.url,
@@ -132,16 +134,19 @@ exports.list = {
             },
         ].concat(talking);
 
-        allData.stocks = allData.stocks.list.slice(0, 6).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
-
-        allData.financeVideo = allData.financeVideo.data.slice(0, 3).map(item => ({
-            url: item.url,
-            thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
-            title: item.title,
-        }));
+        allData.stocks =
+            allData.stocks.list &&
+            allData.stocks.list.slice(0, 6).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
+        allData.financeVideo =
+            allData.financeVideo.data &&
+            allData.financeVideo.data.slice(0, 3).map(item => ({
+                url: item.url,
+                thumbnails: item.thumbnails && item.thumbnails !== '' ? JSON.parse(item.thumbnails).image[0].url : '',
+                title: item.title,
+            }));
 
         const institute = allData.institute.list[0];
 
