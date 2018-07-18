@@ -41,6 +41,7 @@ exports.financeWemoney = {
         ];
 
         let allData = await transfer(ctx, json);
+
         await ctx.html('finance_wemoney', {
             allData,
         });

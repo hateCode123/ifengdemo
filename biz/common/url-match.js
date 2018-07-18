@@ -9,10 +9,11 @@ exports.match = (type, cache, edit, low, handler, cdncache, path) => {
         }
         if (config.default.statisticsJaeger) {
             ctx.span.log({ event: 'route_matching', route_matching_time: ctx.routerTime });
-            ctx.spanrpc = tracer._tracer.startSpan('rpc', { childOf: ctx.span });
+            ctx.spanrouter.finish();
+            ctx.spanrpc = tracer.startSpan('ctrl', { childOf: ctx.span });
         }
         ctx.urlinfo = { type, cache, edit, low, cdncache, path };
-        
+
         return await handler(ctx, next);
     };
 };

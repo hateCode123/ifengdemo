@@ -10,9 +10,12 @@ module.exports = (app, options = {}) => {
     // extend html function
     app.context.html = async function(tplName, data) {
         let child = null;
+        let randerStart = 0;
+        if (config.default.statistics) {
+            randerStart = process.uptime() * 1000;
+        }
         if (config.default.statisticsJaeger) {
-            this.spanrpc.finish();
-            child = tracer._tracer.startSpan('render', { childOf: this.span });
+            child = tracer.startSpan('render', { childOf: this.spanrpc || this.span });
         }
 
         // if (this.urlinfo.ctrlPath === 'mobile') {
@@ -37,8 +40,13 @@ module.exports = (app, options = {}) => {
 
         await this.render(tplName, data);
 
+        if (config.default.statistics) {
+            this.randerTime = process.uptime() * 1000 - randerStart;
+        }
+
         if (config.default.statisticsJaeger) {
             child.finish();
+            this.spanrpc.finish();
         }
     };
 
@@ -67,7 +75,7 @@ module.exports = (app, options = {}) => {
 
     // extend jsonp function
     app.context.jsonp = function(data) {
-        const callback = this.query.callback || 'callback';
+        const callback = this.params.callback || this.query.callback || 'callback';
         const contentType = 'text/javascript';
         let response = null;
 

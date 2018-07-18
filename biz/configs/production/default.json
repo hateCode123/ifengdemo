@@ -10,6 +10,9 @@
     "statistics": true,
     "statisticsJaeger": false,
     "statisticsProm": true,
+    "JaegerDebug": false,
+    "JaegerSamplerType": "probabilistic",
+    "JaegerSamplerParam": 0.1,
     "logs": [
         {
             "type": "rotating-file",

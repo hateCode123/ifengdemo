@@ -132,6 +132,6 @@ function injectHtml(html) {
             socket.on('error', function (error) {
                 // console.log(error);
             });
-    }, 500);
+    }, 0);
     </script></head>`);
 }

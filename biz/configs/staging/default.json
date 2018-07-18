@@ -10,6 +10,9 @@
     "statistics": true,
     "statisticsJaeger": true,
     "statisticsProm": true,
+    "JaegerDebug": true,
+    "JaegerSamplerType": "probabilistic",
+    "JaegerSamplerParam": 1,
     "logs": [
         {
             "type": "rotating-file",
@@ -26,11 +29,7 @@
             "count": 30
         }
     ],
-    "redisHosts": [
-
-    ],
-    "blacklist": [
-        "/controllers/black/black.js"
-    ],
-    "cdnCacheTime":120
+    "redisHosts": [],
+    "blacklist": ["/controllers/black/black.js"],
+    "cdnCacheTime": 120
 }

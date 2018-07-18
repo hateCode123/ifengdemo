@@ -5,6 +5,33 @@ const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
 const Tars = require('@tars/stream');
 const _ = require('lodash');
+const KVTableEnum = {
+    'KVProxy.getStructuredFragment': 'structured_fragment',
+    'KVProxy.getStaticFragment': 'static_fragment',
+    'KVProxy.getDynamicFragment': 'dynamic_fragment',
+    'KVProxy.getSsiFragment': 'ssi_fragment',
+    'KVProxy.getRecommendFragment': 'recommend_fragment',
+    'KVProxy.getCustom': 'custom',
+    'KVProxy.getAd': 'ad',
+    'KVProxy.getCategory': 'category',
+    'KVProxy.getDocument': 'documents',
+    'KVProxy.getVideo': 'video',
+    'KVProxy.getSelectedPool': 'selected_pool',
+};
+
+// const KVTableEnum = {
+//     'KVProxy.getStructuredFragment': 'structuredFragment',
+//     'KVProxy.getStaticFragment': 'staticFragment',
+//     'KVProxy.getDynamicFragment': 'dynFragment',
+//     'KVProxy.getSsiFragment': 'ssiFragment',
+//     'KVProxy.getRecommendFragment': 'recommendFragment',
+//     'KVProxy.getCustom': 'other',
+//     'KVProxy.getAd': 'ad',
+//     'KVProxy.getCategory': 'category',
+//     'KVProxy.getDocument': 'documents',
+//     'KVProxy.getVideo': 'video',
+//     'KVProxy.getSelectedPool': 'selectedPool',
+// };
 
 /**
  * 使用该方法替代JSON.parse(),统计JSON.parse耗时
@@ -22,7 +49,7 @@ const jsonParse = (jsonStr, ctx, parent) => {
         context.start = Timers.time();
     }
     if (config.default.statisticsJaeger) {
-        context.child = tracer._tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
+        context.child = tracer.startSpan('JSON.parse()', { childOf: parent || ctx.span });
     }
 
     let json = null;
@@ -300,9 +327,9 @@ const getString = key => {
 };
 
 const getJson = key => {
-    return (ctx, data) => {
+    return (ctx, data, span) => {
         try {
-            return jsonParse(data, ctx);
+            return jsonParse(data, ctx, span);
         } catch (error) {
             console.error(data);
             console.error(error);
@@ -313,11 +340,11 @@ const getJson = key => {
 };
 
 const getJsonByKey = key => {
-    return (ctx, data) => {
-        let json = jsonParse(data, ctx);
+    return (ctx, data, span) => {
+        let json = jsonParse(data, ctx, span);
 
         try {
-            json = jsonParse(json[key], ctx);
+            json = jsonParse(json[key], ctx, span);
 
             return json;
         } catch (error) {
@@ -331,9 +358,9 @@ const getJsonByKey = key => {
 };
 
 const getStringByKey = key => {
-    return (ctx, data) => {
+    return (ctx, data, span) => {
         try {
-            let json = jsonParse(data, ctx);
+            let json = jsonParse(data, ctx, span);
 
             return json[key];
         } catch (error) {
@@ -363,21 +390,7 @@ const getStringByKey = key => {
 // }
 
 const getAction = key => {
-    let json = {
-        'KVProxy.getStructuredFragment': 'structuredFragment',
-        'KVProxy.getStaticFragment': 'staticFragment',
-        'KVProxy.getDynamicFragment': 'dynFragment',
-        'KVProxy.getSsiFragment': 'ssiFragment',
-        'KVProxy.getRecommendFragment': 'recommendFragment',
-        'KVProxy.getCustom': 'other',
-        'KVProxy.getAd': 'ad',
-        'KVProxy.getCategory': 'category',
-        'KVProxy.getDocument': 'documents',
-        'KVProxy.getVideo': 'video',
-        'KVProxy.getSelectedPool': 'selectedPool',
-    };
-
-    return json[key];
+    return KVTableEnum[key] || 'other';
 };
 
 const transfer = async (ctx, json) => {
@@ -406,13 +419,14 @@ const transfer = async (ctx, json) => {
         map.set(key, tarList);
     }
     let result = '';
+    let rpc_span = null;
 
     try {
         if (ctx.spanrpc) {
             const carrier = {};
 
             // const carrier = new Tars.Map(Tars.String, Tars.String);
-            tracer._tracer.inject(ctx.spanrpc, 'text_map', carrier);
+            tracer.inject(rpc_span, 'text_map', carrier);
 
             // logger.info(`${ctx.uuid}: ${JSON.stringify(carrier)}`);
 
@@ -424,24 +438,24 @@ const transfer = async (ctx, json) => {
 
         //
     } catch (error) {
-        logger.error(error);
+        // logger.error(error);
 
         return backData;
     } finally {
-        if (config.default.statistics) {
-            ctx.rpcTimeList[1].push(result.response.costtime);
+        if (config.default.statistics && result.response) {
+            ctx.rpcTimeList[1].push(result.response.costtime || 0);
         }
         // jaeger trance 结束
-        if (config.default.statisticsJaeger) {
+        if (config.default.statisticsJaeger && result.span) {
             result.span.finish();
         }
         if (config.default.statisticsProm && result.response) {
             ctx.p_rpc.observe(
                 {
-                    url: ctx.originalUrl.replace(/\?.*/, ''),
+                    url: ctx.urlinfo.path,
                     rpc_func: result.callInfo.replace('[object Object]', ''),
                 },
-                result.response.costtime,
+                result.response.costtime || 0,
             );
         }
     }
@@ -455,7 +469,7 @@ const transfer = async (ctx, json) => {
             let handle = obj[key][id].handle;
 
             // console.log(itemkey);
-            backData[itemkey] = handle(ctx, kvObj[id]);
+            backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
         }
     }
 

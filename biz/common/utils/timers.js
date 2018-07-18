@@ -7,4 +7,3 @@ exports.timeEnd = time => {
 
     return ((diff[0] * 1e9 + diff[1]) / 1e6).toFixed(3);
 };
-

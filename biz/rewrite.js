@@ -2,11 +2,7 @@
  * 路由重写,主要用于根据 移动端/pc端 和底页id进行模板选择
  * 如果项目中不需要，可以删除(删除时请同时删除入口文件app.js中的引用)
  */
-const rewrite = require('koa-rewrite');
 const logger = require('./common/logger');
-const { isPC } = require('./common/utils/browser');
-const { KVProxy } = require('./providers/ucmsapiProxy');
-const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('./services/common/common');
 
 module.exports = async (ctx, next) => {
     let devicetype = ctx.headers['devicetype'] || 'pc';

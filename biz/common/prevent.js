@@ -8,6 +8,7 @@ proxy.setMaxListeners(0);
 
 let lock = async (url, action, ctx) => {
     const isLocked = map.has(url);
+
     if (!isLocked) {
         map.set(url, 1);
         try {

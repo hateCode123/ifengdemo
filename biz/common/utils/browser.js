@@ -49,7 +49,7 @@ exports.browser = ctx => {
 };
 
 // 判断是否是pc浏览器
-exports.isPC = (ua) => {
+exports.isPC = ua => {
     let flag = true;
 
     for (let v = 0; v < Agents.length; v++) {

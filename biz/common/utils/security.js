@@ -4,7 +4,7 @@
 const crypto = require('crypto');
 
 // 转换为16进制字符
-const parse = (c) => {
+const parse = c => {
     if (c >= 'a') return (c.charCodeAt(0) - 'a'.charCodeAt(0) + 10) & 0x0f;
     if (c >= 'A') return (c.charCodeAt(0) - 'A'.charCodeAt(0) + 10) & 0x0f;
 
@@ -12,7 +12,7 @@ const parse = (c) => {
 };
 
 // 从十六进制字符串到字节数组转换
-const HexString2Bytes = (hexstr) => {
+const HexString2Bytes = hexstr => {
     const b = Buffer.alloc(hexstr.length / 2);
     let j = 0;
 
@@ -27,7 +27,7 @@ const HexString2Bytes = (hexstr) => {
 };
 
 // 密钥生产器
-const keyGenerator = (key) => {
+const keyGenerator = key => {
     if (!key) throw new Error('密钥key不能为空');
     if (key.length === 8) return Buffer.from(key, 'utf8');
     if (key.length >= 16) return HexString2Bytes(key.substr(0, 16));
