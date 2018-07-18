@@ -32,7 +32,7 @@ exports.list = {
             ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
 
             // 焦点图
-            ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getJsonByKey('data')],
+            ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getStringByKey('data')],
 
             // 头条新闻
             ['headline', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
@@ -41,7 +41,7 @@ exports.list = {
             ['rights', 'KVProxy', 'getStaticFragment', 10018, getJsonByKey('content')],
 
             // 每日要闻
-            ['dayNews', 'KVProxy', 'getSelectedPool', 8, getJsonByKey('data')],
+            ['dayNews', 'KVProxy', 'getSelectedPool', 8, getStringByKey('data')],
 
             // 每日要闻多拼新闻
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
@@ -62,7 +62,7 @@ exports.list = {
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
 
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getSelectedPool', 12, getJsonByKey('data')],
+            ['financeVideo', 'KVProxy', 'getSelectedPool', 12, getStringByKey('data')],
 
             // 研究院
             ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
