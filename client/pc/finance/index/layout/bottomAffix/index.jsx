@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import styles from './index.css';
 import { addEventListener } from '@ifeng/ui_base';
+import { Ad } from '../../../../components/ad';
 
 /**
  * 定义 BottomAffix 组件
  */
 class BottomAffix extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         text: '代码/拼音/名称',
         isShow: false,
         quoteShow: false,
         fundsShow: false,
+        leftAdShow: true,
+        rightAdShow: true,
         quote: '',
         funds: '',
     };
@@ -23,6 +31,18 @@ class BottomAffix extends React.PureComponent {
     componentWillUnmount() {
         this.unHandleScroll();
     }
+
+    handleLeftAdShow = () => {
+        const { leftAdShow } = this.state;
+
+        this.setState({ leftAdShow: !leftAdShow });
+    };
+
+    handleRightAdShow = () => {
+        const { rightAdShow } = this.state;
+
+        this.setState({ rightAdShow: !rightAdShow });
+    };
 
     /**
      * 滚动条滚动
@@ -107,10 +127,37 @@ class BottomAffix extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { text, isShow, quoteShow, fundsShow } = this.state;
+        const { text, isShow, quoteShow, fundsShow, leftAdShow, rightAdShow } = this.state;
+        const {
+            content: { leftAd, rightAd, cornerAd },
+        } = this.props;
 
         const bottomAffix = (
             <div className={styles.affix_box}>
+                {leftAdShow ? (
+                    <div className={styles.box_L}>
+                        <div className={styles.btn_box}>
+                            <div className={styles.leftBtn} onClick={this.handleLeftAdShow}>
+                                关闭广告
+                            </div>
+                        </div>
+                        <Ad content={leftAd} styleName={styles.asideAd} />
+                    </div>
+                ) : (
+                    ''
+                )}
+                {rightAdShow ? (
+                    <div className={styles.box_R}>
+                        <div className={styles.btn_box}>
+                            <div className={styles.rightBtn} onClick={this.handleRightAdShow}>
+                                关闭广告
+                            </div>
+                        </div>
+                        <Ad content={rightAd} styleName={styles.asideAd} />
+                    </div>
+                ) : (
+                    ''
+                )}
                 <table>
                     <tbody>
                         <tr>
@@ -170,10 +217,13 @@ class BottomAffix extends React.PureComponent {
                         )}
                     </tbody>
                 </table>
+                <div className={styles.cornerAd_box}>
+                    <Ad content={cornerAd} styleName={styles.cornerAd} />
+                </div>
             </div>
         );
 
-        return ReactDOM.createPortal(bottomAffix, document.getElementById('root'));
+        return ReactDOM.createPortal(bottomAffix, document.body);
     }
 }
 

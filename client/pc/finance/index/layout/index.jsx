@@ -69,6 +69,11 @@ class Layout extends React.PureComponent {
         };
         const cooperation = content.cooperation;
         const qrCode = content.qrCode;
+        const bottomAffixData = {
+            leftAd: content.leftAd,
+            rightAd: content.rightAd,
+            cornerAd: content.cornerAd,
+        };
 
         return (
             <div className={styles.ip_col}>
@@ -84,7 +89,7 @@ class Layout extends React.PureComponent {
                 <Chip id="10135" type="static" title="二维码" groupName="二维码" content={qrCode}>
                     <QrCode />
                 </Chip>
-                <BottomAffix />
+                <BottomAffix content={bottomAffixData} />
                 <ChipEdit />
             </div>
         );

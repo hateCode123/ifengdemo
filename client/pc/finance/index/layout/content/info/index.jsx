@@ -14,6 +14,21 @@ import Tabs from './tabs';
 import ContentList from './contentList';
 import Ad from '../../../../../components/ad';
 
+// 定义初始化加载数量
+const infoCount = 25;
+
+// 定义每次加载更多的数据数量
+const getMoreCount = 5;
+
+const arr = {};
+
+for (let i = 0; i < 6; i++) {
+    arr[i] = {
+        data: [],
+        listNum: 0,
+    };
+}
+
 class Info extends React.Component {
     static propTypes = {
         content: PropTypes.object,
@@ -22,9 +37,9 @@ class Info extends React.Component {
     state = {
         tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
         current: 0,
-        listNum: 5,
-        datas: [],
+        datas: arr,
         counts: [],
+        adAddType: 'tabChange',
     };
 
     async componentDidMount() {
@@ -33,10 +48,11 @@ class Info extends React.Component {
             const data = await getCustomList();
 
             if (data.data) {
-                const docUrl = data.data.map(item => item.commentUrl);
+                const info = data.data ? data.data.list : [];
+                const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 
-                datas[0] = data.data;
+                datas[0].data = data.data.list;
                 counts[0] = count.map(item => item.count);
 
                 this.setState({
@@ -44,7 +60,7 @@ class Info extends React.Component {
                     counts,
                 });
             } else {
-                datas[0] = [];
+                datas[0].data = [];
             }
         } catch (e) {
             console.error(e);
@@ -59,7 +75,7 @@ class Info extends React.Component {
         let data = [];
 
         // 获取信息流数据
-        if (!datas[num]) {
+        if (num !== 0 && datas[num].data.length === 0) {
             try {
                 if (num === 1) {
                     data = await getMacroList();
@@ -74,9 +90,7 @@ class Info extends React.Component {
                 }
 
                 if (data.data) {
-                    datas[num] = data.data.list;
-
-                    this.setState({ datas });
+                    datas[num].data = data.data.list;
                 }
             } catch (e) {
                 console.error(e);
@@ -84,23 +98,23 @@ class Info extends React.Component {
         }
 
         // 获取文章评论数
-        if (!counts[num]) {
+        if (num !== 0 && !counts[num]) {
             try {
                 const info = data.data ? data.data.list : [];
                 const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 
                 counts[num] = count.map(item => item.count);
-
-                this.setState({ counts });
             } catch (e) {
                 console.error(e);
             }
         }
 
         this.setState({
+            datas,
+            counts,
+            adAddType: 'tabChange',
             current: num,
-            listNum: 5,
         });
 
         scrollTo(0, tabsTop);
@@ -110,53 +124,48 @@ class Info extends React.Component {
      * 获取更多新闻
      */
     getMore = () => {
-        let { listNum } = this.state;
+        const { datas, current } = this.state;
+        let listNum = datas[current].listNum ? datas[current].listNum : 0;
 
         listNum++;
-        this.setState({ listNum });
+        datas[current].listNum = listNum;
+        this.setState({
+            datas,
+            adAddType: 'loadMoreCmp',
+        });
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { tabs, current, listNum, datas, counts } = this.state;
+        const { tabs, current, datas, counts, adAddType } = this.state;
         const { content } = this.props;
-        const contentList = [];
-
-        if (datas) {
-            for (let i = 0; i < listNum; i++) {
-                const index = current === 0 ? 3 : 4;
-                const num = i < 6 ? index : 5;
-                const len = i < 5 ? index : 5;
-
-                contentList.push(
-                    <div key={i}>
-                        <ContentList
-                            content={datas[current] ? datas[current].slice(i * num, i * num + len) : []}
-                            counts={counts[current]}
-                        />
-                        {current === 0 && i < 5 ? <ContentList content={content.softAd} /> : ''}
-                        {content.hardAd && i < 4 ? <Ad content={content.hardAd} styleName={styles.hardAd} /> : ''}
-                    </div>,
-                );
-            }
-        }
 
         return (
             <div className={styles.info}>
                 <Tabs content={tabs} current={current} handleTabsChange={this.handleTabsChange} />
                 <div className={styles.content}>
-                    <div className={styles.list}>
-                        {contentList}
-                        {listNum < 8 ? (
-                            <div className={styles.more} onClick={this.getMore}>
-                                查看更多
-                            </div>
-                        ) : (
-                            <div className={styles.all}>已显示全部</div>
-                        )}
-                    </div>
+                    {Object.values(datas).map((item, index) => (
+                        <div key={index} className={`${current === index ? styles.show : styles.hide}`}>
+                            <ContentList
+                                content={item.data ? item.data.slice(0, infoCount + getMoreCount * item.listNum) : []}
+                                counts={counts[index]}
+                                infoAd={content.infoAd}
+                                adAddType={adAddType}
+                                tabIndex={current}
+                                pageSize={item.listNum}
+                                index={index}
+                            />
+                            {item.listNum < 3 ? (
+                                <div className={styles.more} onClick={this.getMore}>
+                                    查看更多
+                                </div>
+                            ) : (
+                                <div className={styles.all}>已显示全部</div>
+                            )}
+                        </div>
+                    ))}
                 </div>
                 <Ad content={content.hardAd} styleName={styles.hardAd} />
             </div>

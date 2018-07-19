@@ -95,14 +95,13 @@
                 callback: 'function(elm, data) {console.log("asideAd7"); $(elm).html(data.title)}'
             },
             info: {
-                softAd: [{
-                    url: '#',
-                    title: '信息流软广',
-                    type: 'ad',
-                    custom: {
-                        articleTag: '广告'
-                    }
-                }],
+                infoAd: {
+                    data: {
+                        title: 'infoAd'
+                    },
+                    preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                    callback: 'function(data, event) {console.log("infoAd"); event.on("init", () => {console.log("init")}); event.on("tabChange", () => {console.log("tabChange")}); event.on("loadMoreCmp", () => {console.log("loadMoreCmp")});}'
+                },
                 hardAd: {
                     data: {
                         title: '硬广'
@@ -120,7 +119,28 @@
                 callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
             },
             footer: allData.footer,
-            qrCode: allData.qrCode
+            qrCode: allData.qrCode,
+            leftAd: {
+                data: {
+                    title: '左侧广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("leftAd"); $(elm).html(data.title)}'
+            },
+            rightAd: {
+                data: {
+                    title: '右侧广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("rightAd"); $(elm).html(data.title)}'
+            },
+            cornerAd: {
+                data: {
+                    title: '底角广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("cornerAd"); $(elm).html(data.title)}'
+            }
         };
 
     </script>

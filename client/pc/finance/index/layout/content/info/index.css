@@ -3,6 +3,14 @@
     width: 642px;
 }
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 .more {
     margin-top: 22px;
     width: 640px;

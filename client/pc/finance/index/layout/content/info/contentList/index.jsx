@@ -2,19 +2,52 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import md5 from 'md5';
+import { Event } from '@ifeng/ui_base';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
+import { handleAd } from '../../../../../../utils/infoAd';
+
+const event = new Event();
 
 class ContentList extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
         counts: PropTypes.array,
+        infoAd: PropTypes.object,
+        adAddType: PropTypes.string,
+        tabIndex: PropTypes.number,
+        pageSize: PropTypes.number,
+        index: PropTypes.number,
     };
 
     state = {
         isOver: false,
     };
+
+    async componentDidMount() {
+        const { infoAd, tabIndex, pageSize, index } = this.props;
+
+        if (index === 0) {
+            const callback = await handleAd(infoAd);
+
+            callback(infoAd.data, event);
+
+            event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
+        }
+    }
+
+    componentDidUpdate() {
+        const { adAddType, tabIndex, pageSize, index } = this.props;
+
+        if (tabIndex === index) {
+            if (adAddType === 'tabChange') {
+                event.trigger('tabChange', { tabIndex, pageSize, container: this.infoRef.current });
+            } else if (adAddType === 'loadMoreCmp') {
+                event.trigger('loadMoreCmp', { tabIndex, pageSize, container: this.infoRef.current });
+            }
+        }
+    }
 
     /**
      * 获取skey方法
@@ -46,11 +79,12 @@ class ContentList extends React.PureComponent {
             独家: 'category2',
             焦点: 'category2',
             '24小时': 'category2',
-            广告: 'ad',
         };
 
+        this.infoRef = React.createRef();
+
         return (
-            <div className={styles.ExtraContentList}>
+            <div ref={this.infoRef}>
                 {content.map((item, index) => (
                     <div
                         key={index}
