@@ -110,16 +110,19 @@ const promInit = app => {
             ctx.p_rpc = p_rpc;
             await next();
             try {
+                if (ctx.url === '/heartbeat') {
+                    return;
+                }
                 c.inc({ code: ctx.status });
-                let labelObj = {
+                const labelObj = {
                     url: ctx.urlinfo && ctx.urlinfo.path ? ctx.urlinfo.path : '未知路由',
                     method: ctx.method,
                     status_code: ctx.status,
                 };
 
-                p_request.observe(labelObj, ctx.time || 0);
-                p_rander.observe(labelObj, ctx.randerTime || 0);
-                p_parse.observe(labelObj, parseInt(ctx.parseTime || 0));
+                p_request.observe(labelObj, ctx.time);
+                p_rander.observe(labelObj, ctx.randerTime);
+                p_parse.observe(labelObj, parseInt(ctx.parseTime));
             } catch (error) {
                 logger.error(error);
             }
@@ -128,7 +131,7 @@ const promInit = app => {
 };
 
 setInterval(() => {
-    let pm = process.memoryUsage();
+    const pm = process.memoryUsage();
 
     // rss：总内存占用
     p_memory.set({ type: 'rss' }, parseInt(pm.rss));

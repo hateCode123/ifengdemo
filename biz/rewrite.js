@@ -5,7 +5,7 @@
 const logger = require('./common/logger');
 
 module.exports = async (ctx, next) => {
-    let devicetype = ctx.headers['devicetype'] || 'pc';
+    const devicetype = ctx.headers['devicetype'] || 'pc';
 
     ctx.set('deviceType', devicetype);
 
@@ -28,7 +28,7 @@ module.exports = async (ctx, next) => {
         if (devicetype === 'pc' || devicetype === 'mobile') {
             ctx.originalUrl = ctx.url = `/pc/finance${ctx.url}`;
         } else if (devicetype === 'ie78') {
-            let arr = ctx.url.split('?');
+            const arr = ctx.url.split('?');
 
             ctx.originalUrl = ctx.url = `/pc/finance${arr[0] === '/' ? '/index' : arr[0]}/low${
                 arr[1] ? `?${arr[1]}` : ''

@@ -10,7 +10,7 @@ exports.list = {
     cache: 0,
     edit: true,
     handler: async ctx => {
-        let json = [
+        const json = [
             ['nav', 'KVProxy', 'getStaticFragment', 10108, getJsonByKey('content')],
 
             // 搜索
@@ -107,7 +107,8 @@ exports.list = {
             ['qrCode', 'KVProxy', 'getStaticFragment', 10135, getJsonByKey('content')],
         ];
 
-        let allData = await transfer(ctx, json);
+        const allData = await transfer(ctx, json);
+
         ctx.body = allData;
     },
 };

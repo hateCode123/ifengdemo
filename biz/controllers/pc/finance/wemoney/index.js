@@ -10,7 +10,7 @@ exports.financeWemoney = {
     type: 'html',
     low: true,
     handler: async ctx => {
-        let json = [
+        const json = [
             // 通用导航
             ['commonNav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
@@ -40,7 +40,7 @@ exports.financeWemoney = {
             ['copyright', 'KVProxy', 'getStaticFragment', 10121, getStringByKey('content')],
         ];
 
-        let allData = await transfer(ctx, json);
+        const allData = await transfer(ctx, json);
 
         await ctx.html('finance_wemoney', {
             allData,

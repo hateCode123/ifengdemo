@@ -43,7 +43,7 @@ const jsonParse = (jsonStr, ctx, parent) => {
     if (!jsonStr) {
         return jsonStr;
     }
-    let context = {};
+    const context = {};
 
     if (config.default.statistics) {
         context.start = Timers.time();
@@ -63,7 +63,7 @@ const jsonParse = (jsonStr, ctx, parent) => {
     }
 
     if (config.default.statistics) {
-        let endTime = Timers.timeEnd(context.start);
+        const endTime = Timers.timeEnd(context.start);
 
         ctx.parseTimeList.push(endTime);
     }
@@ -197,16 +197,16 @@ const handleStringByKey = (ctx, key, singleType = false) => {
 };
 
 const promiseAll = async json => {
-    let allData = {};
-    let mykeys = [];
-    let myvalues = [];
+    const allData = {};
+    const mykeys = [];
+    const myvalues = [];
 
-    for (let key in json) {
+    for (const key in json) {
         myvalues.push(json[key]);
         mykeys.push(key);
     }
 
-    let arr = await Promise.all(myvalues);
+    const arr = await Promise.all(myvalues);
 
     for (let i = 0; i < arr.length; i++) {
         allData[mykeys[i]] = arr[i];
@@ -360,7 +360,7 @@ const getJsonByKey = key => {
 const getStringByKey = key => {
     return (ctx, data, span) => {
         try {
-            let json = jsonParse(data, ctx, span);
+            const json = jsonParse(data, ctx, span);
 
             return json[key];
         } catch (error) {
@@ -394,14 +394,14 @@ const getAction = key => {
 };
 
 const transfer = async (ctx, json) => {
-    let obj = {};
-    let backData = {};
+    const obj = {};
+    const backData = {};
 
     const map = new Tars.Map(Tars.String, Tars.List(Tars.String));
 
     for (const item of json) {
         backData[item[0]] = [];
-        let key = getAction(`${item[1]}.${item[2]}`);
+        const key = getAction(`${item[1]}.${item[2]}`);
 
         if (!obj[key]) {
             obj[key] = {};
@@ -419,7 +419,7 @@ const transfer = async (ctx, json) => {
         map.set(key, tarList);
     }
     let result = '';
-    let rpc_span = null;
+    const rpc_span = null;
 
     try {
         if (config.default.statisticsJaeger && ctx.spanrpc) {
@@ -461,12 +461,12 @@ const transfer = async (ctx, json) => {
     }
     // console.dir(result.response.return.value, {depth: null});
 
-    for (let key in result.response.return.value) {
-        let kvObj = result.response.return.value[key].value;
+    for (const key in result.response.return.value) {
+        const kvObj = result.response.return.value[key].value;
 
         for (const id in kvObj) {
-            let itemkey = obj[key][id].name;
-            let handle = obj[key][id].handle;
+            const itemkey = obj[key][id].name;
+            const handle = obj[key][id].handle;
 
             // console.log(itemkey);
             backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);

@@ -13,7 +13,7 @@
         "eslint": "eslint ./client/**/*.js && eslint ./client/**/*.jsx",
         "eslint_fix": "eslint ./client/** --fix",
         "api_eslint": "eslint ./app.js && eslint ./biz/**/**/**.js",
-        "api_fix": "eslint ./app.js --fix && eslint ./biz/** --fix",
+        "api_fix": "eslint ./app.js --fix && eslint ./biz/**/js --fix",
         "docker_create": "docker build -t web_channel_finance -f dockerfilepre .",
         "docker_start": "docker run --rm --name web_channel_finance -p 3000:3000 -it web_channel_finance:latest",
         "docker_stop": "docker stop web_channel_finance",
