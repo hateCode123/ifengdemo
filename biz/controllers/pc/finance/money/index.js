@@ -20,7 +20,7 @@ exports.financeWemoney = {
         //     let all = await transfer(ctx,jsons);
         //     return ctx.body = all;
 
-        let json = [
+        const json = [
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
@@ -70,7 +70,7 @@ exports.financeWemoney = {
             ['bottomAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
         ];
 
-        let allData = await transfer(ctx, json);
+        const allData = await transfer(ctx, json);
 
         await ctx.html('finance_money', {
             allData,

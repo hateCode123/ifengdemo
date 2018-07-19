@@ -8,7 +8,7 @@ exports.list = {
     edit: true,
     low: true,
     handler: async ctx => {
-        let json = [
+        const json = [
             // 顶部导航接口WW
             ['nav', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
             // 顶部新闻
@@ -24,6 +24,7 @@ exports.list = {
         ];
 
         const allData = await transfer(ctx, json);
+
         await ctx.html('finance_imarkets', {
             allData,
         });

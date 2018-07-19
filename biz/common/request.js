@@ -1,4 +1,4 @@
-let request = require('request');
+const request = require('request');
 
 /**
  * 发送get请求

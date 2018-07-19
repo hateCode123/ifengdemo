@@ -6,7 +6,7 @@ const proxy = new EventEmitter();
 
 proxy.setMaxListeners(0);
 
-let lock = async (url, action, ctx) => {
+const lock = async (url, action, ctx) => {
     const isLocked = map.has(url);
 
     if (!isLocked) {

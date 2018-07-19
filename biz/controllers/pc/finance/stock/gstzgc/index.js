@@ -113,6 +113,7 @@ exports.financeWemoney = {
             ['copyright', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
         ];
         const allData = await transfer(ctx, json);
+
         await ctx.html('finance_stock_gstzgc', {
             allData,
         });

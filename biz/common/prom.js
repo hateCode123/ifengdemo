@@ -114,7 +114,7 @@ const promInit = app => {
                     return;
                 }
                 c.inc({ code: ctx.status });
-                let labelObj = {
+                const labelObj = {
                     url: ctx.urlinfo && ctx.urlinfo.path ? ctx.urlinfo.path : '未知路由',
                     method: ctx.method,
                     status_code: ctx.status,
@@ -131,7 +131,7 @@ const promInit = app => {
 };
 
 setInterval(() => {
-    let pm = process.memoryUsage();
+    const pm = process.memoryUsage();
 
     // rss：总内存占用
     p_memory.set({ type: 'rss' }, parseInt(pm.rss));
