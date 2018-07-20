@@ -128,13 +128,18 @@
         }
     },
     "lint-staged": {
-        "*.{js,jsx,json,css,md}": [
-            "prettier --write",
-            "git add"
-        ],
-        "./client/**/*.js": "eslint",
-        "./client/**/*.jsx": "eslint",
-        "./app.js": "eslint",
-        "./biz/**/**/**.js": "eslint"
+        "linters": {
+            "*.{js,jsx,json,css,md}": [
+                "prettier --write",
+                "git add"
+            ],
+            "./client/**/*.js": "eslint",
+            "./client/**/*.jsx": "eslint",
+            "./app.js": "eslint",
+            "./biz/**/**/**.js": "eslint"
+        },
+        "ignore": [
+            "./dist/**"
+        ]
     }
 }
