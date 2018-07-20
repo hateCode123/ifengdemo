@@ -92,7 +92,7 @@ class ContentList extends React.PureComponent {
                         onMouseEnter={this.handleMouseOver}
                         onMouseLeave={this.handleMouseOver}
                         style={listStyle}>
-                        {item.thumbnails && item.thumbnails !== '' ? (
+                        {item.thumbnails && item.thumbnails !== '' && item.thumbnails.length !== 0 ? (
                             <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
                                 <img
                                     src={JSON.parse(item.thumbnails).image[0].url}

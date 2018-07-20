@@ -24,7 +24,8 @@ class DateNews extends React.PureComponent {
         return (
             <div className={styles.box}>
                 <div className={styles.title}>
-                    <Ad content={ad} />
+                    <div className={styles.date} />
+                    <Ad content={ad} styleName={styles.ad_box} />
                 </div>
                 <div className={styles.newList}>
                     <ul className={styles.list_top}>

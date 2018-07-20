@@ -8,7 +8,7 @@ exports.getCustomList = {
     path: '/api/finance/index/customList',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, '17007_719_76').then(...handleJson(ctx));
+        const data = await KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx));
 
         ctx.json(data);
     },

@@ -48,11 +48,11 @@ class Info extends React.Component {
             const data = await getCustomList();
 
             if (data.data) {
-                const info = data.data ? data.data.list : [];
+                const info = data.data ? data.data : [];
                 const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 
-                datas[0].data = data.data.list;
+                datas[0].data = data.data;
                 counts[0] = count.map(item => item.count);
 
                 this.setState({

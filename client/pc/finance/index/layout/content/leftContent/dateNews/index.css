@@ -11,6 +11,18 @@
     height: 18px;
 }
 
+.date {
+    width: 72px;
+    height: 16px;
+    display: block;
+    float: left;
+    background: url(./datenew.jpg) no-repeat;
+}
+
+.ad_box {
+    float: left;
+}
+
 .list_top {
     margin-top: 11px;
 }
