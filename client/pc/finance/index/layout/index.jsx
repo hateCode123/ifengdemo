@@ -29,6 +29,7 @@ class Layout extends React.PureComponent {
             topAd: content.topAd,
             logo: content.logo,
             logoAd: content.logoAd,
+            channelAd: content.channelAd,
         };
         const contentData = {
             leftContent: {
@@ -36,6 +37,7 @@ class Layout extends React.PureComponent {
                 headline: content.headline,
                 rights: content.rights,
                 dayNews: content.dayNews,
+                dayNewsAd: content.dayNewsAd,
                 extraNews: content.extraNews,
             },
             middleContent: {
@@ -59,8 +61,11 @@ class Layout extends React.PureComponent {
                 institute: content.institute,
                 lark: content.lark,
                 meeting: content.meeting,
+                meetingAd: content.meetingAd,
                 market: content.market,
+                marketAd: content.marketAd,
                 courier: content.courier,
+                courierAd: content.courierAd,
             },
         };
         const footerData = {
@@ -70,9 +75,12 @@ class Layout extends React.PureComponent {
         const cooperation = content.cooperation;
         const qrCode = content.qrCode;
         const bottomAffixData = {
-            leftAd: content.leftAd,
-            rightAd: content.rightAd,
-            cornerAd: content.cornerAd,
+            floatAd1: content.floatAd1,
+            floatAd2: content.floatAd2,
+            floatAd3: content.floatAd3,
+            floatAd4: content.floatAd4,
+            floatAd5: content.floatAd5,
+            floatAd6: content.floatAd6,
         };
 
         return (

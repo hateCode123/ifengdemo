@@ -18,8 +18,6 @@ class BottomAffix extends React.PureComponent {
         isShow: false,
         quoteShow: false,
         fundsShow: false,
-        leftAdShow: true,
-        rightAdShow: true,
         quote: '',
         funds: '',
     };
@@ -31,18 +29,6 @@ class BottomAffix extends React.PureComponent {
     componentWillUnmount() {
         this.unHandleScroll();
     }
-
-    handleLeftAdShow = () => {
-        const { leftAdShow } = this.state;
-
-        this.setState({ leftAdShow: !leftAdShow });
-    };
-
-    handleRightAdShow = () => {
-        const { rightAdShow } = this.state;
-
-        this.setState({ rightAdShow: !rightAdShow });
-    };
 
     /**
      * 滚动条滚动
@@ -127,100 +113,81 @@ class BottomAffix extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { text, isShow, quoteShow, fundsShow, leftAdShow, rightAdShow } = this.state;
+        const { text, isShow, quoteShow, fundsShow } = this.state;
         const {
-            content: { leftAd, rightAd, cornerAd },
+            content: { floatAd1, floatAd2, floatAd3, floatAd4, floatAd5, floatAd6 },
         } = this.props;
 
         const bottomAffix = (
-            <div className={styles.affix_box}>
-                {leftAdShow ? (
-                    <div className={styles.box_L}>
-                        <div className={styles.btn_box}>
-                            <div className={styles.leftBtn} onClick={this.handleLeftAdShow}>
-                                关闭广告
-                            </div>
-                        </div>
-                        <Ad content={leftAd} styleName={styles.asideAd} />
-                    </div>
-                ) : (
-                    ''
-                )}
-                {rightAdShow ? (
-                    <div className={styles.box_R}>
-                        <div className={styles.btn_box}>
-                            <div className={styles.rightBtn} onClick={this.handleRightAdShow}>
-                                关闭广告
-                            </div>
-                        </div>
-                        <Ad content={rightAd} styleName={styles.asideAd} />
-                    </div>
-                ) : (
-                    ''
-                )}
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="javascript:void(0);" onClick={this.handleQuoteShow}>
-                                    <div className={styles.quote} />
-                                    <p>查行情</p>
-                                </a>
-                                <div
-                                    className={`${styles.caption} ${quoteShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={this.handleQuoteMouseOver}>
-                                    <div className={styles.search}>
-                                        <input
-                                            className="quote"
-                                            value={text}
-                                            onChange={this.handleQuoteChange}
-                                            onFocus={this.handleFocus}
-                                            onBlur={this.handleBlur}
-                                        />
-                                        <a onClick={this.handleQuoteSearch}>搜索</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:void(0);" onClick={this.handleFundsShow}>
-                                    <div className={styles.funds} />
-                                    <p>查资金</p>
-                                </a>
-                                <div
-                                    className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
-                                    onMouseLeave={this.handleFundsMouseOver}>
-                                    <div className={styles.search}>
-                                        <input
-                                            className="funds"
-                                            value={text}
-                                            onChange={this.handleFundsChange}
-                                            onFocus={this.handleFocus}
-                                            onBlur={this.handleBlur}
-                                        />
-                                        <a onClick={this.handleFundsSearch}>搜索</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        {isShow ? (
+            <React.Fragment>
+                <div className={styles.affix_box}>
+                    <table>
+                        <tbody>
                             <tr>
                                 <td>
-                                    <a href="#" onClick={this.backToTop}>
-                                        <div className={styles.back} />
+                                    <a href="javascript:void(0);" onClick={this.handleQuoteShow}>
+                                        <div className={styles.quote} />
+                                        <p>查行情</p>
                                     </a>
+                                    <div
+                                        className={`${styles.caption} ${quoteShow ? styles.show : styles.hide}`}
+                                        onMouseLeave={this.handleQuoteMouseOver}>
+                                        <div className={styles.search}>
+                                            <input
+                                                className="quote"
+                                                value={text}
+                                                onChange={this.handleQuoteChange}
+                                                onFocus={this.handleFocus}
+                                                onBlur={this.handleBlur}
+                                            />
+                                            <a onClick={this.handleQuoteSearch}>搜索</a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
-                        ) : (
-                            <tr />
-                        )}
-                    </tbody>
-                </table>
-                <div className={styles.cornerAd_box}>
-                    <Ad content={cornerAd} styleName={styles.cornerAd} />
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0);" onClick={this.handleFundsShow}>
+                                        <div className={styles.funds} />
+                                        <p>查资金</p>
+                                    </a>
+                                    <div
+                                        className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
+                                        onMouseLeave={this.handleFundsMouseOver}>
+                                        <div className={styles.search}>
+                                            <input
+                                                className="funds"
+                                                value={text}
+                                                onChange={this.handleFundsChange}
+                                                onFocus={this.handleFocus}
+                                                onBlur={this.handleBlur}
+                                            />
+                                            <a onClick={this.handleFundsSearch}>搜索</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {isShow ? (
+                                <tr>
+                                    <td>
+                                        <a href="#" onClick={this.backToTop}>
+                                            <div className={styles.back} />
+                                        </a>
+                                    </td>
+                                </tr>
+                            ) : (
+                                <tr />
+                            )}
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+                <Ad content={floatAd1} styleName={styles.floatAd} />
+                <Ad content={floatAd2} styleName={styles.floatAd} />
+                <Ad content={floatAd3} styleName={styles.floatAd} />
+                <Ad content={floatAd4} styleName={styles.floatAd} />
+                <Ad content={floatAd5} styleName={styles.floatAd} />
+                <Ad content={floatAd6} styleName={styles.floatAd} />
+            </React.Fragment>
         );
 
         return ReactDOM.createPortal(bottomAffix, document.body);

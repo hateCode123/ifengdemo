@@ -19,24 +19,25 @@
     margin-top: 32px;
 }
 
+.meetingAd {
+    position: absolute;
+    top: 11px;
+    right: 0px;
+}
+
 .ad_box {
     margin-top: 28px;
 }
 
-.box_market {
-    width: 298px;
-    height: 418px;
-    border: 1px solid #ccc;
+.market {
+    width: 300px;
     margin-top: 36px;
-    text-align: center;
 }
 
-.box_courier {
-    width: 298px;
-    height: 501px;
-    border: 1px solid #ccc;
-    margin-top: 20px;
-    text-align: center;
+.marketAd {
+    float: right;
+    width: 120px;
+    height: 25px;
 }
 
 .box_1 {

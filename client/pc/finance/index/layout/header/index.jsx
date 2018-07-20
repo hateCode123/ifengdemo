@@ -26,6 +26,7 @@ class Header extends React.PureComponent {
         const logoData = {
             logo: content.logo,
             logoAd: content.logoAd,
+            channelAd: content.channelAd,
         };
 
         const topNav = (

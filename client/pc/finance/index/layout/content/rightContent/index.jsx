@@ -35,19 +35,26 @@ class RightContent extends React.PureComponent {
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />
                 <div className={styles.meeting}>
-                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题·会议" />
+                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题·会议">
+                        <Ad content={content.meetingAd} styleName={styles.meetingAd} />
+                    </BoxTitle>
                     <Meeting content={content.meeting} />
                 </div>
                 <div className={styles.ad_box}>
                     <Ad content={content.asideAd3} styleName={styles.box_3} />
                     <Ad content={content.asideAd4} styleName={styles.box_4} />
                 </div>
-                <Chip id="10014" type="static" title="理财超市静态碎片" groupName="正文" content={content.market}>
-                    <Market />
-                </Chip>
+                <div className={styles.market}>
+                    <BoxTitle url="//18.ifeng.com/index.shtml" title="理财超市">
+                        <Ad content={content.marketAd} styleName={styles.marketAd} />
+                    </BoxTitle>
+                    <Chip id="10014" type="static" title="理财超市静态碎片" groupName="正文" content={content.market}>
+                        <Market />
+                    </Chip>
+                </div>
                 <Ad content={content.asideAd5} styleName={styles.box_5} />
                 <Chip id="10016" type="static" title="理财速递静态碎片" groupName="正文" content={content.courier}>
-                    <Courier />
+                    <Courier ad={content.courierAd} />
                 </Chip>
                 <Ad content={content.asideAd6} styleName={styles.box_6} />
                 <Ad content={content.asideAd7} styleName={styles.box_7} />

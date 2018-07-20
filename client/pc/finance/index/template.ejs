@@ -19,12 +19,26 @@
             },
             logo: allData.logo,
             logoAd: allData.logoAd,
+            channelAd: {
+                data: {
+                    title: '频道冠名广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("channelAd"); $(elm).html(data.title)}'
+            },
             navigation: allData.navigation,
             rights: allData.rights,
             production: allData.production,
             bannerPic: allData.bannerPic,
             headline: allData.headline,
             dayNews: allData.dayNews,
+            dayNewsAd: {
+                data: {
+                    title: '今日要闻广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("dayNewsAd"); $(elm).html(data.title)}'
+            },
             extraNews: allData.extraNews,
             middleAd: {
                 data: {
@@ -43,8 +57,29 @@
             institute: allData.institute,
             lark: allData.lark,
             meeting: allData.meeting,
+            meetingAd: {
+                data: {
+                    title: '专题会议广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("meetingAd"); $(elm).html(data.title)}'
+            },
             market: allData.market,
+            marketAd: {
+                data: {
+                    title: '理财超市广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("marketAd"); $(elm).html(data.title)}'
+            },
             courier: allData.courier,
+            courierAd: {
+                data: {
+                    title: '理财速递广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("courierAd"); $(elm).html(data.title)}'
+            },
             asideAd1: {
                 data: {
                     title: '侧边广告 1'
@@ -120,27 +155,48 @@
             },
             footer: allData.footer,
             qrCode: allData.qrCode,
-            leftAd: {
+            floatAd1: {
                 data: {
-                    title: '左侧广告'
+                    title: '浮动广告1'
                 },
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("leftAd"); $(elm).html(data.title)}'
+                callback: 'function(elm, data) {console.log("floatAd1"); $(elm).html(data.title)}'
             },
-            rightAd: {
+            floatAd2: {
                 data: {
-                    title: '右侧广告'
+                    title: '浮动广告2'
                 },
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("rightAd"); $(elm).html(data.title)}'
+                callback: 'function(elm, data) {console.log("floatAd2"); $(elm).html(data.title)}'
             },
-            cornerAd: {
+            floatAd3: {
                 data: {
-                    title: '底角广告'
+                    title: '浮动广告3'
                 },
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("cornerAd"); $(elm).html(data.title)}'
-            }
+                callback: 'function(elm, data) {console.log("floatAd3"); $(elm).html(data.title)}'
+            },
+            floatAd4: {
+                data: {
+                    title: '浮动广告4'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("floatAd4"); $(elm).html(data.title)}'
+            },
+            floatAd5: {
+                data: {
+                    title: '浮动广告5'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("floatAd5"); $(elm).html(data.title)}'
+            },
+            floatAd6: {
+                data: {
+                    title: '浮动广告6'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("floatAd6"); $(elm).html(data.title)}'
+            },
         };
 
     </script>

@@ -6,23 +6,25 @@ import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import NewsList from './newsList/';
 import ExtraNews from './extraNews/';
+import { Ad } from '../../../../../../components/ad';
 
 class DateNews extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
         extraNews: PropTypes.string,
+        ad: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content, extraNews } = this.props;
+        const { content, extraNews, ad } = this.props;
 
         return (
             <div className={styles.box}>
                 <div className={styles.title}>
-                    <div className={styles.date} />
+                    <Ad content={ad} />
                 </div>
                 <div className={styles.newList}>
                     <ul className={styles.list_top}>

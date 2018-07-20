@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import BoxTitle from '../boxTitle';
 import { rel } from '../../../../../../utils/rel';
+import { Ad } from '../../../../../../components/ad';
 
 class Courier extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
+        ad: PropTypes.object,
     };
 
     state = {
@@ -45,7 +47,7 @@ class Courier extends React.PureComponent {
      */
     render() {
         const { types, current, currentCol } = this.state;
-        const { content } = this.props;
+        const { content, ad } = this.props;
         const tabs = [content[0].tab, content[4].tab];
         const content0 = content.slice(0, 4);
         const content1 = content.slice(4);
@@ -106,7 +108,9 @@ class Courier extends React.PureComponent {
 
         return (
             <div className={styles.courier}>
-                <BoxTitle url="//finance.ifeng.com/zhuanti/" title="理财速递" />
+                <BoxTitle url="//finance.ifeng.com/zhuanti/" title="理财速递">
+                    <Ad content={ad} styleName={styles.ad} />
+                </BoxTitle>
                 <div className={styles.title}>
                     <ul className={`${styles.title_tabs} clearfix`}>
                         {tabs.map((item, index) => (
