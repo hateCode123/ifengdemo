@@ -16,28 +16,25 @@ const routerList = [];
 
 // 路由重写，共用一个路由（将对象key的路径指向value的路径，value所对应的路径不受影响）
 const rewriteList = {
-    '/heartbeat': '/api/heartbeat',
+    // '/heartbeat': '/api/heartbeat',
 
-    '/pc/finance': '/pc/finance/index',
-    '/pc/finance/index.shtml': '/pc/finance/index',
+    // '/pc/finance': '/pc/finance/index',
+    // '/pc/finance/index.shtml': '/pc/finance/index',
 
-    '/pc/finance/stock': '/pc/finance/stock',
-    '/pc/finance/stock/index.shtml': '/pc/finance/stock',
+    // '/pc/finance/stock': '/pc/finance/stock',
+    // '/pc/finance/stock/index.shtml': '/pc/finance/stock',
 
-    '/pc/finance/stock': '/pc/finance/stock',
-    '/pc/finance/stock/index.shtml': '/pc/finance/stock',
+    // '/pc/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
+    // '/pc/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
 
-    '/pc/finance/stock/gstzgc': '/pc/finance/stock/gstzgc',
-    '/pc/finance/stock/gstzgc/index.shtml': '/pc/finance/stock/gstzgc',
+    // '/pc/finance/money': '/pc/finance/money',
+    // '/pc/finance/money/index.shtml': '/pc/finance/money',
 
-    '/pc/finance/money': '/pc/finance/money',
-    '/pc/finance/money/index.shtml': '/pc/finance/money',
+    // '/pc/finance/wemoney': '/pc/finance/wemoney',
+    // '/pc/finance/wemoney/index.shtml': '/pc/finance/wemoney',
 
-    '/pc/finance/wemoney': '/pc/finance/wemoney',
-    '/pc/finance/wemoney/index.shtml': '/pc/finance/wemoney',
-
-    '/mobile/content/:id': '/content/:id',
-    '/mobile/content/:id/edit': '/content/:id/edit',
+    // '/mobile/content/:id': '/content/:id',
+    // '/mobile/content/:id/edit': '/content/:id/edit',
 };
 
 // 自动加载controllers中的路由
@@ -132,9 +129,9 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                 if (edit) {
                     // 将路由放入路由列表
                     routerList.push({
-                        path: `${path}/edit`,
+                        path: `${path}/visualediting`,
                         method: methodItem,
-                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache, `${path}/edit`)],
+                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache, `${path}/visualediting`)],
                     });
                 }
                 // 添加降级页中间件

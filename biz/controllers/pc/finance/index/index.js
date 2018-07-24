@@ -4,8 +4,7 @@ const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 
 exports.list = {
-    path: '/pc/finance/index',
-    domain: 'finance.ifeng.com/index.shtml',
+    path: '/pc/finance/(index)?',
     method: 'get',
     type: 'html',
     cache: 0,
