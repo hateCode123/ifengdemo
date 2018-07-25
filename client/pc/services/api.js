@@ -1,10 +1,10 @@
 import { jsonp, ajax } from '@ifeng/ui_base';
 
 // apiUrl为webpack注入的全局变量
-
 /* eslint-disable no-undef */
 let apiBaseUrl = apiUrl;
 
+/* eslint-enable no-undef */
 if (/:30080/.test(window.location.href)) {
     apiBaseUrl = '/api';
 }
