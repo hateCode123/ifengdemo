@@ -1,6 +1,7 @@
 {
-    "appname": "web_channel",
+    "appname": "web_channel_spring",
     "namespace": "shank",
+    "alias": "spring",
     "debug": false,
     "port": 3000,
     "outputStd": false,

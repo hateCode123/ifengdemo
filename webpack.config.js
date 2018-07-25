@@ -204,6 +204,7 @@ const createConfig = function(type, platform, cssConfig, level, filepath) {
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('development'),
                 ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
+                apiUrl: JSON.stringify('/api'),
             }),
             // new webpack.optimize.CommonsChunkPlugin({
             //     name: ['vendor', 'manifest'],

@@ -18,6 +18,7 @@ module.exports = async (ctx, next) => {
     ctx.set('deviceType', devicetype);
 
     // ctx.headers['domain'] = 'finance.ifeng.com';
+    // ctx.headers['domain'] = 'shankapi.ifeng.com';
 
     if (/\/api\//.test(ctx.url)) {
         // do nothing
@@ -41,6 +42,8 @@ module.exports = async (ctx, next) => {
 
             return (ctx.body = '<h1>ie6</h1>');
         }
+    } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('shankapi.ifeng.com') > -1) {
+        rewrite(ctx, /\/(\w+)/, '/api');
     }
     await next();
 };

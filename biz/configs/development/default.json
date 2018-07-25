@@ -1,6 +1,7 @@
 {
-    "appname": "web_channel",
+    "appname": "web_channel_spring",
     "namespace": "dev_shank",
+    "alias": "spring",
     "debug": true,
     "port": 3000,
     "outputStd": true,
@@ -10,9 +11,9 @@
     "statistics": true,
     "statisticsJaeger": true,
     "statisticsProm": true,
-    "JaegerDebug": true,
+    "JaegerDebug": false,
     "JaegerSamplerType": "probabilistic",
-    "JaegerSamplerParam": 1,
+    "JaegerSamplerParam": 0.1,
     "logs": {
         "level": "debug"
     },

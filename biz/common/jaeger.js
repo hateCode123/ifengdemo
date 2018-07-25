@@ -47,7 +47,6 @@ const jaegerInit = app => {
     }
 };
 
-exports.tracer = tracer;
 module.exports = {
     tracer,
     jaegerInit,

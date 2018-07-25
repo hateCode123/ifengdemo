@@ -1,5 +1,14 @@
 import { jsonp, ajax } from '@ifeng/ui_base';
 
+// apiUrl为webpack注入的全局变量
+
+/* eslint-disable no-undef */
+let apiBaseUrl = apiUrl;
+
+if (/:30080/.test(window.location.href)) {
+    apiBaseUrl = '/api';
+}
+
 const createJsonpCallbackName = (str, num) => {
     const md5 = require('md5');
 
@@ -93,32 +102,32 @@ const getFundsFlowData = async () => {
 
 // 获取信息流首页数据
 const getCustomList = async () => {
-    return await ajax('/api/finance/index/customList');
+    return await ajax(`${apiBaseUrl}/finance/index/customList`);
 };
 
 // 获取信息流宏观数据
 const getMacroList = async () => {
-    return await ajax('/api/finance/index/macroList');
+    return await ajax(`${apiBaseUrl}/finance/index/macroList`);
 };
 
 // 获取信息流股票数据
 const getStockList = async () => {
-    return await ajax('/api/finance/index/stockList');
+    return await ajax(`${apiBaseUrl}/finance/index/stockList`);
 };
 
 // 获取信息流 imarkets 数据
 const getImarketsList = async () => {
-    return await ajax('/api/finance/index/imarketsList');
+    return await ajax(`${apiBaseUrl}/finance/index/imarketsList`);
 };
 
 // 获取信息流公司抓取数据
 const getCompanyList = async () => {
-    return await ajax('/api/finance/index/companyList');
+    return await ajax(`${apiBaseUrl}/finance/index/companyList`);
 };
 
 // 获取信息流 Wemoney 数据
 const getWemoneyList = async () => {
-    return await ajax('/api/finance/index/wemoneyList');
+    return await ajax(`${apiBaseUrl}/finance/index/wemoneyList`);
 };
 
 /* 股首 */
