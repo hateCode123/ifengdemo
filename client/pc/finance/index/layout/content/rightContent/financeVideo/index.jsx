@@ -12,7 +12,9 @@ class FinanceVideo extends React.PureComponent {
     };
 
     sliderTmpl = item => {
-        return (
+        return item.type === 'ad' ? (
+            <div ifeng_ui_pc_sliders-link="" ref={item.ref} />
+        ) : (
             <div className={styles.bigPic}>
                 <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
                     <img src={item.thumbnails} width="300" height="170" className={styles.trans} />

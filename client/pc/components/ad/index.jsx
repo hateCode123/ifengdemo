@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
 import { loadScript } from '@ifeng/ui_base';
-
-const scriptLoadedGroups = {};
 
 /**
  * 定义 Ad 组件
@@ -33,10 +30,7 @@ class Ad extends React.PureComponent {
 
                     console.log('load', scriptUrl);
 
-                    if (!scriptLoadedGroups[scriptUrl]) {
-                        scriptLoadedGroups[scriptUrl] = loadScript(scriptUrl, { cache: false });
-                    }
-                    await scriptLoadedGroups[scriptUrl];
+                    await loadScript(scriptUrl, { cache: false, reload: false });
                     ++index;
                 }
             }
@@ -63,7 +57,7 @@ class Ad extends React.PureComponent {
     render() {
         const { styleName } = this.props;
 
-        return <div className={styleName} adblock="true" ref={n => (this.container = n)} />;
+        return <div className={styleName} ref={n => (this.container = n)} />;
     }
 }
 

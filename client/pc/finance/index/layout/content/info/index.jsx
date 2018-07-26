@@ -39,7 +39,7 @@ class Info extends React.Component {
         current: 0,
         datas: arr,
         counts: [],
-        adAddType: 'tabChange',
+        adAddType: 'init',
     };
 
     async componentDidMount() {
