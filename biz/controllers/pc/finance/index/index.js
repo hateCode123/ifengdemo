@@ -37,7 +37,7 @@ exports.list = {
             ['headline', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
 
             // 客户权益
-            ['rights', 'KVProxy', 'getStaticFragment', 10018, getJsonByKey('content')],
+            ['rights', 'KVProxy', 'getStaticFragment', 10018, getStringByKey('content')],
 
             // 每日要闻
             ['dayNews', 'KVProxy', 'getSelectedPool', 8, getStringByKey('data')],

@@ -32,11 +32,10 @@ class Finance extends React.PureComponent {
                     </Chip>
                 </div>
                 <Chip
-                    id="10161"
-                    type="static"
+                    id="20006"
+                    type="recommend"
                     title="财商教育新闻列表"
                     groupName="正文"
-                    translate="jsonParse"
                     content={content.financeList}>
                     <TitleList />
                 </Chip>

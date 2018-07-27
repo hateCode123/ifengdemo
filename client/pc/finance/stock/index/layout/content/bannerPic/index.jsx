@@ -15,7 +15,7 @@ class BannerPic extends React.PureComponent {
         return (
             <div className={styles.bigPic}>
                 <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
-                    <img src={item.src} width="570" height="260" className={styles.trans} />
+                    <img src={item.thumbnail} width="570" height="260" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>

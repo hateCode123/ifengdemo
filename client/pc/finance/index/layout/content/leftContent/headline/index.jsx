@@ -9,7 +9,7 @@ import List from './list';
 class Headline extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
-        rights: PropTypes.array,
+        rights: PropTypes.string,
         limit: PropTypes.number,
     };
 
@@ -57,13 +57,7 @@ class Headline extends React.PureComponent {
         return (
             <div className={styles.box}>
                 <div onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>
-                    <Chip
-                        id="20003"
-                        type="recommend"
-                        title="头条新闻"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={data}>
+                    <Chip id="20003" type="recommend" title="头条新闻" groupName="正文" content={data}>
                         <List limit={limit} />
                     </Chip>
                     <div
@@ -71,14 +65,8 @@ class Headline extends React.PureComponent {
                         onClick={this.handleChange}
                     />
                 </div>
-                <Chip
-                    id="10018"
-                    type="static"
-                    title="财经客户权益"
-                    groupName="正文"
-                    translate="jsonParse"
-                    content={rights}>
-                    <List limit={2} />
+                <Chip id="10018" type="static" title="财经客户权益" groupName="正文" content={rights}>
+                    <div dangerouslySetInnerHTML={{ __html: rights }} />
                 </Chip>
             </div>
         );

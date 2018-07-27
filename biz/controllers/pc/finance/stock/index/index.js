@@ -40,7 +40,7 @@ exports.list = {
             ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getStaticFragment', 10162, getJsonByKey('content')],
+            ['headline', 'KVProxy', 'getRecommendFragment', 20018, getJsonByKey('data')],
 
             // 要闻直播标题
             ['newsLiveTab', 'KVProxy', 'getStaticFragment', 10049, getJsonByKey('content')],
@@ -70,7 +70,7 @@ exports.list = {
             ['answerSubTab', 'KVProxy', 'getStaticFragment', 10118, getJsonByKey('content')],
 
             // 牛人解盘
-            ['answerList', 'KVProxy', 'getStaticFragment', 10163, getJsonByKey('content')],
+            ['answerList', 'KVProxy', 'getRecommendFragment', 20019, getJsonByKey('data')],
 
             // 视频抓牛股标题
             ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],
@@ -91,7 +91,7 @@ exports.list = {
             ['QATabs', 'KVProxy', 'getStaticFragment', 10105, getJsonByKey('content')],
 
             // 轮播图
-            ['bannerPic', 'KVProxy', 'getStaticFragment', 10075, getJsonByKey('content')],
+            ['bannerPic', 'KVProxy', 'getRecommendFragment', 30010, getJsonByKey('data')],
 
             // 热点专题标题
             ['subjectTitle', 'KVProxy', 'getStaticFragment', 10076, getJsonByKey('content')],
