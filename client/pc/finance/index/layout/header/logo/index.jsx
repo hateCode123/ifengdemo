@@ -25,8 +25,8 @@ class Logo extends React.PureComponent {
             <React.Fragment>
                 <a href={logo[0].url} target="_blank" rel={rel}>
                     <Chip
-                        id="10131"
-                        type="static"
+                        id="20006"
+                        type="struct"
                         title="Logo"
                         groupName="头部"
                         translate="jsonParse"
@@ -36,8 +36,8 @@ class Logo extends React.PureComponent {
                 </a>
                 <div className={styles.ad_1}>
                     <Chip
-                        id="10132"
-                        type="static"
+                        id="20007"
+                        type="struct"
                         title="LogoAd"
                         groupName="头部"
                         translate="jsonParse"

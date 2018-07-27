@@ -22,7 +22,12 @@ class LeftContent extends React.PureComponent {
                 <Topic />
                 <BannerPic content={content.bannerPic} />
                 <Headline content={content.headline} rights={content.rights} limit={6} />
-                <DateNews content={content.dayNews} extraNews={content.extraNews} ad={content.dayNewsAd} />
+                <DateNews
+                    content={content.dayNews}
+                    extraNews={content.extraNews}
+                    ad={content.dayNewsAd}
+                    extraNewsAd={content.extraNewsAd}
+                />
             </div>
         );
     }

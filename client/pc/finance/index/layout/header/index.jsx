@@ -54,8 +54,8 @@ class Header extends React.PureComponent {
                     <Logo content={logoData} />
                 </div>
                 <Chip
-                    id="10129"
-                    type="static"
+                    id="20005"
+                    type="struct"
                     title="搜索"
                     groupName="头部"
                     translate="jsonParse"

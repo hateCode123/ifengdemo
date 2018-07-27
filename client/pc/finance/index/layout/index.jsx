@@ -39,6 +39,7 @@ class Layout extends React.PureComponent {
                 dayNews: content.dayNews,
                 dayNewsAd: content.dayNewsAd,
                 extraNews: content.extraNews,
+                extraNewsAd: content.extraNewsAd,
             },
             middleContent: {
                 comicBook: content.comicBook,
@@ -63,6 +64,7 @@ class Layout extends React.PureComponent {
                 lark: content.lark,
                 meeting: content.meeting,
                 meetingAd: content.meetingAd,
+                meetingListAd: content.meetingListAd,
                 market: content.market,
                 marketAd: content.marketAd,
                 courier: content.courier,
@@ -88,8 +90,8 @@ class Layout extends React.PureComponent {
             <div className={styles.ip_col}>
                 <Header content={headerData} />
                 <Chip
-                    id="10002"
-                    type="static"
+                    id="20008"
+                    type="struct"
                     title="财经导航"
                     groupName="导航栏"
                     translate="jsonParse"
@@ -101,7 +103,7 @@ class Layout extends React.PureComponent {
                 <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
-                <Chip id="10135" type="static" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
+                <Chip id="20013" type="struct" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix content={bottomAffixData} />

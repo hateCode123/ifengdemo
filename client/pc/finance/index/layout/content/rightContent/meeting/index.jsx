@@ -4,11 +4,23 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
+import { handleAd } from '../../../../../../utils/infoAd';
 
 class Meeting extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
+        ad: PropTypes.object,
     };
+
+    ref = React.createRef();
+
+    async componentDidMount() {
+        const { ad } = this.props;
+
+        const callbackFn = await handleAd(ad);
+
+        callbackFn(this.ref.current, ad.data);
+    }
 
     /**
      * 渲染组件
@@ -25,7 +37,7 @@ class Meeting extends React.PureComponent {
                         <img src={pic.banner} width="300" height="169" alt={pic.title} className={styles.trans} />
                     </a>
                 </div>
-                <ul className={styles.list}>
+                <ul className={styles.list} ref={this.ref}>
                     {list.map((item, index) => (
                         <li key={index}>
                             <a href={pic.url} target="_blank" rel={rel} title={item.title}>

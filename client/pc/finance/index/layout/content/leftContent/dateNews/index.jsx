@@ -13,13 +13,14 @@ class DateNews extends React.PureComponent {
         content: PropTypes.array,
         extraNews: PropTypes.string,
         ad: PropTypes.object,
+        extraNewsAd: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content, extraNews, ad } = this.props;
+        const { content, extraNews, ad, extraNewsAd } = this.props;
 
         return (
             <div className={styles.box}>
@@ -36,7 +37,7 @@ class DateNews extends React.PureComponent {
                     </ul>
                 </div>
                 <Chip id="10011" type="static" title="今日要闻多拼静态碎片" groupName="正文" content={extraNews}>
-                    <ExtraNews content={extraNews} />
+                    <ExtraNews content={extraNews} extraNewsAd={extraNewsAd} />
                 </Chip>
             </div>
         );

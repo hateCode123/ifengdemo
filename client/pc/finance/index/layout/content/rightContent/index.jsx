@@ -42,7 +42,7 @@ class RightContent extends React.PureComponent {
                     <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题·会议">
                         <Ad content={content.meetingAd} styleName={styles.meetingAd} />
                     </BoxTitle>
-                    <Meeting content={content.meeting} />
+                    <Meeting content={content.meeting} ad={content.meetingListAd} />
                 </div>
                 <div className={styles.ad_box}>
                     <Ad content={content.asideAd3} styleName={styles.box_3} />
@@ -58,8 +58,8 @@ class RightContent extends React.PureComponent {
                 </div>
                 <Ad content={content.asideAd5} styleName={styles.box_5} />
                 <Chip
-                    id="10016"
-                    type="static"
+                    id="20011"
+                    type="struct"
                     title="理财速递静态碎片"
                     groupName="正文"
                     translate="jsonParse"

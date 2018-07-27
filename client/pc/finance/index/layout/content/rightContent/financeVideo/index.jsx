@@ -5,6 +5,7 @@ import Slides from '@ifeng/ui_pc_slides';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
+import { handleAd } from '../../../../../../utils/infoAd';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {
@@ -34,12 +35,13 @@ class FinanceVideo extends React.PureComponent {
             },
         );
     };
-    componentDidMount() {
+
+    async componentDidMount() {
         const {
             content: { financeVideoAd },
         } = this.props;
 
-        const callbackFn = new Function(`return ${financeVideoAd.callback}`)();
+        const callbackFn = await handleAd(financeVideoAd);
 
         callbackFn(financeVideoAd.data, this.insert);
     }

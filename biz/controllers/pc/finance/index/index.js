@@ -16,19 +16,19 @@ exports.list = {
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             // 搜索
-            ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
+            ['search', 'KVProxy', 'getStructuredFragment', 20005, getStringByKey('content')],
 
             // Logo
-            ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
+            ['logo', 'KVProxy', 'getStructuredFragment', 20006, getStringByKey('content')],
 
             // Logo Ad
-            ['logoAd', 'KVProxy', 'getStaticFragment', 10132, getJsonByKey('content')],
+            ['logoAd', 'KVProxy', 'getStructuredFragment', 20007, getStringByKey('content')],
 
             // 财经首页导航
-            ['navigation', 'KVProxy', 'getStaticFragment', 10002, getJsonByKey('content')],
+            ['navigation', 'KVProxy', 'getStructuredFragment', 20008, getStringByKey('content')],
 
             // 投顾产品
-            ['production', 'KVProxy', 'getStaticFragment', 10017, getJsonByKey('content')],
+            ['production', 'KVProxy', 'getStructuredFragment', 20009, getStringByKey('content')],
 
             // 焦点图
             ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getStringByKey('data')],
@@ -52,7 +52,7 @@ exports.list = {
             ['talking', 'KVProxy', 'getCustom', 'finance_22005_10736_34', getJson()],
 
             // 财商教育
-            ['finance', 'KVProxy', 'getStaticFragment', 10009, getJsonByKey('content')],
+            ['finance', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
 
             // 炒股大赛
             ['stocks', 'KVProxy', 'getCustom', 'finance_22005_10736_31', getJson()],
@@ -79,13 +79,13 @@ exports.list = {
             ['market', 'KVProxy', 'getStaticFragment', 10014, getStringByKey('content')],
 
             // 理财速递
-            ['courier', 'KVProxy', 'getStaticFragment', 10016, getJsonByKey('content')],
+            ['courier', 'KVProxy', 'getStructuredFragment', 20011, getStringByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
+            ['footer', 'KVProxy', 'getStructuredFragment', 20012, getStringByKey('content')],
 
             // 二维码
-            ['qrCode', 'KVProxy', 'getStaticFragment', 10135, getJsonByKey('content')],
+            ['qrCode', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],
         ];
 
         const allData = await transfer(ctx, json);
