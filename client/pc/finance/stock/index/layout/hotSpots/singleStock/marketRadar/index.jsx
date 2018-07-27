@@ -22,7 +22,13 @@ class MarketRadar extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10089" type="static" title="市场雷达" groupName="操盘热点" content={tabs}>
+                        <Chip
+                            id="10089"
+                            type="static"
+                            title="市场雷达"
+                            groupName="操盘热点"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="65">{tabs[0]}</th>
                                 <th width="70">{tabs[1]}</th>

@@ -53,7 +53,13 @@ class HotSpots extends React.PureComponent {
 
         return (
             <div className={`${styles.hot_spots} clearfix`}>
-                <Chip id="10067" type="static" title="操盘热点标题" groupName="操盘热点" content={hotSpotsTitle}>
+                <Chip
+                    id="10067"
+                    type="static"
+                    title="操盘热点标题"
+                    groupName="操盘热点"
+                    translate="jsonParse"
+                    content={hotSpotsTitle}>
                     <HeadTitle />
                 </Chip>
                 <div className={styles.col_L}>
@@ -63,6 +69,7 @@ class HotSpots extends React.PureComponent {
                             type="static"
                             title="操盘分析标题"
                             groupName="操盘热点"
+                            translate="jsonParse"
                             content={hotSpotsSubTitle1}>
                             <Caption />
                         </Chip>
@@ -74,6 +81,7 @@ class HotSpots extends React.PureComponent {
                             type="static"
                             title="热点板块标题"
                             groupName="操盘热点"
+                            translate="jsonParse"
                             content={hotSpotsSubTitle2}>
                             <Caption />
                         </Chip>
@@ -90,6 +98,7 @@ class HotSpots extends React.PureComponent {
                             type="static"
                             title="行业概念资金流向标题"
                             groupName="操盘热点"
+                            translate="jsonParse"
                             content={industryTitle}>
                             <TableTitle />
                         </Chip>
@@ -101,6 +110,7 @@ class HotSpots extends React.PureComponent {
                             type="static"
                             title="个股资金流向标题"
                             groupName="操盘热点"
+                            translate="jsonParse"
                             content={singleStockTitle}>
                             <TableTitle />
                         </Chip>

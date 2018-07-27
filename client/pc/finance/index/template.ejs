@@ -54,6 +54,36 @@
             stocks: allData.stocks,
             stocksList: allData.stocksList,
             financeVideo: allData.financeVideo,
+            financeVideoAd: {
+                data: {},
+                preload: '',
+                callback: (data, insert) => {
+                    const box1 = document.createElement('div');
+                    const box2 = document.createElement('div');
+
+                    box1.style.height = '100%';
+                    box1.style.width = '100%';
+                    box1.style.backgroundColor = '#900';
+                    box1.innerHTML = 'ad1';
+                    box1.style.textAlign = 'center';
+                    box1.style.lineHeight = '220px';
+
+                    box2.style.height = '100%';
+                    box2.style.width = '100%';
+                    box2.style.backgroundColor = '#990';
+                    box2.innerHTML = 'ad2';
+                    box2.style.textAlign = 'center';
+                    box2.style.lineHeight = '220px';
+
+                    box1.addEventListener('click', () => console.log('box1'), false);
+                    box2.addEventListener('click', () => console.log('box2'), false);
+
+                    setTimeout(() => {
+                        insert(box1, 2);
+                        insert(box2, 9);
+                    }, 1000);
+                },
+            },
             institute: allData.institute,
             lark: allData.lark,
             meeting: allData.meeting,

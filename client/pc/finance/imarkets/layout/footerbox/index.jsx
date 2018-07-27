@@ -6,21 +6,34 @@ import HtmlRegion from '../../components/html-region';
 import Ad from '../../../../components/ad';
 import Footer from './footer';
 
-class FooterBox extends PureComponent{
-    render(){
+class FooterBox extends PureComponent {
+    render() {
         const { content } = this.props;
+
         return (
-            <div className={ styles.footerbox }>
+            <div className={styles.footerbox}>
                 {/* 底部合作链接 */}
-                <div className={ styles.cooperation }>
-                    <Chip id="10164" type="static" title="底部合作链接" groupName="底部" content={ content.cooperation }>
+                <div className={styles.cooperation}>
+                    <Chip
+                        id="10164"
+                        type="static"
+                        title="底部合作链接"
+                        groupName="底部"
+                        translate="jsonParse"
+                        content={content.cooperation}>
                         <HtmlRegion />
                     </Chip>
                 </div>
                 {/* 底部广告 */}
-                <Ad styleName={ styles.ad } />
+                <Ad styleName={styles.ad} />
                 {/* 底部公共版权 */}
-                <Chip id="10114" type="static" title="底部公共版权" groupName="底部" content={ content.footer }>
+                <Chip
+                    id="10114"
+                    type="static"
+                    title="底部公共版权"
+                    groupName="底部"
+                    translate="jsonParse"
+                    content={content.footer}>
                     <Footer />
                 </Chip>
             </div>

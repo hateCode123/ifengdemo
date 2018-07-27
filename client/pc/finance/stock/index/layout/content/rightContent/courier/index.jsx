@@ -19,10 +19,22 @@ class Courier extends React.PureComponent {
 
         return (
             <div className={styles.courier}>
-                <Chip id="10119" type="static" title="理财速递标题" groupName="正文" content={courierTitle}>
+                <Chip
+                    id="10119"
+                    type="static"
+                    title="理财速递标题"
+                    groupName="正文"
+                    translate="jsonParse"
+                    content={courierTitle}>
                     <CourierTitle />
                 </Chip>
-                <Chip id="10082" type="static" title="理财速递" groupName="正文" content={courier}>
+                <Chip
+                    id="10082"
+                    type="static"
+                    title="理财速递"
+                    groupName="正文"
+                    translate="jsonParse"
+                    content={courier}>
                     <CourierContent />
                 </Chip>
             </div>

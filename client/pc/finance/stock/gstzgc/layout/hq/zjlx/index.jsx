@@ -19,7 +19,7 @@ class MoneyFlow extends React.PureComponent {
     dealResult = (num, data) => {
         const price = [];
 
-        data.map((item, index) => {
+        data.forEach((item, index) => {
             if (index < 6) {
                 let style = '';
 
@@ -94,7 +94,7 @@ class MoneyFlow extends React.PureComponent {
 
         return (
             <div className={styles.zdph}>
-                <Chip id="10065" type="static" title="资金流向" content={zjlxTit}>
+                <Chip id="10065" type="static" title="资金流向" translate="jsonParse" content={zjlxTit}>
                     <HqSubtitle />
                 </Chip>
                 <div className={styles.zdph_table}>

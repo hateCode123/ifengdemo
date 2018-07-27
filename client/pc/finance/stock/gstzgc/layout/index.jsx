@@ -90,7 +90,13 @@ class Layout extends React.PureComponent {
                 <div className={styles.col_w1000}>
                     <div className={styles.fl}>
                         <Topic />
-                        <Chip id="20035" type="recommend" title="头条新闻" groupName="文章" content={content.headline}>
+                        <Chip
+                            id="20035"
+                            type="recommend"
+                            title="头条新闻"
+                            groupName="文章"
+                            translate="jsonParse"
+                            content={content.headline}>
                             <Headline />
                         </Chip>
                     </div>
@@ -99,6 +105,7 @@ class Layout extends React.PureComponent {
                             id={content.videoAnalysis.id}
                             type="static"
                             title="视频解盘"
+                            translate="jsonParse"
                             content={content.videoAnalysis.content}>
                             <Recommend />
                         </Chip>
@@ -106,6 +113,7 @@ class Layout extends React.PureComponent {
                             id={content.stockCompetition.id}
                             type="static"
                             title="炒股大赛"
+                            translate="jsonParse"
                             content={content.stockCompetition.content}>
                             <Recommend />
                         </Chip>
@@ -114,13 +122,19 @@ class Layout extends React.PureComponent {
 
                 <div className={styles.col_w1000}>
                     <div className={styles.fl640}>
-                        <Chip id="10116" type="static" title="轮播" content={content.sliderData}>
+                        <Chip id="10116" type="static" title="轮播" translate="jsonParse" content={content.sliderData}>
                             <Slide />
                         </Chip>
                         <PaperContent content={paperData} />
                     </div>
                     <div className={styles.fr300}>
-                        <Chip id="10056" type="static" title="牛人解盘" groupName="文章" content={content.nrjp}>
+                        <Chip
+                            id="10056"
+                            type="static"
+                            title="牛人解盘"
+                            groupName="文章"
+                            translate="jsonParse"
+                            content={content.nrjp}>
                             <Recommend />
                         </Chip>
 
@@ -138,6 +152,7 @@ class Layout extends React.PureComponent {
                                 type="static"
                                 title="微信公众号标题"
                                 groupName="文章"
+                                translate="jsonParse"
                                 content={content.wxTitle}>
                                 <TitleR content={content.wxTitle} />
                             </Chip>
@@ -146,6 +161,7 @@ class Layout extends React.PureComponent {
                                 type="static"
                                 title="微信公众号"
                                 groupName="文章"
+                                translate="jsonParse"
                                 content={content.wxPublic.content}>
                                 <Recommend />
                             </Chip>

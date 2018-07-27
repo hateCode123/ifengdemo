@@ -63,7 +63,13 @@ class Stock extends React.PureComponent {
                 {content === null ? (
                     ''
                 ) : (
-                    <Chip id="10017" type="static" title="股票栏产品静态碎片" groupName="股票栏" content={content}>
+                    <Chip
+                        id="10017"
+                        type="static"
+                        title="股票栏产品静态碎片"
+                        groupName="股票栏"
+                        translate="jsonParse"
+                        content={content}>
                         <Production />
                     </Chip>
                 )}

@@ -147,7 +147,13 @@ class Qa extends React.PureComponent {
 
         return (
             <div className={styles.qa}>
-                <Chip id="10060" type="static" title="A股分析师答疑" groupName="文章" content={title}>
+                <Chip
+                    id="10060"
+                    type="static"
+                    title="A股分析师答疑"
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={title}>
                     <TitleR content={title} liveImg={liveImg} />
                 </Chip>
                 <div>

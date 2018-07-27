@@ -42,7 +42,13 @@ class RecommendStock extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10095" type="static" title="机构荐股池" groupName="高手学堂" content={tabs}>
+                        <Chip
+                            id="10095"
+                            type="static"
+                            title="机构荐股池"
+                            groupName="高手学堂"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="85">{tabs[0]}</th>
                                 <th width="65">{tabs[1]}</th>

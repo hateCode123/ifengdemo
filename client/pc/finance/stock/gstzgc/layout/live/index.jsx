@@ -16,21 +16,31 @@ class Live extends React.PureComponent {
         let news = {};
         const newsArr = [];
 
-        Date.prototype.Format = function(fmt) {
+        /**
+         * 获取格式化时间
+         * @param {string} str
+         */
+        const getFormatTime = (num, fmt) => {
+            const time = new Date(num * 1000);
             const o = {
-                'M+': this.getMonth() + 1,
-                'd+': this.getDate(),
-                'h+': this.getHours(),
-                'm+': this.getMinutes(),
-                's+': this.getSeconds(),
-                'q+': Math.floor((this.getMonth() + 3) / 3),
-                S: this.getMilliseconds(),
+                'M+': time.getMonth() + 1,
+                'd+': time.getDate(),
+                'h+': time.getHours(),
+                'm+': time.getMinutes(),
+                's+': time.getSeconds(),
+                'q+': Math.floor((time.getMonth() + 3) / 3),
+                S: time.getMilliseconds(),
             };
 
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, `${this.getFullYear()}`.substr(4 - RegExp.$1.length));
-            for (const k in o)
-                if (new RegExp(`(${k})`).test(fmt))
-                    fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, `${time.getFullYear()}`.substr(4 - RegExp.$1.length));
+            }
+
+            for (const k in o) {
+                if (new RegExp(`(${k})`).test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
+                }
+            }
 
             return fmt;
         };
@@ -38,8 +48,8 @@ class Live extends React.PureComponent {
         const getDayNews = day => {
             const begin = `${day} 00:00:00`;
             const end = `${day} 23:59:59`;
-            const begintime = Date.parse(begin) / 1000;
-            const endtime = Date.parse(end) / 1000;
+            const begintime = getFormatTime(begin) / 1000;
+            const endtime = getFormatTime(end) / 1000;
 
             jsonp('//api3.finance.ifeng.com/live/getday', {
                 data: {
@@ -98,7 +108,13 @@ class Live extends React.PureComponent {
 
         return (
             <div className={styles.box300}>
-                <Chip id="10058" type="static" title="7*24小时" groupName="文章" content={liveTitle}>
+                <Chip
+                    id="10058"
+                    type="static"
+                    title="7*24小时"
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={liveTitle}>
                     <TitleR content={liveTitle} liveImg={liveImg} />
                 </Chip>
 

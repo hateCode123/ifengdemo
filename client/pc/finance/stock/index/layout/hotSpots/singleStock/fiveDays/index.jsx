@@ -23,7 +23,13 @@ class FiveDays extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10091" type="static" title="5日增减仓" groupName="操盘热点" content={tabs}>
+                        <Chip
+                            id="10091"
+                            type="static"
+                            title="5日增减仓"
+                            groupName="操盘热点"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="65">{tabs[0]}</th>
                                 <th width="90">{tabs[1]}</th>

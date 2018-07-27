@@ -54,7 +54,7 @@ class Niugu extends React.PureComponent {
 
         return (
             <div className={styles.hqzx}>
-                <Chip id="10063" type="static" title="视频抓牛股" content={content.spzngTit}>
+                <Chip id="10063" type="static" title="视频抓牛股" translate="jsonParse" content={content.spzngTit}>
                     <HqSubtitle content={content.spzngTit} nowTime={nowTime} />
                 </Chip>
                 <div>

@@ -80,7 +80,7 @@
         "newline-before-return": "error",
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         //"no-continue": "error",
-        "no-inline-comments": "error",
+        "no-inline-comments": "warn",
         "no-lonely-if": "error",
         // "no-mixed-operators": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 0 }],

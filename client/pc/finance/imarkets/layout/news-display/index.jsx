@@ -9,14 +9,20 @@ import styles from './index.css';
 import HtmlRegion from '../../components/html-region';
 import Zhiboshi from './zhiboshi';
 
-class NewsDisplay extends PureComponent{
-    render(){
+class NewsDisplay extends PureComponent {
+    render() {
         const { content } = this.props;
 
         return (
-            <div className={ styles.news_display_box }>
+            <div className={styles.news_display_box}>
                 {/* 置顶新闻 */}
-                <Chip id="10165" type="static" title="新闻" groupName="新闻展示" content={ content.topnews }>
+                <Chip
+                    id="10165"
+                    type="static"
+                    title="新闻"
+                    groupName="新闻展示"
+                    translate="jsonParse"
+                    content={content.topnews}>
                     <HtmlRegion />
                 </Chip>
                 {/* 直播室链接 */}

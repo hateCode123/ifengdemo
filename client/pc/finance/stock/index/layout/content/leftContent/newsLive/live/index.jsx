@@ -164,7 +164,13 @@ class Live extends React.PureComponent {
                         刷新
                     </span>
                     <a href="//finance.ifeng.com/gold/zhibo/" target="_blank" rel={rel}>
-                        <Chip id="10052" type="static" title="直播Logo" groupName="正文" content={content}>
+                        <Chip
+                            id="10052"
+                            type="static"
+                            title="直播Logo"
+                            groupName="正文"
+                            translate="jsonParse"
+                            content={content}>
                             <img src={content[0].url} title={content[0].title} alt={content[0].title} />
                         </Chip>
                     </a>

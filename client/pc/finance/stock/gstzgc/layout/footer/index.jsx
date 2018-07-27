@@ -19,7 +19,14 @@ class BottomFooter extends React.PureComponent {
         const { cooperation, bottomAd } = content;
 
         const BottomCooperation = (
-            <Chip key="10112" id="10112" type="static" title="底部合作" groupName="底部" content={cooperation}>
+            <Chip
+                key="10112"
+                id="10112"
+                type="static"
+                title="底部合作"
+                groupName="底部"
+                translate="jsonParse"
+                content={cooperation}>
                 <Recommend />
             </Chip>
         );

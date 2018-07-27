@@ -119,7 +119,7 @@ class Qa extends React.PureComponent {
 
         return (
             <div>
-                <Chip id="10105" type="static" title="分析师" groupName="正文" content={tabs}>
+                <Chip id="10105" type="static" title="分析师" groupName="正文" translate="jsonParse" content={tabs}>
                     <QaTabs current={current} handleMouseOver={this.handleMouseOver} />
                 </Chip>
                 <div className={styles.qa_box}>

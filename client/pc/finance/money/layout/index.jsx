@@ -190,6 +190,7 @@ class Layout extends React.PureComponent {
             __bottomProc,
             __bottomLink,
         } = this.state;
+
         console.log('content', content);
 
         const headerData = {
@@ -262,14 +263,19 @@ class Layout extends React.PureComponent {
                 <SubNavigation content={subNavigation} />
 
                 <div className="space20 " />
-                <Chip id="10160" type="static" title="顶部隐藏广告" groupName="广告" content={topCollapse}>
+                <Chip
+                    id="10160"
+                    type="static"
+                    title="顶部隐藏广告"
+                    groupName="广告"
+                    translate="jsonParse"
+                    content={topCollapse}>
                     <TopCollapse init={this.state.showTopCollapse} />
                 </Chip>
                 <div className="w1000 clearfix">
                     <div className={style.l_left}>
                         <Slider content={slider} />
                         <NewsListDownSlider content={content.newsListDownSlider || []} />
-                     
                     </div>
                     <div className={style.l_right}>
                         <div className="clearfix">

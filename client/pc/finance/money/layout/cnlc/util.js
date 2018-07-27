@@ -2,7 +2,7 @@ import { jsonp } from '@ifeng/ui_base';
 
 const url = '';
 
-export const getData = async (type) => {
+export const getData = async type => {
     try {
         const type = 'trust';
         const data = await jsonp(`http://app.finance.ifeng.com/gszb/ana_list.php?type=${type}`, {
@@ -15,6 +15,7 @@ export const getData = async (type) => {
             jsonpCallback: 'setNewCont',
             timeout: 10000,
         });
-       
-    } catch (e) {}
+    } catch (e) {
+        console.error(e);
+    }
 };

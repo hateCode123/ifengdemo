@@ -18,7 +18,13 @@ class Header extends React.PureComponent {
         return (
             <div className={styles.nav_box}>
                 <div className={styles.main_nav}>
-                    <Chip id="10108" type="static" title="导航" groupName="头部" content={content.nav}>
+                    <Chip
+                        id="10108"
+                        type="static"
+                        title="导航"
+                        groupName="头部"
+                        translate="jsonParse"
+                        content={content.nav}>
                         <Nav limit={18} />
                     </Chip>
                     <UserInfo />

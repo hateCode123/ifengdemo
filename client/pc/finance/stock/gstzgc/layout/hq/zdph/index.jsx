@@ -17,7 +17,7 @@ class RiseFall extends React.PureComponent {
     dealResult = (num, data) => {
         const price = [];
 
-        data.map((item, index) => {
+        data.forEach((item, index) => {
             if (index < 5) {
                 let style = '';
 
@@ -175,7 +175,7 @@ class RiseFall extends React.PureComponent {
 
         return (
             <div className={styles.zdph}>
-                <Chip id="10064" type="static" title="涨跌排行" content={zdphTit}>
+                <Chip id="10064" type="static" title="涨跌排行" translate="jsonParse" content={zdphTit}>
                     <HqSubtitle />
                 </Chip>
 

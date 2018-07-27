@@ -24,7 +24,13 @@ class ClickRank extends React.PureComponent {
 
         return (
             <div className={styles.box300}>
-                <Chip id="10061" type="static" title="点击排行" groupName="文章" content={clickRankTitle}>
+                <Chip
+                    id="10061"
+                    type="static"
+                    title="点击排行"
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={clickRankTitle}>
                     <TitleR content={clickRankTitle} />
                 </Chip>
                 <ul className={styles.rank_list}>{clickRank.length > 0 ? creatList() : ''}</ul>

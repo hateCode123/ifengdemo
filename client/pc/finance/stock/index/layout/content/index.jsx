@@ -22,7 +22,13 @@ class Content extends React.PureComponent {
             <div className={styles.col}>
                 <LeftContent content={content.leftContent} />
                 <div className={styles.col_R}>
-                    <Chip id="10075" type="static" title="焦点图" groupName="正文" content={content.bannerPic}>
+                    <Chip
+                        id="10075"
+                        type="static"
+                        title="焦点图"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.bannerPic}>
                         <BannerPic />
                     </Chip>
                     <div className="clearfix">

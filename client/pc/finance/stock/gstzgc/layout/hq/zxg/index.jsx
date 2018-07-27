@@ -130,7 +130,7 @@ class CustomStocks extends React.PureComponent {
 
         return (
             <div className={styles.custom_stocks}>
-                <Chip id="10066" type="static" title="自选股" content={content.zxgTit}>
+                <Chip id="10066" type="static" title="自选股" translate="jsonParse" content={content.zxgTit}>
                     <HqSubtitle />
                 </Chip>
                 <div className={styles.box}>

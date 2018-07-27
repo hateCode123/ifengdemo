@@ -42,7 +42,13 @@ class Rating extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10097" type="static" title="评级调高个股" groupName="高手学堂" content={tabs}>
+                        <Chip
+                            id="10097"
+                            type="static"
+                            title="评级调高个股"
+                            groupName="高手学堂"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="85">{tabs[0]}</th>
                                 <th width="60">{tabs[1]}</th>

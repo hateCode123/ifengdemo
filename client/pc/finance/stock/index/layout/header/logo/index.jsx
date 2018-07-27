@@ -23,13 +23,13 @@ class Logo extends React.PureComponent {
 
         const LOGO = (
             <a key="logo" href={logo.url} target="_blank" rel={rel}>
-                <Chip id="10133" type="static" title="Logo" groupName="头部" content={logo}>
+                <Chip id="10133" type="static" title="Logo" groupName="头部" translate="jsonParse" content={logo}>
                     <img src={logo.src} alt={logo.title} width={logo.width} height={logo.height} />
                 </Chip>
             </a>
         );
         const ad = (
-            <Chip key="ad" id="10134" type="static" title="Logo" groupName="头部" content={logo}>
+            <Chip key="ad" id="10134" type="static" title="Logo" groupName="头部" translate="jsonParse" content={logo}>
                 <img className={styles.ad} src={logoAd.src} width={logoAd.width} height={logoAd.height} />
             </Chip>
         );

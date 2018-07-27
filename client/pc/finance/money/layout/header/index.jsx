@@ -38,7 +38,7 @@ class Header extends React.PureComponent {
         //         <div className={styles.h_theLogo}>
         //             <Logo content={logoData} />
         //         </div>
-        //         <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+        //         <Chip id="10129" type="static" title="搜索" groupName="头部" translate="jsonParse" content={content.search}>
         //             <Search />
         //         </Chip>
         //     </div>

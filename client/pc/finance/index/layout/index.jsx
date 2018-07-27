@@ -58,6 +58,7 @@ class Layout extends React.PureComponent {
                 asideAd6: content.asideAd6,
                 asideAd7: content.asideAd7,
                 financeVideo: content.financeVideo,
+                financeVideoAd: content.financeVideoAd,
                 institute: content.institute,
                 lark: content.lark,
                 meeting: content.meeting,
@@ -86,7 +87,13 @@ class Layout extends React.PureComponent {
         return (
             <div className={styles.ip_col}>
                 <Header content={headerData} />
-                <Chip id="10002" type="static" title="财经导航" groupName="导航栏" content={content.navigation}>
+                <Chip
+                    id="10002"
+                    type="static"
+                    title="财经导航"
+                    groupName="导航栏"
+                    translate="jsonParse"
+                    content={content.navigation}>
                     <Navigation />
                 </Chip>
                 <Stock content={content.production} />
@@ -94,7 +101,7 @@ class Layout extends React.PureComponent {
                 <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
-                <Chip id="10135" type="static" title="二维码" groupName="二维码" content={qrCode}>
+                <Chip id="10135" type="static" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix content={bottomAffixData} />

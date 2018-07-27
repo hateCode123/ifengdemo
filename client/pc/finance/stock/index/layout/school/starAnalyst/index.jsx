@@ -55,7 +55,13 @@ class StarAnalyst extends React.PureComponent {
                 <div className={styles.data}>
                     <table>
                         <thead>
-                            <Chip id="10093" type="static" title="明星分析师" groupName="高手学堂" content={tabs}>
+                            <Chip
+                                id="10093"
+                                type="static"
+                                title="明星分析师"
+                                groupName="高手学堂"
+                                translate="jsonParse"
+                                content={tabs}>
                                 <tr>
                                     <th width="50">{tableTabs[0]}</th>
                                     <th width="65">{tableTabs[1]}</th>

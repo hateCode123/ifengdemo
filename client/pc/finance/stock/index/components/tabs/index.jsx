@@ -31,6 +31,7 @@ class Tab extends React.PureComponent {
                         type={title.type}
                         title={title.title}
                         groupName={title.groupName}
+                        translate="jsonParse"
                         content={title.content}>
                         <Title current={current} handleTabsChange={handleTabsChange} />
                     </Chip>
@@ -43,6 +44,7 @@ class Tab extends React.PureComponent {
                         type={subTitle.type}
                         title={subTitle.title}
                         groupName={subTitle.groupName}
+                        translate="jsonParse"
                         content={subTitle.content}>
                         <SubTitle />
                     </Chip>
@@ -55,6 +57,7 @@ class Tab extends React.PureComponent {
                         type={newsLiveTabLink.type}
                         title={newsLiveTabLink.title}
                         groupName={newsLiveTabLink.groupName}
+                        translate="jsonParse"
                         content={newsLiveTabLink.content}>
                         <Link />
                     </Chip>

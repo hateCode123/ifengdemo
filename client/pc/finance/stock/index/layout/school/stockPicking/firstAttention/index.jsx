@@ -42,7 +42,13 @@ class FirstAttention extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10098" type="static" title="机构首次关注股" groupName="高手学堂" content={tabs}>
+                        <Chip
+                            id="10098"
+                            type="static"
+                            title="机构首次关注股"
+                            groupName="高手学堂"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="70">{tabs[0]}</th>
                                 <th width="65">{tabs[1]}</th>

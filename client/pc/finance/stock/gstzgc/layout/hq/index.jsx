@@ -95,7 +95,13 @@ class Hq extends React.PureComponent {
 
         return (
             <div className={styles.box300}>
-                <Chip id="10059" type="static" title="行情" groupName="文章" content={content.hqTitle}>
+                <Chip
+                    id="10059"
+                    type="static"
+                    title="行情"
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={content.hqTitle}>
                     <TitleR content={content.hqTitle} />
                 </Chip>
                 <Niugu content={spzngData} />

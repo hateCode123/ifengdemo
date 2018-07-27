@@ -31,7 +31,13 @@ class Header extends React.PureComponent {
 
         const topNav = (
             <div className={styles.main_nav} key="topNav">
-                <Chip id="20002" type="struct" title="导航" groupName="头部" content={content.nav}>
+                <Chip
+                    id="20002"
+                    type="struct"
+                    title="导航"
+                    groupName="头部"
+                    translate="jsonParse"
+                    content={content.nav}>
                     <Nav />
                 </Chip>
                 <UserInfo />
@@ -47,7 +53,13 @@ class Header extends React.PureComponent {
                 <div className={styles.logo}>
                     <Logo content={logoData} />
                 </div>
-                <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+                <Chip
+                    id="10129"
+                    type="static"
+                    title="搜索"
+                    groupName="头部"
+                    translate="jsonParse"
+                    content={content.search}>
                     <Search />
                 </Chip>
             </div>

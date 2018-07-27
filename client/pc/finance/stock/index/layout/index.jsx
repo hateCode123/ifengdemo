@@ -152,7 +152,13 @@ class Layout extends React.PureComponent {
                         <StockPlate content={stockPlate} />
                         <div className={styles.search_box}>
                             <StockSearch />
-                            <Chip id="10044" type="static" title="导航跳转链接" groupName="导航栏" content={jumpLink}>
+                            <Chip
+                                id="10044"
+                                type="static"
+                                title="导航跳转链接"
+                                groupName="导航栏"
+                                translate="jsonParse"
+                                content={jumpLink}>
                                 <JumpLink />
                             </Chip>
                             <div className="clear" />
@@ -168,7 +174,7 @@ class Layout extends React.PureComponent {
                 <Cooperation content={cooperation} />
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
-                <Chip id="10136" type="static" title="二维码" groupName="二维码" content={qrCode}>
+                <Chip id="10136" type="static" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix />

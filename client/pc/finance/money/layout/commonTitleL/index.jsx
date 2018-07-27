@@ -50,7 +50,7 @@ CommonTitleL.defaultProps = {};
 //         const { content } = this.props;
 
 //         return (
-//             // <Chip id="10039" type="static" title="理财产品" groupName="首屏" content={content}>
+//             // <Chip id="10039" type="static" title="理财产品" groupName="首屏" translate="jsonParse" content={content}>
 //                 <CommonTitleL />
 //             // </Chip>
 //         );

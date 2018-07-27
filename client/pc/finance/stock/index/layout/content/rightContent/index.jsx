@@ -24,24 +24,54 @@ class RightContent extends React.PureComponent {
         return (
             <div className={styles.col_R}>
                 <div className={styles.box}>
-                    <Chip id="10076" type="static" title="热点专题标题" groupName="正文" content={content.subjectTitle}>
+                    <Chip
+                        id="10076"
+                        type="static"
+                        title="热点专题标题"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.subjectTitle}>
                         <RightSideTitle />
                     </Chip>
-                    <Chip id="10079" type="static" title="热点专题" groupName="正文" content={content.subject}>
+                    <Chip
+                        id="10079"
+                        type="static"
+                        title="热点专题"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.subject}>
                         <Subject />
                     </Chip>
                 </div>
                 <div className="clear" />
                 <div>
-                    <Chip id="10077" type="static" title="理财超市标题" groupName="正文" content={content.marketTitle}>
+                    <Chip
+                        id="10077"
+                        type="static"
+                        title="理财超市标题"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.marketTitle}>
                         <RightSideTitle />
                     </Chip>
-                    <Chip id="10080" type="static" title="理财超市" groupName="正文" content={content.market}>
+                    <Chip
+                        id="10080"
+                        type="static"
+                        title="理财超市"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.market}>
                         <Market />
                     </Chip>
                 </div>
                 <Courier content={content.courier} />
-                <Chip id="10083" type="static" title="视频播放项" groupName="正文" content={content.playItem}>
+                <Chip
+                    id="10083"
+                    type="static"
+                    title="视频播放项"
+                    groupName="正文"
+                    translate="jsonParse"
+                    content={content.playItem}>
                     <PlayItem />
                 </Chip>
                 <div className={styles.ad0}>
@@ -51,7 +81,13 @@ class RightContent extends React.PureComponent {
                     <Ad content={content.rightSideAd1} styleName={styles.ad_box1} />
                 </div>
                 <div className={styles.box}>
-                    <Chip id="20040" type="recommend" title="每日论股" groupName="正文" content={content.dayStock}>
+                    <Chip
+                        id="20040"
+                        type="recommend"
+                        title="每日论股"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.dayStock}>
                         <DayStock />
                     </Chip>
                 </div>

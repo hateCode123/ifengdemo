@@ -52,7 +52,13 @@ class School extends React.PureComponent {
 
         return (
             <div className={`${styles.school} clearfix`}>
-                <Chip id="10069" type="static" title="高手学堂标题" groupName="高手学堂" content={content.schoolTitle}>
+                <Chip
+                    id="10069"
+                    type="static"
+                    title="高手学堂标题"
+                    groupName="高手学堂"
+                    translate="jsonParse"
+                    content={content.schoolTitle}>
                     <HeadTitle>
                         <ResearchSearch />
                     </HeadTitle>
@@ -64,6 +70,7 @@ class School extends React.PureComponent {
                             type="static"
                             title="高手操盘日志标题"
                             groupName="高手学堂"
+                            translate="jsonParse"
                             content={content.schoolSubTitle1}>
                             <Caption />
                         </Chip>
@@ -75,6 +82,7 @@ class School extends React.PureComponent {
                             type="static"
                             title="股民学校标题"
                             groupName="高手学堂"
+                            translate="jsonParse"
                             content={content.schoolSubTitle2}>
                             <Caption />
                         </Chip>
@@ -91,6 +99,7 @@ class School extends React.PureComponent {
                             type="static"
                             title="明星分析师标题"
                             groupName="高手学堂"
+                            translate="jsonParse"
                             content={starAnalystTitle}>
                             <TableTitle />
                         </Chip>
@@ -102,6 +111,7 @@ class School extends React.PureComponent {
                             type="static"
                             title="研报选股标题"
                             groupName="高手学堂"
+                            translate="jsonParse"
                             content={stockPickingTitle}>
                             <TableTitle />
                         </Chip>

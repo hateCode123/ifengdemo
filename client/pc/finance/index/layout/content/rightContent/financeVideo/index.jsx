@@ -8,8 +8,39 @@ import { rel } from '../../../../../../utils/rel';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
+
+    state = {
+        content: this.props.content.financeVideo,
+    };
+
+    adIndex = 1;
+
+    insert = (dom, index) => {
+        const { content } = this.state;
+        const ref = React.createRef();
+
+        this.setState(
+            {
+                content: [
+                    ...content.slice(0, index),
+                    { type: 'ad', key: `ad_${this.adIndex++}`, ref },
+                    ...content.slice(index),
+                ],
+            },
+            () => {
+                ref.current.appendChild(dom);
+            },
+        );
+    };
+    componentDidMount() {
+        const {
+            content: { financeVideoAd },
+        } = this.props;
+
+        financeVideoAd.callback(financeVideoAd.data, this.insert);
+    }
 
     sliderTmpl = item => {
         return item.type === 'ad' ? (
@@ -33,7 +64,7 @@ class FinanceVideo extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
+        const { content } = this.state;
 
         const config = {
             arrows: 'hover',

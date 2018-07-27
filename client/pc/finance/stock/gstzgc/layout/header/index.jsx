@@ -33,7 +33,13 @@ class Header extends React.PureComponent {
                     </a>
                     <div className={styles.adv11}>投资观察</div>
                 </div>
-                <Chip id="10129" type="static" title="搜索" groupName="头部" content={content.search}>
+                <Chip
+                    id="10129"
+                    type="static"
+                    title="搜索"
+                    groupName="头部"
+                    translate="jsonParse"
+                    content={content.search}>
                     <Search />
                 </Chip>
             </div>

@@ -24,7 +24,7 @@ class Nav extends React.PureComponent {
         );
 
         return (
-            <Chip id="10028" type="static" title="导航" groupName="文章" content={content}>
+            <Chip id="10028" type="static" title="导航" groupName="文章" translate="jsonParse" content={content}>
                 {creatList()}
             </Chip>
         );

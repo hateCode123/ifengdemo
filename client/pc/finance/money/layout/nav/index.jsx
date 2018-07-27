@@ -10,7 +10,7 @@ class NavigationInner extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-      
+
         const navigation = content.map((item, index) => (
             <li key={index}>
                 <a href={item.url} target="_blank" rel="nofollow me noopener noreferrer" title={item.title}>
@@ -38,7 +38,13 @@ class Navigation extends React.PureComponent {
         return (
             <div className="g_col">
                 <div className="w1000">
-                    <Chip id="10019" type="static" title="logo下导航" groupName="导航" content={content}>
+                    <Chip
+                        id="10019"
+                        type="static"
+                        title="logo下导航"
+                        groupName="导航"
+                        translate="jsonParse"
+                        content={content}>
                         <NavigationInner />
                     </Chip>
                 </div>

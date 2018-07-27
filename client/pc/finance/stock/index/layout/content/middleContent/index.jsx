@@ -28,6 +28,7 @@ class MiddleContent extends React.PureComponent {
                         type="static"
                         title="视频抓牛股标题"
                         groupName="正文"
+                        translate="jsonParse"
                         content={content.cattleStocksTitle}>
                         <MidTitle nowTime />
                     </Chip>
@@ -35,7 +36,13 @@ class MiddleContent extends React.PureComponent {
                 </div>
                 <div className={styles.space16} />
                 <div className={styles.rank_box}>
-                    <Chip id="10101" type="static" title="涨跌排行榜标题" groupName="正文" content={content.rankTitle}>
+                    <Chip
+                        id="10101"
+                        type="static"
+                        title="涨跌排行榜标题"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.rankTitle}>
                         <MidTitle />
                     </Chip>
                     <Rank />
@@ -47,6 +54,7 @@ class MiddleContent extends React.PureComponent {
                         type="static"
                         title="资金流向标题"
                         groupName="正文"
+                        translate="jsonParse"
                         content={content.fundsFlowTitle}>
                         <MidTitle />
                     </Chip>
@@ -59,6 +67,7 @@ class MiddleContent extends React.PureComponent {
                         type="static"
                         title="自选股登录标题"
                         groupName="正文"
+                        translate="jsonParse"
                         content={content.customStocksTitle}>
                         <MidTitle />
                     </Chip>
@@ -66,7 +75,13 @@ class MiddleContent extends React.PureComponent {
                 </div>
                 <div className={styles.space20} />
                 <div className={styles.qa}>
-                    <Chip id="10104" type="static" title="分析师答疑标题" groupName="正文" content={content.QaTitle}>
+                    <Chip
+                        id="10104"
+                        type="static"
+                        title="分析师答疑标题"
+                        groupName="正文"
+                        translate="jsonParse"
+                        content={content.QaTitle}>
                         <MidTitle />
                     </Chip>
                     <Qa tabs={content.QaTabs} />

@@ -22,7 +22,13 @@ class Track extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip id="10090" type="static" title="大单追踪" groupName="操盘热点" content={tabs}>
+                        <Chip
+                            id="10090"
+                            type="static"
+                            title="大单追踪"
+                            groupName="操盘热点"
+                            translate="jsonParse"
+                            content={tabs}>
                             <tr>
                                 <th width="63">{tabs[0]}</th>
                                 <th width="68">{tabs[1]}</th>
