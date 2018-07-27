@@ -56,6 +56,7 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
 
         // 是否需要编辑 (Boolean)
         const edit = ctrlObj[i].edit;
+        const preview = ctrlObj[i].preview;
         const low = ctrlObj[i].low;
 
         // url路径 (String)
@@ -122,7 +123,7 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                 routerList.push({
                     path,
                     method: methodItem,
-                    handlers: [...meddlewareList, match(type, cache, false, false, handler, cdncache, path)],
+                    handlers: [...meddlewareList, match(type, cache, false, false, false, handler, cdncache, path)],
                 });
 
                 // 添加页面编辑中间件
@@ -131,16 +132,26 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
                     routerList.push({
                         path: `${path}/visualediting`,
                         method: methodItem,
-                        handlers: [...meddlewareList, match(type, cache, edit, false, handler, cdncache, `${path}/visualediting`)],
+                        handlers: [...meddlewareList, match(type, cache, edit, false, false, handler, cdncache, `${path}/visualediting`)],
                     });
                 }
+                // 添加全页预览中间件
+                if (preview) {
+                    // 将路由放入路由列表
+                    routerList.push({
+                        path: `${path}/preview/:id/:type/:data`,
+                        method: methodItem,
+                        handlers: [...meddlewareList, match(type, cache, false, preview, false, handler, cdncache, `${path}/preview/:id/:type/:data`)],
+                    });
+                }
+
                 // 添加降级页中间件
                 if (low) {
                     // 将路由放入路由列表
                     routerList.push({
                         path: `${path}/low`,
                         method: methodItem,
-                        handlers: [...meddlewareList, match(type, cache, false, low, handler, cdncache, `${path}/low`)],
+                        handlers: [...meddlewareList, match(type, cache, false, false, low, handler, cdncache, `${path}/low`)],
                     });
                 }
             }

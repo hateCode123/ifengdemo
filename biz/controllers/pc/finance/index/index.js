@@ -10,6 +10,7 @@ exports.list = {
     cache: 0,
     edit: true,
     low: true,
+    preview: true,
     handler: async ctx => {
         const json = [
             // 通用导航

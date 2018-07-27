@@ -372,23 +372,6 @@ const getStringByKey = key => {
     };
 };
 
-// function getAction(action) {
-//     let key = {
-//         'KVProxy.getAd': 'getAds',
-//         'KVProxy.getCategory': 'getCategories',
-//         'KVProxy.getCustom': 'getCustoms',
-//         'KVProxy.getDocument': 'getDocuments',
-//         'KVProxy.getRecommendFragment': 'getRecommendFragments',
-//         'KVProxy.getSsiFragment': 'getSsiFragments',
-//         'KVProxy.getStaticFragment': 'getStaticFragments',
-//         'KVProxy.getStructuredFragment': 'getStructuredFragments',
-//         'KVProxy.getVideo': 'getVideos',
-//         'KVProxy.getDynamicFragment': 'getDynamicFragments',
-//     };
-//     // console.log(key[action]);
-//     return key[action];
-// }
-
 const getAction = key => {
     return KVTableEnum[key] || 'other';
 };
@@ -465,8 +448,26 @@ const transfer = async (ctx, json) => {
         const kvObj = result.response.return.value[key].value;
 
         for (const id in kvObj) {
+
             const itemkey = obj[key][id].name;
             const handle = obj[key][id].handle;
+
+            if (ctx.urlinfo.preview && id === ctx.params.id) {
+                let data = ctx.params.data;
+
+                try {
+                    try {
+                        backData[itemkey] = JSON.parse(JSON.parse(data));
+                    } catch (error) {
+                        backData[itemkey] = JSON.parse(data);
+                    }
+                } catch (error) {
+                    // console.error(error);
+                    backData[itemkey] = data;
+                }
+
+                continue;
+            }
 
             // console.log(itemkey);
             backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
