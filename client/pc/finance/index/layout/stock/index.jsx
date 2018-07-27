@@ -64,8 +64,8 @@ class Stock extends React.PureComponent {
                     ''
                 ) : (
                     <Chip
-                        id="10017"
-                        type="static"
+                        id="20009"
+                        type="struct"
                         title="股票栏产品静态碎片"
                         groupName="股票栏"
                         translate="jsonParse"

@@ -40,6 +40,13 @@
                 callback: 'function(elm, data) {console.log("dayNewsAd"); $(elm).html(data.title)}'
             },
             extraNews: allData.extraNews,
+            extraNewsAd: {
+                data: {
+                    title: '多拼新闻碎片广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("extraNewsAd");}'
+            },
             middleAd: {
                 data: {
                     title: '中部广告'
@@ -68,6 +75,13 @@
                 },
                 preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
                 callback: 'function(elm, data) {console.log("meetingAd"); $(elm).html(data.title)}'
+            },
+            meetingListAd: {
+                data: {
+                    title: '专题会议列表广告'
+                },
+                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+                callback: 'function(elm, data) {console.log("meetingListAd");}'
             },
             market: allData.market,
             marketAd: {

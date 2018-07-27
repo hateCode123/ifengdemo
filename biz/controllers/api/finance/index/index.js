@@ -5,61 +5,85 @@ const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
 
 exports.getCustomList = {
-    path: '/api/finance/index/customList/:callback',
+    path: '/api/finance/index/customList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
 
 exports.getMacroList = {
-    path: '/api/finance/index/macroList/:callback',
+    path: '/api/finance/index/macroList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_24').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
 
 exports.getStockList = {
-    path: '/api/finance/index/stockList/:callback',
+    path: '/api/finance/index/stockList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_30').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
 
 exports.getImarketsList = {
-    path: '/api/finance/index/imarketsList/:callback',
+    path: '/api/finance/index/imarketsList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_25').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
 
 exports.getCompanyList = {
-    path: '/api/finance/index/companyList/:callback',
+    path: '/api/finance/index/companyList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_29').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
 
 exports.getWemoneyList = {
-    path: '/api/finance/index/wemoneyList/:callback',
+    path: '/api/finance/index/wemoneyList/:callback?',
     method: 'get',
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_26').then(...handleJson(ctx));
 
-        ctx.jsonp(data);
+        if (ctx.params.callback) {
+            ctx.jsonp(data);
+        } else {
+            ctx.json(data);
+        }
     },
 };
