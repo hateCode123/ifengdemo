@@ -4,7 +4,7 @@
  */
 
 const rewrite = (ctx, from, to, edit = true) => {
-     // .replace('//', '/index/');
+    // .replace('//', '/index/');
     ctx.originalUrl = ctx.url = ctx.url.replace(from, to);
     // if (!edit) {
     //     ctx.originalUrl = ctx.url = ctx.url.replace(/\/edit/ig, '');
@@ -20,6 +20,9 @@ module.exports = async (ctx, next) => {
     // ctx.headers['domain'] = 'finance.ifeng.com';
     // ctx.headers['domain'] = 'shankapi.ifeng.com';
 
+    if (ctx.url.indexOf('visualediting/') > -1) {
+        return (ctx.status = 404);
+    }
     if (/\/api\//.test(ctx.url)) {
         // do nothing
     } else if (/\/c\/channel/.test(ctx.url)) {

@@ -102,32 +102,50 @@ const getFundsFlowData = async () => {
 
 // 获取信息流首页数据
 const getCustomList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/customList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/customList/getCustomList`, {
+        jsonpCallback: 'getCustomList',
+        cache: false,
+    });
 };
 
 // 获取信息流宏观数据
 const getMacroList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/macroList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/macroList/getMacroList`, {
+        jsonpCallback: 'getMacroList',
+        cache: false,
+    });
 };
 
 // 获取信息流股票数据
 const getStockList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/stockList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/stockList/getStockList`, {
+        jsonpCallback: 'getStockList',
+        cache: false,
+    });
 };
 
 // 获取信息流 imarkets 数据
 const getImarketsList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/imarketsList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/imarketsList/getImarketsList`, {
+        jsonpCallback: 'getImarketsList',
+        cache: false,
+    });
 };
 
 // 获取信息流公司抓取数据
 const getCompanyList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/companyList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/companyList/getCompanyList`, {
+        jsonpCallback: 'getCompanyList',
+        cache: false,
+    });
 };
 
 // 获取信息流 Wemoney 数据
 const getWemoneyList = async () => {
-    return await ajax(`${apiBaseUrl}/finance/index/wemoneyList`);
+    return await jsonp(`${apiBaseUrl}/finance/index/wemoneyList/getWemoneyList`, {
+        jsonpCallback: 'getWemoneyList',
+        cache: false,
+    });
 };
 
 /* 股首 */

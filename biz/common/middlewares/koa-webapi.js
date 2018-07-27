@@ -91,7 +91,14 @@ module.exports = (app, options = {}) => {
             this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
         }
 
-        response = `${callback}(${JSON.stringify(data)})`;
+        if (arguments.length === 1) {
+            response = { code: 0, message: '成功', data: arguments[0] };
+        } else {
+            response = { code, message, data };
+        }
+
+
+        response = `${callback}(${JSON.stringify(response)})`;
 
         this.type = contentType;
         this.body = response;
