@@ -12,6 +12,7 @@ import BottomFooter from './footer';
 import Cooperation from './cooperation';
 import QrCode from './qrCode';
 import BottomAffix from './bottomAffix';
+import transform from 'chipDataTransform';
 
 class Layout extends React.PureComponent {
     static propTypes = {
@@ -105,7 +106,7 @@ class Layout extends React.PureComponent {
                     <QrCode />
                 </Chip>
                 <BottomAffix content={bottomAffixData} />
-                <ChipEdit />
+                <ChipEdit transform={transform} />
             </div>
         );
     }

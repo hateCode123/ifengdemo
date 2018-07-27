@@ -147,6 +147,10 @@ const createConfig = function(type, platform, cssConfig, level) {
                     type === 'view'
                         ? '@ifeng/visualediting/src/components/ChipEditView'
                         : '@ifeng/visualediting/src/components/ChipEdit',
+                chipDataTransform:
+                    type === 'view'
+                        ? path.resolve(__dirname, 'biz/common/transformView.js')
+                        : path.resolve(__dirname, 'biz/common/transform.js'),
                 ...getAliasFrame(level),
             },
         },
