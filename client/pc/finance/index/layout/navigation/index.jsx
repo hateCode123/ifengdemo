@@ -18,7 +18,7 @@ class Navigation extends React.PureComponent {
 
         const navigation = content.map((item, index) => (
             <li key={index} className={index === 0 ? styles.pa : ''}>
-                <a target="_blank" rel={rel} title={item.title}>
+                <a href={item.url} target="_blank" rel={rel} title={item.title}>
                     {item.title}
                 </a>
             </li>

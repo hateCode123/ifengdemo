@@ -33,15 +33,7 @@ class RightContent extends React.PureComponent {
                         content={content.subjectTitle}>
                         <RightSideTitle />
                     </Chip>
-                    <Chip
-                        id="10079"
-                        type="static"
-                        title="热点专题"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={content.subject}>
-                        <Subject />
-                    </Chip>
+                    <Subject content={content.subject} />
                 </div>
                 <div className="clear" />
                 <div>
@@ -54,13 +46,7 @@ class RightContent extends React.PureComponent {
                         content={content.marketTitle}>
                         <RightSideTitle />
                     </Chip>
-                    <Chip
-                        id="10080"
-                        type="static"
-                        title="理财超市"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={content.market}>
+                    <Chip id="10080" type="static" title="理财超市" groupName="正文" content={content.market}>
                         <Market />
                     </Chip>
                 </div>

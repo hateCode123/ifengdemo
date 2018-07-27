@@ -39,7 +39,9 @@ class FinanceVideo extends React.PureComponent {
             content: { financeVideoAd },
         } = this.props;
 
-        financeVideoAd.callback(financeVideoAd.data, this.insert);
+        const callbackFn = new Function(`return ${financeVideoAd.callback}`)();
+
+        callbackFn(financeVideoAd.data, this.insert);
     }
 
     sliderTmpl = item => {

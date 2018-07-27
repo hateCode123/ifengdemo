@@ -14,7 +14,7 @@ const dataProcessing = WrappedComponent => {
 
                         console.error(error);
 
-                        window && window.BJ_REPORT && window.BJ_REPORT.report(error);
+                        if (window && window.BJ_REPORT) window.BJ_REPORT.report(error);
 
                         return;
                     }

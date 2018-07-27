@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
-    <title></title>
+    <title>凤凰财经-离用户最近的财经媒体-凤凰网</title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
         var jsonData = {
@@ -57,22 +57,7 @@
             financeVideoAd: {
                 data: {},
                 preload: '',
-                callback: (data, insert) => {
-                    const box1 = document.createElement('div');
-
-                    box1.style.height = '100%';
-                    box1.style.width = '100%';
-                    box1.style.backgroundColor = '#900';
-                    box1.innerHTML = 'ad1';
-                    box1.style.textAlign = 'center';
-                    box1.style.lineHeight = '220px';
-
-                    box1.addEventListener('click', () => console.log('box1'), false);
-
-                    setTimeout(() => {
-                        insert(box1, 2);
-                    }, 1000);
-                },
+                callback: 'function(data,insert){var box1=document.createElement("div");box1.style.height="100%";box1.style.width="100%";box1.style.backgroundColor="#900";box1.innerHTML="ad1";box1.style.textAlign="center";box1.style.lineHeight="220px";box1.addEventListener("click",function(){console.log("box1")},false);setTimeout(function(){insert(box1,2)},1000)};',
             },
             institute: allData.institute,
             lark: allData.lark,

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './index.css';
 
 class ErrorBoundary extends React.Component {
     static propTypes = {
@@ -9,30 +8,23 @@ class ErrorBoundary extends React.Component {
 
     state = {
         hasError: false,
-        error: '',
     };
 
     componentDidCatch(error) {
         this.setState({
             hasError: true,
-            error: error.message,
         });
 
         console.error('error', error);
 
-        window && window.BJ_REPORT && window.BJ_REPORT.report(error);
+        if (window && window.BJ_REPORT) window.BJ_REPORT.report(error);
     }
 
     render() {
-        const { hasError, error } = this.state;
+        const { hasError } = this.state;
 
         if (hasError) {
-            return (
-                <div className={styles.error_box}>
-                    <div className={styles.error}>{`Something error resulting from ${error} !`}</div>
-                    <div className={styles.error}>You can see the details in the developer tools by F12</div>
-                </div>
-            );
+            return '';
         }
 
         return this.props.children;

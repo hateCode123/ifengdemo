@@ -52,13 +52,7 @@ class RightContent extends React.PureComponent {
                     <BoxTitle url="//18.ifeng.com/index.shtml" title="理财超市">
                         <Ad content={content.marketAd} styleName={styles.marketAd} />
                     </BoxTitle>
-                    <Chip
-                        id="10014"
-                        type="static"
-                        title="理财超市静态碎片"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={content.market}>
+                    <Chip id="10014" type="static" title="理财超市静态碎片" groupName="正文" content={content.market}>
                         <Market />
                     </Chip>
                 </div>

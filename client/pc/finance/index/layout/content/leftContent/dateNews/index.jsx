@@ -35,13 +35,7 @@ class DateNews extends React.PureComponent {
                         <NewsList data={content.slice(6, 12)} />
                     </ul>
                 </div>
-                <Chip
-                    id="10011"
-                    type="static"
-                    title="今日要闻多拼静态碎片"
-                    groupName="正文"
-                    translate="jsonParse"
-                    content={extraNews}>
+                <Chip id="10011" type="static" title="今日要闻多拼静态碎片" groupName="正文" content={extraNews}>
                     <ExtraNews content={extraNews} />
                 </Chip>
             </div>

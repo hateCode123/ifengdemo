@@ -91,7 +91,7 @@ exports.list = {
             ['QATabs', 'KVProxy', 'getStaticFragment', 10105, getJsonByKey('content')],
 
             // 轮播图
-            ['bannerPic', 'KVProxy', 'getRecommendFragment', 30010, getJsonByKey('data')],
+            ['bannerPic', 'KVProxy', 'getRecommendFragment', 30010, getStringByKey('data')],
 
             // 热点专题标题
             ['subjectTitle', 'KVProxy', 'getStaticFragment', 10076, getJsonByKey('content')],
