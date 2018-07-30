@@ -26,14 +26,12 @@ class ContentList extends React.PureComponent {
     };
 
     async componentDidMount() {
-        const { infoAd, tabIndex, pageSize, index } = this.props;
+        const { infoAd, index } = this.props;
 
         if (index === 0) {
             const callback = await handleAd(infoAd);
 
             callback(infoAd.data, event);
-
-            event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
         }
     }
 
@@ -41,7 +39,9 @@ class ContentList extends React.PureComponent {
         const { adAddType, tabIndex, pageSize, index } = this.props;
 
         if (tabIndex === index) {
-            if (adAddType === 'tabChange') {
+            if (adAddType === 'init') {
+                event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
+            } else if (adAddType === 'tabChange') {
                 event.trigger('tabChange', { tabIndex, pageSize, container: this.infoRef.current });
             } else if (adAddType === 'loadMoreCmp') {
                 event.trigger('loadMoreCmp', { tabIndex, pageSize, container: this.infoRef.current });
