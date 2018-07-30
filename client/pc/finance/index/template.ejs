@@ -7,53 +7,232 @@
     <title>凤凰财经-离用户最近的财经媒体-凤凰网</title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+
+        try{
+            var topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var topAd = {};
+        }
+
+        try{
+            var channelAd = new Function('return ' + <%- JSON.stringify(allData.channelAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var channelAd = {};
+        }
+
+        try{
+            var dayNewsAd = new Function('return ' + <%- JSON.stringify(allData.dayNewsAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var dayNewsAd = {};
+        }
+
+        try{
+            var extraNewsAd = new Function('return ' + <%- JSON.stringify(allData.extraNewsAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var extraNewsAd = {};
+        }
+
+        try{
+            var middleAd = new Function('return ' + <%- JSON.stringify(allData.middleAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var middleAd = {};
+        }
+
+        try{
+            var financeVideoAd = new Function('return ' + <%- JSON.stringify(allData.financeVideoAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var financeVideoAd = {};
+        }
+
+        try{
+            var meetingAd = new Function('return ' + <%- JSON.stringify(allData.meetingAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var meetingAd = {};
+        }
+
+        try{
+            var meetingListAd = new Function('return ' + <%- JSON.stringify(allData.meetingListAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var meetingListAd = {};
+        }
+
+        try{
+            var marketAd = new Function('return ' + <%- JSON.stringify(allData.marketAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var marketAd = {};
+        }
+
+        try{
+            var courierAd = new Function('return ' + <%- JSON.stringify(allData.courierAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var courierAd = {};
+        }
+
+        try{
+            var asideAd1 = new Function('return ' + <%- JSON.stringify(allData.asideAd1) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd1 = {};
+        }
+
+        try{
+            var asideAd2 = new Function('return ' + <%- JSON.stringify(allData.asideAd2) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd2 = {};
+        }
+
+        try{
+            var asideAd3 = new Function('return ' + <%- JSON.stringify(allData.asideAd3) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd3 = {};
+        }
+
+        try{
+            var asideAd4 = new Function('return ' + <%- JSON.stringify(allData.asideAd4) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd4 = {};
+        }
+
+        try{
+            var asideAd5 = new Function('return ' + <%- JSON.stringify(allData.asideAd5) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd5 = {};
+        }
+
+        try{
+            var asideAd6 = new Function('return ' + <%- JSON.stringify(allData.asideAd6) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd6 = {};
+        }
+
+        try{
+            var asideAd7 = new Function('return ' + <%- JSON.stringify(allData.asideAd7) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var asideAd7 = {};
+        }
+
+        try{
+            var infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var infoAd = {};
+        }
+
+        try{
+            var hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var hardAd = {};
+        }
+        
+        try{
+            var bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var bottomAd = {};
+        }
+
+        try{
+            var floatAd1 = new Function('return ' + <%- JSON.stringify(allData.floatAd1) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd1 = {};
+        }
+
+        try{
+            var floatAd2 = new Function('return ' + <%- JSON.stringify(allData.floatAd2) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd2 = {};
+        }
+
+        try{
+            var floatAd3 = new Function('return ' + <%- JSON.stringify(allData.floatAd3) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd3 = {};
+        }
+
+        try{
+            var floatAd4 = new Function('return ' + <%- JSON.stringify(allData.floatAd4) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd4 = {};
+        }
+
+        try{
+            var floatAd5 = new Function('return ' + <%- JSON.stringify(allData.floatAd5) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd5 = {};
+        }
+
+        try{
+            var floatAd6 = new Function('return ' + <%- JSON.stringify(allData.floatAd6) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var floatAd6 = {};
+        }
+        
         var jsonData = {
             nav: allData.nav,
             search: allData.search,
-            topAd: {
-                data: {
-                    title: '顶部广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("topAd"); $(elm).html(data.title)}'
-            },
+            topAd: topAd,
             logo: allData.logo,
             logoAd: allData.logoAd,
-            channelAd: {
-                data: {
-                    title: '频道冠名广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("channelAd"); $(elm).html(data.title)}'
-            },
+            channelAd: channelAd,
             navigation: allData.navigation,
             rights: allData.rights,
             production: allData.production,
             bannerPic: allData.bannerPic,
             headline: allData.headline,
             dayNews: allData.dayNews,
-            dayNewsAd: {
-                data: {
-                    title: '今日要闻广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("dayNewsAd"); $(elm).html(data.title)}'
-            },
+            dayNewsAd: dayNewsAd,
             extraNews: allData.extraNews,
-            extraNewsAd: {
-                data: {
-                    title: '多拼新闻碎片广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("extraNewsAd");}'
-            },
-            middleAd: {
-                data: {
-                    title: '中部广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("middleAd"); $(elm).html(data.title)}'
-            },
+            extraNewsAd: extraNewsAd,
+            middleAd: middleAd,
             comicBook: allData.comicBook,
             talking: allData.talking,
             finance: allData.finance,
@@ -61,161 +240,37 @@
             stocks: allData.stocks,
             stocksList: allData.stocksList,
             financeVideo: allData.financeVideo,
-            financeVideoAd: {
-                data: {},
-                preload: '',
-                callback: 'function(data,insert){var box1=document.createElement("div");box1.style.height="100%";box1.style.width="100%";box1.style.backgroundColor="#900";box1.innerHTML="ad1";box1.style.textAlign="center";box1.style.lineHeight="220px";box1.addEventListener("click",function(){console.log("box1")},false);setTimeout(function(){insert(box1,2)},1000)};',
-            },
+            financeVideoAd: financeVideoAd,
             institute: allData.institute,
             lark: allData.lark,
             meeting: allData.meeting,
-            meetingAd: {
-                data: {
-                    title: '专题会议广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("meetingAd"); $(elm).html(data.title)}'
-            },
-            meetingListAd: {
-                data: {
-                    title: '专题会议列表广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("meetingListAd");}'
-            },
+            meetingAd: meetingAd,
+            meetingListAd: meetingListAd,
             market: allData.market,
-            marketAd: {
-                data: {
-                    title: '理财超市广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("marketAd"); $(elm).html(data.title)}'
-            },
+            marketAd: marketAd,
             courier: allData.courier,
-            courierAd: {
-                data: {
-                    title: '理财速递广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("courierAd"); $(elm).html(data.title)}'
-            },
-            asideAd1: {
-                data: {
-                    title: '侧边广告 1'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd1"); $(elm).html(data.title)}'
-            },
-            asideAd2: {
-                data: {
-                    title: '侧边广告 2'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd2"); $(elm).html(data.title)}'
-            },
-            asideAd3: {
-                data: {
-                    title: '侧边广告 3'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd3"); $(elm).html(data.title)}'
-            },
-            asideAd4: {
-                data: {
-                    title: '侧边广告 4'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd4"); $(elm).html(data.title)}'
-            },
-            asideAd5: {
-                data: {
-                    title: '侧边广告 5'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd5"); $(elm).html(data.title)}'
-            },
-            asideAd6: {
-                data: {
-                    title: '侧边广告 6'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd6"); $(elm).html(data.title)}'
-            },
-            asideAd7: {
-                data: {
-                    title: '侧边广告 7'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("asideAd7"); $(elm).html(data.title)}'
-            },
+            courierAd: courierAd,
+            asideAd1: asideAd1,
+            asideAd2: asideAd2,
+            asideAd3: asideAd3,
+            asideAd4: asideAd4,
+            asideAd5: asideAd5,
+            asideAd6: asideAd6,
+            asideAd7: asideAd7,
             info: {
-                infoAd: {
-                    data: {
-                        title: 'infoAd'
-                    },
-                    preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                    callback: 'function(data, event) {console.log("infoAd"); event.on("init", () => {console.log("init")}); event.on("tabChange", () => {console.log("tabChange")}); event.on("loadMoreCmp", () => {console.log("loadMoreCmp")});}'
-                },
-                hardAd: {
-                    data: {
-                        title: '硬广'
-                    },
-                    preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                    callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
-                }
+                infoAd: infoAd,
+                hardAd: hardAd
             },
             cooperation: allData.cooperation,
-            bottomAd: {
-                data: {
-                    title: '底部广告'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-            },
+            bottomAd: bottomAd,
             footer: allData.footer,
             qrCode: allData.qrCode,
-            floatAd1: {
-                data: {
-                    title: '浮动广告1'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd1"); $(elm).html(data.title)}'
-            },
-            floatAd2: {
-                data: {
-                    title: '浮动广告2'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd2"); $(elm).html(data.title)}'
-            },
-            floatAd3: {
-                data: {
-                    title: '浮动广告3'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd3"); $(elm).html(data.title)}'
-            },
-            floatAd4: {
-                data: {
-                    title: '浮动广告4'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd4"); $(elm).html(data.title)}'
-            },
-            floatAd5: {
-                data: {
-                    title: '浮动广告5'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd5"); $(elm).html(data.title)}'
-            },
-            floatAd6: {
-                data: {
-                    title: '浮动广告6'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("floatAd6"); $(elm).html(data.title)}'
-            },
+            floatAd1: floatAd1,
+            floatAd2: floatAd2,
+            floatAd3: floatAd3,
+            floatAd4: floatAd4,
+            floatAd5: floatAd5,
+            floatAd6: floatAd6,
         };
 
     </script>
@@ -261,7 +316,7 @@
         <script src="https://cdn.bootcss.com/es5-shim/4.5.10/es5-sham.min.js"></script>
         <script src="http://cdn.bootcss.com/console-polyfill/0.3.0/index.min.js"></script>
     <![endif]-->
-
+    <script src="https://c0.ifengimg.com/web/d/inice.js"></script>
 </head>
 
 <body>
@@ -269,6 +324,7 @@
 
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script> {{/each}}
+    <script>IfengAmgr.start()</script>
 </body>
 
 </html>

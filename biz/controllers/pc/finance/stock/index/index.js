@@ -70,7 +70,7 @@ exports.list = {
             ['answerSubTab', 'KVProxy', 'getStaticFragment', 10118, getJsonByKey('content')],
 
             // 牛人解盘
-            ['answerList', 'KVProxy', 'getRecommendFragment', 20019, getJsonByKey('data')],
+            ['answerList', 'KVProxy', 'getRecommendFragment', 20019, getStringByKey('data')],
 
             // 视频抓牛股标题
             ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],

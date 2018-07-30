@@ -7,13 +7,62 @@
     <title>凤凰股票-专业让投资更简单-凤凰网</title>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
-        var topAd = <%- allData.topAd ? allData.topAd : 'topAd' %>;
-        var leftAsideAd = <%- allData.leftAsideAd ? allData.leftAsideAd : 'leftAsideAd' %>;
-        var hotSpotsAd = <%- allData.hotSpotsAd ? allData.hotSpotsAd : 'hotSpotsAd' %>;
-        var schoolAd = <%- allData.schoolAd ? allData.schoolAd : 'schoolAd' %>;
-        var rightSideAd0 = <%- allData.rightSideAd0 ? allData.rightSideAd0 : 'rightSideAd0' %>;
-        var rightSideAd1 = <%- allData.rightSideAd1 ? allData.rightSideAd1 : 'rightSideAd1' %>;
-        var bottomAd = <%- allData.bottomAd ? allData.bottomAd : 'bottomAd' %>;
+
+        try{
+            var topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var topAd = {};
+        }
+
+        try{
+            var leftAsideAd = new Function('return ' + <%- JSON.stringify(allData.leftAsideAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var leftAsideAd = {};
+        }
+
+        try{
+            var hotSpotsAd = new Function('return ' + <%- JSON.stringify(allData.hotSpotsAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var hotSpotsAd = {};
+        }
+
+        try{
+            var schoolAd = new Function('return ' + <%- JSON.stringify(allData.schoolAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var schoolAd = {};
+        }
+
+        try{
+            var rightSideAd0 = new Function('return ' + <%- JSON.stringify(allData.rightSideAd0) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var rightSideAd0 = {};
+        }
+
+        try{
+            var rightSideAd1 = new Function('return ' + <%- JSON.stringify(allData.rightSideAd1) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var rightSideAd1 = {};
+        }
+
+        try{
+            var bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            var bottomAd = {};
+        }
 
         var jsonData = {
             nav: allData.nav,

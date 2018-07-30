@@ -87,6 +87,150 @@ exports.list = {
 
             // 二维码
             ['qrCode', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],
+
+            // topAd
+            ['topAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
+
+            // channelAd
+            [
+                'channelAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_130318_index_ad_label_pdgm_180x25.inc.html',
+                getString(),
+            ],
+
+            // dayNewsAd
+            [
+                'dayNewsAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_150721_ad_jryw_label.inc.html',
+                getString(),
+            ],
+
+            // extraNewsAd
+            [
+                'extraNewsAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_150721_ad_jryw18.inc.html',
+                getString(),
+            ],
+
+            // middleAd
+            ['middleAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_170410_ad_banner01.inc.html', getString()],
+
+            // financeVideoAd
+            [
+                'financeVideoAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_150721_ad_slide02.inc.html',
+                getString(),
+            ],
+
+            // meetingAd
+            [
+                'meetingAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_131011_ad_label_rdzt.inc.html',
+                getString(),
+            ],
+
+            // meetingListAd
+            [
+                'meetingListAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_140321_ad_ruanxing_redian06.inc.html',
+                getString(),
+            ],
+
+            // marketAd
+            ['marketAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_170410_lccsbkbq.inc.html', getString()],
+
+            // courierAd
+            [
+                'courierAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_ad_170410_lcsdbkbq.inc.html',
+                getString(),
+            ],
+
+            // asideAd1
+            ['asideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_140321_ad_button01.inc.html', getString()],
+
+            // asideAd2
+            ['asideAd2', 'KVProxy', '/test/ssi-incs/s_finance_index_170417_ad_rectangle_02.inc.html', getString()],
+
+            // asideAd3
+            ['asideAd3', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner03.inc.html', getString()],
+
+            // asideAd4
+            ['asideAd4', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_text_01.inc.html', getString()],
+
+            // asideAd5
+            [
+                'asideAd5',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_170417_ad_rectangle_04.inc.html',
+                getString(),
+            ],
+
+            // asideAd6
+            [
+                'asideAd6',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_170417_ad_rectangle_05.inc.html',
+                getString(),
+            ],
+
+            // asideAd7
+            [
+                'asideAd7',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_170417_ad_rectangle_06.inc.html',
+                getString(),
+            ],
+
+            // infoAd
+            ['infoAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_170410_tuwen01.inc.html', getString()],
+
+            // hardAd
+            ['hardAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_170410_ad_banner06.inc.html', getString()],
+
+            // bottomAd
+            [
+                'bottomAd',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_ad_banner_bottom_1000x90.inc.html',
+                getString(),
+            ],
+
+            // floatAd1
+            ['floatAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_interstitial.inc.html', getString()],
+
+            // floatAd2
+            ['floatAd2', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_floatmedia.inc.html', getString()],
+
+            // floatAd3
+            ['floatAd3', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_couplet.inc.html', getString()],
+
+            // floatAd4
+            ['floatAd4', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_floatpause.inc.html', getString()],
+
+            // floatAd5
+            ['floatAd5', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_media.inc.html', getString()],
+
+            // floatAd6
+            ['floatAd6', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_popunder.html', getString()],
         ];
 
         const allData = await transfer(ctx, json);
