@@ -28,13 +28,7 @@ class BottomFooter extends React.PureComponent {
         );
         const footer = (
             <div key="footer" className={styles.footer}>
-                <Chip
-                    id="20012"
-                    type="struct"
-                    title="底部公用版权"
-                    groupName="底部"
-                    translate="jsonParse"
-                    content={content.footer}>
+                <Chip id="20012" type="struct" title="底部公用版权" groupName="底部" content={content.footer}>
                     <Footer />
                 </Chip>
             </div>

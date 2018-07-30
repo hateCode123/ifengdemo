@@ -170,7 +170,13 @@ exports.list = {
             ['asideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_140321_ad_button01.inc.html', getString()],
 
             // asideAd2
-            ['asideAd2', 'KVProxy', '/test/ssi-incs/s_finance_index_170417_ad_rectangle_02.inc.html', getString()],
+            [
+                'asideAd2',
+                'KVProxy',
+                'getAd',
+                '/test/ssi-incs/s_finance_index_170417_ad_rectangle_02.inc.html',
+                getString(),
+            ],
 
             // asideAd3
             ['asideAd3', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner03.inc.html', getString()],

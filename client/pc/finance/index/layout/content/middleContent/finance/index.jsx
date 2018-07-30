@@ -21,13 +21,7 @@ class Finance extends React.PureComponent {
         return (
             <React.Fragment>
                 <div className={styles.finance}>
-                    <Chip
-                        id="20010"
-                        type="struct"
-                        title="财商教育标题栏"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={content.finance}>
+                    <Chip id="20010" type="struct" title="财商教育标题栏" groupName="正文" content={content.finance}>
                         <Caption />
                     </Chip>
                 </div>

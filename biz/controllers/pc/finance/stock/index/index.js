@@ -22,7 +22,7 @@ exports.list = {
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             // 搜索
-            ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
+            ['search', 'KVProxy', 'getStructuredFragment', 20005, getJsonByKey('content')],
 
             // Logo
             ['logo', 'KVProxy', 'getStaticFragment', 10133, getJsonByKey('content')],

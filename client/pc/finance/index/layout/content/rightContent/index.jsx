@@ -57,13 +57,7 @@ class RightContent extends React.PureComponent {
                     </Chip>
                 </div>
                 <Ad content={content.asideAd5} styleName={styles.box_5} />
-                <Chip
-                    id="20011"
-                    type="struct"
-                    title="理财速递静态碎片"
-                    groupName="正文"
-                    translate="jsonParse"
-                    content={content.courier}>
+                <Chip id="20011" type="struct" title="理财速递静态碎片" groupName="正文" content={content.courier}>
                     <Courier ad={content.courierAd} />
                 </Chip>
                 <Ad content={content.asideAd6} styleName={styles.box_6} />
