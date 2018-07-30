@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import Headline from './headline';
 import NewsLive from './newsLive';
 import News from './news';
 import Answer from './answer';
-import { Ad } from '../../../../../../components/ad';
 
 class LeftContent extends React.PureComponent {
     static propTypes = {

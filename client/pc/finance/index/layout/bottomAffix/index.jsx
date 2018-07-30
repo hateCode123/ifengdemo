@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { addEventListener } from '@ifeng/ui_base';
-import { Ad } from '../../../../components/ad';
+import Ad from '@ifeng/ui_pc_ad';
 
 /**
  * 定义 BottomAffix 组件

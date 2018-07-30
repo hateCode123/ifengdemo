@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import NewsList from './newsList/';
 import ExtraNews from './extraNews/';
-import { Ad } from '../../../../../../components/ad';
 
 class DateNews extends React.PureComponent {
     static propTypes = {

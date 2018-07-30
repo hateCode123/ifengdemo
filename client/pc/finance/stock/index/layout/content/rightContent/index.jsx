@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import Subject from './subject';
 import Market from './market';
 import Courier from './courier/';
 import PlayItem from './playItem/';
 import DayStock from './dayStock/';
-import { Ad } from '../../../../../../components/ad';
 import RightSideTitle from '../../../components/rightSideTitle';
 
 class RightContent extends React.PureComponent {

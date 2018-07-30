@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Ad from '@ifeng/ui_pc_ad';
 import {
     getCommentCount,
     getCustomList,
@@ -12,7 +13,6 @@ import {
 } from '../../../../../services/api';
 import Tabs from './tabs';
 import ContentList from './contentList';
-import Ad from '../../../../../components/ad';
 
 // 定义初始化加载数量
 const infoCount = 25;

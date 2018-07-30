@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Ad from '@ifeng/ui_pc_ad';
 import BoxTitle from '../boxTitle';
 import { rel } from '../../../../../../utils/rel';
-import { Ad } from '../../../../../../components/ad';
 
 class Courier extends React.PureComponent {
     static propTypes = {

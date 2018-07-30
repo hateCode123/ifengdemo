@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import errorBoundary from '../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../components/dataProcessing';
-import { Ad } from '../../../../../components/ad/';
 import Footer from '../../../../../components/footer/';
 
 /**

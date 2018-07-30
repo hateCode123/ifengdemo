@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import { rel } from '../../../../../utils/rel';
-import { Ad } from '../../../../../components/ad';
 
 /**
  * 定义 Logo 组件
