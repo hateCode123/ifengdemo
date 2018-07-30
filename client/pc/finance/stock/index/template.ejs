@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
     <title>凤凰股票-专业让投资更简单-凤凰网</title>
+    <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
 
@@ -205,6 +206,7 @@
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
     <script>IfengAmgr.start()</script>
+    <%- statisticsData.statisticsBody %>
 </body>
 
 </html>

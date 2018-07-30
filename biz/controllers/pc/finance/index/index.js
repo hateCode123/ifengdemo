@@ -13,6 +13,12 @@ exports.list = {
     preview: true,
     handler: async ctx => {
         const json = [
+            // 统计代码 Head 片段
+            ['statisticsHead', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+
+            // 统计代码 Body 片段
+            ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
+
             // 通用导航
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
@@ -317,8 +323,17 @@ exports.list = {
             title: lark.title,
         };
 
+        const statisticsData = {
+            statisticsHead: allData.statisticsHead,
+            statisticsBody: allData.statisticsBody,
+        };
+
+        delete allData.statisticsHead;
+        delete allData.statisticsBody;
+
         await ctx.html('finance_index', {
             allData,
+            statisticsData,
         });
     },
 };
