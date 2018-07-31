@@ -1,6 +1,7 @@
+import 'core-js';
+import 'raf/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'core-js';
 import './reset.css';
 import Layout from './layout/';
 
