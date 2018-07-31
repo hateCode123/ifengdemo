@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
+import transform from 'chipDataTransform';
 import Header from './header/';
 import Navigation from './navigation/';
 import AnimationPic from './animationPic/';
@@ -178,7 +179,7 @@ class Layout extends React.PureComponent {
                     <QrCode />
                 </Chip>
                 <BottomAffix />
-                <ChipEdit />
+                <ChipEdit transform={transform} />
             </div>
         );
     }

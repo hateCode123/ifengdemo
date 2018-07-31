@@ -2,6 +2,7 @@ import ChipEdit from 'ChipEdit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Chip from 'Chip';
+import transform from 'chipDataTransform';
 import '../reset.css';
 import style from './style.css';
 
@@ -295,7 +296,7 @@ class Layout extends React.PureComponent {
                 <BottomFooter content={footerData} />
                 <FixedBar />
 
-                <ChipEdit />
+                <ChipEdit transform={transform} />
             </div>
         );
     }

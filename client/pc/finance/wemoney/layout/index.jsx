@@ -1,6 +1,7 @@
 import React from 'react';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
+import transform from 'chipDataTransform';
 import PropTypes from 'prop-types';
 import '../reset.css';
 import styles from './index.css';
@@ -79,7 +80,7 @@ class Layout extends React.PureComponent {
                 </div>
                 <BottomFooter content={footerData} />
                 <GoTop />
-                <ChipEdit />
+                <ChipEdit transform={transform} />
             </div>
         );
     }

@@ -4,7 +4,7 @@ import '../reset.css';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
-
+import transform from 'chipDataTransform';
 import TopAd from './topAd/';
 import Navigation from './navigation/';
 import Topic from './topic/';
@@ -173,7 +173,7 @@ class Layout extends React.PureComponent {
                         <BottomFooter content={footerData} />
                     </div>
                 </div>
-                <ChipEdit />
+                <ChipEdit transform={transform} />
             </div>
         );
     }
