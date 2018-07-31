@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
     <title>凤凰财经-离用户最近的财经媒体-凤凰网</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
@@ -271,9 +273,8 @@
             floatAd3: floatAd3,
             floatAd4: floatAd4,
             floatAd5: floatAd5,
-            floatAd6: floatAd6,
+            floatAd6: floatAd6
         };
-
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
@@ -324,7 +325,8 @@
     <div id="root"></div>
 
     {{#each htmlWebpackPlugin.files.js}}
-    <script src="{{path}}" type="text/javascript"></script> {{/each}}
+    <script src="{{path}}" type="text/javascript"></script>
+    {{/each}}
     <script>IfengAmgr.start()</script>
     <%- statisticsData.statisticsBody %>
 </body>
