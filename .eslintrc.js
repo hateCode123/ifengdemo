@@ -14,5 +14,5 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: ['react', 'flowtype'],
-    rules: require('@ifeng/eslint'),
+    rules: require('@ifeng/tool_eslint'),
 };

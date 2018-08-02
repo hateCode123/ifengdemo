@@ -25,7 +25,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@ifeng/eslint": "^1.0.10",
+        "@ifeng/tool_eslint": "^1.0.1",
         "@ifeng/ui_base": "^1.0.8",
         "@ifeng/ui_pc_ad": "^1.0.2",
         "@ifeng/ui_pc_auth": "^1.0.7",
