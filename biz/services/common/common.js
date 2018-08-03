@@ -5,6 +5,8 @@ const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
 const Tars = require('@tars/stream');
 const _ = require('lodash');
+// const { schemaCheck } = require('../../services/jsonschema/validate');
+const schemaCheck = null;
 const KVTableEnum = {
     'KVProxy.getStructuredFragment': 'structured_fragment',
     'KVProxy.getStaticFragment': 'static_fragment',
@@ -19,20 +21,6 @@ const KVTableEnum = {
     'KVProxy.getSelectedPool': 'selected_pool',
 };
 
-// const KVTableEnum = {
-//     'KVProxy.getStructuredFragment': 'structuredFragment',
-//     'KVProxy.getStaticFragment': 'staticFragment',
-//     'KVProxy.getDynamicFragment': 'dynFragment',
-//     'KVProxy.getSsiFragment': 'ssiFragment',
-//     'KVProxy.getRecommendFragment': 'recommendFragment',
-//     'KVProxy.getCustom': 'other',
-//     'KVProxy.getAd': 'ad',
-//     'KVProxy.getCategory': 'category',
-//     'KVProxy.getDocument': 'documents',
-//     'KVProxy.getVideo': 'video',
-//     'KVProxy.getSelectedPool': 'selectedPool',
-// };
-
 /**
  * 使用该方法替代JSON.parse(),统计JSON.parse耗时
  * @param {String} jsonStr json格式字符串
@@ -40,9 +28,10 @@ const KVTableEnum = {
  * @return {Object}
  */
 const jsonParse = (jsonStr, ctx, parent) => {
-    if (!jsonStr) {
+    if (!jsonStr || typeof jsonStr === 'object') {
         return jsonStr;
     }
+
     const context = {};
 
     if (config.default.statistics) {
@@ -390,9 +379,8 @@ const transfer = async (ctx, json) => {
             obj[key] = {};
         }
 
-        obj[key][item[3]] = { name: item[0], handle: item[4] };
+        obj[key][item[3]] = { name: item[0], handle: item[4], schemaKey: item[5] };
     }
-    // console.log(obj);
     for (const key in obj) {
         const tarList = new Tars.List(Tars.String);
 
@@ -448,10 +436,11 @@ const transfer = async (ctx, json) => {
         const kvObj = result.response.return.value[key].value;
 
         for (const id in kvObj) {
-
             const itemkey = obj[key][id].name;
             const handle = obj[key][id].handle;
+            const schemaKey = obj[key][id].schemaKey;
 
+            // 全页预览处理
             if (ctx.urlinfo.preview && id === ctx.params.id) {
                 let data = ctx.params.data;
 
@@ -462,15 +451,16 @@ const transfer = async (ctx, json) => {
                         backData[itemkey] = JSON.parse(data);
                     }
                 } catch (error) {
-                    // console.error(error);
                     backData[itemkey] = data;
                 }
-
-                continue;
+            } else {
+                backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
             }
 
-            // console.log(itemkey);
-            backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
+            // kv数据schema处理
+            if (schemaKey && schemaCheck) {
+                backData[itemkey] = schemaCheck(backData[itemkey], schemaKey, ctx);
+            }
         }
     }
 
