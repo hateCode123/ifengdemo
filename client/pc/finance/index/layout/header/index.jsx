@@ -30,7 +30,7 @@ class Header extends React.PureComponent {
         };
 
         const topNav = (
-            <div className={styles.main_nav} key="topNav">
+            <div id="main_nav" className={styles.main_nav} key="topNav">
                 <Chip id="20002" type="struct" title="导航" groupName="头部" content={content.nav}>
                     <Nav />
                 </Chip>

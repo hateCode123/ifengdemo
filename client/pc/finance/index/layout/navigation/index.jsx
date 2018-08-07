@@ -25,7 +25,7 @@ class Navigation extends React.PureComponent {
         ));
 
         return (
-            <div className={styles.col_box}>
+            <div id="navigation" className={styles.col_box}>
                 <div className={styles.col_navlist}>
                     <div className={styles.col_nav}>
                         <ul className="clearfix">{navigation}</ul>
