@@ -1,7 +1,9 @@
 .col {
     composes: clearfix from global;
     width: 1000px;
-    margin: 25px auto 0;
+    margin: 0 auto;
+    padding: 25px 0 0;
+    background: #fff;
 }
 
 .col_L {
