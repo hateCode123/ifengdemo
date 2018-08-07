@@ -4,7 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
-import Ad from '../../../components/ad';
+import Ad from '@ifeng/ui_pc_ad';
 import Header from './header';
 import Logo from './logo';
 import Tools from './tools';

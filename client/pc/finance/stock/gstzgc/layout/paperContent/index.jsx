@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import Ad from '@ifeng/ui_pc_ad';
 import PaperMenu from './paperMenu';
 import PaperList from './paperList';
 import Paper from './paperList/paper';
 import Title from './paperList/title';
 import More from './paperList/more';
-import { Ad } from '../../../../../components/ad';
 import Chip from 'Chip';
 class PaperContent extends React.PureComponent {
     state = {

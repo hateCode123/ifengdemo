@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Ad from '../../../../components/ad/';
-// import Logo from './logo/';
+import Ad from '@ifeng/ui_pc_ad';
 import Nav from '../../../../components/nav/';
 import UserInfo from '@ifeng/ui_pc_userInfo';
-// import Search from '@ifeng/ui_pc_search';
 
 /**
  * 定义 Header 组件

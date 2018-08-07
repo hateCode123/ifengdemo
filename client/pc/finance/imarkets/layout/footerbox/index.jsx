@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Chip from 'Chip';
+import Ad from '@ifeng/ui_pc_ad';
 import styles from './index.css';
 import HtmlRegion from '../../components/html-region';
-import Ad from '../../../../components/ad';
 import Footer from './footer';
 
 class FooterBox extends PureComponent {
