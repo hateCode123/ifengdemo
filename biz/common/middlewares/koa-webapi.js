@@ -37,6 +37,7 @@ module.exports = (app, options = {}) => {
         } else {
             this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
         }
+        data.bid = this.uuid;
 
         await this.render(tplName, data);
 
@@ -74,7 +75,7 @@ module.exports = (app, options = {}) => {
     };
 
     // extend jsonp function
-    app.context.jsonp = function(data) {
+    app.context.jsonp = function(code, message, data) {
         const callback = this.params.callback || this.query.callback || 'callback';
         const contentType = 'text/javascript';
         let response = null;

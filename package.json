@@ -143,7 +143,9 @@
         },
         "ignore": [
             "./dist/**",
-            "./static/**"
+            "./static/**",
+            "./biz/providers/**",
+            "./biz/common/middlewares/**"
         ]
     }
 }
