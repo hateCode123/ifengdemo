@@ -7,6 +7,7 @@ exports.list = {
     type: 'html',
     edit: true,
     low: true,
+    preview: true,
     handler: async ctx => {
         const json = [
             // 顶部导航接口WW

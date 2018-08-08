@@ -10,6 +10,7 @@ exports.list = {
     cache: 0,
     edit: true,
     low: true,
+    preview: true,
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段

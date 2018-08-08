@@ -28,7 +28,7 @@ class Subject extends React.PureComponent {
                 <ul className={styles.list}>
                     {list.map((item, index) => (
                         <li key={index}>
-                            <a href={pic.url} target="_blank" rel={rel} title={item.title}>
+                            <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                 {item.title}
                             </a>
                         </li>

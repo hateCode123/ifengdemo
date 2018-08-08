@@ -9,6 +9,7 @@ exports.financeWemoney = {
     edit: true,
     type: 'html',
     low: true,
+    preview: true,
     handler: async ctx => {
         const json = [
             // 通用导航

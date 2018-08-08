@@ -52,17 +52,9 @@ class Industry extends React.PureComponent {
                     ))}
                 </ul>
                 <div className={styles.data}>
-                    <Chip
-                        id="10087"
-                        type="static"
-                        title="行业概念资金流向数据"
-                        groupName="操盘热点"
-                        translate="jsonParse"
-                        content={industry}>
-                        <a href={imageUrl[current]} target="_blank" rel={rel}>
-                            <img src={image[current]} />
-                        </a>
-                    </Chip>
+                    <a href={imageUrl[current]} target="_blank" rel={rel}>
+                        <img src={image[current]} />
+                    </a>
                     <table>
                         <thead>
                             <tr>
