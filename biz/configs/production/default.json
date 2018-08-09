@@ -14,22 +14,9 @@
     "JaegerDebug": false,
     "JaegerSamplerType": "probabilistic",
     "JaegerSamplerParam": 0.1,
-    "logs": [
-        {
-            "type": "rotating-file",
-            "path": "/data/logs/out.log",
-            "level": "info",
-            "period": "1d",
-            "count": 30
-        },
-        {
-            "type": "rotating-file",
-            "path": "/data/logs/err.log",
-            "level": "error",
-            "period": "1d",
-            "count": 30
-        }
-    ],
+    "logs": {
+        "level": "info"
+    },
     "redisHosts": [],
     "blacklist": ["/controllers/black/black.js"],
     "cdnCacheTime": 120
