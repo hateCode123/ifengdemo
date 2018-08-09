@@ -33,7 +33,7 @@
         "@ifeng/ui_pc_search": "^1.0.4",
         "@ifeng/ui_pc_slides": "^1.0.6",
         "@ifeng/ui_pc_userInfo": "^1.0.2",
-        "@ifeng/visualediting": "^1.0.7",
+        "@ifeng/visualediting": "^1.0.8",
         "@tars/rpc": "2.0.2",
         "anujs": "^1.4.4",
         "babel-runtime": "^6.26.0",

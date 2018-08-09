@@ -90,7 +90,7 @@ class Info extends React.Component {
                 }
 
                 if (data.data) {
-                    datas[num].data = data.data.list;
+                    datas[num].data = data.data.data;
                 }
             } catch (e) {
                 console.error(e);
@@ -100,7 +100,7 @@ class Info extends React.Component {
         // 获取文章评论数
         if (num !== 0 && !counts[num]) {
             try {
-                const info = data.data ? data.data.list : [];
+                const info = data.data ? data.data.data : [];
                 const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 

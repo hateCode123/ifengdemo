@@ -1,4 +1,6 @@
 const handleUrl = url => {
+    if (!url) return;
+
     if (url.indexOf('http:') === 0) {
         return url.replace('http:', '');
     } else if (url.indexOf('https:') === 0) {

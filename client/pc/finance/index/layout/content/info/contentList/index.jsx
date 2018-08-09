@@ -7,6 +7,7 @@ import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/infoAd';
+import { handleUrl } from '../../../../../../utils/utils';
 
 const event = new Event();
 
@@ -93,9 +94,9 @@ class ContentList extends React.PureComponent {
                         onMouseLeave={this.handleMouseOver}
                         style={listStyle}>
                         {item.thumbnails && item.thumbnails !== '' && item.thumbnails.length !== 0 ? (
-                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                            <a href={handleUrl(item.url)} target="_blank" rel={rel} className={styles.imgBox}>
                                 <img
-                                    src={JSON.parse(item.thumbnails).image[0].url}
+                                    src={item.thumbnails.image[0].url}
                                     width="144"
                                     height="96"
                                     className={styles.trans}
@@ -106,7 +107,7 @@ class ContentList extends React.PureComponent {
                         )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
-                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
+                                <a href={handleUrl(item.url)} target="_blank" rel={rel} title={item.title}>
                                     {item.title}
                                 </a>
                             </p>

@@ -44,7 +44,6 @@
     width: 300px;
     height: 600px;
     text-align: center;
-    border: 1px solid #ccc;
 }
 
 .box_2 {
@@ -52,7 +51,6 @@
     width: 300px;
     height: 251px;
     text-align: center;
-    border: 1px solid #ccc;
 }
 
 .box_3 {
@@ -60,7 +58,6 @@
     width: 300px;
     height: 250px;
     text-align: center;
-    border: 1px solid #ccc;
 }
 
 .box_4 {
@@ -70,7 +67,6 @@
     overflow: hidden;
     margin-top: 4px;
     text-align: center;
-    border: 1px solid #ccc;
 }
 
 .box_5,
@@ -80,5 +76,4 @@
     width: 300px;
     height: 250px;
     text-align: center;
-    border: 1px solid #ccc;
 }

@@ -58,8 +58,8 @@ exports.list = {
             // 直播 Logo
             ['liveLogo', 'KVProxy', 'getStaticFragment', 10052, getJsonByKey('content')],
 
-            // 股市要闻
-            ['stockNews', 'KVProxy', 'getCustom', 'finance_22005_10736_30', getJson()],
+            // 证券要闻
+            ['stockNews', 'KVProxy', 'getDynamicFragment', '20032', getStringByKey('data')],
 
             // 公司要闻标题
             ['newsTab', 'KVProxy', 'getStaticFragment', 10050, getJsonByKey('content')],
@@ -68,7 +68,7 @@ exports.list = {
             ['newsSubTab', 'KVProxy', 'getStaticFragment', 10117, getJsonByKey('content')],
 
             // 公司要闻
-            ['news', 'KVProxy', 'getCustom', 'finance_22005_10736_29', getJson()],
+            ['news', 'KVProxy', 'getDynamicFragment', '20033', getStringByKey('data')],
 
             // 牛人解盘标题
             ['answerTab', 'KVProxy', 'getStaticFragment', 10051, getJsonByKey('content')],
@@ -134,10 +134,10 @@ exports.list = {
             ['hotSpotsSubTitle2', 'KVProxy', 'getStaticFragment', 10071, getJsonByKey('content')],
 
             // 操盘分析
-            ['marketAnalysis', 'KVProxy', 'getCustom', 'finance_22005_10736_13', getJson()],
+            ['marketAnalysis', 'KVProxy', 'getDynamicFragment', '20034', getStringByKey('data')],
 
             // 热点板块
-            ['hotPlate', 'KVProxy', 'getCustom', 'finance_22005_10736_14', getJson()],
+            ['hotPlate', 'KVProxy', 'getDynamicFragment', '20035', getStringByKey('data')],
 
             // 行业概念资金流向标题
             ['industryTitle', 'KVProxy', 'getStaticFragment', 10120, getJsonByKey('content')],
@@ -183,10 +183,10 @@ exports.list = {
             ['schoolSubTitle2', 'KVProxy', 'getStaticFragment', 10073, getJsonByKey('content')],
 
             // 高手操盘日志
-            ['logs', 'KVProxy', 'getCustom', 'finance_22005_10736_19', getJson()],
+            ['logs', 'KVProxy', 'getDynamicFragment', '20036', getStringByKey('data')],
 
             // 股民学校
-            ['school', 'KVProxy', 'getCustom', 'finance_22005_10736_15', getJson()],
+            ['school', 'KVProxy', 'getDynamicFragment', '20037', getStringByKey('data')],
 
             // 明星分析师标题
             ['starAnalystTitle', 'KVProxy', 'getStaticFragment', 10092, getJsonByKey('content')],
@@ -301,16 +301,20 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.stockNews = allData.stockNews.list.slice(0, 18).map(item => ({
-            id: item.id,
-            url: item.url,
-            title: item.title,
-        }));
+        allData.stockNews =
+            allData.stockNews &&
+            allData.stockNews.slice(0, 18).map(item => ({
+                id: item.id,
+                url: item.url,
+                title: item.title,
+            }));
 
-        allData.news = allData.news.list.slice(0, 8).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        allData.news =
+            allData.news &&
+            allData.news.slice(0, 8).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
         allData.subject = allData.subject.slice(0, 3).map(item => ({
             banner: item.banner,
@@ -318,25 +322,33 @@ exports.list = {
             title: item.title,
         }));
 
-        allData.marketAnalysis = allData.marketAnalysis.list.slice(0, 11).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        allData.marketAnalysis =
+            allData.marketAnalysis &&
+            allData.marketAnalysis.slice(0, 11).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
-        allData.hotPlate = allData.hotPlate.list.slice(0, 11).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        allData.hotPlate =
+            allData.hotPlate &&
+            allData.hotPlate.slice(0, 11).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
-        allData.logs = allData.logs.list.slice(0, 6).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        allData.logs =
+            allData.logs &&
+            allData.logs.slice(0, 6).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
-        allData.school = allData.school.list.slice(0, 6).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        allData.school =
+            allData.school &&
+            allData.school.slice(0, 6).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
         const statisticsData = {
             statisticsHead: allData.statisticsHead,

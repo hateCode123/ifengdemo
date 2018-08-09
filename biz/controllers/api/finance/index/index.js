@@ -22,7 +22,7 @@ exports.getMacroList = {
     path: '/api/finance/index/macroList/:callback?',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_24').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '20038').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);
@@ -36,7 +36,7 @@ exports.getStockList = {
     path: '/api/finance/index/stockList/:callback?',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_30').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '20032').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);
@@ -50,7 +50,7 @@ exports.getImarketsList = {
     path: '/api/finance/index/imarketsList/:callback?',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_25').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '20040').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);
@@ -64,7 +64,7 @@ exports.getCompanyList = {
     path: '/api/finance/index/companyList/:callback?',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_29').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '20033').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);
@@ -78,7 +78,7 @@ exports.getWemoneyList = {
     path: '/api/finance/index/wemoneyList/:callback?',
     method: 'get',
     handler: async ctx => {
-        const data = await KVProxy.getCustom(ctx, 'finance_22005_10736_26').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '20039').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);

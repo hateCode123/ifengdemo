@@ -67,7 +67,4 @@
     color: #999999;
     padding-top: 6px;
     line-height: 18px;
-    & span {
-        padding-left: 18px;
-    }
 }

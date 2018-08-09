@@ -53,16 +53,16 @@ exports.list = {
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
 
             // 返回连环话数据
-            ['comicBook', 'KVProxy', 'getCustom', 'finance_22005_10736_27', getJson()],
+            ['comicBook', 'KVProxy', 'getDynamicFragment', '20027', getStringByKey('data')],
 
             // 大咖说
-            ['talking', 'KVProxy', 'getCustom', 'finance_22005_10736_34', getJson()],
+            ['talking', 'KVProxy', 'getDynamicFragment', '20028', getStringByKey('data')],
 
             // 财商教育
             ['finance', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
 
             // 炒股大赛
-            ['stocks', 'KVProxy', 'getCustom', 'finance_22005_10736_31', getJson()],
+            ['stocks', 'KVProxy', 'getDynamicFragment', '20029', getStringByKey('data')],
 
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
@@ -71,10 +71,10 @@ exports.list = {
             ['financeVideo', 'KVProxy', 'getSelectedPool', 12, getStringByKey('data')],
 
             // 研究院
-            ['institute', 'KVProxy', 'getCustom', 'finance_22005_10736_32', getJson()],
+            ['institute', 'KVProxy', 'getDynamicFragment', '20030', getStringByKey('data')],
 
             // 国子策
-            ['lark', 'KVProxy', 'getCustom', '22005_516_36328', getJson()],
+            ['lark', 'KVProxy', 'getDynamicFragment', '20031', getStringByKey('data')],
 
             // 专题会议
             ['meeting', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
@@ -260,23 +260,25 @@ exports.list = {
             title: item.title,
         }));
 
-        const comicBook = allData.comicBook.list[0];
+        const comicBook = allData.comicBook && allData.comicBook[0];
 
         allData.comicBook = {
             url: comicBook.url,
             thumbnails:
-                comicBook.thumbnails && JSON.parse(comicBook.thumbnails).image[0]
-                    ? JSON.parse(comicBook.thumbnails).image[0].url
+                comicBook.thumbnails && comicBook.thumbnails.image && comicBook.thumbnails.image[0]
+                    ? comicBook.thumbnails.image[0].url
                     : '',
             title: comicBook.title,
             date: comicBook.newsTime.split(' ')[0],
         };
 
-        const talkingTitle = allData.talking.list[0];
-        const talking = allData.talking.list.slice(1, 7).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
+        const talkingTitle = allData.talking && allData.talking[0];
+        const talking =
+            allData.talking &&
+            allData.talking.slice(1, 7).map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
         allData.talking = [
             {
@@ -284,22 +286,26 @@ exports.list = {
                 title: talkingTitle.title,
                 name: talkingTitle.wemediaEAccountName,
                 img:
-                    talkingTitle.thumbnails && JSON.parse(talkingTitle.thumbnails).image[0]
-                        ? JSON.parse(talkingTitle.thumbnails).image[0].url
+                    talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
+                        ? talkingTitle.thumbnails.image[0].url
                         : '',
             },
         ].concat(talking);
 
         allData.stocks =
-            allData.stocks.list &&
-            allData.stocks.list.slice(0, 6).map(item => ({
+            allData.stocks &&
+            allData.stocks.slice(0, 6).map(item => ({
                 url: item.url,
                 title: item.title,
             }));
+
         allData.financeVideo = allData.financeVideo
             ? allData.financeVideo.slice(0, 3).map(item => ({
                   url: item.url,
-                  thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
+                  thumbnails:
+                      item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                          ? item.thumbnails.image[0].url
+                          : '',
                   title: item.title,
               }))
             : [
@@ -310,22 +316,25 @@ exports.list = {
                   },
               ];
 
-        const institute = allData.institute.list[0];
+        const institute = allData.institute && allData.institute[0];
 
         allData.institute = {
             url: institute.url,
             thumbnails:
-                institute.thumbnails && institute.thumbnails !== ''
-                    ? JSON.parse(institute.thumbnails).image[0].url
+                institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
+                    ? institute.thumbnails.image[0].url
                     : '',
             title: institute.title,
         };
 
-        const lark = allData.lark;
+        const lark = allData.lark && allData.lark[0];
 
         allData.lark = {
             url: lark.url,
-            thumbnails: lark.thumbnails && lark.thumbnails !== '' ? JSON.parse(lark.thumbnails).image[0].url : '',
+            thumbnails:
+                lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
+                    ? lark.thumbnails.image[0].url
+                    : '',
             title: lark.title,
         };
 

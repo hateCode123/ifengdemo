@@ -9,15 +9,16 @@ if (/:30080/.test(window.location.href)) {
     apiBaseUrl = '/api';
 }
 
-const createJsonpCallbackName = (str, num) => {
-    const md5 = require('md5');
+const md5 = require('md5');
 
+const createJsonpCallbackName = (str, num) => {
     num = num ? num : 0;
     const jsonpCallbackName = `_${md5(`${str}_${num}`)}`;
 
     if (window[jsonpCallbackName]) {
         num++;
-        createJsonpCallbackName(str, num);
+
+        return createJsonpCallbackName(str, num);
     } else {
         return jsonpCallbackName;
     }
@@ -36,13 +37,15 @@ const getMyStockData = async num => {
 
 // 获取股票数据
 const getStockData = async codeList => {
+    const callback = createJsonpCallbackName('getFinanceData');
+
     return await jsonp('//hq.finance.ifeng.com/q.php', {
         data: {
             l: codeList.join(','),
             f: 'json',
-            e: 'getStock(json_q)',
+            e: `${callback}(json_q)`,
         },
-        jsonpCallback: createJsonpCallbackName('getStock'),
+        jsonpCallback: callback,
         cache: false,
     });
 };
@@ -215,26 +218,30 @@ const getHotStockData = async () => {
 
 // 获取分析师数据
 const getAnalyzerInfo = async (name, type) => {
+    const callback = createJsonpCallbackName('updateAnalyzerInfo');
+
     return await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
         data: {
             name,
             type,
-            cb: createJsonpCallbackName('updateAnalyzerInfo'),
+            cb: callback,
         },
-        jsonpCallback: createJsonpCallbackName('updateAnalyzerInfo'),
+        jsonpCallback: callback,
         cache: false,
     });
 };
 
 // 获取分析师答疑数据
 const getQAData = async (name, type) => {
+    const callback = createJsonpCallbackName('getQAData');
+
     return await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
         data: {
             name,
             type,
-            cb: createJsonpCallbackName('getQAData'),
+            cb: callback,
         },
-        jsonpCallback: createJsonpCallbackName('getQAData'),
+        jsonpCallback: callback,
         cache: false,
     });
 };
