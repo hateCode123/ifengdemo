@@ -49,7 +49,10 @@ class Layout extends React.PureComponent {
                 financeList: content.financeList,
                 stocks: content.stocks,
             },
-            info: content.info,
+            info: {
+                infoAd: content.infoAd,
+                hardAd: content.hardAd,
+            },
             middleAd: content.middleAd,
             rightContent: {
                 asideAd1: content.asideAd1,

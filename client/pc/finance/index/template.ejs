@@ -12,269 +12,212 @@
         var allData = <%- JSON.stringify(allData) %>;
 
         try{
-            var topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
+            allData.topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var topAd = {};
+            allData.topAd = {};
         }
 
         try{
-            var channelAd = new Function('return ' + <%- JSON.stringify(allData.channelAd) %>)();
+            allData.channelAd = new Function('return ' + <%- JSON.stringify(allData.channelAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var channelAd = {};
+            allData.channelAd = {};
         }
 
         try{
-            var dayNewsAd = new Function('return ' + <%- JSON.stringify(allData.dayNewsAd) %>)();
+            allData.dayNewsAd = new Function('return ' + <%- JSON.stringify(allData.dayNewsAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var dayNewsAd = {};
+            allData.dayNewsAd = {};
         }
 
         try{
-            var extraNewsAd = new Function('return ' + <%- JSON.stringify(allData.extraNewsAd) %>)();
+            allData.extraNewsAd = new Function('return ' + <%- JSON.stringify(allData.extraNewsAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var extraNewsAd = {};
+            allData.extraNewsAd = {};
         }
 
         try{
-            var middleAd = new Function('return ' + <%- JSON.stringify(allData.middleAd) %>)();
+            allData.middleAd = new Function('return ' + <%- JSON.stringify(allData.middleAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var middleAd = {};
+            allData.middleAd = {};
         }
 
         try{
-            var financeVideoAd = new Function('return ' + <%- JSON.stringify(allData.financeVideoAd) %>)();
+            allData.financeVideoAd = new Function('return ' + <%- JSON.stringify(allData.financeVideoAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var financeVideoAd = {};
+            allData.financeVideoAd = {};
         }
 
         try{
-            var meetingAd = new Function('return ' + <%- JSON.stringify(allData.meetingAd) %>)();
+            allData.meetingAd = new Function('return ' + <%- JSON.stringify(allData.meetingAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var meetingAd = {};
+            allData.meetingAd = {};
         }
 
         try{
-            var meetingListAd = new Function('return ' + <%- JSON.stringify(allData.meetingListAd) %>)();
+            allData.meetingListAd = new Function('return ' + <%- JSON.stringify(allData.meetingListAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var meetingListAd = {};
+            allData.meetingListAd = {};
         }
 
         try{
-            var marketAd = new Function('return ' + <%- JSON.stringify(allData.marketAd) %>)();
+            allData.marketAd = new Function('return ' + <%- JSON.stringify(allData.marketAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var marketAd = {};
+            allData.marketAd = {};
         }
 
         try{
-            var courierAd = new Function('return ' + <%- JSON.stringify(allData.courierAd) %>)();
+            allData.courierAd = new Function('return ' + <%- JSON.stringify(allData.courierAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var courierAd = {};
+            allData.courierAd = {};
         }
 
         try{
-            var asideAd1 = new Function('return ' + <%- JSON.stringify(allData.asideAd1) %>)();
+            allData.asideAd1 = new Function('return ' + <%- JSON.stringify(allData.asideAd1) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd1 = {};
+            allData.asideAd1 = {};
         }
 
         try{
-            var asideAd2 = new Function('return ' + <%- JSON.stringify(allData.asideAd2) %>)();
+            allData.asideAd2 = new Function('return ' + <%- JSON.stringify(allData.asideAd2) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd2 = {};
+            allData.asideAd2 = {};
         }
 
         try{
-            var asideAd3 = new Function('return ' + <%- JSON.stringify(allData.asideAd3) %>)();
+            allData.asideAd3 = new Function('return ' + <%- JSON.stringify(allData.asideAd3) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd3 = {};
+            allData.asideAd3 = {};
         }
 
         try{
-            var asideAd4 = new Function('return ' + <%- JSON.stringify(allData.asideAd4) %>)();
+            allData.asideAd4 = new Function('return ' + <%- JSON.stringify(allData.asideAd4) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd4 = {};
+            allData.asideAd4 = {};
         }
 
         try{
-            var asideAd5 = new Function('return ' + <%- JSON.stringify(allData.asideAd5) %>)();
+            allData.asideAd5 = new Function('return ' + <%- JSON.stringify(allData.asideAd5) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd5 = {};
+            allData.asideAd5 = {};
         }
 
         try{
-            var asideAd6 = new Function('return ' + <%- JSON.stringify(allData.asideAd6) %>)();
+            allData.asideAd6 = new Function('return ' + <%- JSON.stringify(allData.asideAd6) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd6 = {};
+            allData.asideAd6 = {};
         }
 
         try{
-            var asideAd7 = new Function('return ' + <%- JSON.stringify(allData.asideAd7) %>)();
+            allData.asideAd7 = new Function('return ' + <%- JSON.stringify(allData.asideAd7) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var asideAd7 = {};
+            allData.asideAd7 = {};
         }
 
         try{
-            var infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
+            allData.infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var infoAd = {};
+            allData.infoAd = {};
         }
 
         try{
-            var hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
+            allData.hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var hardAd = {};
+            allData.hardAd = {};
         }
         
         try{
-            var bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
+            allData.bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var bottomAd = {};
+            allData.bottomAd = {};
         }
 
         try{
-            var floatAd1 = new Function('return ' + <%- JSON.stringify(allData.floatAd1) %>)();
+            allData.floatAd1 = new Function('return ' + <%- JSON.stringify(allData.floatAd1) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd1 = {};
+            allData.floatAd1 = {};
         }
 
         try{
-            var floatAd2 = new Function('return ' + <%- JSON.stringify(allData.floatAd2) %>)();
+            allData.floatAd2 = new Function('return ' + <%- JSON.stringify(allData.floatAd2) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd2 = {};
+            allData.floatAd2 = {};
         }
 
         try{
-            var floatAd3 = new Function('return ' + <%- JSON.stringify(allData.floatAd3) %>)();
+            allData.floatAd3 = new Function('return ' + <%- JSON.stringify(allData.floatAd3) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd3 = {};
+            allData.floatAd3 = {};
         }
 
         try{
-            var floatAd4 = new Function('return ' + <%- JSON.stringify(allData.floatAd4) %>)();
+            allData.floatAd4 = new Function('return ' + <%- JSON.stringify(allData.floatAd4) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd4 = {};
+            allData.floatAd4 = {};
         }
 
         try{
-            var floatAd5 = new Function('return ' + <%- JSON.stringify(allData.floatAd5) %>)();
+            allData.floatAd5 = new Function('return ' + <%- JSON.stringify(allData.floatAd5) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd5 = {};
+            allData.floatAd5 = {};
         }
 
         try{
-            var floatAd6 = new Function('return ' + <%- JSON.stringify(allData.floatAd6) %>)();
+            allData.floatAd6 = new Function('return ' + <%- JSON.stringify(allData.floatAd6) %>)();
         }catch(e){
             console.error('AdError', e);
 
-            var floatAd6 = {};
+            allData.floatAd6 = {};
         }
-        
-        var jsonData = {
-            nav: allData.nav,
-            search: allData.search,
-            topAd: topAd,
-            logo: allData.logo,
-            logoAd: allData.logoAd,
-            channelAd: channelAd,
-            navigation: allData.navigation,
-            rights: allData.rights,
-            production: allData.production,
-            bannerPic: allData.bannerPic,
-            headline: allData.headline,
-            dayNews: allData.dayNews,
-            dayNewsAd: dayNewsAd,
-            extraNews: allData.extraNews,
-            extraNewsAd: extraNewsAd,
-            middleAd: middleAd,
-            comicBook: allData.comicBook,
-            talking: allData.talking,
-            finance: allData.finance,
-            financeList: allData.financeList,
-            stocks: allData.stocks,
-            stocksList: allData.stocksList,
-            financeVideo: allData.financeVideo,
-            financeVideoAd: financeVideoAd,
-            institute: allData.institute,
-            lark: allData.lark,
-            meeting: allData.meeting,
-            meetingAd: meetingAd,
-            meetingListAd: meetingListAd,
-            market: allData.market,
-            marketAd: marketAd,
-            courier: allData.courier,
-            courierAd: courierAd,
-            asideAd1: asideAd1,
-            asideAd2: asideAd2,
-            asideAd3: asideAd3,
-            asideAd4: asideAd4,
-            asideAd5: asideAd5,
-            asideAd6: asideAd6,
-            asideAd7: asideAd7,
-            info: {
-                infoAd: infoAd,
-                hardAd: hardAd
-            },
-            cooperation: allData.cooperation,
-            bottomAd: bottomAd,
-            footer: allData.footer,
-            qrCode: allData.qrCode,
-            floatAd1: floatAd1,
-            floatAd2: floatAd2,
-            floatAd3: floatAd3,
-            floatAd4: floatAd4,
-            floatAd5: floatAd5,
-            floatAd6: floatAd6
-        };
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
