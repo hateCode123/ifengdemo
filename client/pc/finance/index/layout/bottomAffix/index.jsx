@@ -18,8 +18,6 @@ class BottomAffix extends React.PureComponent {
         isShow: false,
         quoteShow: false,
         fundsShow: false,
-        quote: '',
-        funds: '',
     };
 
     componentDidMount() {
@@ -90,11 +88,11 @@ class BottomAffix extends React.PureComponent {
     };
 
     handleQuoteChange = e => {
-        this.setState({ quote: e.currentTarget.value });
+        this.setState({ text: e.currentTarget.value });
     };
 
     handleFundsChange = e => {
-        this.setState({ funds: e.currentTarget.value });
+        this.setState({ text: e.currentTarget.value });
     };
 
     handleQuoteSearch = () => {
