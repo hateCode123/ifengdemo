@@ -4,15 +4,23 @@
  */
 
 const rewrite = (ctx, from, to) => {
-    ctx.originalUrl = ctx.url = ctx.url.replace(from, to);
+    ctx.originalUrl = ctx.url = ctx.url
+        .replace(from, to)
+        .replace(/(\/index\.shtml)|(\.shtml)/ig, '')
+        .replace(/\/\//, '/');
 };
 
 module.exports = async (ctx, next) => {
-    const devicetype = ctx.headers['devicetype'] || 'pc';
+    let devicetype = ctx.headers['devicetype'] || 'pc';
+
+    if (devicetype === 'ie6') {
+        return;
+    }
+    // devicetype = 'ie78';
 
     ctx.set('deviceType', devicetype);
 
-    // ctx.headers['domain'] = 'finance.ifeng.com';
+    ctx.headers['domain'] = 'finance.ifeng.com';
     // ctx.headers['domain'] = 'shankapi.ifeng.com';
 
     if (ctx.url.indexOf('visualediting/') > -1) {
@@ -22,23 +30,16 @@ module.exports = async (ctx, next) => {
         // do nothing
     } else if (/\/c\/channel/.test(ctx.url)) {
         if (devicetype === 'pc' || devicetype === 'mobile') {
-            rewrite(ctx, /\/c\/channel\/(\w+)?(\/\w+)?(\/index\.shtml)?(\.shtml)?/, '/pc/finance/$1$2');
+            rewrite(ctx, /\/c\/channel\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/finance/$1`);
         } else if (devicetype === 'ie78') {
-            rewrite(ctx, /\/c\/channel\/(\w+)?(\/\w+)?(\/index\.shtml)?(\.shtml)?/, '/pc/finance/$1$2/low');
-        } else if (devicetype === 'ie6') {
-            ctx.type = 'text/html';
-
-            return (ctx.body = '<h1>ie6</h1>');
+            rewrite(ctx, /\/c\/channel\/([a-zA-Z0-9/-_]+)?/, '/pc/finance/$1/low');
         }
     } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
         if (devicetype === 'pc' || devicetype === 'mobile') {
-            rewrite(ctx, /\/(\w+)?(\/\w+)?(\.shtml)?(\/index\.shtml)?/, '/pc/finance/$1$2');
+            // rewrite(ctx, /\/(\w+)?(\/\w+)?(\.shtml)?(\/index\.shtml)?/, `/${devicetype}/finance/$1$2`);
+            rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/finance/$1`);
         } else if (devicetype === 'ie78') {
-            rewrite(ctx, /\/(\w+)(\/\w+)?(\/index\.shtml)?(\.shtml)?/, '/pc/finance/$1$2/low');
-        } else if (devicetype === 'ie6') {
-            ctx.type = 'text/html';
-
-            return (ctx.body = '<h1>ie6</h1>');
+            rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/finance/$1/low');
         }
     } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('shankapi.ifeng.com') > -1) {
         rewrite(ctx, /\/(\w+)/, '/api');

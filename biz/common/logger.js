@@ -1,4 +1,4 @@
-const bunyan = require('bunyan');
+const bunyan = require('@ifeng/server_bunyan');
 const config = require('../configs');
 const logs = config.default.logs;
 

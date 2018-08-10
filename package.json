@@ -25,6 +25,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@ifeng/server_bunyan": "^1.0.1",
         "@ifeng/tool_eslint": "^1.0.1",
         "@ifeng/ui_base": "^1.0.8",
         "@ifeng/ui_pc_ad": "^1.0.3",
@@ -37,7 +38,6 @@
         "@tars/rpc": "2.0.2",
         "anujs": "^1.4.4",
         "babel-runtime": "^6.26.0",
-        "bunyan": "^1.8.12",
         "chalk": "^2.4.1",
         "chance": "^1.0.13",
         "extract-text-webpack-plugin": "^4.0.0-beta.0",
