@@ -40,13 +40,13 @@ glob.sync(`${__dirname}/controllers/**/*.js`).forEach(file => {
 });
 routerPath = Object.keys(routers);
 
-console.log(routerPath);
+// console.log(routerPath);
 //
 for (const path of routerPath) {
     if (/^\/pc\//.test(path)) {
         let mobileUrl = path.replace('/pc/', '/mobile/');
 
-        console.log(mobileUrl);
+        // console.log(mobileUrl);
 
         if (routerPath.indexOf(mobileUrl) === -1) {
             routers[mobileUrl] = _.clone(routers[path]);
@@ -131,63 +131,84 @@ for (const i in routers) {
             continue;
         }
         if (_.isFunction(handler)) {
+            let routerObj = JSON.parse(JSON.stringify(routers[i]));
+
+            routerObj.edit = false;
+            routerObj.preview = false;
+            routerObj.low = false;
+
             // 将路由放入路由列表
             routerList.push({
                 path,
                 method: methodItem,
-                handlers: [...meddlewareList, match(type, cache, false, false, false, handler, cdncache, path)],
+                handlers: [...meddlewareList, match(routerObj, handler)],
             });
 
             // 添加页面编辑中间件
             if (edit) {
                 // 将路由放入路由列表
+                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+
+                routerObj.path = `${routerObj.path}/visualediting`;
+                routerObj.edit = true;
+                routerObj.preview = false;
+                routerObj.low = false;
+
                 routerList.push({
-                    path: `${path}/visualediting`,
+                    path: routerObj.path,
                     method: methodItem,
-                    handlers: [
-                        ...meddlewareList,
-                        match(type, cache, edit, false, false, handler, cdncache, `${path}/visualediting`),
-                    ],
+                    handlers: [...meddlewareList, match(routerObj, handler)],
                 });
             }
             // 添加全页预览中间件
             if (preview) {
+                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+
+                routerObj.path = `${routerObj.path}/preview/:id/:type/:data`;
+                routerObj.edit = false;
+                routerObj.preview = true;
+                routerObj.low = false;
+
                 // 将路由放入路由列表
                 routerList.push({
-                    path: `${path}/preview/:id/:type/:data`,
+                    path: routerObj.path,
                     method: methodItem,
-                    handlers: [
-                        ...meddlewareList,
-                        match(type, cache, false, preview, false, handler, cdncache, `${path}/preview/:id/:type/:data`),
-                    ],
+                    handlers: [...meddlewareList, match(routerObj, handler)],
                 });
             }
 
             // 添加降级页中间件
             if (low) {
-               
+                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+
+                routerObj.path = `${routerObj.path}/low`;
+                routerObj.edit = false;
+                routerObj.preview = false;
+                routerObj.low = true;
+
                 // 将路由放入路由列表
                 routerList.push({
                     path: `${path}/low`,
                     method: methodItem,
-                    handlers: [
-                        ...meddlewareList,
-                        match(type, cache, false, false, low, handler, cdncache, `${path}/low`),
-                    ],
+                    handlers: [...meddlewareList, match(routerObj, handler)],
                 });
             }
             // 处理路由冒泡
             if (routers[i].share === 'pc') {
+                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+
+                routerObj.path = `${routerObj.path}/low`;
+                routerObj.edit = false;
+                routerObj.preview = false;
+                routerObj.low = true;
+
                 // 将路由放入路由列表
                 routerList.push({
-                    path: `${path}/low`,
+                    path: routerObj.path,
                     method: methodItem,
-                    handlers: [
-                        ...meddlewareList,
-                        match(type, cache, false, false, low, handler, cdncache, `${path}`),
-                    ],
+                    handlers: [...meddlewareList, match(routerObj, handler)],
                 });
-            } 
+            }
         }
     }
 }
