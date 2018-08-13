@@ -67,7 +67,7 @@
         "write-file-webpack-plugin": "^4.2.0"
     },
     "devDependencies": {
-        "@ifeng_server/gulp_cdn_replace": "0.0.2",
+        "@ifeng/tool_gulp_cdn_replace": "0.0.2",
         "ajv": "^6.5.2",
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.2.2",

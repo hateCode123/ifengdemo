@@ -107,8 +107,14 @@ exports.list = {
             // 热点专题
             ['subject', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
+            // 理财超市标题
+            ['marketTitle', 'KVProxy', 'getStaticFragment', 10077, getJsonByKey('content')],
+
             // 理财超市
             ['market', 'KVProxy', 'getStaticFragment', 10080, getStringByKey('content')],
+
+            // 理财速递标题
+            ['courierTitle', 'KVProxy', 'getStaticFragment', 10119, getJsonByKey('content')],
 
             // 理财速递
             ['courier', 'KVProxy', 'getStaticFragment', 10082, getJsonByKey('content')],
