@@ -1,31 +1,27 @@
+const path = require('path');
 const glob = require('glob');
-const isWin = require('./isWin');
-const _ = require('lodash')
+const _ = require('lodash');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const getErrorupload = require('./getErrorUpload');
+const getPolyfill = require('./getPolyfill');
+const env = process.env.NODE_ENV;
 
-module.exports = function getHTML(globPath, extendName, filepath) {
-    // console.log('html');
+module.exports = function getHTML(globPath, extendName, level, filepath) {
     let files = glob.sync(globPath);
     if (filepath && filepath !== '**') {
         let list = [];
         for (const item of files) {
             for (const path of filepath) {
-                // console.log(item+'----'+path);
                 if (item.indexOf(path) > -1) {
-                    list.push(item)
+                    list.push(item);
                 }
             }
-            
         }
         files = list;
-
     }
-    console.log(files);;
 
     return files.map(file => {
-        // const paths = file.split(isWin() ? '/' : '/');
-        // const entryName =  paths[paths.length - 2];
-
         let path = file.replace('./client/pc/', '').replace('./client/mobile/', '');
         let paths = path.split('/');
         paths.pop();
@@ -33,6 +29,8 @@ module.exports = function getHTML(globPath, extendName, filepath) {
 
         const conf = {
             filename: `${entryName}${extendName}.html`,
+            polyfill: getPolyfill(level),
+            errorupload: env === 'production' ? getErrorupload() : getErrorupload(),
             template: file,
             inject: false,
             hase: false,
@@ -46,5 +44,3 @@ module.exports = function getHTML(globPath, extendName, filepath) {
         return new HtmlWebpackPlugin(conf);
     });
 };
-
-// getHTMLs('./views/*/template.ejs');

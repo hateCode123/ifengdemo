@@ -5,7 +5,7 @@ import { jsonp, ajax } from '@ifeng/ui_base';
 let apiBaseUrl = apiUrl;
 
 /* eslint-enable no-undef */
-if (/:30080/.test(window.location.href)) {
+if (/\.shank\.ifeng\.com/.test(window.location.hostname)) {
     apiBaseUrl = '/api';
 }
 

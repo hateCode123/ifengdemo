@@ -4,13 +4,14 @@ const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy'
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
 
 exports.list = {
-    path: '/pc/finance/stock/(index)?',
+    path: '/pc/finance/stock',
     method: 'get',
     type: 'html',
     cache: 0,
     edit: true,
     low: true,
     preview: true,
+    online: true,
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段

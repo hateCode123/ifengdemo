@@ -8,7 +8,6 @@ const aspectRatioMini = require('postcss-aspect-ratio-mini');
 const pxToViewport = require('postcss-px-to-viewport');
 const viewPortUnits = require('postcss-viewport-units');
 const writeSvg = require('postcss-write-svg');
-const CleanPlugin = require('clean-webpack-plugin');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
 const es3ifyPlugin = require('es3ify-webpack-plugin');
@@ -249,6 +248,7 @@ const createConfig = function(type, platform, cssConfig, level, filepath) {
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
+                level,
                 filepath,
             ),
         ],
