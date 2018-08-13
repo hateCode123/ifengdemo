@@ -37,7 +37,7 @@ const server = app.listen(config.default.port || 3000, () => {
 
 module.exports = server;
 
-if (env === 'development') {
+if (env === 'development' || env === 'pre_development' ) {
     const socket = require('socket.io');
     const io = socket(server);
     const chokidar = require('chokidar');
@@ -49,6 +49,7 @@ if (env === 'development') {
 
     // 静态资源设置
     app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
+    app.use(koaStatic(path.join(__dirname, './static'), { index: 'index.html' }));
 
     setTimeout(() => {
         io.sockets.emit('reload');

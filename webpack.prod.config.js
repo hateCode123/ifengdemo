@@ -10,7 +10,6 @@ const aspectRatioMini = require('postcss-aspect-ratio-mini');
 const pxToViewport = require('postcss-px-to-viewport');
 const viewPortUnits = require('postcss-viewport-units');
 const writeSvg = require('postcss-write-svg');
-const CleanPlugin = require('clean-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
@@ -24,10 +23,10 @@ const env = process.env.NODE_ENV;
 
 const HappyPack = require('happypack');
 const os = require('os');
-// const halfCpuCount = Math.floor(os.cpus().length / 2);
-const happyThreadPool = HappyPack.ThreadPool({ size: 3 });
+const useCpuCount = Math.floor(os.cpus().length / 5);
+const happyThreadPool = HappyPack.ThreadPool({ size: useCpuCount > 1 ? useCpuCount : 1 });
 
-console.log('cpus============>', os.cpus().length);
+// console.log('cpus============>', os.cpus().length);
 
 const pcCssConfig = function(level) {
     return {
@@ -127,6 +126,7 @@ const getAliasFrame = function getAliasFram(level) {
 
 const createConfig = function(type, platform, cssConfig, level) {
     return {
+        stats: 'errors-only',
         devtool: 'source-map',
         entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
         output: {
@@ -300,10 +300,11 @@ const createConfig = function(type, platform, cssConfig, level) {
                 threadPool: happyThreadPool,
                 verbose: true,
             }),
-            new CleanPlugin(['dist']),
+            // new CleanPlugin(['dist']),
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
+                level,
             ),
         ],
     };

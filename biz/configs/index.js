@@ -3,7 +3,6 @@
  */
 const glob = require('glob');
 const path = require('path');
-const logger = require('../common/logger');
 const env = process.env.NODE_ENV || 'development';
 const pattern = path.join(__dirname, env, '/**/*.json');
 
@@ -16,9 +15,9 @@ glob.sync(pattern).forEach(file => {
     try {
         configs[name] = require(file);
     } catch (e) {
-        logger.error(`Invalid config file. ${file}\n${e}`);
+        console.error(`Invalid config file. ${file}\n${e}`);
     }
 });
 
-console.info(JSON.stringify(configs));
+// console.info(JSON.stringify(configs));
 module.exports = configs;
