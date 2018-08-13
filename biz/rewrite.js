@@ -20,7 +20,7 @@ module.exports = async (ctx, next) => {
 
     ctx.set('deviceType', devicetype);
 
-    ctx.headers['domain'] = 'finance.ifeng.com';
+    // ctx.headers['domain'] = 'finance.ifeng.com';
     // ctx.headers['domain'] = 'shankapi.ifeng.com';
 
     if (ctx.url.indexOf('visualediting/') > -1) {
