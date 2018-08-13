@@ -82,6 +82,7 @@ app.use(async (ctx, next) => {
     ctx.start = process.uptime() * 1000;
     ctx.uuid = uuid();
     ctx.schemaTime = 0;
+    ctx.schemaTimeList = [];
     ctx.parseTime = 0;
     ctx.parseTimeList = [];
     ctx.requestTime = 0;
@@ -134,6 +135,9 @@ app.use(async (ctx, next) => {
     }
     ctx.parseTime = ctx.parseTime.toFixed(3);
 
+    for (const i of ctx.schemaTimeList) {
+        ctx.schemaTime += parseFloat(i);
+    }
     // logger.info(
     //     `--> ${ctx.method} ${ctx.originalUrl} ${ctx.status} - ${ctx.time}ms - ${ctx.time2}ms - router: ${
     //         ctx.routerTime

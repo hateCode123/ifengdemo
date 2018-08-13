@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const useref = require('gulp-useref');
 const uglify = require('gulp-uglify');
-const cdn = require('@ifeng_server/gulp_cdn_replace');
+const cdn = require('@ifeng/tool_gulp_cdn_replace');
 const rev = require('gulp-rev');
 const gulpif = require('gulp-if');
 const revReplace = require('gulp-rev-replace');
@@ -12,12 +12,12 @@ const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
 const cdnPath = env === 'pre_development' ? '/' : `//p0.ifengimg.com/fe/zl/test/live/${appName}/`;
 
-gulp.task('polyfill', function() {
+gulp.task('polyfill', () => {
     return gulp
         .src('dist/*.html')
         .pipe(
             useref({
-                transformPath: function(filePath) {
+                transformPath: filePath => {
                     return path.join(filePath.replace('dist', 'static'));
                 },
             }),
@@ -28,11 +28,11 @@ gulp.task('polyfill', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     del(['./dist/*.min.min.js']);
 });
 
-gulp.task('cdn', function() {
+gulp.task('cdn', () => {
     return gulp
         .src(path.join(__dirname, '/dist/*.html'))
         .pipe(
@@ -47,7 +47,7 @@ gulp.task('cdn', function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', ['polyfill'], function() {
+gulp.task('default', ['polyfill'], () => {
     gulp.start('cdn');
     // gulp.start('clean');
 });
