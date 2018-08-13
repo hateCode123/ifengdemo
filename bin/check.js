@@ -7,9 +7,11 @@ const chalk = require('chalk');
 const glob = require('glob');
 const log = console.log;
 const npmPackageUrl = 'http://npm.ifengcloud.ifeng.com/-/verdaccio/packages';
+const shell = require('shelljs');
 
 (async () => {
     await warp('## 检查内网npm包版本', checkPackagesVersion);
+    await warp('## 检查crlf格式文件并转化成lf文件', checkCrlffile);
     await warp('## 检查页面 错误上报，polyfile等是否已经正确引入', checkPageInjectScript);
 })();
 
@@ -60,6 +62,16 @@ async function checkPackagesVersion() {
     if (!warn) {
         log(chalk.blue(`没有内部包需要更新！`));
     }
+}
+
+// 检查页面错误上报，polyfile是否已经正确引入
+async function checkCrlffile() {
+    shell.exec('crlf --set=LF *');
+    shell.exec('crlf --set=LF bin/**/*');
+    shell.exec('crlf --set=LF biz/**/*');
+    shell.exec('crlf --set=LF static/**/*');
+    shell.exec('crlf --set=LF webpackUtils/**/*');
+    shell.exec('crlf --set=LF client/**/*.{js,ejs,jsx,json,css}');
 }
 
 // 检查页面错误上报，polyfile是否已经正确引入
