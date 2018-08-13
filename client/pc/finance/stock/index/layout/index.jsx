@@ -78,7 +78,10 @@ class Layout extends React.PureComponent {
                 subject: content.subject,
                 marketTitle: content.marketTitle,
                 market: content.market,
-                courier: content.courier,
+                courier: {
+                    courierTitle: content.courierTitle,
+                    courier: content.courier,
+                },
                 playItem: content.playItem,
                 rightSideAd0: content.rightSideAd0,
                 rightSideAd1: content.rightSideAd1,
