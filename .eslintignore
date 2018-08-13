@@ -12,4 +12,4 @@ webpack.config.js
 webpack.prod.config.js
 node_modules/*
 biz/providers/**
-biz/common/middlewares/koa-webapi.js
+biz/common/middlewares/**
