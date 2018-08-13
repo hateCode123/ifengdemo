@@ -36,21 +36,12 @@ class RightContent extends React.PureComponent {
                     <Subject content={content.subject} />
                 </div>
                 <div className="clear" />
-                <div>
-                    <Chip
-                        id="10077"
-                        type="static"
-                        title="理财超市标题"
-                        groupName="正文"
-                        translate="jsonParse"
-                        content={content.marketTitle}>
-                        <RightSideTitle />
-                    </Chip>
-                    <Chip id="10080" type="static" title="理财超市" groupName="正文" content={content.market}>
-                        <Market />
-                    </Chip>
-                </div>
-                <Courier content={content.courier} />
+                <Chip id="10080" type="static" title="投教学堂" groupName="正文" content={content.market}>
+                    <Market />
+                </Chip>
+                <Chip id="10082" type="static" title="理财速递" groupName="正文" content={content.courier}>
+                    <Courier />
+                </Chip>
                 <Chip
                     id="10083"
                     type="static"

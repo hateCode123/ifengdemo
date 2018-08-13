@@ -77,7 +77,7 @@ exports.list = {
             ['answerSubTab', 'KVProxy', 'getStaticFragment', 10118, getJsonByKey('content')],
 
             // 牛人解盘
-            ['answerList', 'KVProxy', 'getRecommendFragment', 20019, getStringByKey('data')],
+            ['answerList', 'KVProxy', 'getStaticFragment', 10163, getStringByKey('content')],
 
             // 视频抓牛股标题
             ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],
@@ -106,14 +106,8 @@ exports.list = {
             // 热点专题
             ['subject', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
-            // 理财超市标题
-            ['marketTitle', 'KVProxy', 'getStaticFragment', 10077, getJsonByKey('content')],
-
             // 理财超市
             ['market', 'KVProxy', 'getStaticFragment', 10080, getStringByKey('content')],
-
-            // 理财速递标题
-            ['courierTitle', 'KVProxy', 'getStaticFragment', 10119, getJsonByKey('content')],
 
             // 理财速递
             ['courier', 'KVProxy', 'getStaticFragment', 10082, getJsonByKey('content')],

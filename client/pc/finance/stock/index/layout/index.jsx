@@ -78,10 +78,7 @@ class Layout extends React.PureComponent {
                 subject: content.subject,
                 marketTitle: content.marketTitle,
                 market: content.market,
-                courier: {
-                    courierTitle: content.courierTitle,
-                    courier: content.courier,
-                },
+                courier: content.courier,
                 playItem: content.playItem,
                 rightSideAd0: content.rightSideAd0,
                 rightSideAd1: content.rightSideAd1,
@@ -172,7 +169,11 @@ class Layout extends React.PureComponent {
                     <div className={styles.space30} />
                     <School content={schoolData} />
                 </div>
-                <Cooperation content={cooperation} />
+                <div className={styles.cooperation}>
+                    <Chip id="10074" type="static" title="底部合作链接" groupName="底部合作链接" content={cooperation}>
+                        <Cooperation />
+                    </Chip>
+                </div>
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
                 <Chip id="10136" type="static" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
