@@ -21,7 +21,7 @@ const moment = require('moment');
 const os = require('os');
 const hostname = os.hostname();
 const pid = process.pid;
-const gracefulShutdown = require('./biz/common/shutdown');
+// const gracefulShutdown = require('./biz/common/shutdown');
 
 // 普罗米修斯
 const { promInit } = require('./biz/common/prom');
@@ -191,23 +191,23 @@ app.use(rewrite);
 // 加载路由
 app.use(routers.routes(), routers.allowedMethods());
 
-const cleanup = () => {
-    return new Promise(resolve => {
-        console.log('... in cleanup');
-        setTimeout(() => {
-            console.log('... cleanup finished');
-            resolve();
-        }, 1000);
-    });
-};
+// const cleanup = () => {
+//     return new Promise(resolve => {
+//         console.log('... in cleanup');
+//         setTimeout(() => {
+//             console.log('... cleanup finished');
+//             resolve();
+//         }, 1000);
+//     });
+// };
 
-// this enables the graceful shutdown with advanced options
-gracefulShutdown(server, {
-    signals: 'SIGINT SIGTERM',
-    timeout: 30000,
-    development: false,
-    onShutdown: cleanup,
-    finally: () => {
-        console.log('Server gracefulls shutted down.....');
-    },
-});
+// // this enables the graceful shutdown with advanced options
+// gracefulShutdown(server, {
+//     signals: 'SIGINT SIGTERM',
+//     timeout: 30000,
+//     development: false,
+//     onShutdown: cleanup,
+//     finally: () => {
+//         console.log('Server gracefulls shutted down.....');
+//     },
+// });
