@@ -5,8 +5,7 @@ import Slides from '@ifeng/ui_pc_slides';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
-import { handleAd } from '../../../../../../utils/infoAd';
-import { handleUrl } from '../../../../../../utils/utils';
+import { handleAd, handleUrl } from '../../../../../../utils/utils';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {

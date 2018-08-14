@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dataProcessing from '../../../../../../../components/dataProcessing';
-import { handleAd } from '../../../../../../../utils/infoAd';
+import { handleAd } from '../../../../../../../utils/utils';
 
 class ExtraNews extends React.PureComponent {
     static propTypes = {

@@ -124,6 +124,10 @@ class StockSearch extends React.PureComponent {
         }
     };
 
+    handleMarkKeyword = (str, keyword) => {
+        return str.replace(keyword, `<span>${keyword}</span>`);
+    };
+
     /**
      * 渲染组件
      */
@@ -151,9 +155,27 @@ class StockSearch extends React.PureComponent {
                                             className={current === index ? styles.current : ''}
                                             onMouseEnter={this.handleMouseOver}
                                             onClick={this.handleClick}>
-                                            <td>{item.s}</td>
-                                            <td>{item.n}</td>
-                                            <td>{item.p}</td>
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(
+                                                        item.s.toUpperCase(),
+                                                        searchTxt.toUpperCase(),
+                                                    ),
+                                                }}
+                                            />
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(item.n, searchTxt),
+                                                }}
+                                            />
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(
+                                                        item.p.toUpperCase(),
+                                                        searchTxt.toUpperCase(),
+                                                    ),
+                                                }}
+                                            />
                                             <td>{type[item.t]}</td>
                                         </tr>
                                     ))}

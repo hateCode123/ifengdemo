@@ -96,15 +96,15 @@ class BottomAffix extends React.PureComponent {
     };
 
     handleQuoteSearch = () => {
-        const quote = this.state.quote;
+        const text = this.state.text;
 
-        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${quote}`);
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${text}`);
     };
 
     handleFundsSearch = () => {
-        const funds = this.state.funds;
+        const text = this.state.text;
 
-        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${funds}`);
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${text}`);
     };
 
     /**

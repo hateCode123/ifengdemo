@@ -4,8 +4,7 @@ import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
-import { handleAd } from '../../../../../../utils/infoAd';
-import { handleUrl } from '../../../../../../utils/utils';
+import { handleAd, handleUrl } from '../../../../../../utils/utils';
 
 class Meeting extends React.PureComponent {
     static propTypes = {
