@@ -95,10 +95,26 @@ class BottomAffix extends React.PureComponent {
         this.setState({ text: e.currentTarget.value });
     };
 
+    handleKeyDownQuoteSearch = e => {
+        if (e.keyCode === 13) {
+            const text = this.state.text;
+
+            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${text}`);
+        }
+    };
+
     handleQuoteSearch = () => {
         const text = this.state.text;
 
         window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${text}`);
+    };
+
+    handleKeyDownFundsSearch = e => {
+        if (e.keyCode === 13) {
+            const text = this.state.text;
+
+            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${text}`);
+        }
     };
 
     handleFundsSearch = () => {
@@ -134,6 +150,7 @@ class BottomAffix extends React.PureComponent {
                                             <input
                                                 className="quote"
                                                 value={text}
+                                                onKeyDown={this.handleKeyDownQuoteSearch}
                                                 onChange={this.handleQuoteChange}
                                                 onFocus={this.handleFocus}
                                                 onBlur={this.handleBlur}
@@ -156,6 +173,7 @@ class BottomAffix extends React.PureComponent {
                                             <input
                                                 className="funds"
                                                 value={text}
+                                                onKeyDown={this.handleKeyDownFundsSearch}
                                                 onChange={this.handleFundsChange}
                                                 onFocus={this.handleFocus}
                                                 onBlur={this.handleBlur}

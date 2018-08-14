@@ -2,6 +2,7 @@ const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
+const { recommendRandomSort } = require('../../../../../services/utils/utils');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -301,6 +302,10 @@ exports.list = {
         ];
 
         const allData = await transfer(ctx, json);
+
+        allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
+
+        allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
 
         allData.stockNews =
             allData.stockNews &&

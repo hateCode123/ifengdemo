@@ -4,8 +4,6 @@
  * @param { Number } length 排序后生成的新数组的长度
  */
 const randomSort = (arr, length) => {
-    if (arr.length === length) return arr;
-
     const result = [];
     let count = arr.length;
     const array = [...Array(count).keys()];
@@ -29,17 +27,36 @@ const randomSort = (arr, length) => {
 const recommendRandomSort = (arr, length) => {
     if (arr.length === length) return arr;
 
-    const sortArr = arr.filter(item => item.top === 0 && item.fix === 0);
-
+    const result = [];
+    let sortLength = 0;
+    let sortArr = arr.filter(item => item.top === 0 && item.fix === 0);
     let sortIndex = arr.map((item, index) => {
         if (item.top === 0 && item.fix === 0) {
             return index;
         } else {
+            if (index < length - 1) sortLength++;
+
             return null;
         }
     });
 
-    sortIndex = sortIndex.filter(item => item);
+    sortIndex = sortIndex.filter(item => item !== null);
+
+    sortArr = randomSort(sortArr, length - sortLength);
+
+    let ind = 0;
+
+    for (let i = 0; i < length; i++) {
+        if (!sortIndex.includes(i)) {
+            result[i] = arr[i];
+        } else {
+            result[i] = sortArr[ind];
+
+            ind++;
+        }
+    }
+
+    return result;
 };
 
 module.exports = {
