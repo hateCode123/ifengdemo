@@ -66,12 +66,13 @@ async function checkPackagesVersion() {
 
 // 检查页面错误上报，polyfile是否已经正确引入
 async function checkCrlffile() {
+    shell.exec('crlf --set=LF .*');
     shell.exec('crlf --set=LF *');
     shell.exec('crlf --set=LF bin/**/*');
     shell.exec('crlf --set=LF biz/**/*');
     shell.exec('crlf --set=LF static/**/*');
     shell.exec('crlf --set=LF webpackUtils/**/*');
-    shell.exec('crlf --set=LF client/**/*.{js,ejs,jsx,json,css}');
+    shell.exec('crlf --set=LF client/**/*.{js,ejs,jsx,html,css}');
 }
 
 // 检查页面错误上报，polyfile是否已经正确引入

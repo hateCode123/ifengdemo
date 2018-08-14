@@ -1,6 +1,6 @@
 FROM docker.ifeng.com/library/node:8.9.0
 
-ENV NODE_ENV ""
+ENV NODE_ENV "pre_development"
 
 WORKDIR /ifeng-whale
 
@@ -11,6 +11,7 @@ RUN  mkdir -p /ifeng-whale
 COPY bin /ifeng-whale/bin
 COPY biz /ifeng-whale/biz
 COPY client /ifeng-whale/client
+COPY static /ifeng-whale/static
 COPY tests /ifeng-whale/tests
 COPY webpackUtils /ifeng-whale/webpackUtils
 COPY package.json /ifeng-whale

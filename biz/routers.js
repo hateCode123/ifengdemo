@@ -131,7 +131,7 @@ for (const i in routers) {
             continue;
         }
         if (_.isFunction(handler)) {
-            let routerObj = JSON.parse(JSON.stringify(routers[i]));
+            let routerObj = _.clone(routers[i]);
 
             routerObj.edit = false;
             routerObj.preview = false;
@@ -147,7 +147,7 @@ for (const i in routers) {
             // 添加页面编辑中间件
             if (edit) {
                 // 将路由放入路由列表
-                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+                let routerObj = _.clone(routers[i]);
 
                 routerObj.path = `${routerObj.path}/visualediting`;
                 routerObj.edit = true;
@@ -162,7 +162,7 @@ for (const i in routers) {
             }
             // 添加全页预览中间件
             if (preview) {
-                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+                let routerObj = _.clone(routers[i]);
 
                 routerObj.path = `${routerObj.path}/preview/:id/:type/:data`;
                 routerObj.edit = false;
@@ -179,7 +179,7 @@ for (const i in routers) {
 
             // 添加降级页中间件
             if (low) {
-                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+                let routerObj = _.clone(routers[i]);
 
                 routerObj.path = `${routerObj.path}/low`;
                 routerObj.edit = false;
@@ -195,7 +195,7 @@ for (const i in routers) {
             }
             // 处理路由冒泡
             if (routers[i].share === 'pc') {
-                let routerObj = JSON.parse(JSON.stringify(routers[i]));
+                let routerObj = _.clone(routers[i]);
 
                 routerObj.path = `${routerObj.path}/low`;
                 routerObj.edit = false;
