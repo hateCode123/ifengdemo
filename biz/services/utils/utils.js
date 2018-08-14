@@ -21,6 +21,28 @@ const randomSort = (arr, length) => {
     return result.sort().map(i => arr[i]);
 };
 
+/**
+ * 推荐位数据，置顶与固定的数据位置固定，其他随机排序
+ * @param {*} arr 推荐位数据
+ * @param {*} length 推荐位数据数量
+ */
+const recommendRandomSort = (arr, length) => {
+    if (arr.length === length) return arr;
+
+    const sortArr = arr.filter(item => item.top === 0 && item.fix === 0);
+
+    let sortIndex = arr.map((item, index) => {
+        if (item.top === 0 && item.fix === 0) {
+            return index;
+        } else {
+            return null;
+        }
+    });
+
+    sortIndex = sortIndex.filter(item => item);
+};
+
 module.exports = {
     randomSort,
+    recommendRandomSort,
 };

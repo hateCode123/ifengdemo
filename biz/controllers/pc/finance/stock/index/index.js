@@ -48,7 +48,7 @@ exports.list = {
             ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20018, getJsonByKey('data')],
+            ['headline', 'KVProxy', 'getStaticFragment', 10162, getStringByKey('content')],
 
             // 要闻直播标题
             ['newsLiveTab', 'KVProxy', 'getStaticFragment', 10049, getJsonByKey('content')],
@@ -117,7 +117,7 @@ exports.list = {
             ['courierTitle', 'KVProxy', 'getStaticFragment', 10119, getJsonByKey('content')],
 
             // 理财速递
-            ['courier', 'KVProxy', 'getStaticFragment', 10082, getJsonByKey('content')],
+            ['courier', 'KVProxy', 'getStaticFragment', 10082, getStringByKey('content')],
 
             // 视频播放项
             ['playItem', 'KVProxy', 'getStaticFragment', 10083, getJsonByKey('content')],

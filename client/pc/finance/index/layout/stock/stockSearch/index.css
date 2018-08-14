@@ -45,6 +45,10 @@
             padding-left: 12px;
             text-align: left;
             color: #333;
+            & span {
+                color: #ff0000;
+                font-weight: bold;
+            }
         }
     }
 }

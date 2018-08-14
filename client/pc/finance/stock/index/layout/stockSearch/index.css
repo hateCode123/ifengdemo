@@ -47,6 +47,10 @@
                 padding-left: 12px;
                 text-align: left;
                 color: #333;
+                & span {
+                    color: #ff0000;
+                    font-weight: bold;
+                }
             }
             & .current {
                 background: #194e80;
@@ -67,17 +71,6 @@
     height: 22px;
     width: 62px;
     cursor: pointer;
-}
-
-.f_btn {
-    float: left;
-    border: none;
-    background: url(./62fc144eb7de0e5.png) left top no-repeat;
-    height: 22px;
-    width: 74px;
-    cursor: pointer;
-    position: absolute;
-    margin-left: 10px;
 }
 
 .tip {

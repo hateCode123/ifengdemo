@@ -118,11 +118,12 @@ class StockSearch extends React.PureComponent {
     handleBlur = e => {
         const val = e.currentTarget.value;
 
-        if (val === '') {
-            this.setState({ searchTxt: '代码/拼音/名称' });
-        }
-
-        this.setState({ isShow: false });
+        setTimeout(() => {
+            this.setState({
+                searchTxt: val === '' ? '代码/拼音/名称' : val,
+                isShow: false,
+            });
+        }, 150);
     };
 
     handeleQuoteSearch = () => {
@@ -135,14 +136,8 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handeleFundsSearch = () => {
-        const { current, data } = this.state;
-
-        if (data.length > 0) {
-            const stock = data[current !== null ? current : 0];
-
-            window.open(`//finance.ifeng.com/zjlx/${stock.c}`);
-        }
+    handleMarkKeyword = (str, keyword) => {
+        return str.replace(keyword, `<span>${keyword}</span>`);
     };
 
     /**
@@ -172,9 +167,27 @@ class StockSearch extends React.PureComponent {
                                             className={current === index ? styles.current : ''}
                                             onMouseEnter={this.handleMouseOver}
                                             onClick={this.handleClick}>
-                                            <td>{item.s}</td>
-                                            <td>{item.n}</td>
-                                            <td>{item.p}</td>
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(
+                                                        item.s.toUpperCase(),
+                                                        searchTxt.toUpperCase(),
+                                                    ),
+                                                }}
+                                            />
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(item.n, searchTxt),
+                                                }}
+                                            />
+                                            <td
+                                                dangerouslySetInnerHTML={{
+                                                    __html: this.handleMarkKeyword(
+                                                        item.p.toUpperCase(),
+                                                        searchTxt.toUpperCase(),
+                                                    ),
+                                                }}
+                                            />
                                             <td>{type[item.t]}</td>
                                         </tr>
                                     ))}
@@ -201,7 +214,6 @@ class StockSearch extends React.PureComponent {
                         <option value="bond">债券</option>
                     </select>
                     <button type="button" className={styles.q_btn} onClick={this.handeleQuoteSearch} />
-                    <button type="button" className={styles.f_btn} onClick={this.handeleFundsSearch} />
                 </div>
                 <div className={styles.btn}>
                     <a className={styles.search} onClick={this.handeleSearch} />

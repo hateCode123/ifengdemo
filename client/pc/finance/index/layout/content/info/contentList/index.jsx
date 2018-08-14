@@ -6,8 +6,7 @@ import { Event } from '@ifeng/ui_base';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
-import { handleAd } from '../../../../../../utils/infoAd';
-import { handleUrl } from '../../../../../../utils/utils';
+import { handleAd, handleUrl } from '../../../../../../utils/utils';
 
 const event = new Event();
 
