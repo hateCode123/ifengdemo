@@ -251,8 +251,6 @@ exports.list = {
 
         allData.headline = allData.headline && recommendRandomSort(allData.headline, 4);
 
-        allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 4);
-
         allData.bannerPic =
             allData.bannerPic &&
             allData.bannerPic.slice(0, 5).map(item => ({
@@ -297,6 +295,15 @@ exports.list = {
                         : '',
             },
         ].concat(talking);
+
+        allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 5);
+
+        allData.financeList =
+            allData.financeList &&
+            allData.financeList.map(item => ({
+                url: item.url,
+                title: item.title,
+            }));
 
         allData.stocks =
             allData.stocks &&

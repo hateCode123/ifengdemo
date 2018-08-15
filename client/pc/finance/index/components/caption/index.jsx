@@ -6,13 +6,14 @@ import { rel } from '../../../../utils/rel';
 class Caption extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
+        title: PropTypes.array,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
+        const { content, title } = this.props;
 
         return (
             <div>
@@ -36,8 +37,8 @@ class Caption extends React.PureComponent {
                         </h5>
                     </div>
                     <h3 className={styles.title}>
-                        <a href={content[0].titleUrl} target="_blank" rel={rel} title={content[0].title}>
-                            {content[0].title}
+                        <a href={title.titleUrl} target="_blank" rel={rel} title={title.title}>
+                            {title.title}
                         </a>
                     </h3>
                 </div>

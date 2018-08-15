@@ -18,7 +18,8 @@ class MiddleContent extends React.PureComponent {
         const { content } = this.props;
         const data = {
             finance: content.finance,
-            financeList: content.financeList,
+            title: content.financeList[0],
+            financeList: content.financeList.slice(1, 5),
         };
 
         return (
