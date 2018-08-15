@@ -97,7 +97,7 @@ class Paper extends React.PureComponent {
             </ul>
         );
 
-        return <ul className={styles.newsList}>{creatList()}</ul>;
+        return <ul className={styles.newsList}>{content ? creatList() : ''}</ul>;
     }
 }
 

@@ -45,7 +45,8 @@ exports.financeWemoney = {
             ['paperMenu', 'KVProxy', 'getStaticFragment', 10041, getJsonByKey('content')],
 
             // 最新文章
-            ['newPaper', 'KVProxy', 'getCustom', 'finance_22005_10736_2', getJson()],
+            // ['newPaper', 'KVProxy', 'getCustom', 'finance_22005_10736_2', getJson()],
+            ['newPaper', 'KVProxy', 'getDynamicFragment', '20041', getStringByKey('data')],
 
             // 最新文章2条静态碎片
             ['newPaperExtra', 'KVProxy', 'getStaticFragment', 10043, getJsonByKey('content')],
@@ -54,13 +55,15 @@ exports.financeWemoney = {
             ['newPaperMore', 'KVProxy', 'getStaticFragment', 10053, getJsonByKey('content')],
 
             // 投资情报
-            ['investInfo', 'KVProxy', 'getCustom', 'finance_22005_10736_3', getJson()],
+            // ['investInfo', 'KVProxy', 'getCustom', 'finance_22005_10736_3', getJson()],
+            ['investInfo', 'KVProxy', 'getDynamicFragment', '20042', getStringByKey('data')],
 
             // 更多投资情报
             ['investMore', 'KVProxy', 'getStaticFragment', 10054, getJsonByKey('content')],
 
             // 上市公司
-            ['ssComponey', 'KVProxy', 'getCustom', 'finance_22005_10736_1', getJson()],
+            // ['ssComponey', 'KVProxy', 'getCustom', 'finance_22005_10736_1', getJson()],
+            ['ssComponey', 'KVProxy', 'getDynamicFragment', '20043', getStringByKey('data')],
 
             // 更多上市公司
             ['ssComMore', 'KVProxy', 'getStaticFragment', 10055, getJsonByKey('content')],
