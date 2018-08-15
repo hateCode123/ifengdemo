@@ -30,7 +30,7 @@ module.exports = function getHTML(globPath, extendName, level, filepath) {
         const conf = {
             filename: `${entryName}${extendName}.html`,
             polyfill: getPolyfill(level),
-            errorupload: env === 'production' ? getErrorupload() : getErrorupload(),
+            errorupload: env === 'production' ? getErrorupload() : '',
             template: file,
             inject: false,
             hase: false,
