@@ -12,7 +12,7 @@ exports.list = {
     edit: true,
     low: true,
     preview: true,
-    online: true,
+    online: false,
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段
