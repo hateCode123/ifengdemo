@@ -256,6 +256,12 @@ const createConfig = function(type, platform, cssConfig, level) {
                 // 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
                 apiUrl: JSON.stringify('//shankapi.ifeng.com/spring'),
+                FullPagePreviewUrl:
+                    env === 'production'
+                        ? JSON.stringify('https://ucms.ifeng.com/shank/spring')
+                        : env === 'pre_development'
+                            ? ''
+                            : JSON.stringify('http://test.ucms.ifeng.com/shank/spring'),
             }),
             // new webpack.optimize.CommonsChunkPlugin({
             //     name: ['vendor'],

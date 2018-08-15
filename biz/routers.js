@@ -164,7 +164,7 @@ for (const i in routers) {
             if (preview) {
                 let routerObj = _.clone(routers[i]);
 
-                routerObj.path = `${routerObj.path}/preview/:id/:type/:data`;
+                routerObj.path = `${routerObj.path}/preview`;
                 routerObj.edit = false;
                 routerObj.preview = true;
                 routerObj.low = false;
@@ -172,7 +172,7 @@ for (const i in routers) {
                 // 将路由放入路由列表
                 routerList.push({
                     path: routerObj.path,
-                    method: methodItem,
+                    method: 'post',
                     handlers: [...meddlewareList, match(routerObj, handler)],
                 });
             }

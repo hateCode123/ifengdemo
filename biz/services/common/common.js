@@ -441,9 +441,9 @@ const transfer = async (ctx, json) => {
             const schemaKey = obj[key][id].schemaKey;
 
             // 全页预览处理
-            if (ctx.urlinfo.preview && id === ctx.params.id) {
-                let data = ctx.params.data;
-
+            if (ctx.urlinfo.preview && id === ctx.request.body.id) {
+                let data = decodeURIComponent(ctx.request.body.data);
+                
                 try {
                     try {
                         backData[itemkey] = JSON.parse(JSON.parse(data));
