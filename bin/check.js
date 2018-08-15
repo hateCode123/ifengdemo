@@ -9,10 +9,25 @@ const log = console.log;
 const npmPackageUrl = 'http://npm.ifengcloud.ifeng.com/-/verdaccio/packages';
 const shell = require('shelljs');
 
+function info (str){
+    log(chalk.blue(str));
+}
+
+function warn (str){
+    log(chalk.yellow(str));
+}
+
+function error (str){
+    log(chalk.red(str));
+}
+
 (async () => {
+    console.time('总耗时');
     await warp('## 检查内网npm包版本', checkPackagesVersion);
     await warp('## 检查crlf格式文件并转化成lf文件', checkCrlffile);
     await warp('## 检查页面 错误上报，polyfile等是否已经正确引入', checkPageInjectScript);
+    await warp('## 检查api引入是否正确', checkAPI);
+    console.timeEnd('总耗时');
 })();
 
 async function warp(title, callback) {
@@ -96,4 +111,33 @@ async function checkPageInjectScript() {
             }
         }
     });
+}
+
+// 检查api接口是否都放在了service中
+async function checkAPI() {
+    let files = glob.sync(path.resolve(`${__dirname}/../client/pc/**/*.js*`));
+    for (let file of files) {
+        if (/client\/pc\/services/.test(file)) {
+            continue;
+        }
+
+        let text = fs.readFileSync(file, 'utf-8');
+
+        if (/@ifeng\/ui_base/.test(text) && (/jsonp\(/.test(text) || /ajax\(/.test(text))) {
+            warn(`文件：${file}`)
+            text = text.replace(/\r\n/g, '#$ifeng$##$ifeng$#');
+            text = text.replace(/\n/g, '#$ifeng$##$ifeng$#');
+
+            let lines = text.split('#$ifeng$##$ifeng$#');
+            // console.log(lines)
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+                if (/jsonp\(/.test(line) || /ajax\(/.test(text)) {
+                    warn(`第${i+1}行:${line} ...  `);
+                }
+            }
+           warn(`警告：api请求应该放到/pc/services/api.js\n`);
+        }
+    }
 }

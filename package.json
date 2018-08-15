@@ -7,7 +7,8 @@
         "uploadcdn": "node uploadcdn.js",
         "start": "node --max_old_space_size=4096  ./bin/dev.js",
         "pre": "cross-env NODE_ENV=pre_development node ./bin/build.js && cross-env NODE_ENV=pre_development gulp && cross-env NODE_ENV=pre_development node ./bin/pre.js",
-        "build": "cross-env NODE_ENV=production node ./bin/build.js && cross-env NODE_ENV=production  gulp",
+        "build": "cross-env NODE_ENV=production node ./bin/build.js && cross-env NODE_ENV=production gulp",
+        "build:test": "cross-env NODE_ENV=staging node ./bin/build.js && cross-env NODE_ENV=staging gulp",
         "test": "mocha -t 20000 tests --recursive --exit | bunyan",
         "eslint": "eslint ./client/**/*.js && eslint ./client/**/*.jsx",
         "eslint_fix": "eslint ./client/** --fix",
@@ -153,7 +154,8 @@
             "./dist/**",
             "./static/**",
             "./biz/providers/**",
-            "./biz/common/middlewares/**"
+            "./biz/common/middlewares/**",
+            "./biz/common/shutdown.js"
         ]
     }
 }

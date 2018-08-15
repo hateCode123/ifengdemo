@@ -13,3 +13,4 @@ webpack.prod.config.js
 node_modules/*
 biz/providers/**
 biz/common/middlewares/**
+biz/common/shutdown.js
