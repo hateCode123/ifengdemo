@@ -161,6 +161,13 @@ const createConfig = function(type, platform, cssConfig, level) {
                     parallel: os.cpus().length - 4,
                     uglifyOptions: {
                         ie8: level === '' ? false : true,
+                        comments: false,
+                        compress: {
+                            // remove warnings
+                            warnings: false,
+                            // Drop console statements
+                            drop_console: env === 'production' ? true : false,
+                        },
                     },
                     sourceMap: true,
                 }),

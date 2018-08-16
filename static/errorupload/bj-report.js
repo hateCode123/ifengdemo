@@ -13,7 +13,7 @@ var BJ_REPORT = (function(global) {
     var _config = {
         namespace: "", // 命名空间， 
         appname: "", // 项目名称
-        url: "http://err.ifengcloud.ifeng.com/v1/api/err", // 上报 接口
+        url: "https://err.ifengcloud.ifeng.com/v1/api/err", // 上报 接口
         offline_url: "", // 离线日志上报 接口
         offline_auto_url: "", // 检测是否自动上报
         ext: null, // 扩展参数 用于自定义上报
