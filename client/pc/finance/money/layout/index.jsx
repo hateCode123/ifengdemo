@@ -192,7 +192,7 @@ class Layout extends React.PureComponent {
             __bottomLink,
         } = this.state;
 
-        console.log('content', content);
+        console.log('content==', content);
 
         const headerData = {
             nav: content.nav,

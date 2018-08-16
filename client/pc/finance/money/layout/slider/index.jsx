@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
-import Chip from 'Chip';
 import Slides from '@ifeng/ui_pc_slides';
 import { rel } from '../../../../utils/rel';
 
@@ -12,24 +11,26 @@ class SliderInner extends React.PureComponent {
     getData = data => {
         try {
             const __data = data.filter((item, i) => i < 5);
+
             const res = __data.map(item => {
-                console.log(item)
-                const thu = item.thumbnails ? JSON.parse(item.thumbnails) : {};
-                const img = thu.image || {};
+                const thu = item.thumbnails;
+                const count = parseInt(item.thumbnailsCount, 10);
+                const img = count !== 0 ? thu.image : {};
                 const src = img && img.length > 0 ? img[0].url : '';
+
                 item.src = src;
 
                 return item;
             });
-console.log(res)
+
             return res;
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     };
     render() {
         const { content } = this.props;
-        console.log('content', content);
+
         const sliderTmpl = function sliderTmpl(item) {
             return (
                 <div className={style.bigPic04}>
@@ -55,7 +56,7 @@ console.log(res)
         const __data = this.getData(content);
         const dom = (
             <div className={style.fpic06}>
-                <Slides content={__data} config={config} />{' '}
+                <Slides content={__data} config={config} />
             </div>
         );
 

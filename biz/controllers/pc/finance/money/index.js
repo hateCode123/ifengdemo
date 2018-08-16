@@ -1,7 +1,7 @@
 // const redis = require('../../../../common/redis');
 // const logger = require('../../../../common/logger');
 // const { KVProxy } = require('../../../../providers/ucmsapiProxy');
-const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
+const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
     path: '/pc/finance/money',
@@ -29,7 +29,7 @@ exports.financeWemoney = {
             // 搜索
             ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
 
-            ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getStringByKey('data')],
+            ['newsListDownSlider', 'KVProxy', 'getSelectedPool', 11, getStringByKey('data')],
 
             // 境内 权益
             ['jingneiQuanyiHotFunds', 'KVProxy', 'getCustom', 'finance_22005_516_1293', getJson()],
@@ -55,23 +55,38 @@ exports.financeWemoney = {
             // 热点推荐 货币型
             ['rediantuijianTableMoney', 'KVProxy', 'getCustom', 'finance_22005_516_1300', getJson()],
 
-            ['slider', 'KVProxy', 'getDynamicFragment', 10008, getStringByKey('data')],
+            ['slider', 'KVProxy', 'getSelectedPool', 10, getStringByKey('data')],
 
             ['topCollapse', 'KVProxy', 'getStaticFragment', 10160, getJsonByKey('content')],
 
             // Logo
             ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
 
-            // Logo Ad
-            ['topAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
+            //   // topAd
+            //   ['topAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
 
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
-            ['bottomAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
+            // ['bottomAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
         ];
 
         const allData = await transfer(ctx, json);
+
+        allData.bottomAd = {
+            data: {
+                title: '广告',
+            },
+            preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+            callback: 'function(elm, data) {console.log("ad"); $(elm).html(data.title)}',
+        };
+        allData.topAd = {
+            data: {
+                title: '广告',
+            },
+            preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
+            callback: 'function(elm, data) {console.log("ad"); $(elm).html(data.title)}',
+        };
 
         await ctx.html('finance_money', {
             allData,
