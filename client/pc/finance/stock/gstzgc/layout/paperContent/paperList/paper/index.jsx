@@ -76,7 +76,10 @@ class Paper extends React.PureComponent {
                               onMouseLeave={() => this.handleChange()}
                               className={current === index ? styles.l_on : ''}>
                               <h4>
-                                  <a href={item.url} target="_blank" skey={item.skey}>
+                                  <a
+                                      href={item.url}
+                                      target="_blank"
+                                      skey={item.skey ? item.skey : this.getSkey(item.title, item.url)}>
                                       {item.title}
                                   </a>
                               </h4>
@@ -88,7 +91,9 @@ class Paper extends React.PureComponent {
                                       <a
                                           href={`//gentie.ifeng.com/view.html?docName=${item.title}&docUrl=${
                                               item.commentUrl
-                                          }&skey=${item.skey}&pcUrl&=${item.url}`}
+                                          }&skey=${item.skey ? item.skey : this.getSkey(item.title, item.url)}&pcUrl&=${
+                                              item.url
+                                          }`}
                                           target="_blank"
                                           rel={rel}>
                                           {counts[index]}

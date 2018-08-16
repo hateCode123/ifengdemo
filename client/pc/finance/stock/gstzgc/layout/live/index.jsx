@@ -20,12 +20,16 @@ class Live extends React.PureComponent {
          * 获取格式化时间
          * @param {string} str
          */
-        const formatData = ns => {
+        const formatDate = ns => {
             const d = new Date(ns);
-            const dformat = `${[d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-')} ${[
-                d.getHours(),
-                d.getMinutes(),
-                d.getSeconds(),
+            const dformat = `${[
+                d.getFullYear(),
+                d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1,
+                d.getDate() < 10 ? `0${d.getDate() + 1}` : d.getDate() + 1,
+            ].join('-')} ${[
+                d.getHours() < 10 ? `0${d.getHours()}` : d.getHours(),
+                d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes(),
+                d.getSeconds() < 10 ? `0${d.getSeconds()}` : d.getSeconds(),
             ].join(':')}`;
 
             return dformat;
@@ -53,7 +57,7 @@ class Live extends React.PureComponent {
 
                 dataArr.forEach(item => {
                     news = {
-                        time: formatData(item.time * 1000),
+                        time: formatDate(item.time * 1000),
                         title: item.title,
                     };
                     newsArr.push(news);
