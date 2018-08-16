@@ -20,36 +20,22 @@ class Live extends React.PureComponent {
          * 获取格式化时间
          * @param {string} str
          */
-        const getFormatTime = (num, fmt) => {
-            const time = new Date(num * 1000);
-            const o = {
-                'M+': time.getMonth() + 1,
-                'd+': time.getDate(),
-                'h+': time.getHours(),
-                'm+': time.getMinutes(),
-                's+': time.getSeconds(),
-                'q+': Math.floor((time.getMonth() + 3) / 3),
-                S: time.getMilliseconds(),
-            };
+        const formatData = ns => {
+            const d = new Date(ns);
+            const dformat = `${[d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-')} ${[
+                d.getHours(),
+                d.getMinutes(),
+                d.getSeconds(),
+            ].join(':')}`;
 
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, `${time.getFullYear()}`.substr(4 - RegExp.$1.length));
-            }
-
-            for (const k in o) {
-                if (new RegExp(`(${k})`).test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
-                }
-            }
-
-            return fmt;
+            return dformat;
         };
 
         const getDayNews = day => {
             const begin = `${day} 00:00:00`;
             const end = `${day} 23:59:59`;
-            const begintime = getFormatTime(begin) / 1000;
-            const endtime = getFormatTime(end) / 1000;
+            const begintime = Date.parse(begin) / 1000;
+            const endtime = Date.parse(end) / 1000;
 
             jsonp('//api3.finance.ifeng.com/live/getday', {
                 data: {
@@ -67,7 +53,7 @@ class Live extends React.PureComponent {
 
                 dataArr.forEach(item => {
                     news = {
-                        time: new Date(item.time * 1000).Format('yyyy-MM-dd hh:mm:ss'),
+                        time: formatData(item.time * 1000),
                         title: item.title,
                     };
                     newsArr.push(news);

@@ -138,7 +138,7 @@ class Layout extends React.PureComponent {
                             <Recommend />
                         </Chip>
 
-                        {/* <Live content={liveData} /> */}
+                        <Live content={liveData} />
 
                         <Hq content={hqData} />
 

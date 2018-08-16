@@ -67,8 +67,8 @@ class PaperContent extends React.PureComponent {
                 </Chip>
                 <br />
                 <Ad content={content.hardAd} styleName={styles.hardAd} />
-                <Chip id="10055" type="static" title="更多上市公司" content={investInfoData}>
-                    <PaperList content={ssComponeyData} />
+                <Chip id="10055" type="static" title="更多上市公司" content={ssComponeyData}>
+                    <PaperList />
                 </Chip>
             </div>
         );

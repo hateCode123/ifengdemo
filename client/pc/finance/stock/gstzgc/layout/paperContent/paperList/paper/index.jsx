@@ -35,11 +35,13 @@ class Paper extends React.PureComponent {
         const docUrl = [];
         const count = [];
 
-        content.map(item => {
-            docUrl.push(item.commentUrl);
+        if (content && content.length > 0) {
+            content.map(item => {
+                docUrl.push(item.commentUrl);
 
-            return docUrl;
-        });
+                return docUrl;
+            });
+        }
 
         const data = await jsonp('//comment.ifeng.com/get.php', {
             data: {
@@ -66,34 +68,36 @@ class Paper extends React.PureComponent {
 
         const creatList = () => (
             <ul>
-                {content.map((item, index) => (
-                    <li
-                        key={index}
-                        onMouseEnter={() => this.handleLiChange(index)}
-                        onMouseLeave={() => this.handleChange()}
-                        className={current === index ? styles.l_on : ''}>
-                        <h4>
-                            <a href={item.url} target="_blank" skey={this.getSkey(item.title, item.url)}>
-                                {item.title}
-                            </a>
-                        </h4>
-                        <p>{item.summary ? item.summary : ''}</p>
-                        <div className={styles.xx}>
-                            <div className={styles.by}>{item.source ? item.source : ''}</div>
-                            <div className={styles.date}>{item.newsTime}</div>
-                            <div className={styles.pl}>
-                                <a
-                                    href={`//gentie.ifeng.com/view.html?docName=${item.title}&docUrl=${
-                                        item.commentUrl
-                                    }&skey=${this.getSkey(item.title, item.url)}&pcUrl&=${item.url}`}
-                                    target="_blank"
-                                    rel={rel}>
-                                    {counts[index]}
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                ))}
+                {content
+                    ? content.map((item, index) => (
+                          <li
+                              key={index}
+                              onMouseEnter={() => this.handleLiChange(index)}
+                              onMouseLeave={() => this.handleChange()}
+                              className={current === index ? styles.l_on : ''}>
+                              <h4>
+                                  <a href={item.url} target="_blank" skey={item.skey}>
+                                      {item.title}
+                                  </a>
+                              </h4>
+                              <p>{item.summary ? item.summary : ''}</p>
+                              <div className={styles.xx}>
+                                  <div className={styles.by}>{item.source ? item.source : ''}</div>
+                                  <div className={styles.date}>{item.newsTime}</div>
+                                  <div className={styles.pl}>
+                                      <a
+                                          href={`//gentie.ifeng.com/view.html?docName=${item.title}&docUrl=${
+                                              item.commentUrl
+                                          }&skey=${item.skey}&pcUrl&=${item.url}`}
+                                          target="_blank"
+                                          rel={rel}>
+                                          {counts[index]}
+                                      </a>
+                                  </div>
+                              </div>
+                          </li>
+                      ))
+                    : ''}
             </ul>
         );
 
