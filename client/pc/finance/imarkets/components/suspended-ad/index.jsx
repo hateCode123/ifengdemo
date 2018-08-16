@@ -5,7 +5,7 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { addEventListener } from '@ifeng/ui_base';
-import Ad from '@ifeng/ui_pc_ad';
+import Ad from '../../../../components/ad';
 import styles from './index.css';
 
 class SuspendedAd extends PureComponent {

@@ -4,19 +4,19 @@ import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
-import Ad from '@ifeng/ui_pc_ad';
 import Header from './header';
 import Logo from './logo';
 import Tools from './tools';
 import Shares from './shares';
 import NewsDisplay from './news-display';
-import NewsStream from './news-stream';
+import NewsStream from '../components/newsStream';
 import Question from './question';
 import HotTopic from './hot-topic';
 import CalenderBox from './CalenderBox';
 import SuspendedAd from '../components/suspended-ad';
 import FooterBox from './footerbox';
 import GoToTop from '../components/go-to-top';
+import Ad from '../../../components/ad';
 
 class Layout extends PureComponent {
     render() {
@@ -30,9 +30,7 @@ class Layout extends PureComponent {
         const newDisplayData = {
             topnews: content.topnews,
         };
-        const newsStreamData = {
-            newsstream: content.newsstream,
-        };
+        const newsStreamData = content.newsstream;
         const hotTopicData = {
             hottopic: content.hottopic,
         };
