@@ -6,6 +6,7 @@
     <meta content="always" name="referrer">
     <title></title>
     {{{ htmlWebpackPlugin.options.errorupload }}}
+    <%- statisticsData.statisticsHead %>
     <script>
         let _jsonData_ = <%- JSON.stringify(allData) %>;
         let jsonData = { ..._jsonData_,
@@ -38,6 +39,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
+    <%- statisticsData.statisticsBody %>
 </body>
 
 </html>

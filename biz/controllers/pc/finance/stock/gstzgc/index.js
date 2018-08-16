@@ -14,11 +14,17 @@ exports.financeWemoney = {
     preview: true,
     handler: async ctx => {
         const json = [
+            // 统计代码 Head 片段
+            ['statisticsHead', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+
+            // 统计代码 Body 片段
+            ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
+
             // 通用导航
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             // 搜索
-            ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
+            ['search', 'KVProxy', 'getStructuredFragment', 20005, getStringByKey('content')],
 
             // 顶部logo
             ['logo', 'KVProxy', 'getStaticFragment', 10107, getStringByKey('content')],
@@ -118,8 +124,17 @@ exports.financeWemoney = {
         ];
         const allData = await transfer(ctx, json);
 
+        const statisticsData = {
+            statisticsHead: allData.statisticsHead,
+            statisticsBody: allData.statisticsBody,
+        };
+
+        delete allData.statisticsHead;
+        delete allData.statisticsBody;
+
         await ctx.html('finance_stock_gstzgc', {
             allData,
+            statisticsData,
         });
     },
 };
