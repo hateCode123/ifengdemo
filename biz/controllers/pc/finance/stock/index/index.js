@@ -303,58 +303,62 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
+        try {
+            allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
 
-        allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
+            allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
 
-        allData.stockNews =
-            allData.stockNews &&
-            allData.stockNews.slice(0, 18).map(item => ({
-                id: item.id,
+            allData.stockNews =
+                allData.stockNews &&
+                allData.stockNews.slice(0, 18).map(item => ({
+                    id: item.id,
+                    url: item.url,
+                    title: item.title,
+                }));
+
+            allData.news =
+                allData.news &&
+                allData.news.slice(0, 8).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
+
+            allData.subject = allData.subject.slice(0, 3).map(item => ({
+                banner: item.banner,
                 url: item.url,
                 title: item.title,
             }));
 
-        allData.news =
-            allData.news &&
-            allData.news.slice(0, 8).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.marketAnalysis =
+                allData.marketAnalysis &&
+                allData.marketAnalysis.slice(0, 11).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        allData.subject = allData.subject.slice(0, 3).map(item => ({
-            banner: item.banner,
-            url: item.url,
-            title: item.title,
-        }));
+            allData.hotPlate =
+                allData.hotPlate &&
+                allData.hotPlate.slice(0, 11).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        allData.marketAnalysis =
-            allData.marketAnalysis &&
-            allData.marketAnalysis.slice(0, 11).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.logs =
+                allData.logs &&
+                allData.logs.slice(0, 6).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        allData.hotPlate =
-            allData.hotPlate &&
-            allData.hotPlate.slice(0, 11).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
-
-        allData.logs =
-            allData.logs &&
-            allData.logs.slice(0, 6).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
-
-        allData.school =
-            allData.school &&
-            allData.school.slice(0, 6).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.school =
+                allData.school &&
+                allData.school.slice(0, 6).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
+        } catch (error) {
+            logger.error(error);
+        }
 
         const statisticsData = {
             statisticsHead: allData.statisticsHead,

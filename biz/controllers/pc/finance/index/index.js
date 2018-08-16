@@ -249,107 +249,112 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.headline = allData.headline && recommendRandomSort(allData.headline, 4);
+        try {
+            allData.headline = allData.headline && recommendRandomSort(allData.headline, 4);
 
-        allData.bannerPic =
-            allData.bannerPic &&
-            allData.bannerPic.slice(0, 5).map(item => ({
-                url: item.url,
-                thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
-                title: item.title,
-            }));
+            allData.bannerPic =
+                allData.bannerPic &&
+                allData.bannerPic.slice(0, 5).map(item => ({
+                    url: item.url,
+                    thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
+                    title: item.title,
+                }));
 
-        allData.dayNews = allData.dayNews.slice(0, 12).map(item => ({
-            url: item.url,
-            title: item.title,
-        }));
-
-        const comicBook = allData.comicBook && allData.comicBook[0];
-
-        allData.comicBook = {
-            url: comicBook.url,
-            thumbnails:
-                comicBook.thumbnails && comicBook.thumbnails.image && comicBook.thumbnails.image[0]
-                    ? comicBook.thumbnails.image[0].url
-                    : '',
-            title: comicBook.title,
-            date: comicBook.newsTime.split(' ')[0],
-        };
-
-        const talkingTitle = allData.talking && allData.talking[0];
-        const talking =
-            allData.talking &&
-            allData.talking.slice(1, 7).map(item => ({
+            allData.dayNews = allData.dayNews.slice(0, 12).map(item => ({
                 url: item.url,
                 title: item.title,
             }));
 
-        allData.talking = [
-            {
-                url: talkingTitle.url,
-                title: talkingTitle.title,
-                name: talkingTitle.wemediaEAccountName,
-                img:
-                    talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
-                        ? talkingTitle.thumbnails.image[0].url
+            const comicBook = allData.comicBook && allData.comicBook[0];
+            // const comicBook = [];
+
+            allData.comicBook = {
+                url: comicBook.url,
+                thumbnails:
+                    comicBook.thumbnails && comicBook.thumbnails.image && comicBook.thumbnails.image[0]
+                        ? comicBook.thumbnails.image[0].url
                         : '',
-            },
-        ].concat(talking);
+                title: comicBook.title,
+                date: comicBook.newsTime.split(' ')[0],
+            };
 
-        allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 5);
+            const talkingTitle = allData.talking && allData.talking[0];
+            const talking =
+                allData.talking &&
+                allData.talking.slice(1, 7).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        allData.financeList =
-            allData.financeList &&
-            allData.financeList.map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.talking = [
+                {
+                    url: talkingTitle.url,
+                    title: talkingTitle.title,
+                    name: talkingTitle.wemediaEAccountName,
+                    img:
+                        talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
+                            ? talkingTitle.thumbnails.image[0].url
+                            : '',
+                },
+            ].concat(talking);
 
-        allData.stocks =
-            allData.stocks &&
-            allData.stocks.slice(0, 6).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 5);
 
-        allData.financeVideo = allData.financeVideo
-            ? allData.financeVideo.slice(0, 3).map(item => ({
-                  url: item.url,
-                  thumbnails:
-                      item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                          ? item.thumbnails.image[0].url
-                          : '',
-                  title: item.title,
-              }))
-            : [
-                  {
-                      url: '',
-                      thumbnails: '',
-                      title: '',
-                  },
-              ];
+            allData.financeList =
+                allData.financeList &&
+                allData.financeList.map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        const institute = allData.institute && allData.institute[0];
+            allData.stocks =
+                allData.stocks &&
+                allData.stocks.slice(0, 6).map(item => ({
+                    url: item.url,
+                    title: item.title,
+                }));
 
-        allData.institute = {
-            url: institute.url,
-            thumbnails:
-                institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
-                    ? institute.thumbnails.image[0].url
-                    : '',
-            title: institute.title,
-        };
+            allData.financeVideo = allData.financeVideo
+                ? allData.financeVideo.slice(0, 3).map(item => ({
+                      url: item.url,
+                      thumbnails:
+                          item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                              ? item.thumbnails.image[0].url
+                              : '',
+                      title: item.title,
+                  }))
+                : [
+                      {
+                          url: '',
+                          thumbnails: '',
+                          title: '',
+                      },
+                  ];
 
-        const lark = allData.lark && allData.lark[0];
+            const institute = allData.institute && allData.institute[0];
 
-        allData.lark = {
-            url: lark.url,
-            thumbnails:
-                lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
-                    ? lark.thumbnails.image[0].url
-                    : '',
-            title: lark.title,
-        };
+            allData.institute = {
+                url: institute.url,
+                thumbnails:
+                    institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
+                        ? institute.thumbnails.image[0].url
+                        : '',
+                title: institute.title,
+            };
+
+            let lark = allData.lark && allData.lark[0];
+
+            allData.lark = {
+                url: lark.url,
+                thumbnails:
+                    lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
+                        ? lark.thumbnails.image[0].url
+                        : '',
+                title: lark.title,
+            };
+        } catch (error) {
+            logger.error(error);
+        }
 
         const statisticsData = {
             statisticsHead: allData.statisticsHead,
