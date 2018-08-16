@@ -5,11 +5,10 @@ import '../../reset.css';
 import { rel } from '../../../../utils/rel';
 
 class NewsListDownSliderTop extends React.PureComponent {
-
     render() {
         const { content } = this.props;
 
-        const list = content.map((item, index) => {
+        const list = content.forEach((item, index) => {
             if (index % 3 === 0) {
                 return (
                     <h2 key={index}>
@@ -19,7 +18,6 @@ class NewsListDownSliderTop extends React.PureComponent {
                     </h2>
                 );
             } else if (index % 3 === 1) {
-
                 return (
                     <h3 key={index} className={style.box_01_1}>
                         <a href={item.url} rel={rel} target="_blank">
@@ -28,7 +26,6 @@ class NewsListDownSliderTop extends React.PureComponent {
                     </h3>
                 );
             } else if (index % 3 === 2) {
-
                 return (
                     <h3 key={index} className={style.box_01}>
                         <a href={item.url} rel={rel} target="_blank">
@@ -40,7 +37,7 @@ class NewsListDownSliderTop extends React.PureComponent {
         });
 
         return (
-            <div className={`${style.box_txt01} ${style.huh_box}`}>
+            <div key="list" className={`${style.box_txt01} ${style.huh_box}`}>
                 {list}
             </div>
         );
@@ -57,12 +54,11 @@ NewsListDownSliderTop.propTypes = { content: PropTypes.array };
 NewsListDownSliderTop.defaultProps = {};
 
 class NewsListLeftInner extends React.PureComponent {
-   
     render() {
         // const { showData } = this.state;
         const { content } = this.props;
         const list = showData =>
-            showData.map((item, index) => {
+            showData.forEach((item, index) => {
                 return index === 0 ? (
                     <li key={index}>
                         <h3>
@@ -122,10 +118,8 @@ class NewsListDownSlider extends React.PureComponent {
     };
     render() {
         const { content } = this.props;
-        const top = <NewsListDownSliderTop content={this.getData(content, 0, 6)} />;
-        const bottom = (
-            <NewsListLeftInner content={this.getData(content, 6, 20)} />
-        );
+        const top = <NewsListDownSliderTop key="top" content={this.getData(content, 0, 6)} />;
+        const bottom = <NewsListLeftInner key="bottom" content={this.getData(content, 6, 20)} />;
 
         return [top, bottom];
     }
