@@ -73,13 +73,13 @@ class NewsStream extends PureComponent {
                     </a>
                 </h2>
                 <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[0].url, 203, 130)} title={item.title} />
+                    <img src={getImage(image[0].url, 167, 106)} title={item.title} />
                 </a>
                 <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[1].url, 203, 130)} title={item.title} />
+                    <img src={getImage(image[1].url, 167, 106)} title={item.title} />
                 </a>
                 <a className={styles.image_link_3} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[2].url, 203, 130)} title={item.title} />
+                    <img src={getImage(image[2].url, 167, 106)} title={item.title} />
                 </a>
                 <div className={`${styles.top_11} ${styles.news_item_infor} clearfix`}>
                     {// 显示来源

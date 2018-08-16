@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Chip from 'Chip';
-import Ad from '@ifeng/ui_pc_ad';
+import Ad from '../../../../components/ad';
 import styles from './index.css';
 import HtmlRegion from '../../components/html-region';
 import Footer from './footer';
