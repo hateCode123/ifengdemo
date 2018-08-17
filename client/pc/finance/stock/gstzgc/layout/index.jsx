@@ -13,12 +13,12 @@ import { Headline } from './headline';
 import PaperContent from './paperContent';
 import TitleR from './titleR';
 import { Live } from './live';
-import Hq from './hq';
 import ClickRank from './clickRank';
 import { Qa } from './QA';
 import { Header } from './header';
 import { BottomFooter } from './footer';
 import { Slide } from './slide';
+import StockHq from './stockHq';
 
 class Layout extends React.PureComponent {
     /**
@@ -26,8 +26,6 @@ class Layout extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-
-        console.log(content);
 
         const headerData = {
             nav: content.nav,
@@ -52,14 +50,12 @@ class Layout extends React.PureComponent {
             liveImg: content.liveTitle.liveimg,
         };
 
-        const hqData = {
+        const stockHqData = {
             hqTitle: content.hqTitle,
-            hqSubtitle: {
-                spzngTit: content.spzngTit,
-                zdphTit: content.zdphTit,
-                zjlxTit: content.zjlxTit,
-                zxgTit: content.zxgTit,
-            },
+            cattleStocksTitle: content.cattleStocksTitle,
+            rankTitle: content.rankTitle,
+            fundsFlowTitle: content.fundsFlowTitle,
+            customStocksTitle: content.customStocksTitle,
         };
 
         const QaData = {
@@ -140,7 +136,7 @@ class Layout extends React.PureComponent {
 
                         <Live content={liveData} />
 
-                        <Hq content={hqData} />
+                        <StockHq content={stockHqData} />
 
                         <Qa content={QaData} />
 

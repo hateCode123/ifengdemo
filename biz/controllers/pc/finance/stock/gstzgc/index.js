@@ -95,17 +95,29 @@ exports.financeWemoney = {
             // 点击排行;
             ['clickRank', 'KVProxy', 'getCustom', 'http://finance.ifeng.com/cmpp_12006/click/409.html', getJson()],
 
-            // 视频抓牛股标题
-            ['spzngTit', 'KVProxy', 'getStaticFragment', 10063, getJsonByKey('content')],
+            // // 视频抓牛股标题
+            // ['spzngTit', 'KVProxy', 'getStaticFragment', 10063, getJsonByKey('content')],
 
-            // 涨跌排行标题
-            ['zdphTit', 'KVProxy', 'getStaticFragment', 10064, getJsonByKey('content')],
+            // // 涨跌排行标题
+            // ['zdphTit', 'KVProxy', 'getStaticFragment', 10064, getJsonByKey('content')],
+
+            // // 资金流向标题
+            // ['zjlxTit', 'KVProxy', 'getStaticFragment', 10065, getJsonByKey('content')],
+
+            // // 自选股标题
+            // ['zxgTit', 'KVProxy', 'getStaticFragment', 10066, getJsonByKey('content')],
+
+            // 视频抓牛股标题
+            ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],
+
+            // 涨跌排行榜标题
+            ['rankTitle', 'KVProxy', 'getStaticFragment', 10101, getJsonByKey('content')],
 
             // 资金流向标题
-            ['zjlxTit', 'KVProxy', 'getStaticFragment', 10065, getJsonByKey('content')],
+            ['fundsFlowTitle', 'KVProxy', 'getStaticFragment', 10102, getJsonByKey('content')],
 
-            // 自选股标题
-            ['zxgTit', 'KVProxy', 'getStaticFragment', 10066, getJsonByKey('content')],
+            // 自选股登录标题
+            ['customStocksTitle', 'KVProxy', 'getStaticFragment', 10103, getJsonByKey('content')],
 
             // 分析师答疑
             ['QATabs', 'KVProxy', 'getStaticFragment', 10106, getJsonByKey('content')],
