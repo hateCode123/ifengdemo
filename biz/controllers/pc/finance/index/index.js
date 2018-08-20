@@ -85,10 +85,10 @@ exports.list = {
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
 
             // 理财超市
-            ['market', 'KVProxy', 'getStaticFragment', 10014, getStringByKey('content')],
+            ['market', 'KVProxy', 'getStaticFragment', 10080, getStringByKey('content')],
 
             // 理财速递
-            ['courier', 'KVProxy', 'getStructuredFragment', 20011, getStringByKey('content')],
+            ['courier', 'KVProxy', 'getStaticFragment', 10082, getStringByKey('content')],
 
             // 底部公用版权
             ['footer', 'KVProxy', 'getStructuredFragment', 20012, getStringByKey('content')],

@@ -6,7 +6,7 @@ import { rel } from '../../../../utils/rel';
 class Caption extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
-        title: PropTypes.array,
+        title: PropTypes.object,
     };
 
     /**
