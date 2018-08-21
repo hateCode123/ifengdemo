@@ -59,7 +59,93 @@ const recommendRandomSort = (arr, length) => {
     return result;
 };
 
+// 清洗url，将前面的裁图前缀和参数已经协议头去掉。
+const clear = url => {
+    if (url.includes('d.ifengimg.com/')) {
+        url = url.split('d.ifengimg.com/').pop();
+        const paths = url.split('/');
+
+        paths.shift();
+        url = paths.join('/');
+    }
+
+    if (url.includes('http://')) {
+        url = url.substring(7);
+    }
+
+    if (url.includes('https://')) {
+        url = url.substring(8);
+    }
+
+    if (url.includes('//')) {
+        url = url.substring(2);
+    }
+
+    return url;
+};
+
+/**
+ * @param {string} url 判断域名是否为公司的
+ */
+const checkDomain = url => {
+    const domain = url.split('/')[0];
+
+    if (domain.includes('.ifengimg.com') || domain.includes('.ifeng.com')) {
+        return true;
+    }
+
+    return false;
+};
+
+/**
+ *
+ * @param {string} url 系统提供的图片地址
+ * @param {number} width 图片裁切宽度
+ * @param {number} height 图片裁切高度
+ * @param {number} quality 图片裁切质量，最大值100，一般可以不填，不建议写100
+ */
+const formatImage = (url, width, height, quality) => {
+    url = clear(url);
+
+    const params = [];
+
+    if (width) {
+        params.push(`w${width}`);
+    }
+
+    if (height) {
+        params.push(`h${height}`);
+    }
+
+    if (quality) {
+        params.push(`q${quality}`);
+    }
+
+    return `//d.ifengimg.com/${params.join('_')}/${clear(url)}`;
+};
+
+/**
+ * url 预处理
+ * @param { String } url
+ */
+const handleUrl = url => {
+    if (!url) return;
+
+    if (url.indexOf('http:') === 0) {
+        return url.replace('http:', '');
+    } else if (url.indexOf('https:') === 0) {
+        return url.replace('https:', '');
+    } else if (url.indexOf('/') === 0) {
+        return `/${url}`;
+    } else {
+        return `//${url}`;
+    }
+};
+
 module.exports = {
     randomSort,
     recommendRandomSort,
+    checkDomain,
+    formatImage,
+    handleUrl,
 };

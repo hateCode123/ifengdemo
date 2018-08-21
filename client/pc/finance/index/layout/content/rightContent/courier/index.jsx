@@ -6,7 +6,7 @@ import BoxTitle from '../boxTitle';
 
 class Courier extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.string,
         ad: PropTypes.object,
     };
 

@@ -1,0 +1,48 @@
+.header {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    height: 27px;
+    padding: 21px 0 15px;
+}
+
+.wrapper {
+    composes: clearfix from global;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    & span {
+        display: inline-block;
+        width: 160px;
+        height: 27px;
+        background: url(./logo.jpg) no-repeat;
+    }
+}
+
+.nav {
+    float: left;
+    padding: 10px 0 0 11px;
+    color: #666;
+    & a {
+        font: 14px Microsoft YaHei;
+        color: #666;
+    }
+    & a:hover {
+        color: #f54343;
+        text-decoration: none;
+    }
+}
+
+.user {
+    position: relative;
+    float: right;
+    padding-top: 5px;
+}
+
+.search {
+    position: relative;
+    float: right;
+    padding-top: 1px;
+}
