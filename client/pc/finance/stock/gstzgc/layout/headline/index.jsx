@@ -23,7 +23,6 @@ class Headline extends React.PureComponent {
      */
     render() {
         const { data } = this.state;
-        // const { content } = this.props;
 
         return (
             <div className={styles.box} onMouseEnter={this.handleOver} onMouseLeave={this.handleOver}>

@@ -1,5 +1,7 @@
 ﻿const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
+const logger = require('../../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
+const { recommendRandomSort } = require('../../../../../services/utils/utils');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 
@@ -135,6 +137,29 @@ exports.financeWemoney = {
             ['copyright', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
         ];
         const allData = await transfer(ctx, json);
+
+        const pureData = item => {
+            return {
+                commentUrl: item.commentUrl,
+                newsTime: item.newsTime,
+                skey: item.skey,
+                title: item.title,
+                url: item.url,
+                source: item.source,
+            };
+        };
+
+        // 数据简化
+        try {
+            allData.headline = allData.headline && recommendRandomSort(allData.headline, 12);
+            allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, 4);
+            allData.clickRank = allData.clickRank.map(item => pureData(item));
+            allData.newPaper = allData.newPaper.map(item => pureData(item));
+            allData.investInfo = allData.investInfo.map(item => pureData(item));
+            allData.ssComponey = allData.ssComponey.map(item => pureData(item));
+        } catch (error) {
+            logger.error(error);
+        }
 
         const statisticsData = {
             statisticsHead: allData.statisticsHead,
