@@ -62,31 +62,47 @@ exports.financeWemoney = {
             // Logo
             ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
 
-            //   // topAd
-            //   ['topAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
-
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
-            // ['bottomAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
+            // topAd
+            [
+                'topAd',
+                'KVProxy',
+                'getAd',
+                'http://finance.ifeng.com/ssi-incs/s_finance_index_ad_banner_top_1000x90_2j.html/test',
+                getString(),
+            ],
+
+            // infoAd
+            [
+                'infoAd',
+                'KVProxy',
+                'getAd',
+                'http://finance.ifeng.com//ssi-incs/s_finance_stock_index_ad_button_02.inc.html/test',
+                getString(),
+            ],
+
+            // hardAd
+            [
+                'hardAd',
+                'KVProxy',
+                'getAd',
+                'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
+                getString(),
+            ],
+
+            // bottomAd
+            [
+                'bottomAd',
+                'KVProxy',
+                'getAd',
+                'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html/test',
+                getString(),
+            ],
         ];
 
         const allData = await transfer(ctx, json);
-
-        allData.bottomAd = {
-            data: {
-                title: '广告',
-            },
-            preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-            callback: 'function(elm, data) {console.log("ad"); $(elm).html(data.title)}',
-        };
-        allData.topAd = {
-            data: {
-                title: '广告',
-            },
-            preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-            callback: 'function(elm, data) {console.log("ad"); $(elm).html(data.title)}',
-        };
 
         await ctx.html('finance_money', {
             allData,

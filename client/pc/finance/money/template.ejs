@@ -17,12 +17,41 @@
             color: #fc5521;
         }
     </style>
-    <!-- <title></title> -->
+
     <script>
-        var finance_money_allData = <%- JSON.stringify(allData) %>;
+        var allData = <%- JSON.stringify(allData) %>;
 
-        var __jsonData__ = finance_money_allData;
+        try{
+            allData.topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
 
+            allData.topAd = {};
+        }
+
+        try{
+            allData.infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            allData.infoAd = {};
+        }
+
+        try{
+            allData.hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            allData.hardAd = {};
+        }
+
+        try{
+            allData.bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
+        }catch(e){
+            console.error('AdError', e);
+
+            allData.bottomAd = {};
+        }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 

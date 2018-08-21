@@ -5,7 +5,7 @@ import Chip from 'Chip';
 import transform from 'chipDataTransform';
 import '../reset.css';
 import style from './style.css';
-
+import Ad from '@ifeng/ui_pc_ad';
 import Banner from './banner/';
 import Navigation from './nav/';
 import SubNavigation from './subnav/';
@@ -277,6 +277,7 @@ class Layout extends React.PureComponent {
                     <div className={style.l_left}>
                         <Slider content={slider} />
                         <NewsListDownSlider content={content.newsListDownSlider || []} />
+                        <Ad content={content.infoAd} />
                     </div>
                     <div className={style.l_right}>
                         <div className="clearfix">
@@ -291,6 +292,7 @@ class Layout extends React.PureComponent {
                 </div>
 
                 {/* <Cnlc content={cnlc} /> */}
+                <Ad content={content.hardAd} />
                 <Partner content={partner} />
                 <Bottom />
                 <BottomFooter content={footerData} />

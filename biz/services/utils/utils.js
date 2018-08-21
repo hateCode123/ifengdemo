@@ -59,7 +59,10 @@ const recommendRandomSort = (arr, length) => {
     return result;
 };
 
-// 清洗url，将前面的裁图前缀和参数已经协议头去掉。
+/**
+ * 将前面的裁图前缀,参数以及协议头去掉
+ * @param {*} url 要清洗的 url
+ */
 const clear = url => {
     if (url.includes('d.ifengimg.com/')) {
         url = url.split('d.ifengimg.com/').pop();
@@ -85,7 +88,8 @@ const clear = url => {
 };
 
 /**
- * @param {string} url 判断域名是否为公司的
+ * 判断域名是否为公司的
+ * @param {string} url
  */
 const checkDomain = url => {
     const domain = url.split('/')[0];
@@ -98,7 +102,7 @@ const checkDomain = url => {
 };
 
 /**
- *
+ * 裁剪图片方法
  * @param {string} url 系统提供的图片地址
  * @param {number} width 图片裁切宽度
  * @param {number} height 图片裁切高度
