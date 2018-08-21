@@ -25,7 +25,7 @@ class FooterBox extends PureComponent {
                     </Chip>
                 </div>
                 {/* 底部广告 */}
-                <Ad styleName={styles.ad} content={content.ad_1000_90} />
+                <Ad styleName={styles.ad} content={content.footerAd} />
                 {/* 底部公共版权 */}
                 <Chip
                     id="10114"

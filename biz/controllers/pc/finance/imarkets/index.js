@@ -23,11 +23,11 @@ exports.list = {
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
             // 广告1000*90
-            ['ad_1000_90', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html', getString()],
+            ['footerAd', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html', getString()],
             // 广告300*600
-            ['ad_300_600', 'KVProxy', 'getAd', 'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test', getString()],
+            ['asideAd', 'KVProxy', 'getAd', 'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test', getString()],
             // 广告
-            ['ad_300_250', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test', getString()],
+            ['asideFixedAd', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test', getString()],
         ];
 
         const allData = await transfer(ctx, json);

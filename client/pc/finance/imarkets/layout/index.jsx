@@ -37,7 +37,7 @@ class Layout extends PureComponent {
         const footerData = {
             cooperation: content.cooperation,
             footer: content.footer,
-            ad_1000_90: content.ad_1000_90,
+            footerAd: content.footerAd,
         };
 
         return (
@@ -62,13 +62,13 @@ class Layout extends PureComponent {
                         {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
                         {/* <Question content={ questionData } /> */}
                         {/* 广告 */}
-                        <Ad styleName={styles.ad1} content={content.ad_300_600} />
+                        <Ad styleName={styles.ad1} content={content.asideAd} />
                         {/* 热点专题 */}
                         <HotTopic content={hotTopicData} />
                         {/* 日历 */}
                         <CalenderBox />
                         {/* 漂浮广告 */}
-                        <SuspendedAd content={content.add_300_250} />
+                        <SuspendedAd content={content.asideFixedAd} />
                     </div>
                 </div>
                 {/* 底部 */}

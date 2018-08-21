@@ -10,24 +10,24 @@
         var allData = <%- JSON.stringify(allData) %>;
 
         try{
-            allData.ad_1000_90 = new Function('return ' + <%- JSON.stringify(allData.ad_1000_90) %>)();
+            allData.footerAd = new Function('return ' + <%- JSON.stringify(allData.footerAd) %>)();
         }catch(err){
-            console.error('ad_1000_90 Error', err);
-            allData.ad_1000_90 = {};
+            console.error('AdError', err);
+            allData.footerAd = {};
         }
 
         try{
-            allData.ad_300_600 = new Function('return ' + <%- JSON.stringify(allData.ad_300_600) %>)();
+            allData.asideAd = new Function('return ' + <%- JSON.stringify(allData.asideAd) %>)();
         }catch(err){
-            console.error('ad_1000_90 Error', err);
-            allData.ad_300_600 = {};
+            console.error('AdError', err);
+            allData.asideAd = {};
         }
 
         try{
-            allData.ad_300_250 = new Function('return ' + <%- JSON.stringify(allData.ad_300_250) %>)();
+            allData.asideFixedAd = new Function('return ' + <%- JSON.stringify(allData.asideFixedAd) %>)();
         }catch(err){
-            console.error('ad_1000_90 Error', err);
-            allData.ad_300_250 = {};
+            console.error('AdError', err);
+            allData.asideFixedAd = {};
         }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
