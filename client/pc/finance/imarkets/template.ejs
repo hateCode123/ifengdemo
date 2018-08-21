@@ -8,15 +8,36 @@
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+
+        try{
+            allData.ad_1000_90 = new Function('return ' + <%- JSON.stringify(allData.ad_1000_90) %>)();
+        }catch(err){
+            console.error('ad_1000_90 Error', err);
+            allData.ad_1000_90 = {};
+        }
+
+        try{
+            allData.ad_300_600 = new Function('return ' + <%- JSON.stringify(allData.ad_300_600) %>)();
+        }catch(err){
+            console.error('ad_1000_90 Error', err);
+            allData.ad_300_600 = {};
+        }
+
+        try{
+            allData.ad_300_250 = new Function('return ' + <%- JSON.stringify(allData.ad_300_250) %>)();
+        }catch(err){
+            console.error('ad_1000_90 Error', err);
+            allData.ad_300_250 = {};
+        }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{path}}" rel="stylesheet"> 
+    <link href="{{path}}" rel="stylesheet">
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
 </head>
 <body>
     <div id="root"></div>
-    
+
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script> {{/each}}
 </body>

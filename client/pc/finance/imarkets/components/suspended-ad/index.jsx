@@ -5,7 +5,7 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { addEventListener } from '@ifeng/ui_base';
-import Ad from '../../../../components/ad';
+import Ad from '@ifeng/ui_pc_ad';
 import styles from './index.css';
 
 class SuspendedAd extends PureComponent {
@@ -42,7 +42,7 @@ class SuspendedAd extends PureComponent {
         return (
             <div className={styles.ad_box} ref={this.adBox}>
                 <div className={styles.ad_fixed} style={this.state.isFixed ? { position: 'fixed' } : null}>
-                    <Ad styleName={styles.ad} />
+                    <Ad styleName={styles.ad} content={this.props.content} />
                 </div>
             </div>
         );
@@ -52,7 +52,9 @@ class SuspendedAd extends PureComponent {
 /**
  * 定义组件属性类型
  * */
-SuspendedAd.propTypes = {};
+SuspendedAd.propTypes = {
+    content: PropTypes.object,
+};
 
 /**
  * 定义组件默认属性

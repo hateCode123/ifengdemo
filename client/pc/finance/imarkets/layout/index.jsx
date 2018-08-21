@@ -16,7 +16,7 @@ import CalenderBox from './CalenderBox';
 import SuspendedAd from '../components/suspended-ad';
 import FooterBox from './footerbox';
 import GoToTop from '../components/go-to-top';
-import Ad from '../../../components/ad';
+import Ad from '@ifeng/ui_pc_ad';
 
 class Layout extends PureComponent {
     render() {
@@ -37,6 +37,7 @@ class Layout extends PureComponent {
         const footerData = {
             cooperation: content.cooperation,
             footer: content.footer,
+            ad_1000_90: content.ad_1000_90,
         };
 
         return (
@@ -61,13 +62,13 @@ class Layout extends PureComponent {
                         {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
                         {/* <Question content={ questionData } /> */}
                         {/* 广告 */}
-                        <Ad styleName={styles.ad1} />
+                        <Ad styleName={styles.ad1} content={content.ad_300_600} />
                         {/* 热点专题 */}
                         <HotTopic content={hotTopicData} />
                         {/* 日历 */}
                         <CalenderBox />
                         {/* 漂浮广告 */}
-                        <SuspendedAd />
+                        <SuspendedAd content={content.add_300_250} />
                     </div>
                 </div>
                 {/* 底部 */}

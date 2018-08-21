@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Chip from 'Chip';
-import Ad from '../../../../components/ad';
+import Ad from '@ifeng/ui_pc_ad';
 import styles from './index.css';
 import HtmlRegion from '../../components/html-region';
 import Footer from './footer';
@@ -25,7 +25,7 @@ class FooterBox extends PureComponent {
                     </Chip>
                 </div>
                 {/* 底部广告 */}
-                <Ad styleName={styles.ad} />
+                <Ad styleName={styles.ad} content={content.ad_1000_90} />
                 {/* 底部公共版权 */}
                 <Chip
                     id="10114"
