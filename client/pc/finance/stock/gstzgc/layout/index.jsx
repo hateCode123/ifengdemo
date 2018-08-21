@@ -27,6 +27,8 @@ class Layout extends React.PureComponent {
     render() {
         const { content } = this.props;
 
+        console.log('allData', content);
+
         const headerData = {
             nav: content.nav,
             search: content.search,
@@ -36,10 +38,10 @@ class Layout extends React.PureComponent {
         const paperData = {
             hardAd: content.hardAd,
             paperMenu: content.paperMenu,
-            newPaper: content.newPaper.list,
+            newPaper: content.newPaper,
             newPaperExtra: content.newPaperExtra,
-            investInfo: content.investInfo.list,
-            ssComponey: content.ssComponey.list,
+            investInfo: content.investInfo,
+            ssComponey: content.ssComponey,
             newPaperMore: content.newPaperMore,
             investMore: content.investMore,
             ssComMore: content.ssComMore,
