@@ -1,7 +1,7 @@
 ﻿const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
 const logger = require('../../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
-const { recommendRandomSort } = require('@ifeng/public_method');
+const { formatImage, formatUrl, recommendRandomSort } = require('@ifeng/public_method');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 
@@ -38,7 +38,8 @@ exports.financeWemoney = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20035, getJsonByKey('data')],
+            // ['headline', 'KVProxy', 'getRecommendFragment', 20035, getJsonByKey('data')],
+            ['headline', 'KVProxy', 'getStaticFragment', 10030, getStringByKey('content')],
 
             // 视频解盘
             ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getJson()],
@@ -144,14 +145,13 @@ exports.financeWemoney = {
                 newsTime: item.newsTime,
                 skey: item.skey,
                 title: item.title,
-                url: item.url,
+                url: item.url ? formatUrl(item.url) : '',
                 source: item.source,
             };
         };
 
         // 数据简化
         try {
-            allData.headline = allData.headline && recommendRandomSort(allData.headline, 12);
             allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, 4);
             allData.clickRank = allData.clickRank.map(item => pureData(item));
             allData.newPaper = allData.newPaper.map(item => pureData(item));
@@ -160,6 +160,11 @@ exports.financeWemoney = {
         } catch (error) {
             logger.error(error);
         }
+        allData.sliderData = allData.sliderData.map(item => ({
+            title: item.title,
+            url: formatUrl(item.url),
+            thumbnail: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
+        }));
 
         const statisticsData = {
             statisticsHead: allData.statisticsHead,

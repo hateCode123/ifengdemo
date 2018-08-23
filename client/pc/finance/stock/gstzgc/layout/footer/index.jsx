@@ -4,7 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
 import Footer from '../../../../../components/footer/';
-import { Recommend } from '../recommend';
+import { Recommend } from '../../components/recommend';
 
 /**
  * 定义 Footer 组件

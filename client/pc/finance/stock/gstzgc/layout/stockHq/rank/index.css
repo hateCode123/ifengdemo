@@ -41,7 +41,7 @@
     width: 56px;
     height: 21px;
     margin-top: 2px;
-    background: url(./g_17.png) no-repeat;
+    background: url(./g_7.png) no-repeat;
     float: left;
     padding-left: 9px;
     line-height: 21px;
@@ -76,13 +76,13 @@
         line-height: 30px;
         color: #666666;
         cursor: pointer;
-        background: url(./g_19.png) repeat-x left bottom;
+        background: url(./g_9.png) repeat-x left bottom;
         overflow: hidden;
     }
     & li.current {
         background: #73ade5;
         color: #fff;
-        background: url(./g_18.png) repeat-x left bottom;
+        background: url(./g_8.png) repeat-x left bottom;
     }
 }
 
@@ -98,7 +98,7 @@
     width: 235px;
     overflow: hidden;
     float: left;
-    background: url(./g_20.png) repeat-y left -1px;
+    background: url(./g_2.png) repeat-y left -1px;
     & table {
         width: 235px;
         border: 0;
