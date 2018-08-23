@@ -111,6 +111,8 @@ const checkDomain = url => {
 const formatImage = (url, width, height, quality) => {
     url = clear(url);
 
+    if (!checkDomain(url)) return url;
+
     const params = [];
 
     if (width) {

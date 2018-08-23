@@ -11,16 +11,6 @@ exports.financeWemoney = {
     low: true,
     preview: true,
     handler: async ctx => {
-        //     const Tars = require('@tars/stream');
-
-        //     let jsons = [
-        //         ['newsListDownSlider', 'KVProxy', 'getDynamicFragment', 10009, getJsonByKey('data')],
-        //     ['slider', 'KVProxy', 'getDynamicFragment', 10008, getJson()],
-        // ]
-
-        //     let all = await transfer(ctx,jsons);
-        //     return ctx.body = all;
-
         const json = [
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
@@ -65,6 +55,24 @@ exports.financeWemoney = {
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
+            // adHead
+            [
+                'adHead',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
+                getString(),
+            ],
+
+            // adBody
+            [
+                'adBody',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
+                getString(),
+            ],
+
             // topAd
             [
                 'topAd',
@@ -104,8 +112,17 @@ exports.financeWemoney = {
 
         const allData = await transfer(ctx, json);
 
+        const adData = {
+            adHead: allData.adHead,
+            adBody: allData.adBody,
+        };
+
+        delete allData.adHead;
+        delete allData.adBody;
+
         await ctx.html('finance_money', {
             allData,
+            adData,
         });
     },
 };

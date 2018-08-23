@@ -249,6 +249,24 @@ exports.list = {
             // 二维码
             ['qrCode', 'KVProxy', 'getStaticFragment', 10136, getJsonByKey('content')],
 
+            // adHead
+            [
+                'adHead',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
+                getString(),
+            ],
+
+            // adBody
+            [
+                'adBody',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
+                getString(),
+            ],
+
             // topAd
             [
                 'topAd',
@@ -365,12 +383,20 @@ exports.list = {
             statisticsBody: allData.statisticsBody,
         };
 
+        const adData = {
+            adHead: allData.adHead,
+            adBody: allData.adBody,
+        };
+
         delete allData.statisticsHead;
         delete allData.statisticsBody;
+        delete allData.adHead;
+        delete allData.adBody;
 
         await ctx.html('finance_stock_index', {
             allData,
             statisticsData,
+            adData,
         });
     },
 };

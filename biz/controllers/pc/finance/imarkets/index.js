@@ -22,20 +22,64 @@ exports.list = {
             ['cooperation', 'KVProxy', 'getStaticFragment', '10164', getStringByKey('content')],
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
+            // adHead
+            [
+                'adHead',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
+                getString(),
+            ],
+
+            // adBody
+            [
+                'adBody',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
+                getString(),
+            ],
             // 广告1000*90
-            ['footerAd', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html', getString()],
+            [
+                'footerAd',
+                'KVProxy',
+                'getAd',
+                'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html',
+                getString(),
+            ],
             // 广告300*600
-            ['asideAd', 'KVProxy', 'getAd', 'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test', getString()],
+            [
+                'asideAd',
+                'KVProxy',
+                'getAd',
+                'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test',
+                getString(),
+            ],
             // 广告
-            ['asideFixedAd', 'KVProxy', 'getAd', 'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test', getString()],
+            [
+                'asideFixedAd',
+                'KVProxy',
+                'getAd',
+                'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test',
+                getString(),
+            ],
         ];
 
         const allData = await transfer(ctx, json);
 
         allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
 
+        const adData = {
+            adHead: allData.adHead,
+            adBody: allData.adBody,
+        };
+
+        delete allData.adHead;
+        delete allData.adBody;
+
         await ctx.html('finance_imarkets', {
             allData,
+            adData,
         });
     },
 };
