@@ -6,10 +6,12 @@ const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../..
 exports.financeWemoney = {
     path: '/pc/finance/wemoney',
     method: 'get',
+    cache: 0,
     edit: true,
     type: 'html',
     low: true,
     preview: true,
+    online: false,
     handler: async ctx => {
         const json = [
             // 通用导航
@@ -19,7 +21,7 @@ exports.financeWemoney = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10003, getJson()],
 
             // 轮播
-            ['slider', 'KVProxy', 'getStaticFragment', 10006, getJsonByKey('content')],
+            ['slider', 'KVProxy', 'getStructuredFragment', 20034, getStringByKey('content')],
 
             // 广告
             ['adAside1', 'KVProxy', 'getStaticFragment', 10021, getJson()],
@@ -29,13 +31,13 @@ exports.financeWemoney = {
             ['adAside5', 'KVProxy', 'getStaticFragment', 10025, getJson()],
 
             // 热门新闻标题
-            ['hotNewsTitle', 'KVProxy', 'getStaticFragment', 10122, getJsonByKey('content')],
+            ['hotNewsTitle', 'KVProxy', 'getStructuredFragment', 20033, getStringByKey('content')],
 
             // 热门新闻
-            ['hotNews', 'KVProxy', 'getStaticFragment', 10005, getJsonByKey('content')],
+            ['hotNews', 'KVProxy', 'getStructuredFragment', 20032, getStringByKey('content')],
 
-            // 新闻列表
-            ['info', 'KVProxy', 'getStaticFragment', 10007, getJsonByKey('content')],
+            // 信息流
+            ['info', 'KVProxy', 'getStructuredFragment', 20031, getStringByKey('content')],
 
             // 版权
             ['copyright', 'KVProxy', 'getStaticFragment', 10121, getStringByKey('content')],
