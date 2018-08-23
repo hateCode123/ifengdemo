@@ -5,7 +5,7 @@ import Slides from '@ifeng/ui_pc_slides';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
-import { handleAd, handleUrl } from '../../../../../../utils/utils';
+import { handleAd } from '../../../../../../utils/utils';
 
 class FinanceVideo extends React.PureComponent {
     static propTypes = {
@@ -51,12 +51,12 @@ class FinanceVideo extends React.PureComponent {
             <div ifeng_ui_pc_sliders-link="" ref={item.ref} />
         ) : (
             <div className={styles.bigPic}>
-                <a href={handleUrl(item.url)} className={styles.pic_img} target="_blank" rel={rel}>
+                <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
                     <img src={item.thumbnails} width="300" height="170" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>
-                    <a href={handleUrl(item.url)} target="_blank" rel={rel}>
+                    <a href={item.url} target="_blank" rel={rel}>
                         {item.title}
                     </a>
                 </p>

@@ -6,7 +6,7 @@ import { Event } from '@ifeng/ui_base';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 import { rel } from '../../../../../../utils/rel';
-import { handleAd, handleUrl } from '../../../../../../utils/utils';
+import { handleAd } from '../../../../../../utils/utils';
 
 const event = new Event();
 
@@ -92,21 +92,16 @@ class ContentList extends React.PureComponent {
                         onMouseEnter={this.handleMouseOver}
                         onMouseLeave={this.handleMouseOver}
                         style={listStyle}>
-                        {item.thumbnails && item.thumbnails !== '' && item.thumbnails.length !== 0 ? (
-                            <a href={handleUrl(item.url)} target="_blank" rel={rel} className={styles.imgBox}>
-                                <img
-                                    src={item.thumbnails.image[0].url}
-                                    width="144"
-                                    height="96"
-                                    className={styles.trans}
-                                />
+                        {item.thumbnails && item.thumbnails !== '' ? (
+                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                                <img src={item.thumbnails} width="144" height="96" className={styles.trans} />
                             </a>
                         ) : (
                             ''
                         )}
                         <div className={styles.list_text}>
                             <p className={styles.text}>
-                                <a href={handleUrl(item.url)} target="_blank" rel={rel} title={item.title}>
+                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                     {item.title}
                                 </a>
                             </p>

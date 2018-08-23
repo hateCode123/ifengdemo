@@ -2,7 +2,7 @@ const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
-const { recommendRandomSort } = require('../../../../../services/utils/utils');
+const { recommendRandomSort } = require('@ifeng/public_method');
 
 exports.list = {
     path: '/pc/finance/stock',

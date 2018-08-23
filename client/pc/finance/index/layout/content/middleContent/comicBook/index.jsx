@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
-import { handleUrl } from '../../../../../../utils/utils';
 import errorBoundary from '../../../../../../components/errorBoundary';
 
 class ComicBook extends React.PureComponent {
@@ -20,13 +19,13 @@ class ComicBook extends React.PureComponent {
             <div className={styles.box}>
                 <div className={styles.picTxt}>
                     <div className={styles.pic}>
-                        <a href={handleUrl(content.url)} target="_blank" rel={rel} title="连环话">
+                        <a href={content.url} target="_blank" rel={rel} title="连环话">
                             <img src={content.thumbnails} alt="连环话" className={styles.trans} />
                             <span>连环话</span>
                         </a>
                     </div>
                     <h3>
-                        <a href={handleUrl(content.url)} target="_blank" rel={rel} title={content.title}>
+                        <a href={content.url} target="_blank" rel={rel} title={content.title}>
                             {content.title}
                         </a>
                     </h3>

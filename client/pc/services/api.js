@@ -1,4 +1,5 @@
 import { jsonp, ajax } from '@ifeng/ui_base';
+import { formatImage, formatUrl } from '@ifeng/public_method';
 
 // apiUrl为webpack注入的全局变量
 /* eslint-disable no-undef */
@@ -105,50 +106,143 @@ const getFundsFlowData = async () => {
 
 // 获取信息流首页数据
 const getCustomList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/customList/getCustomList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/customList/getCustomList`, {
         jsonpCallback: 'getCustomList',
         cache: false,
     });
+
+    const result = data.data.map(item => ({
+        thumbnails: formatImage(item.thumbnail, 144, 96),
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 // 获取信息流宏观数据
 const getMacroList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/macroList/getMacroList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/macroList/getMacroList`, {
         jsonpCallback: 'getMacroList',
         cache: false,
     });
+
+    const result = data.data.data.map(item => ({
+        thumbnails:
+            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                ? formatImage(item.thumbnails.image[0].url, 144, 96)
+                : '',
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 // 获取信息流股票数据
 const getStockList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/stockList/getStockList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/stockList/getStockList`, {
         jsonpCallback: 'getStockList',
         cache: false,
     });
+
+    const result = data.data.data.map(item => ({
+        thumbnails:
+            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                ? formatImage(item.thumbnails.image[0].url, 144, 96)
+                : '',
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 // 获取信息流 imarkets 数据
 const getImarketsList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/imarketsList/getImarketsList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/imarketsList/getImarketsList`, {
         jsonpCallback: 'getImarketsList',
         cache: false,
     });
+
+    const result = data.data.data.map(item => ({
+        thumbnails:
+            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                ? formatImage(item.thumbnails.image[0].url, 144, 96)
+                : '',
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 // 获取信息流公司抓取数据
 const getCompanyList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/companyList/getCompanyList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/companyList/getCompanyList`, {
         jsonpCallback: 'getCompanyList',
         cache: false,
     });
+
+    const result = data.data.data.map(item => ({
+        thumbnails:
+            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                ? formatImage(item.thumbnails.image[0].url, 144, 96)
+                : '',
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 // 获取信息流 Wemoney 数据
 const getWemoneyList = async () => {
-    return await jsonp(`${apiBaseUrl}/finance/index/wemoneyList/getWemoneyList`, {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/wemoneyList/getWemoneyList`, {
         jsonpCallback: 'getWemoneyList',
         cache: false,
     });
+
+    const result = data.data.data.map(item => ({
+        thumbnails:
+            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                ? formatImage(item.thumbnails.image[0].url, 144, 96)
+                : '',
+        commentUrl: formatUrl(item.commentUrl),
+        pcUrl: formatUrl(item.pcUrl),
+        url: formatUrl(item.url),
+        title: item.title,
+        custom: item.custom,
+        source: item.source,
+        newsTime: item.newsTime,
+    }));
+
+    return result;
 };
 
 /* 股首 */

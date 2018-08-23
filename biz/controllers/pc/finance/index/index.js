@@ -2,7 +2,7 @@ const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
-const { recommendRandomSort } = require('../../../../services/utils/utils');
+const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
     path: '/pc/finance/(index)?',
@@ -269,28 +269,36 @@ exports.list = {
 
         try {
             allData.headline = allData.headline && recommendRandomSort(allData.headline, 4);
+            allData.headline = allData.headline.map(item => ({
+                url: formatUrl(item.url),
+                title: item.title,
+            }));
 
             allData.bannerPic =
                 allData.bannerPic &&
                 allData.bannerPic.slice(0, 5).map(item => ({
-                    url: item.url,
-                    thumbnails: item.thumbnails && item.thumbnails.image ? item.thumbnails.image[0].url : '',
+                    url: formatUrl(item.url),
+                    thumbnails:
+                        item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                            ? formatImage(item.thumbnails.image[0].url, 400, 230)
+                            : '',
                     title: item.title,
                 }));
 
-            allData.dayNews = allData.dayNews.slice(0, 12).map(item => ({
-                url: item.url,
-                title: item.title,
-            }));
+            allData.dayNews =
+                allData.dayNews &&
+                allData.dayNews.slice(0, 12).map(item => ({
+                    url: formatUrl(item.url),
+                    title: item.title,
+                }));
 
             const comicBook = allData.comicBook && allData.comicBook[0];
-            // const comicBook = [];
 
             allData.comicBook = {
-                url: comicBook.url,
+                url: formatUrl(comicBook.url),
                 thumbnails:
                     comicBook.thumbnails && comicBook.thumbnails.image && comicBook.thumbnails.image[0]
-                        ? comicBook.thumbnails.image[0].url
+                        ? formatImage(comicBook.thumbnails.image[0].url, 198, 120)
                         : '',
                 title: comicBook.title,
                 date: comicBook.newsTime.split(' ')[0],
@@ -300,18 +308,18 @@ exports.list = {
             const talking =
                 allData.talking &&
                 allData.talking.slice(1, 7).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.talking = [
                 {
-                    url: talkingTitle.url,
+                    url: formatUrl(talkingTitle.url),
                     title: talkingTitle.title,
                     name: talkingTitle.wemediaEAccountName,
                     img:
                         talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
-                            ? talkingTitle.thumbnails.image[0].url
+                            ? formatImage(talkingTitle.thumbnails.image[0].url, 50, 50)
                             : '',
                 },
             ].concat(talking);
@@ -321,23 +329,23 @@ exports.list = {
             allData.financeList =
                 allData.financeList &&
                 allData.financeList.map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.stocks =
                 allData.stocks &&
                 allData.stocks.slice(0, 6).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.financeVideo = allData.financeVideo
                 ? allData.financeVideo.slice(0, 3).map(item => ({
-                      url: item.url,
+                      url: formatUrl(item.url),
                       thumbnails:
                           item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                              ? item.thumbnails.image[0].url
+                              ? formatImage(item.thumbnails.image[0].url, 300, 170)
                               : '',
                       title: item.title,
                   }))
@@ -352,24 +360,32 @@ exports.list = {
             const institute = allData.institute && allData.institute[0];
 
             allData.institute = {
-                url: institute.url,
+                url: formatUrl(institute.url),
                 thumbnails:
                     institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
-                        ? institute.thumbnails.image[0].url
+                        ? formatImage(institute.thumbnails.image[0].url, 300, 169)
                         : '',
                 title: institute.title,
             };
 
-            let lark = allData.lark && allData.lark[0];
+            const lark = allData.lark && allData.lark[0];
 
             allData.lark = {
-                url: lark.url,
+                url: formatUrl(lark.url),
                 thumbnails:
                     lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
-                        ? lark.thumbnails.image[0].url
+                        ? formatImage(lark.thumbnails.image[0].url, 300, 169)
                         : '',
                 title: lark.title,
             };
+
+            allData.meeting =
+                allData.meeting &&
+                allData.meeting.slice(0, 7).map(item => ({
+                    banner: formatImage(item.banner, 300, 141),
+                    title: item.title,
+                    url: formatUrl(item.url),
+                }));
         } catch (error) {
             logger.error(error);
         }

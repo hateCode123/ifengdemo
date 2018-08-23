@@ -1,7 +1,7 @@
 ﻿const { KVProxy } = require('../../../../../providers/ucmsapiProxy');
 const logger = require('../../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
-const { recommendRandomSort } = require('../../../../../services/utils/utils');
+const { recommendRandomSort } = require('@ifeng/public_method');
 
 // 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
 

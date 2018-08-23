@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import TitleList from '../../../../components/titleList';
 import { rel } from '../../../../../../utils/rel';
-import { handleUrl } from '../../../../../../utils/utils';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 
@@ -40,7 +39,7 @@ class Stocks extends React.PureComponent {
                             </h5>
                         </div>
                         <h3 className={styles.title}>
-                            <a href={handleUrl(content[0].url)} target="_blank" rel={rel} title={content[0].title}>
+                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
                                 {content[0].title}
                             </a>
                         </h3>

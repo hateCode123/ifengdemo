@@ -47,12 +47,12 @@ class Info extends React.Component {
             const { datas, counts } = this.state;
             const data = await getCustomList();
 
-            if (data.data) {
-                const info = data.data ? data.data : [];
+            if (data) {
+                const info = data;
                 const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 
-                datas[0].data = data.data;
+                datas[0].data = data;
                 counts[0] = count.map(item => item.count);
 
                 this.setState({
@@ -89,8 +89,8 @@ class Info extends React.Component {
                     data = await getWemoneyList();
                 }
 
-                if (data.data) {
-                    datas[num].data = data.data.data;
+                if (data) {
+                    datas[num].data = data;
                 }
             } catch (e) {
                 console.error(e);
@@ -100,7 +100,7 @@ class Info extends React.Component {
         // 获取文章评论数
         if (num !== 0 && !counts[num]) {
             try {
-                const info = data.data ? data.data.data : [];
+                const info = data ? data : [];
                 const docUrl = info.map(item => item.commentUrl);
                 const count = await getCommentCount(docUrl);
 

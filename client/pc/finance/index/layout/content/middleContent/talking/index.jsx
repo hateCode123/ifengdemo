@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import TitleList from '../../../../components/titleList';
 import { rel } from '../../../../../../utils/rel';
-import { handleUrl } from '../../../../../../utils/utils';
 import errorBoundary from '../../../../../../components/errorBoundary';
 import dataProcessing from '../../../../../../components/dataProcessing';
 
@@ -31,17 +30,17 @@ class Talking extends React.Component {
                     </div>
                     <div className={styles.picTxt}>
                         <div className={styles.box_pic}>
-                            <a href={handleUrl(content[0].url)} target="_blank" rel={rel} title={content[0].title}>
+                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
                                 <img src={content[0].img} width="50" height="50" />
                             </a>
                             <h5>
-                                <a href={handleUrl(content[0].url)} target="_blank" rel={rel} title={content[0].name}>
+                                <a href={content[0].url} target="_blank" rel={rel} title={content[0].name}>
                                     {content[0].name}
                                 </a>
                             </h5>
                         </div>
                         <h3 className={styles.title}>
-                            <a href={handleUrl(content[0].url)} target="_blank" rel={rel} title={content[0].title}>
+                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
                                 {content[0].title}
                             </a>
                         </h3>

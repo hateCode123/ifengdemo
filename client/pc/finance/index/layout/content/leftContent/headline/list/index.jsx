@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import { handleUrl } from '../../../../../../../utils/utils';
 import { rel } from '../../../../../../../utils/rel';
 
 class List extends React.PureComponent {
@@ -26,7 +25,7 @@ class List extends React.PureComponent {
             if (index % 2 === 0) {
                 list.push(
                     <h2 key={index} className={styles.title}>
-                        <a href={handleUrl(item.url)} target="_blank" rel={rel} title={item.title}>
+                        <a href={item.url} target="_blank" rel={rel} title={item.title}>
                             {item.title}
                         </a>
                     </h2>,
@@ -34,7 +33,7 @@ class List extends React.PureComponent {
             } else {
                 list.push(
                     <p key={index} className={styles.text}>
-                        <a href={handleUrl(item.url)} target="_blank" rel={rel} title={item.title}>
+                        <a href={item.url} target="_blank" rel={rel} title={item.title}>
                             {item.title}
                         </a>
                     </p>,
