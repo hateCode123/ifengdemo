@@ -40,20 +40,20 @@
     float: left;
     overflow: hidden;
     & li {
-        background: #fafafa;
+        background: #d8ebfe;
         width: 64px;
         height: 30px;
         text-align: center;
         line-height: 30px;
         color: #666666;
         cursor: pointer;
-        background: url(http://y2.ifengimg.com/a/2013/0903/g_19.png) repeat-x left bottom;
+        background: url(./g_19.png) repeat-x left bottom;
         overflow: hidden;
     }
     & li.current {
         background: #73ade5;
         color: #fff;
-        background: url(http://y2.ifengimg.com/a/2013/0903/g_18.png) repeat-x left bottom;
+        background: url(./g_18.png) repeat-x left bottom;
     }
 }
 
@@ -69,7 +69,7 @@
     width: 235px;
     overflow: hidden;
     float: left;
-    background: url(http://p0.ifengimg.com/fe/cj-tzgc/images/g_20_9696f9bd.png) repeat-y left -1px;
+    background: url(./g_20.png) repeat-y left -1px;
     & table {
         width: 100%;
         border: 0;

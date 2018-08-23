@@ -14,7 +14,7 @@ import PaperContent from './paperContent';
 import TitleR from './titleR';
 import { Live } from './live';
 import ClickRank from './clickRank';
-import { Qa } from './QA';
+import Qa from './QA';
 import { Header } from './header';
 import { BottomFooter } from './footer';
 import { Slide } from './slide';
@@ -140,7 +140,18 @@ class Layout extends React.PureComponent {
 
                         <StockHq content={stockHqData} />
 
-                        <Qa content={QaData} />
+                        <div className={styles.mt30}>
+                            <Chip
+                                id="10060"
+                                type="static"
+                                title="A股分析师答疑"
+                                groupName="文章"
+                                translate="jsonParse"
+                                content={content.QATitle}>
+                                <TitleR content={content.QATitle} liveImg={content.liveTitle.liveimg} />
+                            </Chip>
+                            <Qa tabs={content.QATabs} />
+                        </div>
 
                         <ClickRank content={clickRankData} />
 

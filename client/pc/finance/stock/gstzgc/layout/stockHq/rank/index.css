@@ -41,7 +41,7 @@
     width: 56px;
     height: 21px;
     margin-top: 2px;
-    background: url(http://y2.ifengimg.com/a/2013/0903/g_17.png) no-repeat;
+    background: url(./g_17.png) no-repeat;
     float: left;
     padding-left: 9px;
     line-height: 21px;
@@ -69,20 +69,20 @@
     float: left;
     overflow: hidden;
     & li {
-        background: #fafafa;
+        background: #d8ebfe;
         width: 64px;
         height: 30px;
         text-align: center;
         line-height: 30px;
         color: #666666;
         cursor: pointer;
-        background: url(http://y2.ifengimg.com/a/2013/0903/g_19.png) repeat-x left bottom;
+        background: url(./g_19.png) repeat-x left bottom;
         overflow: hidden;
     }
     & li.current {
         background: #73ade5;
         color: #fff;
-        background: url(http://y2.ifengimg.com/a/2013/0903/g_18.png) repeat-x left bottom;
+        background: url(./g_18.png) repeat-x left bottom;
     }
 }
 
