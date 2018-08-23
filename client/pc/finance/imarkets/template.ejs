@@ -34,11 +34,14 @@
     <link href="{{path}}" rel="stylesheet">
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
+    <%- adData.adHead %>
 </head>
 <body>
     <div id="root"></div>
 
     {{#each htmlWebpackPlugin.files.js}}
-    <script src="{{path}}" type="text/javascript"></script> {{/each}}
+        <script src="{{path}}" type="text/javascript"></script>
+    {{/each}}
+    <%- adData.adBody %>
 </body>
 </html>

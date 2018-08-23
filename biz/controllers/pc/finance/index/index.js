@@ -96,6 +96,24 @@ exports.list = {
             // 二维码
             ['qrCode', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],
 
+            // adHead
+            [
+                'adHead',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
+                getString(),
+            ],
+
+            // adBody
+            [
+                'adBody',
+                'KVProxy',
+                'getAd',
+                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
+                getString(),
+            ],
+
             // topAd
             ['topAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
 
@@ -361,12 +379,20 @@ exports.list = {
             statisticsBody: allData.statisticsBody,
         };
 
+        const adData = {
+            adHead: allData.adHead,
+            adBody: allData.adBody,
+        };
+
         delete allData.statisticsHead;
         delete allData.statisticsBody;
+        delete allData.adHead;
+        delete allData.adBody;
 
         await ctx.html('finance_index', {
             allData,
             statisticsData,
+            adData,
         });
     },
 };

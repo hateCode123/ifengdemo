@@ -72,7 +72,7 @@
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
-    <script src="https://c0.ifengimg.com/web/d/inice.js"></script>
+    <%- adData.adHead %>
 </head>
 
 <body>
@@ -80,7 +80,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-    <script>IfengAmgr.start()</script>
+    <%- adData.adBody %>
     <%- statisticsData.statisticsBody %>
 </body>
 
