@@ -38,7 +38,8 @@ exports.financeWemoney = {
             ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20035, getJsonByKey('data')],
+            // ['headline', 'KVProxy', 'getRecommendFragment', 20035, getJsonByKey('data')],
+            ['headline', 'KVProxy', 'getStaticFragment', 10030, getStringByKey('content')],
 
             // 视频解盘
             ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getJson()],
@@ -151,7 +152,7 @@ exports.financeWemoney = {
 
         // 数据简化
         try {
-            allData.headline = allData.headline && recommendRandomSort(allData.headline, 12);
+            // allData.headline = allData.headline && recommendRandomSort(allData.headline, 12);
             allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, 4);
             allData.clickRank = allData.clickRank.map(item => pureData(item));
             allData.newPaper = allData.newPaper.map(item => pureData(item));
