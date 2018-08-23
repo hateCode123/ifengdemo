@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.css';
 import { jsonp } from '@ifeng/ui_base';
+import { getStockData } from './../../../../../../services/api';
 
 class GlobalIndex extends React.PureComponent {
     state = {
@@ -44,14 +45,7 @@ class GlobalIndex extends React.PureComponent {
             return codeList;
         });
 
-        const result = await jsonp('//hq.finance.ifeng.com/q.php', {
-            data: {
-                l: codeList.join(','),
-                f: 'json',
-                e: 'getJson(json_q)',
-            },
-            jsonpCallback: 'getJson',
-        });
+        const result = await getStockData(codeList);
 
         for (let a = 0; a < Object.keys(result).length; a++) {
             let style = '';
