@@ -147,7 +147,6 @@ exports.financeWemoney = {
                 title: item.title,
                 url: item.url ? formatUrl(item.url) : '',
                 source: item.source,
-                thumbnail: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
             };
         };
 

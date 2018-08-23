@@ -8,7 +8,6 @@ import transform from 'chipDataTransform';
 import TopAd from './topAd/';
 import Navigation from './navigation/';
 import Topic from './topic/';
-import { Recommend } from './recommend';
 import Headline from './headline';
 import PaperContent from './paperContent';
 import TitleR from './titleR';
@@ -19,15 +18,15 @@ import { Header } from './header';
 import { BottomFooter } from './footer';
 import { Slide } from './slide';
 import StockHq from './stockHq';
+import Recommend from '../components/recommend';
 
 class Layout extends React.PureComponent {
-    /**
-     * 渲染网页布局
-     */
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
-
-        console.log('allData', content);
 
         const headerData = {
             nav: content.nav,
@@ -58,12 +57,6 @@ class Layout extends React.PureComponent {
             rankTitle: content.rankTitle,
             fundsFlowTitle: content.fundsFlowTitle,
             customStocksTitle: content.customStocksTitle,
-        };
-
-        const QaData = {
-            title: content.QATitle,
-            liveImg: content.QATitle.liveimg,
-            tabs: content.QATabs,
         };
 
         const clickRankData = {
