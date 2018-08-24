@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import NewsList from './newsList/';
 import ExtraNews from './extraNews/';
 
@@ -44,4 +43,4 @@ class DateNews extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(DateNews));
+export default errorBoundary(DateNews);

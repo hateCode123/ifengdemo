@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Slides from '@ifeng/ui_pc_slides';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 
 class BannerPic extends React.PureComponent {
@@ -52,4 +51,4 @@ class BannerPic extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(BannerPic));
+export default errorBoundary(BannerPic);

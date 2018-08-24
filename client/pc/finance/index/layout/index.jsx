@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
-import errorBoundary from '../../../components/errorBoundary';
+import errorBoundary from '@ifeng/errorBoundary';
 import Header from './header';
 import Navigation from './navigation';
 import Stock from './stock';
@@ -98,7 +98,9 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <Stock content={content.production} />
                 <Content content={contentData} />
-                <Cooperation content={cooperation} />
+                <Chip id="10015" type="static" title="底部合作链接" groupName="底部合作链接" content={cooperation}>
+                    <Cooperation />
+                </Chip>
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
                 <Chip id="20013" type="struct" title="二维码" groupName="二维码" content={qrCode}>

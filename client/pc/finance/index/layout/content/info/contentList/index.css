@@ -63,40 +63,11 @@
     margin-top: 50px;
 }
 
-.ad,
 .source,
 .date {
     font-size: 12px;
     color: #999;
-    margin-left: 10px;
-}
-
-.category1 {
-    border: solid 1px #17a0e0;
-    color: #17a0e0;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-weight: normal;
-    font-size: 12px;
-}
-
-.category2 {
-    background: #ff4245;
-    color: #fff;
-    border: solid 1px #ff4245;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-weight: normal;
-    font-size: 12px;
-}
-
-.category3 {
-    border: solid 1px #ff4245;
-    color: #ff4245;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-weight: normal;
-    font-size: 12px;
+    margin-right: 10px;
 }
 
 .comment {

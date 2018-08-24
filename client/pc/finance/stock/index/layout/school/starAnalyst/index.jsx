@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class StarAnalyst extends React.PureComponent {
     static propTypes = {
@@ -107,4 +106,4 @@ class StarAnalyst extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(StarAnalyst));
+export default errorBoundary(StarAnalyst);

@@ -6,7 +6,7 @@ import transform from 'chipDataTransform';
 import Header from './header';
 import Content from './content';
 import BottomFooter from './footer';
-import errorBoundary from '../../../components/errorBoundary';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Layout extends React.PureComponent {
     static propTypes = {

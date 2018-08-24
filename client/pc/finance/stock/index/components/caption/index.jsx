@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import errorBoundary from '../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../utils/rel';
 
 class Caption extends React.PureComponent {
@@ -41,4 +40,4 @@ class Caption extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Caption));
+export default errorBoundary(Caption);

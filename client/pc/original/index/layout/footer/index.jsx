@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Footer from '../../../../components/footer';
-import errorBoundary from '../../../../components/errorBoundary';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Footer 组件

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import TitleList from '../../../../components/titleList';
 import { rel } from '../../../../../../utils/rel';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Stocks extends React.PureComponent {
     static propTypes = {
@@ -45,10 +44,10 @@ class Stocks extends React.PureComponent {
                         </h3>
                     </div>
                 </div>
-                <TitleList content={content.slice(1, 6)} />
+                <TitleList content={content.slice(1, 7)} />
             </React.Fragment>
         );
     }
 }
 
-export default errorBoundary(dataProcessing(Stocks));
+export default errorBoundary(Stocks);

@@ -57,7 +57,7 @@
     background: #194e80;
     cursor: pointer;
     & td {
-        color: #fff;
+        color: #fff !important;
         background: #194e80;
     }
 }

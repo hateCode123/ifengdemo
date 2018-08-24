@@ -117,9 +117,8 @@ const getCustomList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: item.createdTime,
     }));
 
     return result;
@@ -141,7 +140,6 @@ const getMacroList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
         newsTime: item.newsTime,
     }));
@@ -165,7 +163,6 @@ const getStockList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
         newsTime: item.newsTime,
     }));
@@ -189,7 +186,6 @@ const getImarketsList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
         newsTime: item.newsTime,
     }));
@@ -213,7 +209,6 @@ const getCompanyList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
         newsTime: item.newsTime,
     }));
@@ -237,7 +232,6 @@ const getWemoneyList = async () => {
         pcUrl: formatUrl(item.pcUrl),
         url: formatUrl(item.url),
         title: item.title,
-        custom: item.custom,
         source: item.source,
         newsTime: item.newsTime,
     }));

@@ -335,7 +335,7 @@ exports.list = {
 
             allData.stocks =
                 allData.stocks &&
-                allData.stocks.slice(0, 6).map(item => ({
+                allData.stocks.slice(0, 7).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Chip from 'Chip';
 import CourierTitle from './courierTitle/';
 import CourierContent from './courierContent/';
-import errorBoundary from '../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Courier extends React.PureComponent {
     static propTypes = {
@@ -42,4 +41,4 @@ class Courier extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Courier));
+export default errorBoundary(Courier);

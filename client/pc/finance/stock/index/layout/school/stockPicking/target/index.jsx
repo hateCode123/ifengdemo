@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { getStockData } from '../../../../../../../services/api';
-import errorBoundary from '../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 
 class Target extends React.PureComponent {
@@ -105,4 +104,4 @@ class Target extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Target));
+export default errorBoundary(Target);

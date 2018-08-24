@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import errorBoundary from '../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Market extends React.PureComponent {
     static propTypes = {
@@ -23,4 +22,4 @@ class Market extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Market));
+export default errorBoundary(Market);

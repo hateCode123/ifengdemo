@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
-import errorBoundary from '../../../../components/errorBoundary';
-import dataProcessing from '../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import Logo from './logo/';
 import Nav from '../../../../components/nav';
 import UserInfo from '@ifeng/ui_pc_userInfo';
@@ -57,4 +56,4 @@ class Header extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Header));
+export default errorBoundary(Header);

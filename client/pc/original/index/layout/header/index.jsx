@@ -4,7 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import UserInfo from '@ifeng/ui_pc_userInfo';
 import Search from '@ifeng/ui_pc_search';
-import errorBoundary from '../../../../components/errorBoundary';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../utils/rel';
 
 class Header extends React.PureComponent {

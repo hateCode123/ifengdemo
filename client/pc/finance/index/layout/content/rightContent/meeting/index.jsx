@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { handleAd } from '../../../../../../utils/utils';
 
 class Meeting extends React.PureComponent {
@@ -40,7 +39,7 @@ class Meeting extends React.PureComponent {
                 <ul className={styles.list} ref={this.ref}>
                     {list.map((item, index) => (
                         <li key={index}>
-                            <a href={pic.url} target="_blank" rel={rel} title={item.title}>
+                            <a href={item.url} target="_blank" rel={rel} title={item.title}>
                                 {item.title}
                             </a>
                         </li>
@@ -51,4 +50,4 @@ class Meeting extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Meeting));
+export default errorBoundary(Meeting);

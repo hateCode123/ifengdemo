@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import errorBoundary from '../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 
 class Track extends React.PureComponent {
@@ -83,4 +82,4 @@ class Track extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Track));
+export default errorBoundary(Track);

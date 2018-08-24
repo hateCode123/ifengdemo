@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import TitleList from '../../../../components/titleList';
 import { rel } from '../../../../../../utils/rel';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Talking extends React.Component {
     static propTypes = {
@@ -52,4 +51,4 @@ class Talking extends React.Component {
     }
 }
 
-export default errorBoundary(dataProcessing(Talking));
+export default errorBoundary(Talking);

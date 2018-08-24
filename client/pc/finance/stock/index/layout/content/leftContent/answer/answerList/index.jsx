@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import errorBoundary from '../../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class AnswerList extends React.PureComponent {
     static propTypes = {
@@ -20,4 +19,4 @@ class AnswerList extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(AnswerList));
+export default errorBoundary(AnswerList);

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.css';
 import { getStockData } from '../../../../../services/api';
+import { rel } from '../../../../../utils/rel';
 class StockBox extends React.PureComponent {
     state = {
         stock: [
@@ -76,7 +77,7 @@ class StockBox extends React.PureComponent {
             <div className={styles.stock_box}>
                 {stock.map((item, index) => (
                     <div key={index} className={`${styles.stock_container} ${styles[`box${index}`]}`}>
-                        <a href={`//finance.ifeng.com/app/hq/${item.type}/${item.code}`}>
+                        <a href={`//finance.ifeng.com/app/hq/${item.type}/${item.code}`} target="_blank" rel={rel}>
                             <div className={styles.text}>{item.name}</div>
                             <div className={`${styles.price} ${prices.length > 0 ? styles[prices[index].style] : ''}`}>
                                 {prices.length > 0 ? prices[index].price : ''}

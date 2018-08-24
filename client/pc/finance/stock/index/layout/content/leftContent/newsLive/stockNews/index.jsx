@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import errorBoundary from '../../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../../utils/rel';
 
 class StockNews extends React.PureComponent {
@@ -30,4 +29,4 @@ class StockNews extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(StockNews));
+export default errorBoundary(StockNews);

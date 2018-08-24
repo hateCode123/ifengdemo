@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import errorBoundary from '../../../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class CourierContent extends React.PureComponent {
     static propTypes = {
@@ -23,4 +22,4 @@ class CourierContent extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(CourierContent));
+export default errorBoundary(CourierContent);

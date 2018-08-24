@@ -4,8 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Caption from '../../../../components/caption';
 import TitleList from '../../../../components/titleList';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Finance extends React.PureComponent {
     static propTypes = {
@@ -38,4 +37,4 @@ class Finance extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Finance));
+export default errorBoundary(Finance);

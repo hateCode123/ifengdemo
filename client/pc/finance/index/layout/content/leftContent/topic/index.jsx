@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './index.css';
 import { getTopicData } from '../../../../../../services/api';
 import { rel } from '../../../../../../utils/rel';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Topic extends React.PureComponent {
     state = {
@@ -65,4 +64,4 @@ class Topic extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Topic));
+export default errorBoundary(Topic);

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import md5 from 'md5';
 import { Event } from '@ifeng/ui_base';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/utils';
 
@@ -65,21 +64,6 @@ class ContentList extends React.PureComponent {
     render() {
         const { content, counts } = this.props;
         const listStyle = {};
-        const type = {
-            置顶: 'category0',
-            专题: 'category1',
-            热: 'category2',
-            荐: 'category2',
-            本地: 'category2',
-            快讯: 'category2',
-            热门: 'category2',
-            突发: 'category2',
-            原创: 'category2',
-            深度: 'category2',
-            独家: 'category2',
-            焦点: 'category2',
-            '24小时': 'category2',
-        };
 
         this.infoRef = React.createRef();
 
@@ -106,13 +90,6 @@ class ContentList extends React.PureComponent {
                                 </a>
                             </p>
                             <p className={styles.time}>
-                                {item.custom ? (
-                                    <span className={styles[type[`${item.custom.articleTag}`]]}>
-                                        {item.custom.articleTag}
-                                    </span>
-                                ) : (
-                                    ''
-                                )}
                                 {item.source ? <span className={styles.source}>{item.source}</span> : ''}
                                 {item.newsTime && item.newsTime !== '' ? (
                                     <span className={styles.date}>
@@ -146,4 +123,4 @@ class ContentList extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(ContentList));
+export default errorBoundary(ContentList);

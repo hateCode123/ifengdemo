@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
 import Footer from '../../../../components/footer';
-import dataProcessing from '../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Footer 组件
@@ -28,9 +27,7 @@ class BottomFooter extends React.PureComponent {
         );
         const footer = (
             <div key="footer" className={styles.footer}>
-                <Chip id="20012" type="struct" title="底部公用版权" groupName="底部" content={content.footer}>
-                    <Footer />
-                </Chip>
+                <Footer content={content.footer} />
             </div>
         );
 
@@ -38,4 +35,4 @@ class BottomFooter extends React.PureComponent {
     }
 }
 
-export default dataProcessing(BottomFooter);
+export default errorBoundary(BottomFooter);

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class NewsList extends React.PureComponent {
     static propTypes = {
@@ -30,4 +30,4 @@ class NewsList extends React.PureComponent {
     }
 }
 
-export default dataProcessing(NewsList);
+export default errorBoundary(NewsList);

@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import errorBoundary from '../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import Title from './title/';
 import SubTitle from './subTitle/';
 import Link from './link/';
@@ -69,4 +68,4 @@ class Tab extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(Tab));
+export default errorBoundary(Tab);

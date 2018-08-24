@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Slides from '@ifeng/ui_pc_slides';
-import errorBoundary from '../../../../../../components/errorBoundary';
-import dataProcessing from '../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/utils';
 
@@ -89,4 +88,4 @@ class FinanceVideo extends React.PureComponent {
     }
 }
 
-export default errorBoundary(dataProcessing(FinanceVideo));
+export default errorBoundary(FinanceVideo);

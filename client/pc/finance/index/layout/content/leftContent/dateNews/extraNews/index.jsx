@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import dataProcessing from '../../../../../../../components/dataProcessing';
+import errorBoundary from '@ifeng/errorBoundary';
 import { handleAd } from '../../../../../../../utils/utils';
 
 class ExtraNews extends React.PureComponent {
@@ -34,4 +34,4 @@ class ExtraNews extends React.PureComponent {
     }
 }
 
-export default dataProcessing(ExtraNews);
+export default errorBoundary(ExtraNews);
