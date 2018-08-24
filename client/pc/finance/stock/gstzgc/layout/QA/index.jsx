@@ -6,7 +6,7 @@ import { jsonp } from '@ifeng/ui_base';
 import { getAnalyzerInfo, getQAData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 import QaTabs from './QATabs/';
-import QaForm from './QAForm/';
+import QaForm from './QAform/';
 
 class Qa extends React.PureComponent {
     static propTypes = {
