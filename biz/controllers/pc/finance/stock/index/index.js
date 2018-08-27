@@ -2,7 +2,7 @@ const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
-const { recommendRandomSort } = require('@ifeng/public_method');
+const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -323,55 +323,65 @@ exports.list = {
 
         try {
             allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
+            allData.bannerPic = allData.bannerPic.map(item => ({
+                thumbnail: formatImage(item.thumbnail, 570, 260),
+                url: formatUrl(item.url),
+                title: item.title,
+            }));
 
             allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
+            allData.dayStock = allData.dayStock.map(item => ({
+                thumbnail: formatImage(item.thumbnail, 300, 166),
+                url: formatUrl(item.url),
+                title: item.title,
+            }));
 
             allData.stockNews =
                 allData.stockNews &&
                 allData.stockNews.slice(0, 18).map(item => ({
                     id: item.id,
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.news =
                 allData.news &&
                 allData.news.slice(0, 8).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.subject = allData.subject.slice(0, 3).map(item => ({
-                banner: item.banner,
-                url: item.url,
+                banner: formatImage(item.banner, 300, 169),
+                url: formatUrl(item.url),
                 title: item.title,
             }));
 
             allData.marketAnalysis =
                 allData.marketAnalysis &&
                 allData.marketAnalysis.slice(0, 11).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.hotPlate =
                 allData.hotPlate &&
                 allData.hotPlate.slice(0, 11).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.logs =
                 allData.logs &&
                 allData.logs.slice(0, 6).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.school =
                 allData.school &&
                 allData.school.slice(0, 6).map(item => ({
-                    url: item.url,
+                    url: formatUrl(item.url),
                     title: item.title,
                 }));
         } catch (error) {
