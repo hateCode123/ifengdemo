@@ -1,108 +1,25 @@
 const path = require('path');
-const glob = require('glob');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-// const px2rem = require('postcss-px2rem');
-const nextcss = require('postcss-cssnext');
-const postImport = require('postcss-import');
-const aspectRatioMini = require('postcss-aspect-ratio-mini');
-const pxToViewport = require('postcss-px-to-viewport');
-const viewPortUnits = require('postcss-viewport-units');
-const writeSvg = require('postcss-write-svg');
-const WebpackChunkHash = require('webpack-chunk-hash');
 const getEntrys = require('./webpackUtils/getEntry');
 const getHTMLs = require('./webpackUtils/getHTMLs');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const {
+    setAlias,
+    setJsConfig,
+    setThirdPartCssConfig,
+    setSelfCssConfig,
+    setBabelLoader,
+} = require('./webpackUtils/config');
+const HappyPack = require('happypack');
 
 const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
-
-const HappyPack = require('happypack');
 const os = require('os');
 const useCpuCount = Math.floor(os.cpus().length / 5);
 const happyThreadPool = HappyPack.ThreadPool({ size: useCpuCount > 1 ? useCpuCount : 1 });
-
-// console.log('cpus============>', os.cpus().length);
-
-const pcCssConfig = function(level) {
-    return {
-        test: /\.css$/,
-        include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-        use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
-            {
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true,
-                    plugins: function() {
-                        return [
-                            postImport(),
-                            nextcss({
-                                browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                            }),
-                            // px2rem({
-                            //     remUnit: 75,
-                            // }),
-                        ];
-                    },
-                },
-            },
-        ],
-    };
-};
-
-const commoncss = {
-    test: /\.css$/,
-    exclude: [path.resolve(__dirname, 'node_modules/@ifeng')],
-    include: /node_modules/,
-    use: [MiniCssExtractPlugin.loader, 'css-loader'],
-};
-
-const mobileCssConfig = function(level) {
-    return {
-        test: /\.css$/,
-        include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-        use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader?modules&localIdentName=[local]-[hash:base64:8]',
-            {
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true,
-                    plugins: function() {
-                        return [
-                            postImport(),
-                            aspectRatioMini(),
-                            writeSvg({ utf8: false }),
-                            pxToViewport({
-                                viewportWidth: 750,
-                                viewportHeight: 1334,
-                                unitPrecision: 5,
-                                viewportUnit: 'vw',
-                                selectorBlackList: ['.ignore', '.hairlines'],
-                                minPixelValue: 1,
-                                mediaQuery: false,
-                            }),
-                            viewPortUnits(),
-                            nextcss({
-                                browsers: ['last 2 versions', 'ie >= 9'],
-                                // browsers: ['chrome >= 56'],
-                            }),
-                            // px2rem({
-                            //     remUnit: 75,
-                            // }),
-                        ];
-                    },
-                },
-            },
-        ],
-    };
-};
 
 const fileExtend = {
     pc_view: '',
@@ -112,47 +29,24 @@ const fileExtend = {
     mobile_edit: '_mobile_edit',
 };
 
-const getAliasFrame = function getAliasFram(level) {
-    return level === ''
-        ? {}
-        : {
-              react: 'anujs/dist/ReactIE.js',
-              'react-dom': 'anujs/dist/ReactIE.js',
-              'prop-types': 'anujs/lib/ReactPropTypes',
-              devtools: 'anujs/lib/devtools',
-              'create-react-class': 'anujs/lib/createClass',
-          };
-};
-
-const createConfig = function(type, platform, cssConfig, level) {
+const createConfig = function(type, platform, level, modern) {
     return {
         stats: 'errors-only',
         devtool: 'source-map',
-        entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx'),
+        entry: getEntrys(platform === 'pc' ? './client/pc/**/app.jsx' : './client/mobile/**/app.jsx', '', modern),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8].js`,
-            // publicPath: '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
+            filename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8]${
+                modern ? '_modern' : ''
+            }.js`,
             publicPath: env === 'pre_development' ? '/' : '//p0.ifengimg.com/fe/zl/test/live/' + appName + '/',
-            chunkFilename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8].js`,
+            chunkFilename: `[name].${platform}_${type}${level ? '_' + level : ''}.[chunkhash:8]${
+                modern ? '_modern' : ''
+            }.js`,
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
-            alias: {
-                Chip:
-                    type === 'view'
-                        ? '@ifeng/visualediting/src/components/ChipView'
-                        : '@ifeng/visualediting/src/components/Chip',
-                ChipEdit:
-                    type === 'view'
-                        ? '@ifeng/visualediting/src/components/ChipEditView'
-                        : '@ifeng/visualediting/src/components/ChipEdit',
-                chipDataTransform:
-                    type === 'view'
-                        ? path.resolve(__dirname, 'biz/common/transformView.js')
-                        : path.resolve(__dirname, 'biz/common/transform.js'),
-                ...getAliasFrame(level),
-            },
+            alias: setAlias(type, level),
         },
         optimization: {
             minimizer: [
@@ -173,67 +67,14 @@ const createConfig = function(type, platform, cssConfig, level) {
                 }),
             ],
             splitChunks: {
-                // cacheGroups: {
-                //     // base: {
-                //     //     test: /([\\/]node_modules[\\/]react[\\/])|([\\/]node_modules[\\/]react-dom[\\/])/,
-                //     //     name: 'base',
-                //     //     chunks: 'all',
-                //     //     priority: 20,
-                //     // },
-                //     comp: {
-                //         test: /[\\/]node_modules[\\/]/,
-                //         name: 'comp',
-                //         chunks: 'all',
-                //         priority: 10,
-                //     },
-                // },
                 chunks: 'all',
-                // name: 'common',
-                // chunks: 'all',
-                // minSize: 100,
-                // name: 'common',
-                // cacheGroups: {
-                //     base: {
-                //         test: /comp/
-                //     }
-                // }
             },
-            // runtimeChunk: {
-            //     name: 'runtime',
-            // },
         },
         module: {
             rules: [
-                {
-                    test: /\.jsx?$/,
-                    use: 'happypack/loader?id=babel',
-                    // use: {
-                    //     loader: 'babel-loader',
-                    //     options: {
-                    //         presets: [
-                    //             [
-                    //                 'env',
-                    //                 {
-                    //                     targets: {
-                    //                         browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                    //                     },
-                    //                     modules: level === '' ? false : 'commonjs',
-                    //                     useBuiltIns: true,
-                    //                     debug: false,
-                    //                 },
-                    //             ],
-                    //             'react',
-                    //             'stage-2',
-                    //         ],
-
-                    //         plugins: ['transform-runtime'],
-                    //     },
-                    // },
-                    // exclude: /node_modules/,
-                    include: [path.resolve(__dirname, 'node_modules/@ifeng'), path.resolve(__dirname, 'client')],
-                },
-                cssConfig(level),
-                commoncss,
+                setJsConfig('build', modern, level),
+                setSelfCssConfig('build', platform, level),
+                setThirdPartCssConfig('build'),
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
                     use: [
@@ -256,9 +97,7 @@ const createConfig = function(type, platform, cssConfig, level) {
         mode: 'production',
         plugins: [
             // new BundleAnalyzerPlugin(),
-            // new BundleAnalyzerPlugin({ analyzerPort: type === 'view' ? 8888 : 8887 }),
-            // new webpack.HashedModuleIdsPlugin(),
-            // new WebpackChunkHash({ algorithm: 'md5' }),
+            // new BundleAnalyzerPlugin({ analyzerPort: modern === 'modern' ? 8888 : 8887 }),
             new webpack.DefinePlugin({
                 // 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
@@ -270,54 +109,35 @@ const createConfig = function(type, platform, cssConfig, level) {
                             ? ''
                             : JSON.stringify('http://test.ucms.ifeng.com/shank/spring'),
             }),
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     name: ['vendor'],
-            //     minChunks: 2,
-            // }),
-            // new ExtractTextPlugin({
-            //     filename: '[name].[contenthash:8].css',
-            //     allChunks: true,
-            // }),
             new MiniCssExtractPlugin({
-                // Options similar to the same options in webpackOptions.output
-                // both options are optional
                 filename: '[name].[hash].css',
                 chunkFilename: '[id].[hash].css',
             }),
             new HappyPack({
                 id: 'babel',
-                loaders: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            cacheDirectory: true,
-                            presets: [
-                                [
-                                    'env',
-                                    {
-                                        targets: {
-                                            browsers: ['last 2 versions', level === '' ? 'ie >= 9' : 'ie >= 7'],
-                                        },
-                                        modules: level === '' ? false : 'commonjs',
-                                        useBuiltIns: true,
-                                        debug: false,
-                                    },
-                                ],
-                                'react',
-                                'stage-2',
-                            ],
-                            plugins: ['transform-runtime'],
-                        },
-                    },
-                ],
+                loaders: [setBabelLoader(modern, level)],
                 threadPool: happyThreadPool,
                 verbose: true,
             }),
-            // new CleanPlugin(['dist']),
+            // ...(modern
+            //     ? []
+            //     : getHTMLs(
+            //           platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
+            //           fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
+            //           level,
+            //           '',
+            //           'build',
+            //           type,
+            //           modern,
+            //       )),
             ...getHTMLs(
                 platform === 'pc' ? './client/pc/**/template.ejs' : './client/mobile/**/template.ejs',
                 fileExtend[`${platform}_${type}${level ? '_' + level : ''}`],
                 level,
+                '',
+                'build',
+                type,
+                modern,
             ),
         ],
     };
@@ -326,23 +146,25 @@ const createConfig = function(type, platform, cssConfig, level) {
 let list = [];
 
 if (process.argv[process.argv.length - 1] === 'pc_low') {
-    list.push(createConfig('view', 'pc', pcCssConfig, 'low'));
+    list.push(createConfig('view', 'pc', 'low', ''));
 }
-
 if (process.argv[process.argv.length - 1] === 'pc') {
-    list.push(createConfig('view', 'pc', pcCssConfig, ''));
+    list.push(createConfig('view', 'pc', '', ''));
 }
-
+if (process.argv[process.argv.length - 1] === 'pc_modern') {
+    list.push(createConfig('view', 'pc', '', 'modern'));
+}
 if (process.argv[process.argv.length - 1] === 'pc_edit') {
-    list.push(createConfig('edit', 'pc', pcCssConfig, ''));
+    list.push(createConfig('edit', 'pc', '', ''));
 }
-
 if (process.argv[process.argv.length - 1] === 'mobile') {
-    list.push(createConfig('view', 'mobile', mobileCssConfig, ''));
+    list.push(createConfig('view', 'mobile', '', ''));
 }
-
+if (process.argv[process.argv.length - 1] === 'mobile_modern') {
+    list.push(createConfig('view', 'mobile', '', 'modern'));
+}
 if (process.argv[process.argv.length - 1] === 'mobile_edit') {
-    list.push(createConfig('edit', 'mobile', mobileCssConfig, ''));
+    list.push(createConfig('edit', 'mobile', '', ''));
 }
 module.exports = list;
 

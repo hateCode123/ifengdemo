@@ -8,7 +8,6 @@ const _ = require('lodash');
 const logger = require('./common/logger');
 const config = require('./configs');
 const { validate } = require('./common/validate');
-const redis = require('./common/redis');
 const urlCache = require('./common/url-cache');
 const { match } = require('./common/url-match');
 
@@ -108,7 +107,7 @@ for (const i in routers) {
         }
 
         // 添加缓存中间件
-        meddlewareList.push(urlCache(cache, type, { engine: redis, prefix: 'app' }));
+        meddlewareList.push(urlCache(cache, type, { engine: null, prefix: 'app' }));
     }
     if (_.isFunction(middleware)) {
         // 添加自定义中间件，处理单个中间件，传入类型 Function

@@ -38,7 +38,7 @@ const server = app.listen(config.default.port || 3000, () => {
 
 module.exports = server;
 
-if (env === 'development' || env === 'pre_development') {
+if (env === 'development') {
     const socket = require('socket.io');
     const io = socket(server);
     const chokidar = require('chokidar');
@@ -60,6 +60,10 @@ if (env === 'development' || env === 'pre_development') {
         // console.log(event, '----', path);
         io.sockets.emit('reload');
     });
+} else if (env === 'pre_development') {
+    // 静态资源设置
+    app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), { index: 'index.html' }));
+    views = require('koa-views');
 } else {
     views = require('koa-views');
 }
@@ -93,6 +97,7 @@ app.use(async (ctx, next) => {
     ctx.routerTimeStart = process.hrtime();
     ctx.rpcTimeList = [[], []];
     ctx.randerTime = 0;
+    ctx.errorCount = 0;
 
     ctx.set('shankTracerId', ctx.uuid);
     ctx.set('hostname', hostname);

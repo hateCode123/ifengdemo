@@ -5,6 +5,8 @@ const { KVProxy, SearchProxy } = require('../../providers/ucmsapiProxy');
 const { tracer } = require('../../common/jaeger');
 const Tars = require('@tars/stream');
 const _ = require('lodash');
+const os = require('os');
+const hostname = os.hostname();
 // const { schemaCheck } = require('../../services/jsonschema/validate');
 const schemaCheck = null;
 const KVTableEnum = {
@@ -46,6 +48,7 @@ const jsonParse = (jsonStr, ctx, parent) => {
     try {
         json = JSON.parse(jsonStr);
     } catch (error) {
+        ctx.errorCount++;
         console.log(jsonStr);
         console.log(error);
         json = jsonStr;
@@ -99,6 +102,7 @@ const success = (ctx, jsonParseStatus, key, singleType = false, jsStatus = false
                 back = result.response.return;
             }
         } catch (err) {
+            ctx.errorCount++;
             logger.error(`Something error with: ${result.callInfo}`);
             logger.error(err);
         }
@@ -124,7 +128,7 @@ const error = (ctx, singleType = false) => {
     return result => {
         // console.log('success.response.costtime:', result.response.costtime);
         // console.log('success.response:', result.response.return);
-
+        ctx.errorCount++;
         if (config.default.statistics) {
             if (singleType) {
                 ctx.rpcTimeList[0].push(result.response.costtime);
@@ -320,6 +324,7 @@ const getJson = key => {
         try {
             return jsonParse(data, ctx, span);
         } catch (error) {
+            ctx.errorCount++;
             console.error(data);
             console.error(error);
 
@@ -337,6 +342,7 @@ const getJsonByKey = key => {
 
             return json;
         } catch (error) {
+            ctx.errorCount++;
             console.error(error);
             console.error(json[key]);
             console.error(data);
@@ -353,6 +359,7 @@ const getStringByKey = key => {
 
             return json[key];
         } catch (error) {
+            ctx.errorCount++;
             console.error(error);
             console.error(data);
 
@@ -409,6 +416,7 @@ const transfer = async (ctx, json) => {
 
         //
     } catch (error) {
+        ctx.errorCount++;
         // logger.error(error);
 
         return backData;
@@ -425,6 +433,7 @@ const transfer = async (ctx, json) => {
                 {
                     url: ctx.urlinfo.path,
                     rpc_func: result.callInfo.replace('[object Object]', ''),
+                    hostname,
                 },
                 result.response.costtime || 0,
             );
@@ -443,14 +452,16 @@ const transfer = async (ctx, json) => {
             // 全页预览处理
             if (ctx.urlinfo.preview && id === ctx.request.body.id) {
                 let data = decodeURIComponent(ctx.request.body.data);
-                
+
                 try {
                     try {
                         backData[itemkey] = JSON.parse(JSON.parse(data));
                     } catch (error) {
+                        ctx.errorCount++;
                         backData[itemkey] = JSON.parse(data);
                     }
                 } catch (error) {
+                    ctx.errorCount++;
                     backData[itemkey] = data;
                 }
             } else {

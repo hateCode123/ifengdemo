@@ -83,6 +83,7 @@ module.exports = (cache, type, options) => {
 
         await next();
         setCache(type, key, ctx.body, random(cache)).catch(err => {
+            ctx.errorCount++;
             logger.error(`url_cache: ${key} cache happened error:${err}`);
         });
     };

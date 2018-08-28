@@ -13,9 +13,7 @@ var BJ_REPORT = (function(global) {
     var _config = {
         namespace: "", // 命名空间， 
         appname: "", // 项目名称
-        url: "https://err.ifengcloud.ifeng.com/v1/api/err", // 上报 接口
-        offline_url: "", // 离线日志上报 接口
-        offline_auto_url: "", // 检测是否自动上报
+        url: "", // 上报 接口
         ext: null, // 扩展参数 用于自定义上报
         level: 4, // 错误级别 1-debug 2-info 4-error
         ignore: [], // 忽略某个错误, 支持 Regexp 和 Function
@@ -23,9 +21,6 @@ var BJ_REPORT = (function(global) {
         delay: 1000, // 延迟上报 combo 为 true 时有效
         submit: null, // 自定义上报方式
         repeat: 5, // 重复上报次数(对于同一个错误超过多少次不上报),
-        offlineLog: false,
-        offlineLogExp: 5,  // 离线日志过期时间 ， 默认5天
-        offlineLogAuto: false  //是否自动询问服务器需要自动上报
     };
 
    function getErrorType (key){
@@ -67,124 +62,6 @@ var BJ_REPORT = (function(global) {
         }
     }
 
-    var Offline_DB = {
-        db: null,
-        ready: function(callback) {
-            var self = this;
-            if (!window.indexedDB || !_config.offlineLog) {
-                _config.offlineLog = false;
-                return callback();
-            }
-
-            if (this.db) {
-                setTimeout(function() {
-                    callback(null, self);
-                }, 0);
-
-                return;
-            }
-            var version = 1;
-            var request = window.indexedDB.open("badjs", version);
-
-            if (!request) {
-                _config.offlineLog = false;
-                return callback();
-            }
-
-            request.onerror = function(e) {
-                callback(e);
-                _config.offlineLog = false;
-                console.log("indexdb request error");
-                return true;
-            };
-            request.onsuccess = function(e) {
-                self.db = e.target.result;
-
-                setTimeout(function() {
-                    callback(null, self);
-                }, 500);
-
-
-            };
-            request.onupgradeneeded = function(e) {
-                var db = e.target.result;
-                if (!db.objectStoreNames.contains('logs')) {
-                    db.createObjectStore('logs', { autoIncrement: true });
-                }
-            };
-        },
-        insertToDB: function(log) {
-            var store = this.getStore();
-            store.add(log);
-        },
-        addLog: function(log) {
-            if (!this.db) {
-                return;
-            }
-            this.insertToDB(log);
-        },
-        addLogs: function(logs) {
-            if (!this.db) {
-                return;
-            }
-
-            for (var i = 0; i < logs.length; i++) {
-                this.addLog(logs[i]);
-            }
-
-        },
-        getLogs: function(opt, callback) {
-            if (!this.db) {
-                return;
-            }
-            var store = this.getStore();
-            var request = store.openCursor();
-            var result = [];
-            request.onsuccess = function(event) {
-                var cursor = event.target.result;
-                if (cursor) {
-                    if (cursor.value.time >= opt.start && cursor.value.time <= opt.end && cursor.value.namespace == opt.namespace && cursor.value.appname == opt.appname) {
-                        result.push(cursor.value);
-                    }
-                    //# cursor.continue
-                    cursor["continue"]();
-                } else {
-                    callback(null, result);
-                }
-            };
-
-            request.onerror = function(e) {
-                callback(e);
-                return true;
-            };
-        },
-        clearDB: function(daysToMaintain) {
-            if (!this.db) {
-                return;
-            }
-
-            var store = this.getStore();
-            if (!daysToMaintain) {
-                store.clear();
-                return;
-            }
-            var range = (Date.now() - (daysToMaintain || 2) * 24 * 3600 * 1000);
-            var request = store.openCursor();
-            request.onsuccess = function(event) {
-                var cursor = event.target.result;
-                if (cursor && (cursor.value.time < range || !cursor.value.time)) {
-                    store["delete"](cursor.primaryKey);
-                    cursor["continue"]();
-                }
-            };
-        },
-
-        getStore: function() {
-            var transaction = this.db.transaction("logs", 'readwrite');
-            return transaction.objectStore("logs");
-        }
-    };
-
     var T = {
         isOBJByType: function(o, type) {
             return Object.prototype.toString.call(o) === "[object " + (type || "Object") + "]";
@@ -220,18 +97,23 @@ var BJ_REPORT = (function(global) {
                     var stack = T.processStackMsg(errObj);
                     var type = errObj.type?errObj.type:0;
                     return {
-                        msg: stack,
+                        msg: errObj.toString(), //stack,
                         type: type,
                         rowNum: rowCols[1],
                         colNum: rowCols[2],
                         target: url.replace(rowCols[0], ""),
-                        _orgMsg: errObj.toString()
+                        _orgMsg: stack //errObj.toString()
                     };
                 } else {
+                    var type = errObj.type?errObj.type:0;
                     //ie 独有 error 对象信息，try-catch 捕获到错误信息传过来，造成没有msg
                     if (errObj.name && errObj.message && errObj.description) {
                         return {
-                            msg: JSON.stringify(errObj)
+                            msg: JSON.stringify(errObj),
+                            type: type,
+                            rowNum: 0,
+                            colNum: 0,
+                            target: 'null',
                         };
                     }
                     return errObj;
@@ -282,7 +164,7 @@ var BJ_REPORT = (function(global) {
             target: url,
             rowNum: line,
             colNum: col,
-            _orgMsg: msg,
+            _orgMsg: newMsg,
             type: 0
         });
 
@@ -327,45 +209,6 @@ var BJ_REPORT = (function(global) {
         // msg=msg&target=target -- report with out combo
         return [params, stringify.join(","), param.join("&")];
     };
-
-
-
-    var _offline_buffer = [];
-    var _save2Offline = function(key, msgObj) {
-        msgObj = T.extend({ namespace: _config.namespace, appname: _config.appname, time: new Date - 0 }, msgObj);
-
-        if (Offline_DB.db) {
-            Offline_DB.addLog(msgObj);
-            return;
-        }
-
-
-        if (!Offline_DB.db && !_offline_buffer.length) {
-            Offline_DB.ready(function(err, DB) {
-                if (DB) {
-                    if (_offline_buffer.length) {
-                        DB.addLogs(_offline_buffer);
-                        _offline_buffer = [];
-                    }
-
-                }
-            });
-        }
-        _offline_buffer.push(msgObj);
-    };
-
-    var _autoReportOffline = function() {
-        var script = document.createElement("script");
-        script.src = _config.offline_auto_url || _config.url.replace(/badjs$/, "offlineAuto") + "?namespace=" + _config.namespace + "&appname=" + _config.appname;
-        window._badjsOfflineAuto = function(isReport) {
-            if (isReport) {
-                BJ_REPORT.reportOfflineLog();
-            }
-        };
-        document.head.appendChild(script);
-    };
-
-
 
     var submit_log_list = [];
     var comboTimeout = 0;
@@ -439,7 +282,6 @@ var BJ_REPORT = (function(global) {
                 }
             }
             if (!isIgnore) {
-                _config.offlineLog && _save2Offline("badjs_" + _config.namespace + _config.appname, report_log);
                 if (!randomIgnore && report_log.level != 20) {
                     submit_log_list.push(log_str[0]);
                     _config.onReport && (_config.onReport(_config.namespace, report_log));
@@ -531,74 +373,6 @@ var BJ_REPORT = (function(global) {
             report.push(msg);
             return report;
         },
-
-        reportOfflineLog: function() {
-            if (!window.indexedDB) {
-                BJ_REPORT.info("unsupport offlineLog");
-                return;
-            }
-            Offline_DB.ready(function(err, DB) {
-                if (!DB) {
-                    return;
-                }
-                var startDate = new Date - 0 - _config.offlineLogExp * 24 * 3600 * 1000;
-                var endDate = new Date - 0;
-                DB.getLogs({
-                    start: startDate,
-                    end: endDate,
-                    namespace: _config.namespace,
-                    appname: _config.appname
-                }, function(err, result) {
-                    var iframe = document.createElement("iframe");
-                    iframe.name = "badjs_offline_" + (new Date - 0);
-                    iframe.frameborder = 0;
-                    iframe.height = 0;
-                    iframe.width = 0;
-                    iframe.src = "javascript:false;";
-
-                    iframe.onload = function() {
-                        var form = document.createElement("form");
-                        form.style.display = "none";
-                        form.target = iframe.name;
-                        form.method = "POST";
-                        form.action = _config.offline_url || _config.url.replace(/badjs$/, "offlineLog");
-                        form.enctype.method = 'multipart/form-data';
-
-                        var input = document.createElement("input");
-                        input.style.display = "none";
-                        input.type = "hidden";
-                        input.name = "offline_log";
-                        input.value = JSON.stringify({ logs: result, userAgent: navigator.userAgent, startDate: startDate, endDate: endDate, namespace: _config.namespace, appname: _config.appname });
-
-                        iframe.contentDocument.body.appendChild(form);
-                        form.appendChild(input);
-                        form.submit();
-
-                        setTimeout(function() {
-                            document.body.removeChild(iframe);
-                        }, 10000);
-
-                        iframe.onload = null;
-                    };
-                    document.body.appendChild(iframe);
-                });
-            });
-        },
-        offlineLog: function(msg) {
-            if (!msg) {
-                return report;
-            }
-            if (T.isOBJ(msg)) {
-                msg.level = 20;
-            } else {
-                msg = {
-                    msg: msg,
-                    level: 20
-                };
-            }
-            report.push(msg);
-            return report;
-        },
         init: function(config) { // 初始化
             if (T.isOBJ(config)) {
                 for (var key in config) {
@@ -625,24 +399,6 @@ var BJ_REPORT = (function(global) {
             if (_log_list.length) {
                 _process_log();
             }
-
-            // init offline
-            if (!Offline_DB._initing) {
-                Offline_DB._initing = true;
-                Offline_DB.ready(function(err, DB) {
-                    if (DB) {
-                        setTimeout(function() {
-                            DB.clearDB(_config.offlineLogExp);
-                            setTimeout(function() {
-                                _config.offlineLogAuto && _autoReportOffline();
-                            }, 5000);
-                        }, 1000);
-                    }
-
-                });
-            }
-
-
 
             return report;
         },
