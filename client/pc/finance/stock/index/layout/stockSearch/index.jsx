@@ -72,7 +72,7 @@ class StockSearch extends React.PureComponent {
                     if (current === null) {
                         this.setState({ current: 0 });
                     } else if (current === 0) {
-                        this.setState({ current: 9 });
+                        this.setState({ current: data.length - 1 });
                     } else {
                         num--;
 
@@ -81,7 +81,7 @@ class StockSearch extends React.PureComponent {
 
                     break;
                 case 40:
-                    if (current === null || current === 9) {
+                    if (current === null || current === data.length - 1) {
                         this.setState({ current: 0 });
                     } else {
                         num++;
