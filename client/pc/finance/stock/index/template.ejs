@@ -11,68 +11,44 @@
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
 
-        try{
-            allData.topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
 
-            allData.topAd = {};
+                allData[key] = {};
+            }
+
         }
 
-        try{
-            allData.leftAsideAd = new Function('return ' + <%- JSON.stringify(allData.leftAsideAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+         for (var key in staticData) {
+            try{
+                if (typeof staticData[key] === 'string'){
+                    allData[key] = decodeURIComponent(staticData[key]);
+                } else {
+                    allData[key] = staticData[key]
+                }
+            }catch(e){
+                console.error(key, e);
 
-            allData.leftAsideAd = {};
+                allData[key] = [];
+            }
+
         }
 
-        try{
-            allData.hotSpotsAd = new Function('return ' + <%- JSON.stringify(allData.hotSpotsAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.hotSpotsAd = {};
-        }
-
-        try{
-            allData.schoolAd = new Function('return ' + <%- JSON.stringify(allData.schoolAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.schoolAd = {};
-        }
-
-        try{
-            allData.rightSideAd0 = new Function('return ' + <%- JSON.stringify(allData.rightSideAd0) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.rightSideAd0 = {};
-        }
-
-        try{
-            allData.rightSideAd1 = new Function('return ' + <%- JSON.stringify(allData.rightSideAd1) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.rightSideAd1 = {};
-        }
-
-        try{
-            allData.bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.bottomAd = {};
-        }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
-    <%- adData.adHead %>
+    <%- decodeURIComponent(adData.adHead) %>
 </head>
 
 <body>
@@ -80,7 +56,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-    <%- adData.adBody %>
+    <%- decodeURIComponent(adData.adBody) %>
     <%- statisticsData.statisticsBody %>
 </body>
 

@@ -410,7 +410,12 @@ exports.list = {
                 delete allData[item[0]];
             }
             if (item[2] === 'getStaticFragment') {
-                staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                if (typeof allData[item[0]] === 'string') {
+                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else {
+                    staticData[item[0]] = allData[item[0]];
+                }
+                
                 delete allData[item[0]];
             }
         }
