@@ -6,22 +6,17 @@ import { rel } from '../../../../../../../utils/rel';
 class List extends React.PureComponent {
     static propTypes = {
         content: PropTypes.array,
-        limit: PropTypes.number,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content, limit } = this.props;
+        const { content } = this.props;
         const array = [];
         let list = [];
 
         content.forEach((item, index) => {
-            if (index >= limit) {
-                return;
-            }
-
             if (index % 2 === 0) {
                 list.push(
                     <h2 key={index} className={styles.title}>

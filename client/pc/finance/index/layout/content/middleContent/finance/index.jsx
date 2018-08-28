@@ -29,7 +29,8 @@ class Finance extends React.PureComponent {
                     type="recommend"
                     title="财商教育新闻列表"
                     groupName="正文"
-                    content={content.financeList}>
+                    content={content.financeList}
+                    translate="handleFinanceListPicData">
                     <TitleList />
                 </Chip>
             </React.Fragment>

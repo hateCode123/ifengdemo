@@ -21,7 +21,7 @@ class LeftContent extends React.PureComponent {
             <div className={styles.col_L}>
                 <Topic />
                 <BannerPic content={content.bannerPic} />
-                <Headline content={content.headline} rights={content.rights} limit={6} />
+                <Headline content={content.headline} rights={content.rights} />
                 <DateNews
                     content={content.dayNews}
                     extraNews={content.extraNews}

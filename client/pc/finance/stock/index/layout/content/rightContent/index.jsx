@@ -65,7 +65,13 @@ class RightContent extends React.PureComponent {
                     <Ad content={content.rightSideAd1} styleName={styles.ad_box1} />
                 </div>
                 <div className={styles.box}>
-                    <Chip id="20040" type="recommend" title="每日论股" groupName="正文" content={content.dayStock}>
+                    <Chip
+                        id="20040"
+                        type="recommend"
+                        title="每日论股"
+                        groupName="正文"
+                        content={content.dayStock}
+                        translate="handleDayStockData">
                         <DayStock />
                     </Chip>
                 </div>
