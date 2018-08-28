@@ -270,7 +270,7 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         try {
-            allData.headline = allData.headline && recommendRandomSort(allData.headline, 4);
+            allData.headline = allData.headline && recommendRandomSort(allData.headline, 6);
             allData.headline = allData.headline.map(item => ({
                 url: formatUrl(item.url),
                 title: item.title,
@@ -415,7 +415,7 @@ exports.list = {
                 } else {
                     staticData[item[0]] = allData[item[0]];
                 }
-                
+
                 delete allData[item[0]];
             }
         }

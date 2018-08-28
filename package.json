@@ -27,7 +27,7 @@
     "license": "ISC",
     "dependencies": {
         "@ifeng/errorBoundary": "^1.0.1",
-        "@ifeng/public_method": "^1.0.3",
+        "@ifeng/public_method": "^1.0.4",
         "@ifeng/server_bunyan": "^1.0.1",
         "@ifeng/tool_eslint": "^1.0.1",
         "@ifeng/ui_base": "^1.0.8",
