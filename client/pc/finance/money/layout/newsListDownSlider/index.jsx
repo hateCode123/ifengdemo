@@ -8,9 +8,13 @@ class NewsListDownSliderTop extends React.PureComponent {
     render() {
         const { content } = this.props;
 
-        const list = content.forEach((item, index) => {
+        console.log('content=======>>>', content);
+
+        const list = content.map((item, index) => {
+            let result = null;
+
             if (index % 3 === 0) {
-                return (
+                result = (
                     <h2 key={index}>
                         <a href={item.url} rel={rel} target="_blank">
                             {item.title}
@@ -18,7 +22,7 @@ class NewsListDownSliderTop extends React.PureComponent {
                     </h2>
                 );
             } else if (index % 3 === 1) {
-                return (
+                result = (
                     <h3 key={index} className={style.box_01_1}>
                         <a href={item.url} rel={rel} target="_blank">
                             {item.title}
@@ -26,7 +30,7 @@ class NewsListDownSliderTop extends React.PureComponent {
                     </h3>
                 );
             } else if (index % 3 === 2) {
-                return (
+                result = (
                     <h3 key={index} className={style.box_01}>
                         <a href={item.url} rel={rel} target="_blank">
                             {item.title}
@@ -34,6 +38,8 @@ class NewsListDownSliderTop extends React.PureComponent {
                     </h3>
                 );
             }
+
+            return result;
         });
 
         return (
@@ -58,7 +64,7 @@ class NewsListLeftInner extends React.PureComponent {
         // const { showData } = this.state;
         const { content } = this.props;
         const list = showData =>
-            showData.forEach((item, index) => {
+            showData.map((item, index) => {
                 return index === 0 ? (
                     <li key={index}>
                         <h3>
