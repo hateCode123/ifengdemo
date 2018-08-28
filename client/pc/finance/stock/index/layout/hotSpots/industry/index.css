@@ -21,7 +21,6 @@
 }
 
 .data {
-    background: url(../g_25.png) repeat left -2px;
     & > a {
         display: block;
         width: 570px;
@@ -30,6 +29,7 @@
     & table {
         width: 570px;
         border: 0;
+        background: url(../g_25.png) repeat left -2px;
         & thead tr th {
             border-bottom: 1px solid #dddddd;
             height: 30px;

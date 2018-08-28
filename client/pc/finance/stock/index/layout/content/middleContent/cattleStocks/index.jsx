@@ -94,13 +94,6 @@ class CattleStocks extends React.PureComponent {
         window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${searchTxt}`);
     };
 
-    handleFundsSearch = async () => {
-        const { searchTxt } = this.state;
-        const data = await getFinanceData('all', searchTxt);
-
-        window.open(`//finance.ifeng.com/zjlx/${data[0].c}`);
-    };
-
     /**
      * 渲染组件
      */
@@ -134,7 +127,6 @@ class CattleStocks extends React.PureComponent {
                         onBlur={this.handleBlur}
                     />
                     <a onClick={this.handleStockSearch}>查行情</a>
-                    <a onClick={this.handleFundsSearch}>查资金</a>
                 </div>
             </div>
         );

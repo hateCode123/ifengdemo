@@ -14,15 +14,14 @@ const md5 = require('md5');
 
 const createJsonpCallbackName = (str, num) => {
     num = num ? num : 0;
-    const jsonpCallbackName = `_${md5(`${str}_${num}`)}`;
+    let jsonpCallbackName = `_${md5(`${str}_${num}`)}`;
 
-    if (window[jsonpCallbackName]) {
+    while (window[jsonpCallbackName]) {
         num++;
-
-        return createJsonpCallbackName(str, num);
-    } else {
-        return jsonpCallbackName;
+        jsonpCallbackName = `_${md5(`${str}_${num}`)}`;
     }
+
+    return jsonpCallbackName;
 };
 
 /* 公共 */

@@ -66,7 +66,10 @@ class Industry extends React.PureComponent {
                             {datas.map((item, index) => (
                                 <tr key={index}>
                                     <td>
-                                        <a href={`//app.finance.ifeng.com/list/stock_cate.php?c=${item.symbol}`}>
+                                        <a
+                                            href={`//app.finance.ifeng.com/list/stock_cate.php?c=${item.symbol}`}
+                                            target="_blank"
+                                            rel={rel}>
                                             {item.name}
                                         </a>
                                     </td>

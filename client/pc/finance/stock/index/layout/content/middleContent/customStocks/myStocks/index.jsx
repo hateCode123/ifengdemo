@@ -87,30 +87,13 @@ class MyStocks extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
-                            <tr key={index}>
-                                <td>
-                                    <a
-                                        href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
-                                        target="_blank"
-                                        rel={rel}>
-                                        {item.name}
-                                    </a>
-                                </td>
-                                <td className={item.ext > 0 ? styles.red : styles.green}>{item.price}</td>
-                                <td className={item.ext > 0 ? styles.red : styles.green}>{item.ext}%</td>
-                                <td>
-                                    <a
-                                        href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${
-                                            item.code
-                                        }`}
-                                        target="_blank"
-                                        rel={rel}>
-                                        研报
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
+                        <tr>
+                            <td colSpan="5">
+                                <a href="//app.finance.ifeng.com/custom/mystock.php" target="_blank" rel={rel}>
+                                    查看我的自选股&gt;&gt;
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             );

@@ -19,9 +19,7 @@ class DayStock extends React.PureComponent {
             <div className={styles.dayStock}>
                 <div className={styles.title}>
                     <h4>
-                        <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                            {content[0].title}
-                        </a>
+                        <a title="每日论股">每日论股</a>
                     </h4>
                 </div>
                 <div className={styles.list}>
@@ -31,8 +29,8 @@ class DayStock extends React.PureComponent {
                                 <div className={styles.pic}>
                                     <a href={item.url} target="_blank" rel={rel}>
                                         <img src={item.thumbnail} width="300" height="166" className={styles.trans} />
+                                        <div className={styles.link} />
                                     </a>
-                                    <div className={styles.link} />
                                 </div>
                             </li>
                         ))}
