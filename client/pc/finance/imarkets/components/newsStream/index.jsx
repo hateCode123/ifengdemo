@@ -10,11 +10,10 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { formatImage, formatUrl } from '@ifeng/public_method';
 import styles from './index.css';
 import { getCommentCount } from '../../../../services/api';
-import { getImage } from '../../../../utils/cutImg';
 import { formatTime } from '../../../../utils/formatTime';
-import { formatUrl } from '../../../../utils/formatUrl';
 import { rel as relText } from '../../../../utils/rel';
 
 class NewsStream extends PureComponent {
@@ -73,13 +72,13 @@ class NewsStream extends PureComponent {
                     </a>
                 </h2>
                 <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[0].url, 167, 106)} title={item.title} />
+                    <img src={formatImage(image[0].url, 167, 106)} title={item.title} />
                 </a>
                 <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[1].url, 167, 106)} title={item.title} />
+                    <img src={formatImage(image[1].url, 167, 106)} title={item.title} />
                 </a>
                 <a className={styles.image_link_3} href={url} target="_blank" rel={relText}>
-                    <img src={getImage(image[2].url, 167, 106)} title={item.title} />
+                    <img src={formatImage(image[2].url, 167, 106)} title={item.title} />
                 </a>
                 <div className={`${styles.top_11} ${styles.news_item_infor} clearfix`}>
                     {// 显示来源
@@ -108,7 +107,7 @@ class NewsStream extends PureComponent {
                     item.videoCount ? <div className={styles.play} /> : null}
                     {// 是否为图集
                     item.type === 'slide' ? <span className={styles.tuji}>图集</span> : null}
-                    <img src={getImage(image[0].url, 144, 80)} title={item.title} />
+                    <img src={formatImage(image[0].url, 144, 80)} title={item.title} />
                 </a>
                 <div className={styles.news_item_infor}>
                     <h2 className={`${styles.news_item_title} ${styles.mb34}`}>
