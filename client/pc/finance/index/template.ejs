@@ -11,221 +11,41 @@
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
 
-        try{
-            allData.topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
 
-            allData.topAd = {};
+                allData[key] = {};
+            }
+
         }
 
-        try{
-            allData.channelAd = new Function('return ' + <%- JSON.stringify(allData.channelAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+        for (var key in staticData) {
+            try{
+                allData[key] = decodeURIComponent(staticData[key]) //new Function('return ' + )();
+            }catch(e){
+                console.error(key, e);
 
-            allData.channelAd = {};
+                allData[key] = [];
+            }
+
         }
 
-        try{
-            allData.dayNewsAd = new Function('return ' + <%- JSON.stringify(allData.dayNewsAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.dayNewsAd = {};
-        }
-
-        try{
-            allData.extraNewsAd = new Function('return ' + <%- JSON.stringify(allData.extraNewsAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.extraNewsAd = {};
-        }
-
-        try{
-            allData.middleAd = new Function('return ' + <%- JSON.stringify(allData.middleAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.middleAd = {};
-        }
-
-        try{
-            allData.financeVideoAd = new Function('return ' + <%- JSON.stringify(allData.financeVideoAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.financeVideoAd = {};
-        }
-
-        try{
-            allData.meetingAd = new Function('return ' + <%- JSON.stringify(allData.meetingAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.meetingAd = {};
-        }
-
-        try{
-            allData.meetingListAd = new Function('return ' + <%- JSON.stringify(allData.meetingListAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.meetingListAd = {};
-        }
-
-        try{
-            allData.marketAd = new Function('return ' + <%- JSON.stringify(allData.marketAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.marketAd = {};
-        }
-
-        try{
-            allData.courierAd = new Function('return ' + <%- JSON.stringify(allData.courierAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.courierAd = {};
-        }
-
-        try{
-            allData.asideAd1 = new Function('return ' + <%- JSON.stringify(allData.asideAd1) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd1 = {};
-        }
-
-        try{
-            allData.asideAd2 = new Function('return ' + <%- JSON.stringify(allData.asideAd2) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd2 = {};
-        }
-
-        try{
-            allData.asideAd3 = new Function('return ' + <%- JSON.stringify(allData.asideAd3) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd3 = {};
-        }
-
-        try{
-            allData.asideAd4 = new Function('return ' + <%- JSON.stringify(allData.asideAd4) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd4 = {};
-        }
-
-        try{
-            allData.asideAd5 = new Function('return ' + <%- JSON.stringify(allData.asideAd5) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd5 = {};
-        }
-
-        try{
-            allData.asideAd6 = new Function('return ' + <%- JSON.stringify(allData.asideAd6) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd6 = {};
-        }
-
-        try{
-            allData.asideAd7 = new Function('return ' + <%- JSON.stringify(allData.asideAd7) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.asideAd7 = {};
-        }
-
-        try{
-            allData.infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.infoAd = {};
-        }
-
-        try{
-            allData.hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.hardAd = {};
-        }
-        
-        try{
-            allData.bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.bottomAd = {};
-        }
-
-        try{
-            allData.floatAd1 = new Function('return ' + <%- JSON.stringify(allData.floatAd1) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd1 = {};
-        }
-
-        try{
-            allData.floatAd2 = new Function('return ' + <%- JSON.stringify(allData.floatAd2) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd2 = {};
-        }
-
-        try{
-            allData.floatAd3 = new Function('return ' + <%- JSON.stringify(allData.floatAd3) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd3 = {};
-        }
-
-        try{
-            allData.floatAd4 = new Function('return ' + <%- JSON.stringify(allData.floatAd4) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd4 = {};
-        }
-
-        try{
-            allData.floatAd5 = new Function('return ' + <%- JSON.stringify(allData.floatAd5) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd5 = {};
-        }
-
-        try{
-            allData.floatAd6 = new Function('return ' + <%- JSON.stringify(allData.floatAd6) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.floatAd6 = {};
-        }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
 
     {{{ htmlWebpackPlugin.options.polyfill }}}
-    <%- adData.adHead %>
+    <%- decodeURIComponent(adData.adHead) %>
 </head>
 
 <body>
@@ -234,7 +54,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-    <%- adData.adBody %>
+    <%- decodeURIComponent(adData.adBody) %>
     <%- statisticsData.statisticsBody %>
 </body>
 
