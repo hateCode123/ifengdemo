@@ -69,17 +69,30 @@ exports.list = {
 
         allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
 
-        const adData = {
-            adHead: allData.adHead,
-            adBody: allData.adBody,
-        };
-
-        delete allData.adHead;
-        delete allData.adBody;
+         // 处理广告碎片和静态碎片
+         const adData = {};
+         const staticData = {};
+ 
+         for (const item of json) {
+             if (item[2] === 'getAd') {
+                 adData[item[0]] = encodeURIComponent(allData[item[0]]);
+                 delete allData[item[0]];
+             }
+             if (item[2] === 'getStaticFragment') {
+                 if (typeof allData[item[0]] === 'string') {
+                     staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                 } else {
+                     staticData[item[0]] = allData[item[0]];
+                 }
+ 
+                 delete allData[item[0]];
+             }
+         }
 
         await ctx.html('finance_imarkets', {
             allData,
             adData,
+            staticData
         });
     },
 };

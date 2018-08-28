@@ -264,7 +264,9 @@ exports.list = {
             // floatAd6
             ['floatAd6', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_popunder.html', getString()],
         ];
-
+        // for (const item of json) {
+        //     console.log(item[0]);
+        // }
         const allData = await transfer(ctx, json);
 
         try {
@@ -389,26 +391,40 @@ exports.list = {
         } catch (error) {
             logger.error(error);
         }
-
+        // 处理统计数据
         const statisticsData = {
             statisticsHead: allData.statisticsHead,
             statisticsBody: allData.statisticsBody,
         };
 
-        const adData = {
-            adHead: allData.adHead,
-            adBody: allData.adBody,
-        };
-
         delete allData.statisticsHead;
         delete allData.statisticsBody;
-        delete allData.adHead;
-        delete allData.adBody;
+
+        // 处理广告碎片和静态碎片
+        const adData = {};
+        const staticData = {};
+
+        for (const item of json) {
+            if (item[2] === 'getAd') {
+                adData[item[0]] = encodeURIComponent(allData[item[0]]);
+                delete allData[item[0]];
+            }
+            if (item[2] === 'getStaticFragment') {
+                if (typeof allData[item[0]] === 'string') {
+                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else {
+                    staticData[item[0]] = allData[item[0]];
+                }
+                
+                delete allData[item[0]];
+            }
+        }
 
         await ctx.html('finance_index', {
             allData,
             statisticsData,
             adData,
+            staticData,
         });
     },
 };

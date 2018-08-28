@@ -8,33 +8,43 @@
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
 
-        try{
-            allData.footerAd = new Function('return ' + <%- JSON.stringify(allData.footerAd) %>)();
-        }catch(err){
-            console.error('AdError', err);
-            allData.footerAd = {};
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
+
+                allData[key] = {};
+            }
+
         }
 
-        try{
-            allData.asideAd = new Function('return ' + <%- JSON.stringify(allData.asideAd) %>)();
-        }catch(err){
-            console.error('AdError', err);
-            allData.asideAd = {};
-        }
+        for (var key in staticData) {
+            try{
+                if (typeof staticData[key] === 'string'){
+                    allData[key] = decodeURIComponent(staticData[key]);
+                } else {
+                    allData[key] = staticData[key]
+                }
+            }catch(e){
+                console.error(key, e);
 
-        try{
-            allData.asideFixedAd = new Function('return ' + <%- JSON.stringify(allData.asideFixedAd) %>)();
-        }catch(err){
-            console.error('AdError', err);
-            allData.asideFixedAd = {};
+                allData[key] = [];
+            }
+
         }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet">
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
-    <%- adData.adHead %>
+    <%- decodeURIComponent(adData.adHead) %>
 </head>
 <body>
     <div id="root"></div>
@@ -42,6 +52,6 @@
     {{#each htmlWebpackPlugin.files.js}}
         <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-    <%- adData.adBody %>
+    <%- decodeURIComponent(adData.adBody) %>
 </body>
 </html>

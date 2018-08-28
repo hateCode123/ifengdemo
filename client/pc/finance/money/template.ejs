@@ -20,37 +20,36 @@
 
     <script>
         var allData = <%- JSON.stringify(allData) %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
 
-        try{
-            allData.topAd = new Function('return ' + <%- JSON.stringify(allData.topAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
 
-            allData.topAd = {};
+                allData[key] = {};
+            }
+
         }
 
-        try{
-            allData.infoAd = new Function('return ' + <%- JSON.stringify(allData.infoAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
+        for (var key in staticData) {
+            try{
+                if (typeof staticData[key] === 'string'){
+                    allData[key] = decodeURIComponent(staticData[key]);
+                } else {
+                    allData[key] = staticData[key]
+                }
+            }catch(e){
+                console.error(key, e);
 
-            allData.infoAd = {};
-        }
+                allData[key] = [];
+            }
 
-        try{
-            allData.hardAd = new Function('return ' + <%- JSON.stringify(allData.hardAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.hardAd = {};
-        }
-
-        try{
-            allData.bottomAd = new Function('return ' + <%- JSON.stringify(allData.bottomAd) %>)();
-        }catch(e){
-            console.error('AdError', e);
-
-            allData.bottomAd = {};
         }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
@@ -58,7 +57,7 @@
     {{/each}}
 
     {{{ htmlWebpackPlugin.options.polyfill }}}
-    <%- adData.adHead %>
+    <%- decodeURIComponent(adData.adHead) %>
 </head>
 
 <body>
@@ -66,7 +65,7 @@
     {{#each htmlWebpackPlugin.files.js}}
     <script src="{{path}}" type="text/javascript"></script>
     {{/each}}
-    <%- adData.adBody %>
+    <%- decodeURIComponent(adData.adBody) %>
 </body>
 
 </html>
