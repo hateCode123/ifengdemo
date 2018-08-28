@@ -30,7 +30,7 @@
 
         for (var key in staticData) {
             try{
-                allData[key] = decodeURIComponent(staticData[key]) //new Function('return ' + )();
+                allData[key] = decodeURIComponent(staticData[key]);
             }catch(e){
                 console.error(key, e);
 
