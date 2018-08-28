@@ -12,6 +12,7 @@ exports.validate = (schemas, type) => {
             const ret = Joi.validate(Object.assign({}, ctx.query, ctx.params, ctx.request.body), schemas, { allowUnknown: true });
 
             if (ret.error) {
+                ctx.errorCount++;
                 switch (type) {
                     case 'html':
                     case 'xml':

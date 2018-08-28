@@ -5,9 +5,10 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const getErrorupload = require('./getErrorUpload');
 const getPolyfill = require('./getPolyfill');
+const moderPolyfill = require('./getModernPolyfill');
 const env = process.env.NODE_ENV;
 
-module.exports = function getHTML(globPath, extendName, level, filepath) {
+module.exports = function getHTML(globPath, extendName, level, filepath, mode, type, modern) {
     let files = glob.sync(globPath);
     if (filepath && filepath !== '**') {
         let list = [];
@@ -26,14 +27,18 @@ module.exports = function getHTML(globPath, extendName, level, filepath) {
         let paths = path.split('/');
         paths.pop();
         let entryName = paths.join('_');
-
+        const modernName = modern ? '_modern' : '';
         const conf = {
-            filename: `${entryName}${extendName}.html`,
-            polyfill: getPolyfill(level),
+            filename: `${entryName}${extendName}${modernName}.html`,
+            polyfill: getPolyfill(level, mode),
             errorupload: env === 'production' ? getErrorupload() : '',
-            template: file,
+            modernPolyfill: moderPolyfill,
+            template: modern ? './client/common/modern.ejs' : file,
             inject: false,
             hase: false,
+            includeName: `${entryName}${extendName}_modern`,
+            isDevMode: mode === 'dev',
+            useMorden: level !== 'low' && type === 'view',
             // minify: {
             //     // 压缩HTML文件
             //     removeComments: true, // 移除HTML中的注释
