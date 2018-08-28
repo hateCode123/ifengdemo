@@ -17,7 +17,6 @@ class BottomAffix extends React.PureComponent {
         text: '代码/拼音/名称',
         isShow: false,
         quoteShow: false,
-        fundsShow: false,
     };
 
     componentDidMount() {
@@ -73,25 +72,11 @@ class BottomAffix extends React.PureComponent {
         this.setState({ quoteShow: !quoteShow });
     };
 
-    handleFundsShow = () => {
-        const { fundsShow } = this.state;
-
-        this.setState({ fundsShow: !fundsShow });
-    };
-
     handleQuoteMouseOver = () => {
         this.setState({ quoteShow: false });
     };
 
-    handleFundsMouseOver = () => {
-        this.setState({ fundsShow: false });
-    };
-
     handleQuoteChange = e => {
-        this.setState({ text: e.currentTarget.value });
-    };
-
-    handleFundsChange = e => {
         this.setState({ text: e.currentTarget.value });
     };
 
@@ -109,25 +94,11 @@ class BottomAffix extends React.PureComponent {
         window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${text}`);
     };
 
-    handleKeyDownFundsSearch = e => {
-        if (e.keyCode === 13) {
-            const text = this.state.text;
-
-            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${text}`);
-        }
-    };
-
-    handleFundsSearch = () => {
-        const text = this.state.text;
-
-        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&search_type=zijin&q==${text}`);
-    };
-
     /**
      * 渲染组件
      */
     render() {
-        const { text, isShow, quoteShow, fundsShow } = this.state;
+        const { text, isShow, quoteShow } = this.state;
         const {
             content: { floatAd1, floatAd2, floatAd3, floatAd4, floatAd5, floatAd6 },
         } = this.props;
@@ -156,29 +127,6 @@ class BottomAffix extends React.PureComponent {
                                                 onBlur={this.handleBlur}
                                             />
                                             <a onClick={this.handleQuoteSearch}>搜索</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:void(0);" onClick={this.handleFundsShow}>
-                                        <div className={styles.funds} />
-                                        <p>查资金</p>
-                                    </a>
-                                    <div
-                                        className={`${styles.caption} ${fundsShow ? styles.show : styles.hide}`}
-                                        onMouseLeave={this.handleFundsMouseOver}>
-                                        <div className={styles.search}>
-                                            <input
-                                                className="funds"
-                                                value={text}
-                                                onKeyDown={this.handleKeyDownFundsSearch}
-                                                onChange={this.handleFundsChange}
-                                                onFocus={this.handleFocus}
-                                                onBlur={this.handleBlur}
-                                            />
-                                            <a onClick={this.handleFundsSearch}>搜索</a>
                                         </div>
                                     </div>
                                 </td>
