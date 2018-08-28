@@ -6,33 +6,53 @@ import { getLiveData, refreshLiveData } from '../../../../../../../../services/a
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../../utils/rel';
 
-class Live extends React.PureComponent {
+class Live extends React.Component {
     static propTypes = {
         content: PropTypes.array,
+        current: PropTypes.number,
+        selected: PropTypes.bool,
+        handleSelected: PropTypes.func,
     };
 
     state = {
-        selected: true,
         liveData: [],
         lastid: '',
     };
 
+    shouldComponentUpdate(nextProps, prevProps) {
+        if (
+            nextProps.content === prevProps.current &&
+            nextProps.handleSelected === prevProps.handleSelected &&
+            nextProps.selected === prevProps.selected
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
     componentDidMount() {
-        const { selected } = this.state;
-
         this.getLiveData();
+    }
 
-        setInterval(() => {
-            if (selected) {
+    componentDidUpdate() {
+        this.timer = setInterval(() => {
+            const { current, selected } = this.props;
+
+            if (selected && current === 1) {
                 this.refresh();
             }
         }, 60000);
     }
 
-    handleSelected = () => {
-        const { selected } = this.state;
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
 
-        this.setState({ selected: !selected });
+    handleSelected = () => {
+        const { handleSelected } = this.props;
+
+        handleSelected();
     };
 
     /**
@@ -149,8 +169,8 @@ class Live extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const { selected, liveData } = this.state;
-        const { content } = this.props;
+        const { liveData } = this.state;
+        const { selected, content } = this.props;
 
         return (
             <div className={styles.live}>

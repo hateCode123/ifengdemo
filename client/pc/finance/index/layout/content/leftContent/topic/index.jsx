@@ -14,7 +14,8 @@ class Topic extends React.PureComponent {
      */
     componentDidMount() {
         this.getData();
-        setInterval(() => {
+
+        this.timer = setInterval(() => {
             this.getData();
         }, 30000);
     }
@@ -23,7 +24,7 @@ class Topic extends React.PureComponent {
      * 卸载定时器
      */
     componentWillUnmount() {
-        clearInterval();
+        clearInterval(this.timer);
     }
 
     getData = async () => {

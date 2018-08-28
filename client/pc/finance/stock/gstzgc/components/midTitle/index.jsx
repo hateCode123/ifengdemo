@@ -17,14 +17,14 @@ class MidTitle extends React.PureComponent {
     componentDidMount() {
         if (this.props.nowTime) {
             this.refreshCalendarClock();
-            setInterval(() => {
+            this.timer = setInterval(() => {
                 this.refreshCalendarClock();
             }, 1000);
         }
     }
 
     componentWillUnmount() {
-        clearInterval();
+        clearInterval(this.timer);
     }
 
     /**

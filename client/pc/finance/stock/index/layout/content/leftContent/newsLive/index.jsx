@@ -13,17 +13,24 @@ class NewsLive extends React.PureComponent {
 
     state = {
         current: 0,
+        selected: true,
     };
 
     handleTabsChange = index => {
         this.setState({ current: index });
     };
 
+    handleSelected = () => {
+        const { selected } = this.state;
+
+        this.setState({ selected: !selected });
+    };
+
     /**
      * 渲染组件
      */
     render() {
-        const { current } = this.state;
+        const { current, selected } = this.state;
         const { content } = this.props;
 
         const stockNews = content.stockNews;
@@ -52,17 +59,21 @@ class NewsLive extends React.PureComponent {
                     newsLiveTabLink={newsLiveTabLink}
                     handleTabsChange={this.handleTabsChange}
                 />
-                {current === 0 ? (
-                    <div>
-                        <div className={styles.stock_news}>
-                            <StockNews content={stockNews.slice(0, 6)} />
-                            <StockNews content={stockNews.slice(6, 12)} />
-                            <StockNews content={stockNews.slice(12, 18)} />
-                        </div>
+                <div style={{ display: current === 0 ? 'block' : 'none' }}>
+                    <div className={styles.stock_news}>
+                        <StockNews content={stockNews.slice(0, 6)} />
+                        <StockNews content={stockNews.slice(6, 12)} />
+                        <StockNews content={stockNews.slice(12, 18)} />
                     </div>
-                ) : (
-                    <Live content={content.liveLogo} />
-                )}
+                </div>
+                <div style={{ display: current === 0 ? 'none' : 'block' }}>
+                    <Live
+                        content={content.liveLogo}
+                        current={current}
+                        selected={selected}
+                        handleSelected={this.handleSelected}
+                    />
+                </div>
             </div>
         );
     }
