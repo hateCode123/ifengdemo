@@ -57,9 +57,13 @@ class DataBox extends React.PureComponent {
     componentDidMount() {
         this.getData();
 
-        setInterval(() => {
+        this.timer = setInterval(() => {
             this.getData();
         }, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 
     /**
