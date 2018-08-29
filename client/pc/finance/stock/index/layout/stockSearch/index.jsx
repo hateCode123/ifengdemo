@@ -8,25 +8,16 @@ class StockSearch extends React.PureComponent {
         current: null,
         isShow: false,
         data: [],
-        type: 'all',
     };
 
     getList = async str => {
         try {
-            const { type } = this.state;
-
-            const data = await getFinanceData(type, str);
+            const data = await getFinanceData('all', str);
 
             this.setState({ data });
         } catch (e) {
             console.error(e);
         }
-    };
-
-    handleSelect = e => {
-        const selectVal = e.currentTarget.value;
-
-        this.setState({ type: selectVal });
     };
 
     handleMouseOver = e => {
@@ -206,13 +197,6 @@ class StockSearch extends React.PureComponent {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                     />
-                    <select name="type" className={styles.select} onChange={this.handleSelect}>
-                        <option value="all">全部</option>
-                        <option value="fund">基金</option>
-                        <option value="hkstock">港股</option>
-                        <option value="forex">外汇</option>
-                        <option value="bond">债券</option>
-                    </select>
                     <button type="button" className={styles.q_btn} onClick={this.handeleQuoteSearch} />
                 </div>
                 <div className={styles.btn}>
