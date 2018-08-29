@@ -2,6 +2,7 @@ const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
+const { handleHeadlinePicData, handleFinanceListPicData } = require('../../../../common/transform');
 const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
@@ -271,10 +272,7 @@ exports.list = {
 
         try {
             allData.headline = allData.headline && recommendRandomSort(allData.headline, 6);
-            allData.headline = allData.headline.map(item => ({
-                url: formatUrl(item.url),
-                title: item.title,
-            }));
+            allData.headline = handleHeadlinePicData(allData.headline);
 
             allData.bannerPic =
                 allData.bannerPic &&
@@ -327,13 +325,7 @@ exports.list = {
             ].concat(talking);
 
             allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 5);
-
-            allData.financeList =
-                allData.financeList &&
-                allData.financeList.map(item => ({
-                    url: formatUrl(item.url),
-                    title: item.title,
-                }));
+            allData.financeList = handleFinanceListPicData(allData.financeList);
 
             allData.stocks =
                 allData.stocks &&

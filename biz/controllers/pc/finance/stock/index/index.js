@@ -2,6 +2,7 @@ const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
+const { handleBannerPicData, handleDayStockData } = require('../../../../../common/transform');
 const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
@@ -147,16 +148,16 @@ exports.list = {
             // 行业概念资金流向 tabs 与图片数据
             ['industry', 'KVProxy', 'getStaticFragment', 10087, getJsonByKey('content')],
 
-            // 股票显示
+            // 行业资金流入
             ['hyin', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/zijin_hyin.json', getJson()],
 
-            // 股票显示
+            // 行业资金流出
             ['hyout', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/zijin_hyout.json', getJson()],
 
-            // 股票显示
+            // 概念资金流入
             ['gnin', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/zijin_gnin.json', getJson()],
 
-            // 股票显示
+            // 概念资金流出
             ['gnout', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/zijin_gnout.json', getJson()],
 
             // 个股资金流向标题
@@ -323,18 +324,10 @@ exports.list = {
 
         try {
             allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
-            allData.bannerPic = allData.bannerPic.map(item => ({
-                thumbnail: formatImage(item.thumbnail, 570, 260),
-                url: formatUrl(item.url),
-                title: item.title,
-            }));
+            allData.bannerPic = handleBannerPicData(allData.bannerPic);
 
             allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
-            allData.dayStock = allData.dayStock.map(item => ({
-                thumbnail: formatImage(item.thumbnail, 300, 166),
-                url: formatUrl(item.url),
-                title: item.title,
-            }));
+            allData.dayStock = handleDayStockData(allData.dayStock);
 
             allData.stockNews =
                 allData.stockNews &&
@@ -412,7 +405,7 @@ exports.list = {
                 } else {
                     staticData[item[0]] = allData[item[0]];
                 }
-                
+
                 delete allData[item[0]];
             }
         }
