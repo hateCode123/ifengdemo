@@ -112,8 +112,8 @@ const getCustomList = async () => {
 
     const result = data.data.map(item => ({
         thumbnails: formatImage(item.thumbnail, 144, 96),
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.pcUrl,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
@@ -135,8 +135,8 @@ const getMacroList = async () => {
             item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
                 ? formatImage(item.thumbnails.image[0].url, 144, 96)
                 : '',
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.url,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
@@ -158,8 +158,8 @@ const getStockList = async () => {
             item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
                 ? formatImage(item.thumbnails.image[0].url, 144, 96)
                 : '',
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.url,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
@@ -181,8 +181,8 @@ const getImarketsList = async () => {
             item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
                 ? formatImage(item.thumbnails.image[0].url, 144, 96)
                 : '',
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.url,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
@@ -204,8 +204,8 @@ const getCompanyList = async () => {
             item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
                 ? formatImage(item.thumbnails.image[0].url, 144, 96)
                 : '',
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.url,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
@@ -227,8 +227,8 @@ const getWemoneyList = async () => {
             item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
                 ? formatImage(item.thumbnails.image[0].url, 144, 96)
                 : '',
-        commentUrl: formatUrl(item.commentUrl),
-        pcUrl: formatUrl(item.pcUrl),
+        commentUrl: item.commentUrl,
+        pcUrl: item.url,
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
