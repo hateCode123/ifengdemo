@@ -24,6 +24,7 @@
                 console.error(key, e);
 
                 allData[key] = {};
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
             }
 
         }
@@ -39,6 +40,7 @@
                 console.error(key, e);
 
                 allData[key] = [];
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
             }
 
         }
