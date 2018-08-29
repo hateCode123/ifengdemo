@@ -31,10 +31,10 @@ class DataBox extends React.PureComponent {
 
                 if (data[codeList[a]][3] > 0) {
                     style = 'red';
-                    arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon10.gif';
+                    arrowImg = 'up';
                 } else if (data[codeList[a]][3] < 0) {
                     style = 'green';
-                    arrowImg = '//img.ifeng.com/tres/finance/deco/2011/0705/icon16.gif';
+                    arrowImg = 'down';
                 } else {
                     style = 'black';
                 }
@@ -77,7 +77,7 @@ class DataBox extends React.PureComponent {
             return (
                 <div className={styles.data_box}>
                     <span className={`${styles[prices[current].style]} clearfix`}>
-                        <img src={prices[current].arrowImg} width="11" height="10" />
+                        <span className={styles[prices[current].arrowImg]} />
                         <div className={styles.price}>{prices[current].price}</div>
                         <span>{` ${prices[current].width} (${prices[current].percent}%)`}</span>
                         <a

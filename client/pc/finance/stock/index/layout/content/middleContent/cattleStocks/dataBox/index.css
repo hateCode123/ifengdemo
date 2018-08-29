@@ -1,5 +1,5 @@
 .data_box {
-    &>span {
+    & > span {
         display: block;
         height: 30px;
         width: 240px;
@@ -11,18 +11,32 @@
             display: inline;
             font-weight: bold;
         }
-        &>a {
+        & > a {
             float: right;
             font-size: 12px;
             margin-top: 0;
         }
     }
-    &>span.green {
+    & > span.green {
         color: #44a492;
     }
-    &>p a img {
+    & > p a img {
         display: block;
         width: 240px;
         height: 130px;
     }
+}
+
+.up {
+    display: inline-block;
+    width: 11px;
+    height: 10px;
+    background: url(./up.gif) no-repeat;
+}
+
+.down {
+    display: inline-block;
+    width: 11px;
+    height: 10px;
+    background: url(./down.gif) no-repeat;
 }
