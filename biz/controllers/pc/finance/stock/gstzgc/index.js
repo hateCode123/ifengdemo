@@ -3,10 +3,6 @@ const logger = require('../../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
 const { formatImage, formatUrl, recommendRandomSort } = require('@ifeng/public_method');
 
-// 数据处理，过滤掉不必要数据函数 clickRank investInfo newPaper ssComponey
-
-// 静态碎片数据，改为json数据
-
 exports.financeWemoney = {
     path: '/pc/finance/stock/gstzgc',
     method: 'get',
@@ -54,7 +50,6 @@ exports.financeWemoney = {
             ['paperMenu', 'KVProxy', 'getStaticFragment', 10041, getJsonByKey('content')],
 
             // 最新文章
-            // ['newPaper', 'KVProxy', 'getCustom', 'finance_22005_10736_2', getJson()],
             ['newPaper', 'KVProxy', 'getDynamicFragment', '20041', getStringByKey('data')],
 
             // 最新文章2条静态碎片
@@ -64,14 +59,12 @@ exports.financeWemoney = {
             ['newPaperMore', 'KVProxy', 'getStaticFragment', 10053, getJsonByKey('content')],
 
             // 投资情报
-            // ['investInfo', 'KVProxy', 'getCustom', 'finance_22005_10736_3', getJson()],
             ['investInfo', 'KVProxy', 'getDynamicFragment', '20042', getStringByKey('data')],
 
             // 更多投资情报
             ['investMore', 'KVProxy', 'getStaticFragment', 10054, getJsonByKey('content')],
 
             // 上市公司
-            // ['ssComponey', 'KVProxy', 'getCustom', 'finance_22005_10736_1', getJson()],
             ['ssComponey', 'KVProxy', 'getDynamicFragment', '20043', getStringByKey('data')],
 
             // 更多上市公司
@@ -97,18 +90,6 @@ exports.financeWemoney = {
 
             // 点击排行;
             ['clickRank', 'KVProxy', 'getCustom', 'http://finance.ifeng.com/cmpp_12006/click/409.html', getJson()],
-
-            // // 视频抓牛股标题
-            // ['spzngTit', 'KVProxy', 'getStaticFragment', 10063, getJsonByKey('content')],
-
-            // // 涨跌排行标题
-            // ['zdphTit', 'KVProxy', 'getStaticFragment', 10064, getJsonByKey('content')],
-
-            // // 资金流向标题
-            // ['zjlxTit', 'KVProxy', 'getStaticFragment', 10065, getJsonByKey('content')],
-
-            // // 自选股标题
-            // ['zxgTit', 'KVProxy', 'getStaticFragment', 10066, getJsonByKey('content')],
 
             // 视频抓牛股标题
             ['cattleStocksTitle', 'KVProxy', 'getStaticFragment', 10100, getJsonByKey('content')],
@@ -145,12 +126,12 @@ exports.financeWemoney = {
                 newsTime: item.newsTime,
                 skey: item.skey,
                 title: item.title,
-                url: item.url ? formatUrl(item.url) : '',
+                url: item.url,
                 source: item.source,
             };
         };
 
-        // 数据简化
+        // 数据简化,待替换为数据处理高阶组件
         try {
             allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, 4);
             allData.clickRank = allData.clickRank.map(item => pureData(item));
@@ -162,7 +143,7 @@ exports.financeWemoney = {
         }
         allData.sliderData = allData.sliderData.map(item => ({
             title: item.title,
-            url: formatUrl(item.url),
+            url: item.url,
             thumbnail: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
         }));
 

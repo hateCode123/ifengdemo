@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
+import { getCommentCount } from '../../../../../../../services/api';
 import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
 
@@ -43,14 +44,7 @@ class Paper extends React.PureComponent {
             });
         }
 
-        const data = await jsonp('//comment.ifeng.com/get.php', {
-            data: {
-                job: 4,
-                format: 'js',
-                callback: 'getAllComment1',
-                docurl: docUrl.join('|'),
-            },
-        });
+        const data = await getCommentCount(docUrl);
 
         data.forEach(item => {
             count.push(item.count);
