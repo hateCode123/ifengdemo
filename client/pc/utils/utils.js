@@ -33,6 +33,7 @@ const handleAd = async ad => {
         error.message = `AdError - ${error.message}`;
 
         console.error(error);
+        console.error('AdError - AdData', ad);
 
         if (window && window.BJ_REPORT) window.BJ_REPORT.report(error);
     }

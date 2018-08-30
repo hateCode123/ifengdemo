@@ -42,6 +42,13 @@
     background: url(./list11_08d16303.gif) no-repeat left center;
 }
 
+.logo {
+    position: relative;
+    width: 102px;
+    height: 30px;
+    float: right;
+}
+
 .liveList {
     margin: 6px 6px 0 0;
     & li {
