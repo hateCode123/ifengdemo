@@ -110,13 +110,7 @@ class FundsFlow extends React.PureComponent {
                                     <tr key={index}>
                                         <td style={{ width: '107px' }}>
                                             <a
-                                                href={
-                                                    index < 3
-                                                        ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
-                                                        : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
-                                                              3,
-                                                          )}/`
-                                                }
+                                                href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
                                                 target="_blank"
                                                 rel={rel}>
                                                 {item.name.slice(0, 6)}
