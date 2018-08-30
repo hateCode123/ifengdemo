@@ -44,11 +44,18 @@
     background: #fff;
     color: #666666;
 }
-.abo th , .abo  td a, .abo td{
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.abo th,
+.abo td {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.abo td a {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .abo td {
     height: 30px;
@@ -58,25 +65,23 @@
 }
 .f14 {
     font-size: 14px;
-} 
-.abo  a {
-    
+}
+.abo a {
     color: #222222;
 
     width: 8em;
 }
-.abo  .color_red {
+.abo .color_red {
     color: #f54343;
     font-size: 14px;
     /* padding-left: 15px; */
-   
 } /*150806a*/
-.abo  .glv {
+.abo .glv {
     color: #2c9c88;
     font-size: 14px;
-   
+
     /* padding-left: 15px; */
 }
-.abo  .cGray a {
+.abo .cGray a {
     color: #2b2b2b;
 }

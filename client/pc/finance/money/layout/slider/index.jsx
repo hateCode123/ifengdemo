@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import style from './index.css';
 import Slides from '@ifeng/ui_pc_slides';
 import { rel } from '../../../../utils/rel';
+import { formatImage } from '@ifeng/public_method';
 
 class SliderInner extends React.PureComponent {
     /**
@@ -15,10 +16,10 @@ class SliderInner extends React.PureComponent {
             const res = __data.map(item => {
                 const thu = item.thumbnails;
                 const count = parseInt(item.thumbnailsCount, 10);
-                const img = count !== 0 ? thu.image : {};
+                const img = count !== 0 ? thu.image : [];
                 const src = img && img.length > 0 ? img[0].url : '';
 
-                item.src = src;
+                item.src = formatImage(src, 400, 180);
 
                 return item;
             });

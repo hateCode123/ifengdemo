@@ -8,7 +8,6 @@ import HotFundsTable from '../hotfundsTable/';
 import CommonTitleL from './../commonTitleL/';
 
 class Rediantuijian extends React.PureComponent {
-    
     state = {
         current: 0,
         tabContentConfig: [
@@ -21,7 +20,7 @@ class Rediantuijian extends React.PureComponent {
                     { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
                     { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
                     { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
-                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableStock || [],
             },
@@ -34,7 +33,7 @@ class Rediantuijian extends React.PureComponent {
                     { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
                     { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
                     { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
-                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableMix || [],
             },
@@ -47,7 +46,7 @@ class Rediantuijian extends React.PureComponent {
                     { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
                     { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
                     { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
-                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableZhishu || [],
             },
@@ -60,7 +59,7 @@ class Rediantuijian extends React.PureComponent {
                     { txt: '今年收益', tdKey: 'fromThisYear', postfix: '%' },
                     { txt: '近一年收益', tdKey: 'oneYear', postfix: '%' },
                     { txt: '近一月收益', tdKey: 'oneMonth', postfix: '%' },
-                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableZhaiquan || [],
             },
@@ -73,7 +72,7 @@ class Rediantuijian extends React.PureComponent {
                     { txt: '万份收益', tdKey: 'unitInterest', postfix: '%' },
                     { txt: '7日年化收益率', tdKey: 'rateSevenDay', postfix: '%' },
 
-                    { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
                 ],
                 content: this.props.content.rediantuijianTableMoney || [],
             },
