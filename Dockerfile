@@ -1,9 +1,10 @@
 FROM docker.ifeng.com/library/node:10.9.0 AS build
 
 WORKDIR /ifeng-whale
-COPY . /ifeng-whale
-
+COPY *.json /ifeng-whale/
 RUN npm --registry http://npm.ifengcloud.ifeng.com install
+
+COPY . /ifeng-whale
 RUN npm run build
 
 # RUN cd ..
@@ -11,18 +12,15 @@ RUN NODE_ENV=production npm run uploadcdn magicapple V0rxeH2NNjHV31bNDJu4wQxyTh2
 
 FROM docker.ifeng.com/library/node:10.9.0-alpine
 
-ENV NODE_ENV ""
+# ENV NODE_ENV ""
 WORKDIR /ifeng-whale
 EXPOSE 3000
 
-COPY --from=build /ifeng-whale/biz /ifeng-whale/biz
-COPY --from=build /ifeng-whale/dist/*.html /ifeng-whale/dist/
 COPY --from=build /ifeng-whale/*.json /ifeng-whale/
-COPY --from=build /ifeng-whale/*.js /ifeng-whale/
-
 RUN npm --registry http://npm.ifengcloud.ifeng.com install  --production
 
-# TODO remove /data/logs after remove logging to file
-# RUN  mkdir -p /data/logs
+COPY --from=build /ifeng-whale/*.js /ifeng-whale/
+COPY --from=build /ifeng-whale/biz /ifeng-whale/biz
+COPY --from=build /ifeng-whale/dist/*.html /ifeng-whale/dist/
 
 CMD ["node","app.js"]
