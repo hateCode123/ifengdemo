@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.css';
-import { getFinanceData } from '../../../../../../services/api';
 import { rel } from '../../../../../../utils/rel';
 import DataBox from './dataBox/';
 
@@ -38,7 +37,6 @@ class CattleStocks extends React.PureComponent {
             },
         ],
         current: 0,
-        data: {},
     };
 
     handleMouseOver = e => {
@@ -52,11 +50,8 @@ class CattleStocks extends React.PureComponent {
             const val = e.currentTarget.value;
 
             if (val !== '') {
-                const data = await getFinanceData('all', val);
-
                 this.setState({
                     searchTxt: val,
-                    data: data[0],
                 });
             } else {
                 this.setState({
@@ -65,6 +60,14 @@ class CattleStocks extends React.PureComponent {
             }
         } catch (e) {
             console.error(e);
+        }
+    };
+
+    handleKeydown = async e => {
+        if (e.keyCode === 13) {
+            const val = e.currentTarget.value;
+
+            window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${val}`);
         }
     };
 
@@ -85,15 +88,9 @@ class CattleStocks extends React.PureComponent {
     };
 
     handleStockSearch = () => {
-        const { data } = this.state;
+        const { searchTxt } = this.state;
 
-        window.open(`//finance.ifeng.com/app/hq/${data.t}/${data.c}/index.shtml`);
-    };
-
-    handleFundsSearch = () => {
-        const { data } = this.state;
-
-        window.open(`//finance.ifeng.com/zjlx/${data.c}`);
+        window.open(`//app.finance.ifeng.com/hq/search.php?type=stock&q=${searchTxt}`);
     };
 
     /**
@@ -124,11 +121,11 @@ class CattleStocks extends React.PureComponent {
                     <input
                         value={searchTxt}
                         onChange={this.handleChange}
+                        onKeyDown={this.handleKeydown}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                     />
                     <a onClick={this.handleStockSearch}>查行情</a>
-                    <a onClick={this.handleFundsSearch}>查资金</a>
                 </div>
             </div>
         );

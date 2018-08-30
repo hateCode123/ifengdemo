@@ -188,9 +188,12 @@ class Live extends React.Component {
                             type="static"
                             title="直播Logo"
                             groupName="正文"
+                            position="relative"
                             translate="jsonParse"
                             content={content}>
-                            <img src={content[0].url} title={content[0].title} alt={content[0].title} />
+                            <div className={styles.logo}>
+                                <img src={content[0].url} title={content[0].title} alt={content[0].title} />
+                            </div>
                         </Chip>
                     </a>
                 </div>

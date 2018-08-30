@@ -14,7 +14,7 @@ class QaForm extends React.PureComponent {
 
     componentDidMount() {
         const sid = cookie.get('sid');
-        const user = sid === null ? `凤凰网友${parseInt(Math.random() * (10000 - 1)) + 1}` : sid.substr(32);
+        const user = sid === null ? `凤凰网友${parseInt(Math.random() * (10000 - 1)) + 1}` : sid.substring(0, 32);
 
         this.setState({ questionUserName: user });
     }
