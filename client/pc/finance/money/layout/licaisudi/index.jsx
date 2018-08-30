@@ -9,7 +9,6 @@ import { rel } from '../../../../utils/rel';
 
 class LicaisudiInner extends React.PureComponent {
     render() {
-      
         const { content } = this.props;
 
         const first = content.first;
@@ -29,11 +28,11 @@ class LicaisudiInner extends React.PureComponent {
                             {first.txt}
                             <span>{first.perc}</span>
                         </p>
-                        <div className={style.gm}>
+                        {/* <div className={style.gm}>
                             <a href="buyLink" target="_blank" rel={rel}>
                                 {first.buyTxt}
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={style.secSdcp}>
                         <h3>
@@ -43,12 +42,12 @@ class LicaisudiInner extends React.PureComponent {
                             {sec.txt}
                             <span>{sec.perc}</span>
                         </p>
-                        <div className={style.gm}>
+                        {/* <div className={style.gm}>
                             <a href={sec.url} target="_blank" rel={rel}>
                                 {' '}
                                 {sec.buyTxt}
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className={style.sdcp_02}>
@@ -63,10 +62,10 @@ class LicaisudiInner extends React.PureComponent {
                         <p>
                             <span>{thr.recTitle}</span>
                             {thr.recTxt}
-                            <a href={thr.buyLink} target="_blank" rel={rel} className={style.gm02}>
+                            {/* <a href={thr.buyLink} target="_blank" rel={rel} className={style.gm02}>
                                 {' '}
                                 {first.buyTxt}
-                            </a>
+                            </a> */}
                         </p>
                     </div>
                 </div>
@@ -88,11 +87,11 @@ LicaisudiInner.defaultProps = {};
 class Licaisudi extends React.PureComponent {
     render() {
         const { content } = this.props;
-    
+
         return (
             <div className={style.wrap}>
-                    <CommonTitleM content={content.title} />
-                    <LicaisudiInner content={content.content} />
+                <CommonTitleM content={content.title} />
+                <LicaisudiInner content={content.content} />
             </div>
         );
     }

@@ -73,9 +73,9 @@ class HotfundsTable extends React.PureComponent {
             <div className={style.abo}>
                 <table width="100%" border="0">
                     <colgroup>
-                        <col width="110" />
+                        <col width="110" align="left" />
                         <col width="100" />
-                        <col width="50" />
+                        {/* <col width="50" /> */}
                     </colgroup>
                     <thead>
                         <tr>{thead}</tr>
