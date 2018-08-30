@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.css';
-import { getFinanceData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import DataBox from './dataBox/';
 
