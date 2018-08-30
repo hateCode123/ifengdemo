@@ -85,7 +85,7 @@ class FundsFlow extends React.PureComponent {
             <div className={`${styles.box} clearfix`}>
                 <div className={`${styles.title} clearfix`}>
                     <div className={styles.title_name}>股票名称</div>
-                    <div className={styles.raise}>增减仓(万)</div>
+                    <div className={styles.raise}>增减仓（万）</div>
                 </div>
                 <div className={styles.tabs}>
                     <ul>
@@ -110,13 +110,7 @@ class FundsFlow extends React.PureComponent {
                                     <tr key={index}>
                                         <td style={{ width: '167px' }}>
                                             <a
-                                                href={
-                                                    index < 3
-                                                        ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
-                                                        : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
-                                                              3,
-                                                          )}/`
-                                                }
+                                                href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
                                                 target="_blank"
                                                 rel={rel}>
                                                 {item.name.slice(0, 6)}
