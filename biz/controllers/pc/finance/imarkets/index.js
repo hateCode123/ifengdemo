@@ -44,7 +44,7 @@ exports.list = {
                 'footerAd',
                 'KVProxy',
                 'getAd',
-                'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html',
+                'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
                 getString(),
             ],
             // 广告300*600
@@ -69,30 +69,30 @@ exports.list = {
 
         allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
 
-         // 处理广告碎片和静态碎片
-         const adData = {};
-         const staticData = {};
- 
-         for (const item of json) {
-             if (item[2] === 'getAd') {
-                 adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                 delete allData[item[0]];
-             }
-             if (item[2] === 'getStaticFragment') {
-                 if (typeof allData[item[0]] === 'string') {
-                     staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                 } else {
-                     staticData[item[0]] = allData[item[0]];
-                 }
- 
-                 delete allData[item[0]];
-             }
-         }
+        // 处理广告碎片和静态碎片
+        const adData = {};
+        const staticData = {};
+
+        for (const item of json) {
+            if (item[2] === 'getAd') {
+                adData[item[0]] = encodeURIComponent(allData[item[0]]);
+                delete allData[item[0]];
+            }
+            if (item[2] === 'getStaticFragment') {
+                if (typeof allData[item[0]] === 'string') {
+                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else {
+                    staticData[item[0]] = allData[item[0]];
+                }
+
+                delete allData[item[0]];
+            }
+        }
 
         await ctx.html('finance_imarkets', {
             allData,
             adData,
-            staticData
+            staticData,
         });
     },
 };
