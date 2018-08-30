@@ -11,6 +11,7 @@
 }
 
 .space16 {
+    margin-top: 14px;
     height: 16px;
     overflow: hidden;
 }
