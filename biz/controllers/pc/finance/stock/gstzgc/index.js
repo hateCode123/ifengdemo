@@ -30,6 +30,15 @@ exports.financeWemoney = {
             // 顶部通栏广告
             ['topAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
 
+            // 顶部通栏广告
+            ['hardAd02', 'KVProxy', 'getStaticFragment', 15019, getJson()],
+
+            // 顶部通栏广告
+            ['hardAd03', 'KVProxy', 'getStaticFragment', 15020, getJson()],
+
+            // 顶部通栏广告
+            ['hardAd04', 'KVProxy', 'getStaticFragment', 15021, getJson()],
+
             // 投资观察A股指数和导航
             ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
 
