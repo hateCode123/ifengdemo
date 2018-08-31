@@ -60,6 +60,12 @@
                 color: #44a492;
                 font-size: 14px;
             }
+            & td.black {
+                text-align: right;
+                padding-right: 10px;
+                color: #666666;
+                font-size: 14px;
+            }
         }
     }
 }
