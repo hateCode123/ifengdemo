@@ -39,7 +39,7 @@ class FundsFlow extends React.PureComponent {
     componentDidMount() {
         const { tabs, current } = this.state;
 
-        this.getData(tabs[current].raiseUp);
+        this.getData(tabs[current].type);
     }
 
     /**
@@ -64,10 +64,15 @@ class FundsFlow extends React.PureComponent {
         try {
             const data = await getFundsFlowRank(type);
 
-            if (data.data.length > 0) {
+            if (data.data && data.data.length > 0) {
                 this.setState({
                     loading: false,
                     data: data.data.slice(0, 6),
+                });
+            } else {
+                this.setState({
+                    loading: false,
+                    data: [],
                 });
             }
         } catch (e) {
@@ -106,28 +111,36 @@ class FundsFlow extends React.PureComponent {
                     <div className={styles.table}>
                         <table>
                             <tbody>
-                                {data.map((item, index) => (
-                                    <tr key={index}>
-                                        <td style={{ width: '167px' }}>
-                                            <a
-                                                href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
-                                                target="_blank"
-                                                rel={rel}>
-                                                {item.name.slice(0, 6)}
-                                            </a>
-                                            {item.news && item.news !== '' ? (
-                                                <a href={item.news} target="_blank" rel={rel}>
-                                                    <p />
+                                {data.length > 0 ? (
+                                    data.map((item, index) => (
+                                        <tr key={index}>
+                                            <td style={{ width: '167px' }}>
+                                                <a
+                                                    href={`//finance.ifeng.com/app/hq/stock/${item.code}/`}
+                                                    target="_blank"
+                                                    rel={rel}>
+                                                    {item.name.slice(0, 6)}
                                                 </a>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </td>
-                                        <td className={item.chg_pct > 0 ? styles.red : styles.green}>
-                                            <span>{item.chg_pct}</span>
+                                                {item.news && item.news !== '' ? (
+                                                    <a href={item.news} target="_blank" rel={rel}>
+                                                        <p />
+                                                    </a>
+                                                ) : (
+                                                    ''
+                                                )}
+                                            </td>
+                                            <td className={item.chg_pct > 0 ? styles.red : styles.green}>
+                                                <span>{item.chg_pct}</span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="2" style={{ textAlign: 'right', paddingRight: '15px' }}>
+                                            当前无数据
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>
