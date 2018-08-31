@@ -377,6 +377,61 @@ exports.list = {
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
+
+            allData.QATabs[3].url = formatUrl(allData.QATabs[3].url);
+            allData.QATabs[3].src = formatImage(allData.QATabs[3].src, 60, 60);
+
+            allData.hyin.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.hyout.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.gnin.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.gnout.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.marketRadar.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.track.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.fiveDaysBuy.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.fiveDaysSell.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.stockpoolData.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.chgpctestData.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.levelupData.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.firstfocusData.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
+
+            allData.focusestData.forEach(item => {
+                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+            });
         } catch (error) {
             logger.error(error);
         }

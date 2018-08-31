@@ -102,7 +102,10 @@ const createConfig = function(type, platform, level, modern) {
                 // 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipUrl: JSON.stringify('http://test0.ucms.ifeng.com:30080/shard'),
                 // ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
-                apiUrl: JSON.stringify('//shankapi.ifeng.com/spring'),
+                apiUrl:
+                    env === 'production'
+                        ? JSON.stringify('//shankapi.ifeng.com/spring')
+                        : JSON.stringify('//test.shankapi.ifeng.com/spring'),
                 FullPagePreviewUrl:
                     env === 'production'
                         ? JSON.stringify('https://ucms.ifeng.com/shank/spring')
