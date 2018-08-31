@@ -6,5 +6,5 @@ import './reset.css';
 import Layout from './layout/';
 
 /* eslint-disable no-undef */
-ReactDOM.render(<Layout content={jsonData} />, document.getElementById('root'));
+ReactDOM.render(<Layout content={allData} />, document.getElementById('root'));
 /* eslint-enable no-undef */

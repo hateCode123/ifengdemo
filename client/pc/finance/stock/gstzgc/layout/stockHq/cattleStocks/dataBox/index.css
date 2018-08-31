@@ -26,3 +26,17 @@
         /* height: 163px; */
     }
 }
+
+.up {
+    display: inline-block;
+    width: 11px;
+    height: 10px;
+    background: url(./up.gif) no-repeat;
+}
+
+.down {
+    display: inline-block;
+    width: 11px;
+    height: 10px;
+    background: url(./down.gif) no-repeat;
+}
