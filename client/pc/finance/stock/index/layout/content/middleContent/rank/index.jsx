@@ -93,6 +93,11 @@ class Rank extends React.PureComponent {
                     loading: false,
                     data: data.data.slice(0, 5),
                 });
+            } else {
+                this.setState({
+                    loading: false,
+                    data: [],
+                });
             }
         } catch (e) {
             console.error(e);
@@ -138,39 +143,47 @@ class Rank extends React.PureComponent {
                     <div className={styles.table}>
                         <table>
                             <tbody>
-                                {data.map((item, index) => (
-                                    <tr key={index}>
-                                        <td style={{ width: '107px' }}>
-                                            <a
-                                                href={
-                                                    index < 3
-                                                        ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
-                                                        : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
-                                                              3,
-                                                          )}/`
-                                                }
-                                                target="_blank"
-                                                rel={rel}>
-                                                {item.name.slice(0, 6)}
-                                            </a>
-                                            {item.news && item.news !== '' ? (
-                                                <a href={item.news} target="_blank" rel={rel}>
-                                                    <p />
+                                {data.length > 0 ? (
+                                    data.map((item, index) => (
+                                        <tr key={index}>
+                                            <td style={{ width: '107px' }}>
+                                                <a
+                                                    href={
+                                                        index < 3
+                                                            ? `//finance.ifeng.com/app/hq/stock/${item.code}/`
+                                                            : `//app.finance.ifeng.com/list/stock_cate.php?c=${item.code.slice(
+                                                                  3,
+                                                              )}/`
+                                                    }
+                                                    target="_blank"
+                                                    rel={rel}>
+                                                    {item.name.slice(0, 6)}
                                                 </a>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </td>
-                                        <td className={item.chg_pct > 0 ? styles.red : styles.green}>
-                                            <span>
-                                                {current === 2
-                                                    ? Number(item.vol_ratio).toFixed(2)
-                                                    : Number(item.chg_pct).toFixed(2)}
-                                                {current === 2 ? '' : '%'}
-                                            </span>
+                                                {item.news && item.news !== '' ? (
+                                                    <a href={item.news} target="_blank" rel={rel}>
+                                                        <p />
+                                                    </a>
+                                                ) : (
+                                                    ''
+                                                )}
+                                            </td>
+                                            <td className={item.chg_pct > 0 ? styles.red : styles.green}>
+                                                <span>
+                                                    {current === 2
+                                                        ? Number(item.vol_ratio).toFixed(2)
+                                                        : Number(item.chg_pct).toFixed(2)}
+                                                    {current === 2 ? '' : '%'}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="2" style={{ textAlign: 'right', paddingRight: '15px' }}>
+                                            当前无数据
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>

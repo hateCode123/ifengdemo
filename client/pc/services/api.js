@@ -279,11 +279,13 @@ const getStockRank = async type => {
         cache: false,
     });
 
-    data.data.forEach(item => {
-        if (item.news !== '') {
-            item.news = formatUrl(item.news);
-        }
-    });
+    if (data.data) {
+        data.data.forEach(item => {
+            if (item.news !== '') {
+                item.news = formatUrl(item.news);
+            }
+        });
+    }
 
     return data;
 };
@@ -298,11 +300,13 @@ const getFundsFlowRank = async type => {
         cache: false,
     });
 
-    data.data.forEach(item => {
-        if (item.news !== '') {
-            item.news = formatUrl(item.news);
-        }
-    });
+    if (data.data) {
+        data.data.forEach(item => {
+            if (item.news !== '') {
+                item.news = formatUrl(item.news);
+            }
+        });
+    }
 
     return data;
 };
