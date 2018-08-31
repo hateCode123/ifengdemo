@@ -5,8 +5,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
-import TopAd from './topAd/';
-import Navigation from './navigation/';
+import Navigation from './navigation';
 import Topic from './topic/';
 import Headline from './headline';
 import PaperContent from './paperContent';
@@ -35,7 +34,8 @@ class Layout extends React.PureComponent {
         };
 
         const paperData = {
-            hardAd: content.hardAd,
+            hardAd02: content.hardAd03,
+            hardAd03: content.hardAd02,
             paperMenu: content.paperMenu,
             newPaper: content.newPaper,
             newPaperExtra: content.newPaperExtra,
@@ -66,7 +66,7 @@ class Layout extends React.PureComponent {
 
         const footerData = {
             cooperation: content.cooperation,
-            bottomAd: content.bottomAd,
+            hardAd04: content.hardAd04,
             copyright: content.copyright,
         };
 
@@ -74,7 +74,15 @@ class Layout extends React.PureComponent {
             <div>
                 <Header content={headerData} />
                 <div className={styles.col_w1000}>
-                    <TopAd content={content.topAd} />
+                    <Chip
+                        id={content.id}
+                        type="static"
+                        title={content.name}
+                        groupName="文章"
+                        translate="jsonParse"
+                        content={content.topAd.content}>
+                        <Recommend />
+                    </Chip>
                     <Navigation content={content.navigation} />
                 </div>
 
