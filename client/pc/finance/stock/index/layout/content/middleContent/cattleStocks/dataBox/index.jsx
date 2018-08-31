@@ -29,7 +29,7 @@ class DataBox extends React.Component {
 
         this.timer = setInterval(() => {
             this.getData();
-        }, 1000);
+        }, 5000);
     }
 
     componentWillUnmount() {
