@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { jsonp } from '@ifeng/ui_base';
-import { getAnalyzerInfo, getQAData } from '../../../../../services/api';
+import { getAnalyzerInfo, getQADataTzgc, getQAData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 import QaTabs from './QATabs';
 import QaForm from './QAForm';
@@ -63,7 +63,13 @@ class Qa extends React.PureComponent {
 
             const qaobj = Object.assign({}, qaers, qa);
 
-            const data = await getQAData(currentUser.name, currentUser.type ? currentUser.type : '');
+            let data = [];
+
+            if (currentUser.name === '全部专家') {
+                data = await getQAData(currentUser.name, currentUser.type ? currentUser.type : '');
+            } else {
+                data = await getQADataTzgc(currentUser.name, currentUser.type ? currentUser.type : '');
+            }
 
             list[currentUser.name] = data.a_content;
 

@@ -358,6 +358,22 @@ const getQAData = async (name, type) => {
     });
 };
 
+// 投资观察，获取分析师答疑，参数与股票首页不同
+
+const getQADataTzgc = async (user, type) => {
+    const callback = createJsonpCallbackName('getQAData');
+
+    return await jsonp('//app.finance.ifeng.com/gszb/a_data.php', {
+        data: {
+            user,
+            type,
+            cb: callback,
+        },
+        jsonpCallback: callback,
+        cache: false,
+    });
+};
+
 export {
     getMyStockData,
     getStockData,
@@ -378,4 +394,5 @@ export {
     getHotStockData,
     getAnalyzerInfo,
     getQAData,
+    getQADataTzgc,
 };
