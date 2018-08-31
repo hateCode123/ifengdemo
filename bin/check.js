@@ -66,7 +66,7 @@ async function checkPackagesVersion() {
                         } --registry http://npm.ifengcloud.ifeng.com`,
                     );
                 }
-            } catch (error) {
+            } catch (err) {
                 warn = true;
                 error(`"${key}": "${local_packages[key]}" -- 本地没有找到该包，请检查该包是否正确安装！`);
             }
