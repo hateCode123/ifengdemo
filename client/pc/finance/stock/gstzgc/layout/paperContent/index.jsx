@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Ad from '@ifeng/ui_pc_ad';
 import PaperMenu from './paperMenu';
 import PaperList from './paperList';
 import Paper from './paperList/paper';
 import Title from './paperList/title';
 import More from './paperList/more';
 import Chip from 'Chip';
+import { Recommend } from '../../components/recommend';
 class PaperContent extends React.PureComponent {
     state = {
         current: 0,
@@ -61,12 +61,29 @@ class PaperContent extends React.PureComponent {
                     </Chip>
                 </div>
                 <br />
-                <Ad content={content.hardAd} styleName={styles.hardAd} />
+                <Chip
+                    id={content.id}
+                    type="static"
+                    title={content.name}
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={content.hardAd02.content}>
+                    <Recommend />
+                </Chip>
                 <Chip id="10054" type="static" title="更多投资情报" content={investInfoData}>
                     <PaperList />
                 </Chip>
                 <br />
-                <Ad content={content.hardAd} styleName={styles.hardAd} />
+
+                <Chip
+                    id={content.id}
+                    type="static"
+                    title={content.name}
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={content.hardAd03.content}>
+                    <Recommend />
+                </Chip>
                 <Chip id="10055" type="static" title="更多上市公司" content={ssComponeyData}>
                     <PaperList />
                 </Chip>

@@ -66,7 +66,7 @@ class CustomStocks extends React.PureComponent {
                     item.push(stockData[code][0].toFixed(2));
                     item.push(stockData[code][3].toFixed(2));
                 } else {
-                    item.push('', '');
+                    item.push(0, 0);
                 }
             });
 
@@ -76,6 +76,16 @@ class CustomStocks extends React.PureComponent {
             });
         } catch (e) {
             console.error(e);
+        }
+    };
+
+    getColor = num => {
+        if (num > 0) {
+            return styles.red;
+        } else if (num === 0) {
+            return styles.black;
+        } else if (num < 0) {
+            return styles.green;
         }
     };
 
@@ -121,11 +131,8 @@ class CustomStocks extends React.PureComponent {
                                                     {item[1]}
                                                 </a>
                                             </td>
-                                            <td className={item[3] > 0 ? styles.red : styles.green}>{item[2]}</td>
-                                            <td className={item[3] > 0 ? styles.red : styles.green}>
-                                                {item[3]}
-                                                {`${item[3] === '' ? '' : '%'}`}
-                                            </td>
+                                            <td className={this.getColor(item[3])}>{item[2]}</td>
+                                            <td className={this.getColor(item[3])}>{`${item[3]}%`}</td>
                                             <td>
                                                 <a
                                                     href={`//app.finance.ifeng.com/report/search.php?yb_search_type=stock&code=${

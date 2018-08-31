@@ -31,11 +31,11 @@
 }
 
 .search {
-    /* margin-top: 14px; */
+    margin-top: 14px;
     & > input {
         color: #999;
         margin-right: 5px;
-        width: 119px;
+        width: 200px;
         height: 20px;
         line-height: 20px;
         float: left;

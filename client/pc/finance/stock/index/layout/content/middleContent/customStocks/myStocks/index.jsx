@@ -6,21 +6,18 @@ import { rel } from '../../../../../../../../utils/rel';
 
 class MyStocks extends React.PureComponent {
     state = {
-        userInfo: auth.isLogin() ? auth.getUserInfo() : null,
         data: [],
     };
 
     loginId = auth.uuid();
 
     componentDidMount() {
-        this.unBindLogin = auth.event.on(auth.EVENTNAMES.login, userInfo => {
-            this.setState({
-                userInfo,
-            });
+        this.unBindLogin = auth.event.on(auth.EVENTNAMES.login, () => {
+            this.getMyStock();
         });
         this.unBindLogout = auth.event.on(auth.EVENTNAMES.logout, () => {
             this.setState({
-                userInfo: null,
+                data: [],
             });
         });
 

@@ -83,9 +83,11 @@ app.use(async (ctx, next) => {
     if (ctx.url === '/heartbeat') {
         return (ctx.body = { success: true });
     }
+    let sourcePath = ctx.url;
+
     // 初始化
     ctx.start = process.uptime() * 1000;
-    ctx.uuid = uuid();
+    ctx.uuid = uuid().replace(/-/g, '');
     ctx.schemaTime = 0;
     ctx.schemaTimeList = [];
     ctx.parseTime = 0;
@@ -156,6 +158,7 @@ app.use(async (ctx, next) => {
 
     logger.info({
         kpi: {
+            sourcePath,
             path: ctx.originalUrl,
             status: ctx.status,
             time: ctx.time,
@@ -170,6 +173,7 @@ app.use(async (ctx, next) => {
             randerTime: ctx.randerTime,
             domain: ctx.header.domain,
             shankTracerId: ctx.uuid,
+            errorCount: ctx.errorCount,
             serverTime: moment().format('YYYY-MM-DD HH:mm:ss'),
         },
     });

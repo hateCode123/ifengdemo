@@ -47,7 +47,7 @@ exports.list = {
                 'footerAd',
                 'KVProxy',
                 'getAd',
-                'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html',
+                'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
                 getString(),
             ],
             // 广告300*600

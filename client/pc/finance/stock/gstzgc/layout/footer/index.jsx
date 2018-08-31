@@ -15,7 +15,7 @@ class BottomFooter extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const { cooperation, bottomAd } = content;
+        const { cooperation, hardAd04 } = content;
 
         const BottomCooperation = (
             <Chip
@@ -32,7 +32,15 @@ class BottomFooter extends React.PureComponent {
 
         const BottomAd = (
             <div key="bottomAd" className={styles.ad}>
-                <Ad content={bottomAd} styleName={styles.box} />
+                <Chip
+                    id={content.id}
+                    type="static"
+                    title={content.name}
+                    groupName="文章"
+                    translate="jsonParse"
+                    content={hardAd04.content}>
+                    <Recommend />
+                </Chip>
             </div>
         );
         const footer = (

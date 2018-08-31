@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { cookie } from '@ifeng/ui_base';
+import auth from '@ifeng/ui_pc_auth';
 
 class QaForm extends React.PureComponent {
     static propTypes = {
@@ -13,8 +14,24 @@ class QaForm extends React.PureComponent {
     };
 
     componentDidMount() {
+        this.unBindLogin = auth.event.on(auth.EVENTNAMES.login, () => {
+            this.getQuestionUserName();
+        });
+        this.unBindLogout = auth.event.on(auth.EVENTNAMES.logout, () => {
+            this.setState({ questionUserName: '' });
+        });
+
+        this.getQuestionUserName();
+    }
+
+    componentWillUnmount() {
+        this.unBindLogin();
+        this.unBindLogout();
+    }
+
+    getQuestionUserName() {
         const sid = cookie.get('sid');
-        const user = sid === null ? `凤凰网友${parseInt(Math.random() * (10000 - 1)) + 1}` : sid.substr(32);
+        const user = sid === null ? `凤凰网友${parseInt(Math.random() * (10000 - 1)) + 1}` : sid.substring(0, 32);
 
         this.setState({ questionUserName: user });
     }

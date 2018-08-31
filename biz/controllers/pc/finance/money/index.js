@@ -2,6 +2,8 @@
 // const logger = require('../../../../common/logger');
 // const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
+const { formatImage, formatUrl } = require('@ifeng/public_method');
+const logger = require('../../../../common/logger');
 
 exports.financeWemoney = {
     path: '/pc/finance/money',
@@ -111,6 +113,22 @@ exports.financeWemoney = {
         ];
 
         const allData = await transfer(ctx, json);
+
+        try {
+            const __slider = allData.slider && allData.slider.slice(0, 5);
+
+            allData.slider = [...__slider].map(a => ({
+                thumbnailsCount: a.thumbnailsCount,
+                thumbnails: a.thumbnails,
+                title: a.title,
+                // src: a.src && a.src !== '' ? formatImage(a.src, 400, 180) : '',
+                url: a.url ? formatUrl(a.url) : '',
+                ...a,
+            }));
+        } catch (error) {
+            logger.error(error);
+        }
+
         // 处理广告碎片和静态碎片
         const adData = {};
         const staticData = {};
@@ -133,7 +151,7 @@ exports.financeWemoney = {
         await ctx.html('finance_money', {
             allData,
             adData,
-            staticData
+            staticData,
         });
     },
 };

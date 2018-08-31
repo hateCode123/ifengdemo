@@ -271,24 +271,44 @@ const refreshLiveData = async lastid => {
 
 // 获取股票涨跌排行数据
 const getStockRank = async type => {
-    return await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
+    const data = await jsonp('//app.finance.ifeng.com/stockindex/getStockRank.php', {
         data: {
             type,
         },
         jsonpCallback: 'getStockRank',
         cache: false,
     });
+
+    if (data.data) {
+        data.data.forEach(item => {
+            if (item.news !== '') {
+                item.news = formatUrl(item.news);
+            }
+        });
+    }
+
+    return data;
 };
 
 // 获取资金流向排行数据
 const getFundsFlowRank = async type => {
-    return await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
+    const data = await jsonp('//app.finance.ifeng.com/stockindex/getZijinRank.php', {
         data: {
             type,
         },
         jsonpCallback: 'getFundsFlowRank',
         cache: false,
     });
+
+    if (data.data) {
+        data.data.forEach(item => {
+            if (item.news !== '') {
+                item.news = formatUrl(item.news);
+            }
+        });
+    }
+
+    return data;
 };
 
 // 获取热门股票数据
@@ -307,7 +327,7 @@ const getHotStockData = async () => {
 const getAnalyzerInfo = async (name, type) => {
     const callback = createJsonpCallbackName('updateAnalyzerInfo');
 
-    return await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
+    const data = await jsonp('//app.finance.ifeng.com/gszb/user_ol.php', {
         data: {
             name,
             type,
@@ -316,6 +336,11 @@ const getAnalyzerInfo = async (name, type) => {
         jsonpCallback: callback,
         cache: false,
     });
+
+    return data.map(item => ({
+        url: item.url === '' ? '' : formatUrl(item.url),
+        image: formatImage(item.image, 60, 60),
+    }));
 };
 
 // 获取分析师答疑数据

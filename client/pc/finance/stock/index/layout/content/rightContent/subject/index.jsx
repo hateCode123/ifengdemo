@@ -18,7 +18,7 @@ class Subject extends React.PureComponent {
         const list = content.slice(1, 3);
 
         return (
-            <div>
+            <div className={styles.subject}>
                 <div className={styles.pic_box}>
                     <a href={pic.url} target="_blank" rel={rel} title={pic.title} className={styles.pic}>
                         <img src={pic.banner} width="300" height="169" alt={pic.title} className={styles.trans} />

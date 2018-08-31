@@ -5,8 +5,8 @@ import Chip from 'Chip';
 import { jsonp } from '@ifeng/ui_base';
 import { getAnalyzerInfo, getQAData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
-import QaTabs from './QATabs/';
-import QaForm from './QAform/';
+import QaTabs from './QATabs';
+import QaForm from './QAForm';
 
 class Qa extends React.PureComponent {
     static propTypes = {
@@ -26,7 +26,14 @@ class Qa extends React.PureComponent {
     }
 
     handleMouseOver = index => {
-        this.getQaData(index);
+        const { qaers, alist } = this.state;
+        const { tabs } = this.props;
+        const currentUser = tabs[index];
+
+        if (!qaers[currentUser.name] && !alist[currentUser.name]) {
+            this.getQaData(index);
+        }
+
         this.setState({
             current: index,
         });
@@ -40,24 +47,18 @@ class Qa extends React.PureComponent {
             const qa = {};
             const list = {};
 
-            if (!qaers[currentUser.name] && !alist[currentUser.name] && index !== tabs.length - 1) {
+            if (index !== tabs.length - 1) {
                 const userData = await getAnalyzerInfo(currentUser.name, currentUser.type);
 
                 qa[currentUser.name] = {
-                    url: '',
-                    img: '',
+                    url: userData[0].url,
+                    img: userData[0].image,
                 };
-
-                qa[currentUser.name].url = userData[0].url;
-                qa[currentUser.name].img = userData[0].image;
-            } else if (!qaers[currentUser.name] && !alist[currentUser.name] && index === tabs.length - 1) {
+            } else if (index === tabs.length - 1) {
                 qa[currentUser.name] = {
-                    url: '',
-                    img: '',
+                    url: tabs[tabs.length - 1].url,
+                    img: tabs[tabs.length - 1].src,
                 };
-
-                qa[currentUser.name].url = tabs[tabs.length - 1].url;
-                qa[currentUser.name].img = tabs[tabs.length - 1].src;
             }
 
             const qaobj = Object.assign({}, qaers, qa);
@@ -123,15 +124,10 @@ class Qa extends React.PureComponent {
                     <QaTabs current={current} handleMouseOver={this.handleMouseOver} />
                 </Chip>
                 <div className={styles.qa_box}>
-                    <a
-                        href={qaers[currentUser.name] && current < 3 ? qaers[currentUser.name].url : tabs[current].url}
-                        target="_blank"
-                        rel={rel}>
+                    <a href={qaers[currentUser.name] ? qaers[currentUser.name].url : ''} target="_blank" rel={rel}>
                         <img
                             className={styles.user}
-                            src={
-                                qaers[currentUser.name] && current < 3 ? qaers[currentUser.name].img : tabs[current].src
-                            }
+                            src={qaers[currentUser.name] ? qaers[currentUser.name].img : ''}
                             target="_blank"
                             rel={rel}
                         />

@@ -1,8 +1,11 @@
+.subject {
+    margin: 11px 0 20px 0;
+}
+
 .pic_box {
     width: 300px;
     height: 141px;
     position: relative;
-    margin-top: 19px;
 }
 
 .pic {
@@ -31,11 +34,10 @@
 }
 
 .list {
-    margin-top: 5px;
+    margin-top: 8px;
     & li {
-        font-size: 14px;
-        height: 29px;
-        line-height: 29px;
+        height: 22px;
+        line-height: 22px;
         background: url(./dian01.jpg) no-repeat 0 center;
         padding-left: 14px;
         overflow: hidden;

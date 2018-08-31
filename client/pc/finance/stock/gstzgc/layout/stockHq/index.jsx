@@ -56,7 +56,6 @@ class StockHq extends React.PureComponent {
                     </Chip>
                     <Rank />
                 </div>
-                <div className={styles.space16} />
                 <div className={styles.funds_flow}>
                     <Chip
                         id="10102"
@@ -69,7 +68,6 @@ class StockHq extends React.PureComponent {
                     </Chip>
                     <FundsFlow />
                 </div>
-                <div className={styles.space16} />
                 <div className={styles.custom_stocks}>
                     <Chip
                         id="10103"
