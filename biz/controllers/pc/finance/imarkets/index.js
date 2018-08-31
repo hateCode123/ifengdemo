@@ -1,8 +1,9 @@
 const logger = require('../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
+const { cu } = require('../../../../providers/ucmsapiProxy');
 
 exports.list = {
-    path: '/pc/finance/imarkets',
+    path: '/pc/finance/gold/(snapshots)?/:year?/:date?',
     method: 'get',
     type: 'html',
     edit: true,
@@ -22,6 +23,8 @@ exports.list = {
             ['cooperation', 'KVProxy', 'getStaticFragment', '10164', getStringByKey('content')],
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
+            // 旧的数据
+            ['financeGoldSnapshots', 'KVProxy', 'getCustom', 'financeGoldSnapshots2018083110', getJsonByKey('data')],
             // adHead
             [
                 'adHead',
@@ -68,31 +71,32 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
+        allData.params = ctx.params;
 
-         // 处理广告碎片和静态碎片
-         const adData = {};
-         const staticData = {};
- 
-         for (const item of json) {
-             if (item[2] === 'getAd') {
-                 adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                 delete allData[item[0]];
-             }
-             if (item[2] === 'getStaticFragment') {
-                 if (typeof allData[item[0]] === 'string') {
-                     staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                 } else {
-                     staticData[item[0]] = allData[item[0]];
-                 }
- 
-                 delete allData[item[0]];
-             }
-         }
+        // 处理广告碎片和静态碎片
+        const adData = {};
+        const staticData = {};
+
+        for (const item of json) {
+            if (item[2] === 'getAd') {
+                adData[item[0]] = encodeURIComponent(allData[item[0]]);
+                delete allData[item[0]];
+            }
+            if (item[2] === 'getStaticFragment') {
+                if (typeof allData[item[0]] === 'string') {
+                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else {
+                    staticData[item[0]] = allData[item[0]];
+                }
+
+                delete allData[item[0]];
+            }
+        }
 
         await ctx.html('finance_imarkets', {
             allData,
             adData,
-            staticData
+            staticData,
         });
     },
 };
