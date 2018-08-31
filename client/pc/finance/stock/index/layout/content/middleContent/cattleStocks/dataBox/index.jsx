@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import md5 from 'md5';
 import { getStockData } from '../../../../../../../../services/api';
 import { rel } from '../../../../../../../../utils/rel';
 
@@ -41,13 +40,13 @@ class DataBox extends React.Component {
      */
     getData = async () => {
         try {
-            const { dataStock, current } = this.props;
+            const { dataStock } = this.props;
             const codeList = dataStock.map(item => item.code);
             const price = [];
 
             const data = await getStockData(codeList);
 
-            const hash = md5(Object.values(data)[current][0]);
+            const hash = new Date().valueOf();
 
             for (let a = 0; a < Object.keys(data).length; a++) {
                 let style = '';

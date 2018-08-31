@@ -3,7 +3,7 @@ const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const { handleHeadlinePicData, handleFinanceListPicData } = require('../../../../common/transform');
-const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
+const { formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
     path: '/pc/finance/(index)?',
@@ -271,8 +271,7 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         try {
-            allData.headline = allData.headline && recommendRandomSort(allData.headline, 6);
-            allData.headline = handleHeadlinePicData(allData.headline);
+            allData.headline = allData.headline && handleHeadlinePicData(allData.headline);
 
             allData.bannerPic =
                 allData.bannerPic &&
@@ -324,8 +323,7 @@ exports.list = {
                 },
             ].concat(talking);
 
-            allData.financeList = allData.financeList && recommendRandomSort(allData.financeList, 5);
-            allData.financeList = handleFinanceListPicData(allData.financeList);
+            allData.financeList = allData.financeList && handleFinanceListPicData(allData.financeList);
 
             allData.stocks =
                 allData.stocks &&
