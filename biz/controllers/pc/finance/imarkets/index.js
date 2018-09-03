@@ -3,28 +3,27 @@ const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('
 const { cu } = require('../../../../providers/ucmsapiProxy');
 
 exports.list = {
-    path: '/pc/finance/gold/(snapshots)?/:year?/:date?',
+    path: '/pc/finance/gold/:snapshots?/:year?/:date?',
     method: 'get',
     type: 'html',
     edit: true,
     low: true,
     preview: true,
     handler: async ctx => {
+        const { params } = ctx;
+
+        if (params.snapshots && params.snapshots !== 'snapshots') return;
+        if (params.snapshots && params.snapshots === 'snapshots' && (!params.year || !params.date)) return;
+
         const json = [
             // 顶部导航接口
             ['nav', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
-            // 顶部新闻
-            ['topnews', 'KVProxy', 'getStaticFragment', '10165', getStringByKey('content')],
-            // 信息流
-            ['newsstream', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
             // 热点专题
             ['hottopic', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
             // 底部合作链接
             ['cooperation', 'KVProxy', 'getStaticFragment', '10164', getStringByKey('content')],
             // 底部公用版权
             ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
-            // 旧的数据
-            ['financeGoldSnapshots', 'KVProxy', 'getCustom', 'financeGoldSnapshots2018083110', getJsonByKey('data')],
             // adHead
             [
                 'adHead',
@@ -68,10 +67,34 @@ exports.list = {
             ],
         ];
 
+        if (!params.snapshots && !params.year && !params.date) {
+            json.push(
+                // 顶部新闻
+                ['topnews', 'KVProxy', 'getStaticFragment', '10165', getStringByKey('content')],
+                // 信息流
+                ['newsstream', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
+            );
+        } else {
+            // 旧的数据
+            json.push(['financeGoldSnapshots', 'KVProxy', 'getCustom', `financeGoldSnapshots${params.year}${params.date}`, getString()]);
+        }
+
         const allData = await transfer(ctx, json);
 
+        // 处理旧数据
+        if ('financeGoldSnapshots' in allData) {
+            if (typeof allData.financeGoldSnapshots === 'string') {
+                const financeGoldSnapshots = JSON.parse(allData.financeGoldSnapshots);
+
+                allData.newsstream = financeGoldSnapshots.newsstream;
+                allData.topnews = financeGoldSnapshots.topnews;
+                delete allData.financeGoldSnapshots;
+            } else {
+                return;
+            }
+        }
+
         allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
-        allData.params = ctx.params;
 
         // 处理广告碎片和静态碎片
         const adData = {};
