@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './index.css';
 import { addEventListener } from '@ifeng/ui_base';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 BottomAffix 组件
@@ -141,4 +142,4 @@ class BottomAffix extends React.PureComponent {
     }
 }
 
-export default BottomAffix;
+export default errorBoundary(BottomAffix);

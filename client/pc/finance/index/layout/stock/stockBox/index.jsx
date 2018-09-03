@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getStockData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 class StockBox extends React.PureComponent {
@@ -98,4 +99,4 @@ class StockBox extends React.PureComponent {
     }
 }
 
-export default StockBox;
+export default errorBoundary(StockBox);

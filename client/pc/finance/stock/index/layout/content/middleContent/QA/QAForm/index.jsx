@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { cookie } from '@ifeng/ui_base';
 import auth from '@ifeng/ui_pc_auth';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class QaForm extends React.PureComponent {
     static propTypes = {
@@ -62,4 +63,4 @@ class QaForm extends React.PureComponent {
     }
 }
 
-export default QaForm;
+export default errorBoundary(QaForm);

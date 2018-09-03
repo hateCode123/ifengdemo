@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getFundsFlowRank } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 
@@ -150,4 +151,4 @@ class FundsFlow extends React.PureComponent {
     }
 }
 
-export default FundsFlow;
+export default errorBoundary(FundsFlow);

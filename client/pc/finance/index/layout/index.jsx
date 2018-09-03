@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
-import errorBoundary from '@ifeng/errorBoundary';
 import Header from './header';
 import Navigation from './navigation';
 import Stock from './stock';
@@ -113,4 +112,4 @@ class Layout extends React.PureComponent {
     }
 }
 
-export default errorBoundary(Layout);
+export default Layout;

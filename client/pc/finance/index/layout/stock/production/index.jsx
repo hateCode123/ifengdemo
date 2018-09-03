@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../utils/rel';
 
 class Production extends React.PureComponent {
@@ -39,4 +40,4 @@ class Production extends React.PureComponent {
     }
 }
 
-export default Production;
+export default errorBoundary(Production);

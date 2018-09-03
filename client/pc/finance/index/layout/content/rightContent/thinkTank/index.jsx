@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 
 class ThinkTank extends React.PureComponent {
@@ -42,4 +43,4 @@ class ThinkTank extends React.PureComponent {
     }
 }
 
-export default ThinkTank;
+export default errorBoundary(ThinkTank);

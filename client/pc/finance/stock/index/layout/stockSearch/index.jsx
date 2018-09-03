@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getFinanceData } from '../../../../../services/api';
 
 class StockSearch extends React.PureComponent {
@@ -207,4 +208,4 @@ class StockSearch extends React.PureComponent {
     }
 }
 
-export default StockSearch;
+export default errorBoundary(StockSearch);

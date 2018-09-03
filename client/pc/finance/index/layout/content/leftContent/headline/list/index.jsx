@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 
 class List extends React.PureComponent {
@@ -46,4 +47,4 @@ class List extends React.PureComponent {
     }
 }
 
-export default List;
+export default errorBoundary(List);

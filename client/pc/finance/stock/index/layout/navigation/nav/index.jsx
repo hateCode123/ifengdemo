@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 
 class Nav extends React.PureComponent {
@@ -28,4 +29,4 @@ class Nav extends React.PureComponent {
     }
 }
 
-export default Nav;
+export default errorBoundary(Nav);

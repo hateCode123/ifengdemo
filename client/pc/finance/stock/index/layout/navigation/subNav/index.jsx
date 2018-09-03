@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 
 class SubNav extends React.PureComponent {
@@ -24,4 +25,4 @@ class SubNav extends React.PureComponent {
     }
 }
 
-export default SubNav;
+export default errorBoundary(SubNav);

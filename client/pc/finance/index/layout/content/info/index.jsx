@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Ad from '@ifeng/ui_pc_ad';
+import errorBoundary from '@ifeng/errorBoundary';
 import {
     getCommentCount,
     getCustomList,
@@ -173,4 +174,4 @@ class Info extends React.Component {
     }
 }
 
-export default Info;
+export default errorBoundary(Info);

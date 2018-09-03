@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getMyStockData, getStockData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
@@ -166,4 +167,4 @@ class CustomStock extends React.PureComponent {
     }
 }
 
-export default CustomStock;
+export default errorBoundary(CustomStock);

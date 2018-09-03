@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Ad from '@ifeng/ui_pc_ad';
+import errorBoundary from '@ifeng/errorBoundary';
 import BoxTitle from '../boxTitle';
 
 class Courier extends React.PureComponent {
@@ -27,4 +28,4 @@ class Courier extends React.PureComponent {
     }
 }
 
-export default Courier;
+export default errorBoundary(Courier);

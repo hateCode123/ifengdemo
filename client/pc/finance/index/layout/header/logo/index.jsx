@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../utils/rel';
 
 /**
@@ -39,4 +40,4 @@ class Logo extends React.PureComponent {
     }
 }
 
-export default Logo;
+export default errorBoundary(Logo);

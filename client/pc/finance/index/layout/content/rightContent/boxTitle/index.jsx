@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 
 class BoxTitle extends React.PureComponent {
@@ -29,4 +30,4 @@ class BoxTitle extends React.PureComponent {
     }
 }
 
-export default BoxTitle;
+export default errorBoundary(BoxTitle);

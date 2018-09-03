@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 import DataBox from './dataBox/';
 
@@ -132,4 +133,4 @@ class CattleStocks extends React.PureComponent {
     }
 }
 
-export default CattleStocks;
+export default errorBoundary(CattleStocks);

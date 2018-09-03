@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
+import errorBoundary from '@ifeng/errorBoundary';
 import HeadTitle from '../../components/headTitle/';
 import ResearchSearch from './researchSearch/';
 import Caption from '../../components/caption';
@@ -123,4 +124,4 @@ class School extends React.PureComponent {
     }
 }
 
-export default School;
+export default errorBoundary(School);

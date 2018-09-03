@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../utils/rel';
 
 class TitleList extends React.PureComponent {
@@ -28,4 +29,4 @@ class TitleList extends React.PureComponent {
     }
 }
 
-export default TitleList;
+export default errorBoundary(TitleList);

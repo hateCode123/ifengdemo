@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.css';
 import { cookie } from '@ifeng/ui_base';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getHotStockData, getStockData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import MyStocks from './myStocks/';
@@ -166,4 +167,4 @@ class CustomStocks extends React.PureComponent {
     }
 }
 
-export default CustomStocks;
+export default errorBoundary(CustomStocks);

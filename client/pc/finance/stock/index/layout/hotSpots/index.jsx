@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
+import errorBoundary from '@ifeng/errorBoundary';
 import HeadTitle from '../../components/headTitle/';
 import Caption from '../../components/caption';
 import NewsList from '../../components/newsList';
@@ -130,4 +131,4 @@ class HotSpots extends React.PureComponent {
     }
 }
 
-export default HotSpots;
+export default errorBoundary(HotSpots);

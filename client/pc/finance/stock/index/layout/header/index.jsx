@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Ad from '@ifeng/ui_pc_ad';
-import errorBoundary from '@ifeng/errorBoundary';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '@ifeng/ui_pc_userInfo';
 import Search from '@ifeng/ui_pc_search';
@@ -55,4 +54,4 @@ class Header extends React.PureComponent {
     }
 }
 
-export default errorBoundary(Header);
+export default Header;

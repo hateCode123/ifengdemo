@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class StockList extends React.PureComponent {
     static propTypes = {
@@ -38,4 +39,4 @@ class StockList extends React.PureComponent {
     }
 }
 
-export default StockList;
+export default errorBoundary(StockList);

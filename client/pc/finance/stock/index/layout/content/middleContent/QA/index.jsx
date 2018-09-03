@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { jsonp } from '@ifeng/ui_base';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getAnalyzerInfo, getQAData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
 import QaTabs from './QATabs/';
@@ -142,4 +143,4 @@ class Qa extends React.PureComponent {
     }
 }
 
-export default Qa;
+export default errorBoundary(Qa);

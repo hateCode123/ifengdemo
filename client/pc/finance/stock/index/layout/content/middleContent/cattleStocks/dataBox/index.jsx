@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 import { getStockData } from '../../../../../../../../services/api';
 import { rel } from '../../../../../../../../utils/rel';
 
@@ -116,4 +117,4 @@ class DataBox extends React.Component {
     }
 }
 
-export default DataBox;
+export default errorBoundary(DataBox);

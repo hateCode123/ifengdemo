@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
+import errorBoundary from '@ifeng/errorBoundary';
 import Tab from '../../../../components/tabs/';
 import AnswerList from './answerList/';
 
@@ -34,4 +35,4 @@ class Answer extends React.PureComponent {
     }
 }
 
-export default Answer;
+export default errorBoundary(Answer);
