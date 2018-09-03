@@ -47,34 +47,38 @@ async function checkPackagesVersion() {
     for (let item of list) {
         npm_packages[item.name] = item.version;
     }
-    let local_packages = Object.assign(package.dependencies, package.devDependencies);
-    let warn = false;
-    for (const key in local_packages) {
-        if (local_packages[key] == 'latest') {
-            warn = true;
-            error(`"${key}": "${local_packages[key]}" -- 禁止使用latest来安装依赖包！`);
-        } else if (npm_packages[key]) {
-            try {
-                let package = require(`../node_modules/${key}/package.json`);
-                if (package.version != npm_packages[key]) {
-                    warn = true;
-                    warn(
-                        `"${key}": "${package.version}" -- 本地安装版本较低，发现新版本${
-                            npm_packages[key]
-                        }, 建议升级到最新版！命令：npm i --save ${key}@${
-                            npm_packages[key]
-                        } --registry http://npm.ifengcloud.ifeng.com`,
-                    );
+    //let local_packages = Object.assign(package.dependencies, package.devDependencies);
+    let warn_status = false;
+    let check = (json, param) => {
+        for (const key in json) {
+            if (json[key] == 'latest') {
+                warn_status = true;
+                error(`"${key}": "${json[key]}" -- 禁止使用latest来安装依赖包！`);
+            } else if (npm_packages[key]) {
+                try {
+                    let package = require(`../node_modules/${key}/package.json`);
+                    if (package.version != npm_packages[key]) {
+                        warn_status = true;
+                        warn(
+                            `"${key}": "${package.version}" -- 本地安装版本较低，发现新版本${
+                                npm_packages[key]
+                            }, 建议升级到最新版！命令：npm i --save${param} ${key}@${
+                                npm_packages[key]
+                            } --registry http://npm.ifengcloud.ifeng.com`,
+                        );
+                    }
+                } catch (err) {
+                    console.log(err);
+                    warn_status = true;
+                    error(`"${key}": "${json[key]}" -- 本地没有找到该包，请检查该包是否正确安装！`);
                 }
-            } catch (err) {
-                warn = true;
-                error(`"${key}": "${local_packages[key]}" -- 本地没有找到该包，请检查该包是否正确安装！`);
             }
-
-            //console.log(key, package.version, '--', local_packages[key], '--', npm_packages[key]);
         }
-    }
-    if (!warn) {
+    };
+    check(package.dependencies, '');
+    check(package.devDependencies, '-dev');
+
+    if (!warn_status) {
         info(`没有内部包需要更新！`);
     }
 }

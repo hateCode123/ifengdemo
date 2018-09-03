@@ -3,7 +3,7 @@ const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
 const { handleBannerPicData, handleDayStockData } = require('../../../../../common/transform');
-const { recommendRandomSort, formatImage, formatUrl } = require('@ifeng/public_method');
+const { formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -323,11 +323,9 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         try {
-            allData.bannerPic = allData.bannerPic && recommendRandomSort(allData.bannerPic, 4);
-            allData.bannerPic = handleBannerPicData(allData.bannerPic);
+            allData.bannerPic = allData.bannerPic && handleBannerPicData(allData.bannerPic);
 
-            allData.dayStock = allData.dayStock && recommendRandomSort(allData.dayStock, 1);
-            allData.dayStock = handleDayStockData(allData.dayStock);
+            allData.dayStock = allData.dayStock && handleDayStockData(allData.dayStock);
 
             allData.stockNews =
                 allData.stockNews &&
