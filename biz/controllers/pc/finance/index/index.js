@@ -410,60 +410,6 @@ exports.list = {
             }
         }
 
-        allData.nav = `http://finance.ifeng.com/ssi-incs/s_finance_content_ad_head_1000x90.inc.html/test
-        <!--s_finance_content_ad_head_1000x90 2017.07.07 15:39:58-->
-        <!--#{
-               data: {
-                   "aids" : [
-                       {"ap" : "183_1", "w" : "1000", "h" : "90","res" : "1"}
-                   ]
-               },
-               preload: '',
-               callback: 'function(elm, data) {IfengAmgr.show(elm,data);}'
-              }#-->
-        <script type='text/javascript'>
-        if(INice.getCookie('prov') == '9999'){
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        (function() {
-        var gads = document.createElement('script');
-        gads.async = true;
-        gads.type = 'text/javascript';
-        var useSSL = 'https:' == document.location.protocol;
-        gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-        var node = document.getElementsByTagName('script')[0];
-        node.parentNode.insertBefore(gads, node);
-        })();
-        }
-        </script>
-        
-        <script type='text/javascript'>
-        if(INice.getCookie('prov') == '9999'){
-        googletag.cmd.push(function() {
-        googletag.defineSlot('/51332160/s_finance_content_ad_button_01_336x280', [300, 250], 'div-gpt-ad-1403944084159-0').addService(googletag.pubads());
-        googletag.defineSlot('/51332160/s_finance_content_ad_button_02_336x280', [300, 250], 'div-gpt-ad-1403944084159-1').addService(googletag.pubads());
-        googletag.defineSlot('/51332160/s_finance_content_ad_head_1000x90', [1000, 90], 'div-gpt-ad-1403944084159-3').addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-        });
-        }
-        </script>
-        <div id="padhide_468">
-        <script>
-        iis3_config = {
-                            "aids" : [
-                                {"ap" : "183", "w" : "1000", "h" : "90","res" : "1"}
-                            ],
-                            "mode" : "1"
-                          };
-        </script>
-        <script src="http://c0.ifengimg.com/iis/iis_v3_0.js"></script></div>
-        <script language="javascript">
-            try {if(iNiceBrowser.IPAD){document.getElementById("padhide_468").style.display = "none";}}catch(e){;}
-        </script>
-        <!--/s_finance_content_ad_head_1000x90-->
-        `;
         await ctx.html('finance_index', {
             allData,
             statisticsData,
