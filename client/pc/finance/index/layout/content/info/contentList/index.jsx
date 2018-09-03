@@ -35,16 +35,20 @@ class ContentList extends React.PureComponent {
     }
 
     componentDidUpdate() {
-        const { adAddType, tabIndex, pageSize, index } = this.props;
+        try {
+            const { adAddType, tabIndex, pageSize, index } = this.props;
 
-        if (tabIndex === index) {
-            if (adAddType === 'init') {
-                event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
-            } else if (adAddType === 'tabChange') {
-                event.trigger('tabChange', { tabIndex, pageSize, container: this.infoRef.current });
-            } else if (adAddType === 'loadMoreCmp') {
-                event.trigger('loadMoreCmp', { tabIndex, pageSize, container: this.infoRef.current });
+            if (tabIndex === index) {
+                if (adAddType === 'init') {
+                    event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
+                } else if (adAddType === 'tabChange') {
+                    event.trigger('tabChange', { tabIndex, pageSize, container: this.infoRef.current });
+                } else if (adAddType === 'loadMoreCmp') {
+                    event.trigger('loadMoreCmp', { tabIndex, pageSize, container: this.infoRef.current });
+                }
             }
+        } catch (e) {
+            console.error(e);
         }
     }
 
