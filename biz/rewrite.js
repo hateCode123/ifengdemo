@@ -6,7 +6,7 @@
 const rewrite = (ctx, from, to) => {
     ctx.originalUrl = ctx.url = ctx.url
         .replace(from, to)
-        .replace(/(\/index\.shtml)|(\.shtml)/gi, '')
+        .replace(/(\/index\.s?html)|(\.s?html)/gi, '')
         .replace(/\/\//, '/');
 };
 
