@@ -33,7 +33,9 @@ class Header extends React.PureComponent {
                 <Chip id="20002" type="struct" title="导航" groupName="头部" content={content.nav}>
                     <Nav />
                 </Chip>
-                <UserInfo />
+                <div className={styles.user}>
+                    <UserInfo />
+                </div>
             </div>
         );
         const topAd = (

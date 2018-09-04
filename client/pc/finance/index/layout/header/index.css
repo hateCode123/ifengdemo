@@ -9,6 +9,11 @@
     background: #fff;
 }
 
+.user {
+    width: 140px;
+    float: right;
+}
+
 .box {
     width: 1000px;
     height: 90px;
