@@ -171,10 +171,11 @@ app.use(async (ctx, next) => {
             schemaTime: Number(ctx.schemaTime),
             parseCount: ctx.parseTimeList.length,
             randerTime: ctx.randerTime,
-            domain: ctx.header.domain,
             shankTracerId: ctx.uuid,
             errorCount: ctx.errorCount,
             serverTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+            domain: ctx.header.domain || 'nodomain',
+            devicetype: ctx.headers['devicetype'] || 'nodevicetype',
         },
     });
 });
