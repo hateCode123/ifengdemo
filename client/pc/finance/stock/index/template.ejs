@@ -22,8 +22,8 @@
                 allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
             }catch(e){
                 console.error(key, e);
-
                 allData[key] = {};
+                e.message = key + ' ' +e.message;
                 if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
             }
 
@@ -38,8 +38,8 @@
                 }
             }catch(e){
                 console.error(key, e);
-
                 allData[key] = [];
+                e.message = key + ' ' +e.message;
                 if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
             }
 
