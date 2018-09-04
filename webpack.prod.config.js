@@ -100,8 +100,10 @@ const createConfig = function(type, platform, level, modern) {
             // new BundleAnalyzerPlugin({ analyzerPort: modern === 'modern' ? 8888 : 8887 }),
             new webpack.DefinePlugin({
                 // 'process.env.NODE_ENV': JSON.stringify('production'),
-                ChipUrl: JSON.stringify('http://test0.ucms.ifeng.com:30080/shard'),
-                // ChipUrl: JSON.stringify('https://ucms.ifeng.com/shard'),
+                ChipUrl:
+                    env === 'production'
+                        ? JSON.stringify('https://ucms.ifeng.com/shard')
+                        : JSON.stringify('http://test0.ucms.ifeng.com:30080/shard'),
                 apiUrl:
                     env === 'production'
                         ? JSON.stringify('//shankapi.ifeng.com/spring')

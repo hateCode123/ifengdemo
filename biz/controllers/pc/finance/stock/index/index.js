@@ -6,14 +6,14 @@ const { handleBannerPicData, handleDayStockData } = require('../../../../../comm
 const { formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
-    path: '/pc/finance/stock',
+    path: '/pc/finance/stock/test',
     method: 'get',
     type: 'html',
     cache: 0,
     edit: true,
     low: true,
     preview: true,
-    online: false,
+    online: true,
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段

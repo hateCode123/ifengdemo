@@ -17,5 +17,31 @@ module.exports = () => {
             level: 4
         });
         BJ_REPORT.tryJs().spyAll();
-    </script>`;
+
+       
+    </script>
+
+    <script>
+setTimeout(function (){
+    var map = {};
+    function fds(node){
+      if(node.nodeType === 1){
+        var tagName = node.nodeName;
+        map[tagName] = map[tagName]? map[tagName] + 1: 1;  
+      }
+      var children = node.childNodes;
+      for(var i = 0;i<children.length;i++){
+         fds(children[i])
+      }
+    }
+    fds(document.body);
+ 
+    if(map.DIV < 100){
+        var err = new Error(JSON.stringify(map));
+        if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
+    }
+  }, 5000);
+  </script>
+  `;
 };
+

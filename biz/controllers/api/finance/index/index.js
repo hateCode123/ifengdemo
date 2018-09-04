@@ -7,7 +7,7 @@ const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require
 exports.getCustomList = {
     path: '/api/finance/index/customList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx));
 
