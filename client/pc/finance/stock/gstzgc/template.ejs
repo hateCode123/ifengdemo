@@ -8,7 +8,7 @@
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <%- statisticsData.statisticsHead %>
     <script>
-        let allData = <%- JSON.stringify(allData) %>;
+        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
 
         // allData = { ...allData,
         //     hardAd: {

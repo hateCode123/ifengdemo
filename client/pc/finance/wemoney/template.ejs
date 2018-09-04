@@ -7,7 +7,7 @@
     <title></title>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <script>
-        var __jsonData__ = <%- JSON.stringify(allData) %>;
+        var __jsonData__ = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
         var jsonData = {
             nav: __jsonData__.commonNav,
             navigation: __jsonData__.navigation,

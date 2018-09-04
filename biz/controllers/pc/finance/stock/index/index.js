@@ -432,6 +432,7 @@ exports.list = {
             });
         } catch (error) {
             logger.error(error);
+            ctx.errorCount++;
         }
 
         // 处理统计数据
