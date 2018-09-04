@@ -36,11 +36,9 @@ setTimeout(function (){
     }
     fds(document.body);
  
-    if(map.DIV < 1000){
+    if(map.DIV < 100){
         var err = new Error(JSON.stringify(map));
-        // window.BJ_REPORT.report(err, false, 'alive');
-        console.log(map)
-        if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'data');
+        if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
     }
   }, 5000);
   </script>
