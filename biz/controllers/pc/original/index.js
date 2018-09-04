@@ -118,6 +118,8 @@ exports.list = {
         let allData = {};
         const array = [];
 
+        const listUrl = '//test.finance.ifeng.com/shanklist/original/';
+
         try {
             for (const [key, value] of Object.entries(data)) {
                 const arr = {
@@ -126,15 +128,15 @@ exports.list = {
 
                 if (key.includes('Column')) {
                     if (value.length > 0) {
-                        arr.url = formatUrl(value[0].url);
+                        arr.url = `${listUrl}${value[0].searchPath}`;
                         arr.title = value[0].title;
                         const thumbnails =
                             value[0].thumbnails && value[0].thumbnails.image && value[0].thumbnails.image[0].url;
 
                         arr.thumbnails = formatImage(thumbnails, 240, 135);
-                    }
 
-                    array.push(arr);
+                        array.push(arr);
+                    }
                 }
             }
 
