@@ -9,42 +9,7 @@
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
-
-        // allData = { ...allData,
-        //     hardAd: {
-        //         data: {
-        //             title: '硬广'
-        //         },
-        //         preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-        //         callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
-        //     },
-        //     bottomAd: {
-        //         data: {
-        //             title: 'bottomAd'
-        //         },
-        //         preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-        //         callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-        //     }
-        // }
-        allData.hardAd= {
-                data: {
-                    title: '硬广'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
-            };
-
-        allData.bottomAd =  {
-                data: {
-                    title: 'bottomAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-            }
-
-
     </script>
-    <!-- 硬广 -->
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}

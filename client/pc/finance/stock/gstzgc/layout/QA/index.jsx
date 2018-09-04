@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { jsonp } from '@ifeng/ui_base';
 import { getAnalyzerInfo, getQADataTzgc, getQAData } from '../../../../../services/api';
 import { rel } from '../../../../../utils/rel';
 import QaTabs from './QATabs';
