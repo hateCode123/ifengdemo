@@ -9,7 +9,7 @@
     <meta name="description" content="">
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <script>
-        var allData = <%- JSON.stringify(allData) %>;
+        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 

@@ -115,13 +115,11 @@ exports.list = {
             Column22: '上升星座',
         };
 
-        let allData = {};
         const array = [];
-
         const listUrl = '//test.finance.ifeng.com/shanklist/original/';
 
-        try {
-            for (const [key, value] of Object.entries(data)) {
+        for (const [key, value] of Object.entries(data)) {
+            try {
                 const arr = {
                     name: mapping[key],
                 };
@@ -138,16 +136,17 @@ exports.list = {
                         array.push(arr);
                     }
                 }
+            } catch (error) {
+                logger.error(error);
+                ctx.errorCount++;
             }
-
-            allData = {
-                search: data.search,
-                footer: data.footer,
-                content: array,
-            };
-        } catch (error) {
-            logger.error(error);
         }
+
+        const allData = {
+            search: data.search,
+            footer: data.footer,
+            content: array,
+        };
 
         await ctx.html('original_index', {
             allData,

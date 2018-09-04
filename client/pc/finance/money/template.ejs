@@ -19,7 +19,7 @@
     </style>
 
     <script>
-        var allData = <%- JSON.stringify(allData) %>;
+        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
         var adData = <%- JSON.stringify(adData) %>;
         var staticData = <%- JSON.stringify(staticData) %>;
 
