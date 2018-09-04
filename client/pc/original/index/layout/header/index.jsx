@@ -26,13 +26,15 @@ class Header extends React.PureComponent {
                             凤凰网首页
                         </a>
                     </div>
-                    <div className={styles.search}>
-                        <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content}>
-                            <Search expand />
-                        </Chip>
-                    </div>
-                    <div className={styles.user}>
-                        <UserInfo iconShow option={['login']} />
+                    <div className={styles.box}>
+                        <div className={styles.search}>
+                            <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content}>
+                                <Search expand />
+                            </Chip>
+                        </div>
+                        <div className={styles.user}>
+                            <UserInfo iconShow option={['login']} />
+                        </div>
                     </div>
                 </div>
             </div>

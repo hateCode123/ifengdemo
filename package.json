@@ -54,7 +54,7 @@
         "@ifeng/ui_pc_ad": "^1.0.4",
         "@ifeng/ui_pc_auth": "^1.0.8",
         "@ifeng/ui_pc_lazyLoad": "^1.0.2",
-        "@ifeng/ui_pc_search": "^1.0.5",
+        "@ifeng/ui_pc_search": "^1.0.6",
         "@ifeng/ui_pc_slides": "^1.0.6",
         "@ifeng/ui_pc_userInfo": "^1.0.2",
         "@ifeng/visualediting": "^1.0.9",

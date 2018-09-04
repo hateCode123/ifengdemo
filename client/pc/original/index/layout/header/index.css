@@ -35,14 +35,16 @@
     }
 }
 
+.box {
+    float: right;
+}
+
 .user {
-    position: relative;
     float: right;
     padding-top: 5px;
 }
 
 .search {
-    position: relative;
     float: right;
     padding-top: 1px;
 }
