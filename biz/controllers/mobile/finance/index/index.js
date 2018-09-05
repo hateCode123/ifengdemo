@@ -8,6 +8,7 @@ exports.mobileFinanceIndex = {
     preview: true,
     online: true,
     handler: async ctx => {
-        ctx.redirect('http://ifinance.ifeng.com/');
+        ctx.status = 301;
+        ctx.redirect('https://ifinance.ifeng.com/');
     },
 };

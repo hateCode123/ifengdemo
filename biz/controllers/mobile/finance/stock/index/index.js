@@ -8,6 +8,7 @@ exports.mobileFinanceStock = {
     preview: true,
     online: true,
     handler: async ctx => {
+        ctx.status = 301;
         ctx.redirect('https://istock.ifeng.com/');
     },
 };
