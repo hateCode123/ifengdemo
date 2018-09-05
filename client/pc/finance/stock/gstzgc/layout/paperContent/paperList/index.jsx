@@ -4,6 +4,7 @@ import styles from './index.css';
 import Title from './title';
 import Paper from './paper';
 import More from './more';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class PaperList extends React.PureComponent {
     /**
@@ -39,4 +40,4 @@ PaperList.propTypes = { content: PropTypes.object };
  * */
 PaperList.defaultProps = {};
 
-export default PaperList;
+export default errorBoundary(PaperList);

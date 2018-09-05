@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class PaperMenu extends React.PureComponent {
     /**
@@ -14,7 +15,7 @@ class PaperMenu extends React.PureComponent {
                 {content.map((item, index) => (
                     <li
                         key={index}
-                        className={index == current ? styles.current : ''}
+                        className={index === current ? styles.current : ''}
                         onClick={() => handleTabsChange(index)}>
                         <a href={`#t${index + 1}`}>{item.tabName}</a>
                     </li>
@@ -36,4 +37,4 @@ PaperMenu.propTypes = { content: PropTypes.array, current: PropTypes.number, han
  * */
 PaperMenu.defaultProps = {};
 
-export default PaperMenu;
+export default errorBoundary(PaperMenu);

@@ -3,6 +3,7 @@ import styles from './index.css';
 import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
 import { getMyStockData, getStockData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class MyStocks extends React.PureComponent {
     state = {
@@ -123,4 +124,4 @@ class MyStocks extends React.PureComponent {
     }
 }
 
-export default MyStocks;
+export default errorBoundary(MyStocks);

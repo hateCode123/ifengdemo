@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.css';
 import { getFundsFlowRank } from '../../../../../../services/api';
 import { rel } from '../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class FundsFlow extends React.PureComponent {
     state = {
@@ -150,4 +151,4 @@ class FundsFlow extends React.PureComponent {
     }
 }
 
-export default FundsFlow;
+export default errorBoundary(FundsFlow);

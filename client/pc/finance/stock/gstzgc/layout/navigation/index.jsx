@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Nav from './nav';
 import GlobalIndex from './globalIndex';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Navigation extends React.PureComponent {
     /**
@@ -29,4 +30,4 @@ Navigation.propTypes = { content: PropTypes.array };
  * */
 Navigation.defaultProps = {};
 
-export default Navigation;
+export default errorBoundary(Navigation);

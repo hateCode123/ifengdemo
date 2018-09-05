@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.css';
 import { getStockData } from './../../../../../../services/api';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class GlobalIndex extends React.PureComponent {
     state = {
@@ -114,4 +115,4 @@ GlobalIndex.propTypes = {};
  * */
 GlobalIndex.defaultProps = {};
 
-export default GlobalIndex;
+export default errorBoundary(GlobalIndex);

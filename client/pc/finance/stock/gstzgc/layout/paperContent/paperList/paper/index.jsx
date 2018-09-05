@@ -4,6 +4,7 @@ import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 import { getCommentCount } from '../../../../../../../services/api';
 import md5 from 'md5';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Paper extends React.PureComponent {
     state = {
@@ -113,4 +114,4 @@ Paper.propTypes = { content: PropTypes.array };
  * */
 Paper.defaultProps = {};
 
-export default Paper;
+export default errorBoundary(Paper);

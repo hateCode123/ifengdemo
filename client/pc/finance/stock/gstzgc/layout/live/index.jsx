@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { getLiveData, refreshLiveData } from '../../../../../services/api';
-
 import TitleR from '../../components/titleR';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Live extends React.PureComponent {
     state = {
@@ -176,5 +176,4 @@ Live.propTypes = { content: PropTypes.object };
  * */
 Live.defaultProps = {};
 
-export { Live };
-export default Live;
+export default errorBoundary(Live);

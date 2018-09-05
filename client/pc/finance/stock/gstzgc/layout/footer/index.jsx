@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Ad from '@ifeng/ui_pc_ad';
 import Footer from '../../../../../components/footer/';
 import { Recommend } from '../../components/recommend';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Footer 组件
@@ -63,5 +63,4 @@ BottomFooter.propTypes = { content: PropTypes.object };
  * */
 BottomFooter.defaultProps = {};
 
-export { BottomFooter };
-export default BottomFooter;
+export default errorBoundary(BottomFooter);

@@ -7,7 +7,9 @@ import Paper from './paperList/paper';
 import Title from './paperList/title';
 import More from './paperList/more';
 import Chip from 'Chip';
-import { Recommend } from '../../components/recommend';
+import Recommend from '../../components/recommend';
+import errorBoundary from '@ifeng/errorBoundary';
+
 class PaperContent extends React.PureComponent {
     state = {
         current: 0,
@@ -102,4 +104,4 @@ PaperContent.propTypes = { content: PropTypes.object };
  * */
 PaperContent.defaultProps = {};
 
-export default PaperContent;
+export default errorBoundary(PaperContent);

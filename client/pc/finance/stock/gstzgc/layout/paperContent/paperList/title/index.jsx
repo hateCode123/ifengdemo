@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Title extends React.PureComponent {
     /**
@@ -27,4 +28,4 @@ Title.propTypes = { content: PropTypes.object };
  * */
 Title.defaultProps = {};
 
-export default Title;
+export default errorBoundary(Title);

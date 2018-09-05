@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 import { getTopicData } from '../../../../../services/api';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Topic extends React.PureComponent {
     state = { topic: '' };
@@ -48,5 +49,4 @@ Topic.propTypes = {};
  * */
 Topic.defaultProps = {};
 
-export { Topic };
-export default Topic;
+export default errorBoundary(Topic);

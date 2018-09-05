@@ -6,18 +6,18 @@ import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
 import Recommend from '../components/recommend';
 
-import { Header } from './header';
+import Header from './header';
 import Navigation from './navigation';
 import Topic from './topic/';
 import Headline from './headline';
-import { Slide } from './slide';
+import Slide from './slide';
 import PaperContent from './paperContent';
 import TitleR from './../components/titleR';
-import { Live } from './live';
+import Live from './live';
 import StockHq from './stockHq';
 import Qa from './QA';
 import ClickRank from './clickRank';
-import { BottomFooter } from './footer';
+import BottomFooter from './footer';
 
 class Layout extends React.PureComponent {
     static propTypes = {
