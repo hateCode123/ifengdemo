@@ -34,8 +34,8 @@ class Layout extends React.PureComponent {
         };
 
         const paperData = {
-            hardAd02: content.hardAd03,
-            hardAd03: content.hardAd02,
+            hardAd02: content.hardAd02,
+            hardAd03: content.hardAd03,
             paperMenu: content.paperMenu,
             newPaper: content.newPaper,
             newPaperExtra: content.newPaperExtra,
