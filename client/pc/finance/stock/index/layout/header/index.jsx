@@ -46,9 +46,13 @@ class Header extends React.PureComponent {
                 <div className={styles.h_theLogo}>
                     <Logo content={logoData} />
                 </div>
-                <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
-                    <Search />
-                </Chip>
+                {content.search.length > 0 ? (
+                    <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
+                        <Search />
+                    </Chip>
+                ) : (
+                    ''
+                )}
             </div>
         );
 
