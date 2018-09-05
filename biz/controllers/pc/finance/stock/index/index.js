@@ -251,29 +251,17 @@ exports.list = {
             ['qrCode', 'KVProxy', 'getStaticFragment', 10136, getJsonByKey('content')],
 
             // adHead
-            [
-                'adHead',
-                'KVProxy',
-                'getAd',
-                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
-                getString(),
-            ],
+            ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
 
             // adBody
-            [
-                'adBody',
-                'KVProxy',
-                'getAd',
-                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
-                getString(),
-            ],
+            ['adBody', 'KVProxy', 'getAd', 'ad_new_chip/s_all_indexs_180823_ad_qpdpcggdb.inc.html', getString()],
 
             // topAd
             [
                 'topAd',
                 'KVProxy',
                 'getAd',
-                '/test/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
                 getString(),
             ],
 
@@ -282,7 +270,7 @@ exports.list = {
                 'leftAsideAd',
                 'KVProxy',
                 'getAd',
-                '/test/ssi-incs/s_finance_stock_index_ad_button_02.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_button_02.inc.html',
                 getString(),
             ],
 
@@ -291,33 +279,27 @@ exports.list = {
                 'hotSpotsAd',
                 'KVProxy',
                 'getAd',
-                '/test/ssi-incs/s_finance_stock_index_ad_button_03.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_button_03.inc.html',
                 getString(),
             ],
 
             // schoolAd
-            ['schoolAd', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_131011_ad_banner06.inc.html', getString()],
+            ['schoolAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_131011_ad_banner03.inc.html', getString()],
 
             // rightSideAd0
             [
                 'rightSideAd0',
                 'KVProxy',
                 'getAd',
-                '/test/ssi-incs/s_finance_stock_index_ad_pictext_01.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_pictext_01.inc.html',
                 getString(),
             ],
 
             // rightSideAd1
-            ['rightSideAd1', 'KVProxy', 'getAd', '/test/ssi-incs/s_finance_index_ad_text_01.inc.html', getString()],
+            ['rightSideAd1', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_ad_text_01.inc.html', getString()],
 
             // bottomAd
-            [
-                'bottomAd',
-                'KVProxy',
-                'getAd',
-                '/test/ssi-incs/s_finance_index_ad_banner_bottom_1000x90.inc.html',
-                getString(),
-            ],
+            ['bottomAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         ];
 
         const allData = await transfer(ctx, json);
