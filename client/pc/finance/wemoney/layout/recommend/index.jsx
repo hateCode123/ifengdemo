@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Recommend 组件
@@ -31,5 +32,4 @@ Recommend.propTypes = { content: PropTypes.string };
  * */
 Recommend.defaultProps = {};
 
-export { Recommend };
-export default Recommend;
+export default errorBoundary(Recommend);

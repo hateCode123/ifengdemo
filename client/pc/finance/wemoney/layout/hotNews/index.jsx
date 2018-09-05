@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 HotNews 组件
@@ -56,5 +57,4 @@ HotNews.propTypes = { content: PropTypes.object };
  * */
 HotNews.defaultProps = {};
 
-export { HotNews };
-export default HotNews;
+export default errorBoundary(HotNews);

@@ -4,6 +4,7 @@ import 'core-js';
 import Slides from '@ifeng/ui_pc_slides';
 import styles from './index.css';
 import PropTypes from 'prop-types';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class SimpleSlider extends React.PureComponent {
     changeCallback = function changeCallback(index, total) {
@@ -50,5 +51,4 @@ SimpleSlider.propTypes = { content: PropTypes.array };
  * */
 SimpleSlider.defaultProps = {};
 
-export { SimpleSlider };
-export default SimpleSlider;
+export default errorBoundary(SimpleSlider);

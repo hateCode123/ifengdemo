@@ -47,5 +47,4 @@ GoTop.propTypes = {};
  * */
 GoTop.defaultProps = {};
 
-export { GoTop };
 export default GoTop;

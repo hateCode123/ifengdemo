@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import Nav from '../../../../components/nav/';
 import UserInfo from '@ifeng/ui_pc_userInfo';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Header 组件
@@ -36,5 +36,4 @@ Header.propTypes = { content: PropTypes.object };
  * */
 Header.defaultProps = {};
 
-export { Header };
-export default Header;
+export default errorBoundary(Header);
