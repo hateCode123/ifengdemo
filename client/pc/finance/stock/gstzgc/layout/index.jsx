@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../reset.css';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
+import Recommend from '../components/recommend';
+
+import { Header } from './header';
 import Navigation from './navigation';
 import Topic from './topic/';
 import Headline from './headline';
-import PaperContent from './paperContent';
-import TitleR from './titleR';
-import { Live } from './live';
-import ClickRank from './clickRank';
-import Qa from './QA';
-import { Header } from './header';
-import { BottomFooter } from './footer';
 import { Slide } from './slide';
+import PaperContent from './paperContent';
+import TitleR from './../components/titleR';
+import { Live } from './live';
 import StockHq from './stockHq';
-import Recommend from '../components/recommend';
+import Qa from './QA';
+import ClickRank from './clickRank';
+import { BottomFooter } from './footer';
 
 class Layout extends React.PureComponent {
     static propTypes = {
@@ -34,8 +34,8 @@ class Layout extends React.PureComponent {
         };
 
         const paperData = {
-            hardAd02: content.hardAd03,
-            hardAd03: content.hardAd02,
+            hardAd02: content.hardAd02,
+            hardAd03: content.hardAd03,
             paperMenu: content.paperMenu,
             newPaper: content.newPaper,
             newPaperExtra: content.newPaperExtra,

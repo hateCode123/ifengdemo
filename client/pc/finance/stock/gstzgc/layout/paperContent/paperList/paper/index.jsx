@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
 import { getCommentCount } from '../../../../../../../services/api';
-import { jsonp } from '@ifeng/ui_base';
 import md5 from 'md5';
 
 class Paper extends React.PureComponent {

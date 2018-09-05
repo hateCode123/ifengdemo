@@ -7,7 +7,7 @@ import CattleStocks from './cattleStocks/';
 import Rank from './rank/';
 import FundsFlow from './fundsFlow/';
 import CustomStocks from './customStocks/';
-import TitleR from '../titleR';
+import TitleR from '../../components/titleR';
 
 class StockHq extends React.PureComponent {
     static propTypes = {

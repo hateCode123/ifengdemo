@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.css';
-import { jsonp } from '@ifeng/ui_base';
 import { getStockData } from './../../../../../../services/api';
 
 class GlobalIndex extends React.PureComponent {

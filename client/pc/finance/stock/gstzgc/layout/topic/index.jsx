@@ -1,8 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './index.css';
-
-import { jsonp } from '@ifeng/ui_base';
 import { rel } from '../../../../../utils/rel';
 import { getTopicData } from '../../../../../services/api';
 

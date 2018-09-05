@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 import Chip from 'Chip';
-import TitleR from '../titleR';
+import TitleR from '../../components/titleR';
 class ClickRank extends React.PureComponent {
     render() {
         const { content } = this.props;

@@ -4,47 +4,12 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
-    <title></title>
+    <title>凤凰财经_财经频道_凤凰网</title>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
-
-        // allData = { ...allData,
-        //     hardAd: {
-        //         data: {
-        //             title: '硬广'
-        //         },
-        //         preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-        //         callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
-        //     },
-        //     bottomAd: {
-        //         data: {
-        //             title: 'bottomAd'
-        //         },
-        //         preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-        //         callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-        //     }
-        // }
-        allData.hardAd= {
-                data: {
-                    title: '硬广'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("hardAd"); $(elm).html(data.title)}'
-            };
-
-        allData.bottomAd =  {
-                data: {
-                    title: 'bottomAd'
-                },
-                preload: 'http://y0.ifengimg.com/base/jQuery/jquery-1.9.1.min.js',
-                callback: 'function(elm, data) {console.log("bottomAd"); $(elm).html(data.title)}'
-            }
-
-
     </script>
-    <!-- 硬广 -->
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 
     {{/each}}
