@@ -6,6 +6,7 @@ import Ad from '@ifeng/ui_pc_ad';
 import Nav from '../../../../../components/nav/';
 import UserInfo from '@ifeng/ui_pc_userInfo';
 import Search from '@ifeng/ui_pc_search';
+import errorBoundary from '@ifeng/errorBoundary';
 import Logo from './logo/';
 
 /**
@@ -25,6 +26,8 @@ class Header extends React.PureComponent {
             logo: content.logo,
             logoAd: content.logoAd,
         };
+
+        const SearchComp = errorBoundary(Search);
 
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
@@ -46,13 +49,9 @@ class Header extends React.PureComponent {
                 <div className={styles.h_theLogo}>
                     <Logo content={logoData} />
                 </div>
-                {content.search && content.search.length > 0 ? (
-                    <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
-                        <Search />
-                    </Chip>
-                ) : (
-                    ''
-                )}
+                <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
+                    <SearchComp />
+                </Chip>
             </div>
         );
 

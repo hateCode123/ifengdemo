@@ -28,6 +28,8 @@ class Header extends React.PureComponent {
             channelAd: content.channelAd,
         };
 
+        const SearchComp = errorBoundary(Search);
+
         const topNav = (
             <div id="main_nav" className={styles.main_nav} key="topNav">
                 <Chip id="20002" type="struct" title="导航" groupName="头部" content={content.nav}>
@@ -48,13 +50,9 @@ class Header extends React.PureComponent {
                 <div className={styles.logo}>
                     <Logo content={logoData} />
                 </div>
-                {content.search && content.search.length > 0 ? (
-                    <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
-                        <Search />
-                    </Chip>
-                ) : (
-                    ''
-                )}
+                <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
+                    <SearchComp />
+                </Chip>
             </div>
         );
 
