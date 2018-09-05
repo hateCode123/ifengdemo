@@ -4,7 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import { getLiveData, refreshLiveData } from '../../../../../services/api';
 
-import TitleR from '../titleR';
+import TitleR from '../../components/titleR';
 
 class Live extends React.PureComponent {
     state = {

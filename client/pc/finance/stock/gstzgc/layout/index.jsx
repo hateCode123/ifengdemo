@@ -9,7 +9,7 @@ import Navigation from './navigation';
 import Topic from './topic/';
 import Headline from './headline';
 import PaperContent from './paperContent';
-import TitleR from './titleR';
+import TitleR from './../components/titleR';
 import { Live } from './live';
 import ClickRank from './clickRank';
 import Qa from './QA';
