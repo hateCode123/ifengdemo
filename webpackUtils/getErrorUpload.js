@@ -27,7 +27,8 @@ setTimeout(function (){
     function fds(node){
       if(node.nodeType === 1){
         var tagName = node.nodeName;
-        map[tagName] = map[tagName]? map[tagName] + 1: 1;  
+        map[tagName] = map[tagName]? map[tagName] + 1: 1;
+        map.ALL = map.ALL ? map.ALL + 1: 1;
       }
       var children = node.childNodes;
       for(var i = 0;i<children.length;i++){
@@ -36,7 +37,7 @@ setTimeout(function (){
     }
     fds(document.body);
  
-    if(map.DIV < 100){
+    if(map.ALL < 200){
         var err = new Error(JSON.stringify(map));
         if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
     }
