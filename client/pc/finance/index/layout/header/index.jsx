@@ -48,7 +48,7 @@ class Header extends React.PureComponent {
                 <div className={styles.logo}>
                     <Logo content={logoData} />
                 </div>
-                {content.search.length > 0 ? (
+                {content.search && content.search.length > 0 ? (
                     <Chip id="20005" type="struct" title="搜索" groupName="头部" content={content.search}>
                         <Search />
                     </Chip>
