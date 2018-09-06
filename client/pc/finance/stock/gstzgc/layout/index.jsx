@@ -46,11 +46,6 @@ class Layout extends React.PureComponent {
             ssComMore: content.ssComMore,
         };
 
-        const liveData = {
-            liveTitle: content.liveTitle,
-            liveImg: content.liveTitle.liveimg,
-        };
-
         const stockHqData = {
             hqTitle: content.hqTitle,
             cattleStocksTitle: content.cattleStocksTitle,
@@ -75,12 +70,12 @@ class Layout extends React.PureComponent {
                 <Header content={headerData} />
                 <div className={styles.col_w1000}>
                     <Chip
-                        id={content.id}
+                        id="10027"
                         type="static"
-                        title={content.name}
-                        groupName="文章"
+                        title="投资观察顶部通栏广告"
+                        groupName="硬广"
                         translate="jsonParse"
-                        content={content.topAd.content}>
+                        content={content.topAd}>
                         <Recommend />
                     </Chip>
                     <Navigation content={content.navigation} />
@@ -101,19 +96,19 @@ class Layout extends React.PureComponent {
                     </div>
                     <div className={styles.fr}>
                         <Chip
-                            id={content.videoAnalysis.id}
+                            id="100336"
                             type="static"
                             title="视频解盘"
                             translate="jsonParse"
-                            content={content.videoAnalysis.content}>
+                            content={content.videoAnalysis}>
                             <Recommend />
                         </Chip>
                         <Chip
-                            id={content.stockCompetition.id}
+                            id="10037"
                             type="static"
                             title="炒股大赛"
                             translate="jsonParse"
-                            content={content.stockCompetition.content}>
+                            content={content.stockCompetition}>
                             <Recommend />
                         </Chip>
                     </div>
@@ -121,7 +116,12 @@ class Layout extends React.PureComponent {
 
                 <div className={styles.col_w1000}>
                     <div className={styles.fl640}>
-                        <Chip id="10116" type="static" title="轮播" translate="jsonParse" content={content.sliderData}>
+                        <Chip
+                            id="20036"
+                            type="recommend"
+                            title="轮播"
+                            translate="jsonParse"
+                            content={content.sliderData}>
                             <Slide />
                         </Chip>
                         <PaperContent content={paperData} />
@@ -137,7 +137,7 @@ class Layout extends React.PureComponent {
                             <Recommend />
                         </Chip>
 
-                        <Live content={liveData} />
+                        <Live content={content.liveTitle} />
 
                         <StockHq content={stockHqData} />
 
@@ -149,7 +149,7 @@ class Layout extends React.PureComponent {
                                 groupName="文章"
                                 translate="jsonParse"
                                 content={content.QATitle}>
-                                <TitleR content={content.QATitle} liveImg={content.liveTitle.liveimg} />
+                                <TitleR content={content.QATitle} />
                             </Chip>
                             <Qa tabs={content.QATabs} />
                         </div>
@@ -172,7 +172,7 @@ class Layout extends React.PureComponent {
                                 title="微信公众号"
                                 groupName="文章"
                                 translate="jsonParse"
-                                content={content.wxPublic.content}>
+                                content={content.wxPublic}>
                                 <Recommend />
                             </Chip>
                         </div>

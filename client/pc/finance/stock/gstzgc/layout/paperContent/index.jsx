@@ -64,12 +64,12 @@ class PaperContent extends React.PureComponent {
                 </div>
                 <br />
                 <Chip
-                    id={content.id}
+                    id="15019"
                     type="static"
-                    title={content.name}
-                    groupName="文章"
+                    title="投资观察-硬广02"
+                    groupName="硬广"
                     translate="jsonParse"
-                    content={content.hardAd02.content}>
+                    content={content.hardAd02}>
                     <Recommend />
                 </Chip>
                 <Chip id="10054" type="static" title="更多投资情报" content={investInfoData}>
@@ -78,12 +78,12 @@ class PaperContent extends React.PureComponent {
                 <br />
 
                 <Chip
-                    id={content.id}
+                    id="15020"
                     type="static"
-                    title={content.name}
-                    groupName="文章"
+                    title="投资观察-硬广03"
+                    groupName="硬广"
                     translate="jsonParse"
-                    content={content.hardAd03.content}>
+                    content={content.hardAd03}>
                     <Recommend />
                 </Chip>
                 <Chip id="10055" type="static" title="更多上市公司" content={ssComponeyData}>

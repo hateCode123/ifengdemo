@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class TitleR extends React.PureComponent {
     render() {
         const { content } = this.props;
-        const Img = this.props.liveImg ? <img src={this.props.liveImg} /> : '';
+        const { titleR, liveimg } = content;
+        const Img = liveimg ? <img src={liveimg} /> : '';
 
         return (
             <div className={styles.titleR}>
-                <span>{content.titleR}</span>
+                <span>{titleR}</span>
                 {Img}
             </div>
         );
@@ -19,11 +21,11 @@ class TitleR extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-TitleR.propTypes = { content: PropTypes.object, liveImg: PropTypes.string };
+TitleR.propTypes = { content: PropTypes.object };
 
 /**
  * 定义组件默认属性
  * */
 TitleR.defaultProps = {};
 
-export default TitleR;
+export default errorBoundary(TitleR);
