@@ -103,15 +103,7 @@ class HotSpots extends React.PureComponent {
                             content={industryTitle}>
                             <TableTitle />
                         </Chip>
-                        <Chip
-                            id="10087"
-                            type="static"
-                            title="行业概念资金流向"
-                            groupName="操盘热点"
-                            translate="jsonParse"
-                            content={industryData}>
-                            <Industry />
-                        </Chip>
+                        <Industry content={industryData} />
                     </div>
                     <div className={styles.data_box}>
                         <Chip

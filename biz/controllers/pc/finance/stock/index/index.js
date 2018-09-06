@@ -61,8 +61,11 @@ exports.list = {
             // 直播 Logo
             ['liveLogo', 'KVProxy', 'getStaticFragment', 10052, getJsonByKey('content')],
 
-            // 证券要闻
-            ['stockNews', 'KVProxy', 'getDynamicFragment', '20032', getStringByKey('data')],
+            // 证券要闻 3级
+            ['stockNews', 'KVProxy', 'getDynamicFragment', '20067', getStringByKey('data')],
+
+            // 证券要闻 4级
+            ['stockNewsList', 'KVProxy', 'getDynamicFragment', '20032', getStringByKey('data')],
 
             // 公司要闻标题
             ['newsTab', 'KVProxy', 'getStaticFragment', 10050, getJsonByKey('content')],
@@ -71,7 +74,10 @@ exports.list = {
             ['newsSubTab', 'KVProxy', 'getStaticFragment', 10117, getJsonByKey('content')],
 
             // 公司要闻
-            ['news', 'KVProxy', 'getDynamicFragment', '20033', getStringByKey('data')],
+            ['news', 'KVProxy', 'getDynamicFragment', '20068', getStringByKey('data')],
+
+            // 公司要闻
+            ['newsList', 'KVProxy', 'getDynamicFragment', '20033', getStringByKey('data')],
 
             // 牛人解盘标题
             ['answerTab', 'KVProxy', 'getStaticFragment', 10051, getJsonByKey('content')],
@@ -309,20 +315,27 @@ exports.list = {
 
             allData.dayStock = allData.dayStock && handleDayStockData(allData.dayStock);
 
-            allData.stockNews =
-                allData.stockNews &&
-                allData.stockNews.slice(0, 18).map(item => ({
-                    id: item.id,
-                    url: formatUrl(item.url),
-                    title: item.title,
-                }));
+            const stockNews = [
+                allData.stockNews && allData.stockNews[0],
+                ...(allData.stockNewsList && allData.stockNewsList.slice(0, 5)),
+                allData.stockNews && allData.stockNews[1],
+                ...(allData.stockNewsList && allData.stockNewsList.slice(5, 10)),
+                allData.stockNews && allData.stockNews[2],
+                ...(allData.stockNewsList && allData.stockNewsList.slice(10, 15)),
+            ];
 
-            allData.news =
-                allData.news &&
-                allData.news.slice(0, 8).map(item => ({
-                    url: formatUrl(item.url),
-                    title: item.title,
-                }));
+            allData.stockNews = stockNews.map(item => ({
+                id: item.id,
+                url: formatUrl(item.url),
+                title: item.title,
+            }));
+
+            const news = allData.news.concat(allData.newsList);
+
+            allData.news = news.map(item => ({
+                url: formatUrl(item.url),
+                title: item.title,
+            }));
 
             allData.subject = allData.subject.slice(0, 3).map(item => ({
                 banner: formatImage(item.banner, 300, 169),
