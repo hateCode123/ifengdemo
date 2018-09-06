@@ -1,5 +1,6 @@
 .caption {
     composes: clearfix from global;
+    position: relative;
     overflow: hidden;
     border-bottom: 1px solid #dddddd;
     padding-bottom: 6px;

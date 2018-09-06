@@ -70,9 +70,6 @@ exports.list = {
             // 公司要闻标题
             ['newsTab', 'KVProxy', 'getStaticFragment', 10050, getJsonByKey('content')],
 
-            // 公司要闻子标题
-            ['newsSubTab', 'KVProxy', 'getStaticFragment', 10117, getJsonByKey('content')],
-
             // 公司要闻
             ['news', 'KVProxy', 'getDynamicFragment', '20068', getStringByKey('data')],
 

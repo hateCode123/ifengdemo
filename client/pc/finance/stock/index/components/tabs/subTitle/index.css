@@ -1,4 +1,5 @@
 .sub_title {
+    position: relative;
     line-height: 30px;
     padding-top: 6px;
     padding-left: 26px;

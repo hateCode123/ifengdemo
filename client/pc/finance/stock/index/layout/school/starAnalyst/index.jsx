@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import errorBoundary from '@ifeng/errorBoundary';
 
 class StarAnalyst extends React.PureComponent {
@@ -54,23 +53,15 @@ class StarAnalyst extends React.PureComponent {
                 <div className={styles.data}>
                     <table>
                         <thead>
-                            <Chip
-                                id="10093"
-                                type="static"
-                                title="明星分析师"
-                                groupName="高手学堂"
-                                translate="jsonParse"
-                                content={tabs}>
-                                <tr>
-                                    <th width="50">{tableTabs[0]}</th>
-                                    <th width="65">{tableTabs[1]}</th>
-                                    <th width="70">{tableTabs[2]}</th>
-                                    <th width="85">{tableTabs[3]}</th>
-                                    <th width="60">{tableTabs[4]}</th>
-                                    <th>{tableTabs[5]}</th>
-                                    <th>{tableTabs[6]}</th>
-                                </tr>
-                            </Chip>
+                            <tr>
+                                <th width="50">{tableTabs[0]}</th>
+                                <th width="65">{tableTabs[1]}</th>
+                                <th width="70">{tableTabs[2]}</th>
+                                <th width="85">{tableTabs[3]}</th>
+                                <th width="60">{tableTabs[4]}</th>
+                                <th>{tableTabs[5]}</th>
+                                <th>{tableTabs[6]}</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {data.map((item, index) => (

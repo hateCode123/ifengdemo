@@ -60,7 +60,8 @@ class HotSpots extends React.PureComponent {
                     title="操盘热点标题"
                     groupName="操盘热点"
                     translate="jsonParse"
-                    content={hotSpotsTitle}>
+                    content={hotSpotsTitle}
+                    position="relative">
                     <HeadTitle />
                 </Chip>
                 <div className={styles.col_L}>
@@ -71,7 +72,8 @@ class HotSpots extends React.PureComponent {
                             title="操盘分析标题"
                             groupName="操盘热点"
                             translate="jsonParse"
-                            content={hotSpotsSubTitle1}>
+                            content={hotSpotsSubTitle1}
+                            position="relative">
                             <Caption />
                         </Chip>
                         {marketAnalysisList.length > 0 ? <NewsList content={marketAnalysisList} /> : ''}
@@ -83,7 +85,8 @@ class HotSpots extends React.PureComponent {
                             title="热点板块标题"
                             groupName="操盘热点"
                             translate="jsonParse"
-                            content={hotSpotsSubTitle2}>
+                            content={hotSpotsSubTitle2}
+                            position="relative">
                             <Caption />
                         </Chip>
                         {hotPlateList.length > 0 ? <NewsList content={hotPlateList} /> : ''}
@@ -100,7 +103,8 @@ class HotSpots extends React.PureComponent {
                             title="行业概念资金流向标题"
                             groupName="操盘热点"
                             translate="jsonParse"
-                            content={industryTitle}>
+                            content={industryTitle}
+                            position="relative">
                             <TableTitle />
                         </Chip>
                         <Industry content={industryData} />
@@ -112,7 +116,8 @@ class HotSpots extends React.PureComponent {
                             title="个股资金流向标题"
                             groupName="操盘热点"
                             translate="jsonParse"
-                            content={singleStockTitle}>
+                            content={singleStockTitle}
+                            position="relative">
                             <TableTitle />
                         </Chip>
                         <SingleStock tabs={singleStockTitle[0].tabs} content={data} />

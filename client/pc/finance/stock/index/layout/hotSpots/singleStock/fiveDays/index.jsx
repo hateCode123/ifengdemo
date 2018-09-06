@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 
@@ -22,21 +21,13 @@ class FiveDays extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip
-                            id="10091"
-                            type="static"
-                            title="5日增减仓"
-                            groupName="操盘热点"
-                            translate="jsonParse"
-                            content={tabs}>
-                            <tr>
-                                <th width="65">{tabs[0]}</th>
-                                <th width="90">{tabs[1]}</th>
-                                <th width="70">{tabs[2]}</th>
-                                <th width="60">{tabs[3]}</th>
-                                <th>{tabs[4]}</th>
-                            </tr>
-                        </Chip>
+                        <tr>
+                            <th width="65">{tabs[0]}</th>
+                            <th width="90">{tabs[1]}</th>
+                            <th width="70">{tabs[2]}</th>
+                            <th width="60">{tabs[3]}</th>
+                            <th>{tabs[4]}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {content.map((item, index) => (

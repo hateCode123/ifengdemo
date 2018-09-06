@@ -42,10 +42,8 @@ class BannerPic extends React.PureComponent {
         };
 
         return (
-            <div>
-                <div className={styles.bannerPic}>
-                    <Slides content={content} config={config} />
-                </div>
+            <div className={styles.bannerPic}>
+                <Slides content={content} config={config} />
             </div>
         );
     }

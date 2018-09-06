@@ -28,7 +28,8 @@ class Content extends React.PureComponent {
                         title="焦点图"
                         groupName="正文"
                         content={content.bannerPic}
-                        translate="handleBannerPicData">
+                        translate="handleBannerPicData"
+                        position="relative">
                         <BannerPic />
                     </Chip>
                     <div className="clearfix">

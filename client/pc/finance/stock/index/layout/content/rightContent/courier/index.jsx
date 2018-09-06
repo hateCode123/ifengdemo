@@ -24,7 +24,8 @@ class Courier extends React.PureComponent {
                     title="理财速递标题"
                     groupName="正文"
                     translate="jsonParse"
-                    content={content.courierTitle}>
+                    content={content.courierTitle}
+                    position="relative">
                     <CourierTitle />
                 </Chip>
                 <Chip
@@ -33,7 +34,8 @@ class Courier extends React.PureComponent {
                     title="理财速递"
                     groupName="正文"
                     translate="jsonParse"
-                    content={content.courier}>
+                    content={content.courier}
+                    position="relative">
                     <CourierContent />
                 </Chip>
             </React.Fragment>

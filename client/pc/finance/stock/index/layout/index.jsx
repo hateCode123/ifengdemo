@@ -54,7 +54,6 @@ class Layout extends React.PureComponent {
                 },
                 news: {
                     newsTab: content.newsTab,
-                    newsSubTab: content.newsSubTab,
                     news: content.news,
                 },
                 answer: {
@@ -159,6 +158,7 @@ class Layout extends React.PureComponent {
                                 title="导航跳转链接"
                                 groupName="导航栏"
                                 translate="jsonParse"
+                                position="relative"
                                 content={jumpLink}>
                                 <JumpLink />
                             </Chip>
@@ -173,13 +173,26 @@ class Layout extends React.PureComponent {
                     <School content={schoolData} />
                 </div>
                 <div className={styles.cooperation}>
-                    <Chip id="10074" type="static" title="底部合作链接" groupName="底部合作链接" content={cooperation}>
+                    <Chip
+                        id="10074"
+                        type="static"
+                        title="底部合作链接"
+                        groupName="底部合作链接"
+                        content={cooperation}
+                        position="relative">
                         <Cooperation />
                     </Chip>
                 </div>
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
-                <Chip id="10136" type="static" title="二维码" groupName="二维码" translate="jsonParse" content={qrCode}>
+                <Chip
+                    id="10136"
+                    type="static"
+                    title="二维码"
+                    groupName="二维码"
+                    translate="jsonParse"
+                    position="relative"
+                    content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix />

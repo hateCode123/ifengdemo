@@ -22,17 +22,10 @@ class News extends React.PureComponent {
             groupName: '正文',
             content: content.newsTab,
         };
-        const subTitle = {
-            id: '10117',
-            type: 'static',
-            title: '公司要闻子标题',
-            groupName: '正文',
-            content: content.newsSubTab,
-        };
 
         return (
             <div className={styles.news}>
-                <Tab title={title} subTitle={subTitle} />
+                <Tab title={title} />
                 <NewsList content={content.news} />
             </div>
         );

@@ -1,4 +1,5 @@
 .head_title {
+    position: relative;
     background: url(./g59.png) no-repeat left bottom;
     height: 45px;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
 
@@ -21,22 +20,14 @@ class Track extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip
-                            id="10090"
-                            type="static"
-                            title="大单追踪"
-                            groupName="操盘热点"
-                            translate="jsonParse"
-                            content={tabs}>
-                            <tr>
-                                <th width="63">{tabs[0]}</th>
-                                <th width="68">{tabs[1]}</th>
-                                <th width="67">{tabs[2]}</th>
-                                <th width="76">{tabs[3]}</th>
-                                <th width="60">{tabs[4]}</th>
-                                <th width="210">{tabs[5]}</th>
-                            </tr>
-                        </Chip>
+                        <tr>
+                            <th width="63">{tabs[0]}</th>
+                            <th width="68">{tabs[1]}</th>
+                            <th width="67">{tabs[2]}</th>
+                            <th width="76">{tabs[3]}</th>
+                            <th width="60">{tabs[4]}</th>
+                            <th width="210">{tabs[5]}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {content.map((item, index) => (
