@@ -335,7 +335,7 @@ exports.list = {
             }));
 
             allData.subject = allData.subject.slice(0, 3).map(item => ({
-                banner: formatImage(item.banner, 300, 169),
+                banner: formatImage(item.thumbnail !== '' ? item.thumbnail : item.banner, 300, 169),
                 url: formatUrl(item.url),
                 title: item.title,
             }));
