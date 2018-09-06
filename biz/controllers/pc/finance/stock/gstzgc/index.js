@@ -28,13 +28,13 @@ exports.financeWemoney = {
             ['logo', 'KVProxy', 'getStaticFragment', 10107, getStringByKey('content')],
 
             // 顶部通栏广告
-            ['topAd', 'KVProxy', 'getStaticFragment', 10027, getJson()],
+            ['topAd', 'KVProxy', 'getStaticFragment', 10027, getStringByKey('content')],
 
             // 顶部通栏广告
-            ['hardAd02', 'KVProxy', 'getStaticFragment', 15019, getJson()],
+            ['hardAd02', 'KVProxy', 'getStaticFragment', 15019, getStringByKey('content')],
 
             // 顶部通栏广告
-            ['hardAd03', 'KVProxy', 'getStaticFragment', 15020, getJson()],
+            ['hardAd03', 'KVProxy', 'getStaticFragment', 15020, getStringByKey('content')],
 
             // 顶部通栏广告
             ['hardAd04', 'KVProxy', 'getStaticFragment', 15021, getJson()],

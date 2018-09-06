@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class TitleR extends React.PureComponent {
     render() {
@@ -26,4 +27,4 @@ TitleR.propTypes = { content: PropTypes.object, liveImg: PropTypes.string };
  * */
 TitleR.defaultProps = {};
 
-export default TitleR;
+export default errorBoundary(TitleR);

@@ -75,12 +75,12 @@ class Layout extends React.PureComponent {
                 <Header content={headerData} />
                 <div className={styles.col_w1000}>
                     <Chip
-                        id={content.id}
+                        id="10027"
                         type="static"
-                        title={content.name}
-                        groupName="文章"
+                        title="投资观察顶部通栏广告"
+                        groupName="硬广"
                         translate="jsonParse"
-                        content={content.topAd.content}>
+                        content={content.topAd}>
                         <Recommend />
                     </Chip>
                     <Navigation content={content.navigation} />
