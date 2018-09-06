@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import Footer from '../../../../../components/footer/';
-import { Recommend } from '../../components/recommend';
+import Recommend from '../../components/recommend';
 import errorBoundary from '@ifeng/errorBoundary';
 
 /**
@@ -17,39 +17,34 @@ class BottomFooter extends React.PureComponent {
         const { content } = this.props;
         const { cooperation, hardAd04 } = content;
 
-        const BottomCooperation = (
-            <Chip
-                key="10112"
-                id="10112"
-                type="static"
-                title="底部合作"
-                groupName="底部"
-                translate="jsonParse"
-                content={cooperation}>
-                <Recommend />
-            </Chip>
-        );
-
-        const BottomAd = (
-            <div key="bottomAd" className={styles.ad}>
+        return (
+            <React.Fragment>
                 <Chip
-                    id={content.id}
+                    key="10112"
+                    id="10112"
                     type="static"
-                    title={content.name}
-                    groupName="文章"
+                    title="底部合作"
+                    groupName="底部"
                     translate="jsonParse"
-                    content={hardAd04.content}>
+                    content={cooperation}>
                     <Recommend />
                 </Chip>
-            </div>
+                <div key="bottomAd" className={styles.ad}>
+                    <Chip
+                        id={content.id}
+                        type="static"
+                        title={content.name}
+                        groupName="文章"
+                        translate="jsonParse"
+                        content={hardAd04.content}>
+                        <Recommend />
+                    </Chip>
+                </div>
+                <div key="tzgcfooter" className={styles.footer}>
+                    <Footer content={content.copyright} />
+                </div>
+            </React.Fragment>
         );
-        const footer = (
-            <div key="tzgcfooter" className={styles.footer}>
-                <Footer content={content.copyright} />
-            </div>
-        );
-
-        return [BottomCooperation, BottomAd, footer];
     }
 }
 
