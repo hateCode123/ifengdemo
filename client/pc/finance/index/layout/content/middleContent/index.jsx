@@ -16,11 +16,6 @@ class MiddleContent extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const data = {
-            finance: content.finance,
-            title: content.financeList[0],
-            financeList: content.financeList.slice(1, 5),
-        };
 
         return (
             <div className={styles.col_M}>
@@ -28,7 +23,7 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.box}>
                     <div className={styles.box_inner}>
                         <Talking content={content.talking} />
-                        <Finance content={data} />
+                        <Finance data={content.finance} content={content.financeList} />
                         <Stocks content={content.stocks} />
                     </div>
                 </div>
