@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import { rel } from '../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class News extends React.PureComponent {
     /**
@@ -53,5 +53,4 @@ News.propTypes = { content: PropTypes.array };
  * */
 News.defaultProps = {};
 
-export { News };
-export default News;
+export default errorBoundary(News);

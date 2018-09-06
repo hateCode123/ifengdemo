@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import News from './news';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 NewsList 组件
@@ -31,5 +31,5 @@ class NewsList extends React.PureComponent {
 /** 定义组件属性类型**/
 NewsList.propTypes = { content: PropTypes.array };
 NewsList.defaultProps = {};
-export { NewsList };
-export default NewsList;
+
+export default errorBoundary(NewsList);

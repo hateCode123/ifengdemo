@@ -12,8 +12,8 @@ import HotNews from './hotNews/';
 import AdAside from './adAside/';
 import NewsList from './newslist/';
 import GoTop from './goTop/';
-import { Header } from './header';
-import { BottomFooter } from './footer';
+import Header from './header';
+import BottomFooter from './footer';
 
 /*
 import Header from './components/header/';

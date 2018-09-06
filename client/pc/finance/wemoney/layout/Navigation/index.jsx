@@ -4,6 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import Recommend from '../recommend/';
 import Search from './search/';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Navigation 组件
@@ -44,5 +45,4 @@ Navigation.propTypes = { content: PropTypes.object };
  * */
 Navigation.defaultProps = {};
 
-export { Navigation };
-export default Navigation;
+export default errorBoundary(Navigation);

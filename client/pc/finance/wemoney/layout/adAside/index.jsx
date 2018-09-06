@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './index.css';
 import Chip from 'Chip';
 import Recommend from '../recommend/';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 AdAside 组件
@@ -40,5 +40,4 @@ AdAside.propTypes = { content: PropTypes.object };
  * */
 AdAside.defaultProps = {};
 
-export { AdAside };
-export default AdAside;
+export default errorBoundary(AdAside);

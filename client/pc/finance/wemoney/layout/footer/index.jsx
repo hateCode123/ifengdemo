@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Recommend from '../recommend/';
+import errorBoundary from '@ifeng/errorBoundary';
 
 // import Footer from '../../../../../components/footer/';
 
@@ -35,5 +36,4 @@ BottomFooter.propTypes = { content: PropTypes.object };
  * */
 BottomFooter.defaultProps = {};
 
-export { BottomFooter };
-export default BottomFooter;
+export default errorBoundary(BottomFooter);
