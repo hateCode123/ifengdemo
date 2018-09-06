@@ -31,6 +31,10 @@ import FixedBar from './fixedBar/';
 import TopCollapse from './collapse/';
 
 class Layout extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染网页布局
      */
@@ -303,15 +307,5 @@ class Layout extends React.PureComponent {
         );
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-Layout.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Layout.defaultProps = {};
 
 export default Layout;

@@ -5,22 +5,27 @@ import '../../reset.css';
 
 import CommonTitleM from './../commonTitleM/';
 import { rel } from '../../../../utils/rel';
-
+import errorBoundary from '@ifeng/errorBoundary';
 class Market extends React.PureComponent {
+    static propTypes = {
+        title: PropTypes.object,
+    };
+
     render() {
         const { title } = this.props;
 
         return (
             <div className="bor w300 fl">
                 <CommonTitleM content={title} />
-          
+
                 <div>
                     <div className={style.lccs}>
-                        <div className='clearfix'>
+                        <div className="clearfix">
                             <a
                                 className={style.mfkh}
                                 href="https://www.fengjr.com/cn/act/201801-pc-20jia10.html"
-                                target="_blank" rel={rel}>
+                                target="_blank"
+                                rel={rel}>
                                 免费开户<br />
                                 <span>10秒快速开户</span>
                             </a>
@@ -32,20 +37,9 @@ class Market extends React.PureComponent {
                         <div className={style.ms} /> <div className={style.jjkf}>基金客服：400-076-1166</div>
                     </div>
                 </div>
-              
             </div>
         );
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Market.propTypes = { title: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Market.defaultProps = {};
-export { Market };
-export default Market;
+export default errorBoundary(Market);

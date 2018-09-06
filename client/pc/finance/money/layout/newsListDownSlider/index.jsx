@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class NewsListDownSliderTop extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     render() {
         const { content } = this.props;
 
@@ -49,17 +53,11 @@ class NewsListDownSliderTop extends React.PureComponent {
         );
     }
 }
-/**
- * 定义组件属性类型
- * */
-NewsListDownSliderTop.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-NewsListDownSliderTop.defaultProps = {};
 
 class NewsListLeftInner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     render() {
         // const { showData } = this.state;
         const { content } = this.props;
@@ -107,18 +105,11 @@ class NewsListLeftInner extends React.PureComponent {
         );
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-NewsListLeftInner.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-NewsListLeftInner.defaultProps = {};
-
 class NewsListDownSlider extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     getData = (data, min, max) => {
         return [...data].filter((item, i) => i >= min && i < max);
     };
@@ -131,14 +122,4 @@ class NewsListDownSlider extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-NewsListDownSlider.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-NewsListDownSlider.defaultProps = {};
-export { NewsListDownSlider };
-export default NewsListDownSlider;
+export default errorBoundary(NewsListDownSlider);

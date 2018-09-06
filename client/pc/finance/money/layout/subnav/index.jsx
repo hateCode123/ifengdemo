@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import errorBoundary from '@ifeng/errorBoundary';
 import styles from './style.css';
 
 class SubNavigation extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     render() {
         const { content } = this.props;
         const navigation = content.map((item, index) => (
@@ -12,21 +16,11 @@ class SubNavigation extends React.PureComponent {
         ));
 
         return (
-            <div className="w1000"> 
+            <div className="w1000">
                 <div className={styles.p_banner}>{navigation}</div>
             </div>
         );
     }
 }
-/**
- * 定义组件属性类型
- * */
-SubNavigation.propTypes = { content: PropTypes.array };
 
-/**
- * 定义组件默认属性
- * */
-SubNavigation.defaultProps = {};
-
-export { SubNavigation };
-export default SubNavigation;
+export default errorBoundary(SubNavigation);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
 import { addEventListener } from '@ifeng/ui_base';
@@ -20,6 +19,7 @@ class FixedBar extends React.PureComponent {
     handleScroll = event => {
         const scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
         let tag = true;
+
         if (scrollTop < 100) {
             tag = false;
         }
@@ -84,8 +84,11 @@ class FixedBar extends React.PureComponent {
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" id={style.sea_04} style={showGotoTop ? { display: 'block' } : { display: 'none' }}>
-                                    <b> </b>
+                                <a
+                                    href="#"
+                                    id={style.sea_04}
+                                    style={showGotoTop ? { display: 'block' } : { display: 'none' }}>
+                                    <b>&nbsp;</b>
                                 </a>
                             </td>
                         </tr>
@@ -95,15 +98,5 @@ class FixedBar extends React.PureComponent {
         );
     }
 }
-/**
- * 定义组件属性类型
- * */
-FixedBar.propTypes = { };
 
-/**
- * 定义组件默认属性
- * */
-FixedBar.defaultProps = {};
-
-export { FixedBar };
 export default FixedBar;

@@ -6,6 +6,10 @@ import '../../reset.css';
 import HotFundsTable from '../hotfundsTable/';
 
 class HotFunds extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         current: 0,
         tabContentConfig: [
@@ -69,14 +73,4 @@ class HotFunds extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-HotFunds.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-HotFunds.defaultProps = {};
-export { HotFunds };
 export default HotFunds;

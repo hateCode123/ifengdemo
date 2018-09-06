@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './style.css';
 import '../../reset.css';
 import Chip from 'Chip';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class NavigationInner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     /**
      * 渲染组件
      */
@@ -27,11 +31,10 @@ class NavigationInner extends React.PureComponent {
     }
 }
 
-NavigationInner.propTypes = { content: PropTypes.array };
-
-NavigationInner.defaultProps = {};
-
 class Navigation extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     render() {
         const { content } = this.props;
 
@@ -52,15 +55,5 @@ class Navigation extends React.PureComponent {
         );
     }
 }
-/**
- * 定义组件属性类型
- * */
-Navigation.propTypes = { content: PropTypes.array };
 
-/**
- * 定义组件默认属性
- * */
-Navigation.defaultProps = {};
-
-export { Navigation };
-export default Navigation;
+export default errorBoundary(Navigation);

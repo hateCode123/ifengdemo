@@ -211,14 +211,4 @@ class Bottom extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Bottom.propTypes = {};
-
-/**
- * 定义组件默认属性
- * */
-Bottom.defaultProps = {};
-export { Bottom };
 export default Bottom;

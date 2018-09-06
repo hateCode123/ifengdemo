@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Logo 组件
  */
 class Logo extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
     /**
      * 渲染组件
      */
@@ -24,15 +28,4 @@ class Logo extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Logo.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Logo.defaultProps = {};
-
-export { Logo };
-export default Logo;
+export default errorBoundary(Logo);

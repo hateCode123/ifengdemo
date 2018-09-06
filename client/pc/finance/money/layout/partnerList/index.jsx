@@ -1,12 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import style from './style.css';
 import { rel } from '../../../../utils/rel';
 
 class PartnerList extends React.PureComponent {
-    createMarkup = () => {
-        return { __html: this.props.content };
-    };
     render() {
         return (
             <ul className={style.list}>
@@ -63,7 +59,8 @@ class PartnerList extends React.PureComponent {
                 <li>
                     <a
                         href="http://dol.deliver.ifeng.com/c?z=ifeng&amp;la=0&amp;si=2&amp;cg=1&amp;c=1&amp;ci=2&amp;or=8625&amp;l=32677&amp;bg=32676&amp;b=45381&amp;u=http://finance.ifeng.com/money/special/jdgjsmnds/index.shtml"
-                        rel={rel} target="_blank">
+                        rel={rel}
+                        target="_blank">
                         <img src="http://y0.ifengimg.com/a/2015_52/39160b04d1d7bfb.jpg" width="182" height="78" />
                     </a>
                 </li>
@@ -72,14 +69,4 @@ class PartnerList extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-PartnerList.propTypes = { content: PropTypes.string };
-
-/**
- * 定义组件默认属性
- * */
-PartnerList.defaultProps = {};
-export { PartnerList };
 export default PartnerList;

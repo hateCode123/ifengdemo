@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import style from './style.css';
 import '../../reset.css';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class CommonTitleL extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
         // {"title":"境内掘金","more":[{"txt":"更多基金","url":"https://etrade.fengfd.com/","newOpen":true,"icon":true}]}
@@ -35,36 +39,4 @@ class CommonTitleL extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CommonTitleL.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-CommonTitleL.defaultProps = {};
-
-// class CommonTitleL extends React.PureComponent {
-//     render() {
-//         const { content } = this.props;
-
-//         return (
-//             // <Chip id="10039" type="static" title="理财产品" groupName="首屏" translate="jsonParse" content={content}>
-//                 <CommonTitleL />
-//             // </Chip>
-//         );
-//     }
-// }
-
-// /**
-//  * 定义组件属性类型
-//  * */
-// CommonTitleL.propTypes = { content: PropTypes.object };
-
-// /**
-//  * 定义组件默认属性
-//  * */
-// CommonTitleL.defaultProps = {};
-export { CommonTitleL };
-export default CommonTitleL;
+export default errorBoundary(CommonTitleL);
