@@ -46,11 +46,6 @@ class Layout extends React.PureComponent {
             ssComMore: content.ssComMore,
         };
 
-        const liveData = {
-            liveTitle: content.liveTitle,
-            liveImg: content.liveTitle.liveimg,
-        };
-
         const stockHqData = {
             hqTitle: content.hqTitle,
             cattleStocksTitle: content.cattleStocksTitle,
@@ -142,7 +137,7 @@ class Layout extends React.PureComponent {
                             <Recommend />
                         </Chip>
 
-                        <Live content={liveData} />
+                        <Live content={content.liveTitle} />
 
                         <StockHq content={stockHqData} />
 
@@ -154,7 +149,7 @@ class Layout extends React.PureComponent {
                                 groupName="文章"
                                 translate="jsonParse"
                                 content={content.QATitle}>
-                                <TitleR content={content.QATitle} liveImg={content.liveTitle.liveimg} />
+                                <TitleR content={content.QATitle} />
                             </Chip>
                             <Qa tabs={content.QATabs} />
                         </div>
