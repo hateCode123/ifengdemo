@@ -6,6 +6,7 @@ import { getAnalyzerInfo, getQADataTzgc, getQAData } from '../../../../../servic
 import { rel } from '../../../../../utils/rel';
 import QaTabs from './QATabs';
 import QaForm from './QAForm';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Qa extends React.PureComponent {
     static propTypes = {
@@ -147,4 +148,4 @@ class Qa extends React.PureComponent {
     }
 }
 
-export default Qa;
+export default errorBoundary(Qa);

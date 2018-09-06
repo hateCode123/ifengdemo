@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Qa extends React.PureComponent {
     static propTypes = {
@@ -38,4 +39,4 @@ class Qa extends React.PureComponent {
     }
 }
 
-export default Qa;
+export default errorBoundary(Qa);

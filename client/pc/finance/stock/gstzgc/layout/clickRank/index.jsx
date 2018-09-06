@@ -4,6 +4,8 @@ import styles from './index.css';
 import { rel } from '../../../../../utils/rel';
 import Chip from 'Chip';
 import TitleR from '../../components/titleR';
+import errorBoundary from '@ifeng/errorBoundary';
+
 class ClickRank extends React.PureComponent {
     render() {
         const { content } = this.props;
@@ -49,4 +51,4 @@ ClickRank.propTypes = { content: PropTypes.object };
  * */
 ClickRank.defaultProps = {};
 
-export default ClickRank;
+export default errorBoundary(ClickRank);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Cooperation 组件
@@ -30,5 +31,4 @@ Cooperation.propTypes = { content: PropTypes.string };
  * */
 Cooperation.defaultProps = {};
 
-export { Cooperation };
-export default Cooperation;
+export default errorBoundary(Cooperation);

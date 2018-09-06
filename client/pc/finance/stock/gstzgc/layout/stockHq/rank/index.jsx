@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.css';
 import { getStockRank } from '../../../../../../services/api';
 import { rel } from '../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Rank extends React.PureComponent {
     state = {
@@ -193,4 +194,4 @@ class Rank extends React.PureComponent {
     }
 }
 
-export default Rank;
+export default errorBoundary(Rank);

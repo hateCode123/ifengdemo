@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import { rel } from '../../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class More extends React.PureComponent {
     /**
@@ -30,4 +31,4 @@ More.propTypes = { content: PropTypes.object };
  * */
 More.defaultProps = {};
 
-export default More;
+export default errorBoundary(More);

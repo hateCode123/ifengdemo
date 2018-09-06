@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import { rel } from '../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Nav extends React.PureComponent {
     /**
@@ -41,4 +42,4 @@ Nav.propTypes = { content: PropTypes.array };
  * */
 Nav.defaultProps = {};
 
-export default Nav;
+export default errorBoundary(Nav);

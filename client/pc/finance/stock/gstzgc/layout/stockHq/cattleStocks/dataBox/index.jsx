@@ -4,6 +4,7 @@ import styles from './index.css';
 import md5 from 'md5';
 import { getStockData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class DataBox extends React.Component {
     static propTypes = {
@@ -117,4 +118,4 @@ class DataBox extends React.Component {
     }
 }
 
-export default DataBox;
+export default errorBoundary(DataBox);

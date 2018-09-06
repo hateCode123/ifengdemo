@@ -7,6 +7,7 @@ import UserInfo from '@ifeng/ui_pc_userInfo';
 import Search from '@ifeng/ui_pc_search';
 import { rel } from '../../../../../utils/rel';
 import logoUrl from './logo.jpg';
+import errorBoundary from '@ifeng/errorBoundary';
 
 /**
  * 定义 Header 组件
@@ -59,5 +60,4 @@ Header.propTypes = { content: PropTypes.object };
  * */
 Header.defaultProps = {};
 
-export { Header };
-export default Header;
+export default errorBoundary(Header);
