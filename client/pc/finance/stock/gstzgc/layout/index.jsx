@@ -101,19 +101,19 @@ class Layout extends React.PureComponent {
                     </div>
                     <div className={styles.fr}>
                         <Chip
-                            id={content.videoAnalysis.id}
+                            id="100336"
                             type="static"
                             title="视频解盘"
                             translate="jsonParse"
-                            content={content.videoAnalysis.content}>
+                            content={content.videoAnalysis}>
                             <Recommend />
                         </Chip>
                         <Chip
-                            id={content.stockCompetition.id}
+                            id="10037"
                             type="static"
                             title="炒股大赛"
                             translate="jsonParse"
-                            content={content.stockCompetition.content}>
+                            content={content.stockCompetition}>
                             <Recommend />
                         </Chip>
                     </div>
@@ -172,7 +172,7 @@ class Layout extends React.PureComponent {
                                 title="微信公众号"
                                 groupName="文章"
                                 translate="jsonParse"
-                                content={content.wxPublic.content}>
+                                content={content.wxPublic}>
                                 <Recommend />
                             </Chip>
                         </div>

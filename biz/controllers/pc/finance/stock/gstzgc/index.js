@@ -30,14 +30,14 @@ exports.financeWemoney = {
             // 顶部通栏广告
             ['topAd', 'KVProxy', 'getStaticFragment', 10027, getStringByKey('content')],
 
-            // 顶部通栏广告
+            // 新闻列表通栏02
             ['hardAd02', 'KVProxy', 'getStaticFragment', 15019, getStringByKey('content')],
 
-            // 顶部通栏广告
+            // 新闻列表通栏03
             ['hardAd03', 'KVProxy', 'getStaticFragment', 15020, getStringByKey('content')],
 
-            // 顶部通栏广告
-            ['hardAd04', 'KVProxy', 'getStaticFragment', 15021, getJson()],
+            // 底部通栏
+            ['hardAd04', 'KVProxy', 'getStaticFragment', 15021, getStringByKey('content')],
 
             // 投资观察A股指数和导航
             ['navigation', 'KVProxy', 'getStaticFragment', 10028, getJsonByKey('content')],
@@ -47,10 +47,10 @@ exports.financeWemoney = {
             ['headline', 'KVProxy', 'getStaticFragment', 10030, getStringByKey('content')],
 
             // 视频解盘
-            ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getJson()],
+            ['videoAnalysis', 'KVProxy', 'getStaticFragment', 10036, getStringByKey('content')],
 
             // 炒股大赛
-            ['stockCompetition', 'KVProxy', 'getStaticFragment', 10037, getJson()],
+            ['stockCompetition', 'KVProxy', 'getStaticFragment', 10037, getStringByKey('content')],
 
             // 轮播
             ['sliderData', 'KVProxy', 'getRecommendFragment', 20036, getJsonByKey('data')],
@@ -119,7 +119,7 @@ exports.financeWemoney = {
             ['wxTitle', 'KVProxy', 'getStaticFragment', 10062, getJsonByKey('content')],
 
             // 微信公众号
-            ['wxPublic', 'KVProxy', 'getStaticFragment', 10068, getJson()],
+            ['wxPublic', 'KVProxy', 'getStaticFragment', 10068, getStringByKey('content')],
 
             // 版权合作
             ['cooperation', 'KVProxy', 'getStaticFragment', 10112, getStringByKey('content')],
