@@ -153,7 +153,7 @@ exports.financeWemoney = {
         allData.sliderData = allData.sliderData.map(item => ({
             title: item.title,
             url: item.url,
-            thumbnail: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
+            src: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
         }));
 
         const statisticsData = {

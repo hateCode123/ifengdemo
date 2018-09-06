@@ -121,7 +121,12 @@ class Layout extends React.PureComponent {
 
                 <div className={styles.col_w1000}>
                     <div className={styles.fl640}>
-                        <Chip id="10116" type="static" title="轮播" translate="jsonParse" content={content.sliderData}>
+                        <Chip
+                            id="20036"
+                            type="recommend"
+                            title="轮播"
+                            translate="jsonParse"
+                            content={content.sliderData}>
                             <Slide />
                         </Chip>
                         <PaperContent content={paperData} />
