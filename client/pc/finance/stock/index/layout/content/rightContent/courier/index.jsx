@@ -33,7 +33,6 @@ class Courier extends React.PureComponent {
                     type="static"
                     title="理财速递"
                     groupName="正文"
-                    translate="jsonParse"
                     content={content.courier}
                     position="relative">
                     <CourierContent />

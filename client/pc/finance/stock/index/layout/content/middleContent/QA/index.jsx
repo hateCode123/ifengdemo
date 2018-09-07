@@ -81,10 +81,10 @@ class Qa extends React.PureComponent {
 
     getQaList = user => {
         const { alist } = this.state;
-        const qaList = [];
+        let qaList = [];
 
         if (alist[user]) {
-            alist[user].forEach((item, index) => {
+            qaList = alist[user].map((item, index) => {
                 const questionKey = `question${index}`;
                 const answerKey = `answer${index}`;
 
@@ -103,8 +103,7 @@ class Qa extends React.PureComponent {
                     </dd>
                 );
 
-                qaList.push(question);
-                qaList.push(answer);
+                return [question, answer];
             });
         }
 

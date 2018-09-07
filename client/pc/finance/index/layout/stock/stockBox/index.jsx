@@ -37,13 +37,10 @@ class StockBox extends React.PureComponent {
     async componentDidMount() {
         try {
             const { stock } = this.state;
-            const price = [];
-
             const codeList = stock.map(item => item.code);
-
             const result = await getStockData(codeList);
 
-            codeList.forEach(item => {
+            const price = codeList.map(item => {
                 let style = '';
 
                 if (result[item][2] > 0) {
@@ -54,12 +51,12 @@ class StockBox extends React.PureComponent {
                     style = 'black';
                 }
 
-                price.push({
+                return {
                     price: result[item][0],
                     index: result[item][2],
                     percent: result[item][3],
                     style,
-                });
+                };
             });
 
             this.setState({ prices: price });

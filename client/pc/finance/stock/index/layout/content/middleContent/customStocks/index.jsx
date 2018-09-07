@@ -34,13 +34,8 @@ class CustomStocks extends React.PureComponent {
             if (userSawList === '') {
                 const stockData = await getHotStockData();
 
-                stockData.slice(0, 4).forEach(item => {
-                    const d = [];
-
-                    d.push(item.code);
-                    d.push(item.name);
-
-                    data.push(d);
+                data = stockData.slice(0, 4).map(item => {
+                    return [item.code, item.name];
                 });
 
                 code = data.map(item => item[0]);

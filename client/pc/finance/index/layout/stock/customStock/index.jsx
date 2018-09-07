@@ -45,9 +45,7 @@ class CustomStock extends React.PureComponent {
 
                 const result = await getStockData(codeList);
 
-                const customStock = [];
-
-                codeList.forEach((item, index) => {
+                const customStock = codeList.map((item, index) => {
                     let style = '';
 
                     if (result[item][2] > 0) {
@@ -58,7 +56,7 @@ class CustomStock extends React.PureComponent {
                         style = 'black';
                     }
 
-                    customStock.push({
+                    return {
                         url: `//finance.ifeng.com/app/hq/stock/${item}`,
                         name: nameList[index],
                         price: result[item][0],
@@ -66,7 +64,7 @@ class CustomStock extends React.PureComponent {
                         percent: result[item][3],
                         style,
                         report: `//app.finance.ifeng.com/report/search.php?yb_search_type=stock&amp;code=${item}`,
-                    });
+                    };
                 });
 
                 this.setState({ customStock });

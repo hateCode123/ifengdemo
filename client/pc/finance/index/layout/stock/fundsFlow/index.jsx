@@ -19,13 +19,10 @@ class FundsFlow extends React.PureComponent {
      */
     async componentDidMount() {
         try {
-            const datas = [];
             const data = await getFundsFlowData();
 
-            data.forEach((item, index) => {
-                if ([0, 1, 10, 11].includes(index)) {
-                    datas.push(item);
-                }
+            const datas = data.filter((item, index) => {
+                return [0, 1, 10, 11].includes(index);
             });
 
             this.setState({ flow: datas });
@@ -38,25 +35,26 @@ class FundsFlow extends React.PureComponent {
      * 组建柱状图样式
      */
     getStyle = tenDayList => {
-        const styles = [];
-
         // 柱状图每只最大值
         const flowMax = Math.max(...tenDayList.map(item => Math.abs(item)));
 
-        tenDayList.forEach(item => {
+        const styles = tenDayList.map(item => {
+            let style = {};
             const height = Math.abs(12 * (item / flowMax));
 
             if (item > 0) {
-                styles.push({
+                style = {
                     color: 'red',
                     style: { height: `${height}px`, marginTop: `${12 - height}px` },
-                });
+                };
             } else {
-                styles.push({
+                style = {
                     color: 'green',
                     style: { height: `${height}px`, marginTop: '12px' },
-                });
+                };
             }
+
+            return style;
         });
 
         return styles;

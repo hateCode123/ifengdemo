@@ -313,11 +313,11 @@ exports.list = {
             allData.dayStock = allData.dayStock && handleDayStockData(allData.dayStock);
 
             const stockNews = [
-                allData.stockNews && allData.stockNews[0],
+                ...(allData.stockNews && allData.stockNews.slice(0, 1)),
                 ...(allData.stockNewsList && allData.stockNewsList.slice(0, 5)),
-                allData.stockNews && allData.stockNews[1],
+                ...(allData.stockNews && allData.stockNews.slice(1, 2)),
                 ...(allData.stockNewsList && allData.stockNewsList.slice(5, 10)),
-                allData.stockNews && allData.stockNews[2],
+                ...(allData.stockNews && allData.stockNews.slice(2, 3)),
                 ...(allData.stockNewsList && allData.stockNewsList.slice(10, 15)),
             ];
 
@@ -327,18 +327,20 @@ exports.list = {
                 title: item.title,
             }));
 
-            const news = allData.news.concat(allData.newsList);
+            const news = allData.news.slice(0, 1).concat(allData.newsList.slice(0, 7));
 
             allData.news = news.map(item => ({
                 url: formatUrl(item.url),
                 title: item.title,
             }));
 
-            allData.subject = allData.subject.slice(0, 3).map(item => ({
-                banner: formatImage(item.thumbnail !== '' ? item.thumbnail : item.banner, 300, 169),
-                url: formatUrl(item.url),
-                title: item.title,
-            }));
+            allData.subject =
+                allData.subject &&
+                allData.subject.slice(0, 3).map(item => ({
+                    banner: formatImage(item.thumbnail !== '' ? item.thumbnail : item.banner, 300, 169),
+                    url: formatUrl(item.url),
+                    title: item.title,
+                }));
 
             allData.marketAnalysis =
                 allData.marketAnalysis &&

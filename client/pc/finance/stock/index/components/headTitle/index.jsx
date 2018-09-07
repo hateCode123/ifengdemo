@@ -16,16 +16,13 @@ class HeadTitle extends React.PureComponent {
     render() {
         const { content, children } = this.props;
         const subTitle = content.slice(1);
-        const subTitleList = [];
-
-        subTitle.forEach((item, index) => {
-            subTitleList.push(
+        const subTitleList = subTitle.map((item, index) => {
+            return [
                 <a key={index} href={item.url} target="_blank" rel={rel}>
                     {item.title}
                 </a>,
-            );
-
-            subTitleList.push(index === subTitle.length - 1 ? '' : '|');
+                index === subTitle.length - 1 ? '' : '|',
+            ];
         });
 
         return (
