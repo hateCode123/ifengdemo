@@ -29,7 +29,8 @@ class MiddleContent extends React.PureComponent {
                         title="视频抓牛股标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.cattleStocksTitle}>
+                        content={content.cattleStocksTitle}
+                        position="relative">
                         <MidTitle nowTime />
                     </Chip>
                     <CattleStocks />
@@ -42,7 +43,8 @@ class MiddleContent extends React.PureComponent {
                         title="涨跌排行榜标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.rankTitle}>
+                        content={content.rankTitle}
+                        position="relative">
                         <MidTitle />
                     </Chip>
                     <Rank />
@@ -55,7 +57,8 @@ class MiddleContent extends React.PureComponent {
                         title="资金流向标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.fundsFlowTitle}>
+                        content={content.fundsFlowTitle}
+                        position="relative">
                         <MidTitle />
                     </Chip>
                     <FundsFlow />
@@ -68,7 +71,8 @@ class MiddleContent extends React.PureComponent {
                         title="自选股登录标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.customStocksTitle}>
+                        content={content.customStocksTitle}
+                        position="relative">
                         <MidTitle />
                     </Chip>
                     <CustomStocks />
@@ -81,7 +85,8 @@ class MiddleContent extends React.PureComponent {
                         title="分析师答疑标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.QaTitle}>
+                        content={content.QaTitle}
+                        position="relative">
                         <MidTitle />
                     </Chip>
                     <Qa tabs={content.QaTabs} />

@@ -30,7 +30,8 @@ class RightContent extends React.PureComponent {
                         title="热点专题标题"
                         groupName="正文"
                         translate="jsonParse"
-                        content={content.subjectTitle}>
+                        content={content.subjectTitle}
+                        position="relative">
                         <RightSideTitle />
                     </Chip>
                     <Subject content={content.subject} />
@@ -42,10 +43,17 @@ class RightContent extends React.PureComponent {
                     title="投教学堂标题"
                     groupName="正文"
                     translate="jsonParse"
-                    content={content.marketTitle}>
+                    content={content.marketTitle}
+                    position="relative">
                     <RightSideTitle />
                 </Chip>
-                <Chip id="10080" type="static" title="投教学堂" groupName="正文" content={content.market}>
+                <Chip
+                    id="10080"
+                    type="static"
+                    title="投教学堂"
+                    groupName="正文"
+                    content={content.market}
+                    position="relative">
                     <Market />
                 </Chip>
                 <Courier content={content.courier} />
@@ -55,7 +63,8 @@ class RightContent extends React.PureComponent {
                     title="视频播放项"
                     groupName="正文"
                     translate="jsonParse"
-                    content={content.playItem}>
+                    content={content.playItem}
+                    position="relative">
                     <PlayItem />
                 </Chip>
                 <div className={styles.ad0}>
@@ -71,7 +80,8 @@ class RightContent extends React.PureComponent {
                         title="每日论股"
                         groupName="正文"
                         content={content.dayStock}
-                        translate="handleDayStockData">
+                        translate="handleDayStockData"
+                        position="relative">
                         <DayStock />
                     </Chip>
                 </div>

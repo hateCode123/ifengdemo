@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import Chip from 'Chip';
 import { getStockData } from '../../../../../../../services/api';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../../utils/rel';
@@ -41,22 +40,14 @@ class Target extends React.PureComponent {
             <div className={styles.data_box}>
                 <table>
                     <thead>
-                        <Chip
-                            id="10096"
-                            type="static"
-                            title="目标涨幅最大"
-                            groupName="高手学堂"
-                            translate="jsonParse"
-                            content={tabs}>
-                            <tr>
-                                <th width="85">{tabs[0]}</th>
-                                <th width="60">{tabs[1]}</th>
-                                <th width="60">{tabs[2]}</th>
-                                <th width="70">{tabs[3]}</th>
-                                <th width="70">{tabs[4]}</th>
-                                <th>{tabs[5]}</th>
-                            </tr>
-                        </Chip>
+                        <tr>
+                            <th width="85">{tabs[0]}</th>
+                            <th width="60">{tabs[1]}</th>
+                            <th width="60">{tabs[2]}</th>
+                            <th width="70">{tabs[3]}</th>
+                            <th width="70">{tabs[4]}</th>
+                            <th>{tabs[5]}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {content.map((item, index) => (

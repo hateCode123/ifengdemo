@@ -59,7 +59,8 @@ class School extends React.PureComponent {
                     title="高手学堂标题"
                     groupName="高手学堂"
                     translate="jsonParse"
-                    content={content.schoolTitle}>
+                    content={content.schoolTitle}
+                    position="relative">
                     <HeadTitle>
                         <ResearchSearch />
                     </HeadTitle>
@@ -72,7 +73,8 @@ class School extends React.PureComponent {
                             title="高手操盘日志标题"
                             groupName="高手学堂"
                             translate="jsonParse"
-                            content={content.schoolSubTitle1}>
+                            content={content.schoolSubTitle1}
+                            position="relative">
                             <Caption />
                         </Chip>
                         {logsList.length > 0 ? <NewsList content={logsList} /> : ''}
@@ -84,7 +86,8 @@ class School extends React.PureComponent {
                             title="股民学校标题"
                             groupName="高手学堂"
                             translate="jsonParse"
-                            content={content.schoolSubTitle2}>
+                            content={content.schoolSubTitle2}
+                            position="relative">
                             <Caption />
                         </Chip>
                         {schoolList.length > 0 ? <NewsList content={schoolList} /> : ''}
@@ -101,7 +104,8 @@ class School extends React.PureComponent {
                             title="明星分析师标题"
                             groupName="高手学堂"
                             translate="jsonParse"
-                            content={starAnalystTitle}>
+                            content={starAnalystTitle}
+                            position="relative">
                             <TableTitle />
                         </Chip>
                         <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalystData} />
@@ -113,7 +117,8 @@ class School extends React.PureComponent {
                             title="研报选股标题"
                             groupName="高手学堂"
                             translate="jsonParse"
-                            content={stockPickingTitle}>
+                            content={stockPickingTitle}
+                            position="relative">
                             <TableTitle />
                         </Chip>
                         <StockPicking tabs={stockPickingTitle[0].tabs} content={stockPickingData} />

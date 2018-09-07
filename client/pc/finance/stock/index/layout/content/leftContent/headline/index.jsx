@@ -21,7 +21,7 @@ class Headline extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createHeadline()} />;
+        return <div style={{ position: 'relative' }} dangerouslySetInnerHTML={this.createHeadline()} />;
     }
 }
 

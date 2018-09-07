@@ -62,6 +62,19 @@ class ContentList extends React.PureComponent {
         return skey.substr(2, 6).toLowerCase();
     };
 
+    handleNewstime = time => {
+        const d = new Date();
+
+        time = time.substr(0, time.length - 3);
+        const year = Number(time.split('-')[0]);
+
+        if (year < d.getFullYear()) {
+            return time;
+        } else {
+            return time.substr(5, time.length);
+        }
+    };
+
     /**
      * 渲染组件
      */
@@ -96,11 +109,7 @@ class ContentList extends React.PureComponent {
                             <p className={styles.time}>
                                 {item.source ? <span className={styles.source}>{item.source}</span> : ''}
                                 {item.newsTime && item.newsTime !== '' ? (
-                                    <span className={styles.date}>
-                                        {Number(item.newsTime.split('-')[0]) < 2018
-                                            ? 'item.createdTime'
-                                            : `${item.newsTime.split('-')[1]}-${item.newsTime.split('-')[2]}`}
-                                    </span>
+                                    <span className={styles.date}>{this.handleNewstime(item.newsTime)}</span>
                                 ) : (
                                     ''
                                 )}

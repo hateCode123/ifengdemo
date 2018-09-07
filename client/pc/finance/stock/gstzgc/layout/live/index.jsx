@@ -138,7 +138,7 @@ class Live extends React.PureComponent {
      */
     render() {
         const { content } = this.props;
-        const { liveTitle, liveImg } = content;
+
         const { liveData } = this.state;
 
         return (
@@ -149,8 +149,8 @@ class Live extends React.PureComponent {
                     title="7*24小时"
                     groupName="文章"
                     translate="jsonParse"
-                    content={liveTitle}>
-                    <TitleR content={liveTitle} liveImg={liveImg} />
+                    content={content}>
+                    <TitleR content={content} />
                 </Chip>
 
                 <ul className={styles.zbList}>

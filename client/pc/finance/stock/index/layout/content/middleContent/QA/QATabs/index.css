@@ -1,4 +1,5 @@
 .tabs {
+    position: relative;
     border-bottom: 1px solid #efefef;
     margin-bottom: 10px;
     & li {
@@ -15,6 +16,6 @@
     }
     & li.current {
         background: #f54343;
-        color: #FFF;
+        color: #fff;
     }
 }

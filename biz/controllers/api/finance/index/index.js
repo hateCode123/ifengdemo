@@ -26,7 +26,7 @@ exports.getCustomList = {
 exports.getMacroList = {
     path: '/api/finance/index/macroList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getDynamicFragment(ctx, '20038').then(...handleJson(ctx));
 
@@ -41,7 +41,7 @@ exports.getMacroList = {
 exports.getStockList = {
     path: '/api/finance/index/stockList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getDynamicFragment(ctx, '20032').then(...handleJson(ctx));
 
@@ -56,7 +56,7 @@ exports.getStockList = {
 exports.getImarketsList = {
     path: '/api/finance/index/imarketsList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getDynamicFragment(ctx, '20040').then(...handleJson(ctx));
 
@@ -71,7 +71,7 @@ exports.getImarketsList = {
 exports.getCompanyList = {
     path: '/api/finance/index/companyList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getDynamicFragment(ctx, '20033').then(...handleJson(ctx));
 
@@ -86,7 +86,7 @@ exports.getCompanyList = {
 exports.getWemoneyList = {
     path: '/api/finance/index/wemoneyList/:callback?',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const data = await KVProxy.getDynamicFragment(ctx, '20039').then(...handleJson(ctx));
 
