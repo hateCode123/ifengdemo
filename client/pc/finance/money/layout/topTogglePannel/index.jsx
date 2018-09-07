@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import errorBoundary from '@ifeng/errorBoundary';
 import styles from './style.css';
 import '../../reset.css';
-import Collapse from '../collapse/';
 
 class Collapse extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
 
@@ -21,15 +25,4 @@ class Collapse extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Collapse.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Collapse.defaultProps = {};
-
-export { Collapse };
-export default Collapse;
+export default errorBoundary(Collapse);

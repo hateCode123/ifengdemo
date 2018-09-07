@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
+import errorBoundary from '@ifeng/errorBoundary';
 import style from './style.css';
 import '../../reset.css';
 import CommonTitleL from './../commonTitleL/';
@@ -9,6 +9,10 @@ import Licaisudi from './../licaisudi/';
 import HotFundsTable from '../hotfundsTable/';
 
 class Taojin extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -48,15 +52,4 @@ class Taojin extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Taojin.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Taojin.defaultProps = {};
-
-export { Taojin };
-export default Taojin;
+export default errorBoundary(Taojin);

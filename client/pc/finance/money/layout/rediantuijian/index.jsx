@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
+import errorBoundary from '@ifeng/errorBoundary';
+
 import style from './style.css';
 import '../../reset.css';
 // import { rel } from '../../../../../utils/rel';
@@ -8,6 +9,9 @@ import HotFundsTable from '../hotfundsTable/';
 import CommonTitleL from './../commonTitleL/';
 
 class Rediantuijian extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
     state = {
         current: 0,
         tabContentConfig: [
@@ -120,14 +124,4 @@ class Rediantuijian extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Rediantuijian.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Rediantuijian.defaultProps = {};
-export { Rediantuijian };
-export default Rediantuijian;
+export default errorBoundary(Rediantuijian);

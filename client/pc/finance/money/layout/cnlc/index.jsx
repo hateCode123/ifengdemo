@@ -7,8 +7,13 @@ import style from './style.css';
 import '../../reset.css';
 import CommonTitleXL from './../commonTitleXL/';
 import CnlcTabControlArea from '../cnlcTabControlArea/';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Cnlc extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     state = {
         current: 0,
         tabContentConfig: [
@@ -82,6 +87,7 @@ class Cnlc extends React.PureComponent {
         const __type = TYPE || 'trust';
         const data = await jsonp(`http://app.finance.ifeng.com/gszb/ana_list.php?type=${__type}`);
         let arr = [...tabContentConfig];
+
         arr[__i].content = this.dealData(data, __type);
         this.setState({ tabContentConfig: [...arr] }, () => {
             console.log('tabContentConfig', tabContentConfig);
@@ -89,6 +95,7 @@ class Cnlc extends React.PureComponent {
     };
     componentDidMount() {
         const { type } = this.state;
+
         type.map(async (item, i) => {
             await this.getData(item, i);
 
@@ -103,6 +110,7 @@ class Cnlc extends React.PureComponent {
     changeUiConfig = obj => {
         const i = this.state.current;
         const arr = [...this.state.uiConfig];
+
         arr[i] = { ...obj };
 
         this.setState({
@@ -138,14 +146,4 @@ class Cnlc extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Cnlc.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Cnlc.defaultProps = {};
-export { Cnlc };
-export default Cnlc;
+export default errorBoundary(Cnlc);

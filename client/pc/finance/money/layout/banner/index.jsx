@@ -5,8 +5,13 @@ import '../../reset.css';
 import Chip from 'Chip';
 import Search from '@ifeng/ui_pc_search';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Banner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
 
@@ -33,15 +38,5 @@ class Banner extends React.PureComponent {
         );
     }
 }
-/**
- * 定义组件属性类型
- * */
-Banner.propTypes = { content: PropTypes.object };
 
-/**
- * 定义组件默认属性
- * */
-Banner.defaultProps = {};
-
-export { Banner };
-export default Banner;
+export default errorBoundary(Banner);

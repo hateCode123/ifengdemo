@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import style from './style.css';
 import '../../reset.css';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class CommonTitleXL extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+        config: PropTypes.object,
+    };
     render() {
         const { content, config } = this.props;
 
@@ -35,14 +39,4 @@ class CommonTitleXL extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CommonTitleXL.propTypes = { content: PropTypes.object, config: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-CommonTitleXL.defaultProps = {};
-export { CommonTitleXL };
-export default CommonTitleXL;
+export default errorBoundary(CommonTitleXL);

@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import errorBoundary from '@ifeng/errorBoundary';
+
 import style from './index.css';
 import Slides from '@ifeng/ui_pc_slides';
 import { rel } from '../../../../utils/rel';
 import { formatImage } from '@ifeng/public_method';
 
 class SliderInner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     /**
      * 渲染组件
      */
@@ -65,11 +70,10 @@ class SliderInner extends React.PureComponent {
     }
 }
 
-SliderInner.propTypes = { content: PropTypes.array };
-
-SliderInner.defaultProps = {};
-
 class Slider extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
     render() {
         const { content } = this.props;
 
@@ -81,15 +85,4 @@ class Slider extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Slider.propTypes = { content: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-Slider.defaultProps = {};
-
-export { Slider };
-export default Slider;
+export default errorBoundary(Slider);

@@ -6,8 +6,13 @@ import '../../reset.css';
 import CommonTitleL from './../commonTitleL/';
 import Licaisudi from './../licaisudi/';
 import HotFunds from '../hotfunds/';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class Juejin extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     /**
      * 渲染组件
      */
@@ -32,15 +37,4 @@ class Juejin extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Juejin.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Juejin.defaultProps = {};
-
-export { Juejin };
-export default Juejin;
+export default errorBoundary(Juejin);

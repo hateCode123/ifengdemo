@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import style from './style.css';
 import '../../reset.css';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class HotfundsTable extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+        head: PropTypes.array,
+    };
+
     render() {
         const { content, head } = this.props;
         // { txt: '', tdKey: '' },
@@ -87,15 +92,4 @@ class HotfundsTable extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-HotfundsTable.propTypes = { content: PropTypes.array, head: PropTypes.array };
-
-/**
- * 定义组件默认属性
- * */
-HotfundsTable.defaultProps = {};
-
-export { HotfundsTable };
-export default HotfundsTable;
+export default errorBoundary(HotfundsTable);

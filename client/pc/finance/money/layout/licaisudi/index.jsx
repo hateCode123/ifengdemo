@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'Chip';
 import style from './style.css';
 import '../../reset.css';
 import CommonTitleM from '../commonTitleM/';
 import { rel } from '../../../../utils/rel';
 // import { relative } from 'path';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class LicaisudiInner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
 
@@ -74,17 +78,11 @@ class LicaisudiInner extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-LicaisudiInner.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-LicaisudiInner.defaultProps = {};
-
 class Licaisudi extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+    };
+
     render() {
         const { content } = this.props;
 
@@ -97,14 +95,4 @@ class Licaisudi extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-Licaisudi.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-Licaisudi.defaultProps = {};
-export { Licaisudi };
-export default Licaisudi;
+export default errorBoundary(Licaisudi);

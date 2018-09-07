@@ -5,8 +5,15 @@ import style from './style.css';
 import '../../reset.css';
 import CommonTitleXL from './../commonTitleXL/';
 import { rel } from '../../../../utils/rel';
+import errorBoundary from '@ifeng/errorBoundary';
 
 class CnlcTabControlArea extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.object,
+        analy: PropTypes.object,
+        config: PropTypes.object,
+        handle: PropTypes.func,
+    };
 
     state = {
         current: 0,
@@ -60,6 +67,7 @@ class CnlcTabControlArea extends React.PureComponent {
 
     changeToPre = () => {
         const { top } = this.state;
+
         if (top < 0) {
             this.changeTop(top + 80);
         }
@@ -67,6 +75,7 @@ class CnlcTabControlArea extends React.PureComponent {
     changeToNext = () => {
         const { content } = this.props;
         const { top } = this.state;
+
         if (0 - top < (content.analyst.length - 1) * 80) {
             this.changeTop(top - 80);
         }
@@ -315,19 +324,4 @@ class CnlcTabControlArea extends React.PureComponent {
     }
 }
 
-/**
- * 定义组件属性类型
- * */
-CnlcTabControlArea.propTypes = {
-    content: PropTypes.object,
-    analy: PropTypes.object,
-    config: PropTypes.object,
-    handle: PropTypes.func,
-};
-
-/**
- * 定义组件默认属性
- * */
-CnlcTabControlArea.defaultProps = {};
-export { CnlcTabControlArea };
-export default CnlcTabControlArea;
+export default errorBoundary(CnlcTabControlArea);
