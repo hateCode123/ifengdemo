@@ -15,7 +15,11 @@ class AnswerList extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div style={{ position: 'relative' }} dangerouslySetInnerHTML={this.createAnswerList()} />;
+        return (
+            <div style={{ position: 'relative' }}>
+                <div dangerouslySetInnerHTML={this.createAnswerList()} />
+            </div>
+        );
     }
 }
 

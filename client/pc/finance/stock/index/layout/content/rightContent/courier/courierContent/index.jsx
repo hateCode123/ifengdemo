@@ -18,7 +18,11 @@ class CourierContent extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div style={{ position: 'relative' }} dangerouslySetInnerHTML={this.createMarkup()} />;
+        return (
+            <div style={{ position: 'relative' }}>
+                <div dangerouslySetInnerHTML={this.createMarkup()} />
+            </div>
+        );
     }
 }
 
