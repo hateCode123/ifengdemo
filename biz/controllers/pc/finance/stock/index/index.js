@@ -44,7 +44,7 @@ exports.list = {
             ['stockPlate', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/caterank.json', getJson()],
 
             // 动画
-            ['animationPic', 'KVProxy', 'getStaticFragment', 10085, getJsonByKey('content')],
+            ['animationPic', 'KVProxy', 'getStructuredFragment', 20041, getJsonByKey('content')],
 
             // 跳转链接
             ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getJsonByKey('content')],

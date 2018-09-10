@@ -149,8 +149,8 @@ class Layout extends React.PureComponent {
                     <div className={styles.col}>
                         <Navigation content={navigationData} />
                         <Chip
-                            id="10085"
-                            type="static"
+                            id="20041"
+                            type="struct"
                             title="动画图"
                             groupName="动画图"
                             translate="jsonParse"

@@ -18,14 +18,14 @@ module.exports = {
     },
     handleBannerPicData: data => {
         return recommendRandomSort(data, 4).map(item => ({
-            thumbnail: formatImage(item.thumbnail, 570, 260),
+            thumbnail: item.thumbnail ? formatImage(item.thumbnail, 570, 260) : item.thumbnail,
             url: item.url,
             title: item.title,
         }));
     },
     handleDayStockData: data => {
         return recommendRandomSort(data, 1).map(item => ({
-            thumbnail: formatImage(item.thumbnail, 300, 166),
+            thumbnail: item.thumbnail ? formatImage(item.thumbnail, 300, 166) : item.thumbnail,
             url: item.url,
             title: item.title,
         }));
