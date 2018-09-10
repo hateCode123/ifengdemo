@@ -153,7 +153,6 @@ class Layout extends React.PureComponent {
                             type="struct"
                             title="动画图"
                             groupName="动画图"
-                            translate="jsonParse"
                             position="relative"
                             content={animationPic}>
                             <AnimationPic />
@@ -162,11 +161,10 @@ class Layout extends React.PureComponent {
                         <div className={styles.search_box}>
                             <StockSearch />
                             <Chip
-                                id="10044"
-                                type="static"
+                                id="20042"
+                                type="struct"
                                 title="导航跳转链接"
                                 groupName="导航栏"
-                                translate="jsonParse"
                                 position="relative"
                                 content={jumpLink}>
                                 <JumpLink />

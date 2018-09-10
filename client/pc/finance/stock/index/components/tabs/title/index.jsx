@@ -30,19 +30,23 @@ class Title extends React.PureComponent {
     render() {
         const { content, current } = this.props;
 
-        return content.map((item, index) => (
-            <h4
-                key={index}
-                data-index={index}
-                className={`${styles.title} ${styles[`title${index}`]} ${
-                    content.length === 1 || current === index ? styles.current : ''
-                }`}
-                onMouseEnter={this.handleMouseOver}>
-                <a href={item.url} target="_blank" rel={rel}>
-                    {item.title}
-                </a>
-            </h4>
-        ));
+        return (
+            <div className={styles.title_box}>
+                {content.map((item, index) => (
+                    <h4
+                        key={index}
+                        data-index={index}
+                        className={`${styles.title} ${styles[`title${index}`]} ${
+                            content.length === 1 || current === index ? styles.current : ''
+                        }`}
+                        onMouseEnter={this.handleMouseOver}>
+                        <a href={item.url} target="_blank" rel={rel}>
+                            {item.title}
+                        </a>
+                    </h4>
+                ))}
+            </div>
+        );
     }
 }
 

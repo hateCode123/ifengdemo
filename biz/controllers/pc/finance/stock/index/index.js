@@ -6,7 +6,7 @@ const { handleBannerPicData, handleDayStockData } = require('../../../../../comm
 const { formatImage, formatUrl } = require('@ifeng/public_method');
 
 exports.list = {
-    path: '/pc/finance/stock/test',
+    path: '/pc/finance/stock',
     method: 'get',
     type: 'html',
     cache: 0,
@@ -47,19 +47,19 @@ exports.list = {
             ['animationPic', 'KVProxy', 'getStructuredFragment', 20041, getJsonByKey('content')],
 
             // 跳转链接
-            ['jumpLink', 'KVProxy', 'getStaticFragment', 10044, getJsonByKey('content')],
+            ['jumpLink', 'KVProxy', 'getStructuredFragment', 20042, getJsonByKey('content')],
 
             // 头条新闻
             ['headline', 'KVProxy', 'getStaticFragment', 10162, getStringByKey('content')],
 
             // 要闻直播标题
-            ['newsLiveTab', 'KVProxy', 'getStaticFragment', 10049, getJsonByKey('content')],
+            ['newsLiveTab', 'KVProxy', 'getStructuredFragment', 20043, getJsonByKey('content')],
 
             // 要闻直播标题外链
-            ['newsLiveTabLink', 'KVProxy', 'getStaticFragment', 10115, getJsonByKey('content')],
+            ['newsLiveTabLink', 'KVProxy', 'getStructuredFragment', 20044, getJsonByKey('content')],
 
             // 直播 Logo
-            ['liveLogo', 'KVProxy', 'getStaticFragment', 10052, getJsonByKey('content')],
+            ['liveLogo', 'KVProxy', 'getStructuredFragment', 20045, getJsonByKey('content')],
 
             // 证券要闻 3级
             ['stockNews', 'KVProxy', 'getDynamicFragment', '20067', getStringByKey('data')],
@@ -68,7 +68,7 @@ exports.list = {
             ['stockNewsList', 'KVProxy', 'getDynamicFragment', '20032', getStringByKey('data')],
 
             // 公司要闻标题
-            ['newsTab', 'KVProxy', 'getStaticFragment', 10050, getJsonByKey('content')],
+            ['newsTab', 'KVProxy', 'getStructuredFragment', 20046, getJsonByKey('content')],
 
             // 公司要闻
             ['news', 'KVProxy', 'getDynamicFragment', '20068', getStringByKey('data')],
@@ -77,10 +77,10 @@ exports.list = {
             ['newsList', 'KVProxy', 'getDynamicFragment', '20033', getStringByKey('data')],
 
             // 牛人解盘标题
-            ['answerTab', 'KVProxy', 'getStaticFragment', 10051, getJsonByKey('content')],
+            ['answerTab', 'KVProxy', 'getStructuredFragment', 20047, getJsonByKey('content')],
 
             // 牛人解盘子标题
-            ['answerSubTab', 'KVProxy', 'getStaticFragment', 10118, getJsonByKey('content')],
+            ['answerSubTab', 'KVProxy', 'getStructuredFragment', 20048, getJsonByKey('content')],
 
             // 牛人解盘
             ['answerList', 'KVProxy', 'getStaticFragment', 10163, getStringByKey('content')],

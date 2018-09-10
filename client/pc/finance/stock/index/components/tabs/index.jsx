@@ -30,7 +30,6 @@ class Tab extends React.PureComponent {
                         type={title.type}
                         title={title.title}
                         groupName={title.groupName}
-                        translate="jsonParse"
                         content={title.content}
                         position="relative">
                         <Title current={current} handleTabsChange={handleTabsChange} />
@@ -44,7 +43,6 @@ class Tab extends React.PureComponent {
                         type={subTitle.type}
                         title={subTitle.title}
                         groupName={subTitle.groupName}
-                        translate="jsonParse"
                         content={subTitle.content}
                         position="relative">
                         <SubTitle />

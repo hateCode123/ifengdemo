@@ -16,8 +16,8 @@ class News extends React.PureComponent {
     render() {
         const { content } = this.props;
         const title = {
-            id: '10050',
-            type: 'static',
+            id: '20046',
+            type: 'struct',
             title: '公司要闻主标题',
             groupName: '正文',
             content: content.newsTab,

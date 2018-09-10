@@ -8,7 +8,7 @@ import { rel } from '../../../../../../../../utils/rel';
 
 class Live extends React.Component {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
         current: PropTypes.number,
         selected: PropTypes.bool,
         handleSelected: PropTypes.func,
@@ -184,15 +184,14 @@ class Live extends React.Component {
                     </span>
                     <a href="//finance.ifeng.com/gold/zhibo/" target="_blank" rel={rel}>
                         <Chip
-                            id="10052"
-                            type="static"
+                            id="20045"
+                            type="struct"
                             title="直播Logo"
                             groupName="正文"
                             position="relative"
-                            translate="jsonParse"
                             content={content}>
                             <div className={styles.logo}>
-                                <img src={content[0].url} title={content[0].title} alt={content[0].title} />
+                                <img src={content.url} title={content.title} alt={content.title} />
                             </div>
                         </Chip>
                     </a>

@@ -36,16 +36,16 @@ class NewsLive extends React.PureComponent {
         const stockNews = content.stockNews;
 
         const title = {
-            id: '10049',
-            type: 'static',
+            id: '20043',
+            type: 'struct',
             title: '要闻直播主标题',
             groupName: '正文',
             content: content.newsLiveTab,
         };
 
         const newsLiveTabLink = {
-            id: '10115',
-            type: 'static',
+            id: '20044',
+            type: 'struct',
             title: '要闻直播标题外链',
             groupName: '正文',
             content: content.newsLiveTabLink,

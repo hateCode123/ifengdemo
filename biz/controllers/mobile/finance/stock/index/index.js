@@ -1,5 +1,5 @@
 exports.mobileFinanceStock = {
-    path: '/mobile/finance/stock/test',
+    path: '/mobile/finance/stock',
     method: 'get',
     type: 'html',
     cache: 0,

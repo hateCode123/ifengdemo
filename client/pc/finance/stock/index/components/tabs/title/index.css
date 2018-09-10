@@ -1,5 +1,10 @@
-.title {
+.title_box {
     position: relative;
+    float: left;
+    height: 38px;
+}
+
+.title {
     background: #fff;
     height: 30px;
     line-height: 30px;
