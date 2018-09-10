@@ -30,7 +30,7 @@ class News extends React.PureComponent {
                                 </a>
                             </p>
                             <p className={styles.time}>
-                                <span className={styles[`${item.typeStyle}`]}>{item.type}</span>
+                                {/* <span className={styles[`${item.typeStyle}`]}>{item.type}</span> */}
                                 <span className={styles.source}>{item.source}</span>
                                 <span className={styles.date}>{item.date}</span>
                                 <span className={styles.date}>{item.time}</span>
