@@ -92,7 +92,7 @@ exports.list = {
             ['courier', 'KVProxy', 'getStaticFragment', 10082, getStringByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStructuredFragment', 20012, getStringByKey('content')],
+            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
 
             // 二维码
             ['qrCode', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],

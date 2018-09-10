@@ -9,21 +9,22 @@ import { rel } from '../../utils/rel';
  */
 class Footer extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
-        const copyrightData = content.pop();
+        const {
+            content: { nav, content },
+        } = this.props;
 
         return (
             <div className={styles.footer}>
                 <div className={`${styles.foot_link} clearfix`}>
                     <div className={styles.list}>
-                        {content.map((item, index) => (
+                        {nav.map((item, index) => (
                             <a key={index} className={styles.link} href={item.url} target="_blank" rel={rel}>
                                 {item.title}
                             </a>
@@ -31,9 +32,9 @@ class Footer extends React.PureComponent {
                     </div>
                 </div>
                 <div className={styles.copyright}>
-                    <span>{copyrightData.text0}</span>
-                    <span>{copyrightData.text1}</span>
-                    <span>{copyrightData.text2}</span>
+                    <span>{content.text0}</span>
+                    <span>{content.text1}</span>
+                    <span>{content.text2}</span>
                 </div>
             </div>
         );

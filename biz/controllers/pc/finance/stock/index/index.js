@@ -29,13 +29,13 @@ exports.list = {
             ['search', 'KVProxy', 'getStructuredFragment', 20005, getJsonByKey('content')],
 
             // Logo
-            ['logo', 'KVProxy', 'getStaticFragment', 10133, getJsonByKey('content')],
+            ['logo', 'KVProxy', 'getStructuredFragment', 20037, getJsonByKey('content')],
 
             // Logo Ad
-            ['logoAd', 'KVProxy', 'getStaticFragment', 10134, getJsonByKey('content')],
+            ['logoAd', 'KVProxy', 'getStructuredFragment', 20038, getJsonByKey('content')],
 
             // 股票导航
-            ['navigation', 'KVProxy', 'getStaticFragment', 10038, getJsonByKey('content')],
+            ['navigation', 'KVProxy', 'getStructuredFragment', 20039, getJsonByKey('content')],
 
             // 股票子导航
             ['subNavigation', 'KVProxy', 'getStaticFragment', 10040, getJsonByKey('content')],
@@ -248,7 +248,7 @@ exports.list = {
             ['cooperation', 'KVProxy', 'getStaticFragment', 10074, getStringByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
+            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getJsonByKey('content')],
 
             // 二维码
             ['qrCode', 'KVProxy', 'getStaticFragment', 10136, getJsonByKey('content')],
@@ -373,57 +373,70 @@ exports.list = {
             allData.QATabs[3].url = formatUrl(allData.QATabs[3].url);
             allData.QATabs[3].src = formatImage(allData.QATabs[3].src, 60, 60);
 
-            allData.hyin.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.hyin)
+                allData.hyin.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.hyout.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.hyout)
+                allData.hyout.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.gnin.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.gnin)
+                allData.gnin.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.gnout.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.gnout)
+                allData.gnout.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.marketRadar.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.marketRadar)
+                allData.marketRadar.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.track.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.track)
+                allData.track.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.fiveDaysBuy.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.fiveDaysBuy)
+                allData.fiveDaysBuy.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.fiveDaysSell.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.hyin)
+                allData.fiveDaysSell.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.stockpoolData.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.stockpoolData)
+                allData.stockpoolData.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.chgpctestData.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.chgpctestData)
+                allData.chgpctestData.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.levelupData.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.levelupData)
+                allData.levelupData.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.firstfocusData.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.firstfocusData)
+                allData.firstfocusData.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
 
-            allData.focusestData.forEach(item => {
-                item.ybinfo[1] = formatUrl(item.ybinfo[1]);
-            });
+            if (allData.focusestData)
+                allData.focusestData.forEach(item => {
+                    item.ybinfo[1] = formatUrl(item.ybinfo[1]);
+                });
         } catch (error) {
             logger.error(error);
             ctx.errorCount++;

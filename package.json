@@ -56,7 +56,7 @@
         "@ifeng/ui_pc_lazyLoad": "^1.0.2",
         "@ifeng/ui_pc_search": "^1.0.6",
         "@ifeng/ui_pc_slides": "^1.0.6",
-        "@ifeng/ui_pc_userInfo": "^1.0.6",
+        "@ifeng/ui_pc_userInfo": "^1.0.7",
         "@ifeng/visualediting": "^1.0.9",
         "@ifengbuild/postcss-adaptive": "^1.0.1",
         "anujs": "^1.4.4",

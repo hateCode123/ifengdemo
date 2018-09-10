@@ -53,7 +53,9 @@ class RecommendStock extends React.PureComponent {
                         {content.map((item, index) => (
                             <tr key={index}>
                                 <td>
-                                    <a href={`//finance.ifeng.com/app/hq/stock/${item.code}`}>{item.name}</a>
+                                    <a href={`//finance.ifeng.com/app/hq/stock/${item.code}`} target="_blank" rel={rel}>
+                                        {item.name}
+                                    </a>
                                 </td>
                                 <td
                                     className={

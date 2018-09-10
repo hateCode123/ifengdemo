@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
+import { rel } from '../../../../../../utils/rel';
 
 class StarAnalyst extends React.PureComponent {
     static propTypes = {
@@ -68,21 +69,36 @@ class StarAnalyst extends React.PureComponent {
                                 <tr key={index}>
                                     <td>{item.rank}</td>
                                     <td>
-                                        <a href={`//star.finance.ifeng.com/analyst/${item.indcode}`}>{item.ananame}</a>
+                                        <a
+                                            href={`//star.finance.ifeng.com/analyst/${item.indcode}`}
+                                            target="_blank"
+                                            rel={rel}>
+                                            {item.ananame}
+                                        </a>
                                     </td>
                                     <td className={styles.red}>{item[`${flag}_total`]}</td>
                                     <td className={styles.red}>{item[`${flag}_succ_num`]}</td>
                                     <td className={styles.red}>{item[`${flag}_avg_ana`]}</td>
                                     <td>
                                         {item.orgname ? (
-                                            <a href={`//star.finance.ifeng.com/org/${item.orgcode}`}>{item.orgname}</a>
+                                            <a
+                                                href={`//star.finance.ifeng.com/org/${item.orgcode}`}
+                                                target="_blank"
+                                                rel={rel}>
+                                                {item.orgname}
+                                            </a>
                                         ) : (
                                             ''
                                         )}
                                     </td>
                                     <td>
                                         {item.orgname ? (
-                                            <a href={`//finance.ifeng.com/app/hq/stock/${item.code}`}>{item.name}</a>
+                                            <a
+                                                href={`//finance.ifeng.com/app/hq/stock/${item.code}`}
+                                                target="_blank"
+                                                rel={rel}>
+                                                {item.name}
+                                            </a>
                                         ) : (
                                             ''
                                         )}
