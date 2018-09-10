@@ -58,16 +58,10 @@ exports.financeWemoney = {
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
             // adHead
-            ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
+            ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
 
             // adBody
-            [
-                'adBody',
-                'KVProxy',
-                'getAd',
-                'ad_new_chip/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html',
-                getString(),
-            ],
+            ['adBody', 'KVProxy', 'getAd', 'ad_new_chip/s_all_indexs_180823_ad_qpdpcggdb.inc.html', getString()],
 
             // topAd
             ['topAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
