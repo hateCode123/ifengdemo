@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import Recommend from '../recommend/';
+import Recommend from '../../compontents/recommend';
 import Search from './search/';
 import errorBoundary from '@ifeng/errorBoundary';
 
