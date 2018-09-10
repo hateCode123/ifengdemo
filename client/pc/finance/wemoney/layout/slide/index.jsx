@@ -7,10 +7,6 @@ import PropTypes from 'prop-types';
 import errorBoundary from '@ifeng/errorBoundary';
 
 class SimpleSlider extends React.PureComponent {
-    changeCallback = function changeCallback(index, total) {
-        console.log(index, total);
-    };
-
     /**
      * 渲染组件
      */
@@ -19,18 +15,6 @@ class SimpleSlider extends React.PureComponent {
 
         const config = {
             arrows: false,
-            dots: true,
-            afterChange: this.changeCallback,
-            beiginChange: this.changeCallback,
-            autoplay: true,
-            direction: 'forward',
-            pauseOnHover: true,
-            autoplayInterval: 3000,
-            axis: 'horizonta',
-            className: 'mySliders',
-            effect: 'slide',
-            initialSlide: 0,
-            speed: 300,
         };
 
         return (
