@@ -38,7 +38,7 @@ exports.list = {
             ['navigation', 'KVProxy', 'getStructuredFragment', 20039, getJsonByKey('content')],
 
             // 股票子导航
-            ['subNavigation', 'KVProxy', 'getStaticFragment', 10040, getJsonByKey('content')],
+            ['subNavigation', 'KVProxy', 'getStructuredFragment', 20040, getJsonByKey('content')],
 
             // 股票显示
             ['stockPlate', 'KVProxy', 'getSsiFragment', 'finance.ifeng.com/app/json/zq/caterank.json', getJson()],

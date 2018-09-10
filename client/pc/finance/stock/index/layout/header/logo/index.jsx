@@ -17,18 +17,18 @@ class Logo extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        const logo = this.props.content.logo[0];
-        const logoAd = this.props.content.logoAd[0];
+        const logo = this.props.content.logo;
+        const logoAd = this.props.content.logoAd;
 
         const LOGO = (
             <a key="logo" href={logo.url} target="_blank" rel={rel}>
-                <Chip id="10133" type="static" title="Logo" groupName="头部" translate="jsonParse" content={logo}>
+                <Chip id="20037" type="struct" title="Logo" groupName="头部" content={logo}>
                     <img src={logo.src} alt={logo.title} width={logo.width} height={logo.height} />
                 </Chip>
             </a>
         );
         const ad = (
-            <Chip key="ad" id="10134" type="static" title="Logo" groupName="头部" translate="jsonParse" content={logo}>
+            <Chip key="ad" id="20038" type="struct" title="LogoAd" groupName="头部" content={logo}>
                 <img className={styles.ad} src={logoAd.src} width={logoAd.width} height={logoAd.height} />
             </Chip>
         );
