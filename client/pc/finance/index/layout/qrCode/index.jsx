@@ -47,7 +47,7 @@ class QrCode extends React.PureComponent {
             </div>
         );
 
-        return ReactDOM.createPortal(qrCode, document.getElementById('root'));
+        return ReactDOM.createPortal(qrCode, document.body);
     }
 }
 
