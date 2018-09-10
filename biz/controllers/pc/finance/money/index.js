@@ -58,58 +58,34 @@ exports.financeWemoney = {
             ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
 
             // adHead
-            [
-                'adHead',
-                'KVProxy',
-                'getAd',
-                'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
-                getString(),
-            ],
+            ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
 
             // adBody
             [
                 'adBody',
                 'KVProxy',
                 'getAd',
-                'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
+                'ad_new_chip/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html',
                 getString(),
             ],
 
             // topAd
-            [
-                'topAd',
-                'KVProxy',
-                'getAd',
-                'http://finance.ifeng.com/ssi-incs/s_finance_index_ad_banner_top_1000x90_2j.html/test',
-                getString(),
-            ],
+            ['topAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
 
             // infoAd
-            [
-                'infoAd',
-                'KVProxy',
-                'getAd',
-                'http://finance.ifeng.com//ssi-incs/s_finance_stock_index_ad_button_02.inc.html/test',
-                getString(),
-            ],
+            ['infoAd', 'KVProxy', 'getAd', 'ad_new_chip/s_finance_stock_index_ad_button_02.inc.html', getString()],
 
             // hardAd
             [
                 'hardAd',
                 'KVProxy',
                 'getAd',
-                'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
+                'ad_new_chip/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
                 getString(),
             ],
 
             // bottomAd
-            [
-                'bottomAd',
-                'KVProxy',
-                'getAd',
-                'http://www.ifeng.com/ssi-incs/s_all_index_ad_banner_bottom.inc.html/test',
-                getString(),
-            ],
+            ['bottomAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         ];
 
         const allData = await transfer(ctx, json);
