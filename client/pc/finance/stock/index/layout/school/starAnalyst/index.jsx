@@ -26,7 +26,7 @@ class StarAnalyst extends React.PureComponent {
     render() {
         const { current } = this.state;
         const { tabs, content } = this.props;
-        const tableTabs = content[0][0].tabs;
+        const tableTabs = content[0].tabs;
         const data = content[current + 1];
         let flag = '';
 

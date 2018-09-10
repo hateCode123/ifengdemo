@@ -24,11 +24,10 @@ class MiddleContent extends React.PureComponent {
             <div className={styles.col_M}>
                 <div className={styles.cattle_stocks}>
                     <Chip
-                        id="10100"
-                        type="static"
+                        id="20049"
+                        type="struct"
                         title="视频抓牛股标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.cattleStocksTitle}
                         position="relative">
                         <MidTitle nowTime />
@@ -38,11 +37,10 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.space16} />
                 <div className={styles.rank_box}>
                     <Chip
-                        id="10101"
-                        type="static"
+                        id="20050"
+                        type="struct"
                         title="涨跌排行榜标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.rankTitle}
                         position="relative">
                         <MidTitle />
@@ -52,11 +50,10 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.space16} />
                 <div className={styles.funds_flow}>
                     <Chip
-                        id="10102"
-                        type="static"
+                        id="20051"
+                        type="struct"
                         title="资金流向标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.fundsFlowTitle}
                         position="relative">
                         <MidTitle />
@@ -66,11 +63,10 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.space16} />
                 <div className={styles.custom_stocks}>
                     <Chip
-                        id="10103"
-                        type="static"
+                        id="20052"
+                        type="struct"
                         title="自选股登录标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.customStocksTitle}
                         position="relative">
                         <MidTitle />
@@ -80,11 +76,10 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.space20} />
                 <div className={styles.qa}>
                     <Chip
-                        id="10104"
-                        type="static"
+                        id="20053"
+                        type="struct"
                         title="分析师答疑标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.QaTitle}
                         position="relative">
                         <MidTitle />

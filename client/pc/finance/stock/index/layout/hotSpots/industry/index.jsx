@@ -26,7 +26,7 @@ class Industry extends React.PureComponent {
     render() {
         const { current, max } = this.state;
         const { industry, hyin, hyout, gnin, gnout } = this.props.content;
-        const { tabs, tableTabs, image, imageUrl } = industry[0];
+        const { tabs, tableTabs, image, imageUrl } = industry;
         const data = [hyin, hyout, gnin, gnout];
         const datas = data[current];
 

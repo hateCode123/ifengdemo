@@ -6,15 +6,16 @@ import { rel } from '../../../../../utils/rel';
 
 class TableTitle extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content } = this.props;
-        const { title, url, more } = content[0];
+        const {
+            content: { title, url, more },
+        } = this.props;
 
         return (
             <div className={`${styles.title_box} clearfix`}>

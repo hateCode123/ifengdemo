@@ -19,11 +19,10 @@ class Courier extends React.PureComponent {
         return (
             <React.Fragment>
                 <Chip
-                    id="10119"
-                    type="static"
+                    id="20057"
+                    type="struct"
                     title="理财速递标题"
                     groupName="正文"
-                    translate="jsonParse"
                     content={content.courierTitle}
                     position="relative">
                     <CourierTitle />

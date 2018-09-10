@@ -192,14 +192,7 @@ class Layout extends React.PureComponent {
                 </div>
                 <BottomFooter content={footerData} />
                 <div className={styles.space25} />
-                <Chip
-                    id="10136"
-                    type="static"
-                    title="二维码"
-                    groupName="二维码"
-                    translate="jsonParse"
-                    position="relative"
-                    content={qrCode}>
+                <Chip id="20079" type="struct" title="二维码" groupName="二维码" position="relative" content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix />

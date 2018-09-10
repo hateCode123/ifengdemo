@@ -9,7 +9,7 @@ import errorBoundary from '@ifeng/errorBoundary';
  */
 class QrCode extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     state = {
@@ -30,7 +30,7 @@ class QrCode extends React.PureComponent {
      */
     render() {
         const { isShow } = this.state;
-        const content = this.props.content[0];
+        const { content } = this.props;
 
         const qrCode = (
             <div className={styles.qrCode} style={{ display: isShow ? 'block' : 'none' }}>

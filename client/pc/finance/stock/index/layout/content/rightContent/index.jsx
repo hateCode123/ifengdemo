@@ -25,11 +25,10 @@ class RightContent extends React.PureComponent {
             <div className={styles.col_R}>
                 <div className={styles.box}>
                     <Chip
-                        id="10076"
-                        type="static"
+                        id="20055"
+                        type="struct"
                         title="热点专题标题"
                         groupName="正文"
-                        translate="jsonParse"
                         content={content.subjectTitle}
                         position="relative">
                         <RightSideTitle />
@@ -38,11 +37,10 @@ class RightContent extends React.PureComponent {
                 </div>
                 <div className="clear" />
                 <Chip
-                    id="10077"
-                    type="static"
+                    id="20056"
+                    type="struct"
                     title="投教学堂标题"
                     groupName="正文"
-                    translate="jsonParse"
                     content={content.marketTitle}
                     position="relative">
                     <RightSideTitle />
@@ -58,11 +56,10 @@ class RightContent extends React.PureComponent {
                 </Chip>
                 <Courier content={content.courier} />
                 <Chip
-                    id="10083"
-                    type="static"
+                    id="20058"
+                    type="struct"
                     title="视频播放项"
                     groupName="正文"
-                    translate="jsonParse"
                     content={content.playItem}
                     position="relative">
                     <PlayItem />

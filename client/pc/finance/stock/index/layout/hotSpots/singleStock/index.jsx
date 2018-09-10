@@ -33,14 +33,14 @@ class SingleStock extends React.PureComponent {
         let list = null;
 
         if (current === 0) {
-            list = <MarketRadar tabs={marketRadarTabs[0].tabs} content={marketRadar} />;
+            list = <MarketRadar tabs={marketRadarTabs.tabs} content={marketRadar} />;
         } else if (current === 1) {
-            list = <Track tabs={trackTabs[0].tabs} content={track} />;
+            list = <Track tabs={trackTabs.tabs} content={track} />;
         } else {
             list = (
                 <FiveDays
                     current={current}
-                    tabs={fiveDaysTabs[0].tabs}
+                    tabs={fiveDaysTabs.tabs}
                     content={current === 2 ? fiveDaysBuy : fiveDaysSell}
                 />
             );

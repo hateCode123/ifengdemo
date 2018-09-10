@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
-import { jsonp } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
 import { getAnalyzerInfo, getQAData } from '../../../../../../../services/api';
 import { rel } from '../../../../../../../utils/rel';
@@ -11,7 +10,7 @@ import QaForm from './QAForm/';
 
 class Qa extends React.PureComponent {
     static propTypes = {
-        tabs: PropTypes.array,
+        tabs: PropTypes.object,
     };
 
     state = {
@@ -28,8 +27,10 @@ class Qa extends React.PureComponent {
 
     handleMouseOver = index => {
         const { qaers, alist } = this.state;
-        const { tabs } = this.props;
-        const currentUser = tabs[index];
+        const {
+            tabs: { analyzerList },
+        } = this.props;
+        const currentUser = analyzerList[index];
 
         if (!qaers[currentUser.name] && !alist[currentUser.name]) {
             this.getQaData(index);
@@ -43,22 +44,24 @@ class Qa extends React.PureComponent {
     getQaData = async index => {
         try {
             const { qaers, alist } = this.state;
-            const { tabs } = this.props;
-            const currentUser = tabs[index];
+            const {
+                tabs: { analyzerList, allData },
+            } = this.props;
+            const currentUser = analyzerList[index];
             const qa = {};
             const list = {};
 
-            if (index !== tabs.length - 1) {
+            if (index !== analyzerList.length - 1) {
                 const userData = await getAnalyzerInfo(currentUser.name, currentUser.type);
 
                 qa[currentUser.name] = {
                     url: userData[0].url,
                     img: userData[0].image,
                 };
-            } else if (index === tabs.length - 1) {
+            } else if (index === analyzerList.length - 1) {
                 qa[currentUser.name] = {
-                    url: tabs[tabs.length - 1].url,
-                    img: tabs[tabs.length - 1].src,
+                    url: allData.url,
+                    img: allData.image,
                 };
             }
 
@@ -115,18 +118,19 @@ class Qa extends React.PureComponent {
      */
     render() {
         const { current, qaers } = this.state;
-        const { tabs } = this.props;
-        const currentUser = tabs[current];
+        const {
+            tabs: { analyzerList },
+        } = this.props;
+        const currentUser = analyzerList[current];
 
         return (
             <div>
                 <Chip
-                    id="10105"
-                    type="static"
+                    id="20054"
+                    type="struct"
                     title="分析师"
                     groupName="正文"
-                    translate="jsonParse"
-                    content={tabs}
+                    content={analyzerList}
                     position="relative">
                     <QaTabs current={current} handleMouseOver={this.handleMouseOver} />
                 </Chip>

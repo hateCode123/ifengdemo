@@ -6,7 +6,7 @@ import { rel } from '../../../../../utils/rel';
 
 class MidTitle extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
         nowTime: PropTypes.bool,
     };
 
@@ -58,8 +58,8 @@ class MidTitle extends React.PureComponent {
         return (
             <div className={styles.title}>
                 {nowTime ? <span>{time}</span> : ''}
-                <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                    {content[0].title}
+                <a href={content.url} target="_blank" rel={rel} title={content.title}>
+                    {content.title}
                 </a>
             </div>
         );

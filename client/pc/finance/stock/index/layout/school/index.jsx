@@ -54,11 +54,10 @@ class School extends React.PureComponent {
         return (
             <div className={`${styles.school} clearfix`}>
                 <Chip
-                    id="10069"
-                    type="static"
+                    id="20068"
+                    type="struct"
                     title="高手学堂标题"
                     groupName="高手学堂"
-                    translate="jsonParse"
                     content={content.schoolTitle}
                     position="relative">
                     <HeadTitle>
@@ -68,11 +67,10 @@ class School extends React.PureComponent {
                 <div className={styles.col_L}>
                     <div className={styles.box}>
                         <Chip
-                            id="10072"
-                            type="static"
+                            id="20069"
+                            type="struct"
                             title="高手操盘日志标题"
                             groupName="高手学堂"
-                            translate="jsonParse"
                             content={content.schoolSubTitle1}
                             position="relative">
                             <Caption />
@@ -81,11 +79,10 @@ class School extends React.PureComponent {
                     </div>
                     <div className={styles.box}>
                         <Chip
-                            id="10073"
-                            type="static"
+                            id="20070"
+                            type="struct"
                             title="股民学校标题"
                             groupName="高手学堂"
-                            translate="jsonParse"
                             content={content.schoolSubTitle2}
                             position="relative">
                             <Caption />
@@ -99,21 +96,20 @@ class School extends React.PureComponent {
                 <div className={styles.col_R}>
                     <div>
                         <Chip
-                            id="10092"
-                            type="static"
+                            id="20071"
+                            type="struct"
                             title="明星分析师标题"
                             groupName="高手学堂"
-                            translate="jsonParse"
                             content={starAnalystTitle}
                             position="relative">
                             <TableTitle />
                         </Chip>
-                        <StarAnalyst tabs={starAnalystTitle[0].tabs} content={starAnalystData} />
+                        <StarAnalyst tabs={starAnalystTitle.tabs} content={starAnalystData} />
                     </div>
                     <div className={styles.data_box}>
                         <Chip
-                            id="10094"
-                            type="static"
+                            id="20073"
+                            type="struct"
                             title="研报选股标题"
                             groupName="高手学堂"
                             translate="jsonParse"
@@ -121,7 +117,7 @@ class School extends React.PureComponent {
                             position="relative">
                             <TableTitle />
                         </Chip>
-                        <StockPicking tabs={stockPickingTitle[0].tabs} content={stockPickingData} />
+                        <StockPicking tabs={stockPickingTitle.tabs} content={stockPickingData} />
                     </div>
                 </div>
             </div>

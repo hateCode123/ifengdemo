@@ -6,14 +6,14 @@ import errorBoundary from '@ifeng/errorBoundary';
 
 class PlayItem extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const content = this.props.content[0];
+        const { content } = this.props;
 
         return (
             <div className={styles.playitem}>
