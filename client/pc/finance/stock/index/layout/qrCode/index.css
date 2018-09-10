@@ -1,5 +1,6 @@
 .qrCode {
     position: fixed;
+    z-index: 9999999999;
     display: block;
     top: 250px;
     width: 110px;
