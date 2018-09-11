@@ -64,12 +64,12 @@ class Layout extends React.PureComponent {
         __jingneijuejinTitle: {
             title: '境内掘金',
             more: [
-                {
-                    txt: '更多基金',
-                    url: 'https://etrade.fengfd.com/',
-                    newOpen: true,
-                    icon: true,
-                },
+                // {
+                //     txt: '更多基金',
+                //     url: 'https://etrade.fengfd.com/',
+                //     newOpen: true,
+                //     icon: true,
+                // },
             ],
         },
         __sudiTitle01: {
@@ -107,12 +107,12 @@ class Layout extends React.PureComponent {
         __haiwaitaojinTitle: {
             title: '海外淘金',
             more: [
-                {
-                    txt: '更多基金',
-                    url: '//etrade.fengfd.com/',
-                    newOpen: true,
-                    icon: true,
-                },
+                // {
+                //     txt: '更多基金',
+                //     url: '//etrade.fengfd.com/',
+                //     newOpen: true,
+                //     icon: true,
+                // },
             ],
         },
         __sudiTitle02: {
@@ -150,18 +150,18 @@ class Layout extends React.PureComponent {
         __rediantuijianTitle: {
             title: '热点推荐',
             more: [
-                {
-                    txt: '收益排行',
-                    url: '//etrade.fengfd.com/list/',
-                    newOpen: true,
-                    icon: false,
-                },
-                {
-                    txt: '最新净值',
-                    url: '//etrade.fengfd.com/list/',
-                    newOpen: true,
-                    icon: false,
-                },
+                // {
+                //     txt: '收益排行',
+                //     url: '//etrade.fengfd.com/list/',
+                //     newOpen: true,
+                //     icon: false,
+                // },
+                // {
+                //     txt: '最新净值',
+                //     url: '//etrade.fengfd.com/list/',
+                //     newOpen: true,
+                //     icon: false,
+                // },
             ],
         },
         __cnlcTitle: {
