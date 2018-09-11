@@ -6,12 +6,13 @@ const { formatImage, formatUrl } = require('@ifeng/public_method');
 const logger = require('../../../../common/logger');
 
 exports.financeWemoney = {
-    path: '/pc/finance/money',
+    path: '/pc/finance/money/test',
     method: 'get',
     edit: true,
     type: 'html',
     low: true,
     preview: true,
+    online: true,
     handler: async ctx => {
         const json = [
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
