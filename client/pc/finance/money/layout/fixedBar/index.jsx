@@ -72,7 +72,7 @@ class FixedBar extends React.PureComponent {
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td className={style.Focus}>
                                 <a href="#fxs" id={style.sea_02}>
                                     <b />
@@ -81,7 +81,7 @@ class FixedBar extends React.PureComponent {
                                     </p>
                                 </a>
                             </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <td>
                                 <a
