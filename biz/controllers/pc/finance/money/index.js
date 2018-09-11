@@ -67,14 +67,14 @@ exports.financeWemoney = {
             ['topAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
 
             // infoAd
-            ['infoAd', 'KVProxy', 'getAd', 'ad_new_chip/s_finance_stock_index_ad_button_02.inc.html', getString()],
+            ['infoAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_stock_index_ad_button_02.inc.html', getString()],
 
             // hardAd
             [
                 'hardAd',
                 'KVProxy',
                 'getAd',
-                'ad_new_chip/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
                 getString(),
             ],
 
