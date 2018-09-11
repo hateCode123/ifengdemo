@@ -112,7 +112,7 @@ class Rediantuijian extends React.PureComponent {
         });
 
         return (
-            <div className={style.rdtj} style={{ 'padding-bottom': '20px' }}>
+            <div className={style.rdtj} style={{ paddingBottom: '20px' }}>
                 <CommonTitleL content={content.rediantuijianTitle} />
 
                 <div style={{ marginTop: '18px' }}>
