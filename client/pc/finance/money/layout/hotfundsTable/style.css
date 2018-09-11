@@ -55,7 +55,7 @@
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
 }
 .abo td {
     height: 30px;
@@ -69,7 +69,7 @@
 .abo a {
     color: #222222;
 
-    width: 8em;
+    width: 11em;
 }
 .abo .color_red {
     color: #f54343;

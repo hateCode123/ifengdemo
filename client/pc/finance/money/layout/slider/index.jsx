@@ -58,6 +58,9 @@ class SliderInner extends React.PureComponent {
             dots: true,
             axis: 'horizonta',
             sliderTmpl,
+            // dotStyle: style.dot,
+            dotCurrentStyle: style.dotCurrent,
+            autoplayInterval: 10000,
         };
         const __data = this.getData(content);
         const dom = (
