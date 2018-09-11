@@ -56,7 +56,6 @@ class Tab extends React.PureComponent {
                         type={newsLiveTabLink.type}
                         title={newsLiveTabLink.title}
                         groupName={newsLiveTabLink.groupName}
-                        translate="jsonParse"
                         content={newsLiveTabLink.content}
                         position="relative">
                         <Link />

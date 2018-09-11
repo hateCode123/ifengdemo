@@ -112,7 +112,6 @@ class School extends React.PureComponent {
                             type="struct"
                             title="研报选股标题"
                             groupName="高手学堂"
-                            translate="jsonParse"
                             content={stockPickingTitle}
                             position="relative">
                             <TableTitle />
