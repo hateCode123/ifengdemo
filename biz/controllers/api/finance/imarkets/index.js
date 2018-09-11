@@ -5,7 +5,7 @@ const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 exports.goldSnapshotsDataCache = {
     path: '/api/gold/snapshots/dataCache',
     method: 'get',
-    online: false,
+    online: true,
     handler: async ctx => {
         const json = [
             // 顶部新闻

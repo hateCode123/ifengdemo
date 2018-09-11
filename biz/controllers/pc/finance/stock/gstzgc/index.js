@@ -4,12 +4,13 @@ const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../..
 const { formatImage, formatUrl, recommendRandomSort } = require('@ifeng/public_method');
 
 exports.financeWemoney = {
-    path: '/pc/finance/stock/gstzgc',
+    path: '/pc/finance/stock/gstzgc/test',
     method: 'get',
     edit: true,
     type: 'html',
     low: true,
     preview: true,
+    online: true,
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段

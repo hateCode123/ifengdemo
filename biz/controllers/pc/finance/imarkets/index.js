@@ -117,21 +117,23 @@ let handler = async ctx => {
 };
 
 exports.gold = {
-    path: '/pc/finance/gold',
+    path: '/pc/finance/gold/test',
     method: 'get',
     type: 'html',
     edit: true,
     low: true,
     preview: true,
+    online: true,
     handler
 };
 
 exports.snapshots = {
-    path: '/pc/finance/gold/:snapshots?/:year?/:date?',
+    path: '/pc/finance/gold/:snapshots?/:year?/:date?/test',
     method: 'get',
     type: 'html',
     edit: true,
     low: true,
     preview: true,
+    online: true,
     handler
 };
