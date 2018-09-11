@@ -6,12 +6,13 @@ const { formatImage, formatUrl } = require('@ifeng/public_method');
 const logger = require('../../../../common/logger');
 
 exports.financeWemoney = {
-    path: '/pc/finance/money',
+    path: '/pc/finance/money/test',
     method: 'get',
     edit: true,
     type: 'html',
     low: true,
     preview: true,
+    online: true,
     handler: async ctx => {
         const json = [
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
@@ -55,8 +56,8 @@ exports.financeWemoney = {
             ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
 
             // 底部公用版权
-          
-            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
+            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getJsonByKey('content')],
+
             // adHead
             ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
 
@@ -67,14 +68,14 @@ exports.financeWemoney = {
             ['topAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_ad_banner_top_1000x90.inc.html', getString()],
 
             // infoAd
-            ['infoAd', 'KVProxy', 'getAd', 'ad_new_chip/s_finance_stock_index_ad_button_02.inc.html', getString()],
+            ['infoAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_stock_index_ad_button_02.inc.html', getString()],
 
             // hardAd
             [
                 'hardAd',
                 'KVProxy',
                 'getAd',
-                'ad_new_chip/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
+                'adchip_finance/s_finance_stock_index_ad_banner_top_1000x90.inc.html',
                 getString(),
             ],
 

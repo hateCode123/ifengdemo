@@ -19,10 +19,22 @@ class Navigation extends React.PureComponent {
 
         return (
             <div className={styles.banner}>
-                <Chip id="20039" type="struct" title="股票导航" groupName="导航栏" content={content.nav}>
+                <Chip
+                    id="20039"
+                    type="struct"
+                    title="股票导航"
+                    groupName="导航栏"
+                    position="relative"
+                    content={content.nav}>
                     <Nav content={content.nav} />
                 </Chip>
-                <Chip id="20040" type="struct" title="股票二级导航" groupName="导航栏" content={content.subNav}>
+                <Chip
+                    id="20040"
+                    type="struct"
+                    title="股票二级导航"
+                    groupName="导航栏"
+                    position="relative"
+                    content={content.subNav}>
                     <SubNav content={content.subNav} />
                 </Chip>
             </div>

@@ -1,4 +1,6 @@
 .navigation {
+    composes: clearfix from global;
+    position: relative;
     background: url(./c_02.png) no-repeat left top;
     & li {
         float: left;

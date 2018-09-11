@@ -4,14 +4,14 @@ const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
-    path: '/pc/finance/wemoney',
+    path: '/pc/finance/wemoney/test',
     method: 'get',
     cache: 0,
     edit: true,
     type: 'html',
     low: true,
     preview: true,
-    online: false,
+    online: true,
     handler: async ctx => {
         const json = [
             // 通用导航
