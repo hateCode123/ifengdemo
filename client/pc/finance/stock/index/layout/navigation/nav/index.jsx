@@ -16,7 +16,7 @@ class Nav extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <ul className={`${styles.navigation} clearfix`}>
+            <ul className={styles.navigation}>
                 {content.map((item, index) => (
                     <li key={index}>
                         <a href={item.url} target="_blank" rel={rel} title={item.title}>
