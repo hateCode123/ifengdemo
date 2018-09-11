@@ -55,8 +55,8 @@ exports.financeWemoney = {
             ['logo', 'KVProxy', 'getStaticFragment', 10131, getJsonByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
-
+          
+            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
             // adHead
             ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
 

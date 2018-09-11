@@ -1,14 +1,19 @@
-
 .col_banner ul {
-    background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_02.png) no-repeat left top;
+    background: url(//p1.ifengimg.com/a/2018/0911/c_02.png) no-repeat left top;
 }
 .col_banner ul li {
     float: left;
     line-height: 38px;
     padding: 0px 20px;
     height: 38px;
-    background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_02.png) no-repeat right top;;
+    background: url(//p1.ifengimg.com/a/2018/0911/c_02.png) no-repeat right top;
 }
-.col_banner ul li a{ color:#FFF; font-weight:bold; font-size:14px; text-decoration:none;}
-.col_banner ul li a:hover{ color:#fdc300;}
- 
+.col_banner ul li a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+}
+.col_banner ul li a:hover {
+    color: #fdc300;
+}
