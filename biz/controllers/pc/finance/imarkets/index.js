@@ -116,7 +116,7 @@ const handler = async ctx => {
 };
 
 exports.gold = {
-    path: '/pc/finance/gold',
+    path: '/pc/finance/gold/test',
     method: 'get',
     type: 'html',
     edit: true,
