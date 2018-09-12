@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import { Event } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
+import { LazyImg } from '@ifeng/ui_pc_lazyLoad';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/utils';
 import {
@@ -180,7 +181,7 @@ class ContentList extends React.PureComponent {
                                   <div key={index} className={styles.list} style={listStyle}>
                                       {item.thumbnails && item.thumbnails !== '' ? (
                                           <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
-                                              <img
+                                              <LazyImg
                                                   src={item.thumbnails}
                                                   width="144"
                                                   height="96"
