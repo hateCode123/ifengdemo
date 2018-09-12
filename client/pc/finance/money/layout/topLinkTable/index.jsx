@@ -25,7 +25,7 @@ class TopLinkTable extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <Chip id="15027" type="static" title="财急送" groupName="财急送" translate="jsonParse" content={content}>
+            <Chip id="15027" type="static" title="财急送" groupName="财急送" content={content}>
                 <Inner />
             </Chip>
         );

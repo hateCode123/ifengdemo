@@ -32,9 +32,9 @@ class Taojin extends React.PureComponent {
                             <HotFundsTable
                                 content={content.haiwaiHotfunds}
                                 head={[
-                                    { txt: '简称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                                    { txt: '简称', tdKey: 'name', linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                                     { txt: '近一个月收益', tdKey: 'oneMonth', postfix: '%' },
-                                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                                    // { txt: '操作', tdKey: false, linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                                 ]}
                             />
                         </div>

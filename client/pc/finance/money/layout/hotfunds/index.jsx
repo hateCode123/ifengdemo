@@ -16,18 +16,18 @@ class HotFunds extends React.PureComponent {
             {
                 tabTxt: '热门权益类基金',
                 title: [
-                    { txt: '简称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '简称', tdKey: 'name', linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                     { txt: '近一个月收益', tdKey: 'oneMonth', postfix: '%' },
-                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                 ],
                 content: this.props.content.jingneiQuanyiHotFunds || [],
             },
             {
                 tabTxt: '热门货币类基金',
                 title: [
-                    { txt: '简称', tdKey: 'name', linkPrefix: '//etrade.fengfd.com/detail/' },
+                    { txt: '简称', tdKey: 'name', linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                     { txt: '7日年化', tdKey: 'rateSevenDay', postfix: '%' },
-                    // { txt: '操作', tdKey: false, linkPrefix: '//etrade.fengfd.com/detail/' },
+                    // { txt: '操作', tdKey: false, linkPrefix: '//finance.ifeng.com/app/hq/fund/of' },
                 ],
                 content: this.props.content.jingneiHuobiHotFunds || [],
             },

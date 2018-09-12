@@ -381,6 +381,19 @@ const getQADataTzgc = async (user, type) => {
     });
 };
 
+// imarkets 直播室标题
+const getZhiboTitle = async () => {
+    return await jsonp('http://api3.finance.ifeng.com/live/getnew', {
+        data: {
+            level: 1,
+            dist: 1,
+            cb: 'setNewCont',
+        },
+        cache: false,
+        jsonpCallback: 'setNewCont',
+    });
+};
+
 export {
     getMyStockData,
     getStockData,
@@ -402,4 +415,5 @@ export {
     getAnalyzerInfo,
     getQAData,
     getQADataTzgc,
+    getZhiboTitle,
 };
