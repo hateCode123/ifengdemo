@@ -35,8 +35,10 @@ class TopCollapse extends React.PureComponent {
 
     render() {
         const { content, init } = this.props;
-        const { url, img } = content;
+        const { url, img } = content.topCollapse;
         const { open } = this.state;
+
+        console.log(url, img);
 
         return (
             <div className="w1000">
@@ -45,11 +47,11 @@ class TopCollapse extends React.PureComponent {
                         className={style.box_fixed}
                         style={
                             open === 1
-                                ? { height: '200px', backgroundImage: { img } }
-                                : { height: '0', backgroundImage: { img } }
+                                ? { height: '200px', background: `url(${img}) 0 0` }
+                                : { height: '0', background: `url(${img}) 0 0` }
                         }>
                         <div className={style.box_posr}>
-                            <a href={url} target="_blank" rel={rel} style={{ display: 'none' }} />
+                            <a href={url} target="_blank" rel={rel} />
                             {/* <span className={style.span_close} id="span_close" /> */}
                         </div>
                     </div>

@@ -17,7 +17,7 @@ exports.financeWemoney = {
         const json = [
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
-            ['navigation', 'KVProxy', 'getStaticFragment', 10019, getJsonByKey('content')],
+            ['navigation', 'KVProxy', 'getStructuredFragment', 20080, getJsonByKey('content')],
 
             ['subNavigation', 'KVProxy', 'getStaticFragment', 15024, getStringByKey('content')],
 
@@ -29,9 +29,9 @@ exports.financeWemoney = {
             ['newsListDownSlider', 'KVProxy', 'getSelectedPool', 11, getStringByKey('data')],
 
             ['market', 'KVProxy', 'getStaticFragment', 15026, getStringByKey('content')],
-            
+
             ['marketTitle', 'KVProxy', 'getStaticFragment', 15030, getJsonByKey('content')],
-            
+
             ['topLinkTable', 'KVProxy', 'getStaticFragment', 15027, getStringByKey('content')],
 
             ['sudiContent01', 'KVProxy', 'getStaticFragment', 10048, getJsonByKey('content')],

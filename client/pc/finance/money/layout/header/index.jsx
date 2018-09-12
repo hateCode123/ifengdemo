@@ -23,8 +23,12 @@ class Header extends React.PureComponent {
 
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
-                <Nav limit={18} content={content.nav} />
-                <UserInfo />
+                <Chip id="20002" type="struct" title="导航" groupName="头部" content={content.nav}>
+                    <Nav />
+                </Chip>
+                <div className={styles.user}>
+                    <UserInfo />
+                </div>
             </div>
         );
         const topAd = (
