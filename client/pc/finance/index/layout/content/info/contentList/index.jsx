@@ -1,136 +1,221 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
-import md5 from 'md5';
 import { Event } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/utils';
+import {
+    getCommentCount,
+    getCustomList,
+    getMacroList,
+    getStockList,
+    getImarketsList,
+    getCompanyList,
+    getWemoneyList,
+} from '../../../../../../services/api';
 
 const event = new Event();
 
 class ContentList extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
-        counts: PropTypes.array,
+        active: PropTypes.bool,
         infoAd: PropTypes.object,
-        adAddType: PropTypes.string,
-        tabIndex: PropTypes.number,
-        pageSize: PropTypes.number,
         index: PropTypes.number,
     };
 
     state = {
         isOver: false,
+        len: 25,
+        data: [],
+        count: [],
+    };
+
+    insert = (insertArr, replaceArr) => {
+        const { len, data, count } = this.state;
+
+        const infoData = [...data];
+        const infoCount = [...count];
+
+        const refs = [];
+
+        insertArr.forEach(item => {
+            const ref = React.createRef();
+
+            refs.push({ dom: item.dom, ref });
+
+            infoData.splice(item.index, 0, { type: 'ad', ref });
+            infoCount.splice(item.index, 0, null);
+        });
+
+        replaceArr.forEach(item => {
+            const ref = React.createRef();
+
+            refs.push({ dom: item.dom, ref });
+
+            infoData.splice(item.index, 1, { type: 'ad', ref });
+        });
+
+        this.setState(
+            {
+                len: len + insertArr.length,
+                data: infoData,
+                count: infoCount,
+            },
+            () => {
+                for (const ref of refs) {
+                    if (ref.ref.current) {
+                        ref.ref.current.appendChild(ref.dom);
+                    }
+                }
+            },
+        );
     };
 
     async componentDidMount() {
-        const { infoAd, index } = this.props;
-
-        if (index === 0) {
+        try {
+            const { len } = this.state;
+            const { infoAd, index } = this.props;
             const callback = await handleAd(infoAd);
 
-            callback(infoAd.data, event);
-        }
-    }
+            callback(infoAd.data, event, this.insert);
 
-    componentDidUpdate() {
-        try {
-            const { adAddType, tabIndex, pageSize, index } = this.props;
+            let data = [];
 
-            if (tabIndex === index) {
-                if (adAddType === 'init') {
-                    event.trigger('init', { tabIndex, pageSize, container: this.infoRef.current });
-                } else if (adAddType === 'tabChange') {
-                    event.trigger('tabChange', { tabIndex, pageSize, container: this.infoRef.current });
-                } else if (adAddType === 'loadMoreCmp') {
-                    event.trigger('loadMoreCmp', { tabIndex, pageSize, container: this.infoRef.current });
-                }
+            if (index === 0) {
+                data = await getCustomList();
+            } else if (index === 1) {
+                data = await getMacroList();
+            } else if (index === 2) {
+                data = await getStockList();
+            } else if (index === 3) {
+                data = await getImarketsList();
+            } else if (index === 4) {
+                data = await getCompanyList();
+            } else {
+                data = await getWemoneyList();
+            }
+
+            if (data) {
+                const docUrl = data.map(item => item.commentUrl);
+                const counts = await getCommentCount(docUrl);
+                const count = counts.map(item => item.count);
+
+                this.setState(
+                    {
+                        data,
+                        count,
+                    },
+                    () => {
+                        event.trigger('init', { index, len });
+                    },
+                );
             }
         } catch (e) {
             console.error(e);
         }
     }
 
-    /**
-     * 获取skey方法
-     */
-    getSkey = (title, url) => {
-        const str = `Ifeng888${encodeURI(title)}${encodeURI(url)}`;
-        const skey = md5(str);
+    componentDidUpdate() {
+        const { active } = this.props;
 
-        return skey.substr(2, 6).toLowerCase();
-    };
-
-    handleNewstime = time => {
-        const d = new Date();
-
-        time = time.substr(0, time.length - 3);
-        const year = Number(time.split('-')[0]);
-
-        if (year < d.getFullYear()) {
-            return time;
-        } else {
-            return time.substr(5, time.length);
+        if (!active) {
+            event.off('init');
         }
+    }
+
+    /**
+     * 获取更多新闻
+     */
+    getMore = () => {
+        const { len, data } = this.state;
+        const { index } = this.props;
+
+        const length = len + 5;
+
+        this.setState(
+            {
+                len: length,
+            },
+            () => {
+                event.trigger('loadMoreCmp', { index, len });
+
+                if (length >= data.length) {
+                    event.off('loadMoreCmp');
+                }
+            },
+        );
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { content, counts } = this.props;
+        const { len, data, count } = this.state;
         const listStyle = {};
 
-        this.infoRef = React.createRef();
-
+        /* eslint-disable no-confusing-arrow */
         return (
-            <div ref={this.infoRef}>
-                {content.map((item, index) => (
-                    <div
-                        key={index}
-                        className={styles.list}
-                        onMouseEnter={this.handleMouseOver}
-                        onMouseLeave={this.handleMouseOver}
-                        style={listStyle}>
-                        {item.thumbnails && item.thumbnails !== '' ? (
-                            <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
-                                <img src={item.thumbnails} width="144" height="96" className={styles.trans} />
-                            </a>
-                        ) : (
-                            ''
-                        )}
-                        <div className={styles.list_text}>
-                            <p className={styles.text}>
-                                <a href={item.url} target="_blank" rel={rel} title={item.title}>
-                                    {item.title}
-                                </a>
-                            </p>
-                            <p className={styles.time}>
-                                {item.source ? <span className={styles.source}>{item.source}</span> : ''}
-                                {item.newsTime && item.newsTime !== '' ? (
-                                    <span className={styles.date}>{this.handleNewstime(item.newsTime)}</span>
-                                ) : (
-                                    ''
-                                )}
-                            </p>
-                        </div>
-                        {item.commentUrl ? (
-                            <div className={styles.comment}>
-                                <a
-                                    href={`//gentie.ifeng.com/view.html?docUrl=${item.commentUrl}&docName=${
-                                        item.title
-                                    }&skey=${this.getSkey(item.title, item.pcUrl)}&pcUrl&=${item.pcUrl}`}
-                                    target="_blank"
-                                    rel={rel}>
-                                    {counts[index]}
-                                </a>
-                            </div>
-                        ) : (
-                            ''
-                        )}
+            <div>
+                {data.length > 0
+                    ? data.slice(0, len).map(
+                          (item, index) =>
+                              item.type === 'ad' ? (
+                                  <div key={index} ref={item.ref} />
+                              ) : (
+                                  <div key={index} className={styles.list} style={listStyle}>
+                                      {item.thumbnails && item.thumbnails !== '' ? (
+                                          <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
+                                              <img
+                                                  src={item.thumbnails}
+                                                  width="144"
+                                                  height="96"
+                                                  className={styles.trans}
+                                              />
+                                          </a>
+                                      ) : (
+                                          ''
+                                      )}
+                                      <div className={styles.list_text}>
+                                          <p className={styles.text}>
+                                              <a href={item.url} target="_blank" rel={rel} title={item.title}>
+                                                  {item.title}
+                                              </a>
+                                          </p>
+                                          <p className={styles.time}>
+                                              {item.source ? <span className={styles.source}>{item.source}</span> : ''}
+                                              {item.newsTime && item.newsTime !== '' ? (
+                                                  <span className={styles.date}>{item.newsTime}</span>
+                                              ) : (
+                                                  ''
+                                              )}
+                                          </p>
+                                      </div>
+                                      {item.commentUrl ? (
+                                          <div className={styles.comment}>
+                                              <a
+                                                  href={`//gentie.ifeng.com/view.html?docUrl=${
+                                                      item.commentUrl
+                                                  }&docName=${item.title}&skey=${item.skey}&pcUrl&=${item.pcUrl}`}
+                                                  target="_blank"
+                                                  rel={rel}>
+                                                  {count[index]}
+                                              </a>
+                                          </div>
+                                      ) : (
+                                          ''
+                                      )}
+                                  </div>
+                              ),
+                      )
+                    : ''}
+                {data.length > len ? (
+                    <div className={styles.more} onClick={this.getMore}>
+                        查看更多
                     </div>
-                ))}
+                ) : (
+                    <div className={styles.all}>已显示全部</div>
+                )}
             </div>
         );
     }
