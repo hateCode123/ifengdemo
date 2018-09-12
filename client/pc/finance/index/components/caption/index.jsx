@@ -17,24 +17,24 @@ class Caption extends React.PureComponent {
         const { content, title } = this.props;
 
         return (
-            <div>
+            <div style={{ position: 'relative' }}>
                 <div className={styles.caption}>
                     <h5>
-                        <a href={content[0].captionUrl} target="_blank" rel={rel} title={content[0].title}>
-                            {content[0].captionTitle}
+                        <a href={content.captionUrl} target="_blank" rel={rel} title={content.title}>
+                            {content.captionTitle}
                         </a>
                     </h5>
                 </div>
                 <div className={styles.picTxt}>
                     <div className={styles.box_pic}>
-                        <a href={content[0].picTxtUrl} target="_blank" rel={rel} title={content[0].name}>
-                            <img src={content[0].src} alt={content[0].name} />
+                        <a href={content.picTxtUrl} target="_blank" rel={rel} title={content.name}>
+                            <img src={content.src} alt={content.name} />
                         </a>
                         <h5>
-                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].name}>
-                                {content[0].name}
+                            <a href={content.picTxtUrl} target="_blank" rel={rel} title={content.name}>
+                                {content.name}
                             </a>
-                            <span>{content[0].tag}</span>
+                            <span>{content.tag}</span>
                         </h5>
                     </div>
                     <h3 className={styles.title}>

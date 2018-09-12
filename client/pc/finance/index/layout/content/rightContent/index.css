@@ -42,28 +42,24 @@
 
 .box_1 {
     width: 300px;
-    height: 600px;
     text-align: center;
 }
 
 .box_2 {
     margin-top: 2px;
     width: 300px;
-    height: 251px;
     text-align: center;
 }
 
 .box_3 {
     margin-top: 28px;
     width: 300px;
-    height: 250px;
     text-align: center;
 }
 
 .box_4 {
     composes: clearfix from global;
     width: 300px;
-    height: 72px;
     overflow: hidden;
     margin-top: 4px;
     text-align: center;
@@ -74,6 +70,5 @@
 .box_7 {
     margin-top: 18px;
     width: 300px;
-    height: 250px;
     text-align: center;
 }
