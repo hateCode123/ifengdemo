@@ -4,6 +4,7 @@ import styles from './index.css';
 import Chip from 'Chip';
 import errorBoundary from '@ifeng/errorBoundary';
 import List from './list';
+import Rights from './rights';
 
 class Headline extends React.PureComponent {
     static propTypes = {
@@ -43,9 +44,7 @@ class Headline extends React.PureComponent {
                     groupName="正文"
                     position="relative"
                     content={rights}>
-                    <div style={{ position: 'relative' }}>
-                        <div dangerouslySetInnerHTML={{ __html: rights }} />
-                    </div>
+                    <Rights />
                 </Chip>
             </div>
         );

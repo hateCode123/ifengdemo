@@ -51,6 +51,9 @@
                     color: #ff0000;
                     font-weight: bold;
                 }
+                &:last-child {
+                    width: 25px;
+                }
             }
             & .current {
                 background: #194e80;
