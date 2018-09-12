@@ -18,13 +18,7 @@ class Partner extends React.PureComponent {
             <div className="w1000">
                 <div className={style.hzhb}>
                     <CommonTitleXL config={{ img: 'bg03' }} content={content.partnerTitle} />
-                    <Chip
-                        id="15025"
-                        type="static"
-                        title="合作伙伴"
-                        groupName="合作伙伴"
-                        translate="jsonParse"
-                        content={content.list}>
+                    <Chip id="15025" type="static" title="合作伙伴" groupName="合作伙伴" content={content.list}>
                         <PartnerList />
                     </Chip>
                 </div>

@@ -29,7 +29,7 @@ class SubNavigation extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <Chip id="15024" type="static" title="副导航" groupName="导航" translate="jsonParse" content={content}>
+            <Chip id="15024" type="static" title="副导航" groupName="导航" content={content}>
                 <Sub />
             </Chip>
         );
