@@ -178,10 +178,6 @@ class Layout extends React.PureComponent {
             footer: content.footer,
         };
 
-        const topCollapse = {
-            topCollapse: content.topCollapse,
-        };
-
         const slider = content.slider || [];
 
         const __market = {
@@ -203,7 +199,7 @@ class Layout extends React.PureComponent {
                     title="顶部隐藏广告"
                     groupName="广告"
                     translate="jsonParse"
-                    content={topCollapse}>
+                    content={content.topCollapse}>
                     <TopCollapse />
                     {/*  init={showTopCollapse} */}
                 </Chip>
