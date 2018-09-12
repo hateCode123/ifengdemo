@@ -20,7 +20,7 @@ class NewsDisplay extends PureComponent {
             if (i % 3 === 0) {
                 children.push(
                     <h3 key={item.id} className={styles.top_news_title}>
-                        <a href={item.url} target="_blank" rel={relText}>
+                        <a href={item.url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
                     </h3>,
@@ -28,7 +28,7 @@ class NewsDisplay extends PureComponent {
             } else {
                 children.push(
                     <p key={item.id} className={styles.top_news_item}>
-                        <a href={item.url} target="_blank" rel={relText}>
+                        <a href={item.url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
                     </p>,

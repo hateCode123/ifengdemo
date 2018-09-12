@@ -80,18 +80,28 @@ class NewsStream extends PureComponent {
                 className={`${styles.news_item_3_image} clearfix`}
                 data-id={item.id}>
                 <h2 className={`${styles.news_item_title} ${styles.mb16}`}>
-                    <a href={url} target="_blank" rel={relText}>
+                    <a href={url} title={item.title} target="_blank" rel={relText}>
                         {item.title}
                     </a>
                 </h2>
-                <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={formatImage(image[0].url, 167, 106)} title={item.title} />
+                <a
+                    className={`${styles.image_link_3} ${styles.mr11}`}
+                    href={url}
+                    title={item.title}
+                    target="_blank"
+                    rel={relText}>
+                    <img src={formatImage(image[0].url, 167, 106)} />
                 </a>
-                <a className={`${styles.image_link_3} ${styles.mr11}`} href={url} target="_blank" rel={relText}>
-                    <img src={formatImage(image[1].url, 167, 106)} title={item.title} />
+                <a
+                    className={`${styles.image_link_3} ${styles.mr11}`}
+                    href={url}
+                    title={item.title}
+                    target="_blank"
+                    rel={relText}>
+                    <img src={formatImage(image[1].url, 167, 106)} />
                 </a>
-                <a className={styles.image_link_3} href={url} target="_blank" rel={relText}>
-                    <img src={formatImage(image[2].url, 167, 106)} title={item.title} />
+                <a className={styles.image_link_3} href={url} target="_blank" title={item.title} rel={relText}>
+                    <img src={formatImage(image[2].url, 167, 106)} />
                 </a>
                 <div className={`${styles.top_11} ${styles.news_item_infor} clearfix`}>
                     {// 显示来源
@@ -99,7 +109,7 @@ class NewsStream extends PureComponent {
                         <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                     ) : null}
                     <time className={styles.text}>{formatTime(item.newsTime)}</time>
-                    <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
+                    <a className={styles.ly} href={pinglunUrl} title={item.title} target="_blank" rel={relText}>
                         {item.allcount || 0}
                     </a>
                 </div>
@@ -115,16 +125,16 @@ class NewsStream extends PureComponent {
                 key={`${item.id}_${item.creator}_${item.newsTime}`}
                 className={`${styles.news_item_has_image} clearfix`}
                 data-id={item.id}>
-                <a className={styles.image_link} href={url} target="_blank" rel={relText}>
+                <a className={styles.image_link} href={url} title={item.title} target="_blank" rel={relText}>
                     {// 是否为视频
                     item.videoCount ? <div className={styles.play} /> : null}
                     {// 是否为图集
                     item.type === 'slide' ? <span className={styles.tuji}>图集</span> : null}
-                    <img src={formatImage(image[0].url, 144, 80)} title={item.title} />
+                    <img src={formatImage(image[0].url, 144, 80)} />
                 </a>
                 <div className={styles.news_item_infor}>
                     <h2 className={`${styles.news_item_title} ${styles.mb34}`}>
-                        <a href={url} target="_blank" rel={relText}>
+                        <a href={url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
                     </h2>
@@ -134,7 +144,7 @@ class NewsStream extends PureComponent {
                             <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
-                        <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
+                        <a className={styles.ly} href={pinglunUrl} target="_blank" rel={relText}>
                             {item.allcount || 0}
                         </a>
                     </div>
@@ -151,7 +161,7 @@ class NewsStream extends PureComponent {
                 data-id={item.id}>
                 <div className={styles.news_item_infor}>
                     <h2 className={`${styles.news_item_title} ${styles.mb34}`}>
-                        <a href={url} target="_blank" rel={relText}>
+                        <a href={url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
                     </h2>
@@ -161,7 +171,7 @@ class NewsStream extends PureComponent {
                             <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
-                        <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
+                        <a className={styles.ly} href={pinglunUrl} target="_blank" rel={relText}>
                             {item.allcount || 0}
                         </a>
                     </div>
