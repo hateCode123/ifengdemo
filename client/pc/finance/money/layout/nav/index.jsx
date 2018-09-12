@@ -41,13 +41,7 @@ class Navigation extends React.PureComponent {
         return (
             <div className="g_col">
                 <div className="w1000">
-                    <Chip
-                        id="10019"
-                        type="static"
-                        title="logo下导航"
-                        groupName="导航"
-                        translate="jsonParse"
-                        content={content}>
+                    <Chip id="20080" type="struct" title="logo下导航" groupName="导航" content={content}>
                         <NavigationInner />
                     </Chip>
                 </div>
