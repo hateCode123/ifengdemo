@@ -52,12 +52,24 @@ class RightContent extends React.PureComponent {
                     <BoxTitle title="投教学堂">
                         <Ad content={content.marketAd} styleName={styles.marketAd} />
                     </BoxTitle>
-                    <Chip id="10080" type="static" title="投教学堂静态碎片" groupName="正文" content={content.market}>
+                    <Chip
+                        id="10080"
+                        type="static"
+                        title="投教学堂静态碎片"
+                        groupName="正文"
+                        position="relative"
+                        content={content.market}>
                         <Market />
                     </Chip>
                 </div>
                 <Ad content={content.asideAd5} styleName={styles.box_5} />
-                <Chip id="10082" type="static" title="理财速递静态碎片" groupName="正文" content={content.courier}>
+                <Chip
+                    id="10082"
+                    type="static"
+                    title="理财速递静态碎片"
+                    groupName="正文"
+                    position="relative"
+                    content={content.courier}>
                     <Courier ad={content.courierAd} />
                 </Chip>
                 <Ad content={content.asideAd6} styleName={styles.box_6} />

@@ -30,7 +30,11 @@ class ExtraNews extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div ref={this.ref} dangerouslySetInnerHTML={this.createMarkup()} />;
+        return (
+            <div style={{ position: 'relative' }}>
+                <div ref={this.ref} dangerouslySetInnerHTML={this.createMarkup()} />
+            </div>
+        );
     }
 }
 

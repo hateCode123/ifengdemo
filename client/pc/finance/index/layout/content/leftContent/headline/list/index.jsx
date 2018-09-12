@@ -43,7 +43,7 @@ class List extends React.PureComponent {
             }
         });
 
-        return <div>{array}</div>;
+        return <div style={{ position: 'relative' }}>{array}</div>;
     }
 }
 
