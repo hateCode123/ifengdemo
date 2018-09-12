@@ -9,13 +9,15 @@
     background: #fff;
 }
 
+.user {
+    width: 140px;
+    float: right;
+    text-align: right;
+}
+
 .box {
     width: 1000px;
-    height: 90px;
-    /* float: right; */
     text-align: center;
-    line-height: 90px;
-    border: 1px solid #ccc;
     box-sizing: border-box;
     position: relative;
     padding: 0;
@@ -24,9 +26,9 @@
 
 .ad {
     width: 1000px;
-    /* height: 91px; */
     margin: 0 auto;
 }
+
 /*
 .h_searchDiv {
     width: 1000px;
