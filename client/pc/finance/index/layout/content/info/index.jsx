@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Ad from '@ifeng/ui_pc_ad';
 import errorBoundary from '@ifeng/errorBoundary';
-import {
-    getCommentCount,
-    getCustomList,
-    getMacroList,
-    getStockList,
-    getImarketsList,
-    getCompanyList,
-    getWemoneyList,
-} from '../../../../../services/api';
 import Tabs from './tabs';
 import TabPane from './tabPane';
 import ContentList from './contentList';
@@ -23,46 +14,14 @@ class Info extends React.Component {
 
     state = {
         tabs: ['首页', '宏观', '股票', 'iMarket', '公司', 'WEMONEY'],
-        current: 0,
-        counts: [],
-        adAddType: 'init',
     };
 
     /**
      * 渲染组件
      */
     render() {
-        const { tabs, current, datas, counts, adAddType } = this.state;
+        const { tabs } = this.state;
         const { content } = this.props;
-
-        // return (
-        //     <div className={styles.info}>
-        //         <Tabs content={tabs} current={current} handleTabsChange={this.handleTabsChange} />
-        //         <div className={styles.content}>
-        //             {Object.values(datas).map((item, index) => (
-        //                 <div key={index} className={`${current === index ? styles.show : styles.hide}`}>
-        //                     <ContentList
-        //                         content={item.data ? item.data.slice(0, infoCount + getMoreCount * item.listNum) : []}
-        //                         counts={counts[index]}
-        //                         infoAd={content.infoAd}
-        //                         adAddType={adAddType}
-        //                         tabIndex={current}
-        //                         pageSize={item.listNum}
-        //                         index={index}
-        //                     />
-        //                     {item.listNum < 3 ? (
-        //                         <div className={styles.more} onClick={this.getMore}>
-        //                             查看更多
-        //                         </div>
-        //                     ) : (
-        //                         <div className={styles.all}>已显示全部</div>
-        //                     )}
-        //                 </div>
-        //             ))}
-        //         </div>
-        //         <Ad content={content.hardAd} styleName={styles.hardAd} />
-        //     </div>
-        // );
 
         return (
             <div className={styles.info}>
