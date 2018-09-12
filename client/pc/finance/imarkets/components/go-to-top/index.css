@@ -5,9 +5,12 @@
     margin-left: 540px;
     width: 50px;
     height: 50px;
+    border: none;
     background: url('./top.png') no-repeat center center #1c7e67;
     outline: none;
-    border: none;
+    &:hover {
+        background-color: #33b294;
+    }
 }
 @-webkit-keyframes opacity0to1 {
     from {
@@ -73,23 +76,26 @@
         opacity: 0;
     }
 }
-.opacity_0, .opacity_0_to_1 {
+.opacity_0,
+.opacity_0_to_1 {
     opacity: 0;
 }
-.opacity_1, .opacity_1_to_0 {
+.opacity_1,
+.opacity_1_to_0 {
     opacity: 1;
 }
 .opacity_1 {
     cursor: pointer;
 }
-.opacity_0_to_1, .opacity_1_to_0 {
-    -webkit-animation-duration: .3s;
+.opacity_0_to_1,
+.opacity_1_to_0 {
+    -webkit-animation-duration: 0.3s;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-duration: .3s;
+    -moz-animation-duration: 0.3s;
     -moz-animation-fill-mode: forwards;
-    -o-animation-duration: .3s;
+    -o-animation-duration: 0.3s;
     -o-animation-fill-mode: forwards;
-    animation-duration: .3s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
 }
 .opacity_0_to_1 {
