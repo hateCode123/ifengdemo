@@ -1,4 +1,5 @@
 .col_box {
+    position: relative;
     background: #f54343;
     width: 100%;
     margin: 0 auto;

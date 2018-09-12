@@ -85,8 +85,8 @@ class Layout extends React.PureComponent {
                     <div className={styles.fl}>
                         <Topic />
                         <Chip
-                            id="20035"
-                            type="recommend"
+                            id="10030"
+                            type="static"
                             title="头条新闻"
                             groupName="文章"
                             translate="jsonParse"

@@ -92,17 +92,29 @@ class Layout extends React.PureComponent {
         return (
             <div className={styles.ip_col}>
                 <Header content={headerData} />
-                <Chip id="20008" type="struct" title="财经导航" groupName="导航栏" content={content.navigation}>
+                <Chip
+                    id="20008"
+                    type="struct"
+                    title="财经导航"
+                    groupName="导航栏"
+                    position="relative"
+                    content={content.navigation}>
                     <Navigation />
                 </Chip>
                 <Stock content={content.production} />
                 <Content content={contentData} />
-                <Chip id="10015" type="static" title="底部合作链接" groupName="底部合作链接" content={cooperation}>
+                <Chip
+                    id="10015"
+                    type="static"
+                    title="底部合作链接"
+                    groupName="底部合作链接"
+                    position="relative"
+                    content={cooperation}>
                     <Cooperation />
                 </Chip>
                 <BottomFooter content={footerData} />
                 <div className={styles.bottom} />
-                <Chip id="20013" type="struct" title="二维码" groupName="二维码" content={qrCode}>
+                <Chip id="20013" type="struct" title="二维码" groupName="二维码" position="relative" content={qrCode}>
                     <QrCode />
                 </Chip>
                 <BottomAffix content={bottomAffixData} />

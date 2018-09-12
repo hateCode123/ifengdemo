@@ -1,5 +1,6 @@
 .col_boxR {
     composes: clearfix from global;
+    position: relative;
     float: left;
     width: 465px;
     border-left: 1px solid #eeeeee;
