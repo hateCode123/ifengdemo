@@ -42,6 +42,9 @@ var BJ_REPORT = (function(global) {
             case 'alive':
                 type = 5;
                 break;
+            case 'document.body':
+                type = 6;
+                break;
             default:
                 type = 0;
         }
@@ -49,6 +52,7 @@ var BJ_REPORT = (function(global) {
         return type
 
    }
+
    function request(paras)
     {
         var url = global.location.href;
@@ -63,6 +67,12 @@ var BJ_REPORT = (function(global) {
         }else{
             return returnValue;
         }
+    }
+
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]);
+        return null
     }
 
     var T = {
@@ -90,7 +100,7 @@ var BJ_REPORT = (function(global) {
         processError: function(errObj) {
             try {
                 if (errObj.stack) {
-                    var url = errObj.stack.match("https?://[^\n]+");
+                    var url = errObj.stack.match("https?://[^\n\"]+");
                     url = url ? url[0] : "";
                     var rowCols = url.match(":(\\d+):(\\d+)");
                     if (!rowCols) {
@@ -237,15 +247,23 @@ var BJ_REPORT = (function(global) {
             _t: new Date - 0,
             bid: global.bid ? global.bid : 'null',
             url: global.location.href.replace(/\?.*/,''),
-            data: submit_log_list
+            data: submit_log_list,
+            uid: uid
         }
 
 
         var debugid = request('debugid');
+        var sid = getCookie('sid');
+        var userid = getCookie('userid');
 
         if(debugid){
-            // url += '&debugid=' + debugid;
-            err_json.debugid = debugid
+            err_json.debugid = debugid;
+        }
+        if(sid){
+            err_json.sid = sid;
+        }
+        if(userid){
+            err_json.userid = userid;
         }
 
         var url =  _config._reportUrl +'?e='+ encodeURIComponent(JSON.stringify(err_json));
@@ -270,7 +288,7 @@ var BJ_REPORT = (function(global) {
             var isIgnore = false;
             var report_log = _log_list.shift();
             //有效保证字符不要过长
-            report_log.msg = (report_log.msg + "" || "").substr(0, 500);
+            report_log.msg = (report_log.msg + "" || "").substr(0, 5000);
             // 重复上报
             if (T.isRepeat(report_log)) continue;
             var log_str = _report_log_tostring(report_log, submit_log_list.length);

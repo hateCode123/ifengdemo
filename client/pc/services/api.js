@@ -1,5 +1,6 @@
 import { jsonp, ajax } from '@ifeng/ui_base';
 import { formatImage, formatUrl } from '@ifeng/public_method';
+import { getSkey, handleNewstime } from '../utils/utils';
 
 // apiUrl为webpack注入的全局变量
 /* eslint-disable no-undef */
@@ -117,7 +118,8 @@ const getCustomList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.createdTime,
+        newsTime: handleNewstime(item.createdTime),
+        skey: getSkey(item.title, item.pcUrl),
     }));
 
     return result;
@@ -140,7 +142,8 @@ const getMacroList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: handleNewstime(item.newsTime),
+        skey: item.skey,
     }));
 
     return result;
@@ -163,7 +166,8 @@ const getStockList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: handleNewstime(item.newsTime),
+        skey: item.skey,
     }));
 
     return result;
@@ -186,7 +190,8 @@ const getImarketsList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: handleNewstime(item.newsTime),
+        skey: item.skey,
     }));
 
     return result;
@@ -209,7 +214,8 @@ const getCompanyList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: handleNewstime(item.newsTime),
+        skey: item.skey,
     }));
 
     return result;
@@ -232,7 +238,8 @@ const getWemoneyList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: item.newsTime,
+        newsTime: handleNewstime(item.newsTime),
+        skey: item.skey,
     }));
 
     return result;
