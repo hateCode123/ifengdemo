@@ -2,7 +2,7 @@ const logger = require('../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const { cu } = require('../../../../providers/ucmsapiProxy');
 
-let handler = async ctx => {
+const handler = async ctx => {
     const { params } = ctx;
 
     if (params.snapshots && params.snapshots !== 'snapshots') return;
@@ -25,7 +25,6 @@ let handler = async ctx => {
             'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
             getString(),
         ],
-
         // adBody
         [
             'adBody',
@@ -117,14 +116,14 @@ let handler = async ctx => {
 };
 
 exports.gold = {
-    path: '/pc/finance/gold/test',
+    path: '/pc/finance/gold',
     method: 'get',
     type: 'html',
     edit: true,
     low: true,
     preview: true,
     online: true,
-    handler
+    handler,
 };
 
 exports.snapshots = {
@@ -135,5 +134,5 @@ exports.snapshots = {
     low: true,
     preview: true,
     online: true,
-    handler
+    handler,
 };
