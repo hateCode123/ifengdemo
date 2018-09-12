@@ -1,15 +1,11 @@
 .ad {
     width: 1000px;
-    height: 90px;
     margin: 37px auto 0;
 }
 
 .box {
     width: 1000px;
-    height: 90px;
-    float: right;
     text-align: center;
-    line-height: 90px;
     box-sizing: border-box;
     position: relative;
     padding: 0;
