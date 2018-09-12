@@ -31,7 +31,7 @@ class Market extends React.PureComponent {
             <div className="bor w300 fl">
                 <CommonTitleM content={content.title} />
 
-                <Chip id="15026" type="static" title="理财超市" groupName="理财超市" content={content.content}>
+                <Chip id="15026" type="static" title="投资者教育" groupName="投资者教育" content={content.content}>
                     <Inner />
                 </Chip>
             </div>

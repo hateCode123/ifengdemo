@@ -43,11 +43,11 @@ class Layout extends React.PureComponent {
         const { content } = this.props;
 
         const initData = {
-            marketTitle: {
-                title: '理财超市',
-                url: 'http://18.ifeng.com/',
-                newOpen: true,
-            },
+            // marketTitle: {
+            //     title: '投资者教育',
+            //     url: 'http://18.ifeng.com/',
+            //     newOpen: true,
+            // },
 
             __jingneijuejinTitle: {
                 title: '境内掘金',
@@ -106,13 +106,10 @@ class Layout extends React.PureComponent {
             },
         };
         const {
-            marketTitle,
             __jingneijuejinTitle,
             __sudiTitle01,
-            __sudiContent01,
             __haiwaitaojinTitle,
             __sudiTitle02,
-            __sudiContent02,
             __rediantuijianTitle,
             __cnlcTitle,
             __partnerTitle,
@@ -188,7 +185,7 @@ class Layout extends React.PureComponent {
         const slider = content.slider || [];
 
         const __market = {
-            title: marketTitle,
+            title: content.marketTitle,
             content: content.market,
         };
 
