@@ -12,7 +12,7 @@
 .box {
     width: 1000px;
     height: 90px;
-    float: right;
+    /* float: right; */
     text-align: center;
     line-height: 90px;
     border: 1px solid #ccc;
@@ -22,9 +22,9 @@
     margin: 0;
 }
 
- .ad {
+.ad {
     width: 1000px;
-    height: 91px;
+    /* height: 91px; */
     margin: 0 auto;
 }
 /*

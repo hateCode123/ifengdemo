@@ -2,10 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.css';
 import '../../reset.css';
-import Chip from 'Chip';
 import Search from '@ifeng/ui_pc_search';
-import { rel } from '../../../../utils/rel';
 import errorBoundary from '@ifeng/errorBoundary';
+
+class Inner extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.string,
+    };
+
+    createHtml = () => {
+        return { __html: this.props.content };
+    };
+    render() {
+        return <div className={style.h_theLogo} dangerouslySetInnerHTML={this.createHtml()} />;
+    }
+}
 
 class Banner extends React.PureComponent {
     static propTypes = {
@@ -17,22 +28,7 @@ class Banner extends React.PureComponent {
 
         return (
             <div className={style.h_searchDiv}>
-                <div className={style.h_theLogo}>
-                    <a href="http://finance.ifeng.com/stock/" target="_blank" rel={rel} title="理财首页">
-                        <img
-                            src="//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
-                            width="161"
-                            height="27"
-                            alt="凤凰网理财"
-                        />
-                    </a>
-                    <img
-                        src="//y1.ifengimg.com/a/2014/0922/lc/images/l_18.png"
-                        width="178"
-                        height="30"
-                        style={{ marginLeft: '15px' }}
-                    />
-                </div>
+                <Inner content={content.bannerLogo} />
                 <Search content={content.search} />
             </div>
         );

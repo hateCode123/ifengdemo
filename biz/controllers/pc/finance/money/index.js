@@ -21,15 +21,20 @@ exports.financeWemoney = {
 
             ['subNavigation', 'KVProxy', 'getStaticFragment', 15024, getStringByKey('content')],
 
+            ['bannerLogo', 'KVProxy', 'getStaticFragment', 15029, getStringByKey('content')],
+
             // 搜索
             ['search', 'KVProxy', 'getStaticFragment', 10129, getJsonByKey('content')],
 
             ['newsListDownSlider', 'KVProxy', 'getSelectedPool', 11, getStringByKey('data')],
 
             ['market', 'KVProxy', 'getStaticFragment', 15026, getStringByKey('content')],
-            
+
             ['topLinkTable', 'KVProxy', 'getStaticFragment', 15027, getStringByKey('content')],
-            
+
+            ['sudiContent01', 'KVProxy', 'getStaticFragment', 10048, getJsonByKey('content')],
+            ['sudiContent02', 'KVProxy', 'getStaticFragment', 10111, getJsonByKey('content')],
+
             // 境内 权益
             ['jingneiQuanyiHotFunds', 'KVProxy', 'getCustom', 'finance_22005_516_1293', getJson()],
 
@@ -86,6 +91,7 @@ exports.financeWemoney = {
             ],
             ['partnerlist', 'KVProxy', 'getStaticFragment', 15025, getStringByKey('content')],
 
+            ['bottom', 'KVProxy', 'getStaticFragment', 15028, getStringByKey('content')],
             // bottomAd
             ['bottomAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         ];

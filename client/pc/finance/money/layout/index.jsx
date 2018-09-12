@@ -43,22 +43,6 @@ class Layout extends React.PureComponent {
         const { content } = this.props;
 
         const initData = {
-            // showTopCollapse: ,
-            subNavigation: [
-                {
-                    url: 'http://jr.ifeng.com/',
-                    title: '凤凰金融',
-                },
-                {
-                    url: 'http://ds.ifeng.com/',
-                    title: '报名炒股大赛赢百万奖金',
-                },
-                {
-                    url: 'http://finance.ifeng.com/app/hq/',
-                    title: '基金行情',
-                },
-            ],
-
             marketTitle: {
                 title: '理财超市',
                 url: 'http://18.ifeng.com/',
@@ -79,34 +63,6 @@ class Layout extends React.PureComponent {
             __sudiTitle01: {
                 title: '理财速递',
             },
-            __sudiContent01: {
-                first: {
-                    url: 'https://etrade.fengfd.com/detail/180012',
-                    title: '银华富裕主题混合',
-                    txt: '近一年涨幅：',
-                    perc: '53.95%',
-                    buyLink: 'https://etrade.fengfd.com/detail/180012',
-                    buyTxt: '购买',
-                },
-                second: {
-                    url: 'https://etrade.fengfd.com/detail/001878/',
-                    title: '嘉实沪港深精选股票',
-                    txt: '近一年涨幅：',
-                    perc: '47.46%',
-                    buyLink: 'https://etrade.fengfd.com/detail/210004',
-                    buyTxt: '购买',
-                },
-                third: {
-                    url: 'https://etrade.fengfd.com/detail/217027/',
-                    title: '招商央视财经50指数A',
-                    txt: '近一年涨幅：',
-                    perc: '47.84%',
-                    recTitle: '推荐理由：',
-                    recTxt: '中国“漂亮A50”崛起，长期价值投资的典范。',
-                    buyLink: 'https://etrade.fengfd.com/detail/217027/',
-                    buyTxt: '购买',
-                },
-            },
 
             __haiwaitaojinTitle: {
                 title: '海外淘金',
@@ -121,34 +77,6 @@ class Layout extends React.PureComponent {
             },
             __sudiTitle02: {
                 title: '理财速递',
-            },
-            __sudiContent02: {
-                first: {
-                    url: '//etrade.fengfd.com/detail/000988',
-                    title: '嘉实全球互联网',
-                    txt: '近一年涨幅：',
-                    perc: '22.85%',
-                    buyLink: '//etrade.fengfd.com/detail/217023',
-                    buyTxt: '购买',
-                },
-                second: {
-                    url: '//etrade.fengfd.com/detail/000311',
-                    title: '景顺长城沪深300',
-                    txt: '近一年涨幅：',
-                    perc: '15.72%',
-                    buyLink: '//etrade.fengfd.com/detail/180028',
-                    buyTxt: '购买',
-                },
-                third: {
-                    url: '//etrade.fengfd.com/detail/164705',
-                    title: '汇添富恒生指数分级',
-                    txt: '近一年涨幅：',
-                    perc: '11.20%',
-                    recTitle: '推荐理由：',
-                    recTxt: '享受港股牛市，内地资金南下狩猎低估值港股市场。',
-                    buyLink: '//etrade.fengfd.com/detail/164705',
-                    buyTxt: '购买',
-                },
             },
 
             __rediantuijianTitle: {
@@ -202,12 +130,13 @@ class Layout extends React.PureComponent {
 
         const bannerData = {
             search: content.search,
+            bannerLogo: content.bannerLogo,
         };
 
         const juejin = {
             jingneijuejinTitle: __jingneijuejinTitle,
             sudiTitle01: __sudiTitle01,
-            sudiContent01: __sudiContent01,
+            sudiContent01: content.sudiContent01,
             jingneiQuanyiHotFunds: content.jingneiQuanyiHotFunds,
             jingneiHuobiHotFunds: content.jingneiHuobiHotFunds,
         };
@@ -215,7 +144,7 @@ class Layout extends React.PureComponent {
         const taojin = {
             haiwaitaojinTitle: __haiwaitaojinTitle,
             sudiTitle02: __sudiTitle02,
-            sudiContent02: __sudiContent02,
+            sudiContent02: content.sudiContent02,
             haiwaiHotfunds: content.haiwaiHotfunds,
         };
 
@@ -302,7 +231,7 @@ class Layout extends React.PureComponent {
                 {/* <Cnlc content={cnlc} /> */}
                 <Ad content={content.hardAd} />
                 <Partner content={partner} />
-                <Bottom />
+                <Bottom content={content.bottom} />
                 <BottomFooter content={footerData} />
                 <FixedBar />
 
