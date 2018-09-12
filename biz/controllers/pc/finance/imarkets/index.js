@@ -1,6 +1,5 @@
-const logger = require('../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
-const { cu } = require('../../../../providers/ucmsapiProxy');
+const { imarketslist, formatList } = require('../../../../services/utils/list');
 
 const handler = async ctx => {
     const { params } = ctx;
@@ -60,11 +59,9 @@ const handler = async ctx => {
     ];
 
     if (!params.snapshots && !params.year && !params.date) {
+        // 信息流
         json.push(
-            // 顶部新闻
-            ['topnews', 'KVProxy', 'getStaticFragment', '10165', getStringByKey('content')],
-            // 信息流
-            ['newsstream', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
+            ['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
         );
     } else {
         // 旧的数据
@@ -73,20 +70,27 @@ const handler = async ctx => {
 
     const allData = await transfer(ctx, json);
 
+    // 处理新数据
+    if ('allnews' in allData) {
+        const { topnews, newsstream } = imarketslist(allData.allnews);
+
+        allData.topnews = topnews;
+        allData.newsstream = newsstream;
+        delete allData.allnews;
+    }
+
     // 处理旧数据
     if ('financeGoldSnapshots' in allData) {
         if (typeof allData.financeGoldSnapshots === 'string') {
             const financeGoldSnapshots = JSON.parse(allData.financeGoldSnapshots);
 
-            allData.newsstream = financeGoldSnapshots.newsstream;
-            allData.topnews = financeGoldSnapshots.topnews;
+            allData.newsstream = formatList(financeGoldSnapshots.newsstream);
+            allData.topnews = formatList(financeGoldSnapshots.topnews);
             delete allData.financeGoldSnapshots;
         } else {
             return;
         }
     }
-
-    allData.newsstream = typeof allData.newsstream === 'string' ? [] : allData.newsstream;
 
     // 处理广告碎片和静态碎片
     const adData = {};
