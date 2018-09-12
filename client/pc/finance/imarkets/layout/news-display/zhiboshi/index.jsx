@@ -1,57 +1,51 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Chip from 'Chip';
-import { jsonp } from '@ifeng/ui_base';
 import styles from './index.css';
+import { getZhiboTitle } from '../../../../../services/api';
 
-class Zhiboshi extends PureComponent{
-    timer = null;     // 定时器
+class Zhiboshi extends PureComponent {
+    timer = null; // 定时器
     state = {
-        title: null,  // 直播间标题
-        id: null      // 当前的标题id
+        title: null, // 直播间标题
+        id: null, // 当前的标题id
     };
-    
-    componentDidMount(){
+
+    componentDidMount() {
         this.getNewTitle();
         this.timer = setInterval(this.getNewTitle, 30000);
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.timer);
         this.timer = null;
     }
     // 删除文本内的标签，测试文字：
-    deleteHtmlTag = (text) => text.replace(/<\/?[a-zA-Z]+>/g, '');
+    deleteHtmlTag = text => text.replace(/<\/?[a-zA-Z]+>/g, '');
     // 获取新的直播间标题
-    getNewTitle = async()=>{
-        try{
-            const data = await jsonp('http://api3.finance.ifeng.com/live/getnew', {
-                data: {
-                    level: 1,
-                    dist: 1, 
-                    cb: 'setNewCont'
-                },
-                cache: false,
-                jsonpCallback: 'setNewCont'
-            });
+    getNewTitle = async () => {
+        try {
+            const data = await getZhiboTitle();
             const infor = data[0];
-            if(this.state.id !== infor.id){
+
+            if (this.state.id !== infor.id) {
                 let title = this.deleteHtmlTag(infor.title[0]);
-                if(title.length > 26){
-                    title = title.substring(0, 26) + '...';
+
+                if (title.length > 26) {
+                    title = `${title.substring(0, 26)}...`;
                 }
                 this.setState({
                     id: infor.id,
-                    title
+                    title,
                 });
             }
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     };
-    render(){
+    render() {
         return (
-            <div className={ styles.zhiboshi }>
-                <a className={ styles.link } href="http://finance.ifeng.com/gold/zhibo/index.shtml" target="_blank">{ this.state.title }</a>
+            <div className={styles.zhiboshi}>
+                <a className={styles.link} href="http://finance.ifeng.com/gold/zhibo/index.shtml" target="_blank">
+                    {this.state.title}
+                </a>
             </div>
         );
     }

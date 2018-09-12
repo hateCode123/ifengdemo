@@ -74,11 +74,17 @@ class ContentList extends React.PureComponent {
 
     async componentDidMount() {
         try {
-            const { len } = this.state;
-            const { infoAd, index } = this.props;
+            const { infoAd } = this.props;
             const callback = await handleAd(infoAd);
 
             callback(infoAd.data, event, this.insert);
+        } catch (e) {
+            console.error(e);
+        }
+
+        try {
+            const { len } = this.state;
+            const { index } = this.props;
 
             let data = [];
 
@@ -120,7 +126,11 @@ class ContentList extends React.PureComponent {
         const { active } = this.props;
 
         if (!active) {
-            event.off('init');
+            try {
+                event.off('init');
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 
@@ -138,10 +148,14 @@ class ContentList extends React.PureComponent {
                 len: length,
             },
             () => {
-                event.trigger('loadMoreCmp', { index, len });
+                try {
+                    event.trigger('loadMoreCmp', { index, len });
 
-                if (length >= data.length) {
-                    event.off('loadMoreCmp');
+                    if (length >= data.length) {
+                        event.off('loadMoreCmp');
+                    }
+                } catch (e) {
+                    console.error(e);
                 }
             },
         );
