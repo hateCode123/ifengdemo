@@ -32,7 +32,7 @@ class ContentList extends React.PureComponent {
     };
 
     insert = (insertArr, replaceArr) => {
-        const { data, count } = this.state;
+        const { len, data, count } = this.state;
 
         const infoData = [...data];
         const infoCount = [...count];
@@ -58,6 +58,7 @@ class ContentList extends React.PureComponent {
 
         this.setState(
             {
+                len: len + insertArr.length,
                 data: infoData,
                 count: infoCount,
             },
