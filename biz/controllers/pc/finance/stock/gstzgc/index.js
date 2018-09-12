@@ -126,7 +126,7 @@ exports.financeWemoney = {
             ['cooperation', 'KVProxy', 'getStaticFragment', 10112, getStringByKey('content')],
 
             // 版权
-            ['copyright', 'KVProxy', 'getStaticFragment', 10114, getJsonByKey('content')],
+            ['copyright', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
         ];
         const allData = await transfer(ctx, json);
 

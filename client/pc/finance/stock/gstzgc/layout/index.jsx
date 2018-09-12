@@ -96,7 +96,7 @@ class Layout extends React.PureComponent {
                     </div>
                     <div className={styles.fr}>
                         <Chip
-                            id="100336"
+                            id="10036"
                             type="static"
                             title="视频解盘"
                             translate="jsonParse"
