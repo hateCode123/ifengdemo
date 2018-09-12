@@ -31,12 +31,21 @@ class Headline extends React.PureComponent {
                         title="头条新闻"
                         groupName="正文"
                         content={data}
+                        position="relative"
                         translate="handleHeadlinePicData">
                         <List />
                     </Chip>
                 </div>
-                <Chip id="10018" type="static" title="财经客户权益" groupName="正文" content={rights}>
-                    <div dangerouslySetInnerHTML={{ __html: rights }} />
+                <Chip
+                    id="10018"
+                    type="static"
+                    title="财经客户权益"
+                    groupName="正文"
+                    position="relative"
+                    content={rights}>
+                    <div style={{ position: 'relative' }}>
+                        <div dangerouslySetInnerHTML={{ __html: rights }} />
+                    </div>
                 </Chip>
             </div>
         );

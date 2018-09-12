@@ -12,14 +12,11 @@ module.exports = () => {
     var domreadyStatus = false;
     document.addEventListener("DOMContentLoaded", function(event) {
         domreadyStatus = true;
-        console.log("DOM ready!");
     });
     var loadStatus = false;
     document.addEventListener("load", function(event) {
         loadStatus = true;
-        console.log("DOM ready!");
     });
-    console.log(uid);
     </script>
     <!-- build:js errorupload.min.js -->
     <script src="/errorupload/bj-report.js"></script>

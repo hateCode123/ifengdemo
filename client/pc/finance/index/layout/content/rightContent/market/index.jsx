@@ -18,7 +18,11 @@ class Market extends React.PureComponent {
      * 渲染组件
      */
     render() {
-        return <div dangerouslySetInnerHTML={this.createMarkup()} />;
+        return (
+            <div style={{ position: 'relative' }}>
+                <div dangerouslySetInnerHTML={this.createMarkup()} />
+            </div>
+        );
     }
 }
 

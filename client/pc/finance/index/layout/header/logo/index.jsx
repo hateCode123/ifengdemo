@@ -24,14 +24,14 @@ class Logo extends React.PureComponent {
 
         return (
             <React.Fragment>
-                <a href={logo[0].url} target="_blank" rel={rel}>
-                    <Chip id="20006" type="struct" title="Logo" groupName="头部" content={logo[0]}>
-                        <img src={logo[0].src} alt={logo[0].title} width={logo[0].width} height={logo[0].height} />
+                <a href={logo.url} target="_blank" rel={rel}>
+                    <Chip id="20006" type="struct" title="Logo" groupName="头部" content={logo}>
+                        <img src={logo.src} alt={logo.title} width={logo.width} height={logo.height} />
                     </Chip>
                 </a>
                 <div className={styles.ad_1}>
-                    <Chip id="20007" type="struct" title="LogoAd" groupName="头部" content={logoAd[0]}>
-                        <img src={logoAd[0].src} width={logoAd[0].width} height={logoAd[0].height} />
+                    <Chip id="20007" type="struct" title="LogoAd" groupName="头部" content={logoAd}>
+                        <img src={logoAd.src} width={logoAd.width} height={logoAd.height} />
                     </Chip>
                 </div>
                 <Ad content={channelAd} styleName={styles.ad_2} />
