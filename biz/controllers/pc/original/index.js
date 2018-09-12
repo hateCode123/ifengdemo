@@ -19,7 +19,7 @@ exports.list = {
             ['search', 'KVProxy', 'getStructuredFragment', '20005', getStringByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStructuredFragment', '20012', getStringByKey('content')],
+            ['footer', 'KVProxy', 'getStructuredFragment', '20036', getStringByKey('content')],
 
             // 唐驳虎
             ['Column1', 'KVProxy', 'getDynamicFragment', '3-35189-', getStringByKey('data')],
