@@ -6,12 +6,11 @@ import errorBoundary from '@ifeng/errorBoundary';
 
 class Tabs extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
-        current: PropTypes.number,
-        handleTabsChange: PropTypes.func,
+        children: PropTypes.any,
     };
 
     state = {
+        current: 0,
         isFixed: false,
     };
 
@@ -41,32 +40,56 @@ class Tabs extends React.PureComponent {
     };
 
     handleClick = e => {
-        const { handleTabsChange } = this.props;
-        const index = Number(e.currentTarget.attributes['data-index'].value);
-        const tabsTop = this.tabsTop;
+        scrollTo(0, this.tabsTop);
 
-        handleTabsChange(index, tabsTop);
+        const index = Number(e.currentTarget.getAttribute('index'));
+
+        if (index !== this.state.current) {
+            this.setState({
+                current: index,
+            });
+        }
     };
+
+    renderTabHead = () => {
+        const { isFixed, current } = this.state;
+
+        return (
+            <div id="tabs" className={`${styles.tabHead} ${isFixed ? styles.fix : ''}`}>
+                {React.Children.map(this.props.children, (item, index) => {
+                    return (
+                        <div
+                            className={`${styles.tabHeadItem} ${index === current ? styles.current : ''}`}
+                            key={index}
+                            index={index}
+                            onClick={this.handleClick}>
+                            {item.props.tab}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
+
+    renderBody() {
+        return (
+            <div className={styles.tabBody}>
+                {React.Children.map(this.props.children, (item, index) =>
+                    React.cloneElement(item, { active: this.state.current === index }),
+                )}
+            </div>
+        );
+    }
 
     /**
      * 渲染组件
      */
     render() {
-        const { isFixed } = this.state;
-        const { content, current } = this.props;
-
         return (
-            <ul id="tabs" className={`${styles.tabs} ${isFixed ? styles.fix : ''}`}>
-                {content.map((item, index) => (
-                    <li
-                        key={index}
-                        className={index === current ? styles.current : ''}
-                        data-index={index}
-                        onClick={this.handleClick}>
-                        {item}
-                    </li>
-                ))}
-            </ul>
+            <div>
+                {this.renderTabHead()}
+                {this.renderBody()}
+            </div>
         );
     }
 }

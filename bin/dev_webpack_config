@@ -1,4 +1,4 @@
---platform pc --path finance/wemoney
+--platform pc --type view,edit
   
 # --platform pc --type view,edit --path finance/stock
 # --platform pc --type view,edit,low 
