@@ -1,5 +1,6 @@
 .box_fixed {
-    background: url(//p0.ifengimg.com/2018_22/D84DEBC06504F4DE6B4329FF33AF2FD8E2DD1300_w1000_h200.png) 0 0;
+    /* background: url(//p0.ifengimg.com/2018_22/D84DEBC06504F4DE6B4329FF33AF2FD8E2DD1300_w1000_h200.png) 0 0; */
+    background-position: 0 0;
     transition: all 1s;
     /* _background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://p0.ifengimg.com/2018_22/D84DEBC06504F4DE6B4329FF33AF2FD8E2DD1300_w1000_h200.png" ,sizingMethod="crop");  */
     overflow: hidden;
