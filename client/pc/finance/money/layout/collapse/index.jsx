@@ -12,15 +12,25 @@ class TopCollapse extends React.PureComponent {
     };
 
     state = {
-        open: 1,
+        open: 0,
     };
+    // UNSAFE_componentWillReceiveProps
+    componentDidMount(nextProps) {
+        // if (nextProps.init && nextProps.init !== this.props.init) {
+        this.timer1 = setTimeout(() => {
+            this.setState({ open: 1 });
+        }, 100);
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.init && nextProps.init !== this.props.init) {
-            setTimeout(() => {
-                this.setState({ open: 0 });
-            }, 6000);
-        }
+        this.timer2 = setTimeout(() => {
+            clearTimeout(this.timer1);
+            this.setState({ open: 0 });
+        }, 6000);
+        // }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer1);
+        clearTimeout(this.timer2);
     }
 
     render() {
@@ -34,7 +44,7 @@ class TopCollapse extends React.PureComponent {
                     <div
                         className={style.box_fixed}
                         style={
-                            init && open === 1
+                            open === 1
                                 ? { height: '200px', backgroundImage: { img } }
                                 : { height: '0', backgroundImage: { img } }
                         }>

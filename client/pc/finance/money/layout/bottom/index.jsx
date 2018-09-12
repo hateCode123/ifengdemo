@@ -11,14 +11,14 @@ class Bottom extends React.PureComponent {
                 <div className={style.box_10z}>
                     <div className={style.flog01}>
                         <img
-                            src="http://p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
+                            src="//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
                             width="161"
                             height="27"
                             alt="凤凰网财经"
                         />
                     </div>
                     <div className={style.wei}>
-                        <img src="http://y3.ifengimg.com/a/2015_42/b32824459e3fdf7.jpg" width="102" height="102" />
+                        <img src="//y3.ifengimg.com/a/2015_42/b32824459e3fdf7.jpg" width="102" height="102" />
                     </div>
                     <p>凤凰新媒体 财经频道</p>
                     <p>互动/投稿邮箱：all_cj@ifeng.com</p>

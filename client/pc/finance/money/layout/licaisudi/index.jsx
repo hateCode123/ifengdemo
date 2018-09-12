@@ -40,7 +40,9 @@ class LicaisudiInner extends React.PureComponent {
                     </div>
                     <div className={style.secSdcp}>
                         <h3>
-                            <a href={sec.url} target="_blank" rel={rel} />
+                            <a href={sec.url} target="_blank" rel={rel}>
+                                {sec.title}
+                            </a>
                         </h3>
                         <p>
                             {sec.txt}
@@ -57,7 +59,9 @@ class LicaisudiInner extends React.PureComponent {
                 <div className={style.sdcp_02}>
                     <div className="clearfix">
                         <h3>
-                            <a href={thr.url} target="_blank" rel={rel} />
+                            <a href={thr.url} target="_blank" rel={rel}>
+                                {thr.title}
+                            </a>
                             {thr.txt}
                             <span>{thr.perc}</span>
                         </h3>

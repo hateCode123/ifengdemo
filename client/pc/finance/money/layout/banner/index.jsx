@@ -20,14 +20,14 @@ class Banner extends React.PureComponent {
                 <div className={style.h_theLogo}>
                     <a href="http://finance.ifeng.com/stock/" target="_blank" rel={rel} title="理财首页">
                         <img
-                            src="http://p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
+                            src="//p3.ifengimg.com/37780e23b9ea2d8b/2017/38/logoMoney.png"
                             width="161"
                             height="27"
                             alt="凤凰网理财"
                         />
                     </a>
                     <img
-                        src="http://y1.ifengimg.com/a/2014/0922/lc/images/l_18.png"
+                        src="//y1.ifengimg.com/a/2014/0922/lc/images/l_18.png"
                         width="178"
                         height="30"
                         style={{ marginLeft: '15px' }}

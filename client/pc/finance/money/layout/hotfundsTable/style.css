@@ -23,7 +23,7 @@
 }
 .labelTab01 .tabTd {
     height: 24px;
-    background: url(http://img.ifeng.com/tres/finance/deco/2011/0727/dot_sprite.gif) repeat-x 0 -43px;
+    background: url(//p1.ifengimg.com/a/2018/0911/dot_sprite.gif) repeat-x 0 -43px;
 }
 .labelTab01 .tabTdbg {
     background: none;
@@ -55,7 +55,7 @@
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
 }
 .abo td {
     height: 30px;
@@ -69,7 +69,7 @@
 .abo a {
     color: #222222;
 
-    width: 8em;
+    width: 11em;
 }
 .abo .color_red {
     color: #f54343;

@@ -1,55 +1,55 @@
- .lccs {
-     width: 258px;
-     margin: 25px auto 25px;
- }
+.lccs {
+    width: 258px;
+    margin: 25px auto 25px;
+}
 
- .lccs a {
-     display: block;
-     width: 116px;
-     background: #ffffff;
-     height: 48px;
-     text-align: center;
-     line-height: 22px;
-     font-size: 14px;
-     color: #f54343;
-     text-decoration: none;
-     padding-top: 4px;
- }
+.lccs a {
+    display: block;
+    width: 116px;
+    background: #ffffff;
+    height: 48px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 14px;
+    color: #f54343;
+    text-decoration: none;
+    padding-top: 4px;
+}
 
- .lccs a span {
-     font-size: 12px;
-     line-height: 20px;
- }
+.lccs a span {
+    font-size: 12px;
+    line-height: 20px;
+}
 
- .lccs a.mfkh {
-     margin-right: 22px;
-     border: 1px solid #f54343;
-     float: left;
- }
+.lccs a.mfkh {
+    margin-right: 22px;
+    border: 1px solid #f54343;
+    float: left;
+}
 
- .lccs a.ljdl {
-     background: #ffffff;
-     color: #f54343;
-     border: 1px solid #f54343;
-     float: left;
- }
+.lccs a.ljdl {
+    background: #ffffff;
+    color: #f54343;
+    border: 1px solid #f54343;
+    float: left;
+}
 
- .lccs a:hover {
-     background: #f54343;
-     color: #ffffff;
- }
+.lccs a:hover {
+    background: #f54343;
+    color: #ffffff;
+}
 
- .jjkf {
-     height: 18px;
-     line-height: 18px;
-     font-size: 16px;
-     background: url(http://ued.ifeng.com/test/songbb/finance_managing/images/c_05.png) no-repeat 14px center;
-     color: #666666;
-     padding-left: 59px;
-     font-weight: bold;
- }
+.jjkf {
+    height: 18px;
+    line-height: 18px;
+    font-size: 16px;
+    background: url(//p1.ifengimg.com/a/2018/0911/c_05.png) no-repeat 14px center;
+    color: #666666;
+    padding-left: 59px;
+    font-weight: bold;
+}
 
- .ms {
-     composes: clearfix from global;
-     padding-top: 25px;
- }
+.ms {
+    composes: clearfix from global;
+    padding-top: 25px;
+}
