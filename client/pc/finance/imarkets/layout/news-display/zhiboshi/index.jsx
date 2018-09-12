@@ -22,7 +22,7 @@ class Zhiboshi extends PureComponent {
     // 获取新的直播间标题
     getNewTitle = async () => {
         try {
-            const data = getZhiboTitle();
+            const data = await getZhiboTitle();
             const infor = data[0];
 
             if (this.state.id !== infor.id) {

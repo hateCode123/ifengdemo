@@ -20,7 +20,6 @@ class NewsStream extends PureComponent {
     static propTypes = {
         isDisplaySource: PropTypes.bool,
         content: PropTypes.array,
-        repeatedID: PropTypes.arrayOf(PropTypes.string),
     };
     static defaultProps = {
         isDisplaySource: true,
@@ -29,22 +28,36 @@ class NewsStream extends PureComponent {
 
     countMapCache = {}; // 文章评论数，用于判断评论的数据是否已经读取
     countMap = {}; // 文章评论数，渲染list后清空
+    state = {
+        content: this.props.content,
+    };
 
     componentDidMount() {
-        this.getCount(Object.keys(this.countMap), Object.values(this.countMap));
+        this.getCount();
     }
     // 获取评论列表
-    async getCount(docKey, docValue) {
+    async getCount() {
         try {
-            const data = await getCommentCount(docValue);
+            // 生成评论地址的数组
+            const urlArr = [];
+            const keys = [];
+
+            for (const key in this.countMap) {
+                keys.push(key);
+                urlArr.push(this.countMap[key].commentUrl);
+            }
+
+            const data = await getCommentCount(urlArr);
 
             for (let i = 0, j = data.length; i < j; i++) {
                 const item = data[i];
 
-                if (item.allcount !== 0) {
-                    document.getElementById(`count${docKey[i]}`).innerHTML = item.allcount;
-                }
+                this.countMap[keys[i]].allcount = item.allcount;
             }
+
+            this.setState({
+                content: this.state.content,
+            });
         } catch (err) {
             console.error(err);
         }
@@ -82,12 +95,12 @@ class NewsStream extends PureComponent {
                 </a>
                 <div className={`${styles.top_11} ${styles.news_item_infor} clearfix`}>
                     {// 显示来源
-                    this.props.isDisplaySource && item.source !== '' ? (
+                    this.props.isDisplaySource && item.source && item.source !== '' ? (
                         <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                     ) : null}
                     <time className={styles.text}>{formatTime(item.newsTime)}</time>
                     <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
-                        0
+                        {item.allcount || 0}
                     </a>
                 </div>
             </li>
@@ -117,12 +130,12 @@ class NewsStream extends PureComponent {
                     </h2>
                     <div className="clearfix">
                         {// 显示来源
-                        this.props.isDisplaySource && item.source !== '' ? (
+                        this.props.isDisplaySource && item.source && item.source !== '' ? (
                             <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
                         <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
-                            0
+                            {item.allcount || 0}
                         </a>
                     </div>
                 </div>
@@ -144,12 +157,12 @@ class NewsStream extends PureComponent {
                     </h2>
                     <div className="clearfix">
                         {// 显示来源
-                        this.props.isDisplaySource && item.source !== '' ? (
+                        this.props.isDisplaySource && item.source && item.source !== '' ? (
                             <span className={`${styles.mr10} ${styles.text}`}>{item.source}</span>
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
                         <a className={styles.ly} id={`count${item.id}`} href={pinglunUrl} target="_blank" rel={relText}>
-                            0
+                            {item.allcount || 0}
                         </a>
                     </div>
                 </div>
@@ -159,26 +172,21 @@ class NewsStream extends PureComponent {
     // 渲染list
     listView(list) {
         this.countMap = {};
-        const endIndex = list.length - 1;
         const id = [];
 
         return list.map((item, index) => {
-            // 获取最后一位的信息，用于加载信息流
-            if (index === endIndex) this.lastItem = item;
-
-            // 和推荐位或信息流本身的id去重
-            if (this.props.repeatedID.includes(item.id) || id.includes(item.id)) return null;
-
             // 将已渲染id加入到数组
-            id.push(item.id);
+            const idKey = `list_${item.id}`;
+
+            id.push(idKey);
 
             // 格式化url
             const url = formatUrl(item.url);
 
             // 评论
-            if (!(item.id in this.countMapCache)) {
-                this.countMapCache[item.id] = item.commentUrl;
-                this.countMap[item.id] = item.commentUrl;
+            if (!(idKey in this.countMapCache)) {
+                this.countMapCache[idKey] = item;
+                this.countMap[idKey] = item;
             }
 
             // 评论地址
@@ -206,7 +214,7 @@ class NewsStream extends PureComponent {
         );
     }
     render() {
-        const { content } = this.props;
+        const { content } = this.state;
 
         if (content.length === 0) {
             return (
@@ -220,7 +228,7 @@ class NewsStream extends PureComponent {
             return (
                 <div>
                     {/* 新闻列表 */}
-                    <ul className={styles.news_list}>{this.listView(content)}</ul>
+                    <ul className={styles.news_list}>{this.listView(this.state.content)}</ul>
                     <div className={styles.more_box}>
                         <a
                             className={styles.more}
