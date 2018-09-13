@@ -167,7 +167,6 @@ class ContentList extends React.PureComponent {
      */
     render() {
         const { len, data, count } = this.state;
-        const listStyle = {};
 
         /* eslint-disable no-confusing-arrow */
         return (
@@ -176,9 +175,9 @@ class ContentList extends React.PureComponent {
                     ? data.slice(0, len).map(
                           (item, index) =>
                               item.type === 'ad' ? (
-                                  <div key={index} ref={item.ref} />
+                                  <div key={index} className={styles.list} ref={item.ref} />
                               ) : (
-                                  <div key={index} className={styles.list} style={listStyle}>
+                                  <div key={index} className={styles.list}>
                                       {item.thumbnails && item.thumbnails !== '' ? (
                                           <a href={item.url} target="_blank" rel={rel} className={styles.imgBox}>
                                               <LazyImg
