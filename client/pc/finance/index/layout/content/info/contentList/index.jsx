@@ -150,7 +150,7 @@ class ContentList extends React.PureComponent {
             },
             () => {
                 try {
-                    event.trigger('loadMoreCmp', { index, len });
+                    event.trigger('loadMoreCmp', { index, len: length });
 
                     if (length >= data.length) {
                         event.off('loadMoreCmp');
