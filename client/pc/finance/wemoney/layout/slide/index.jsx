@@ -15,10 +15,12 @@ class SimpleSlider extends React.PureComponent {
 
         const config = {
             arrows: false,
+            dotStyle: styles.dot,
+            dotCurrentStyle: styles.current,
         };
 
         return (
-            <div className={styles.slide}>
+            <div className={styles.box}>
                 <Slides content={content} config={config} />
             </div>
         );
