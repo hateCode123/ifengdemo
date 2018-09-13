@@ -8,7 +8,6 @@ import '../../reset.css';
 class TopCollapse extends React.PureComponent {
     static propTypes = {
         content: PropTypes.object,
-        init: PropTypes.bool,
     };
 
     state = {
@@ -34,8 +33,10 @@ class TopCollapse extends React.PureComponent {
     }
 
     render() {
-        const { content, init } = this.props;
-        const { url, img } = content.topCollapse;
+        console.log(this.props);
+        const { content } = this.props;
+
+        const { url, img } = content;
         const { open } = this.state;
 
         console.log(url, img);
