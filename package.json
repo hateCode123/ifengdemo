@@ -25,7 +25,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@ifeng/public_method": "^1.0.5",
+        "@ifeng/public_method": "^1.0.6",
         "@ifeng/server_bunyan": "^1.0.1",
         "@tars/rpc": "2.0.2",
         "ajv": "^6.5.2",

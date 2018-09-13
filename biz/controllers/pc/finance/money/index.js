@@ -6,7 +6,7 @@ const { formatImage, formatUrl } = require('@ifeng/public_method');
 const logger = require('../../../../common/logger');
 
 exports.financeWemoney = {
-    path: '/pc/finance/money/test',
+    path: '/pc/finance/money',
     method: 'get',
     edit: true,
     type: 'html',
