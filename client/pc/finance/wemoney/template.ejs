@@ -4,8 +4,9 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
-    <title></title>
+    <title>凤凰WEMONEY-新金融风向标-凤凰网</title>
     {{{ htmlWebpackPlugin.options.errorupload }}}
+    <%- statisticsData.statisticsHead %>
     <script>
         var __jsonData__ = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
         var jsonData = {
@@ -50,6 +51,7 @@
             <script src="{{path}}" type="text/javascript"></script>
         {{/each}}
     {{/if}}
+    <%- statisticsData.statisticsBody %>
 </body>
 
 </html>

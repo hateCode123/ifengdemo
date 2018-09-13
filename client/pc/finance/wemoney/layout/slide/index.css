@@ -1,22 +1,8 @@
-.slide {
+.box {
     width: 654px;
     height: 400px;
     font-size: 14pt;
     overflow: hidden;
-    & [ifeng_ui_pc_sliders-dots-item] {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border-radius: 6px;
-        background: #fff;
-        margin: 0px 10px 0px 10px;
-        cursor: pointer;
-        position: relative;
-    }
-
-    & [ifeng_ui_pc_sliders-dots-item='current'] {
-        background: #fe5421;
-    }
 
     & [ifeng_ui_pc_sliders-title] {
         height: 68px;
@@ -37,4 +23,22 @@
     & [ifeng_ui_pc_sliders-link] :hover {
         color: #fe5421;
     }
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #fff;
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.current {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #fe5421;
 }
