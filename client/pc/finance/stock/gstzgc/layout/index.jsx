@@ -74,7 +74,6 @@ class Layout extends React.PureComponent {
                         type="static"
                         title="投资观察顶部通栏广告"
                         groupName="硬广"
-                        translate="jsonParse"
                         content={content.topAd}>
                         <Recommend />
                     </Chip>
@@ -84,31 +83,15 @@ class Layout extends React.PureComponent {
                 <div className={styles.col_w1000}>
                     <div className={styles.fl}>
                         <Topic />
-                        <Chip
-                            id="10030"
-                            type="static"
-                            title="头条新闻"
-                            groupName="文章"
-                            translate="jsonParse"
-                            content={content.headline}>
+                        <Chip id="10030" type="static" title="头条新闻" groupName="文章" content={content.headline}>
                             <Headline />
                         </Chip>
                     </div>
                     <div className={styles.fr}>
-                        <Chip
-                            id="10036"
-                            type="static"
-                            title="视频解盘"
-                            translate="jsonParse"
-                            content={content.videoAnalysis}>
+                        <Chip id="10036" type="static" title="视频解盘" content={content.videoAnalysis}>
                             <Recommend />
                         </Chip>
-                        <Chip
-                            id="10037"
-                            type="static"
-                            title="炒股大赛"
-                            translate="jsonParse"
-                            content={content.stockCompetition}>
+                        <Chip id="10037" type="static" title="炒股大赛" content={content.stockCompetition}>
                             <Recommend />
                         </Chip>
                     </div>
@@ -116,24 +99,13 @@ class Layout extends React.PureComponent {
 
                 <div className={styles.col_w1000}>
                     <div className={styles.fl640}>
-                        <Chip
-                            id="20036"
-                            type="recommend"
-                            title="轮播"
-                            translate="jsonParse"
-                            content={content.sliderData}>
+                        <Chip id="20036" type="recommend" title="轮播" content={content.sliderData}>
                             <Slide />
                         </Chip>
                         <PaperContent content={paperData} />
                     </div>
                     <div className={styles.fr300}>
-                        <Chip
-                            id="10056"
-                            type="static"
-                            title="牛人解盘"
-                            groupName="文章"
-                            translate="jsonParse"
-                            content={content.nrjp}>
+                        <Chip id="10056" type="static" title="牛人解盘" groupName="文章" content={content.nrjp}>
                             <Recommend />
                         </Chip>
 
@@ -171,7 +143,6 @@ class Layout extends React.PureComponent {
                                 type="static"
                                 title="微信公众号"
                                 groupName="文章"
-                                translate="jsonParse"
                                 content={content.wxPublic}>
                                 <Recommend />
                             </Chip>

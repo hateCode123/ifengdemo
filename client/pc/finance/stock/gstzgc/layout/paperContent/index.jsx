@@ -55,7 +55,12 @@ class PaperContent extends React.PureComponent {
                 <div className={styles.mt20}>
                     <Title content={newPaperTitle} />
                     <Paper content={content.newPaper} />
-                    <Chip id="10043" type="static" title="最新文章2" content={content.newPaperExtra}>
+                    <Chip
+                        id="10043"
+                        type="static"
+                        title="最新文章2"
+                        translate="jsonParse"
+                        content={content.newPaperExtra}>
                         <Paper />
                     </Chip>
                     <Chip id="10053" type="static" title="更多最新文章" content={content.newPaperMore}>
@@ -63,13 +68,7 @@ class PaperContent extends React.PureComponent {
                     </Chip>
                 </div>
                 <br />
-                <Chip
-                    id="15019"
-                    type="static"
-                    title="投资观察-硬广02"
-                    groupName="硬广"
-                    translate="jsonParse"
-                    content={content.hardAd02}>
+                <Chip id="15019" type="static" title="投资观察-硬广02" groupName="硬广" content={content.hardAd02}>
                     <Recommend />
                 </Chip>
                 <Chip id="10054" type="static" title="更多投资情报" content={investInfoData}>
@@ -77,13 +76,7 @@ class PaperContent extends React.PureComponent {
                 </Chip>
                 <br />
 
-                <Chip
-                    id="15020"
-                    type="static"
-                    title="投资观察-硬广03"
-                    groupName="硬广"
-                    translate="jsonParse"
-                    content={content.hardAd03}>
+                <Chip id="15020" type="static" title="投资观察-硬广03" groupName="硬广" content={content.hardAd03}>
                     <Recommend />
                 </Chip>
                 <Chip id="10055" type="static" title="更多上市公司" content={ssComponeyData}>

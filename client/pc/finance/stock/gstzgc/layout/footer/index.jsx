@@ -30,13 +30,7 @@ class BottomFooter extends React.PureComponent {
                     <Recommend />
                 </Chip>
                 <div key="bottomAd" className={styles.ad}>
-                    <Chip
-                        id="15021"
-                        type="static"
-                        title="投资观察-硬广04"
-                        groupName="底部广告"
-                        translate="jsonParse"
-                        content={hardAd04}>
+                    <Chip id="15021" type="static" title="投资观察-硬广04" groupName="底部广告" content={hardAd04}>
                         <Recommend />
                     </Chip>
                 </div>
