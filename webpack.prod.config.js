@@ -29,7 +29,7 @@ const fileExtend = {
     mobile_edit: '_mobile_edit',
 };
 
-const createConfig = function(type, platform, level, modern) {
+const createConfig = function(type, platform, level, modern, port) {
     return {
         stats: 'errors-only',
         devtool: 'source-map',
@@ -62,6 +62,7 @@ const createConfig = function(type, platform, level, modern) {
                             // Drop console statements
                             drop_console: env === 'production' ? true : false,
                         },
+                        safari10: true,
                     },
                     sourceMap: true,
                 }),
@@ -97,9 +98,8 @@ const createConfig = function(type, platform, level, modern) {
         mode: 'production',
         plugins: [
             // new BundleAnalyzerPlugin(),
-            // new BundleAnalyzerPlugin({ analyzerPort: modern === 'modern' ? 8888 : 8887 }),
+            // new BundleAnalyzerPlugin({ analyzerPort: port }),
             new webpack.DefinePlugin({
-                // 'process.env.NODE_ENV': JSON.stringify('production'),
                 ChipUrl:
                     env === 'production'
                         ? JSON.stringify('https://ucms.ifeng.com/shard')
@@ -152,25 +152,25 @@ const createConfig = function(type, platform, level, modern) {
 let list = [];
 
 if (process.argv[process.argv.length - 1] === 'pc_low') {
-    list.push(createConfig('view', 'pc', 'low', ''));
+    list.push(createConfig('view', 'pc', 'low', '', 8880));
 }
 if (process.argv[process.argv.length - 1] === 'pc') {
-    list.push(createConfig('view', 'pc', '', ''));
+    list.push(createConfig('view', 'pc', '', '', 8881));
 }
 if (process.argv[process.argv.length - 1] === 'pc_modern') {
-    list.push(createConfig('view', 'pc', '', 'modern'));
+    list.push(createConfig('view', 'pc', '', 'modern', 8882));
 }
 if (process.argv[process.argv.length - 1] === 'pc_edit') {
-    list.push(createConfig('edit', 'pc', '', ''));
+    list.push(createConfig('edit', 'pc', '', '', 8883));
 }
 if (process.argv[process.argv.length - 1] === 'mobile') {
-    list.push(createConfig('view', 'mobile', '', ''));
+    list.push(createConfig('view', 'mobile', '', '', 8884));
 }
 if (process.argv[process.argv.length - 1] === 'mobile_modern') {
-    list.push(createConfig('view', 'mobile', '', 'modern'));
+    list.push(createConfig('view', 'mobile', '', 'modern', 8885));
 }
 if (process.argv[process.argv.length - 1] === 'mobile_edit') {
-    list.push(createConfig('edit', 'mobile', '', ''));
+    list.push(createConfig('edit', 'mobile', '', '', 8886));
 }
 module.exports = list;
 
