@@ -78,7 +78,7 @@ class GlobalIndex extends React.PureComponent {
             <ul className={styles.qqList}>
                 <li className={styles.lA}>
                     A股指数&nbsp;
-                    <span>|&nbsp;</span>
+                    <span>&nbsp;|&nbsp;&nbsp;</span>
                 </li>
                 <li>
                     <ul className={styles.globalIndex}>
