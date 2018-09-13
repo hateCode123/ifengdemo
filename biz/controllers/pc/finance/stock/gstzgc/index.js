@@ -143,7 +143,7 @@ exports.financeWemoney = {
 
         // 数据简化,待替换为数据处理高阶组件
         try {
-            allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, 4);
+            allData.sliderData = allData.sliderData && recommendRandomSort(allData.sliderData, allData.sliderData.length > 4 ? 4 : allData.sliderData.length);
             allData.clickRank = allData.clickRank.map(item => pureData(item));
             allData.newPaper = allData.newPaper.map(item => pureData(item));
             allData.investInfo = allData.investInfo.map(item => pureData(item));

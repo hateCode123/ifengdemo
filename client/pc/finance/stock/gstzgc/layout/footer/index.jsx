@@ -19,14 +19,7 @@ class BottomFooter extends React.PureComponent {
 
         return (
             <React.Fragment>
-                <Chip
-                    key="10112"
-                    id="10112"
-                    type="static"
-                    title="底部合作"
-                    groupName="底部"
-                    translate="jsonParse"
-                    content={cooperation}>
+                <Chip key="10112" id="10112" type="static" title="底部合作" groupName="底部" content={cooperation}>
                     <Recommend />
                 </Chip>
                 <div key="bottomAd" className={styles.ad}>
