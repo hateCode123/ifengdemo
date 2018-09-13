@@ -43,8 +43,8 @@
 .user {
     float: right;
     width: 190px;
-    margin: 0 30px 0 0;
     padding-top: 5px;
+    text-align: right;
 }
 
 .search {

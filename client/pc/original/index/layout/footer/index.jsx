@@ -10,7 +10,7 @@ import errorBoundary from '@ifeng/errorBoundary';
  */
 class BottomFooter extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     /**

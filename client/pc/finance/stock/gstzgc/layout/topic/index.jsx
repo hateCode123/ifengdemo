@@ -8,13 +8,31 @@ class Topic extends React.PureComponent {
     state = { topic: '' };
 
     /**
+     * 处理接口中返回的title，因为title中可能含有div
+     * @param {*} title
+     */
+    getTitle = title => {
+        if (title.indexOf('<div>') > -1) {
+            title = title.substring(5, title.length);
+        }
+
+        const indexAfDiv = title.indexOf('</div>');
+
+        if (indexAfDiv > -1) {
+            title = title.substring(0, indexAfDiv);
+        }
+
+        return title;
+    };
+
+    /**
      * 请求 Topic
      */
     componentDidMount() {
         const getData = async () => {
             const data = await getTopicData();
 
-            this.setState({ topic: data[0].title[0] });
+            this.setState({ topic: this.getTitle(data[0].title[0]) });
         };
 
         getData();
