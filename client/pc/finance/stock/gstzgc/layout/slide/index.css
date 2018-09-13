@@ -5,17 +5,14 @@
 
     & [ifeng_ui_pc_sliders-title] {
         position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
         height: 40px;
-        background: rgba(0, 0, 0, 0.5);
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        line-height: 38px;
-        padding: 0 10px;
+        line-height: 40px;
+        bottom: 0;
+        z-index: 1;
+        font-size: 11pt;
         color: #fff;
-        font-size: 14px;
+        overflow: hidden;
+        cursor: pointer;
     }
 
     & [ifeng_ui_pc_sliders-link] :hover {
@@ -33,7 +30,6 @@
     cursor: pointer;
     position: relative;
     top: 18px;
-    z-index: 9999;
 }
 
 .current {
@@ -45,5 +41,4 @@
     cursor: pointer;
     position: relative;
     top: 18px;
-    z-index: 9999;
 }

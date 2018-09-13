@@ -15,18 +15,9 @@ class Slide extends React.PureComponent {
 
         const config = {
             arrows: false,
-            dots: true,
-            dotsAction: 'hover',
             autoplay: false,
-            direction: 'forward',
-            autoplayInterval: 3000,
-            axis: 'horizonta',
-            className: 'mySliders',
-            effect: 'slide',
-            initialSlide: 0,
-            speed: 300,
-            // dotStyle: styles.dot,
-            // dotCurrentStyle: styles.current,
+            dotStyle: styles.dot,
+            dotCurrentStyle: styles.current,
         };
 
         return (
