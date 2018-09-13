@@ -21,6 +21,7 @@ class Topic extends React.PureComponent {
         if (indexAfDiv > -1) {
             title = title.substring(0, indexAfDiv);
         }
+        title.replace(/&nbsp;/gi, '');
 
         return title;
     };
