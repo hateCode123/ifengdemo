@@ -135,7 +135,7 @@ class BottomAffix extends React.PureComponent {
                             {isShow ? (
                                 <tr>
                                     <td>
-                                        <a href="#" onClick={this.backToTop}>
+                                        <a onClick={this.backToTop}>
                                             <div className={styles.back} />
                                         </a>
                                     </td>

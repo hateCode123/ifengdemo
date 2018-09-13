@@ -12,6 +12,7 @@
         & tr td {
             position: relative;
             & a {
+                cursor: pointer;
                 display: block;
                 height: 50px;
                 margin-bottom: 1px;
