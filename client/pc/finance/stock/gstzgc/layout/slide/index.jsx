@@ -15,7 +15,7 @@ class Slide extends React.PureComponent {
 
         const config = {
             arrows: false,
-            autoplay: false,
+            autoplay: true,
             dotStyle: styles.dot,
             dotCurrentStyle: styles.current,
         };
