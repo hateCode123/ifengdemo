@@ -4,7 +4,7 @@ const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../..
 const { formatImage, formatUrl, recommendRandomSort } = require('@ifeng/public_method');
 
 exports.financeWemoney = {
-    path: '/pc/finance/stock/gstzgc/test',
+    path: '/pc/finance/stock/gstzgc',
     method: 'get',
     edit: true,
     type: 'html',
