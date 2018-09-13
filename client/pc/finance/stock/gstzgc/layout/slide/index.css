@@ -17,6 +17,7 @@
         color: #fff;
         font-size: 14px;
     }
+
     & [ifeng_ui_pc_sliders-link] :hover {
         text-decoration: underline;
     }
@@ -32,6 +33,7 @@
     cursor: pointer;
     position: relative;
     top: 18px;
+    z-index: 9999;
 }
 
 .current {
@@ -43,4 +45,5 @@
     cursor: pointer;
     position: relative;
     top: 18px;
+    z-index: 9999;
 }
