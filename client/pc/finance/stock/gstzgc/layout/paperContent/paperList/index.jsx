@@ -5,6 +5,7 @@ import Title from './title';
 import Paper from './paper';
 import More from './more';
 import errorBoundary from '@ifeng/errorBoundary';
+import Chip from 'Chip';
 
 class PaperList extends React.PureComponent {
     /**
@@ -23,7 +24,20 @@ class PaperList extends React.PureComponent {
                 <div className={styles.mt20}>
                     <Title content={title} />
                     <Paper content={content.paper} />
-                    <More content={content.more} />
+                    {title.index === 1 ? (
+                        <Chip id="10054" type="static" title="更多投资情报" content={content.more}>
+                            <More content={content.more} />
+                        </Chip>
+                    ) : (
+                        ''
+                    )}
+                    {title.index === 2 ? (
+                        <Chip id="10055" type="static" title="更多上市公司" content={content.more}>
+                            <More content={content.more} />
+                        </Chip>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         );

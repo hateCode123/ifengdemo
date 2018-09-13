@@ -71,17 +71,13 @@ class PaperContent extends React.PureComponent {
                 <Chip id="15019" type="static" title="投资观察-硬广02" groupName="硬广" content={content.hardAd02}>
                     <Recommend />
                 </Chip>
-                <Chip id="10054" type="static" title="更多投资情报" content={investInfoData}>
-                    <PaperList />
-                </Chip>
+                <PaperList content={investInfoData} />
                 <br />
 
                 <Chip id="15020" type="static" title="投资观察-硬广03" groupName="硬广" content={content.hardAd03}>
                     <Recommend />
                 </Chip>
-                <Chip id="10055" type="static" title="更多上市公司" content={ssComponeyData}>
-                    <PaperList />
-                </Chip>
+                <PaperList content={ssComponeyData} />
             </div>
         );
     }
