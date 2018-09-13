@@ -31,7 +31,7 @@ module.exports = function getHTML(globPath, extendName, level, filepath, mode, t
         const conf = {
             filename: `${entryName}${extendName}${modernName}.html`,
             polyfill: getPolyfill(level, mode),
-            errorupload: env === 'production' ? getErrorupload() : '',
+            errorupload: getErrorupload(level, mode), //env === 'production' ? getErrorupload() :getErrorupload(),
             modernPolyfill: moderPolyfill,
             template: modern ? './client/common/modern.ejs' : file,
             inject: false,

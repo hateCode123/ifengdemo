@@ -18,7 +18,7 @@ var BJ_REPORT = (function(global) {
         level: 4, // 错误级别 1-debug 2-info 4-error
         ignore: [], // 忽略某个错误, 支持 Regexp 和 Function
         random: 1, // 抽样 (0-1] 1-全量
-        delay: 1000, // 延迟上报 combo 为 true 时有效
+        delay: 2000, // 延迟上报 combo 为 true 时有效
         submit: null, // 自定义上报方式
         repeat: 5 // 重复上报次数(对于同一个错误超过多少次不上报),
     };
@@ -27,26 +27,32 @@ var BJ_REPORT = (function(global) {
        var type = 0;
         switch(key)
         {
-            case 'ui':
+            case 'ui':          // ui错误
                 type = 1;
                 break;
-            case 'ad':
+            case 'ad':          // 广告错误
                 type = 2;
                 break;
-            case 'data':
+            case 'data':        // 数据错误
                 type = 3;
                 break;
-            case 'api':
+            case 'api':         // api错误
                 type = 4;
                 break;
-            case 'alive':
+            case 'alive':       // 5s验活失败
                 type = 5;
                 break;
-            case 'document.body':
+            case 'document.body': // 5s页面超时未响应
                 type = 6;
                 break;
+            case 'match':       // 路由错配
+                type = 7;
+                break;
+            case 'prevent':     // 广告脚本被阻止
+                type = 8;
+                break;
             default:
-                type = 0;
+                type = 0;       // 未知错误
         }
 
         return type

@@ -61,18 +61,18 @@
     {{#if htmlWebpackPlugin.options.useMorden}}
     {{#if htmlWebpackPlugin.options.isDevMode}}
         {{#each htmlWebpackPlugin.files.js}}
-            <script type="module" src="{{path}}_modern.js" type="text/javascript"></script>
+            <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin></script>
         {{/each}}
     {{else}}
         <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
     {{/if}}
     {{{htmlWebpackPlugin.options.modernPolyfill}}}
     {{#each htmlWebpackPlugin.files.js}}
-        <script nomodule src="{{path}}" type="text/javascript"></script>
+        <script nomodule src="{{path}}" type="text/javascript" crossorigin></script>
     {{/each}}
     {{else}}
         {{#each htmlWebpackPlugin.files.js}}
-            <script src="{{path}}" type="text/javascript"></script>
+            <script src="{{path}}" type="text/javascript" crossorigin></script>
         {{/each}}
     {{/if}}
     <%- decodeURIComponent(adData.adBody) %>
