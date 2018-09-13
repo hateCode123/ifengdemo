@@ -26,6 +26,8 @@ class Slide extends React.PureComponent {
             effect: 'slide',
             initialSlide: 0,
             speed: 300,
+            dotStyle: styles.dot,
+            dotCurrentStyle: styles.current,
         };
 
         return (
