@@ -17,7 +17,7 @@ class AdAside extends React.PureComponent {
         return (
             <div>
                 <Chip
-                    id={content.id}
+                    id={`${content.id}`}
                     type="static"
                     title={content.name}
                     groupName="rightContent"
