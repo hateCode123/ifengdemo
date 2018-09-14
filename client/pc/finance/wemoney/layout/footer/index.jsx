@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Recommend from '../../compontents/recommend';
 import errorBoundary from '@ifeng/errorBoundary';
+import Chip from 'Chip';
 
 // import Footer from '../../../../../components/footer/';
 
@@ -18,7 +19,9 @@ class BottomFooter extends React.PureComponent {
 
         const footer = (
             <div key="tzgcfooter" className={styles.footer}>
-                <Recommend content={content.copyright} />
+                <Chip id="10121" type="static" title="底部版权" groupName="底部" content={content.copyright}>
+                    <Recommend />
+                </Chip>
             </div>
         );
 

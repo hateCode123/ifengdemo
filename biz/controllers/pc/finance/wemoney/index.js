@@ -42,7 +42,7 @@ exports.financeWemoney = {
             // 热门新闻
             ['hotNews', 'KVProxy', 'getStructuredFragment', 20032, getStringByKey('content')],
 
-            // 信息流
+            // 新闻列表
             ['info', 'KVProxy', 'getStructuredFragment', 20031, getStringByKey('content')],
 
             // 版权
