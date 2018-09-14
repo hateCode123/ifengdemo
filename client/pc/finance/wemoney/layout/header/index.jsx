@@ -18,7 +18,9 @@ class Header extends React.PureComponent {
         const topNav = (
             <div className={styles.h_mainNavNew} key="topNav">
                 <Nav limit={18} content={content.nav} />
-                <UserInfo />
+                <div className={styles.user}>
+                    <UserInfo />
+                </div>
             </div>
         );
 
