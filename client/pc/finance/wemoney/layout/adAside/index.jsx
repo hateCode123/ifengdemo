@@ -16,7 +16,12 @@ class AdAside extends React.PureComponent {
 
         return (
             <div>
-                <Chip id={content.id} type="static" title={content.name} groupName="文章" content={content.content}>
+                <Chip
+                    id={`${content.id}`}
+                    type="static"
+                    title={content.name}
+                    groupName="rightContent"
+                    content={content.content}>
                     <Recommend />
                 </Chip>
             </div>

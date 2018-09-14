@@ -50,8 +50,11 @@
             color: #999999;
             font-size: 14px;
             margin-top: 50px;
+            & .source {
+                font-size: 12px;
+                color: #999;
+            }
             & .ad,
-            & .source,
             & .date {
                 font-size: 12px;
                 color: #999;

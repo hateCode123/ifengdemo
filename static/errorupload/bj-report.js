@@ -51,6 +51,9 @@ var BJ_REPORT = (function(global) {
             case 'prevent':     // 广告脚本被阻止
                 type = 8;
                 break;
+            case 'performance':     // 验活失败增加load事件监听，并上报资源加载时间
+                type = 9;
+                break;
             default:
                 type = 0;       // 未知错误
         }

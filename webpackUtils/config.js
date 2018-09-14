@@ -128,22 +128,39 @@ const setBabelLoader = (modern = false, level = '') => ({
         cacheDirectory: true,
         presets: [
             [
-                'env',
+                '@babel/preset-env',
                 {
                     targets: {
                         browsers: modern
                             ? ['Chrome >= 60', 'Safari >= 10.1', 'iOS >= 10.3', 'Firefox >= 54', 'Edge >= 15']
                             : ['last 2 versions', level === 'low' ? 'ie >= 7' : 'ie >= 9'],
                     },
-                    modules: level === 'low' ? 'commonjs' : false,
-                    useBuiltIns: true,
+                    loose: level === 'low' ? true : false,
+                    modules: 'commonjs',
+                    useBuiltIns: 'entry',
                     debug: false,
                 },
             ],
-            'react',
-            'stage-2',
+            '@babel/preset-react',
         ],
-        plugins: ['transform-runtime'],
+        plugins: [
+            '@babel/plugin-transform-runtime',
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-syntax-import-meta',
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-json-strings',
+            [
+                '@babel/plugin-proposal-decorators',
+                {
+                    legacy: true,
+                },
+            ],
+            '@babel/plugin-proposal-function-sent',
+            '@babel/plugin-proposal-export-namespace-from',
+            '@babel/plugin-proposal-numeric-separator',
+            '@babel/plugin-proposal-throw-expressions',
+            '@babel/plugin-transform-async-to-generator',
+        ],
     },
 });
 

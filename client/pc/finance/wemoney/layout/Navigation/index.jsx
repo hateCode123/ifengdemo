@@ -19,7 +19,7 @@ class Navigation extends React.PureComponent {
         return (
             <div className={styles.navCon}>
                 <div className={styles.nav}>
-                    <Chip id="10003" type="static" title="导航" groupName="文章" content={content.content}>
+                    <Chip id="10003" type="static" title="导航" groupName="头部" content={content.content}>
                         <Recommend />
                     </Chip>
                     <Search />

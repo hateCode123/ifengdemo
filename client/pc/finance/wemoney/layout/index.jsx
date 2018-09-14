@@ -53,14 +53,19 @@ class Layout extends React.PureComponent {
                 <div className={styles.bodyCon}>
                     <div className={styles.bodyMes}>
                         <div className={styles.bodyLeftCon}>
-                            <Chip id="10006" type="static" title="轮播" translate="jsonParse" content={content.slider}>
+                            <Chip
+                                id="20034"
+                                type="struct"
+                                title="轮播"
+                                groupName="leftContent"
+                                content={content.slider}>
                                 <SimpleSlider />
                             </Chip>
                             <Chip
-                                id="10007"
-                                type="static"
+                                id="20031"
+                                type="struct"
                                 title="新闻列表"
-                                translate="jsonParse"
+                                groupName="leftContent"
                                 content={content.info}>
                                 <NewsList />
                             </Chip>
