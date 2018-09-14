@@ -5,7 +5,7 @@ WORKDIR /ifeng-whale
 RUN df -h && free -h && cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l && cat /proc/cpuinfo| grep "cpu cores"| uniq && cat /proc/cpuinfo| grep "processor"| wc -l
 
 COPY *.json /ifeng-whale/
-RUN npm set progress=false && npm --registry http://npm.ifengcloud.ifeng.com install
+RUN npm --registry http://npm.ifengcloud.ifeng.com install
 
 COPY . /ifeng-whale
 RUN npm run build:test
@@ -20,7 +20,7 @@ WORKDIR /ifeng-whale
 EXPOSE 3000
 
 COPY --from=build /ifeng-whale/*.json /ifeng-whale/
-RUN npm set progress=false && npm --registry http://npm.ifengcloud.ifeng.com install  --production
+RUN npm --registry http://npm.ifengcloud.ifeng.com install  --production
 
 COPY --from=build /ifeng-whale/*.js /ifeng-whale/
 COPY --from=build /ifeng-whale/biz /ifeng-whale/biz
