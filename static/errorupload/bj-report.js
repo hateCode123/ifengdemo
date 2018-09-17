@@ -5,6 +5,26 @@
  * Copyright (c) 2014 kael, chriscai
  * Licensed under the MIT license.
  */
+function getAlive(){
+    var map = {};
+    function fds(node){
+        if(node.nodeType === 1){
+            var tagName = node.nodeName;
+            map[tagName] = map[tagName]? map[tagName] + 1: 1;
+            map.ALL = map.ALL ? map.ALL + 1: 1;
+        }
+        var children = node.childNodes;
+        for(var i = 0;i<children.length;i++){
+            fds(children[i]);
+        }
+    }
+    if(document.body){
+        fds(document.body);
+        return map;
+    }
+    return {description:'document.body is not ok'};
+}
+
 var BJ_REPORT = (function(global) {
     if (global.BJ_REPORT) return global.BJ_REPORT;
 
@@ -84,6 +104,7 @@ var BJ_REPORT = (function(global) {
         return null
     }
 
+   
     var T = {
         isOBJByType: function(o, type) {
             return Object.prototype.toString.call(o) === "[object " + (type || "Object") + "]";
@@ -181,6 +202,7 @@ var BJ_REPORT = (function(global) {
                 ("--" + newMsg.type + "--" + (newMsg.target ?
                     (newMsg.target.tagName + "::" + newMsg.target.src) : "")) : "";
         }
+        newMsg += ', alive：'+ JSON.stringify(getAlive());
         report.push({
             msg: newMsg,
             target: url,
@@ -364,10 +386,15 @@ var BJ_REPORT = (function(global) {
             return report;
         },
         report: function(msg, isReportNow, type) { // error report
+            if(typeof msg == 'object'){
+                msg.message  += ', alive：' + JSON.stringify(getAlive());
+            }
+            
             if(msg){
                 msg.type = getErrorType(type);
                 report.push(msg);
             }
+            
            
 
             isReportNow && _process_log(true);

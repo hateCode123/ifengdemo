@@ -62,43 +62,56 @@ module.exports = (level, type) => {
 
         setTimeout(function (){
             try {
-                var map = {};
+                function getPerformanceTiming () {  
+                    var performance = window.performance;
+                
+                    if (!performance) {
+                        return;
+                    }
+                    var t = performance.timing;
+                    var times = {};
+                    times.loadPage = t.loadEventEnd - t.navigationStart;
+                    times.domReady = t.domCompvare - t.responseEnd;
+                    times.redirect = t.redirectEnd - t.redirectStart;    
+                    times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
+                    times.ttfb = t.responseStart - t.navigationStart;
+                    times.request = t.responseEnd - t.requestStart;
+                    times.loadEvent = t.loadEventEnd - t.loadEventStart;
+                    times.appcache = t.domainLookupStart - t.fetchStart;
+                    times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
+                    times.connect = t.connectEnd - t.connectStart;
+                    return times;
+                }
 
-                function getPerformance(map){
+                function getPerformance(){
+                    var perfs = {};
                     if(performance && performance.getEntries) {
-                        var performances = performance.getEntries("*")
-                        map.performance = [];
+                        var performances = performance.getEntries("*")      
                         for(var i=0,len=performances.length;i<len;i++){
                             var perf = performances[i];
-                            if(perf.initiatorType == 'script' || perf.initiatorType == 'navigation'){
-                                map.performance.push([perf.name, perf.duration, perf.requestStart-perf.connectStart,perf.responseStart-perf.requestStart,perf.responseEnd-perf.responseStart]);
+                            if(perf.name && perf.name.indexOf('inice.js')>-1){
+                                perfs[perf.name] = {
+                                   name: perf.name,
+                                   dns: perf.domainLookupEnd - perf.domainLookupStart,
+                                   tcp: perf.connectEnd - perf.connectStart,
+                                   request: perf.responseStart - perf.requestStart,
+                                   response: perf.responseEnd - perf.responseStart,
+                                   source: JSON.stringify(perf)
+                                } 
+                              
+                                
                             }
-                        
                         }
                     }
-                    map.loadStatus = loadStatus;
-                    map.domreadyStatus = domreadyStatus;
+                    return perfs;
                 }
-
-                function fds(node){
-                    if(node.nodeType === 1){
-                        var tagName = node.nodeName;
-                        map[tagName] = map[tagName]? map[tagName] + 1: 1;
-                        map.ALL = map.ALL ? map.ALL + 1: 1;
-                    }
-                    var children = node.childNodes;
-                    for(var i = 0;i<children.length;i++){
-                        fds(children[i]);
-                    }
-                }
-
+               
                 function upPerformance(){
                    if(!loadStatus){
-            
                         addListener(window, "load", function(event) {
-                            var pf = {}
-                            getPerformance(pf);
-                            var err = new Error(JSON.stringify(pf));
+                            var perfs = getPerformance();
+                            var timing = getPerformanceTiming();
+                            var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
                             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
                         });
                    }
@@ -106,18 +119,19 @@ module.exports = (level, type) => {
         
                 var node = document.body;
                 if (node) {
-                    fds(node);
+                    var map = getAlive();
                     if(map.ALL < 200){
-                        getPerformance(map);
-                        var err = new Error(JSON.stringify(map));
+                        var perfs = getPerformance();
+                        var timing = getPerformanceTiming();
+                        var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
                         if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
                         upPerformance();
 
                     }
                 } else {
-                    map.description = 'document.body is null';
-                    getPerformance(map);
-                    var err = new Error(JSON.stringify(map));
+                    var perfs = getPerformance();
+                    var timing = getPerformanceTiming();
+                    var err = new Error(JSON.stringify({description:'document.body is null',perfs: perfs, timing: timing}));
                     if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'document.body');
                     upPerformance();
                 }
