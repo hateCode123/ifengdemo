@@ -9,7 +9,7 @@ import errorBoundary from '@ifeng/errorBoundary';
  */
 class QrCode extends React.PureComponent {
     static propTypes = {
-        content: PropTypes.array,
+        content: PropTypes.object,
     };
 
     state = {

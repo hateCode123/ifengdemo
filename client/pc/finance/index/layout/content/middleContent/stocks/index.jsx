@@ -37,14 +37,9 @@ class Stocks extends React.PureComponent {
                                 </a>
                             </h5>
                         </div>
-                        <h3 className={styles.title}>
-                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                                {content[0].title}
-                            </a>
-                        </h3>
                     </div>
                 </div>
-                <TitleList content={content.slice(1, 7)} />
+                <TitleList content={content} />
             </React.Fragment>
         );
     }

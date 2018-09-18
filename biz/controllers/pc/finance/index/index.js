@@ -291,7 +291,7 @@ exports.list = {
             const talkingTitle = allData.talking && allData.talking[0];
             const talking =
                 allData.talking &&
-                allData.talking.slice(1, 7).map(item => ({
+                allData.talking.slice(1, 4).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
@@ -301,10 +301,7 @@ exports.list = {
                     url: formatUrl(talkingTitle.url),
                     title: talkingTitle.title,
                     name: talkingTitle.wemediaEAccountName,
-                    img:
-                        talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
-                            ? formatImage(talkingTitle.thumbnails.image[0].url, 50, 50)
-                            : '',
+                    wemediaEAccountId: talkingTitle.wemediaEAccountId,
                 },
             ].concat(talking);
 
@@ -312,7 +309,7 @@ exports.list = {
 
             allData.stocks =
                 allData.stocks &&
-                allData.stocks.slice(0, 7).map(item => ({
+                allData.stocks.slice(0, 5).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
@@ -362,7 +359,7 @@ exports.list = {
             allData.meeting =
                 allData.meeting &&
                 allData.meeting.slice(0, 7).map(item => ({
-                    banner: formatImage(item.banner, 300, 141),
+                    banner: formatImage(item.thumbnail !== '' ? item.thumbnail : item.banner, 300, 141),
                     title: item.title,
                     url: formatUrl(item.url),
                 }));
