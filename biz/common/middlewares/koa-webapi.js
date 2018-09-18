@@ -38,6 +38,7 @@ module.exports = (app, options = {}) => {
             this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
         }
         data.bid = this.uuid;
+        data.router = this.urlinfo.path;
 
         await this.render(tplName, data);
 

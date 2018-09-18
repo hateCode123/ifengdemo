@@ -5,7 +5,30 @@
  * Copyright (c) 2014 kael, chriscai
  * Licensed under the MIT license.
  */
-function getAlive(){
+
+function request(paras)
+{
+    var url = window.location.href;
+    var paraString = url.substring(url.indexOf("?")+1,url.length).split("&");
+    var paraObj = {}
+    for (var i= 0,j; j=paraString[i]; i++){
+        paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length);
+    }
+    var returnValue = paraObj[paras.toLowerCase()];
+    if(typeof(returnValue)=="undefined"){
+        return "";
+    }else{
+        return returnValue;
+    }
+}
+
+function getCookie(name) {
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]);
+    return null
+}
+
+function getAlive () {
     var map = {};
     function fds(node){
         if(node.nodeType === 1){
@@ -25,6 +48,62 @@ function getAlive(){
     return {description:'document.body is not ok'};
 }
 
+function addListener () {
+    if(document.addEventListener){
+        return function(element, type, fun, useCapture){
+            element.addEventListener(type, fun, useCapture ? useCapture : false);
+        };    
+    }else{
+        return function(element, type, fun){
+            element.attachEvent("on" + type, function(event){
+                fun.call(element, event);
+            });
+        };
+    }
+};
+
+function getPerformanceTiming () {
+    var performance = window.performance;
+
+    if (!performance) {
+        return;
+    }
+    var t = performance.timing;
+    var times = {};
+    times.loadPage = t.loadEventEnd - t.navigationStart;
+    times.domReady = t.domCompvare - t.responseEnd;
+    times.redirect = t.redirectEnd - t.redirectStart;    
+    times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
+    times.ttfb = t.responseStart - t.navigationStart;
+    times.request = t.responseEnd - t.requestStart;
+    times.loadEvent = t.loadEventEnd - t.loadEventStart;
+    times.appcache = t.domainLookupStart - t.fetchStart;
+    times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
+    times.connect = t.connectEnd - t.connectStart;
+    return times;
+}
+
+function getPerformance(){
+    var perfs = {};
+    if(performance && performance.getEntries) {
+        var performances = performance.getEntries("*");
+        for(var i=0,len=performances.length;i<len;i++){
+            var perf = performances[i];
+            if(perf.name && (perf.name.indexOf('inice.js')>-1 || perf.name.indexOf('fa.min.js') >-1)){
+                perfs[perf.name] = {
+                   name: perf.name,
+                   dns: perf.domainLookupEnd - perf.domainLookupStart,
+                   tcp: perf.connectEnd - perf.connectStart,
+                   request: perf.responseStart - perf.requestStart,
+                   response: perf.responseEnd - perf.responseStart,
+                   source: JSON.stringify(perf)
+                }
+            }
+        }
+    }
+    return perfs;
+}
+
 var BJ_REPORT = (function(global) {
     if (global.BJ_REPORT) return global.BJ_REPORT;
 
@@ -33,7 +112,8 @@ var BJ_REPORT = (function(global) {
     var _config = {
         namespace: "", // 命名空间， 
         appname: "", // 项目名称
-        url: "", // 上报 接口
+        url: "", // 错误上报 接口
+        perf_url: '', // 性能上报 接口
         ext: null, // 扩展参数 用于自定义上报
         level: 4, // 错误级别 1-debug 2-info 4-error
         ignore: [], // 忽略某个错误, 支持 Regexp 和 Function
@@ -71,8 +151,11 @@ var BJ_REPORT = (function(global) {
             case 'prevent':     // 广告脚本被阻止
                 type = 8;
                 break;
-            case 'performance':     // 验活失败增加load事件监听，并上报资源加载时间
+            case 'performance': // 验活失败增加load事件监听，并上报资源加载时间
                 type = 9;
+                break;
+            case 'inject':     // 流量劫持注入
+                type = 10;
                 break;
             default:
                 type = 0;       // 未知错误
@@ -81,29 +164,6 @@ var BJ_REPORT = (function(global) {
         return type
 
    }
-
-   function request(paras)
-    {
-        var url = global.location.href;
-        var paraString = url.substring(url.indexOf("?")+1,url.length).split("&");
-        var paraObj = {}
-        for (var i= 0,j; j=paraString[i]; i++){
-            paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length);
-        }
-        var returnValue = paraObj[paras.toLowerCase()];
-        if(typeof(returnValue)=="undefined"){
-            return "";
-        }else{
-            return returnValue;
-        }
-    }
-
-    function getCookie(name) {
-        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-        if (arr != null) return unescape(arr[2]);
-        return null
-    }
-
    
     var T = {
         isOBJByType: function(o, type) {
@@ -277,7 +337,7 @@ var BJ_REPORT = (function(global) {
             count: submit_log_list.length,
             _t: new Date - 0,
             bid: global.bid ? global.bid : 'null',
-            url: global.location.href.replace(/\?.*/,''),
+            url: router || global.location.href.replace(/\?.*/,''),
             data: submit_log_list,
             uid: uid
         }
@@ -400,6 +460,37 @@ var BJ_REPORT = (function(global) {
             isReportNow && _process_log(true);
             return report;
         },
+        heartbeat: function(){
+            // 发送心跳
+            var heartjson =  {
+                namespace:_config.namespace,
+                appname: _config.appname,
+                router: window.router,
+                url: window.location.href
+            }
+            var url = _config.perf_url+'?p='+JSON.stringify(heartjson);
+
+            var _img = new Image();
+            _img.src = url;
+        },
+        // 上报性能
+        performace: function(){
+            addListener(window, "load", function(event) {
+                var json =  {
+                    namespace:_config.namespace,
+                    appname: _config.appname,
+                    router: window.router,
+                    url: window.location.href,
+                    // count: submit_log_list.length,
+                    _t: new Date - 0,
+                    bid: global.bid ? global.bid : 'null',
+                    url: global.location.href.replace(/\?.*/,''),
+                    // data: submit_log_list,
+                    uid: uid
+                }
+                var url = _config.perf_url+'?p='+JSON.stringify(json);
+            });
+        },
         info: function(msg) { // info report
             if (!msg) {
                 return report;
@@ -456,6 +547,11 @@ var BJ_REPORT = (function(global) {
             if (_log_list.length) {
                 _process_log();
             }
+
+            // // 前端心跳
+            // report.heartbeat();
+            // // 前端性能上报
+            // report.performace();
 
             return report;
         },
