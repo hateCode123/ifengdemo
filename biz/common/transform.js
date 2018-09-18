@@ -11,7 +11,7 @@ module.exports = {
         }));
     },
     handleFinanceListPicData: data => {
-        return recommendRandomSort(data, 5).map(item => ({
+        return recommendRandomSort(data, 4).map(item => ({
             url: item.url,
             title: item.title,
         }));

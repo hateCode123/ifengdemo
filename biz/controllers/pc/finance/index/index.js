@@ -309,7 +309,7 @@ exports.list = {
 
             allData.stocks =
                 allData.stocks &&
-                allData.stocks.slice(0, 5).map(item => ({
+                allData.stocks.slice(0, 4).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
@@ -363,6 +363,10 @@ exports.list = {
                     title: item.title,
                     url: formatUrl(item.url),
                 }));
+
+            if (allData.qrCode) {
+                allData.qrCode.url = formatImage(allData.qrCode.url, 120, 164);
+            }
         } catch (error) {
             logger.error(error);
             ctx.errorCount++;

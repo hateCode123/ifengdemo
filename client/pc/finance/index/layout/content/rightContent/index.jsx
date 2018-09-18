@@ -27,8 +27,14 @@ class RightContent extends React.PureComponent {
 
         return (
             <div className={styles.col_R}>
-                <BoxTitle url="#" title="财经视频" />
-                <FinanceVideo content={data} />
+                {content.financeVideo.length > 0 ? (
+                    <React.Fragment>
+                        <BoxTitle url="#" title="财经视频" />
+                        <FinanceVideo content={data} />
+                    </React.Fragment>
+                ) : (
+                    ''
+                )}
                 <Ad content={content.asideAd1} styleName={styles.box_1} />
                 <div className={styles.box_finance}>
                     <BoxTitle url="#" title="财经智库" />
