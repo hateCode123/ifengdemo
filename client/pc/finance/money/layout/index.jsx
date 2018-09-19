@@ -101,7 +101,7 @@ class Layout extends React.PureComponent {
                 more: [],
             },
             __partnerTitle: {
-                title: '合作伙伴',
+                title: '精品推荐',
                 more: [],
             },
         };
