@@ -1,10 +1,10 @@
 let config = require('../biz/configs');
 let namespace = config.default.namespace;
 let appname = config.default.appname;
-let errorUploadUrl = 'https://test.err.ifengcloud.ifeng.com/v1/api/err';
+let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
 let perfUploadUrl = '';
 let env = process.env.NODE_ENV;
-env = 'production';
+
 module.exports = (level, type) => {
     let backstr = `
     <!--[if lt IE 8]>
