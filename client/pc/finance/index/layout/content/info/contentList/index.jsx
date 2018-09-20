@@ -113,7 +113,7 @@ class ContentList extends React.PureComponent {
                         count,
                     },
                     () => {
-                        this.event.trigger('init', { index, len });
+                        this.adInit(index, len);
                     },
                 );
             }
@@ -121,6 +121,14 @@ class ContentList extends React.PureComponent {
             console.error(e);
         }
     }
+
+    adInit = (index, len) => {
+        try {
+            this.event.trigger('init', { index, len });
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     /**
      * 获取更多新闻

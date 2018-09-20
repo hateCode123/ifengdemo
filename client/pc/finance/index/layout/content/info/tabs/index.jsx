@@ -16,7 +16,6 @@ class Tabs extends React.PureComponent {
 
     componentDidMount() {
         this.unHandleScroll = addEventListener(window, 'scroll', this.handleScroll);
-        this.tabsTop = document.getElementById('tabs').offsetTop;
     }
 
     componentWillUnmount() {
@@ -27,7 +26,7 @@ class Tabs extends React.PureComponent {
      * 滚动条滚动
      */
     handleScroll = () => {
-        const tabsTop = this.tabsTop;
+        const tabsTop = document.getElementById('tabs').offsetTop;
 
         // 兼容各主流浏览器
         const currentTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
@@ -55,7 +54,7 @@ class Tabs extends React.PureComponent {
         const { isFixed, current } = this.state;
 
         return (
-            <div id="tabs" className={`${styles.tabHead} ${isFixed ? styles.fix : ''}`}>
+            <div className={`${styles.tabHead} ${isFixed ? styles.fix : ''}`}>
                 {React.Children.map(this.props.children, (item, index) => {
                     return (
                         <div
@@ -86,7 +85,7 @@ class Tabs extends React.PureComponent {
      */
     render() {
         return (
-            <div>
+            <div id="tabs">
                 {this.renderTabHead()}
                 {this.renderBody()}
             </div>
