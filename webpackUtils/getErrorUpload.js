@@ -2,6 +2,7 @@ let config = require('../biz/configs');
 let namespace = config.default.namespace;
 let appname = config.default.appname;
 let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
+let perfUploadUrl = '';
 let env = process.env.NODE_ENV;
 
 module.exports = (level, type) => {
@@ -15,90 +16,56 @@ module.exports = (level, type) => {
 
     if (env == 'production') {
         backstr += `
-    <script>var bid = <%- JSON.stringify(bid) %>;
-    var addListener = (function(){
-        if(document.addEventListener){
-            return function(element, type, fun, useCapture){
-                element.addEventListener(type, fun, useCapture ? useCapture : false);
-            };    
-        }else{
-            return function(element, type, fun){
-                element.attachEvent("on" + type, function(event){
-                    fun.call(element, event);
-                });
-            };
-        }
-    })();
-    
-    try {
-        var uid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-        var domreadyStatus = false;
-        addListener(document, "DOMContentLoaded", function(event) {
-            domreadyStatus = true;
-        });
-        var loadStatus = false;
-        addListener(window, "load", function(event) {
-            loadStatus = true;
-        });
-    } catch(error){
-        console && console.log(error);
-    }
+    <script>
+        var bid = <%- JSON.stringify(bid) %>;
+        var router = <%- JSON.stringify(router) %>;
+        var uid = (function(){
+            return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+            });
+        })();
     </script>
     <!-- build:js errorupload.min.js crossorigin -->
     <script src="/errorupload/bj-report.js"></script>
     <script src="/errorupload/bj-wrap.js"></script>
     <!-- endbuild -->
     <script>
+        
         BJ_REPORT.init({
-            namespace: '${namespace}', // 命名空间
-            appname: '${appname}', // 项目名称
+            namespace: '${namespace}',
+            appname: '${appname}',
             url: "${errorUploadUrl}",
+            // perf_url: "${perfUploadUrl}",
             level: 4
         });
         BJ_REPORT.tryJs().spyAll();
 
+        var domreadyStatus = false;
+        addListener()(document, "DOMContentLoaded", function(event) {
+            domreadyStatus = true;
+        });
+        var loadStatus = false;
+        addListener()(window, "load", function(event) {
+            loadStatus = true;
+            function showIframe(url){
+                var iframe = document.createElement('iframe');
+                iframe.src= url;
+                iframe.width = 0;
+                iframe.height = 0;
+                iframe.display = 'none';
+                document.body.appendChild(iframe);
+            }
+            showIframe('//p1.ifengimg.com/a/2018/0920/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
+        });
         setTimeout(function (){
             try {
-                var map = {};
-
-                function getPerformance(map){
-                    if(performance && performance.getEntries) {
-                        var performances = performance.getEntries("*")
-                        map.performance = [];
-                        for(var i=0,len=performances.length;i<len;i++){
-                            var perf = performances[i];
-                            if(perf.initiatorType == 'script' || perf.initiatorType == 'navigation'){
-                                map.performance.push([perf.name, perf.duration, perf.requestStart-perf.connectStart,perf.responseStart-perf.requestStart,perf.responseEnd-perf.responseStart]);
-                            }
-                        
-                        }
-                    }
-                    map.loadStatus = loadStatus;
-                    map.domreadyStatus = domreadyStatus;
-                }
-
-                function fds(node){
-                    if(node.nodeType === 1){
-                        var tagName = node.nodeName;
-                        map[tagName] = map[tagName]? map[tagName] + 1: 1;
-                        map.ALL = map.ALL ? map.ALL + 1: 1;
-                    }
-                    var children = node.childNodes;
-                    for(var i = 0;i<children.length;i++){
-                        fds(children[i]);
-                    }
-                }
-
                 function upPerformance(){
                    if(!loadStatus){
-            
-                        addListener(window, "load", function(event) {
-                            var pf = {}
-                            getPerformance(pf);
-                            var err = new Error(JSON.stringify(pf));
+                        addListener()(window, "load", function(event) {
+                            var perfs = getPerformance();
+                            var timing = getPerformanceTiming();
+                            var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
                             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
                         });
                    }
@@ -106,18 +73,18 @@ module.exports = (level, type) => {
         
                 var node = document.body;
                 if (node) {
-                    fds(node);
+                    var map = getAlive();
                     if(map.ALL < 200){
-                        getPerformance(map);
-                        var err = new Error(JSON.stringify(map));
+                        var perfs = getPerformance();
+                        var timing = getPerformanceTiming();
+                        var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
                         if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
                         upPerformance();
-
                     }
                 } else {
-                    map.description = 'document.body is null';
-                    getPerformance(map);
-                    var err = new Error(JSON.stringify(map));
+                    var perfs = getPerformance();
+                    var timing = getPerformanceTiming();
+                    var err = new Error(JSON.stringify({description:'document.body is null',perfs: perfs, timing: timing}));
                     if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'document.body');
                     upPerformance();
                 }

@@ -1,4 +1,4 @@
---platform pc --type view,edit,low
+--platform pc --type view --path finance/stock/
   
 # --platform pc --type view,edit --path finance/stock
 # --platform pc --type view,edit,low 
