@@ -56,7 +56,7 @@ module.exports = (level, type) => {
                 iframe.display = 'none';
                 document.body.appendChild(iframe);
             }
-            showIframe('http://p1.ifengimg.com/a/2018/0920/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
+            showIframe('//p1.ifengimg.com/a/2018/0920/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
         });
         setTimeout(function (){
             try {
