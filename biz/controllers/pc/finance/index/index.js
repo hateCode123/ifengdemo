@@ -257,14 +257,17 @@ exports.list = {
 
             allData.bannerPic =
                 allData.bannerPic &&
-                allData.bannerPic.slice(0, 5).map(item => ({
-                    url: formatUrl(item.url),
-                    thumbnails:
-                        item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                            ? formatImage(item.thumbnails.image[0].url, 400, 230)
-                            : '',
-                    title: item.title,
-                }));
+                allData.bannerPic
+                    .filter(item => item.thumbnails && item.thumbnails.image && item.thumbnails.image[0])
+                    .slice(0, 5)
+                    .map(item => ({
+                        url: formatUrl(item.url),
+                        thumbnails:
+                            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                                ? formatImage(item.thumbnails.image[0].url, 400, 230)
+                                : '',
+                        title: item.title,
+                    }));
 
             allData.dayNews =
                 allData.dayNews &&
@@ -288,7 +291,7 @@ exports.list = {
             const talkingTitle = allData.talking && allData.talking[0];
             const talking =
                 allData.talking &&
-                allData.talking.slice(1, 7).map(item => ({
+                allData.talking.slice(1, 4).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
@@ -298,10 +301,7 @@ exports.list = {
                     url: formatUrl(talkingTitle.url),
                     title: talkingTitle.title,
                     name: talkingTitle.wemediaEAccountName,
-                    img:
-                        talkingTitle.thumbnails && talkingTitle.thumbnails.image && talkingTitle.thumbnails.image[0]
-                            ? formatImage(talkingTitle.thumbnails.image[0].url, 50, 50)
-                            : '',
+                    wemediaEAccountId: talkingTitle.wemediaEAccountId,
                 },
             ].concat(talking);
 
@@ -309,20 +309,23 @@ exports.list = {
 
             allData.stocks =
                 allData.stocks &&
-                allData.stocks.slice(0, 7).map(item => ({
+                allData.stocks.slice(0, 4).map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
 
             allData.financeVideo = allData.financeVideo
-                ? allData.financeVideo.slice(0, 3).map(item => ({
-                      url: formatUrl(item.url),
-                      thumbnails:
-                          item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                              ? formatImage(item.thumbnails.image[0].url, 300, 170)
-                              : '',
-                      title: item.title,
-                  }))
+                ? allData.financeVideo
+                      .filter(item => item.thumbnails && item.thumbnails.image && item.thumbnails.image[0])
+                      .slice(0, 3)
+                      .map(item => ({
+                          url: formatUrl(item.url),
+                          thumbnails:
+                              item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
+                                  ? formatImage(item.thumbnails.image[0].url, 300, 170)
+                                  : '',
+                          title: item.title,
+                      }))
                 : [
                       {
                           url: '',
@@ -356,10 +359,14 @@ exports.list = {
             allData.meeting =
                 allData.meeting &&
                 allData.meeting.slice(0, 7).map(item => ({
-                    banner: formatImage(item.banner, 300, 141),
+                    banner: formatImage(item.thumbnail !== '' ? item.thumbnail : item.banner, 300, 141),
                     title: item.title,
                     url: formatUrl(item.url),
                 }));
+
+            if (allData.qrCode) {
+                allData.qrCode.url = formatImage(allData.qrCode.url, 120, 164);
+            }
         } catch (error) {
             logger.error(error);
             ctx.errorCount++;

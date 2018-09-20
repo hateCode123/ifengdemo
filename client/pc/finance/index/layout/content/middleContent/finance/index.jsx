@@ -8,7 +8,7 @@ import errorBoundary from '@ifeng/errorBoundary';
 
 class Finance extends React.PureComponent {
     static propTypes = {
-        data: PropTypes.array,
+        data: PropTypes.object,
         content: PropTypes.array,
     };
 
@@ -28,7 +28,7 @@ class Finance extends React.PureComponent {
                         groupName="正文"
                         position="relative"
                         content={data}>
-                        <Caption title={content[0]} />
+                        <Caption />
                     </Chip>
                 </div>
                 <Chip
@@ -36,7 +36,7 @@ class Finance extends React.PureComponent {
                     type="recommend"
                     title="财商教育新闻列表"
                     groupName="正文"
-                    content={content.slice(1, 5)}
+                    content={content}
                     position="relative"
                     translate="handleFinanceListPicData">
                     <TitleList />

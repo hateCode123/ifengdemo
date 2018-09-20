@@ -104,6 +104,25 @@ const getFundsFlowData = async () => {
     });
 };
 
+// 根据自媒体账号 id 获取自媒体账号头像
+const getwemediaEAccountImg = async wemediaEAccountId => {
+    const data = await jsonp(
+        `${apiBaseUrl}/finance/index/getwemediaEAccountImg/${wemediaEAccountId}/getwemediaEAccountImg`,
+        {
+            jsonpCallback: 'getwemediaEAccountImg',
+            cache: false,
+        },
+    );
+
+    let img = '';
+
+    if (data.code === 0) {
+        img = data.data.weMediaImg && data.data.weMediaImg !== '' ? formatImage(data.data.weMediaImg, 50, 50) : '';
+    }
+
+    return img;
+};
+
 // 获取信息流首页数据
 const getCustomList = async () => {
     const data = await jsonp(`${apiBaseUrl}/finance/index/customList/getCustomList`, {
@@ -118,7 +137,7 @@ const getCustomList = async () => {
         url: formatUrl(item.url),
         title: item.title,
         source: item.source,
-        newsTime: handleNewstime(item.createdTime),
+        newsTime: handleNewstime(item.createdTime || item.startTime),
         skey: getSkey(item.title, item.pcUrl),
     }));
 
@@ -401,6 +420,7 @@ export {
     getCommentCount,
     getTopicData,
     getFundsFlowData,
+    getwemediaEAccountImg,
     getCustomList,
     getMacroList,
     getStockList,

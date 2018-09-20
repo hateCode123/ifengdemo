@@ -16,11 +16,8 @@ import {
     getWemoneyList,
 } from '../../../../../../services/api';
 
-const event = new Event();
-
 class ContentList extends React.PureComponent {
     static propTypes = {
-        active: PropTypes.bool,
         infoAd: PropTypes.object,
         index: PropTypes.number,
     };
@@ -31,6 +28,8 @@ class ContentList extends React.PureComponent {
         data: [],
         count: [],
     };
+
+    event = new Event();
 
     insert = (insertArr, replaceArr) => {
         const { len, data, count } = this.state;
@@ -78,7 +77,7 @@ class ContentList extends React.PureComponent {
             const { infoAd } = this.props;
             const callback = await handleAd(infoAd);
 
-            callback(infoAd.data, event, this.insert);
+            callback(infoAd.data, this.event, this.insert);
         } catch (e) {
             console.error(e);
         }
@@ -114,7 +113,7 @@ class ContentList extends React.PureComponent {
                         count,
                     },
                     () => {
-                        event.trigger('init', { index, len });
+                        this.event.trigger('init', { index, len });
                     },
                 );
             }
@@ -123,23 +122,11 @@ class ContentList extends React.PureComponent {
         }
     }
 
-    componentDidUpdate() {
-        const { active } = this.props;
-
-        if (!active) {
-            try {
-                event.off('init');
-            } catch (e) {
-                console.error(e);
-            }
-        }
-    }
-
     /**
      * 获取更多新闻
      */
     getMore = () => {
-        const { len, data } = this.state;
+        const { len } = this.state;
         const { index } = this.props;
 
         const length = len + 5;
@@ -150,11 +137,7 @@ class ContentList extends React.PureComponent {
             },
             () => {
                 try {
-                    event.trigger('loadMoreCmp', { index, len: length });
-
-                    if (length >= data.length) {
-                        event.off('loadMoreCmp');
-                    }
+                    this.event.trigger('loadMoreCmp', { index, len: length });
                 } catch (e) {
                     console.error(e);
                 }

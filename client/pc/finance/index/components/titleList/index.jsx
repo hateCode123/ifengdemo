@@ -16,15 +16,22 @@ class TitleList extends React.PureComponent {
         const { content } = this.props;
 
         return (
-            <ul className={styles.titleList}>
-                {content.map((item, index) => (
-                    <li key={index}>
-                        <a href={item.url} target="_blank" rel={rel} title={item.title}>
-                            {item.title}
-                        </a>
-                    </li>
-                ))}
-            </ul>
+            <div style={{ position: 'relative' }}>
+                <h3 className={styles.title}>
+                    <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
+                        {content[0].title}
+                    </a>
+                </h3>
+                <ul className={styles.titleList}>
+                    {content.slice(1).map((item, index) => (
+                        <li key={index}>
+                            <a href={item.url} target="_blank" rel={rel} title={item.title}>
+                                {item.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         );
     }
 }

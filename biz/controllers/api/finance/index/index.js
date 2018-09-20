@@ -4,6 +4,25 @@ const request = require('../../../../common/request');
 const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { jsonParse, handleData, handleJson, handleJsonByKey, handleJs } = require('../../../../services/common/common');
 
+exports.getwemediaEAccountImg = {
+    path: '/api/finance/index/getwemediaEAccountImg/:wemediaEAccountId/:callback?',
+    method: 'get',
+    online: true,
+    handler: async ctx => {
+        const wemediaEAccountId = ctx.params.wemediaEAccountId;
+        const body = await request.get({
+            url: `http://fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
+            json: true,
+        });
+
+        if (ctx.params.callback) {
+            ctx.jsonp(body.data);
+        } else {
+            ctx.json(body.data);
+        }
+    },
+};
+
 exports.getCustomList = {
     path: '/api/finance/index/customList/:callback?',
     method: 'get',

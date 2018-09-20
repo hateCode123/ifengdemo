@@ -4,13 +4,34 @@ import styles from './index.css';
 import TitleList from '../../../../components/titleList';
 import { rel } from '../../../../../../utils/rel';
 import errorBoundary from '@ifeng/errorBoundary';
+import { getwemediaEAccountImg } from '../../../../../../services/api';
 
 class Talking extends React.Component {
     static propTypes = {
         content: PropTypes.array,
     };
 
+    state = {
+        img: '',
+    };
+
+    async componentDidMount() {
+        try {
+            const { content } = this.props;
+            const wemediaEAccountId = content[0].wemediaEAccountId;
+
+            const img = await getwemediaEAccountImg(wemediaEAccountId);
+
+            this.setState({
+                img,
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     render() {
+        const { img } = this.state;
         const { content } = this.props;
 
         return (
@@ -30,7 +51,7 @@ class Talking extends React.Component {
                     <div className={styles.picTxt}>
                         <div className={styles.box_pic}>
                             <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                                <img src={content[0].img} width="50" height="50" />
+                                <img src={img} width="50" height="50" />
                             </a>
                             <h5>
                                 <a href={content[0].url} target="_blank" rel={rel} title={content[0].name}>
@@ -38,14 +59,9 @@ class Talking extends React.Component {
                                 </a>
                             </h5>
                         </div>
-                        <h3 className={styles.title}>
-                            <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                                {content[0].title}
-                            </a>
-                        </h3>
                     </div>
                 </div>
-                <TitleList content={content.slice(1, 7)} />
+                <TitleList content={content} />
             </React.Fragment>
         );
     }

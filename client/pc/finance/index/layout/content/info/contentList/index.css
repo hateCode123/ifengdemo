@@ -40,7 +40,7 @@
 }
 
 .text {
-    height: 26px;
+    height: 52px;
     overflow: hidden;
     & a {
         color: #222222;
@@ -60,7 +60,7 @@
 .time {
     color: #999999;
     font-size: 14px;
-    margin-top: 50px;
+    margin-top: 24px;
 }
 
 .source,

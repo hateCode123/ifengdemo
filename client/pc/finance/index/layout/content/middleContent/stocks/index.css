@@ -22,9 +22,6 @@
 
 .picTxt {
     padding-top: 11px;
-    border-bottom: solid 1px #ececec;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
 }
 
 .box_pic {
@@ -58,20 +55,5 @@
         & a:hover {
             color: #f54343;
         }
-    }
-}
-
-.title {
-    height: 22px;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: normal;
-    padding-top: 11px;
-    line-height: 22px;
-    & a {
-        color: #3b3a3b;
-    }
-    & a:hover {
-        color: #f54343;
     }
 }
