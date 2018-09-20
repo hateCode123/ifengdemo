@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <!--[if lt IE 8]>
-    <script src="//p0.ifengimg.com/fe/zl/test/live/application/ie8-89b32da32d.polyfill.min.js" crossorigin></script>
+    <script src="//p0.ifengimg.com/fe/zl/test/live/application/ie8-89b32da32d.polyfill.min.js" id="__polyfill" crossorigin></script>
   <![endif]-->
   <script src="//p0.ifengimg.com/fe/zl/test/live/application/errorupload-bb1c9a25cd.min.js" id="__errorupload"></script>
   <script id="__head">
@@ -275,7 +275,7 @@
           BJ_REPORT.init({
             namespace: namespace, // 命名空间
             appname: appname, // 项目名称
-            url: "https://test.err.ifengcloud.ifeng.com/v1/api/err",
+            url: "https://err.ifengcloud.ifeng.com/v1/api/err",
             level: 4
           });
           // BJ_REPORT.tryJs().spyAll();
@@ -290,9 +290,9 @@
         var myJs1 = document.getElementById('__errorupload');
         myJs1.parentNode.removeChild(myJs1);
 
-        // var myJs2 = document.getElementById('__polyfill');
-        // myJs2.parentNode.removeChild(myJs2);
-        var node = document.head.childNodes || [];
+        var myJs2 = document.getElementById('__polyfill');
+        myJs2 && myJs2.parentNode && myJs2.parentNode.removeChild(myJs2);
+        var node = document && document.head && document.head.childNodes ? document.head.childNodes : [];
         for(var i=0; i < node.length; i++ ){
           if(node[i].nodeType === 8){
             document.head.removeChild(node[i]);
@@ -332,12 +332,6 @@
 </head>
 
 <body>
-  <div>123</div>
-  <div>123</div>
-  <div>123</div>
-  <div>123</div>
-  <div>123</div>
-  <div>123</div>
 </body>
 
 </html>

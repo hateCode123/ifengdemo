@@ -1,10 +1,10 @@
 let config = require('../biz/configs');
 let namespace = config.default.namespace;
 let appname = config.default.appname;
-let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
+let errorUploadUrl = 'https://test.err.ifengcloud.ifeng.com/v1/api/err';
 let perfUploadUrl = '';
 let env = process.env.NODE_ENV;
-
+env = 'production';
 module.exports = (level, type) => {
     let backstr = `
     <!--[if lt IE 8]>
@@ -31,6 +31,7 @@ module.exports = (level, type) => {
     <script src="/errorupload/bj-wrap.js"></script>
     <!-- endbuild -->
     <script>
+        
         BJ_REPORT.init({
             namespace: '${namespace}',
             appname: '${appname}',
@@ -41,27 +42,27 @@ module.exports = (level, type) => {
         BJ_REPORT.tryJs().spyAll();
 
         var domreadyStatus = false;
-        addListener(document, "DOMContentLoaded", function(event) {
+        addListener()(document, "DOMContentLoaded", function(event) {
             domreadyStatus = true;
         });
         var loadStatus = false;
-        addListener(window, "load", function(event) {
+        addListener()(window, "load", function(event) {
             loadStatus = true;
-            // function showIframe(url){
-            //     var iframe = document.createElement('iframe');
-            //     iframe.src= url;
-            //     iframe.width = 0;
-            //     iframe.height = 0;
-            //     iframe.display = 'none';
-            //     document.body.appendChild(iframe);
-            // }
-            // showIframe('http://test.ifeng.com:3000/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
+            function showIframe(url){
+                var iframe = document.createElement('iframe');
+                iframe.src= url;
+                iframe.width = 0;
+                iframe.height = 0;
+                iframe.display = 'none';
+                document.body.appendChild(iframe);
+            }
+            showIframe('http://p1.ifengimg.com/a/2018/0920/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
         });
         setTimeout(function (){
             try {
                 function upPerformance(){
                    if(!loadStatus){
-                        addListener(window, "load", function(event) {
+                        addListener()(window, "load", function(event) {
                             var perfs = getPerformance();
                             var timing = getPerformanceTiming();
                             var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
