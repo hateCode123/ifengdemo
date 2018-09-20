@@ -42,7 +42,7 @@ function getAlive () {
         }
     }
     if(document.body){
-        fds(document.body);
+        fds(document);
         return map;
     }
     return {description:'document.body is not ok'};
