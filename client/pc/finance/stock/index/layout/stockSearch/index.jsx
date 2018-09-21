@@ -55,42 +55,46 @@ class StockSearch extends React.PureComponent {
     };
 
     handleKeydown = e => {
-        const { current, data } = this.state;
-        let num = current;
+        try {
+            const { current, data } = this.state;
+            let num = current;
 
-        if (data.length > 0) {
-            switch (e.keyCode) {
-                case 38:
-                    if (current === null) {
-                        this.setState({ current: 0 });
-                    } else if (current === 0) {
-                        this.setState({ current: data.length - 1 });
-                    } else {
-                        num--;
+            if (data.length > 0) {
+                switch (e.keyCode) {
+                    case 38:
+                        if (current === null) {
+                            this.setState({ current: 0 });
+                        } else if (current === 0) {
+                            this.setState({ current: data.length - 1 });
+                        } else {
+                            num--;
 
-                        this.setState({ current: num });
-                    }
+                            this.setState({ current: num });
+                        }
 
-                    break;
-                case 40:
-                    if (current === null || current === data.length - 1) {
-                        this.setState({ current: 0 });
-                    } else {
-                        num++;
+                        break;
+                    case 40:
+                        if (current === null || current === data.length - 1) {
+                            this.setState({ current: 0 });
+                        } else {
+                            num++;
 
-                        this.setState({ current: num });
-                    }
+                            this.setState({ current: num });
+                        }
 
-                    break;
-                case 13:
-                    window.open(
-                        `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                            data[current !== null ? current : 0].c
-                        }`,
-                    );
+                        break;
+                    case 13:
+                        window.open(
+                            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+                                data[current !== null ? current : 0].c
+                            }`,
+                        );
 
-                    break;
+                        break;
+                }
             }
+        } catch (e) {
+            console.error(e);
         }
     };
 
@@ -119,12 +123,16 @@ class StockSearch extends React.PureComponent {
     };
 
     handeleQuoteSearch = () => {
-        const { current, data } = this.state;
+        try {
+            const { current, data } = this.state;
 
-        if (data.length > 0) {
-            const stock = data[current !== null ? current : 0];
+            if (data.length > 0) {
+                const stock = data[current !== null ? current : 0];
 
-            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+                window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+            }
+        } catch (e) {
+            console.error(e);
         }
     };
 
