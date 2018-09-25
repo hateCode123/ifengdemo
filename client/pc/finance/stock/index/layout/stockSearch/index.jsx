@@ -3,6 +3,7 @@ import styles from './index.css';
 import { debounce } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
 import { getFinanceData } from '../../../../../services/api';
+import ResultList from './resultList';
 
 const cacheData = {};
 
@@ -34,9 +35,7 @@ class StockSearch extends React.PureComponent {
 
     debounceGetList = debounce(this.getList);
 
-    handleMouseOver = e => {
-        const index = Number(e.currentTarget.attributes['data-index'].value);
-
+    handleMouseOver = index => {
         this.setState({ current: index });
     };
 
@@ -148,62 +147,22 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handleMarkKeyword = (str, keyword) => {
-        if (str.includes(keyword)) {
-            const arr = str.split(keyword);
-
-            return (
-                <React.Fragment>
-                    <span>{arr[0]}</span>
-                    <span className={styles.red}>{keyword}</span>
-                    <span>{arr[1]}</span>
-                </React.Fragment>
-            );
-        }
-
-        return str;
-    };
-
     /**
      * 渲染组件
      */
     render() {
         const { searchTxt, current, isShow, data } = this.state;
-        const type = {
-            stock: '股票',
-            fund: '基金',
-            hkstock: '港股',
-            forex: '外汇',
-            bond: '债券',
-        };
 
         return (
             <div className={`${styles.search_box} clearfix`}>
                 <div className={styles.text}>
                     {isShow && data.length > 0 ? (
-                        <div className={styles.stockList}>
-                            <table>
-                                <tbody>
-                                    {data.map((item, index) => (
-                                        <tr
-                                            key={index}
-                                            data-index={index}
-                                            className={current === index ? styles.current : ''}
-                                            onMouseEnter={this.handleMouseOver}
-                                            onClick={this.handleClick}>
-                                            <td>
-                                                {this.handleMarkKeyword(item.s.toUpperCase(), searchTxt.toUpperCase())}
-                                            </td>
-                                            <td>{this.handleMarkKeyword(item.n, searchTxt)}</td>
-                                            <td>
-                                                {this.handleMarkKeyword(item.p.toUpperCase(), searchTxt.toUpperCase())}
-                                            </td>
-                                            <td>{type[item.t]}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        <ResultList
+                            data={data}
+                            searchTxt={searchTxt}
+                            current={current}
+                            handleMouseOver={this.handleMouseOver}
+                        />
                     ) : (
                         ''
                     )}
