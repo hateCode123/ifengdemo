@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './index.css';
+import { debounce } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
 import { getFinanceData } from '../../../../../services/api';
+
+const cacheData = {};
 
 class StockSearch extends React.PureComponent {
     state = {
@@ -13,13 +16,23 @@ class StockSearch extends React.PureComponent {
 
     getList = async str => {
         try {
-            const data = await getFinanceData('all', str);
+            let data = [];
+
+            if (cacheData[str]) {
+                data = cacheData[str];
+            } else {
+                data = await getFinanceData('all', str);
+
+                cacheData[str] = data;
+            }
 
             this.setState({ data });
         } catch (e) {
             console.error(e);
         }
     };
+
+    debounceGetList = debounce(this.getList);
 
     handleMouseOver = e => {
         const index = Number(e.currentTarget.attributes['data-index'].value);
@@ -41,7 +54,7 @@ class StockSearch extends React.PureComponent {
         const val = e.currentTarget.value;
 
         if (val !== '') {
-            this.getList(val);
+            this.debounceGetList(val);
             this.setState({
                 searchTxt: val,
                 isShow: true,
@@ -106,7 +119,6 @@ class StockSearch extends React.PureComponent {
         } else if (val === '') {
             return;
         } else {
-            this.getList(val);
             this.setState({ isShow: true });
         }
     };
