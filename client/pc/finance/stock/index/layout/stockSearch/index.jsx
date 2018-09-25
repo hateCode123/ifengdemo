@@ -149,7 +149,19 @@ class StockSearch extends React.PureComponent {
     };
 
     handleMarkKeyword = (str, keyword) => {
-        return str.replace(keyword, `<span>${keyword}</span>`);
+        if (str.includes(keyword)) {
+            const arr = str.split(keyword);
+
+            return (
+                <React.Fragment>
+                    <span>{arr[0]}</span>
+                    <span className={styles.red}>{keyword}</span>
+                    <span>{arr[1]}</span>
+                </React.Fragment>
+            );
+        }
+
+        return str;
     };
 
     /**
@@ -179,27 +191,13 @@ class StockSearch extends React.PureComponent {
                                             className={current === index ? styles.current : ''}
                                             onMouseEnter={this.handleMouseOver}
                                             onClick={this.handleClick}>
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(
-                                                        item.s.toUpperCase(),
-                                                        searchTxt.toUpperCase(),
-                                                    ),
-                                                }}
-                                            />
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(item.n, searchTxt),
-                                                }}
-                                            />
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(
-                                                        item.p.toUpperCase(),
-                                                        searchTxt.toUpperCase(),
-                                                    ),
-                                                }}
-                                            />
+                                            <td>
+                                                {this.handleMarkKeyword(item.s.toUpperCase(), searchTxt.toUpperCase())}
+                                            </td>
+                                            <td>{this.handleMarkKeyword(item.n, searchTxt)}</td>
+                                            <td>
+                                                {this.handleMarkKeyword(item.p.toUpperCase(), searchTxt.toUpperCase())}
+                                            </td>
                                             <td>{type[item.t]}</td>
                                         </tr>
                                     ))}

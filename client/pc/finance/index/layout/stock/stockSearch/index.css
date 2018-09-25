@@ -44,15 +44,16 @@
             padding-left: 12px;
             text-align: left;
             color: #333;
-            & span {
-                color: #ff0000;
-                font-weight: bold;
-            }
             &:last-child {
                 width: 25px;
             }
         }
     }
+}
+
+.red {
+    color: #ff0000;
+    font-weight: bold;
 }
 
 .current {
