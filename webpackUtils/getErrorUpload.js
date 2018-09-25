@@ -3,6 +3,10 @@ let namespace = config.default.namespace;
 let appname = config.default.appname;
 let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
 let heartbeatUrl = 'https://err.ifengcloud.ifeng.com/v1/api/hb';
+let filterJsList = [
+    "inice.js",
+    "fa.min.js"
+]
 let env = process.env.NODE_ENV;
 
 module.exports = (level, type) => {
@@ -19,6 +23,7 @@ module.exports = (level, type) => {
     <script>
         var bid = <%- JSON.stringify(bid) %>;
         var router = <%- JSON.stringify(router) %>;
+        var filterJsList = ${JSON.stringify(filterJsList)};
         var uid = (function(){
             return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -57,34 +62,40 @@ module.exports = (level, type) => {
                 document.body.appendChild(iframe);
             }
             showIframe('//p1.ifengimg.com/a/2018/0920/injection.html?namespace=${namespace}&appname=${appname}&uid='+uid+'&router=<%- router %>');
+
         });
         setTimeout(function (){
             try {
                 function upPerformance(){
                    if(!loadStatus){
                         addListener()(window, "load", function(event) {
-                            var perfs = getPerformance();
-                            var timing = getPerformanceTiming();
-                            var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
-                            if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
+                            setTimeout(function(){
+                                var perfs = getPerformance();
+                                var err = new Error(JSON.stringify({perfs: perfs}));
+                                if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
+                            },500)
                         });
+                   }else{
+                        setTimeout(function(){
+                            var perfs = getPerformance();
+                            var err = new Error(JSON.stringify({perfs: perfs}));
+                            if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
+                        },500)
                    }
                 }
-        
                 var node = document.body;
                 if (node) {
                     var map = getAlive();
                     if(map.ALL < 200){
                         var perfs = getPerformance();
-                        var timing = getPerformanceTiming();
-                        var err = new Error(JSON.stringify({perfs: perfs, timing: timing}));
+    
+                        var err = new Error(JSON.stringify({perfs: perfs}));
                         if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
                         upPerformance();
                     }
                 } else {
                     var perfs = getPerformance();
-                    var timing = getPerformanceTiming();
-                    var err = new Error(JSON.stringify({description:'document.body is null',perfs: perfs, timing: timing}));
+                    var err = new Error(JSON.stringify({description:'document.body is null',perfs: perfs}));
                     if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'document.body');
                     upPerformance();
                 }

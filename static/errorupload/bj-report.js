@@ -61,47 +61,76 @@ function addListener () {
         };
     }
 };
-
-function getPerformanceTiming () {
-    var performance = window.performance;
-
-    if (!performance) {
-        return;
+function isInFilterList(url){
+    try {
+        if(!url){
+            return false;
+        }
+        if(url.indexOf('err.ifengcloud.ifeng.com')>-1){
+            return false;
+        }
+        for(var i=0; i< filterJsList.length; i++){
+            if(url.indexOf(filterJsList[i])>-1){
+                return true;
+            }
+        };
+        return false;
+    } catch (error) {
+        console && console.error(error)
+        return false;
     }
-    var t = performance.timing;
-    var times = {};
-    times.loadPage = t.loadEventEnd - t.navigationStart;
-    times.domReady = t.domCompvare - t.responseEnd;
-    times.redirect = t.redirectEnd - t.redirectStart;    
-    times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
-    times.ttfb = t.responseStart - t.navigationStart;
-    times.request = t.responseEnd - t.requestStart;
-    times.loadEvent = t.loadEventEnd - t.loadEventStart;
-    times.appcache = t.domainLookupStart - t.fetchStart;
-    times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
-    times.connect = t.connectEnd - t.connectStart;
-    return times;
+    
 }
 
 function getPerformance(){
-    var perfs = {};
-    if(performance && performance.getEntries) {
-        var performances = performance.getEntries("*");
-        for(var i=0,len=performances.length;i<len;i++){
-            var perf = performances[i];
-            if(perf.name && (perf.name.indexOf('inice.js')>-1 || perf.name.indexOf('fa.min.js') >-1)){
-                perfs[perf.name] = {
-                   name: perf.name,
-                   dns: perf.domainLookupEnd - perf.domainLookupStart,
-                   tcp: perf.connectEnd - perf.connectStart,
-                   request: perf.responseStart - perf.requestStart,
-                   response: perf.responseEnd - perf.responseStart,
-                   source: JSON.stringify(perf)
+    try {
+        var performance = window.performance;
+        if (!performance) {
+            return ;
+        }
+    
+        var perfs = [];
+        var t = performance.timing;
+        var times = {};
+    
+        if(t){
+            times.loadPage = t.loadEventEnd - (t.navigationStart||t.fetchStart);
+            times.domReady = t.domComplete - t.responseEnd;
+            times.redirect = t.redirectEnd - t.redirectStart;    
+            times.appcache = t.domainLookupStart - t.fetchStart;
+            times.dns = t.domainLookupEnd - t.domainLookupStart;
+            times.tcp = t.connectEnd - t.connectStart;
+            times.ttfb = t.responseStart - (t.navigationStart||t.fetchStart);
+            times.request = t.responseEnd - t.requestStart;
+            times.loadEvent = t.loadEventEnd - t.loadEventStart;
+            times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
+            times.name = window.location.href.replace(/\?.*/,'');
+            perfs.push(times);
+        }
+     
+        if(performance.getEntries) {
+            var performances = performance.getEntries("*");
+            for(var i=0,len=performances.length;i<len;i++){
+                var perf = performances[i];
+                if(perf.name && isInFilterList( perf.name)){
+                    perfs.push({
+                       name: perf.name,
+                       redirect: parseInt(perf.redirectEnd - perf.redirectStart),
+                       appcache: parseInt(perf.domainLookupStart - perf.fetchStart),
+                       dns: parseInt(perf.domainLookupEnd - perf.domainLookupStart),
+                       tcp: parseInt(perf.connectEnd - perf.connectStart),
+                       request: parseInt(perf.responseStart - perf.requestStart),
+                       response: parseInt(perf.responseEnd - perf.responseStart)
+                    })
                 }
             }
         }
+        return perfs;
+    } catch (error) {
+        console && console.error(error);
+        return [];
     }
-    return perfs;
+  
 }
 
 var BJ_REPORT = (function(global) {
@@ -479,7 +508,7 @@ var BJ_REPORT = (function(global) {
                 var json =  {
                     namespace:_config.namespace,
                     appname: _config.appname,
-                    router: window.router,
+                    route: window.router,
                     url: window.location.href,
                     // count: submit_log_list.length,
                     _t: new Date - 0,
