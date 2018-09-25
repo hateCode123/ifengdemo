@@ -26,12 +26,12 @@ class Tabs extends React.PureComponent {
      * 滚动条滚动
      */
     handleScroll = () => {
-        const tabsTop = document.getElementById('tabs').offsetTop;
+        this.tabsTop = document.getElementById('tabs').offsetTop;
 
         // 兼容各主流浏览器
         const currentTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 
-        if (currentTop > tabsTop) {
+        if (currentTop > this.tabsTop) {
             this.setState({ isFixed: true });
         } else {
             this.setState({ isFixed: false });
