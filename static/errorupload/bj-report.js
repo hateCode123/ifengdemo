@@ -113,7 +113,7 @@ var BJ_REPORT = (function(global) {
         namespace: "", // 命名空间， 
         appname: "", // 项目名称
         url: "", // 错误上报 接口
-        perf_url: '', // 性能上报 接口
+        hb_url: '', // 心跳上报 接口
         ext: null, // 扩展参数 用于自定义上报
         level: 4, // 错误级别 1-debug 2-info 4-error
         ignore: [], // 忽略某个错误, 支持 Regexp 和 Function
@@ -468,7 +468,7 @@ var BJ_REPORT = (function(global) {
                 router: window.router,
                 url: window.location.href
             }
-            var url = _config.perf_url+'?p='+JSON.stringify(heartjson);
+            var url = _config.hb_url + '?d=' + encodeURIComponent(JSON.stringify(heartjson));
 
             var _img = new Image();
             _img.src = url;
@@ -488,7 +488,7 @@ var BJ_REPORT = (function(global) {
                     // data: submit_log_list,
                     uid: uid
                 }
-                var url = _config.perf_url+'?p='+JSON.stringify(json);
+                var url = _config.hb_url+'?d=' + encodeURIComponent(JSON.stringify(json));
             });
         },
         info: function(msg) { // info report
@@ -548,8 +548,6 @@ var BJ_REPORT = (function(global) {
                 _process_log();
             }
 
-            // // 前端心跳
-            // report.heartbeat();
             // // 前端性能上报
             // report.performace();
 

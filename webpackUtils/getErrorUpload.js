@@ -2,7 +2,7 @@ let config = require('../biz/configs');
 let namespace = config.default.namespace;
 let appname = config.default.appname;
 let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
-let perfUploadUrl = '';
+let heartbeatUrl = 'https://err.ifengcloud.ifeng.com/v1/api/hb';
 let env = process.env.NODE_ENV;
 
 module.exports = (level, type) => {
@@ -31,14 +31,14 @@ module.exports = (level, type) => {
     <script src="/errorupload/bj-wrap.js"></script>
     <!-- endbuild -->
     <script>
-        
         BJ_REPORT.init({
             namespace: '${namespace}',
             appname: '${appname}',
             url: "${errorUploadUrl}",
-            // perf_url: "${perfUploadUrl}",
+            hb_url: "${heartbeatUrl}",
             level: 4
         });
+        BJ_REPORT.heartbeat();
         BJ_REPORT.tryJs().spyAll();
 
         var domreadyStatus = false;
