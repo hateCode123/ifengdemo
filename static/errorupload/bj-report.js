@@ -465,7 +465,7 @@ var BJ_REPORT = (function(global) {
             var heartjson =  {
                 namespace:_config.namespace,
                 appname: _config.appname,
-                router: window.router,
+                route: window.router,
                 url: window.location.href
             }
             var url = _config.hb_url + '?d=' + encodeURIComponent(JSON.stringify(heartjson));
