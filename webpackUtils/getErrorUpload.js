@@ -4,11 +4,11 @@ let appname = config.default.appname;
 let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
 let heartbeatUrl = 'https://err.ifengcloud.ifeng.com/v1/api/hb';
 let filterJsList = [
-    "inice.js",
-    "fa.min.js"
+    "/inice",
+    "/fa.min.js"
 ]
 let env = process.env.NODE_ENV;
-env = 'production';
+
 module.exports = (level, type) => {
     let backstr = `
     <!--[if lt IE 8]>
