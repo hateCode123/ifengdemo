@@ -13,7 +13,7 @@ module.exports = (level, type) => {
         } else {
             return `
             <!--[if lt IE 9]> 
-                <!-- build:js es.polyfill.min.js crossorigin -->
+                <!-- build:js es.polyfill.min.js crossorigin="anonymous" -->
                     <script src="/polyfill/textContent.js"></script>
                     <script src="/polyfill/now.js"></script>
                     <script src="/polyfill/getComputedStyle.js"></script>

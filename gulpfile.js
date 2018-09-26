@@ -13,6 +13,7 @@ const env = process.env.NODE_ENV;
 const cdnPath = env === 'pre_development' ? '/' : `//p0.ifengimg.com/fe/zl/test/live/${appName}/`;
 const glob = require('glob');
 const fs = require('fs');
+const sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('polyfill', () => {
     return gulp
@@ -24,14 +25,16 @@ gulp.task('polyfill', () => {
                 },
             }),
         )
+        .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(gulpif('*.js', uglify({ ie8: true })))
         .pipe(gulpif('*.js', rev()))
         .pipe(revReplace())
+        .pipe(gulpif('*.js', sourcemaps.write('./')))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('merge_modern', () => {
-    let files = glob.sync(`${__dirname}/dist/*.html`)
+    let files = glob.sync(`${__dirname}/dist/*.html`);
     for (const file of files) {
         try {
             if (file.indexOf('_modern.html') > -1) {
@@ -44,15 +47,13 @@ gulp.task('merge_modern', () => {
                 let modern_name = match[1];
                 let modern_text = fs.readFileSync(path.join(__dirname, `/dist/${modern_name}`), 'utf-8');
                 text = text.replace(/\<\!--include *file="(.+\.html)" -->/, modern_text);
-                fs.writeFileSync(file, text, 'utf-8')
+                fs.writeFileSync(file, text, 'utf-8');
             }
         } catch (error) {
             console.log(error);
         }
-
     }
     del.sync([path.join(__dirname + '/dist/*_modern.html')]);
-
 });
 
 gulp.task('cdn', () => {

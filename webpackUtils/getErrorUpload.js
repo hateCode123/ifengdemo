@@ -8,11 +8,11 @@ let filterJsList = [
     "fa.min.js"
 ]
 let env = process.env.NODE_ENV;
-
+env = 'production';
 module.exports = (level, type) => {
     let backstr = `
     <!--[if lt IE 8]>
-    <!-- build:js ie8.polyfill.min.js crossorigin -->
+    <!-- build:js ie8.polyfill.min.js crossorigin="anonymous"  -->
         <script src="/polyfill/querySelector.js"></script>
         <script src="/polyfill/lib/json3.min.js"></script>
     <!-- endbuild -->
@@ -31,7 +31,7 @@ module.exports = (level, type) => {
             });
         })();
     </script>
-    <!-- build:js errorupload.min.js crossorigin -->
+    <!-- build:js errorupload.min.js crossorigin="anonymous" -->
     <script src="/errorupload/bj-report.js"></script>
     <script src="/errorupload/bj-wrap.js"></script>
     <!-- endbuild -->
