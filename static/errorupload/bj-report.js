@@ -25,6 +25,7 @@ var BJ_REPORT = (function(global) {
         submit: null, // 自定义上报方式
         repeat: 5 ,// 重复上报次数(对于同一个错误超过多少次不上报),
         uid: getUid(),
+        bid: '',
         filterJsList: [],
         router: ''
     };
@@ -397,7 +398,7 @@ var BJ_REPORT = (function(global) {
                 appname: _config.appname,
                 count: submit_log_list.length,
                 _t: new Date - 0,
-                bid: global.bid ? global.bid : 'null',
+                bid: _config.bid,
                 url: _config.router,
                 data: submit_log_list,
                 uid: _config.uid
@@ -565,7 +566,7 @@ var BJ_REPORT = (function(global) {
                     url: window.location.href,
                     // count: submit_log_list.length,
                     _t: new Date - 0,
-                    bid: global.bid ? global.bid : 'null',
+                    bid: _config.bid,
                     url: global.location.href.replace(/\?.*/,''),
                     // data: submit_log_list,
                     uid: _config.uid
@@ -692,7 +693,11 @@ var BJ_REPORT = (function(global) {
                 if(!_config.router){
                     _config.router = global.location.href.replace(/\?.*/,'')
                 }
-    
+
+                if(!_config.bid){
+                    _config.bid = 'null';
+                }
+                
                 // if had error in cache , report now
                 if (_log_list.length) {
                     _process_log();
