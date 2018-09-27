@@ -337,23 +337,23 @@ exports.list = {
             const institute = allData.institute && allData.institute[0];
 
             allData.institute = {
-                url: formatUrl(institute.url),
+                url: institute ? formatUrl(institute.url) : '',
                 thumbnails:
-                    institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
+                    institute && institute.thumbnails && institute.thumbnails.image && institute.thumbnails.image[0]
                         ? formatImage(institute.thumbnails.image[0].url, 300, 169)
                         : '',
-                title: institute.title,
+                title: institute ? institute.title : '',
             };
 
             const lark = allData.lark && allData.lark[0];
 
             allData.lark = {
-                url: formatUrl(lark.url),
+                url: lark ? formatUrl(lark.url) : '',
                 thumbnails:
-                    lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
+                    lark && lark.thumbnails && lark.thumbnails.image && lark.thumbnails.image[0]
                         ? formatImage(lark.thumbnails.image[0].url, 300, 169)
                         : '',
-                title: lark.title,
+                title: lark ? lark.title : '',
             };
 
             allData.meeting =
