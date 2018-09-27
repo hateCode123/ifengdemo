@@ -34,8 +34,7 @@ module.exports = (level, type) => {
                 level: 4,
                 bid: <%- JSON.stringify(bid) %>,
                 router: <%- JSON.stringify(router) %>,
-                filterJsList: ${JSON.stringify(filterJsList)},
-                
+                filterJsList: ${JSON.stringify(filterJsList)}
             });
             BJ_REPORT.heartbeat();
             BJ_REPORT.tryJs().spyAll();
