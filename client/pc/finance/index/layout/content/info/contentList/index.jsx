@@ -113,7 +113,7 @@ class ContentList extends React.PureComponent {
                         count,
                     },
                     () => {
-                        this.adInit(index, len);
+                        this.adInit(index, data.length < len ? data.length : len);
                     },
                 );
             }
@@ -134,7 +134,7 @@ class ContentList extends React.PureComponent {
      * 获取更多新闻
      */
     getMore = () => {
-        const { len } = this.state;
+        const { len, data } = this.state;
         const { index } = this.props;
 
         const length = len + 5;
@@ -145,7 +145,7 @@ class ContentList extends React.PureComponent {
             },
             () => {
                 try {
-                    this.event.trigger('loadMoreCmp', { index, len: length });
+                    this.event.trigger('loadMoreCmp', { index, len: data.length < len ? data.length : len });
                 } catch (e) {
                     console.error(e);
                 }
