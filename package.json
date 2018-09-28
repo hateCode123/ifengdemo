@@ -64,7 +64,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/runtime": "^7.0.0",
         "@ifeng/errorBoundary": "^1.0.1",
-        "@ifeng/tool_eslint": "^1.0.1",
+        "@ifeng/tool_eslint": "^1.0.3",
         "@ifeng/tool_f.lib.upload": "^1.0.0",
         "@ifeng/tool_f.lib.upload2": "^1.0.0",
         "@ifeng/tool_gulp_cdn_replace": "0.0.2",
