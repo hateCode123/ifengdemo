@@ -26,9 +26,15 @@ var BJ_REPORT = (function(global) {
         repeat: 5 ,// 重复上报次数(对于同一个错误超过多少次不上报),
         uid: getUid(),
         bid: '',
-        filterJsList: [],
-        router: ''
+        router: '',
+        perf_url: '',
+        perf_filter_list: [],
+        perf_timeout: 0,
+        pref_count: 50
     };
+    var debugid = request('debugid');
+    var sid = getCookie('sid');
+    var userid = getCookie('userid');
 
    function getErrorType (key){
        var type = 0;
@@ -149,8 +155,8 @@ var BJ_REPORT = (function(global) {
             if(url.indexOf('err.ifengcloud.ifeng.com')>-1){
                 return false;
             }
-            for(var i=0; i< _config.filterJsList.length; i++){
-                if(url.indexOf(_config.filterJsList[i])>-1){
+            for(var i=0; i< _config.perf_filter_list.length; i++){
+                if(url.indexOf(_config.perf_filter_list[i])>-1){
                     return true;
                 }
             };
@@ -170,49 +176,73 @@ var BJ_REPORT = (function(global) {
             }
         
             var perfs = [];
+            var fixed_perfs =  []; // 上报页面性能 和 perf_filter_list 中的脚本
             var t = performance.timing;
-            var times = {};
-        
+            
             if(t){
+                var times = {}
                 times.loadPage = t.loadEventEnd - (t.navigationStart||t.fetchStart);
                 times.domReady = t.domComplete - t.responseEnd;
-                times.redirect = t.redirectEnd - t.redirectStart;    
+                times.redirect = t.redirectEnd - t.redirectStart;
                 times.appcache = t.domainLookupStart - t.fetchStart;
                 times.dns = t.domainLookupEnd - t.domainLookupStart;
                 times.tcp = t.connectEnd - t.connectStart;
                 times.ttfb = t.responseStart - (t.navigationStart||t.fetchStart);
                 times.request = t.responseEnd - t.requestStart;
+                times.response = t.responseEnd - t.responseStart;
                 times.loadEvent = t.loadEventEnd - t.loadEventStart;
                 times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
                 times.name = window.location.href.replace(/\?.*/,'');
-                perfs.push(times);
+                fixed_perfs.push(times);
             }
         
             if(performance.getEntries) {
                 var performances = performance.getEntries("*");
                 for(var i=0,len=performances.length;i<len;i++){
                     var perf = performances[i];
-                    if(perf.name && isInFilterList( perf.name)){
-                        perfs.push({
+                    
+                  
+                    if(!perf.name || (perf.name.indexOf('.css') ==-1 &&perf.name.indexOf('.js') ==-1 )){
+                        continue;
+                    };
+
+                    var perf_data = {
                         name: perf.name,
+                        duration: parseInt(perf.duration),
                         redirect: parseInt(perf.redirectEnd - perf.redirectStart),
                         appcache: parseInt(perf.domainLookupStart - perf.fetchStart),
                         dns: parseInt(perf.domainLookupEnd - perf.domainLookupStart),
                         tcp: parseInt(perf.connectEnd - perf.connectStart),
                         request: parseInt(perf.responseStart - perf.requestStart),
                         response: parseInt(perf.responseEnd - perf.responseStart)
-                        })
                     }
+                    // console.log( perf.name, perf_data.duration, perf_data.response,_config.perf_timeout )
+                    if(isInFilterList(perf.name)){
+                        fixed_perfs.push(perf_data);
+                    }
+                    // else if(perf_data.duration> _config.perf_timeout ){
+                    //     perfs.push(perf_data);
+                    // }
                 }
             }
-            return perfs;
+            // console.log(JSON.stringify(perfs))
+            if(perfs.length > _config.pref_count){
+                perfs = perfs.sort(function(a,b){
+                    return  (a.response < b.response) ? 1 : -1
+                })
+                // console.log(perfs)
+                perfs = perfs.slice(0,_config.pref_count);
+                // console.log(perfs)
+            }
+
+            return fixed_perfs.concat(perfs);
+
         } catch (error) {
             console && console.error(error);
             return [];
         }
     
     }
-
 
     function getUid(){
         return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -405,9 +435,7 @@ var BJ_REPORT = (function(global) {
             }
 
 
-            var debugid = request('debugid');
-            var sid = getCookie('sid');
-            var userid = getCookie('userid');
+           
 
             if(debugid){
                 err_json.debugid = debugid;
@@ -558,20 +586,45 @@ var BJ_REPORT = (function(global) {
         },
         // 上报性能
         performace: function(){
-            addListener()(window, "load", function(event) {
-                var json =  {
-                    namespace:_config.namespace,
-                    appname: _config.appname,
-                    route: _config.router,
-                    url: window.location.href,
-                    // count: submit_log_list.length,
-                    _t: new Date - 0,
-                    bid: _config.bid,
-                    url: global.location.href.replace(/\?.*/,''),
-                    // data: submit_log_list,
-                    uid: _config.uid
+            addListener()(document, "DOMContentLoaded", function(event) {
+                var arr = [];
+                if(performance.getEntries){
+                    var performances = performance.getEntries("*");
+                    for(var i=0,len=performances.length;i<len;i++){
+                        var perf = performances[i];
+                    
+                        if(perf.name && (perf.name.indexOf('.css') > -1 || perf.name.indexOf('.js') > -1 )){
+                            _config.perf_filter_list.push(perf.name)
+                            // arr.push(perf.name)
+                        }
+                       
+                    }
+          
                 }
-                var url = _config.hb_url+'?d=' + encodeURIComponent(JSON.stringify(json));
+                // console.log('DOMContentLoaded')
+                // console.log(_config.perf_filter_list)
+            });
+    
+            addListener()(window, "load", function(event) {
+                setTimeout(function(){
+                    var json =  {
+                        namespace:_config.namespace,
+                        appname: _config.appname,
+                        route: _config.router,
+                        _t: new Date - 0,
+                        uid: _config.uid,
+                        bid: _config.bid,
+                        sid: sid,
+                        userid: userid,
+                        url: global.location.href.replace(/\?.*/,''),
+                        requests: getPerformance()
+                    }
+                    var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
+                    
+                    var _img = new Image();
+                    _img.src = url;
+                },500)
+                
             });
         },
          // 拦截注入
@@ -599,41 +652,41 @@ var BJ_REPORT = (function(global) {
         alive: function(){
             setTimeout(function (){
                 try {
-                    function upPerformance(){
-                       if(!loadStatus){
-                            addListener()(window, "load", function(event) {
-                                setTimeout(function(){
-                                    var perfs = getPerformance();
-                                    var err = new Error(JSON.stringify({perfs: perfs}));
-                                    if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                                },500)
-                            });
-                       }else{
-                            setTimeout(function(){
-                                var perfs = getPerformance();
-                                var err = new Error(JSON.stringify({perfs: perfs}));
-                                if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                            },500)
-                       }
-                    }
+                    // function upPerformance(){
+                    //    if(!loadStatus){
+                    //         addListener()(window, "load", function(event) {
+                    //             setTimeout(function(){
+                    //                 var perfs = getPerformance();
+                    //                 var err = new Error(JSON.stringify({perfs: perfs}));
+                    //                 if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
+                    //             },500)
+                    //         });
+                    //    }else{
+                    //         setTimeout(function(){
+                    //             var perfs = getPerformance();
+                    //             var err = new Error(JSON.stringify({perfs: perfs}));
+                    //             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
+                    //         },500)
+                    //    }
+                    // }
                     var node = document.body;
                     if (node) {
                         var map = getAlive();
                         if(map.ALL < 200){
-                            var perfs = getPerformance();
+                            // var perfs = getPerformance();
         
-                            var err = new Error(JSON.stringify({perfs: perfs}));
+                            var err = new Error('alive error');
                             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
-                            upPerformance();
+                            // upPerformance();
                         }
                     } else {
                         var perfs = getPerformance();
-                        var err = new Error(JSON.stringify({description:'document.body is null',perfs: perfs}));
+                        var err = new Error('document.body is null');
                         if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'document.body');
-                        upPerformance();
+                        // upPerformance();
                     }
                 } catch (error) {
-                    console && console.log(error);
+                    console && console.error(error);
                 }
             
             }, 5000);
@@ -702,10 +755,7 @@ var BJ_REPORT = (function(global) {
                 if (_log_list.length) {
                     _process_log();
                 }
-    
-                // // 前端性能上报
-                // report.performace();
-    
+
                 return report;
             } catch (error) {
                 console && console.error(error)

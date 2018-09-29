@@ -3,6 +3,7 @@ let namespace = config.default.namespace;
 let appname = config.default.appname;
 let errorUploadUrl = 'https://err.ifengcloud.ifeng.com/v1/api/err';
 let heartbeatUrl = 'https://err.ifengcloud.ifeng.com/v1/api/hb';
+let perfUrl = 'https://err.ifengcloud.ifeng.com/v1/api/perf';
 let filterJsList = [
     "/inice",
     "/fa.min.js"
@@ -31,15 +32,19 @@ module.exports = (level, type) => {
                 appname: '${appname}',
                 url: "${errorUploadUrl}",
                 hb_url: "${heartbeatUrl}",
+                perf_url: "${perfUrl}",
                 level: 4,
                 bid: <%- JSON.stringify(bid) %>,
                 router: <%- JSON.stringify(router) %>,
-                filterJsList: ${JSON.stringify(filterJsList)}
+                perf_filter_list: ${JSON.stringify(filterJsList)},
+                perf_timeout: 0,
+                pref_count: 50
             });
-            BJ_REPORT.heartbeat();
             BJ_REPORT.tryJs().spyAll();
+            BJ_REPORT.heartbeat();
             BJ_REPORT.injection();
             BJ_REPORT.alive();
+            BJ_REPORT.performace();
         } catch (error){
             console && console.error(error);
         }
