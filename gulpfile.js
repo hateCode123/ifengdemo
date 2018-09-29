@@ -15,6 +15,7 @@ const glob = require('glob');
 const fs = require('fs');
 const sourcemaps = require('gulp-sourcemaps');
 
+// 合并js
 gulp.task('polyfill', () => {
     return gulp
         .src('dist/*.html')
@@ -33,6 +34,7 @@ gulp.task('polyfill', () => {
         .pipe(gulp.dest('dist'));
 });
 
+// 将现代浏览器js注入到页面
 gulp.task('merge_modern', () => {
     let files = glob.sync(`${__dirname}/dist/*.html`);
     for (const file of files) {
@@ -56,6 +58,7 @@ gulp.task('merge_modern', () => {
     del.sync([path.join(__dirname + '/dist/*_modern.html')]);
 });
 
+// 将合并后的js链接，转为 cdn 链接
 gulp.task('cdn', () => {
     return gulp
         .src(path.join(__dirname, '/dist/*.html'))
@@ -71,6 +74,7 @@ gulp.task('cdn', () => {
         .pipe(gulp.dest('./dist'));
 });
 
+// 默认执行
 gulp.task('default', ['polyfill'], () => {
     gulp.start('merge_modern');
     gulp.start('cdn');
