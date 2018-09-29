@@ -74,5 +74,4 @@ gulp.task('cdn', () => {
 gulp.task('default', ['polyfill'], () => {
     gulp.start('merge_modern');
     gulp.start('cdn');
-    // gulp.start('clean');
 });
