@@ -22,14 +22,31 @@ class Tabs extends React.PureComponent {
         this.unHandleScroll();
     }
 
+    // 兼容 ie7 的 offsetTop 获取方法
+    getOffsetTop = dom => {
+        let offsetTop = dom.offsetTop;
+
+        if (dom.offsetParent) {
+            offsetTop += this.getOffsetTop(dom.offsetParent);
+        }
+
+        return offsetTop;
+    };
+
     /**
      * 滚动条滚动
      */
     handleScroll = () => {
-        this.tabsTop = document.getElementById('tabs').offsetTop;
+        const offsetTop = this.getOffsetTop(document.getElementById('tabs'));
+
+        this.tabsTop = document.getElementById('tabs').offsetTop || offsetTop;
+
+        console.log(this.tabsTop);
 
         // 兼容各主流浏览器
         const currentTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+        console.log(currentTop);
 
         if (currentTop > this.tabsTop) {
             this.setState({ isFixed: true });
