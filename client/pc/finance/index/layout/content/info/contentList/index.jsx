@@ -42,7 +42,7 @@ class ContentList extends React.PureComponent {
         insertArr.forEach(item => {
             const ref = React.createRef();
 
-            refs.push({ dom: item.dom, ref });
+            refs.push({ index: item.index, ref });
 
             infoData.splice(item.index, 0, { type: 'ad', ref });
             infoCount.splice(item.index, 0, null);
@@ -51,7 +51,7 @@ class ContentList extends React.PureComponent {
         replaceArr.forEach(item => {
             const ref = React.createRef();
 
-            refs.push({ dom: item.dom, ref });
+            refs.push({ index: item.index, ref });
 
             infoData.splice(item.index, 1, { type: 'ad', ref });
         });
@@ -63,11 +63,15 @@ class ContentList extends React.PureComponent {
                 count: infoCount,
             },
             () => {
+                const adDom = {};
+
                 for (const ref of refs) {
                     if (ref.ref.current) {
-                        ref.ref.current.appendChild(ref.dom);
+                        adDom[ref.index] = ref.ref.current;
                     }
                 }
+
+                return adDom;
             },
         );
     };

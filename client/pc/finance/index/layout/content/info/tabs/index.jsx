@@ -41,12 +41,8 @@ class Tabs extends React.PureComponent {
 
         this.tabsTop = document.getElementById('tabs').offsetTop || offsetTop;
 
-        console.log(this.tabsTop);
-
         // 兼容各主流浏览器
         const currentTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-
-        console.log(currentTop);
 
         if (currentTop > this.tabsTop) {
             this.setState({ isFixed: true });
