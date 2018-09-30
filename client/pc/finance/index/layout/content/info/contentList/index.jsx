@@ -32,48 +32,50 @@ class ContentList extends React.PureComponent {
     event = new Event();
 
     insert = (insertArr, replaceArr, adFn) => {
-        const { len, data, count } = this.state;
+        if (adFn && typeof adFn === 'function') {
+            const { len, data, count } = this.state;
 
-        const infoData = [...data];
-        const infoCount = [...count];
+            const infoData = [...data];
+            const infoCount = [...count];
 
-        const refs = [];
+            const refs = [];
 
-        insertArr.forEach(item => {
-            const ref = React.createRef();
+            insertArr.forEach(item => {
+                const ref = React.createRef();
 
-            refs.push({ dom: item.dom, ref });
+                refs.push({ index: item, ref });
 
-            infoData.splice(item.index, 0, { type: 'ad', ref });
-            infoCount.splice(item.index, 0, null);
-        });
+                infoData.splice(item, 0, { type: 'ad', ref });
+                infoCount.splice(item, 0, null);
+            });
 
-        replaceArr.forEach(item => {
-            const ref = React.createRef();
+            replaceArr.forEach(item => {
+                const ref = React.createRef();
 
-            refs.push({ dom: item.dom, ref });
+                refs.push({ index: item, ref });
 
-            infoData.splice(item.index, 1, { type: 'ad', ref });
-        });
+                infoData.splice(item, 1, { type: 'ad', ref });
+            });
 
-        this.setState(
-            {
-                len: len + insertArr.length,
-                data: infoData,
-                count: infoCount,
-            },
-            () => {
-                for (const ref of refs) {
-                    if (ref.ref.current) {
-                        ref.ref.current.appendChild(ref.dom);
+            this.setState(
+                {
+                    len: len + insertArr.length,
+                    data: infoData,
+                    count: infoCount,
+                },
+                () => {
+                    const dom = {};
+
+                    for (const ref of refs) {
+                        dom[ref.index] = ref.ref.current;
                     }
-                }
 
-                if (adFn) {
-                    adFn();
-                }
-            },
-        );
+                    adFn(dom);
+                },
+            );
+        }
+
+        return;
     };
 
     async componentDidMount() {
