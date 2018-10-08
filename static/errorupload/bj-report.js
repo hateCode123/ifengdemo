@@ -201,14 +201,20 @@ var BJ_REPORT = (function(global) {
                 for(var i=0,len=performances.length;i<len;i++){
                     var perf = performances[i];
                     
+                    if(i==0 && fixed_perfs.length > 0){
+                        fixed_perfs[0].duration = parseInt(perf.duration);
+                        fixed_perfs[0]._duration = parseInt(perf.responseEnd - perf.startTime);
+                        continue;
+                    }
                   
-                    if(!perf.name || (perf.name.indexOf('.css') ==-1 &&perf.name.indexOf('.js') ==-1 )){
+                    if(!perf.name || (perf.name.indexOf('.css') == -1 &&perf.name.indexOf('.js') == -1 )){
                         continue;
                     };
 
                     var perf_data = {
                         name: perf.name,
                         duration: parseInt(perf.duration),
+                        _duration: parseInt(perf.responseEnd - perf.startTime),
                         redirect: parseInt(perf.redirectEnd - perf.redirectStart),
                         appcache: parseInt(perf.domainLookupStart - perf.fetchStart),
                         dns: parseInt(perf.domainLookupEnd - perf.domainLookupStart),
@@ -586,6 +592,7 @@ var BJ_REPORT = (function(global) {
         },
         // 上报性能
         performace: function(){
+            var uploadStatus = false;
             addListener()(document, "DOMContentLoaded", function(event) {
                 var arr = [];
                 if(performance.getEntries){
@@ -607,6 +614,10 @@ var BJ_REPORT = (function(global) {
     
             addListener()(window, "load", function(event) {
                 setTimeout(function(){
+                    if(uploadStatus){
+                        return;
+                    }
+                    uploadStatus = true;
                     var json =  {
                         namespace:_config.namespace,
                         appname: _config.appname,
@@ -616,6 +627,7 @@ var BJ_REPORT = (function(global) {
                         bid: _config.bid,
                         sid: sid,
                         userid: userid,
+                        event: 'load',
                         url: global.location.href.replace(/\?.*/,''),
                         requests: getPerformance()
                     }
@@ -626,6 +638,32 @@ var BJ_REPORT = (function(global) {
                 },500)
                 
             });
+
+            addListener()(window, "beforeunload", function(e) {
+        
+                if(uploadStatus){
+                    return;
+                }
+                uploadStatus = true;
+                var json =  {
+                    namespace:_config.namespace,
+                    appname: _config.appname,
+                    route: _config.router,
+                    _t: new Date - 0,
+                    uid: _config.uid,
+                    bid: _config.bid,
+                    sid: sid,
+                    userid: userid,
+                    event: 'beforeunload',
+                    url: global.location.href.replace(/\?.*/,''),
+                    requests: getPerformance()
+                }
+                var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
+                
+                var _img = new Image();
+                _img.src = url;
+                
+             })
         },
          // 拦截注入
          injection: function(){
