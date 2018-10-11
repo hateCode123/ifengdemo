@@ -284,7 +284,7 @@ var BJ_REPORT = (function(global) {
                 if (errObj.stack) {
                     var url = errObj.stack.match("https?://[^\n\"]+");
                     url = url ? url[0] : "";
-                    var rowCols = url.match(":(\\d+):(\\d+)");
+                    var rowCols = url.match(/:(\d+):(\d+)\)?/);
                     if (!rowCols) {
                         rowCols = [0, 0, 0];
                     }
@@ -611,36 +611,8 @@ var BJ_REPORT = (function(global) {
                 // console.log('DOMContentLoaded')
                 // console.log(_config.perf_filter_list)
             });
-    
-            addListener()(window, "load", function(event) {
-                setTimeout(function(){
-                    if(uploadStatus){
-                        return;
-                    }
-                    uploadStatus = true;
-                    var json =  {
-                        namespace:_config.namespace,
-                        appname: _config.appname,
-                        route: _config.router,
-                        _t: new Date - 0,
-                        uid: _config.uid,
-                        bid: _config.bid,
-                        sid: sid,
-                        userid: userid,
-                        event: 'load',
-                        url: global.location.href.replace(/\?.*/,''),
-                        requests: getPerformance()
-                    }
-                    var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
-                    
-                    var _img = new Image();
-                    _img.src = url;
-                },500)
-                
-            });
-
-            addListener()(window, "beforeunload", function(e) {
-        
+            
+            function sendDate(){
                 if(uploadStatus){
                     return;
                 }
@@ -654,7 +626,7 @@ var BJ_REPORT = (function(global) {
                     bid: _config.bid,
                     sid: sid,
                     userid: userid,
-                    event: 'beforeunload',
+                    event: 'load',
                     url: global.location.href.replace(/\?.*/,''),
                     requests: getPerformance()
                 }
@@ -662,8 +634,24 @@ var BJ_REPORT = (function(global) {
                 
                 var _img = new Image();
                 _img.src = url;
+                var now = +new Date;
+                while(new Date - now <= 20) {} // 阻塞 20ms
+            }
+    
+            addListener()(window, "load", function(event) {
+                setTimeout(function(){
+                    sendDate();
+                },300)
                 
-             })
+            });
+
+            addListener()(window, "beforeunload", function(e) {
+                sendDate();
+            });
+
+            addListener()(window, "unload", function(e) {
+                sendDate();
+            });
         },
          // 拦截注入
          injection: function(){
@@ -690,23 +678,6 @@ var BJ_REPORT = (function(global) {
         alive: function(){
             setTimeout(function (){
                 try {
-                    // function upPerformance(){
-                    //    if(!loadStatus){
-                    //         addListener()(window, "load", function(event) {
-                    //             setTimeout(function(){
-                    //                 var perfs = getPerformance();
-                    //                 var err = new Error(JSON.stringify({perfs: perfs}));
-                    //                 if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                    //             },500)
-                    //         });
-                    //    }else{
-                    //         setTimeout(function(){
-                    //             var perfs = getPerformance();
-                    //             var err = new Error(JSON.stringify({perfs: perfs}));
-                    //             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                    //         },500)
-                    //    }
-                    // }
                     var node = document.body;
                     if (node) {
                         var map = getAlive();
