@@ -66,7 +66,7 @@
         "@ifeng/errorBoundary": "^1.0.1",
         "@ifeng/tool_eslint": "^1.0.3",
         "@ifeng/tool_f.lib.upload": "^1.0.0",
-        "@ifeng/tool_f.lib.upload2": "^1.0.1",
+        "@ifeng/tool_f.lib.upload2": "^1.0.2",
         "@ifeng/tool_gulp_cdn_replace": "0.0.2",
         "@ifeng/ui_base": "^1.0.8",
         "@ifeng/ui_pc_ad": "^1.0.4",
