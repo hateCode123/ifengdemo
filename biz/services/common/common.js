@@ -21,6 +21,7 @@ const KVTableEnum = {
     'KVProxy.getDocument': 'documents',
     'KVProxy.getVideo': 'video',
     'KVProxy.getSelectedPool': 'selected_pool',
+    'KVProxy.getListByWemediaEAccountId': 'WEMEDIA_ACCOUNT',
 };
 
 /**
