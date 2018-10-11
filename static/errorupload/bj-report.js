@@ -612,7 +612,7 @@ var BJ_REPORT = (function(global) {
                 // console.log(_config.perf_filter_list)
             });
             
-            function sendDate(){
+            function sendDate(event){
                 if(uploadStatus){
                     return;
                 }
@@ -626,7 +626,7 @@ var BJ_REPORT = (function(global) {
                     bid: _config.bid,
                     sid: sid,
                     userid: userid,
-                    event: 'load',
+                    event: event,
                     url: global.location.href.replace(/\?.*/,''),
                     requests: getPerformance()
                 }
@@ -640,17 +640,17 @@ var BJ_REPORT = (function(global) {
     
             addListener()(window, "load", function(event) {
                 setTimeout(function(){
-                    sendDate();
+                    sendDate('load');
                 },300)
                 
             });
 
             addListener()(window, "beforeunload", function(e) {
-                sendDate();
+                sendDate('beforeunload');
             });
 
             addListener()(window, "unload", function(e) {
-                sendDate();
+                sendDate('unload');
             });
         },
          // 拦截注入
