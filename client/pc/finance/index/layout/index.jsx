@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Chip from 'Chip';
 import ChipEdit from 'ChipEdit';
+import transform from 'chipDataTransform';
+import { addEventListener } from '@ifeng/ui_base';
 import Header from './header';
 import Navigation from './navigation';
 import Stock from './stock';
@@ -11,11 +13,132 @@ import BottomFooter from './footer';
 import Cooperation from './cooperation';
 import QrCode from './qrCode';
 import BottomAffix from './bottomAffix';
-import transform from 'chipDataTransform';
 
 class Layout extends React.PureComponent {
     static propTypes = {
         content: PropTypes.object,
+    };
+
+    componentDidMount() {
+        this.unHandleClick = addEventListener(document, 'click', this.handleClick);
+    }
+
+    componentWillUnmount() {
+        this.unHandleClick();
+    }
+
+    // 全站渠道标记传递，文章页的任意跳转
+    handleClick = e => {
+        const tag = this.getATag(e.target);
+
+        if (!tag) return;
+
+        let localHref =
+            (tag.attributes['sign-trs-href'] ? tag.attributes['sign-trs-href'].value : '') ||
+            (tag.attributes['href'] ? tag.attributes['href'].value : '');
+
+        if (
+            localHref &&
+            localHref !== 'undefined' &&
+            localHref !== '' &&
+            localHref !== '#' &&
+            localHref.indexOf('javascript:') === -1
+        ) {
+            localHref = localHref.trim();
+            const localSearch = location.search;
+            const localHash = location.hash;
+
+            tag.setAttribute('sign-trs-href', localHref);
+
+            let newUrl = '';
+            let inWhitelist = false;
+            const whitelist = ['//dol.deliver.ifeng.com/'];
+
+            for (let i = 0, len = whitelist.length; i < len; i++) {
+                if (localHref.indexOf(whitelist[i]) > -1) {
+                    inWhitelist = true;
+                }
+            }
+            // 传递下划线开头的统计
+            const curSrc = this.getParam(localSearch, localHash);
+
+            if ((localSearch || localHash) && curSrc && !inWhitelist) {
+                if (localHref.indexOf('?') > -1) {
+                    newUrl = `${localHref}&${curSrc}`;
+                } else {
+                    newUrl = `${localHref}?${curSrc}`;
+                }
+
+                tag.setAttribute('href', newUrl);
+            }
+        }
+    };
+
+    getATag = tag => {
+        if (!tag) {
+            return null;
+        }
+
+        if (tag.tagName !== 'A') {
+            return this.getATag(tag.parentElement);
+        } else {
+            return tag;
+        }
+    };
+
+    getSign = (localSearch, ret) => {
+        const localSearchArr = localSearch.split('#');
+
+        for (let i = 0; i < localSearchArr.length; i++) {
+            const localParam = localSearchArr[i];
+
+            if (localParam.indexOf('_') === -1) continue;
+
+            const localParamArr = localParam.split('?');
+
+            for (let j = 0; j < localParamArr.length; j++) {
+                const localParam2 = localParamArr[j];
+
+                if (localParam2.indexOf('_') === -1) continue;
+
+                const localParam2Arr = localParam2.split('&');
+
+                for (let m = 0; m < localParam2Arr.length; m++) {
+                    const localParam3 = localParam2Arr[m];
+
+                    if (localParam3.indexOf('_') === -1) continue;
+
+                    const localParam3Arr = localParam3.split('|');
+
+                    for (let k = 0; k < localParam3Arr.length; k++) {
+                        const localParam4 = localParam3Arr[k];
+
+                        if (localParam4.indexOf('_') !== 0) continue;
+
+                        if (ret === '') {
+                            ret += localParam4;
+                        } else {
+                            ret = `${ret}&${localParam4}`;
+                        }
+                    }
+                }
+            }
+        }
+
+        return ret;
+    };
+
+    getParam = (localSearch, localHash) => {
+        let ret = '';
+
+        if (localSearch.indexOf('_zbs') > -1) {
+            ret = this.getSign(localSearch, ret);
+        }
+        if (localHash.indexOf('_zbs') > -1) {
+            ret = this.getSign(localHash, ret);
+        }
+
+        return ret;
     };
 
     render() {

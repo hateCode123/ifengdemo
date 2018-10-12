@@ -4,6 +4,7 @@ const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const { handleHeadlinePicData, handleFinanceListPicData } = require('../../../../common/transform');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
+const moment = require('moment');
 
 exports.list = {
     path: '/pc/finance/(index)?/test',
@@ -43,16 +44,19 @@ exports.list = {
             // 焦点图
             ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getStringByKey('data')],
 
+            // 焦点图广告权益
+            ['bannerPicAd', 'KVProxy', 'getStructuredFragment', 30028, getStringByKey('content')],
+
             // 头条新闻
             ['headline', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
 
             // 客户权益
             ['rights', 'KVProxy', 'getStaticFragment', 10018, getStringByKey('content')],
 
-            // 每日要闻
+            // 今日要闻
             ['dayNews', 'KVProxy', 'getSelectedPool', 8, getStringByKey('data')],
 
-            // 每日要闻多拼新闻
+            // 今日要闻多拼新闻
             ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
 
             // 返回连环话数据
@@ -64,8 +68,11 @@ exports.list = {
             // 财商教育
             ['finance', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
 
-            // 炒股大赛
-            ['stocks', 'KVProxy', 'getDynamicFragment', '20029', getStringByKey('data')],
+            // 炒股大赛战报
+            ['stocks', 'KVProxy', 'getDynamicFragment', '40028', getStringByKey('data')],
+
+            // 炒股大赛新闻
+            ['stocksNews', 'KVProxy', 'getDynamicFragment', '20029', getStringByKey('data')],
 
             // 财商教育新闻列表
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
@@ -255,11 +262,24 @@ exports.list = {
         try {
             allData.headline = allData.headline && handleHeadlinePicData(allData.headline);
 
-            allData.bannerPic =
+            const currentTime = moment().unix();
+
+            const bannerPicAd =
+                allData.bannerPicAd &&
+                allData.bannerPicAd
+                    .filter(item => item.isShow && (item.deadline ? moment(item.deadline).unix() > currentTime : true))
+                    .map(item => ({
+                        index: item.index,
+                        url: formatUrl(item.url),
+                        thumbnails: item.img ? formatImage(item.img, 400, 230) : '',
+                        title: item.title,
+                    }));
+
+            const bannerPic =
                 allData.bannerPic &&
                 allData.bannerPic
                     .filter(item => item.thumbnails && item.thumbnails.image && item.thumbnails.image[0])
-                    .slice(0, 5)
+                    .slice(0, 5 - bannerPicAd.length)
                     .map(item => ({
                         url: formatUrl(item.url),
                         thumbnails:
@@ -269,12 +289,33 @@ exports.list = {
                         title: item.title,
                     }));
 
-            allData.dayNews =
+            bannerPicAd.forEach(item => {
+                bannerPic.splice(item.index - 1, 0, item);
+            });
+
+            allData.bannerPic = bannerPic;
+
+            const mainNews =
                 allData.dayNews &&
-                allData.dayNews.slice(0, 12).map(item => ({
-                    url: formatUrl(item.url),
-                    title: item.title,
-                }));
+                allData.dayNews
+                    .filter(item => item.selectedLevel === '2')
+                    .slice(0, 2)
+                    .map(item => ({
+                        url: formatUrl(item.url),
+                        title: item.title,
+                    }));
+
+            const otherNews =
+                allData.dayNews &&
+                allData.dayNews
+                    .filter(item => item.selectedLevel !== '2')
+                    .slice(0, 12 - mainNews.length)
+                    .map(item => ({
+                        url: formatUrl(item.url),
+                        title: item.title,
+                    }));
+
+            allData.dayNews = [mainNews[0], ...otherNews.slice(0, 5), mainNews[1], ...otherNews.slice(5)];
 
             const comicBook = allData.comicBook && allData.comicBook[0];
 
@@ -307,12 +348,24 @@ exports.list = {
 
             allData.financeList = allData.financeList && handleFinanceListPicData(allData.financeList);
 
-            allData.stocks =
+            const stocks =
                 allData.stocks &&
-                allData.stocks.slice(0, 4).map(item => ({
+                allData.stocks.map(item => ({
                     url: formatUrl(item.url),
                     title: item.title,
                 }));
+
+            const stocksNews =
+                allData.stocksNews &&
+                allData.stocksNews
+                    .filter(item => (item.base62Id !== allData.stocks[0] ? allData.stocks[0].base62Id : ''))
+                    .slice(0, 3)
+                    .map(item => ({
+                        url: formatUrl(item.url),
+                        title: item.title,
+                    }));
+
+            allData.stocks = [...stocks, ...stocksNews];
 
             allData.financeVideo = allData.financeVideo
                 ? allData.financeVideo

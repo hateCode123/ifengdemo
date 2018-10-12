@@ -42,7 +42,7 @@ class BannerPic extends React.PureComponent {
         };
 
         return (
-            <div>
+            <div style={{ position: 'relative' }}>
                 <div className={styles.bannerPic}>
                     <Slides content={content} config={config} />
                 </div>
