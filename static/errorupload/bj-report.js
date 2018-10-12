@@ -201,14 +201,20 @@ var BJ_REPORT = (function(global) {
                 for(var i=0,len=performances.length;i<len;i++){
                     var perf = performances[i];
                     
+                    if(i==0 && fixed_perfs.length > 0){
+                        fixed_perfs[0].duration = parseInt(perf.duration);
+                        fixed_perfs[0]._duration = parseInt(perf.responseEnd - perf.startTime);
+                        continue;
+                    }
                   
-                    if(!perf.name || (perf.name.indexOf('.css') ==-1 &&perf.name.indexOf('.js') ==-1 )){
+                    if(!perf.name || (perf.name.indexOf('.css') == -1 &&perf.name.indexOf('.js') == -1 )){
                         continue;
                     };
 
                     var perf_data = {
                         name: perf.name,
                         duration: parseInt(perf.duration),
+                        _duration: parseInt(perf.responseEnd - perf.startTime),
                         redirect: parseInt(perf.redirectEnd - perf.redirectStart),
                         appcache: parseInt(perf.domainLookupStart - perf.fetchStart),
                         dns: parseInt(perf.domainLookupEnd - perf.domainLookupStart),
@@ -278,7 +284,7 @@ var BJ_REPORT = (function(global) {
                 if (errObj.stack) {
                     var url = errObj.stack.match("https?://[^\n\"]+");
                     url = url ? url[0] : "";
-                    var rowCols = url.match(":(\\d+):(\\d+)");
+                    var rowCols = url.match(/:(\d+):(\d+)\)?/);
                     if (!rowCols) {
                         rowCols = [0, 0, 0];
                     }
@@ -586,6 +592,7 @@ var BJ_REPORT = (function(global) {
         },
         // 上报性能
         performace: function(){
+            var uploadStatus = false;
             addListener()(document, "DOMContentLoaded", function(event) {
                 var arr = [];
                 if(performance.getEntries){
@@ -604,27 +611,46 @@ var BJ_REPORT = (function(global) {
                 // console.log('DOMContentLoaded')
                 // console.log(_config.perf_filter_list)
             });
+            
+            function sendDate(event){
+                if(uploadStatus){
+                    return;
+                }
+                uploadStatus = true;
+                var json =  {
+                    namespace:_config.namespace,
+                    appname: _config.appname,
+                    route: _config.router,
+                    _t: new Date - 0,
+                    uid: _config.uid,
+                    bid: _config.bid,
+                    sid: sid,
+                    userid: userid,
+                    event: event,
+                    url: global.location.href.replace(/\?.*/,''),
+                    requests: getPerformance()
+                }
+                var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
+                
+                var _img = new Image();
+                _img.src = url;
+                var now = +new Date;
+                while(new Date - now <= 20) {} // 阻塞 20ms
+            }
     
             addListener()(window, "load", function(event) {
                 setTimeout(function(){
-                    var json =  {
-                        namespace:_config.namespace,
-                        appname: _config.appname,
-                        route: _config.router,
-                        _t: new Date - 0,
-                        uid: _config.uid,
-                        bid: _config.bid,
-                        sid: sid,
-                        userid: userid,
-                        url: global.location.href.replace(/\?.*/,''),
-                        requests: getPerformance()
-                    }
-                    var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
-                    
-                    var _img = new Image();
-                    _img.src = url;
-                },500)
+                    sendDate('load');
+                },300)
                 
+            });
+
+            addListener()(window, "beforeunload", function(e) {
+                sendDate('beforeunload');
+            });
+
+            addListener()(window, "unload", function(e) {
+                sendDate('unload');
             });
         },
          // 拦截注入
@@ -652,23 +678,6 @@ var BJ_REPORT = (function(global) {
         alive: function(){
             setTimeout(function (){
                 try {
-                    // function upPerformance(){
-                    //    if(!loadStatus){
-                    //         addListener()(window, "load", function(event) {
-                    //             setTimeout(function(){
-                    //                 var perfs = getPerformance();
-                    //                 var err = new Error(JSON.stringify({perfs: perfs}));
-                    //                 if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                    //             },500)
-                    //         });
-                    //    }else{
-                    //         setTimeout(function(){
-                    //             var perfs = getPerformance();
-                    //             var err = new Error(JSON.stringify({perfs: perfs}));
-                    //             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'performance');
-                    //         },500)
-                    //    }
-                    // }
                     var node = document.body;
                     if (node) {
                         var map = getAlive();
