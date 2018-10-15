@@ -2,7 +2,11 @@ const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
-const { handleHeadlinePicData, handleFinanceListPicData } = require('../../../../common/transform');
+const {
+    handleHeadlinePicData,
+    handleFinanceListPicData,
+    handleFinanceVideoData,
+} = require('../../../../common/transform');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
 const moment = require('moment');
 
@@ -78,7 +82,7 @@ exports.list = {
             ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
 
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getSelectedPool', 12, getStringByKey('data')],
+            ['financeVideo', 'KVProxy', 'getRecommendFragment', 55016, getStringByKey('data')],
 
             // 研究院
             ['institute', 'KVProxy', 'getDynamicFragment', '20030', getStringByKey('data')],
@@ -367,25 +371,7 @@ exports.list = {
 
             allData.stocks = [...stocks, ...stocksNews];
 
-            allData.financeVideo = allData.financeVideo
-                ? allData.financeVideo
-                      .filter(item => item.thumbnails && item.thumbnails.image && item.thumbnails.image[0])
-                      .slice(0, 3)
-                      .map(item => ({
-                          url: formatUrl(item.url),
-                          thumbnails:
-                              item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                                  ? formatImage(item.thumbnails.image[0].url, 300, 170)
-                                  : '',
-                          title: item.title,
-                      }))
-                : [
-                      {
-                          url: '',
-                          thumbnails: '',
-                          title: '',
-                      },
-                  ];
+            allData.financeVideo = allData.financeVideo && handleFinanceVideoData(allData.financeVideo);
 
             const institute = allData.institute && allData.institute[0];
 

@@ -51,7 +51,7 @@ class FinanceVideo extends React.PureComponent {
         ) : (
             <div className={styles.bigPic}>
                 <a href={item.url} className={styles.pic_img} target="_blank" rel={rel}>
-                    <img src={item.thumbnails} width="300" height="170" className={styles.trans} />
+                    <img src={item.thumbnail} width="300" height="170" className={styles.trans} />
                 </a>
                 <div className={styles.text} />
                 <p className={styles.title}>
@@ -79,7 +79,7 @@ class FinanceVideo extends React.PureComponent {
         };
 
         return (
-            <div>
+            <div style={{ position: 'relative' }}>
                 <div className={styles.financeVideo}>
                     <Slides content={content} config={config} />
                 </div>
