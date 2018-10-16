@@ -11,7 +11,7 @@ const { formatImage, formatUrl } = require('@ifeng/public_method');
 const moment = require('moment');
 
 exports.list = {
-    path: '/pc/finance/(index)?/test',
+    path: '/pc/finance/(index)?',
     method: 'get',
     type: 'html',
     cache: 0,
