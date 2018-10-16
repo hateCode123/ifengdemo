@@ -1,0 +1,24 @@
+.coupletBox {
+    z-index: 10;
+    position: fixed;
+    cursor: pointer;
+    top: 40%;
+    width: 120px;
+    height: 300px;
+    overflow: hidden;
+}
+.left {
+    left: 0px;
+}
+.right {
+    right: 0px;
+}
+.picA {
+    display: block;
+}
+.show {
+    display: block;
+}
+.close {
+    display: none;
+}

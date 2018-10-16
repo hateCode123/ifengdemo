@@ -1,0 +1,24 @@
+.ad {
+    width: 1000px;
+    margin: 37px auto 0;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid #000;
+}
+
+.box {
+    width: 1000px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.footer {
+    background: none;
+    width: 100%;
+    margin: 50px auto 0;
+    height: 80px;
+}

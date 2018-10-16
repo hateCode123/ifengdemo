@@ -1,0 +1,81 @@
+.newsList {
+    width: 100%;
+}
+.col_L_tex {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+}
+.col_L_tex .pic01 {
+    width: 100px;
+    height: 56px;
+    overflow: hidden;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+.col_L_tex img {
+    width: 100px;
+    height: 56px;
+    vertical-align: middle;
+}
+
+.col_L_tex img {
+    transition: 0.5s;
+}
+.col_L_tex a:hover img {
+    transform: scale(1.1);
+}
+
+.col_L_tex h4 {
+    font-size: 16px;
+    font-weight: normal;
+    font-family: '宋体';
+    line-height: 24px;
+    height: 56px;
+    overflow: hidden;
+}
+.col_L_tex h4 a {
+    color: #000;
+    font-size: 16px;
+    line-height: 28px;
+    height: 56px;
+    overflow: hidden;
+    display: inline-block;
+}
+.col_L_tex ul {
+    width: 100%;
+    height: auto;
+}
+.col_L_tex ul li {
+    height: 44px;
+    line-height: 44px;
+    overflow: hidden;
+    font-size: 14px;
+    font-family: '宋体';
+    background: url(./list_icon.jpg) no-repeat left 20px;
+    padding-left: 12px;
+}
+.col_L_tex ul li a {
+    color: #000;
+    font-size: 14px;
+}
+.col_L_tex h4 a:hover,
+.col_L_tex ul li a:hover {
+    color: #f54343;
+}
+.col_R_tex ul {
+    width: 100%;
+    height: auto;
+    padding-top: 0px;
+}
+.col_R_tex ul li {
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    background: url(./list_icon.jpg) no-repeat left 15px;
+    padding-left: 12px;
+}
+.iframeList {
+    margin-top: 20px;
+}

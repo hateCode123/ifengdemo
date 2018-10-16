@@ -1,0 +1,85 @@
+.main_box {
+    width: 1000px;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.content_l {
+    width: 400px;
+    height: auto;
+    float: left;
+    display: block;
+}
+.content_r {
+    width: 570px;
+    height: auto;
+    float: right;
+    display: block;
+}
+.ad {
+    width: 1000px;
+    margin: 37px auto 0;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid #000;
+}
+.searchBox {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.searchLine {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.sous01 {
+    float: left;
+    width: 320px;
+    height: 20px;
+}
+.gup01 {
+    float: left;
+    width: 60px;
+    height: 18px;
+    border: 1px solid #f54343;
+    color: #f64243;
+    font-size: 12px;
+    font-family: '宋体';
+    text-align: center;
+    line-height: 19px;
+}
+.t_btn01 {
+    width: 252px;
+    height: 18px;
+    background: url(./sos.jpg) no-repeat 235px 0px;
+    border: 1px solid #b2b2b2;
+    float: left;
+    margin-left: 3px;
+    position: relative;
+}
+.text_bg01 {
+    width: 235px;
+    height: 18px;
+    float: left;
+    color: #bbbbbb;
+}
+.text_bg01 .inputTxt {
+    color: #bbbbbb;
+    border: none;
+    background: none;
+    width: 220px;
+    padding: 0 0 0 5px;
+    height: 18px;
+    font-size: 12px;
+    line-height: 18px;
+}
+.hk_stock {
+    float: right;
+    border: 1px solid #000;
+}
+.hk_stock iframe {
+    border: none;
+}

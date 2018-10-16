@@ -1,0 +1,22 @@
+.logo {
+    position: 'relative';
+    width: 161px;
+    height: 27px;
+}
+
+.ad_1 {
+    width: 178px;
+    height: 18px;
+    float: left;
+    padding-top: 5px;
+    padding-left: 9px;
+}
+
+.ad_2 {
+    float: left;
+    width: 185px;
+    height: 25px;
+    margin-left: 120px;
+    padding-top: 0px;
+    padding-right: 0px;
+}
