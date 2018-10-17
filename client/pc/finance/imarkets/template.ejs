@@ -5,48 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
     <title>凤凰国际iMarkets_为国际金融投资者提供最专业的金融市场资讯服务</title>
-    {{{ htmlWebpackPlugin.options.errorupload }}}
-    <script>
+    <script id="__INITIAL_STATE__">
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
-        var adData = <%- JSON.stringify(adData) %>;
+    </script>
+    {{{ htmlWebpackPlugin.options.errorupload }}}
+    {{{ htmlWebpackPlugin.options.polyfill }}}
+    {{#each htmlWebpackPlugin.files.css}}
+        <link href="{{path}}" rel="stylesheet">
+    {{/each}}
+    <% if(Object.values(adData).length !== 0){ %>
+        <script>
+            var adData = <%- JSON.stringify(adData) %>;
+
+            for (var key in adData) {
+                try {
+                    if (key === 'adHead' || key === 'adBody') continue;
+                    allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+                } catch(err) {
+                    console.error(key, err);
+                    allData[key] = {};
+                    e.message = key + ' ' + err.message;
+                    if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'ad');
+                }
+            }
+        </script>
+    <% } %>
+    <script>
         var staticData = <%- JSON.stringify(staticData) %>;
 
-        for (var key in adData) {
-            try{
-                if(key==='adHead' || key == 'adBody'){
-                    continue;
-                }
-                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
-            }catch(e){
-                console.error(key, e);
-                allData[key] = {};
-                e.message = key + ' ' +e.message;
-                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
-            }
-
-        }
-
         for (var key in staticData) {
-            try{
-                if (typeof staticData[key] === 'string'){
-                    allData[key] = decodeURIComponent(staticData[key]);
-                } else {
-                    allData[key] = staticData[key]
-                }
-            }catch(e){
-                console.error(key, e);
+            try {
+                if (typeof staticData[key] === 'string') allData[key] = decodeURIComponent(staticData[key]);
+                else allData[key] = staticData[key]
+            } catch(err) {
+                console.error(key, err);
                 allData[key] = [];
-                e.message = key + ' ' +e.message;
-                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+                e.message = key + ' ' + err.message;
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'data');
             }
-
         }
     </script>
-    {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{path}}" rel="stylesheet">
-    {{/each}}
-    {{{ htmlWebpackPlugin.options.polyfill }}}
-    <%- decodeURIComponent(adData.adHead) %>
+    <%- adData.adHead ? decodeURIComponent(adData.adHead) : undefined %>
 </head>
 <body>
     <div id="root"></div>
@@ -57,7 +56,6 @@
             <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
         {{/each}}
     {{else}}
-        <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
     {{/if}}
     {{{htmlWebpackPlugin.options.modernPolyfill}}}
     {{#each htmlWebpackPlugin.files.js}}

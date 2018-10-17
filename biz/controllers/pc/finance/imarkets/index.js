@@ -37,7 +37,7 @@ const handler = async ctx => {
             'footerAd',
             'KVProxy',
             'getAd',
-            'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
+            'ad_new_chip/s_all_index_ad_banner_bottom.inc.html',
             getString(),
         ],
         // 广告300*600
@@ -45,7 +45,7 @@ const handler = async ctx => {
             'asideAd',
             'KVProxy',
             'getAd',
-            'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test',
+            'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html',
             getString(),
         ],
         // 广告
@@ -53,7 +53,7 @@ const handler = async ctx => {
             'asideFixedAd',
             'KVProxy',
             'getAd',
-            'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test',
+            'adchip_finance/s_finance_index_140321_ad_button01.inc.html',
             getString(),
         ],
     ];
