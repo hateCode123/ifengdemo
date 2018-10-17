@@ -8,6 +8,9 @@ const handler = async ctx => {
     if (params.snapshots && params.snapshots === 'snapshots' && (!params.year || !params.date)) return;
 
     const json = [
+        // 统计代码
+        ['statisticsHead', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+        ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
         // 顶部导航接口
         ['nav', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
         // 热点专题
