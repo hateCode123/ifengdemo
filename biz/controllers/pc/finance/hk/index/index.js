@@ -60,7 +60,7 @@ exports.list = {
             // 顶部通栏iframe2
             ['topBannerFrame', 'KVProxy', 'getStructuredFragment', 30016, getStringByKey('content')],
 
-            // 新股上市iframe3
+            // 新股上市,涡轮涨幅排名，牛熊证涨幅排名iframe3
             ['xgss_Frame', 'KVProxy', 'getStructuredFragment', 30017, getStringByKey('content')],
 
             // 指数iframe4
@@ -74,12 +74,6 @@ exports.list = {
 
             // 五大牛熊证资金流入流出iframe7
             ['wdnxzzjlrlc_Frame', 'KVProxy', 'getStructuredFragment', 30021, getStringByKey('content')],
-
-            // 涡轮涨幅排名iframe8
-            ['wlzfpm_Frame', 'KVProxy', 'getStructuredFragment', 30022, getStringByKey('content')],
-
-            // 牛熊证涨幅排名iframe9
-            ['nszzfpm_Frame', 'KVProxy', 'getStructuredFragment', 30023, getStringByKey('content')],
 
             // 轮播图推荐位
             ['banner_pic', 'KVProxy', 'getRecommendFragment', 55014, getJsonByKey('data')],

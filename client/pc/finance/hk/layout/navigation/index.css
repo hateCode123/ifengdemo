@@ -36,6 +36,6 @@
 .pa {
     padding: 0 35px;
     & a {
-        color: #ffc200;
+        color: #ffc200 !important;
     }
 }

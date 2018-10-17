@@ -9,6 +9,7 @@ import Content from './content';
 import BottomFooter from './footer';
 import Cooperation from './cooperation';
 import FixAd from './fixAd/';
+import InIframe from './content/inIframe/';
 import transform from 'chipDataTransform';
 import errorBoundary from '@ifeng/errorBoundary';
 import ToTop from '../../../components/toTop/';
@@ -38,9 +39,6 @@ class Layout extends React.PureComponent {
         const cooperation = content.cooperation;
 
         const contentData = {
-            headerFrame: {
-                topBannerFrame: content.topBannerFrame,
-            },
             mainBody_ad: {
                 ad_content_02: content.ad_content_02,
                 ad_content_04: content.ad_content_04,
@@ -49,7 +47,7 @@ class Layout extends React.PureComponent {
                 hk_toutiao: {
                     titleData: {
                         title: '港股头条',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35248-',
                         withBG: false,
                     },
                     listData: {
@@ -64,7 +62,7 @@ class Layout extends React.PureComponent {
                 hk_dxgl: {
                     titleData: {
                         title: '打新攻略',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35250-',
                         withBG: true,
                     },
                     listData: content.hk_dzgl_singlePic,
@@ -72,7 +70,7 @@ class Layout extends React.PureComponent {
                 hk_xgdp: {
                     titleData: {
                         title: '新股点评',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35252-',
                         withBG: true,
                     },
                     listData: content.hk_xgdp,
@@ -80,7 +78,7 @@ class Layout extends React.PureComponent {
                 hk_xgpj: {
                     titleData: {
                         title: '新股评级',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35251-',
                         withBG: true,
                     },
                     listData: content.hk_xgpj,
@@ -88,7 +86,7 @@ class Layout extends React.PureComponent {
                 hk_xgss: {
                     titleData: {
                         title: '新股上市',
-                        url: '#',
+                        url: '//hk.finance.ifeng.com/ipo.php ',
                         withBG: true,
                     },
                     listData: {
@@ -100,7 +98,7 @@ class Layout extends React.PureComponent {
                 hk_rdzt: {
                     titleData: {
                         title: '热点专题',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35256-',
                         withBG: true,
                     },
                     listData: content.hk_rdzt,
@@ -108,7 +106,7 @@ class Layout extends React.PureComponent {
                 hk_ssgs: {
                     titleData: {
                         title: '上市公司',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35255-',
                         withBG: true,
                     },
                     listData: content.hk_ssgs,
@@ -120,7 +118,7 @@ class Layout extends React.PureComponent {
                 hk_ggyw: {
                     titleData: {
                         title: '港股要闻',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-41-',
                         withBG: false,
                     },
                     listData: content.hk_ggyw,
@@ -128,7 +126,7 @@ class Layout extends React.PureComponent {
                 hk_mgyw: {
                     titleData: {
                         title: '美股要闻',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35259-',
                         withBG: false,
                     },
                     listData: content.hk_mgyw,
@@ -138,6 +136,7 @@ class Layout extends React.PureComponent {
                         title: '指数',
                         url: '#',
                         withBG: true,
+                        more: false,
                     },
                     listData: {
                         iframeFragmentId: '30018',
@@ -148,7 +147,7 @@ class Layout extends React.PureComponent {
                 hk_jgdt: {
                     titleData: {
                         title: '机构动态',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35260-',
                         withBG: true,
                     },
                     listData: content.hk_jgdt,
@@ -156,7 +155,7 @@ class Layout extends React.PureComponent {
                 hk_ggxt: {
                     titleData: {
                         title: '港股学堂',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35253-',
                         withBG: true,
                     },
                     listData: content.hk_ggxt,
@@ -164,7 +163,7 @@ class Layout extends React.PureComponent {
                 hk_mjyhs: {
                     titleData: {
                         title: '名家有话说',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35258-',
                         withBG: true,
                     },
                     listData: content.hk_mjyhs,
@@ -174,21 +173,15 @@ class Layout extends React.PureComponent {
                 hk_lzzx: {
                     titleData: {
                         title: '轮证资讯',
-                        url: '#',
+                        url: '//finance.ifeng.com/shanklist/1-69-35249-',
                         withBG: false,
                     },
                     listData: content.hk_lzzx,
                 },
                 hk_xgsswl: {
-                    titleData: {
-                        title: '新股上市涡轮',
-                        url: '#',
-                        withBG: true,
-                        more: false,
-                    },
                     listData: {
                         iframeFragmentId: '30019',
-                        iframeName: '新股上市涡轮iframe',
+                        iframeName: '新股上市,涡轮涨幅排名，牛熊证涨幅排名iframe3',
                         iframeSet: content.xgsswl_Frame,
                     },
                 },
@@ -218,32 +211,6 @@ class Layout extends React.PureComponent {
                         iframeSet: content.wdnxzzjlrlc_Frame,
                     },
                 },
-                hk_wlzfpm: {
-                    titleData: {
-                        title: '涡轮涨幅排名',
-                        url: '#',
-                        withBG: true,
-                        more: false,
-                    },
-                    listData: {
-                        iframeFragmentId: '30022',
-                        iframeName: '涡轮涨幅排名iframe',
-                        iframeSet: content.wlzfpm_Frame,
-                    },
-                },
-                hk_nszzfpm: {
-                    titleData: {
-                        title: '牛熊证涨幅排名',
-                        url: '#',
-                        withBG: true,
-                        more: false,
-                    },
-                    listData: {
-                        iframeFragmentId: '30023',
-                        iframeName: '牛熊证涨幅排名iframe',
-                        iframeSet: content.nszzfpm_Frame,
-                    },
-                },
             },
         };
 
@@ -268,6 +235,14 @@ class Layout extends React.PureComponent {
                     position="relative"
                     content={content.navigation}>
                     <Navigation />
+                </Chip>
+                <Chip
+                    id="30016"
+                    type="struct"
+                    title="头部通栏iframe2"
+                    groupName="iframe引用"
+                    content={content.topBannerFrame}>
+                    <InIframe />
                 </Chip>
                 <Chip
                     id="30039"
