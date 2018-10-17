@@ -26,9 +26,9 @@ const handler = async ctx => {
         // 广告1000*90
         ['footerAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         // 广告300*600
-        ['asideAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html', getString()],
+        ['asideAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_140321_ad_button01.inc.html', getString()],
         // 广告
-        ['asideFixedAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_140321_ad_button01.inc.html', getString()],
+        ['asideFixedAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html', getString()],
     ];
 
     if (!params.snapshots && !params.year && !params.date) {
