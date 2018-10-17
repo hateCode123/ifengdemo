@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <title>凤凰国际iMarkets_为国际金融投资者提供最专业的金融市场资讯服务</title>
-    <%- statisticsData.statisticsHead %>
     <script id="__INITIAL_STATE__">
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
     </script>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
     {{#each htmlWebpackPlugin.files.css}}
-        <link href="{{path}}" rel="stylesheet">
+    <link href="{{path}}" rel="stylesheet">
     {{/each}}
     <% if(Object.values(adData).length !== 0){ %>
         <script>
@@ -31,13 +32,14 @@
             }
         </script>
     <% } %>
+
     <script>
         var staticData = <%- JSON.stringify(staticData) %>;
 
         for (var key in staticData) {
             try {
                 if (typeof staticData[key] === 'string') allData[key] = decodeURIComponent(staticData[key]);
-                else allData[key] = staticData[key]
+                else allData[key] = staticData[key];
             } catch(err) {
                 console.error(key, err);
                 allData[key] = [];
@@ -46,6 +48,7 @@
             }
         }
     </script>
+
     <%- adData.adHead ? decodeURIComponent(adData.adHead) : undefined %>
 </head>
 <body>
