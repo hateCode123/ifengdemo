@@ -16,11 +16,8 @@ import {
     getWemoneyList,
 } from '../../../../../../services/api';
 
-const event = new Event();
-
 class ContentList extends React.PureComponent {
     static propTypes = {
-        active: PropTypes.bool,
         infoAd: PropTypes.object,
         index: PropTypes.number,
     };
@@ -32,45 +29,53 @@ class ContentList extends React.PureComponent {
         count: [],
     };
 
-    insert = (insertArr, replaceArr) => {
-        const { len, data, count } = this.state;
+    event = new Event();
 
-        const infoData = [...data];
-        const infoCount = [...count];
+    insert = (insertArr, replaceArr, adFn) => {
+        if (adFn && typeof adFn === 'function') {
+            const { len, data, count } = this.state;
 
-        const refs = [];
+            const infoData = [...data];
+            const infoCount = [...count];
 
-        insertArr.forEach(item => {
-            const ref = React.createRef();
+            const refs = [];
 
-            refs.push({ dom: item.dom, ref });
+            insertArr.forEach(item => {
+                const ref = React.createRef();
 
-            infoData.splice(item.index, 0, { type: 'ad', ref });
-            infoCount.splice(item.index, 0, null);
-        });
+                refs.push({ index: item, ref });
 
-        replaceArr.forEach(item => {
-            const ref = React.createRef();
+                infoData.splice(item, 0, { type: 'ad', ref });
+                infoCount.splice(item, 0, null);
+            });
 
-            refs.push({ dom: item.dom, ref });
+            replaceArr.forEach(item => {
+                const ref = React.createRef();
 
-            infoData.splice(item.index, 1, { type: 'ad', ref });
-        });
+                refs.push({ index: item, ref });
 
-        this.setState(
-            {
-                len: len + insertArr.length,
-                data: infoData,
-                count: infoCount,
-            },
-            () => {
-                for (const ref of refs) {
-                    if (ref.ref.current) {
-                        ref.ref.current.appendChild(ref.dom);
+                infoData.splice(item, 1, { type: 'ad', ref });
+            });
+
+            this.setState(
+                {
+                    len: len + insertArr.length,
+                    data: infoData,
+                    count: infoCount,
+                },
+                () => {
+                    const dom = {};
+
+                    for (const ref of refs) {
+                        dom[ref.index] = ref.ref.current;
                     }
-                }
-            },
-        );
+
+                    adFn(dom);
+                },
+            );
+        }
+
+        return;
     };
 
     async componentDidMount() {
@@ -78,7 +83,7 @@ class ContentList extends React.PureComponent {
             const { infoAd } = this.props;
             const callback = await handleAd(infoAd);
 
-            callback(infoAd.data, event, this.insert);
+            callback(infoAd.data, this.event, this.insert);
         } catch (e) {
             console.error(e);
         }
@@ -114,7 +119,7 @@ class ContentList extends React.PureComponent {
                         count,
                     },
                     () => {
-                        event.trigger('init', { index, len });
+                        this.adInit(index, data.length < len ? data.length : len);
                     },
                 );
             }
@@ -123,17 +128,13 @@ class ContentList extends React.PureComponent {
         }
     }
 
-    componentDidUpdate() {
-        const { active } = this.props;
-
-        if (!active) {
-            try {
-                event.off('init');
-            } catch (e) {
-                console.error(e);
-            }
+    adInit = (index, len) => {
+        try {
+            this.event.trigger('init', { index, len });
+        } catch (e) {
+            console.error(e);
         }
-    }
+    };
 
     /**
      * 获取更多新闻
@@ -150,11 +151,7 @@ class ContentList extends React.PureComponent {
             },
             () => {
                 try {
-                    event.trigger('loadMoreCmp', { index, len: length });
-
-                    if (length >= data.length) {
-                        event.off('loadMoreCmp');
-                    }
+                    this.event.trigger('loadMoreCmp', { index, len: data.length < len ? data.length : len });
                 } catch (e) {
                     console.error(e);
                 }

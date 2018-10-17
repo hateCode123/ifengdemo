@@ -103,7 +103,8 @@ const createConfig = function(type, platform, level, modern, port) {
                 ChipUrl:
                     env === 'production'
                         ? JSON.stringify('https://ucms.ifeng.com/shard')
-                        : JSON.stringify('http://test0.ucms.ifeng.com:30080/shard'),
+                        : // : JSON.stringify('http://test0.ucms.ifeng.com:30080/shard'),
+                          JSON.stringify('https://ucms.ifeng.com/shard'),
                 apiUrl:
                     env === 'production'
                         ? JSON.stringify('//shankapi.ifeng.com/spring')

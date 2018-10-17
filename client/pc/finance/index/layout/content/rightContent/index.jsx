@@ -30,7 +30,16 @@ class RightContent extends React.PureComponent {
                 {content.financeVideo.length > 0 ? (
                     <React.Fragment>
                         <BoxTitle url="#" title="财经视频" />
-                        <FinanceVideo content={data} />
+                        <Chip
+                            id="55016"
+                            type="recommend"
+                            title="财经视频"
+                            groupName="正文"
+                            position="relative"
+                            translate="handleFinanceVideoData"
+                            content={data}>
+                            <FinanceVideo />
+                        </Chip>
                     </React.Fragment>
                 ) : (
                     ''

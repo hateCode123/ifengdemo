@@ -33,7 +33,7 @@ class TabPane extends React.PureComponent {
 
         return this.state.isReady ? (
             <div className={active ? styles.tabBodyItemActive : styles.tabBodyItem}>
-                {React.Children.map(children, item => React.cloneElement(item, { active }))}
+                {React.Children.map(children, item => React.cloneElement(item))}
             </div>
         ) : null;
     }

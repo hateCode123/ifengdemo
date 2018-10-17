@@ -16,23 +16,35 @@ class Tabs extends React.PureComponent {
 
     componentDidMount() {
         this.unHandleScroll = addEventListener(window, 'scroll', this.handleScroll);
-        this.tabsTop = document.getElementById('tabs').offsetTop;
     }
 
     componentWillUnmount() {
         this.unHandleScroll();
     }
 
+    // 兼容 ie7 的 offsetTop 获取方法
+    getOffsetTop = dom => {
+        let offsetTop = dom.offsetTop;
+
+        if (dom.offsetParent) {
+            offsetTop += this.getOffsetTop(dom.offsetParent);
+        }
+
+        return offsetTop;
+    };
+
     /**
      * 滚动条滚动
      */
     handleScroll = () => {
-        const tabsTop = this.tabsTop;
+        const offsetTop = this.getOffsetTop(document.getElementById('tabs'));
+
+        this.tabsTop = document.getElementById('tabs').offsetTop || offsetTop;
 
         // 兼容各主流浏览器
         const currentTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 
-        if (currentTop > tabsTop) {
+        if (currentTop > this.tabsTop) {
             this.setState({ isFixed: true });
         } else {
             this.setState({ isFixed: false });
@@ -55,7 +67,7 @@ class Tabs extends React.PureComponent {
         const { isFixed, current } = this.state;
 
         return (
-            <div id="tabs" className={`${styles.tabHead} ${isFixed ? styles.fix : ''}`}>
+            <div className={`${styles.tabHead} ${isFixed ? styles.fix : ''}`}>
                 {React.Children.map(this.props.children, (item, index) => {
                     return (
                         <div
@@ -86,7 +98,7 @@ class Tabs extends React.PureComponent {
      */
     render() {
         return (
-            <div>
+            <div id="tabs">
                 {this.renderTabHead()}
                 {this.renderBody()}
             </div>

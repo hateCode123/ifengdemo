@@ -117,7 +117,7 @@ const getwemediaEAccountImg = async wemediaEAccountId => {
     let img = '';
 
     if (data.code === 0) {
-        img = data.data.weMediaImg && data.data.weMediaImg !== '' ? formatImage(data.data.weMediaImg, 50, 50) : '';
+        img = data.data.headImage && data.data.headImage !== '' ? formatImage(data.data.headImage, 50, 50) : '';
     }
 
     return img;

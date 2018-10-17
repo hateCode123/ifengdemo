@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!--[if lt IE 8]>
+    <script src="//p0.ifengimg.com/fe/zl/test/live/application/ie8-89b32da32d.polyfill.min.js" id="__polyfill" crossorigin></script>
+  <![endif]-->
+  <script src="//p0.ifengimg.com/fe/zl/test/live/application/errorupload-bb1c9a25cd.min.js" id="__errorupload"></script>
+  <script id="__head">
+    function request(paras)
+    {
+        var url = window.location.href;
+        var paraString = url.substring(url.indexOf("?")+1,url.length).split("&");
+        var paraObj = {}
+        for (var i= 0,j; j=paraString[i]; i++){
+            paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length);
+        }
+        var returnValue = paraObj[paras.toLowerCase()];
+        if(typeof(returnValue)=="undefined"){
+            return "";
+        }else{
+            return returnValue;
+        }
+    }
+    var uid = request('uid') || 'unknown';
+    var namespace =  request('namespace') || 'unknown';
+    var appname =  request('appname') || 'unknown';
+    var router =  request('router') || 'unknown';
+    (function () {
+      var watchAll = function (notFilter, showOrigin) {
+        try {
+          notFilter = !!notFilter;
+          showOrigin = !!showOrigin;
+          if (!(Object.getOwnPropertyDescriptor && Object.defineProperty && typeof console !== 'undefined')) {
+            console.log('=======> not support Object.getOwnPropertyDescriptor or Object.defineProperty <=======');
+            return;
+          }
+
+          var timer = null;
+          var errors = [];
+
+          var publishError = function () {
+
+          };
+
+          var getError = function (err) {
+            sendData(err);
+          };
+
+          var HTMLs = [{
+            obj: HTMLScriptElement,
+            attr: 'src'
+          }, {
+            obj: HTMLImageElement,
+            attr: 'src'
+          }, {
+            obj: HTMLIFrameElement,
+            attr: 'src'
+          }, {
+            obj: HTMLEmbedElement,
+            attr: 'src'
+          }, {
+            obj: HTMLLinkElement,
+            attr: 'href'
+          }, {
+            obj: HTMLFormElement,
+            attr: 'action'
+          }];
+
+          for (var i = 0; i < HTMLs.length; i++) {
+            (function (HTMLItem) {
+              var originPro = Object.getOwnPropertyDescriptor(HTMLItem.obj.prototype, HTMLItem.attr);
+              if (typeof originPro !== 'undefined' && typeof originPro.set == 'function') {
+                var originSet = originPro.set;
+                Object.defineProperty(HTMLItem.obj.prototype, 'src', {
+                  set: function (value) {
+                    if (filterData(value)) {
+                      try {
+                        throw new Error('你使用' + this.tagName + '的' + HTMLItem.attr + '发送了请求:\n' + value);
+                      } catch (e) {
+                        getError(e);
+                      }
+                    }
+                    return originSet.call(this, value);
+                  }
+                });
+              }
+            }(HTMLs[i]));
+          }
+
+
+          var formatWriteData = function (val) {
+            var result = [];
+            result = result.concat(getDataBySrc(val, 'img|iframe|embed|script'));
+            result = result.concat(getDataByLink(val));
+            result = result.concat(getDataByStyle(val));
+            result = result.concat(getDataByForm(val));
+            return result.join('|||');
+          }
+
+          var write = document.write;
+          document.write = function (contents) {
+            var result = formatWriteData(contents);
+            if (result !== '') {
+              if (showOrigin) {
+                result = contents + '\n======\n' + result;
+              }
+              try {
+                throw new Error('你使用document.write注入了资源:\n' + result);
+              } catch (e) {
+                getError(e);
+              }
+            }
+            write.call(document, contents);
+          };
+
+          var setAttr = Element.prototype.setAttribute;
+          Element.prototype.setAttribute = function (attr, value) {
+            if (attr === 'src' || attr === 'href') {
+              if (filterData(value)) {
+                try {
+                  throw new Error('你使用' + this.tagName + '的setAttribute方法对' + attr + '进行了赋值:\n' + value);
+                } catch (e) {
+                  getError(e);
+                }
+              }
+            }
+            setAttr.apply(this, arguments);
+          }
+
+          var filterData = function (val) {
+            if (val == 'http://nstool.ifengcdn.com/jsonp' || val == 'http://profiler.ifeng.com/box.js') {
+              return false;
+            }
+            if (notFilter) {
+              return true;
+            }
+            var rBlank = /about:blank/;
+            var rIgnores = /(\.ifeng\.|\.ifengimg\.|\.ifengcdn\.|errorupload|errorupload)/;
+            if (val == '') {
+              return false;
+            }
+            if (rBlank.test(val)) {
+              return false;
+            }
+            var a = val.split('//');
+            if (typeof a[1] !== 'undefined') {
+              var host = a[1].split('/')[0];
+              if (!rIgnores.test(host)) {
+                return true;
+              }
+            }
+            return false;
+          };
+
+          var getDataByRules = function (rTag, rSrc, val) {
+            var result = [];
+            var matchs = val.match(rTag);
+            var matchSrc;
+            if (matchs) {
+              for (var i = 0; i < matchs.length; i++) {
+                matchSrc = matchs[i].match(rSrc);
+                if (matchSrc && filterData(matchSrc[1])) {
+                  result.push(matchSrc[1]);
+                }
+              }
+            }
+            return result;
+          };
+
+          // 匹配 <img src /> <iframe src /> <script src />
+          var getDataBySrc = function (val, rules) {
+            // var rTag = /<(img|iframe|embed)([^>])*(\/){0,1}>/ig;
+            var rTag = new RegExp('<(' + rules + ')([^>])*(\/){0,1}>', 'ig');
+            var rSrc = /src\s*=\s*["']([^"']*)["']/;
+            return getDataByRules(rTag, rSrc, val);
+          };
+
+          // 匹配 <link href />
+          var getDataByLink = function (val) {
+            var rTag = /<link([^>])*(\/){0,1}>/ig;
+            var rSrc = /href\s*=\s*["']([^"']*)["']/;
+            return getDataByRules(rTag, rSrc, val);
+          };
+
+          // 匹配 <form action />
+          var getDataByForm = function (val) {
+            var rTag = /<form([^>])*>/ig;
+            var rSrc = /action\s*=\s*["']([^"']*)["']/;
+            return getDataByRules(rTag, rSrc, val);
+          };
+
+          // 匹配 background: url();
+          var getDataByStyle = function (val) {
+            var rTag = /url\([^\)]*\)/ig;
+            var rSrc = /url\(([^\)]*)\)/;
+            return getDataByRules(rTag, rSrc, val);
+          };
+
+          var formatInnerHTMLData = function (val) {
+            var result = [];
+            result = result.concat(getDataBySrc(val, 'img|iframe|embed'));
+            result = result.concat(getDataByLink(val));
+            result = result.concat(getDataByStyle(val));
+            result = result.concat(getDataByForm(val));
+            return result.join('|||');
+          }
+
+          var innerHTMLoriginalSet;
+          var innerHTMLHTMLItem;
+          if (typeof Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML') !== 'undefined') {
+            innerHTMLoriginalSet = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML').set;
+            innerHTMLHTMLItem = Element.prototype;
+          } else {
+            innerHTMLoriginalSet = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'innerHTML').set;
+            innerHTMLHTMLItem = HTMLElement.prototype;
+          }
+          // safari 9.13下面
+          // Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML')
+          // {get: undefined, set: undefined, enumerable: true, configurable: false}，无法获取到set方法，故忽略掉。
+          // https://stackoverflow.com/questions/39142617/object-defineproperty-behaves-in-safari
+          if (typeof innerHTMLoriginalSet == 'function') {
+            Object.defineProperty(innerHTMLHTMLItem, 'innerHTML', {
+              set: function (value) {
+                var result = formatInnerHTMLData(value);
+                if (result !== '') {
+                  if (showOrigin) {
+                    result = value + '\n======\n' + result;
+                  }
+                  try {
+                    throw new Error('你使用innerHTML注入了资源:\n' + result);
+                  } catch (e) {
+                    getError(e);
+                  }
+                }
+                return innerHTMLoriginalSet.call(this, value);
+              }
+            });
+          }
+
+
+          // 这种事件监听的方式，无法拿到style调用时的调用栈。
+          if (typeof MutationObserver !== 'undefined') {
+            var observer = new MutationObserver(function (mutations) {
+              mutations.forEach(function (mutationRecord) {
+                var cssString = mutationRecord.target.style.cssText;
+                var result = getDataByStyle(cssString).join('|||');
+                if (result) {
+                  try {
+                    throw new Error('你改变了dom的style:\n' + result);
+                  } catch (e) {
+                    getError(e);
+                  }
+                }
+              });
+            });
+
+            var target = document.querySelector('html');
+            observer.observe(target, { attributes: true, subtree: true, attributeFilter: ['style'] });
+          }
+
+        } catch (e) {
+          console.log('showAll代码执行错误，ua为', navigator.userAgent, e);
+        }
+
+      };
+
+      watchAll(true);
+      var isSend = false;
+      var sendData = function (err) {
+      // var sendData = function (ispv) {
+        if (!isSend) {
+          isSend = true;
+          BJ_REPORT.init({
+            namespace: namespace, // 命名空间
+            appname: appname, // 项目名称
+            url: "https://err.ifengcloud.ifeng.com/v1/api/err",
+            level: 4
+          });
+          // BJ_REPORT.tryJs().spyAll();
+          err = err?err : new Error('代码注入');
+          window.BJ_REPORT.report(err, false, 'inject');
+        }
+      };
+
+      var __apprun = function () {
+        var myJs = document.getElementById('__head');
+        myJs.parentNode.removeChild(myJs);
+        var myJs1 = document.getElementById('__errorupload');
+        myJs1.parentNode.removeChild(myJs1);
+
+        var myJs2 = document.getElementById('__polyfill');
+        myJs2 && myJs2.parentNode && myJs2.parentNode.removeChild(myJs2);
+        var node = document && document.head && document.head.childNodes ? document.head.childNodes : [];
+        for(var i=0; i < node.length; i++ ){
+          if(node[i].nodeType === 8){
+            document.head.removeChild(node[i]);
+          }
+        };
+        
+        var html = document.getElementsByTagName('html')[0];
+        var body = document.getElementsByTagName('body')[0];
+        var ua = navigator.userAgent;
+        if (ua.indexOf('UBrowser') >= 0) {
+          var styles = document.head.getElementsByTagName('style');
+          for (var i = 0, iLen = styles.length; i < iLen; i++) {
+            document.head.removeChild(styles[i]);
+          }
+        }
+        var contentLength = html.outerHTML.length;
+        var tags = document.getElementsByTagName('*');
+        var tagCount = tags.length;
+        var tagElm;
+
+        if (contentLength > 120 || tagCount > 6) {
+          sendData(false);
+        }
+      };
+
+      if (window.addEventListener) {
+        window.addEventListener('load', function () {
+          __apprun();
+        }, false);
+      } else {
+        window.attachEvent('onload', function () {
+          __apprun();
+        })
+      }
+    }())
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>

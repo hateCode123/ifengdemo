@@ -21,6 +21,7 @@ const KVTableEnum = {
     'KVProxy.getDocument': 'documents',
     'KVProxy.getVideo': 'video',
     'KVProxy.getSelectedPool': 'selected_pool',
+    'KVProxy.getListByWemediaEAccountId': 'WEMEDIA_ACCOUNT',
 };
 
 /**
@@ -385,9 +386,13 @@ const transfer = async (ctx, json) => {
         if (!obj[key]) {
             obj[key] = {};
         }
-
-        obj[key][item[3]] = { name: item[0], handle: item[4], schemaKey: item[5] };
+        if (!obj[key][item[3]]) {
+            obj[key][item[3]] = [{ name: item[0], handle: item[4], schemaKey: item[5] }];
+        } else {
+            obj[key][item[3]].push({ name: item[0], handle: item[4], schemaKey: item[5] });
+        }
     }
+
     for (const key in obj) {
         const tarList = new Tars.List(Tars.String);
 
@@ -445,32 +450,35 @@ const transfer = async (ctx, json) => {
         const kvObj = result.response.return.value[key].value;
 
         for (const id in kvObj) {
-            const itemkey = obj[key][id].name;
-            const handle = obj[key][id].handle;
-            const schemaKey = obj[key][id].schemaKey;
+            for (const item of obj[key][id]) {
 
-            // 全页预览处理
-            if (ctx.urlinfo.preview && id === ctx.request.body.id) {
-                let data = decodeURIComponent(ctx.request.body.data);
+                const itemkey = item.name;
+                const handle = item.handle;
+                const schemaKey = item.schemaKey;
 
-                try {
+                // 全页预览处理
+                if (ctx.urlinfo.preview && id === ctx.request.body.id) {
+                    let data = decodeURIComponent(ctx.request.body.data);
+
                     try {
-                        backData[itemkey] = JSON.parse(JSON.parse(data));
+                        try {
+                            backData[itemkey] = JSON.parse(JSON.parse(data));
+                        } catch (error) {
+                            ctx.errorCount++;
+                            backData[itemkey] = JSON.parse(data);
+                        }
                     } catch (error) {
                         ctx.errorCount++;
-                        backData[itemkey] = JSON.parse(data);
+                        backData[itemkey] = data;
                     }
-                } catch (error) {
-                    ctx.errorCount++;
-                    backData[itemkey] = data;
+                } else {
+                    backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
                 }
-            } else {
-                backData[itemkey] = handle(ctx, kvObj[id], ctx.spanrpc);
-            }
 
-            // kv数据schema处理
-            if (schemaKey && schemaCheck) {
-                backData[itemkey] = schemaCheck(backData[itemkey], schemaKey, ctx);
+                // kv数据schema处理
+                if (schemaKey && schemaCheck) {
+                    backData[itemkey] = schemaCheck(backData[itemkey], schemaKey, ctx);
+                }
             }
         }
     }

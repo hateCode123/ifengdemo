@@ -27,43 +27,6 @@
     }
 }
 
-.stockList {
-    position: absolute;
-    top: 28px;
-    left: -127px;
-    width: 300px;
-    border: 1px solid #195184;
-    background: #fff;
-    z-index: 999;
-    & table {
-        width: 100%;
-        border: 0;
-        & tbody tr td {
-            border-bottom: 1px solid #ececec;
-            height: 21px;
-            padding-left: 12px;
-            text-align: left;
-            color: #333;
-            & span {
-                color: #ff0000;
-                font-weight: bold;
-            }
-            &:last-child {
-                width: 25px;
-            }
-        }
-    }
-}
-
-.current {
-    background: #194e80;
-    cursor: pointer;
-    & td {
-        color: #fff !important;
-        background: #194e80;
-    }
-}
-
 .btn {
     width: 17px;
     height: 18px;

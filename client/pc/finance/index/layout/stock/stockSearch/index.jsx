@@ -1,18 +1,14 @@
 import React from 'react';
 import styles from './index.css';
+import { debounce } from '@ifeng/ui_base';
 import errorBoundary from '@ifeng/errorBoundary';
 import { getFinanceData } from '../../../../../services/api';
+import ResultList from './resultList';
+
+const cacheData = {};
 
 class StockSearch extends React.PureComponent {
     state = {
-        type: {
-            stock: '股票',
-            fund: '基金',
-            hkstock: '港股',
-            usstock: '美股',
-            forex: '外汇',
-            bond: '债券',
-        },
         searchTxt: '代码/拼音',
         current: null,
         isShow: false,
@@ -21,28 +17,29 @@ class StockSearch extends React.PureComponent {
 
     getList = async str => {
         try {
-            const data = await getFinanceData('all', str);
+            let data = [];
 
-            this.setState({ data });
+            if (cacheData[str]) {
+                data = cacheData[str];
+            } else {
+                data = await getFinanceData('all', str);
+
+                cacheData[str] = data;
+            }
+
+            this.setState({
+                data,
+                isShow: true,
+            });
         } catch (e) {
             console.error(e);
         }
     };
 
-    handleMouseOver = e => {
-        const index = Number(e.currentTarget.attributes['data-index'].value);
+    debounceGetList = debounce(this.getList);
 
+    handleMouseOver = index => {
         this.setState({ current: index });
-    };
-
-    handleClick = () => {
-        const { current, data } = this.state;
-
-        window.open(
-            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                data[current !== null ? current : 0].c
-            }`,
-        );
     };
 
     handleChange = e => {
@@ -51,7 +48,12 @@ class StockSearch extends React.PureComponent {
         this.setState({ searchTxt: val });
 
         if (val !== '') {
-            this.getList(val);
+            this.debounceGetList(val);
+        } else {
+            this.setState({
+                data: [],
+                isShow: false,
+            });
         }
     };
 
@@ -125,15 +127,11 @@ class StockSearch extends React.PureComponent {
         }
     };
 
-    handleMarkKeyword = (str, keyword) => {
-        return str.replace(keyword, `<span>${keyword}</span>`);
-    };
-
     /**
      * 渲染组件
      */
     render() {
-        const { type, current, searchTxt, isShow, data } = this.state;
+        const { searchTxt, current, isShow, data } = this.state;
 
         return (
             <div className={`${styles.search_box} clearfix`}>
@@ -146,43 +144,12 @@ class StockSearch extends React.PureComponent {
                         onBlur={this.handleBlur}
                     />
                     {isShow && data.length > 0 ? (
-                        <div className={styles.stockList}>
-                            <table>
-                                <tbody>
-                                    {data.map((item, index) => (
-                                        <tr
-                                            key={index}
-                                            data-index={index}
-                                            className={current === index ? styles.current : ''}
-                                            onMouseEnter={this.handleMouseOver}
-                                            onClick={this.handleClick}>
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(
-                                                        item.s.toUpperCase(),
-                                                        searchTxt.toUpperCase(),
-                                                    ),
-                                                }}
-                                            />
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(item.n, searchTxt),
-                                                }}
-                                            />
-                                            <td
-                                                dangerouslySetInnerHTML={{
-                                                    __html: this.handleMarkKeyword(
-                                                        item.p.toUpperCase(),
-                                                        searchTxt.toUpperCase(),
-                                                    ),
-                                                }}
-                                            />
-                                            <td>{type[item.t]}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        <ResultList
+                            data={data}
+                            searchTxt={searchTxt}
+                            current={current}
+                            handleMouseOver={this.handleMouseOver}
+                        />
                     ) : (
                         ''
                     )}
