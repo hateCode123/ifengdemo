@@ -1,6 +1,6 @@
-.ad_box, .ad_fixed {
+.ad_box,
+.ad_fixed {
     width: 300px;
-    height: 310px;
 }
 .ad_fixed {
     top: 40px;

@@ -8,6 +8,9 @@ const handler = async ctx => {
     if (params.snapshots && params.snapshots === 'snapshots' && (!params.year || !params.date)) return;
 
     const json = [
+        // 统计代码
+        ['statisticsHead', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+        ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
         // 顶部导航接口
         ['nav', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
         // 热点专题
@@ -17,52 +20,20 @@ const handler = async ctx => {
         // 底部公用版权
         ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
         // adHead
-        [
-            'adHead',
-            'KVProxy',
-            'getAd',
-            'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
-            getString(),
-        ],
+        ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
         // adBody
-        [
-            'adBody',
-            'KVProxy',
-            'getAd',
-            'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
-            getString(),
-        ],
+        ['adBody', 'KVProxy', 'getAd', 'ad_new_chip/s_all_indexs_180823_ad_qpdpcggdb.inc.html', getString()],
         // 广告1000*90
-        [
-            'footerAd',
-            'KVProxy',
-            'getAd',
-            'http://finance.ifeng.com/ssi-incs/s_finance_stock_index_ad_banner_top_1000x90.inc.html/test',
-            getString(),
-        ],
+        ['footerAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         // 广告300*600
-        [
-            'asideAd',
-            'KVProxy',
-            'getAd',
-            'http://finance.ifeng.com/ssi-incs/s_finance_index_140321_ad_button01.inc.html/test',
-            getString(),
-        ],
+        ['asideAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_140321_ad_button01.inc.html', getString()],
         // 广告
-        [
-            'asideFixedAd',
-            'KVProxy',
-            'getAd',
-            'http://www.ifeng.com/ssi-incs/s_all_2j_index_150514_ad_button01.inc.html/test',
-            getString(),
-        ],
+        ['asideFixedAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html', getString()],
     ];
 
     if (!params.snapshots && !params.year && !params.date) {
         // 信息流
-        json.push(
-            ['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
-        );
+        json.push(['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')]);
     } else {
         // 旧的数据
         json.push(['financeGoldSnapshots', 'KVProxy', 'getCustom', `financeGoldSnapshots${params.year}${params.date}`, getString()]);
@@ -116,6 +87,10 @@ const handler = async ctx => {
         allData,
         adData,
         staticData,
+        statisticsData: {
+            statisticsHead: allData.statisticsHead,
+            statisticsBody: allData.statisticsBody,
+        },
     });
 };
 
