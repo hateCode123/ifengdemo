@@ -17,52 +17,20 @@ const handler = async ctx => {
         // 底部公用版权
         ['footer', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
         // adHead
-        [
-            'adHead',
-            'KVProxy',
-            'getAd',
-            'http://news.ifeng.com/ssi-incs/s_all-indexs_180823_ad_qpdggtb.inc.html/test',
-            getString(),
-        ],
+        ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
         // adBody
-        [
-            'adBody',
-            'KVProxy',
-            'getAd',
-            'http://news.ifeng.com/ssi-incs/s_all_indexs_180823_ad_qpdpcggdb.inc.html/test',
-            getString(),
-        ],
+        ['adBody', 'KVProxy', 'getAd', 'ad_new_chip/s_all_indexs_180823_ad_qpdpcggdb.inc.html', getString()],
         // 广告1000*90
-        [
-            'footerAd',
-            'KVProxy',
-            'getAd',
-            'ad_new_chip/s_all_index_ad_banner_bottom.inc.html',
-            getString(),
-        ],
+        ['footerAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_index_ad_banner_bottom.inc.html', getString()],
         // 广告300*600
-        [
-            'asideAd',
-            'KVProxy',
-            'getAd',
-            'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html',
-            getString(),
-        ],
+        ['asideAd', 'KVProxy', 'getAd', 'ad_new_chip/s_all_2j_index_150514_ad_button01.inc.html', getString()],
         // 广告
-        [
-            'asideFixedAd',
-            'KVProxy',
-            'getAd',
-            'adchip_finance/s_finance_index_140321_ad_button01.inc.html',
-            getString(),
-        ],
+        ['asideFixedAd', 'KVProxy', 'getAd', 'adchip_finance/s_finance_index_140321_ad_button01.inc.html', getString()],
     ];
 
     if (!params.snapshots && !params.year && !params.date) {
         // 信息流
-        json.push(
-            ['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
-        );
+        json.push(['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')]);
     } else {
         // 旧的数据
         json.push(['financeGoldSnapshots', 'KVProxy', 'getCustom', `financeGoldSnapshots${params.year}${params.date}`, getString()]);
