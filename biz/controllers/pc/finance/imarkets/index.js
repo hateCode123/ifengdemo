@@ -87,6 +87,10 @@ const handler = async ctx => {
         allData,
         adData,
         staticData,
+        statisticsData: {
+            statisticsHead: allData.statisticsHead,
+            statisticsBody: allData.statisticsBody,
+        },
     });
 };
 
