@@ -85,7 +85,7 @@ exports.getCompanyNews = {
             });
         });
 
-        // res.list = returnList;
+        res.list = returnList;
 
         if (ctx.params.callback) {
             ctx.jsonp(res);
