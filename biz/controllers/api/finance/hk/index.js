@@ -45,7 +45,7 @@ exports.getCompanyNews = {
                 query: {
                     searchPath: '1-',
                     status: '1',
-                    title: `"${stockName}"`,
+                    title: stockName,
                 },
                 pagination: {
                     current,
@@ -60,7 +60,7 @@ exports.getCompanyNews = {
                 query: {
                     searchPath: '1-',
                     status: '1',
-                    title: `"${stockName}"&"公告"`,
+                    title: `${stockName} 公告`,
                 },
                 pagination: {
                     current,
@@ -85,7 +85,7 @@ exports.getCompanyNews = {
             });
         });
 
-        res.list = returnList;
+        // res.list = returnList;
 
         if (ctx.params.callback) {
             ctx.jsonp(res);
