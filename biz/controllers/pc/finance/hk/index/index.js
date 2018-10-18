@@ -2,7 +2,7 @@ const { transfer, getJsonByKey, getStringByKey } = require('../../../../../servi
 const { filterRecommendData, singlePicList } = require('../../../../../services/utils/utils');
 
 exports.list = {
-    path: '/pc/finance/hk',
+    path: '/pc/finance/hk/test',
     method: 'get',
     type: 'html',
     cache: 0,
