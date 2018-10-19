@@ -25,12 +25,12 @@ class Logo extends PureComponent {
                 src="http://y1.ifengimg.com/a/2015/0310/a40afde56b53ef1.swf"
                 width="490"
                 height="180"
-                                quality="high"
-                                pluginspage="http://www.macromedia.com/go/getflashplayer"
-                                type="application/x-shockwave-flash"
-                                wmode="transparent"
-                            />
-                        </object>`;
+                quality="high"
+                pluginspage="http://www.macromedia.com/go/getflashplayer"
+                type="application/x-shockwave-flash"
+                wmode="transparent"
+            />
+        </object>`;
     }
     render() {
         return (
