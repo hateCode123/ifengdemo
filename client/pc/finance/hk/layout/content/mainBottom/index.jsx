@@ -11,7 +11,7 @@ class MainTop extends React.PureComponent {
 
     render() {
         const {
-            content: { hk_lzzx, hk_xgsswl, hk_ggwl, hk_wdnszzjlrlc, hk_wlzfpm, hk_nszzfpm },
+            content: { hk_lzzx, hk_xgsswl, hk_ggwl, hk_wdnszzjlrlc },
         } = this.props;
 
         return (
@@ -28,15 +28,7 @@ class MainTop extends React.PureComponent {
                     </div>
                 </div>
                 <div className={styles.bottom_box_line}>
-                    <div className={styles.bottom_box_L}>
-                        <NewsList content={hk_xgsswl} mode="inIframe" />
-                    </div>
-                    <div className={styles.bottom_box_M}>
-                        <NewsList content={hk_wlzfpm} mode="inIframe" />
-                    </div>
-                    <div className={styles.bottom_box_R}>
-                        <NewsList content={hk_nszzfpm} mode="inIframe" />
-                    </div>
+                    <NewsList content={hk_xgsswl} mode="inIframe" />
                 </div>
             </div>
         );
