@@ -48,3 +48,7 @@
         float: left;
     }
 }
+.userinfo {
+    margin-top: -2px;
+    *margin-top: 8px;
+}

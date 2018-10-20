@@ -27,7 +27,9 @@ class Header extends React.PureComponent {
                         content={content.nav}>
                         <Nav limit={18} />
                     </Chip>
-                    <UserInfo />
+                    <div className={styles.userinfo}>
+                        <UserInfo />
+                    </div>
                 </div>
             </div>
         );
