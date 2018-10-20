@@ -9,7 +9,6 @@ import Content from './content';
 import BottomFooter from './footer';
 import Cooperation from './cooperation';
 import FixAd from './fixAd/';
-import InIframe from './content/inIframe/';
 import transform from 'chipDataTransform';
 import errorBoundary from '@ifeng/errorBoundary';
 import ToTop from '../../../components/toTop/';
@@ -42,6 +41,16 @@ class Layout extends React.PureComponent {
             mainBody_ad: {
                 ad_content_02: content.ad_content_02,
                 ad_content_04: content.ad_content_04,
+            },
+            headBody_iframe: {
+                top3Frame: {
+                    iframeId: '30015',
+                    iframeObj: content.top3Frame,
+                },
+                tophktFrame: {
+                    iframeId: '30016',
+                    iframeObj: content.tophktFrame,
+                },
             },
             mainTopData: {
                 hk_toutiao: {
@@ -235,14 +244,6 @@ class Layout extends React.PureComponent {
                     position="relative"
                     content={content.navigation}>
                     <Navigation />
-                </Chip>
-                <Chip
-                    id="30016"
-                    type="struct"
-                    title="头部通栏iframe2"
-                    groupName="iframe引用"
-                    content={content.topBannerFrame}>
-                    <InIframe />
                 </Chip>
                 <Chip
                     id="30039"

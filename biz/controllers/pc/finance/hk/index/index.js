@@ -57,8 +57,11 @@ exports.list = {
             // 顶部通栏广告01
             ['ad_bottom', 'KVProxy', 'getStructuredFragment', 30014, getStringByKey('content')],
 
-            // 顶部通栏iframe2
-            ['topBannerFrame', 'KVProxy', 'getStructuredFragment', 30016, getStringByKey('content')],
+            // 顶部三大指数iframe1
+            ['top3Frame', 'KVProxy', 'getStructuredFragment', 30015, getStringByKey('content')],
+
+            // 顶部港股通资金通栏iframe2
+            ['tophktFrame', 'KVProxy', 'getStructuredFragment', 30016, getStringByKey('content')],
 
             // 新股上市,涡轮涨幅排名，牛熊证涨幅排名iframe3
             ['xgss_Frame', 'KVProxy', 'getStructuredFragment', 30017, getStringByKey('content')],
