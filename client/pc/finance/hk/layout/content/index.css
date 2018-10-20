@@ -3,7 +3,6 @@
     height: auto;
     overflow: hidden;
     margin: 0 auto;
-    padding-top: 20px;
 }
 .content_l {
     width: 400px;
@@ -28,14 +27,11 @@
 .searchBox {
     width: 1000px;
     margin: 0 auto;
-    overflow: hidden;
+    padding: 15px 0;
 }
-.searchLine {
-    width: 100%;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
+
 .sous01 {
+    position: relative;
     float: left;
     width: 320px;
     height: 20px;
@@ -58,7 +54,9 @@
     border: 1px solid #b2b2b2;
     float: left;
     margin-left: 3px;
-    position: relative;
+}
+.t_btn01:hover {
+    cursor: pointer;
 }
 .text_bg01 {
     width: 235px;
@@ -76,10 +74,31 @@
     font-size: 12px;
     line-height: 18px;
 }
-.hk_stock {
+.top3I {
     float: right;
-    border: 1px solid #000;
+    height: 20px;
 }
-.hk_stock iframe {
-    border: none;
+.search_suggest_list {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 320px;
+    background: #fff;
+    z-index: 999;
+    border: 1px solid #f54343;
+}
+.search_suggest_list table {
+    width: 100%;
+}
+.search_suggest_list table tbody tr:hover {
+    background: #f54343;
+}
+.search_suggest_list table tbody tr td {
+    border-bottom: 1px solid #ececec;
+    height: 21px !important;
+    padding-left: 12px;
+    text-align: left;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
 }

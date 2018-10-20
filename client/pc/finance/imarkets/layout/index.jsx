@@ -61,10 +61,10 @@ class Layout extends PureComponent {
                     <div className={styles.main_right}>
                         {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
                         {/* <Question content={ questionData } /> */}
-                        {/* 广告 */}
-                        <Ad styleName={styles.ad1} content={content.asideAd} />
                         {/* 热点专题 */}
                         <HotTopic content={hotTopicData} />
+                        {/* 广告 */}
+                        <Ad styleName={styles.ad1} content={content.asideAd} />
                         {/* 日历 */}
                         <CalenderBox />
                         {/* 漂浮广告 */}

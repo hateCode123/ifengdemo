@@ -11,7 +11,7 @@ exports.getwemediaEAccountImg = {
     handler: async ctx => {
         const wemediaEAccountId = ctx.params.wemediaEAccountId;
         const body = await request.get({
-            url: `http://fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
+            url: `http://local.fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
             json: true,
         });
 

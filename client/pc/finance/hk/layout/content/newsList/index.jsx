@@ -145,7 +145,7 @@ class NewsList extends React.PureComponent {
 
         return (
             <div className={styles.newsList}>
-                <HeadLine content={titleData} />
+                {titleData ? <HeadLine content={titleData} /> : null}
                 {this.renderNewsList(listData)}
             </div>
         );
