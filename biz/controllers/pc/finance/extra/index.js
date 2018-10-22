@@ -11,7 +11,7 @@ const { formatImage, formatUrl } = require('@ifeng/public_method');
 const moment = require('moment');
 
 exports.list = {
-    path: '/pc/finance/extra',
+    path: '/pc/finance/coop/maxthon',
     method: 'get',
     type: 'html',
     cache: 0,
