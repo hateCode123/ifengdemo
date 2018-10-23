@@ -5,6 +5,8 @@
 const util = require('util');
 const { tracer } = require('../../common/jaeger');
 const config = require('../../configs');
+const _ =require('lodash');
+const KVTableEnum = config.common.KVProxy;
 
 module.exports = (app, options = {}) => {
     // extend html function
@@ -36,6 +38,17 @@ module.exports = (app, options = {}) => {
             this.set('Cache-Control', 'no-cache');
         } else {
             this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
+        }
+        if(this.urlinfo.edit){
+            if(_.isArray(this.urlinfo.async_chips)) {
+                for (const item of this.urlinfo.async_chips) {
+                    let arr = item[0].split(':');
+                    this.kvList.push({ type: KVTableEnum[item[2]] || '', id: item[3], title: arr[1] || '', key: arr[0], from:'api'});
+                }
+            }
+            data.kvList = this.kvList;
+        }else{
+            data.kvList = '';
         }
         data.bid = this.uuid;
         data.router = this.urlinfo.path;

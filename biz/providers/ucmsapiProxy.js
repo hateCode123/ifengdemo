@@ -5,17 +5,19 @@
 
 const TarsStream = require('@tars/stream');
 const TarsError = require('@tars/rpc').error;
-const Tars = require('@tars/rpc').client;
+const Tarsclient = require('@tars/rpc').client;
+const Tars = require('@tars/stream');
 const path = require('path');
 const env = process.env.NODE_ENV || 'development';
 const { tracer } = require('../common/jaeger');
 const config = require('../configs');
 
-Tars.initialize(path.join(__dirname, `../configs/${env}/config.conf`));
+Tarsclient.initialize(path.join(__dirname, `../configs/${env}/config.conf`));
 
 var Tarsapi = Tarsapi || {};
 
 module.exports.Tarsapi = Tarsapi;
+
 Tarsapi.SearchProxy = function() {
     this._name = undefined;
     this._worker = undefined;
@@ -92,7 +94,7 @@ Tarsapi.Result.prototype.readFromObject = function(json) {
     !json.hasOwnProperty('data') || (this.data = json.data);
 };
 Tarsapi.Result.prototype.toBinBuffer = function() {
-    var os = new TarsStream.OutputStream();
+    var os = new TarsStream.TarsOutputStream();
     this._writeTo(os);
     return os.getBinBuffer();
 };
@@ -102,10 +104,8 @@ Tarsapi.Result.new = function() {
 Tarsapi.Result.create = function(is) {
     return Tarsapi.Result._readFrom(is);
 };
-Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`Tarsapi.SearchProxy.del( id, newsTime)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+
+Tarsapi.SearchProxy.prototype.del = function(id, newsTime) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -121,12 +121,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'Tarsapi.SearchProxy.del( id, newsTime)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -134,12 +129,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'Tarsapi.SearchProxy.del( id, newsTime)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -148,12 +138,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'Tarsapi.SearchProxy.del( id, newsTime)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -161,10 +146,7 @@ Tarsapi.SearchProxy.prototype.del = function(ctx, id, newsTime) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.delData( indexName, type, id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.delData = function(indexName, type, id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
@@ -181,12 +163,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.delData( indexName, type, id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -194,12 +171,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.delData( indexName, type, id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -208,12 +180,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.delData( indexName, type, id)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -221,10 +188,7 @@ Tarsapi.SearchProxy.prototype.delData = function(ctx, indexName, type, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.getById( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.getById = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -239,7 +203,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getById( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -247,7 +211,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getById( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -256,7 +220,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getById( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -264,10 +228,7 @@ Tarsapi.SearchProxy.prototype.getById = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.getByIds( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.getByIds = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -282,7 +243,7 @@ Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getByIds( ids)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -290,7 +251,7 @@ Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getByIds( ids)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -299,7 +260,7 @@ Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'SearchProxy.getByIds( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -307,12 +268,63 @@ Tarsapi.SearchProxy.prototype.getByIds = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.listByMap = function(ctx, queryMap, offset, size, sort, returnFields) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.listByMap( queryMap, offset, size, sort, returnFields)`, {
-              childOf: ctx.spanrpc || ctx.spanrouter || ctx.span,
-          });
+Tarsapi.SearchProxy.prototype.list = function(
+    searchPath,
+    specialChannelPath,
+    type,
+    status,
+    offset,
+    size,
+    sort,
+    returnFields,
+) {
+    var _encode = function() {
+        var os = new TarsStream.TarsOutputStream();
+        os.writeString(1, searchPath);
+        os.writeString(2, specialChannelPath);
+        os.writeString(3, type);
+        os.writeString(4, status);
+        os.writeInt32(5, offset);
+        os.writeInt32(6, size);
+        os.writeString(7, sort);
+        os.writeString(8, returnFields);
+        return os.getBinBuffer();
+    };
+
+    var _decode = function(data) {
+        try {
+            var response = { arguments: {} };
+            var is = new TarsStream.TarsInputStream(data.response.sBuffer);
+
+            response.costtime = data.request.costtime;
+            response.return = is.readString(0, true, TarsStream.String);
+
+            return { request: data.request, response: response };
+        } catch (e) {
+            var response = {};
+            response.costtime = data.request.costtime;
+            response.error = {};
+            response.error.code = TarsError.CLIENT.DECODE_ERROR;
+            response.error.message = e.message;
+
+            throw { request: data.request, response: response };
+        }
+    };
+
+    var _error = function(data) {
+        var response = {};
+        response.costtime = data.request.costtime;
+        response.error = data.error;
+
+        throw { request: data.request, response: response };
+    };
+
+    return this._worker
+        .tars_invoke('list', _encode(), arguments.length != 0 ? arguments[arguments.length - 1] : undefined)
+        .then(_decode, _error);
+};
+
+Tarsapi.SearchProxy.prototype.listByMap = function(queryMap, offset, size, sort, returnFields) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeMap(1, queryMap);
@@ -331,12 +343,7 @@ Tarsapi.SearchProxy.prototype.listByMap = function(ctx, queryMap, offset, size, 
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.listByMap( queryMap, offset, size, sort, returnFields)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -344,12 +351,7 @@ Tarsapi.SearchProxy.prototype.listByMap = function(ctx, queryMap, offset, size, 
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.listByMap( queryMap, offset, size, sort, returnFields)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -358,12 +360,7 @@ Tarsapi.SearchProxy.prototype.listByMap = function(ctx, queryMap, offset, size, 
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.listByMap( queryMap, offset, size, sort, returnFields)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -371,10 +368,7 @@ Tarsapi.SearchProxy.prototype.listByMap = function(ctx, queryMap, offset, size, 
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.listByQueryStr( queryStr)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.listByQueryStr = function(queryStr) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, queryStr);
@@ -389,12 +383,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.listByQueryStr( queryStr)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -402,12 +391,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.listByQueryStr( queryStr)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -416,12 +400,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.listByQueryStr( queryStr)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -429,10 +408,7 @@ Tarsapi.SearchProxy.prototype.listByQueryStr = function(ctx, queryStr) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.put( id, dataJson, newsTime)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.put = function(id, dataJson, newsTime) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -449,12 +425,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.put( id, dataJson, newsTime)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -462,12 +433,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.put( id, dataJson, newsTime)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -476,12 +442,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.put( id, dataJson, newsTime)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -489,10 +450,7 @@ Tarsapi.SearchProxy.prototype.put = function(ctx, id, dataJson, newsTime) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJson) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.putData( indexName, type, id, dataJson)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.putData = function(indexName, type, id, dataJson) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
@@ -510,12 +468,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.putData( indexName, type, id, dataJson)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -523,12 +476,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.putData( indexName, type, id, dataJson)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -537,12 +485,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.putData( indexName, type, id, dataJson)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -550,10 +493,7 @@ Tarsapi.SearchProxy.prototype.putData = function(ctx, indexName, type, id, dataJ
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.update( id, dataJson, newsTime)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.update = function(id, dataJson, newsTime) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -570,12 +510,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.update( id, dataJson, newsTime)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -583,12 +518,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.update( id, dataJson, newsTime)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -597,12 +527,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.update( id, dataJson, newsTime)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -610,10 +535,7 @@ Tarsapi.SearchProxy.prototype.update = function(ctx, id, dataJson, newsTime) {
         .then(_decode, _error);
 };
 
-Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, dataJson) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`SearchProxy.updateData( indexName, type, id, dataJson)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.SearchProxy.prototype.updateData = function(indexName, type, id, dataJson) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, indexName);
@@ -631,12 +553,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
             response.costtime = data.request.costtime;
             response.return = is.readStruct(0, true, Tarsapi.Result);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.updateData( indexName, type, id, dataJson)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -644,12 +561,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'SearchProxy.updateData( indexName, type, id, dataJson)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -658,12 +570,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'SearchProxy.updateData( indexName, type, id, dataJson)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -671,10 +578,7 @@ Tarsapi.SearchProxy.prototype.updateData = function(ctx, indexName, type, id, da
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delAd = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delAd( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delAd = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -689,7 +593,7 @@ Tarsapi.KVProxy.prototype.delAd = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delAd( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -697,7 +601,7 @@ Tarsapi.KVProxy.prototype.delAd = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delAd( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -706,7 +610,7 @@ Tarsapi.KVProxy.prototype.delAd = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delAd( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -714,10 +618,7 @@ Tarsapi.KVProxy.prototype.delAd = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delCategory = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delCategory( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delCategory = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -732,7 +633,7 @@ Tarsapi.KVProxy.prototype.delCategory = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCategory( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -740,7 +641,7 @@ Tarsapi.KVProxy.prototype.delCategory = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCategory( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -749,7 +650,7 @@ Tarsapi.KVProxy.prototype.delCategory = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCategory( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -757,10 +658,7 @@ Tarsapi.KVProxy.prototype.delCategory = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delCustom = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delCustom( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delCustom = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -775,7 +673,7 @@ Tarsapi.KVProxy.prototype.delCustom = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCustom( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -783,7 +681,7 @@ Tarsapi.KVProxy.prototype.delCustom = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCustom( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -792,7 +690,7 @@ Tarsapi.KVProxy.prototype.delCustom = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delCustom( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -800,10 +698,7 @@ Tarsapi.KVProxy.prototype.delCustom = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delDocument = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delDocument( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delDocument = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -818,7 +713,7 @@ Tarsapi.KVProxy.prototype.delDocument = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delDocument( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -826,7 +721,7 @@ Tarsapi.KVProxy.prototype.delDocument = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delDocument( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -835,7 +730,7 @@ Tarsapi.KVProxy.prototype.delDocument = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delDocument( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -843,10 +738,7 @@ Tarsapi.KVProxy.prototype.delDocument = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delDynamicFragments = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delDynamicFragments( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delDynamicFragments = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -861,12 +753,7 @@ Tarsapi.KVProxy.prototype.delDynamicFragments = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delDynamicFragments( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -874,12 +761,7 @@ Tarsapi.KVProxy.prototype.delDynamicFragments = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delDynamicFragments( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -888,7 +770,7 @@ Tarsapi.KVProxy.prototype.delDynamicFragments = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delDynamicFragments( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -900,10 +782,7 @@ Tarsapi.KVProxy.prototype.delDynamicFragments = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delOther = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delOther( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delOther = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -918,7 +797,7 @@ Tarsapi.KVProxy.prototype.delOther = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delOther( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -926,7 +805,7 @@ Tarsapi.KVProxy.prototype.delOther = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delOther( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -935,7 +814,7 @@ Tarsapi.KVProxy.prototype.delOther = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delOther( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -943,10 +822,7 @@ Tarsapi.KVProxy.prototype.delOther = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delRecommendFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delRecommendFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delRecommendFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -961,12 +837,7 @@ Tarsapi.KVProxy.prototype.delRecommendFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delRecommendFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -974,12 +845,7 @@ Tarsapi.KVProxy.prototype.delRecommendFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delRecommendFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -988,7 +854,7 @@ Tarsapi.KVProxy.prototype.delRecommendFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delRecommendFragment( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1000,10 +866,7 @@ Tarsapi.KVProxy.prototype.delRecommendFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delSelectedPool = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delSelectedPool( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delSelectedPool = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1018,7 +881,7 @@ Tarsapi.KVProxy.prototype.delSelectedPool = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSelectedPool( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1026,7 +889,7 @@ Tarsapi.KVProxy.prototype.delSelectedPool = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSelectedPool( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1035,7 +898,7 @@ Tarsapi.KVProxy.prototype.delSelectedPool = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSelectedPool( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1043,10 +906,7 @@ Tarsapi.KVProxy.prototype.delSelectedPool = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delSsiFragment = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delSsiFragment( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delSsiFragment = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1061,7 +921,7 @@ Tarsapi.KVProxy.prototype.delSsiFragment = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSsiFragment( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1069,7 +929,7 @@ Tarsapi.KVProxy.prototype.delSsiFragment = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSsiFragment( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1078,7 +938,7 @@ Tarsapi.KVProxy.prototype.delSsiFragment = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delSsiFragment( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1086,10 +946,7 @@ Tarsapi.KVProxy.prototype.delSsiFragment = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delStaticFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delStaticFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delStaticFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1104,12 +961,7 @@ Tarsapi.KVProxy.prototype.delStaticFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delStaticFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1117,12 +969,7 @@ Tarsapi.KVProxy.prototype.delStaticFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delStaticFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1131,7 +978,7 @@ Tarsapi.KVProxy.prototype.delStaticFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delStaticFragment( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1143,10 +990,7 @@ Tarsapi.KVProxy.prototype.delStaticFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delStructuredFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delStructuredFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delStructuredFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1161,12 +1005,7 @@ Tarsapi.KVProxy.prototype.delStructuredFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delStructuredFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1174,12 +1013,7 @@ Tarsapi.KVProxy.prototype.delStructuredFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delStructuredFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1188,12 +1022,7 @@ Tarsapi.KVProxy.prototype.delStructuredFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.delStructuredFragment( id)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1205,10 +1034,7 @@ Tarsapi.KVProxy.prototype.delStructuredFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delVideo = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delVideo( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delVideo = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1223,7 +1049,7 @@ Tarsapi.KVProxy.prototype.delVideo = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.delVideo( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1231,7 +1057,7 @@ Tarsapi.KVProxy.prototype.delVideo = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delVideo( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1240,7 +1066,7 @@ Tarsapi.KVProxy.prototype.delVideo = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delVideo( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1248,10 +1074,7 @@ Tarsapi.KVProxy.prototype.delVideo = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.delWemediaAccount = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.delWemediaAccount( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.delWemediaAccount = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1266,12 +1089,7 @@ Tarsapi.KVProxy.prototype.delWemediaAccount = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.delWemediaAccount( k)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1279,7 +1097,7 @@ Tarsapi.KVProxy.prototype.delWemediaAccount = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delWemediaAccount( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1288,7 +1106,7 @@ Tarsapi.KVProxy.prototype.delWemediaAccount = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.delWemediaAccount( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1300,10 +1118,7 @@ Tarsapi.KVProxy.prototype.delWemediaAccount = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getAd( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getAd = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1318,7 +1133,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAd( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1326,7 +1141,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAd( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1335,7 +1150,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAd( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1343,10 +1158,7 @@ Tarsapi.KVProxy.prototype.getAd = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getAds( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getAds = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -1361,7 +1173,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAds( ks)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1369,7 +1181,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAds( ks)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1378,7 +1190,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAds( ks)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1386,10 +1198,7 @@ Tarsapi.KVProxy.prototype.getAds = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getAll = function(ctx, idmap) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getAll( idmap)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getAll = function(idmap) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeMap(1, idmap);
@@ -1408,7 +1217,7 @@ Tarsapi.KVProxy.prototype.getAll = function(ctx, idmap) {
                 TarsStream.Map(TarsStream.String, TarsStream.Map(TarsStream.String, TarsStream.String)),
             );
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAll( idmap)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1416,7 +1225,7 @@ Tarsapi.KVProxy.prototype.getAll = function(ctx, idmap) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAll( idmap)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1425,7 +1234,7 @@ Tarsapi.KVProxy.prototype.getAll = function(ctx, idmap) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getAll( idmap)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1433,10 +1242,7 @@ Tarsapi.KVProxy.prototype.getAll = function(ctx, idmap) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getAllWithTracer = function(ctx, idmap, spanContext) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getAllWithTracer( idmap, spanContext)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getAllWithTracer = function(idmap, spanContext) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeMap(1, idmap);
@@ -1456,12 +1262,7 @@ Tarsapi.KVProxy.prototype.getAllWithTracer = function(ctx, idmap, spanContext) {
                 TarsStream.Map(TarsStream.String, TarsStream.Map(TarsStream.String, TarsStream.String)),
             );
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getAllWithTracer( idmap, spanContext)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1469,12 +1270,7 @@ Tarsapi.KVProxy.prototype.getAllWithTracer = function(ctx, idmap, spanContext) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getAllWithTracer( idmap, spanContext)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1483,12 +1279,7 @@ Tarsapi.KVProxy.prototype.getAllWithTracer = function(ctx, idmap, spanContext) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getAllWithTracer( idmap, spanContext)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1496,10 +1287,7 @@ Tarsapi.KVProxy.prototype.getAllWithTracer = function(ctx, idmap, spanContext) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getCategories( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getCategories = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -1514,7 +1302,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategories( ids)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1522,7 +1310,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategories( ids)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1531,7 +1319,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategories( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1539,10 +1327,7 @@ Tarsapi.KVProxy.prototype.getCategories = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getCategory( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getCategory = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1557,7 +1342,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategory( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1565,7 +1350,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategory( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1574,7 +1359,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCategory( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1582,10 +1367,7 @@ Tarsapi.KVProxy.prototype.getCategory = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getCustom( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getCustom = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1600,7 +1382,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustom( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1608,7 +1390,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustom( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1617,7 +1399,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustom( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1625,10 +1407,7 @@ Tarsapi.KVProxy.prototype.getCustom = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getCustoms( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getCustoms = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -1643,7 +1422,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustoms( ks)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1651,7 +1430,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustoms( ks)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1660,7 +1439,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getCustoms( ks)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1668,10 +1447,7 @@ Tarsapi.KVProxy.prototype.getCustoms = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getDocument( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getDocument = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1686,7 +1462,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocument( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1694,7 +1470,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocument( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1703,7 +1479,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocument( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1711,10 +1487,7 @@ Tarsapi.KVProxy.prototype.getDocument = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getDocuments( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getDocuments = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -1729,7 +1502,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocuments( ids)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1737,7 +1510,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocuments( ids)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1746,7 +1519,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDocuments( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1754,10 +1527,7 @@ Tarsapi.KVProxy.prototype.getDocuments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getDynamicFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getDynamicFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getDynamicFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -1772,12 +1542,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getDynamicFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1785,12 +1550,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getDynamicFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1799,7 +1559,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDynamicFragment( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1811,10 +1571,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getDynamicFragments = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getDynamicFragments( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getDynamicFragments = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -1829,12 +1586,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getDynamicFragments( ids)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1842,12 +1594,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getDynamicFragments( ids)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1856,7 +1603,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getDynamicFragments( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1868,10 +1615,7 @@ Tarsapi.KVProxy.prototype.getDynamicFragments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getListByWemediaEAccountId( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -1886,12 +1630,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getListByWemediaEAccountId( k)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1899,12 +1638,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getListByWemediaEAccountId( k)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1913,12 +1647,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getListByWemediaEAccountId( k)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1930,10 +1659,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountId = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getListByWemediaEAccountIds( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -1948,12 +1674,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getListByWemediaEAccountIds( ks)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -1961,12 +1682,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getListByWemediaEAccountIds( ks)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -1975,12 +1691,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getListByWemediaEAccountIds( ks)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -1992,10 +1703,7 @@ Tarsapi.KVProxy.prototype.getListByWemediaEAccountIds = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getOther = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getOther( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getOther = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2010,7 +1718,7 @@ Tarsapi.KVProxy.prototype.getOther = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOther( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2018,7 +1726,7 @@ Tarsapi.KVProxy.prototype.getOther = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOther( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2027,7 +1735,7 @@ Tarsapi.KVProxy.prototype.getOther = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOther( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2035,10 +1743,7 @@ Tarsapi.KVProxy.prototype.getOther = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getOthers = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getOthers( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getOthers = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -2053,7 +1758,7 @@ Tarsapi.KVProxy.prototype.getOthers = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOthers( ks)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2061,7 +1766,7 @@ Tarsapi.KVProxy.prototype.getOthers = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOthers( ks)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2070,7 +1775,7 @@ Tarsapi.KVProxy.prototype.getOthers = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getOthers( ks)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2078,10 +1783,7 @@ Tarsapi.KVProxy.prototype.getOthers = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getRecommendFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getRecommendFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2096,12 +1798,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getRecommendFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2109,12 +1806,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getRecommendFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2123,7 +1815,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getRecommendFragment( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2135,10 +1827,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getRecommendFragments( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getRecommendFragments = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -2153,12 +1842,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getRecommendFragments( ids)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2166,12 +1850,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getRecommendFragments( ids)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2180,12 +1859,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getRecommendFragments( ids)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2197,10 +1871,7 @@ Tarsapi.KVProxy.prototype.getRecommendFragments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSelectedPool = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSelectedPool( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getSelectedPool = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2215,7 +1886,7 @@ Tarsapi.KVProxy.prototype.getSelectedPool = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSelectedPool( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2223,7 +1894,7 @@ Tarsapi.KVProxy.prototype.getSelectedPool = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSelectedPool( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2232,7 +1903,7 @@ Tarsapi.KVProxy.prototype.getSelectedPool = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSelectedPool( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2240,10 +1911,7 @@ Tarsapi.KVProxy.prototype.getSelectedPool = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSelectedPools = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSelectedPools( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getSelectedPools = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -2258,12 +1926,7 @@ Tarsapi.KVProxy.prototype.getSelectedPools = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getSelectedPools( ks)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2271,7 +1934,7 @@ Tarsapi.KVProxy.prototype.getSelectedPools = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSelectedPools( ks)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2280,7 +1943,7 @@ Tarsapi.KVProxy.prototype.getSelectedPools = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSelectedPools( ks)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2288,10 +1951,7 @@ Tarsapi.KVProxy.prototype.getSelectedPools = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSsiFragment( k)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getSsiFragment = function(k) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2306,7 +1966,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragment( k)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2314,7 +1974,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragment( k)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2323,7 +1983,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragment( k)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2331,10 +1991,7 @@ Tarsapi.KVProxy.prototype.getSsiFragment = function(ctx, k) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSsiFragments( ks)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getSsiFragments = function(ks) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -2349,7 +2006,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragments( ks)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2357,7 +2014,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragments( ks)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2366,7 +2023,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getSsiFragments( ks)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2374,10 +2031,7 @@ Tarsapi.KVProxy.prototype.getSsiFragments = function(ctx, ks) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getStaticFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getStaticFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2392,12 +2046,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStaticFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2405,12 +2054,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStaticFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2419,7 +2063,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getStaticFragment( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2431,10 +2075,7 @@ Tarsapi.KVProxy.prototype.getStaticFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getStaticFragments( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getStaticFragments = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -2449,12 +2090,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStaticFragments( ids)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2462,12 +2098,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStaticFragments( ids)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2476,7 +2107,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getStaticFragments( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2488,10 +2119,7 @@ Tarsapi.KVProxy.prototype.getStaticFragments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getStructuredFragment( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getStructuredFragment = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2506,12 +2134,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStructuredFragment( id)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2519,12 +2142,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStructuredFragment( id)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2533,12 +2151,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getStructuredFragment( id)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2550,10 +2163,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragment = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getStructuredFragments( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getStructuredFragments = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -2568,12 +2178,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStructuredFragments( ids)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2581,12 +2186,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getStructuredFragments( ids)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2595,12 +2195,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getStructuredFragments( ids)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2612,10 +2207,7 @@ Tarsapi.KVProxy.prototype.getStructuredFragments = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(ctx, k, offset, size) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSublistByWemediaEAccountId( k, offset, size)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(k, offset, size) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2632,12 +2224,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(ctx, k, offse
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getSublistByWemediaEAccountId( k, offset, size)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2645,12 +2232,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(ctx, k, offse
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getSublistByWemediaEAccountId( k, offset, size)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2659,12 +2241,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(ctx, k, offse
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getSublistByWemediaEAccountId( k, offset, size)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2676,12 +2253,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountId = function(ctx, k, offse
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ctx, ks, offset, size) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getSublistByWemediaEAccountIds( ks, offset, size)`, {
-              childOf: ctx.spanrpc || ctx.spanrouter || ctx.span,
-          });
+Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ks, offset, size) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ks);
@@ -2698,12 +2270,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ctx, ks, off
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getSublistByWemediaEAccountIds( ks, offset, size)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2711,12 +2278,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ctx, ks, off
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.getSublistByWemediaEAccountIds( ks, offset, size)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2725,12 +2287,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ctx, ks, off
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.getSublistByWemediaEAccountIds( ks, offset, size)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2742,10 +2299,7 @@ Tarsapi.KVProxy.prototype.getSublistByWemediaEAccountIds = function(ctx, ks, off
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getVideo( id)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getVideo = function(id) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2760,7 +2314,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
             response.costtime = data.request.costtime;
             response.return = is.readString(0, true, TarsStream.String);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideo( id)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2768,7 +2322,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideo( id)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2777,7 +2331,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideo( id)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2785,10 +2339,7 @@ Tarsapi.KVProxy.prototype.getVideo = function(ctx, id) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.getVideos( ids)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.getVideos = function(ids) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeList(1, ids);
@@ -2803,7 +2354,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
             response.costtime = data.request.costtime;
             response.return = is.readMap(0, true, TarsStream.Map(TarsStream.String, TarsStream.String));
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideos( ids)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2811,7 +2362,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideos( ids)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2820,7 +2371,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.getVideos( ids)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2828,10 +2379,7 @@ Tarsapi.KVProxy.prototype.getVideos = function(ctx, ids) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putAd( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putAd = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2847,7 +2395,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putAd( k, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2855,7 +2403,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putAd( k, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2864,7 +2412,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putAd( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2872,10 +2420,7 @@ Tarsapi.KVProxy.prototype.putAd = function(ctx, k, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putCategory( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putCategory = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2891,7 +2436,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCategory( id, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2899,7 +2444,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCategory( id, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2908,7 +2453,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCategory( id, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2916,10 +2461,7 @@ Tarsapi.KVProxy.prototype.putCategory = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putCustom( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putCustom = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -2935,7 +2477,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCustom( k, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2943,7 +2485,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCustom( k, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2952,7 +2494,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putCustom( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -2960,10 +2502,7 @@ Tarsapi.KVProxy.prototype.putCustom = function(ctx, k, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putDocument( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putDocument = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -2979,7 +2518,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putDocument( id, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -2987,7 +2526,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putDocument( id, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -2996,7 +2535,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putDocument( id, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3004,10 +2543,7 @@ Tarsapi.KVProxy.prototype.putDocument = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putDynamicFragments = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putDynamicFragments( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putDynamicFragments = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -3023,12 +2559,7 @@ Tarsapi.KVProxy.prototype.putDynamicFragments = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putDynamicFragments( id, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3036,12 +2567,7 @@ Tarsapi.KVProxy.prototype.putDynamicFragments = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putDynamicFragments( id, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3050,12 +2576,7 @@ Tarsapi.KVProxy.prototype.putDynamicFragments = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.putDynamicFragments( id, v)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3067,10 +2588,7 @@ Tarsapi.KVProxy.prototype.putDynamicFragments = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putOther = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putOther( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putOther = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -3086,7 +2604,7 @@ Tarsapi.KVProxy.prototype.putOther = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putOther( k, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3094,7 +2612,7 @@ Tarsapi.KVProxy.prototype.putOther = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putOther( k, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3103,7 +2621,7 @@ Tarsapi.KVProxy.prototype.putOther = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putOther( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3111,10 +2629,7 @@ Tarsapi.KVProxy.prototype.putOther = function(ctx, k, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putRecommendFragment( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putRecommendFragment = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -3130,12 +2645,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putRecommendFragment( id, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3143,12 +2653,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putRecommendFragment( id, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3157,12 +2662,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.putRecommendFragment( id, v)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3174,10 +2674,7 @@ Tarsapi.KVProxy.prototype.putRecommendFragment = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putSelectedPool = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putSelectedPool( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putSelectedPool = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -3193,12 +2690,7 @@ Tarsapi.KVProxy.prototype.putSelectedPool = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putSelectedPool( k, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3206,12 +2698,7 @@ Tarsapi.KVProxy.prototype.putSelectedPool = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putSelectedPool( k, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3220,7 +2707,7 @@ Tarsapi.KVProxy.prototype.putSelectedPool = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putSelectedPool( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3228,10 +2715,7 @@ Tarsapi.KVProxy.prototype.putSelectedPool = function(ctx, k, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putSsiFragment( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putSsiFragment = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -3247,12 +2731,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putSsiFragment( k, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3260,7 +2739,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putSsiFragment( k, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3269,7 +2748,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putSsiFragment( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3277,10 +2756,7 @@ Tarsapi.KVProxy.prototype.putSsiFragment = function(ctx, k, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putStaticFragment( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putStaticFragment = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -3296,12 +2772,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putStaticFragment( id, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3309,12 +2780,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putStaticFragment( id, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3323,7 +2789,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putStaticFragment( id, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3335,10 +2801,7 @@ Tarsapi.KVProxy.prototype.putStaticFragment = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putStructuredFragment( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putStructuredFragment = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -3354,12 +2817,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putStructuredFragment( id, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3367,12 +2825,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putStructuredFragment( id, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3381,12 +2834,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw {
-            request: data.request,
-            response: response,
-            span: child,
-            callInfo: 'KVProxy.putStructuredFragment( id, v)',
-        };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3398,10 +2846,7 @@ Tarsapi.KVProxy.prototype.putStructuredFragment = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putVideo( id, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putVideo = function(id, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, id);
@@ -3417,7 +2862,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return { request: data.request, response: response, span: child, callInfo: 'KVProxy.putVideo( id, v)' };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3425,7 +2870,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putVideo( id, v)' };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3434,7 +2879,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putVideo( id, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3442,10 +2887,7 @@ Tarsapi.KVProxy.prototype.putVideo = function(ctx, id, v) {
         .then(_decode, _error);
 };
 
-Tarsapi.KVProxy.prototype.putWemediaAccount = function(ctx, k, v) {
-    var child = !config.default.statisticsJaeger
-        ? null
-        : tracer.startSpan(`KVProxy.putWemediaAccount( k, v)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+Tarsapi.KVProxy.prototype.putWemediaAccount = function(k, v) {
     var _encode = function() {
         var os = new TarsStream.TarsOutputStream();
         os.writeString(1, k);
@@ -3461,12 +2903,7 @@ Tarsapi.KVProxy.prototype.putWemediaAccount = function(ctx, k, v) {
             response.costtime = data.request.costtime;
             response.return = is.readBoolean(0, true, TarsStream.Boolean);
 
-            return {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putWemediaAccount( k, v)',
-            };
+            return { request: data.request, response: response };
         } catch (e) {
             var response = {};
             response.costtime = data.request.costtime;
@@ -3474,12 +2911,7 @@ Tarsapi.KVProxy.prototype.putWemediaAccount = function(ctx, k, v) {
             response.error.code = TarsError.CLIENT.DECODE_ERROR;
             response.error.message = e.message;
 
-            throw {
-                request: data.request,
-                response: response,
-                span: child,
-                callInfo: 'KVProxy.putWemediaAccount( k, v)',
-            };
+            throw { request: data.request, response: response };
         }
     };
 
@@ -3488,7 +2920,7 @@ Tarsapi.KVProxy.prototype.putWemediaAccount = function(ctx, k, v) {
         response.costtime = data.request.costtime;
         response.error = data.error;
 
-        throw { request: data.request, response: response, span: child, callInfo: 'KVProxy.putWemediaAccount( k, v)' };
+        throw { request: data.request, response: response };
     };
 
     return this._worker
@@ -3499,5 +2931,83 @@ Tarsapi.KVProxy.prototype.putWemediaAccount = function(ctx, k, v) {
         )
         .then(_decode, _error);
 };
-exports.KVProxy = Tars.stringToProxy(Tarsapi.KVProxy, Tars.configure.get('main.KVServer'));
-exports.SearchProxy = Tars.stringToProxy(Tarsapi.SearchProxy, Tars.configure.get('main.SearchServer'));
+
+var KVProxy = Tarsclient.stringToProxy(Tarsapi.KVProxy, Tarsclient.configure.get('main.KVServer'));
+var SearchProxy = Tarsclient.stringToProxy(Tarsapi.SearchProxy, Tarsclient.configure.get('main.SearchServer'));
+
+exports.KVProxy = {};
+exports.SearchProxy = {};
+const KVTableEnum = config.common.KVProxy;
+for (const key in KVProxy) {
+    // console.log(key);
+    exports.KVProxy[key] = function(ctx, ...args) {
+        var child = !config.default.statisticsJaeger
+            ? null
+            : tracer.startSpan(`KVProxy.${key}(...args)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+        // if(ctx){
+        //     ctx.rpcList.push({func:key,args:args})
+        // }
+        // console.log(key);
+        // console.log(ctx.urlinfo);
+
+        if (/^getAll.*/.test(key)) {
+            let json = args.shift();
+            for (let item of json) {
+                let arr = item[0].split(':');
+                ctx.kvList.push({ type: KVTableEnum[item[2]] || '', id: item[3], title: arr[1] || '', key: arr[0] });
+            }
+        } else if (/^get.*[^s]$/.test(key)) {
+            ctx.kvList.push({ type: KVTableEnum[key] || '', id: args[0], title: '', desc: '' });
+        } else if (/^get.*s$/.test(key)) {
+            args = [getIds(ctx, key, args)];
+        }
+
+        return KVProxy[key](...args).then(
+            function(data) {
+                data.span = child;
+                data.callInfo = `KVProxy.${key}(...args)`;
+                return data;
+            },
+            function(error) {
+                error.span = child;
+                error.callInfo = `KVProxy.${key}(...args)`;
+                console.log(error);
+                return error;
+            },
+        );
+    };
+}
+
+for (const key in SearchProxy) {
+    exports.SearchProxy[key] = function(ctx, ...args) {
+        var child = !config.default.statisticsJaeger
+            ? null
+            : tracer.startSpan(`SearchProxy.${key}(...args)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
+        if (ctx) {
+            ctx.rpcList.push({ func: key, args: args });
+        }
+        return SearchProxy[key](...args).then(
+            function(data) {
+                data.span = child;
+                data.callInfo = `SearchProxy.${key}(...args)`;
+                return data;
+            },
+            function(error) {
+                error.span = child;
+                error.callInfo = `SearchProxy.${key}(...args)`;
+                console.log(error);
+                return error;
+            },
+        );
+    };
+}
+
+function getIds(ctx, key, arr) {
+    const ids = new Tars.List(Tars.String);
+    arr = [...new Set(arr)];
+    for (const item of arr) {
+        ids.push(item + '');
+        ctx.kvList.push({ type: KVTableEnum[key] || '', id: item, title: '', desc: '' });
+    }
+    return ids;
+}

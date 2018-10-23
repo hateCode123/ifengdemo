@@ -9,7 +9,6 @@ const pattern = path.join(__dirname, env, '/**/*.json');
 const configs = {};
 
 glob.sync(pattern).forEach(file => {
-    // console.log(file);
     const name = path.basename(file, '.json');
 
     try {
@@ -18,6 +17,8 @@ glob.sync(pattern).forEach(file => {
         console.error(`Invalid config file. ${file}\n${e}`);
     }
 });
+
+configs.common = require(path.join(__dirname, './common.json'));
 
 // console.info(JSON.stringify(configs));
 module.exports = configs;

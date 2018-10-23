@@ -100,6 +100,8 @@ app.use(async (ctx, next) => {
     ctx.rpcTimeList = [[], []];
     ctx.randerTime = 0;
     ctx.errorCount = 0;
+    ctx.rpcList = []; 
+    ctx.kvList = [];
 
     ctx.set('shankTracerId', ctx.uuid);
     ctx.set('hostname', hostname);
