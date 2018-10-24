@@ -46,7 +46,7 @@ const handler = async ctx => {
 
     // 处理新数据
     if ('topnews' in allData && 'newsstream' in allData) {
-        allData.newsstream = formatList(allData.newsstream.slice(0, 40));
+        allData.newsstream = formatList(allData.newsstream.slice(0, 36));
         allData.topnews = formatList(allData.topnews, true);
     }
 
