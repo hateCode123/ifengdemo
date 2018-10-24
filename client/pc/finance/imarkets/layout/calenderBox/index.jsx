@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import Calender from '../../components/calendar';
 
-class CalenderBox extends PureComponent{
-    render(){
+class CalenderBox extends PureComponent {
+    render() {
         return (
-            <div className={ styles.box }>
-                <img className={ styles.rili } src={ require('./rili.jpg') } />
+            <div className={styles.box}>
+                <img className={styles.rili} src={require('./rili.jpg')} />
                 <Calender />
             </div>
         );

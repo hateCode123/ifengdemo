@@ -1,6 +1,6 @@
 /* 缓存推荐位信息和信息流信息 */
 const { transfer, getJsonByKey } = require('../../../../services/common/common');
-const { imarketslist } = require('../../../../services/utils/list');
+const { formatList } = require('../../../../services/utils/list');
 
 exports.goldSnapshotsDataCache = {
     path: '/api/gold/snapshots/dataCache',
@@ -8,15 +8,13 @@ exports.goldSnapshotsDataCache = {
     online: true,
     handler: async ctx => {
         const json = [
-            ['allnews', 'KVProxy', 'getDynamicFragment', '20044', getJsonByKey('data')],
+            ['topnews', 'KVProxy', 'getRecommendFragment', 55069, getJsonByKey('data')],
+            ['newsstream', 'KVProxy', 'getDynamicFragment', 20044, getJsonByKey('data')],
         ];
         const allData = await transfer(ctx, json);
 
-        const { topnews, newsstream } = imarketslist(allData.allnews, true);
-
-        allData.topnews = topnews;
-        allData.newsstream = newsstream;
-        delete allData.allnews;
+        allData.topnews = formatList(allData.topnews);
+        allData.newsstream = formatList(allData.newsstream.slice(0, 40));
 
         ctx.json(allData);
     },
