@@ -6,7 +6,7 @@ import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
 import Header from './header';
 import Logo from './logo';
-import Tools from './tools';
+import Tools from './tool';
 import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from '../components/newsStream';

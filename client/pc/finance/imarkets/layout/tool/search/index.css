@@ -17,6 +17,7 @@
 .sousuo_btn {
     position: absolute;
     top: 0;
+    *top: 1px;
     right: 0;
     width: 67px;
     height: 27px;

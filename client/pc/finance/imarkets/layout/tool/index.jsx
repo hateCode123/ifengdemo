@@ -9,12 +9,6 @@ import Calendar from './calender';
 import Search from './search';
 
 class Tools extends PureComponent {
-    state = {
-        isActive: null, // 行情中心是否显示
-    };
-
-    // 显示行情中心
-    handleDisplayHangqingzhongxinClick = event => this.setState({ isActive: !this.state.isActive });
     render() {
         return (
             <Fragment>
@@ -35,13 +29,6 @@ class Tools extends PureComponent {
                         <Search />
                     </div>
                 </div>
-                {this.state.isActive !== null ? (
-                    <iframe
-                        className={styles.hangqingzhongxin}
-                        style={{ display: this.state.isActive ? 'block' : 'none' }}
-                        src="http://fx.caiku.com/coop/ifeng/pair_new"
-                    />
-                ) : null}
             </Fragment>
         );
     }
