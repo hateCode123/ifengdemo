@@ -11,7 +11,7 @@ const redis = require('../redis');
 
 module.exports = (app, options = {}) => {
     // extend html function
-    app.context.html = async function(tplName, data) {
+    app.context.html = async function(tplName, data = {}) {
         let child = null;
         let randerStart = 0;
         if (config.default.statistics) {
