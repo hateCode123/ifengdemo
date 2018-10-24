@@ -9,8 +9,12 @@ import Zhiboshi from './zhiboshi';
 import { rel as relText } from '../../../../utils/rel';
 
 class NewsDisplay extends PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+
     newsGroupView() {
-        const { topnews } = this.props.content;
+        const topnews = this.props.content;
         const element = [];
         let children = [];
 
@@ -58,16 +62,6 @@ class NewsDisplay extends PureComponent {
         );
     }
 }
-
-/**
- * 定义组件属性类型
- * */
-NewsDisplay.propTypes = { content: PropTypes.object };
-
-/**
- * 定义组件默认属性
- * */
-NewsDisplay.defaultProps = {};
 
 export { NewsDisplay };
 export default NewsDisplay;

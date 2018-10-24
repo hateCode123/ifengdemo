@@ -2,20 +2,23 @@
  * 股票信息
  */
 
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 
 class Shares extends PureComponent {
+    iframe = `<iframe
+    class="${styles.iframe}"
+    src="https://unews.fx678.com/union/HaoSTZ/EC/Fhw/FhwInterface.html"
+    scrolling="no"
+    frameBorder="0"
+    border="0"
+/>`;
+
     render() {
         return (
             <div className={styles.shares}>
-                <iframe
-                    className={styles.iframe}
-                    src="http://unews.fx678.com/union/HaoSTZ/EC/Fhw/FhwInterface.html"
-                    scrolling="no"
-                    frameBorder="0"
-                />
+                <div dangerouslySetInnerHTML={{ __html: this.iframe }} />
                 <p>
                     数据来源：
                     <a href="http://www.fx678.com/" target="_blank">

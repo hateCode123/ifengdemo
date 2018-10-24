@@ -54,7 +54,7 @@ class RightContent extends React.PureComponent {
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />
                 <div className={styles.meeting}>
-                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题·会议">
+                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题 · 会议">
                         <Ad content={content.meetingAd} styleName={styles.meetingAd} />
                     </BoxTitle>
                     <Meeting content={content.meeting} ad={content.meetingListAd} />
