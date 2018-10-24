@@ -5,8 +5,9 @@
 const util = require('util');
 const { tracer } = require('../../common/jaeger');
 const config = require('../../configs');
-const _ =require('lodash');
+const _ = require('lodash');
 const KVTableEnum = config.common.KVProxy;
+const redis = require('../redis');
 
 module.exports = (app, options = {}) => {
     // extend html function
@@ -39,21 +40,28 @@ module.exports = (app, options = {}) => {
         } else {
             this.set('Cache-Control', `max-age=${config.default.cdnCacheTime}`);
         }
-        if(this.urlinfo.edit){
-            if(_.isArray(this.urlinfo.async_chips)) {
+        if (this.urlinfo.edit) {
+            if (_.isArray(this.urlinfo.async_chips)) {
                 for (const item of this.urlinfo.async_chips) {
                     let arr = item[0].split(':');
-                    this.kvList.push({ type: KVTableEnum[item[2]] || '', id: item[3], title: arr[1] || '', key: arr[0], from:'api'});
+                    this.kvList.push({
+                        type: KVTableEnum[item[2]] || '',
+                        id: item[3],
+                        title: arr[1] || '',
+                        key: arr[0],
+                        from: 'api',
+                    });
                 }
             }
             data.kvList = this.kvList;
-        }else{
+        } else {
             data.kvList = '';
         }
         data.bid = this.uuid;
         data.router = this.urlinfo.path;
 
         await this.render(tplName, data);
+        console.log(this.kvList);
 
         if (config.default.statistics) {
             this.randerTime = process.uptime() * 1000 - randerStart;
@@ -63,6 +71,9 @@ module.exports = (app, options = {}) => {
             child.finish();
             this.spanrpc.finish();
         }
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend json function
@@ -86,6 +97,9 @@ module.exports = (app, options = {}) => {
 
         this.type = contentType;
         this.body = response;
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend jsonp function
@@ -112,11 +126,13 @@ module.exports = (app, options = {}) => {
             response = { code, message, data };
         }
 
-
         response = `${callback}(${JSON.stringify(response)})`;
 
         this.type = contentType;
         this.body = response;
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend error function
@@ -124,3 +140,26 @@ module.exports = (app, options = {}) => {
         this.status = status || 404;
     };
 };
+
+const set = new Set();
+const prefix = `${config.default.namespace}:${config.default.appname}`;
+const cacheTime = 7 * 24 * 60 * 60;
+function writeKvToQueue(ctx) {
+    process.nextTick(() => {
+        for (let item of ctx.kvList) {
+            set.add(
+                `${prefix}:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
+                    item.type != 'documents.' ? item.id : ':id'
+                }`,
+            );
+        }
+    });
+}
+
+setInterval(function() {
+    for (let item of set) {
+        console.log(item);
+        redis.set(item, '1', 'EX', cacheTime);
+        set.delete(item);
+    }
+}, 2 * 60 * 1000 + parseInt(Math.random() * 1000 * 60));
