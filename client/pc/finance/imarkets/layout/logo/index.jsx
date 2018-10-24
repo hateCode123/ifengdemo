@@ -9,7 +9,9 @@ import styles from './index.css';
 class Logo extends PureComponent {
     timeRef = createRef();
 
-    componentDidMount() {}
+    componentDidMount() {
+        this.loadFlash();
+    }
     // 加载flash
     loadFlash() {
         this.timeRef.current.innerHTML = `<object
@@ -18,11 +20,11 @@ class Logo extends PureComponent {
             width="490"
             height="180"
         >
-            <param name="movie" value="http://y1.ifengimg.com/a/2015/0310/a40afde56b53ef1.swf" />
+            <param name="movie" value="https://y1.ifengimg.com/a/2015/0310/a40afde56b53ef1.swf" />
             <param name="quality" value="high" />
             <param name="wmode" value="transparent" />
             <embed
-                src="http://y1.ifengimg.com/a/2015/0310/a40afde56b53ef1.swf"
+                src="https://y1.ifengimg.com/a/2015/0310/a40afde56b53ef1.swf"
                 width="490"
                 height="180"
                 quality="high"

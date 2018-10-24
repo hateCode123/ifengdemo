@@ -1,4 +1,4 @@
---platform pc --type view,edit,low --path finance/hk/
-  
+--platform pc --type view,edit,low --path finance/imarkets
+
 # --platform pc --type view,edit --path finance/stock
-# --platform pc --type view,edit,low 
+# --platform pc --type view,edit,low
