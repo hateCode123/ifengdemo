@@ -61,7 +61,6 @@ module.exports = (app, options = {}) => {
         data.router = this.urlinfo.path;
 
         await this.render(tplName, data);
-        console.log(this.kvList);
 
         if (config.default.statistics) {
             this.randerTime = process.uptime() * 1000 - randerStart;
@@ -158,7 +157,6 @@ function writeKvToQueue(ctx) {
 
 setInterval(function() {
     for (let item of set) {
-        console.log(item);
         redis.set(item, '1', 'EX', cacheTime);
         set.delete(item);
     }
