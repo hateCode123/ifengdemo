@@ -147,8 +147,8 @@ function writeKvToQueue(ctx) {
     process.nextTick(() => {
         for (let item of ctx.kvList) {
             set.add(
-                `${prefix}:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
-                    item.type != 'documents.' ? item.id : ':id'
+                `${prefix}:chip:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
+                    item.type != 'documents' ? item.id : ':id'
                 }`,
             );
         }
@@ -156,8 +156,17 @@ function writeKvToQueue(ctx) {
 }
 
 setInterval(function() {
+    var index = 0;
+    const size = set.size;
+    const start = process.uptime() * 1000;
     for (let item of set) {
-        redis.set(item, '1', 'EX', cacheTime);
-        set.delete(item);
+        redis.set(item, '1', 'EX', cacheTime, function() {
+            index++;
+            if (size == index) {
+                let time = process.uptime() * 1000 - start;
+                console.info({ chip: { size, time } });
+            }
+        });
     }
+    set.clear();
 }, 2 * 60 * 1000 + parseInt(Math.random() * 1000 * 60));
