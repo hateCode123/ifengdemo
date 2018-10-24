@@ -12,7 +12,7 @@ class Shares extends PureComponent {
             <div className={styles.shares}>
                 <iframe
                     className={styles.iframe}
-                    src="http://unews.fx678.com/union/HaoSTZ/EC/Fhw/FhwInterface.html"
+                    src="https://unews.fx678.com/union/HaoSTZ/EC/Fhw/FhwInterface.html"
                     scrolling="no"
                     frameBorder="0"
                 />
