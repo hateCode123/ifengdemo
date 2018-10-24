@@ -157,12 +157,13 @@ app.use(async (ctx, next) => {
     //         ctx.parseTime
     //     }ms] - domain: ${ctx.header.domain || ''}`,
     // );
-    console.info(ctx.headers);
+    // console.info(ctx.headers);
     logger.info({
         kpi: {
             sourcePath,
             method: ctx.method,
             path: ctx.originalUrl,
+            origin: ctx.headers['origin'],
             status: ctx.status,
             time: ctx.time,
             router: Number(ctx.routerTime),
