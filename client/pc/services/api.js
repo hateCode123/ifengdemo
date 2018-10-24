@@ -413,6 +413,23 @@ const getZhiboTitle = async () => {
     });
 };
 
+/**
+ * 港股首页搜索股票推荐接口
+ * @param {string} keyword
+ */
+const searchStockSuggest = async keyword => {
+    const timestamp = Date.parse(new Date());
+    const token = md5(`${timestamp}#ifeng`);
+
+    return await jsonp(
+        `http://ifeng.szfuit.com:83/hkquote/api/search.php?keyword=${keyword}&number=20&_callback=search_suggest&_timestamp=${timestamp}&_token=${token}`,
+        {
+            cache: false,
+            jsonpCallback: 'search_suggest',
+        },
+    );
+};
+
 export {
     getMyStockData,
     getStockData,
@@ -436,4 +453,5 @@ export {
     getQAData,
     getQADataTzgc,
     getZhiboTitle,
+    searchStockSuggest,
 };
