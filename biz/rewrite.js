@@ -12,12 +12,12 @@ const rewrite = (ctx, from, to) => {
 
 module.exports = async (ctx, next) => {
     let devicetype = ctx.headers['devicetype'] || 'pc';
+    let domain = ctx.headers['domain'] || '';
+    let domainPrefix = ctx.headers['domain'].replace(/\.\w+\.\w+$/, '').replace(/^test\./, '');
 
     if (devicetype === 'ie6') {
         return;
     }
-    // devicetype = 'ie78';
-
     ctx.set('deviceType', devicetype);
 
     // ctx.headers['domain'] = 'finance.ifeng.com';
@@ -26,27 +26,25 @@ module.exports = async (ctx, next) => {
     if (ctx.url.indexOf('visualediting/') > -1) {
         return (ctx.status = 404);
     }
-   
+
     if (/\/api\//.test(ctx.url)) {
-        // do nothing
-    } else if (/\/c\/channel/.test(ctx.url)) {
-        if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('ucms.ifeng.com') > -1) {
-            rewrite(ctx, /\/shank\/spring\/c\/channel/, `/${devicetype}/finance`);
-        } else if (devicetype === 'pc' || devicetype === 'mobile') {
-            rewrite(ctx, /\/c\/channel\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/finance/$1`);
-        } else if (devicetype === 'ie78') {
-            rewrite(ctx, /\/c\/channel\/([a-zA-Z0-9/-_]+)?/, '/pc/finance/$1/low');
+        return await next();
+    }
+
+    if (domain) {
+        if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1) {
+            if (devicetype === 'pc' || devicetype === 'mobile') {
+                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
+            } else if (devicetype === 'ie78') {
+                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/${domainPrefix}/$1/low');
+            }
+        } else if (domain.indexOf('shankapi.ifeng.com') > -1) {
+            rewrite(ctx, /\/(\w+)/, '/api');
+        } else if (domain.indexOf('ucms.ifeng.com') > -1) {
+            let originPrefix = ctx.headers['origin'].replace(/\.\w+\.\w+$/, '').replace(/^https?:\/\/(test\.)?/, '');
+
+            rewrite(ctx, /\/shank\/\w+/, `/${devicetype}/${originPrefix}`);
         }
-    } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('finance.ifeng.com') > -1) {
-        if (devicetype === 'pc' || devicetype === 'mobile') {
-            rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/finance/$1`);
-        } else if (devicetype === 'ie78') {
-            rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/finance/$1/low');
-        }
-    } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('shankapi.ifeng.com') > -1) {
-        rewrite(ctx, /\/(\w+)/, '/api');
-    } else if (ctx.headers['domain'] && ctx.headers['domain'].indexOf('ucms.ifeng.com') > -1) {
-        rewrite(ctx, /\/shank\/\w+/, `/${devicetype}/finance`);
     }
     await next();
 };
