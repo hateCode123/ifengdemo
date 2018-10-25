@@ -43,7 +43,7 @@ class Zhiboshi extends PureComponent {
     render() {
         return (
             <div className={styles.zhiboshi}>
-                <a className={styles.link} href="http://finance.ifeng.com/gold/zhibo/index.shtml" target="_blank">
+                <a className={styles.link} href="//finance.ifeng.com/gold/zhibo/index.shtml" target="_blank">
                     {this.state.title}
                 </a>
             </div>

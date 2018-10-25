@@ -46,7 +46,7 @@ const handler = async ctx => {
 
     // 处理新数据
     if ('topnews' in allData && 'newsstream' in allData) {
-        allData.newsstream = formatList(allData.newsstream.slice(0, 40));
+        allData.newsstream = formatList(allData.newsstream.slice(0, 36));
         allData.topnews = formatList(allData.topnews, true);
     }
 
@@ -95,7 +95,7 @@ const handler = async ctx => {
 };
 
 exports.gold = {
-    path: '/pc/finance/gold/test',
+    path: '/pc/finance/gold',
     method: 'get',
     type: 'html',
     edit: true,
@@ -106,7 +106,7 @@ exports.gold = {
 };
 
 exports.snapshots = {
-    path: '/pc/finance/gold/:snapshots?/:year?/:date?/test',
+    path: '/pc/finance/gold/:snapshots?/:year?/:date?',
     method: 'get',
     type: 'html',
     edit: true,

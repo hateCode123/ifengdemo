@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './index.css';
 import Chip from 'Chip';
-import Nav from '../../../../components/nav';
 import UserInfo from '@ifeng/ui_pc_userInfo';
+import styles from './index.css';
+import Nav from '../../../../components/nav';
 
 /**
  * 定义 Header 组件
@@ -17,7 +17,7 @@ class Header extends React.PureComponent {
 
         return (
             <div className={styles.nav_box}>
-                <div className={styles.main_nav}>
+                <div className={`${styles.main_nav} clearfix`}>
                     <Chip
                         id="10108"
                         type="static"
