@@ -95,7 +95,7 @@ const handler = async ctx => {
 };
 
 exports.gold = {
-    path: '/pc/finance/gold/test',
+    path: '/pc/finance/gold',
     method: 'get',
     type: 'html',
     edit: true,
@@ -106,7 +106,7 @@ exports.gold = {
 };
 
 exports.snapshots = {
-    path: '/pc/finance/gold/:snapshots?/:year?/:date?/test',
+    path: '/pc/finance/gold/:snapshots?/:year?/:date?',
     method: 'get',
     type: 'html',
     edit: true,
