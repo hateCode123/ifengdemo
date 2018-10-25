@@ -32,7 +32,6 @@
             }
         </script>
     <% } %>
-
     <script>
         var staticData = <%- JSON.stringify(staticData) %>;
 
@@ -48,7 +47,6 @@
             }
         }
     </script>
-
     <%- adData.adHead ? decodeURIComponent(adData.adHead) : undefined %>
 </head>
 <body>
@@ -70,7 +68,7 @@
             <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
         {{/each}}
     {{/if}}
-    <%- decodeURIComponent(adData.adBody) %>
+    <%- adData && adData.adBody ? decodeURIComponent(adData.adBody) : undefined %>
     <%- statisticsData.statisticsBody %>
 </body>
 </html>
