@@ -32,7 +32,7 @@ module.exports = async (ctx, next) => {
     }
 
     if (domain) {
-        if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1) {
+        if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1 && domainPrefix !== 'ucms') {
             if (devicetype === 'pc' || devicetype === 'mobile') {
                 rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
             } else if (devicetype === 'ie78') {
