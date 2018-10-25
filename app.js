@@ -163,7 +163,6 @@ app.use(async (ctx, next) => {
             sourcePath,
             method: ctx.method,
             path: ctx.originalUrl,
-            origin: ctx.headers['origin'],
             status: ctx.status,
             time: ctx.time,
             router: Number(ctx.routerTime),
