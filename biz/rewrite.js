@@ -33,18 +33,18 @@ module.exports = async (ctx, next) => {
     if (domain) {
         let domainPrefix = ctx.headers['domain'].replace(/\.\w+\.\w+$/, '').replace(/^test\./, '');
 
-        if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1 && domainPrefix !== 'ucms') {
-            if (devicetype === 'pc' || devicetype === 'mobile') {
-                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
-            } else if (devicetype === 'ie78') {
-                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/${domainPrefix}/$1/low');
-            }
-        } else if (domain.indexOf('shankapi.ifeng.com') > -1) {
+        if (domain.indexOf('shankapi.ifeng.com') > -1) {
             rewrite(ctx, /\/(\w+)/, '/api');
         } else if (domain.indexOf('ucms.ifeng.com') > -1) {
             let originPrefix = ctx.headers['origin'].replace(/\.\w+\.\w+$/, '').replace(/^https?:\/\/(test\.)?/, '');
 
             rewrite(ctx, /\/shank\/\w+/, `/${devicetype}/${originPrefix}`);
+        } else if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1) {
+            if (devicetype === 'pc' || devicetype === 'mobile') {
+                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
+            } else if (devicetype === 'ie78') {
+                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/${domainPrefix}/$1/low');
+            }
         }
     }
     await next();
