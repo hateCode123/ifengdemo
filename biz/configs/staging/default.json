@@ -15,9 +15,13 @@
     "JaegerSamplerType": "probabilistic",
     "JaegerSamplerParam": 0.1,
     "logs": {
-        "level": "info"
+        "level": "debug"
     },
-    "redisHosts": [],
+    "redisHosts": [
+        { "host": "10.21.7.23", "port": 7000 },
+        { "host": "10.21.7.23", "port": 7001 },
+        { "host": "10.21.7.23", "port": 7002 }
+    ],
     "blacklist": ["/controllers/black/black.js"],
     "cdnCacheTime": 120
 }

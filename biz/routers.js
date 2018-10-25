@@ -95,6 +95,7 @@ for (const i in routers) {
 
     // 缓存时间 (Number)，单位s
     const cache = routers[i].cache || 0;
+    const async_chips = routers[i].async_chips || [];
     const meddlewareList = [];
 
     if (_.isObject(schema)) {
@@ -152,6 +153,7 @@ for (const i in routers) {
                 routerObj.edit = true;
                 routerObj.preview = false;
                 routerObj.low = false;
+                routerObj.async_chips = async_chips;
 
                 routerList.push({
                     path: routerObj.path,

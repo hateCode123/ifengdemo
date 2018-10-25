@@ -1,0 +1,35 @@
+{
+    "KVProxy": {
+        "getAd": "ad",
+        "getAds": "ad",
+        "getCategories": "category",
+        "getCategory": "category",
+        "getCustom": "custom",
+        "getCustoms": "custom",
+        "getDocument": "documents",
+        "getDocuments": "documents",
+        "getDynamicFragment": "dynamic_fragment",
+        "getDynamicFragments": "dynamic_fragment",
+        "getListByWemediaEAccountId": "WEMEDIA_ACCOUNT",
+        "getListByWemediaEAccountIds": "WEMEDIA_ACCOUNT",
+        "getOther": "other",
+        "getOthers": "other",
+        "getRecommendFragment": "recommend",
+        "getRecommendFragments": "recommend",
+        "getSelectedPool": "selected_pool",
+        "getSelectedPools": "selected_pool",
+        "getSsiFragment": "ssi_fragment",
+        "getSsiFragments": "ssi_fragment",
+        "getStaticFragment": "static",
+        "getStaticFragments": "static",
+        "getStructuredFragment": "struct",
+        "getStructuredFragments": "struct",
+        "getSublistByWemediaEAccountId": "sublist",
+        "getSublistByWemediaEAccountIds": "sublist",
+        "getVideo": "video",
+        "getVideos": "video"
+    },
+    "SearchProxy": {
+
+    }
+}

@@ -100,6 +100,8 @@ app.use(async (ctx, next) => {
     ctx.rpcTimeList = [[], []];
     ctx.randerTime = 0;
     ctx.errorCount = 0;
+    ctx.rpcList = [];
+    ctx.kvList = [];
 
     ctx.set('shankTracerId', ctx.uuid);
     ctx.set('hostname', hostname);
@@ -155,10 +157,11 @@ app.use(async (ctx, next) => {
     //         ctx.parseTime
     //     }ms] - domain: ${ctx.header.domain || ''}`,
     // );
-
+    // console.info(ctx.headers);
     logger.info({
         kpi: {
             sourcePath,
+            method: ctx.method,
             path: ctx.originalUrl,
             status: ctx.status,
             time: ctx.time,
