@@ -10,6 +10,7 @@
     <%- statisticsData.statisticsHead %>
     <script id="__INITIAL_STATE__">
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var __chipsData = <%- JSON.stringify(kvList) %>;
     </script>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     {{{ htmlWebpackPlugin.options.polyfill }}}

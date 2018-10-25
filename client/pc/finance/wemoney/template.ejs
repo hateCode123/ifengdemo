@@ -9,6 +9,7 @@
     <%- statisticsData.statisticsHead %>
     <script>
         var __jsonData__ = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var __chipsData = <%- JSON.stringify(kvList) %>;
         var jsonData = {
             nav: __jsonData__.commonNav,
             navigation: __jsonData__.navigation,

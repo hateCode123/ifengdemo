@@ -13,6 +13,7 @@
     <script>
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
         var staticData = <%- JSON.stringify(staticData) %>;
+        var __chipsData = <%- JSON.stringify(kvList) %>;
 
 
         for (var key in staticData) {

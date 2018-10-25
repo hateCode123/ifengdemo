@@ -107,8 +107,8 @@ async function checkCrlffile() {
         '.*',
         '*',
         'bin/**/*',
-        ' biz/**/*',
-        ' static/**/*',
+        'biz/**/*',
+        'static/**/*',
         'webpackUtils/**/*',
         'client/**/*.{js,ejs,jsx,css}',
     ];

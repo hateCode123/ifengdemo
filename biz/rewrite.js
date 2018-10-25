@@ -13,7 +13,6 @@ const rewrite = (ctx, from, to) => {
 module.exports = async (ctx, next) => {
     let devicetype = ctx.headers['devicetype'] || 'pc';
     let domain = ctx.headers['domain'] || '';
-    let domainPrefix = ctx.headers['domain'].replace(/\.\w+\.\w+$/, '').replace(/^test\./, '');
 
     if (devicetype === 'ie6') {
         return;
@@ -32,6 +31,8 @@ module.exports = async (ctx, next) => {
     }
 
     if (domain) {
+        let domainPrefix = ctx.headers['domain'].replace(/\.\w+\.\w+$/, '').replace(/^test\./, '');
+
         if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1 && domainPrefix !== 'ucms') {
             if (devicetype === 'pc' || devicetype === 'mobile') {
                 rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
