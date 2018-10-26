@@ -181,8 +181,10 @@ var BJ_REPORT = (function(global) {
             
             if(t){
                 var times = {}
-                times.loadPage = t.loadEventEnd - (t.navigationStart||t.fetchStart);
-                times.domReady = t.domComplete - t.responseEnd;
+                // times.loadPage = t.loadEventEnd - (t.navigationStart||t.fetchStart);
+                times.loadPage = t.domComplete - t.fetchStart;
+                // times.domReady = t.domComplete - t.responseEnd;
+                times.domReady = t.domContentLoadedEventStart - t.fetchStart;
                 times.redirect = t.redirectEnd - t.redirectStart;
                 times.appcache = t.domainLookupStart - t.fetchStart;
                 times.dns = t.domainLookupEnd - t.domainLookupStart;
@@ -203,7 +205,14 @@ var BJ_REPORT = (function(global) {
                     
                     if(i==0 && fixed_perfs.length > 0){
                         fixed_perfs[0].duration = parseInt(perf.duration);
-                        fixed_perfs[0]._duration = parseInt(perf.responseEnd - perf.startTime);
+                        if( parseInt(perf.domComplete) > 0){
+                            fixed_perfs[0].loadPage = parseInt(perf.domComplete)
+                        }
+                        if( parseInt(perf.domContentLoadedEventEnd) > 0){
+                            fixed_perfs[0].domReady = parseInt(perf.domContentLoadedEventEnd)
+                        }
+                        
+                        // fixed_perfs[0]._duration = parseInt(perf.responseEnd - perf.startTime);
                         continue;
                     }
                   
