@@ -30,11 +30,11 @@ exports.financeWemoney = {
             ['slider', 'KVProxy', 'getStructuredFragment', 20034, getStringByKey('content')],
 
             // 广告
-            ['adAside1', 'KVProxy', 'getStaticFragment', 10021, getJson()],
-            ['adAside2', 'KVProxy', 'getStaticFragment', 10022, getJson()],
-            ['adAside3', 'KVProxy', 'getStaticFragment', 10023, getJson()],
-            ['adAside4', 'KVProxy', 'getStaticFragment', 10024, getJson()],
-            ['adAside5', 'KVProxy', 'getStaticFragment', 10025, getJson()],
+            ['adAside1', 'KVProxy', 'getStaticFragment', 10021, getStringByKey('content')],
+            ['adAside2', 'KVProxy', 'getStaticFragment', 10022, getStringByKey('content')],
+            ['adAside3', 'KVProxy', 'getStaticFragment', 10023, getStringByKey('content')],
+            ['adAside4', 'KVProxy', 'getStaticFragment', 10024, getStringByKey('content')],
+            ['adAside5', 'KVProxy', 'getStaticFragment', 10025, getStringByKey('content')],
 
             // 热门新闻标题
             ['hotNewsTitle', 'KVProxy', 'getStructuredFragment', 20033, getStringByKey('content')],
