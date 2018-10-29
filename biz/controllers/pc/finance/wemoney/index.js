@@ -4,7 +4,7 @@ const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
 
 exports.financeWemoney = {
-    path: '/pc/finance/wemoney/test',
+    path: '/pc/finance/wemoney',
     method: 'get',
     cache: 0,
     edit: true,
