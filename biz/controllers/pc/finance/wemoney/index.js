@@ -34,7 +34,7 @@ exports.financeWemoney = {
             ['adAside2', 'KVProxy', 'getStaticFragment', 10022, getStringByKey('content')],
             ['adAside3', 'KVProxy', 'getStaticFragment', 10023, getStringByKey('content')],
             ['adAside4', 'KVProxy', 'getStaticFragment', 10024, getStringByKey('content')],
-            ['adAside5', 'KVProxy', 'getStaticFragment', 10025, getStringByKey('content')],
+            // ['adAside5', 'KVProxy', 'getStaticFragment', 10025, getStringByKey('content')],
 
             // 热门新闻标题
             ['hotNewsTitle', 'KVProxy', 'getStructuredFragment', 20033, getStringByKey('content')],
@@ -44,6 +44,9 @@ exports.financeWemoney = {
 
             // 新闻列表
             ['info', 'KVProxy', 'getStructuredFragment', 20031, getStringByKey('content')],
+            
+            // 更多新闻链接
+            ['moreNews', 'KVProxy', 'getStructuredFragment', 30086, getStringByKey('content')],
 
             // 版权
             ['copyright', 'KVProxy', 'getStaticFragment', 10121, getStringByKey('content')],
