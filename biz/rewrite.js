@@ -43,7 +43,7 @@ module.exports = async (ctx, next) => {
             if (devicetype === 'pc' || devicetype === 'mobile') {
                 rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/${devicetype}/${domainPrefix}/$1`);
             } else if (devicetype === 'ie78') {
-                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, '/pc/${domainPrefix}/$1/low');
+                rewrite(ctx, /\/([a-zA-Z0-9/-_]+)?/, `/pc/${domainPrefix}/$1/low`);
             }
         }
     }
