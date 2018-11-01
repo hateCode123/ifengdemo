@@ -1,5 +1,5 @@
 const { transfer, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
-const { filterRecommendData, singlePicList } = require('../../../../../services/utils/utils');
+const { filterRecommendData, singlePicList, formatData } = require('../../../../../services/utils/utils');
 
 exports.list = {
     path: '/pc/finance/hk/test',
@@ -123,27 +123,27 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.hk_tt_withoutR = filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR).slice(0, 9);
+        allData.hk_tt_withoutR = formatData(filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR), 9, false, 100, 62);
 
-        allData.hk_dzgl_singlePic = singlePicList(allData.hk_dzgl_singlePic.slice(0, 4));
+        allData.hk_dzgl_singlePic = singlePicList(formatData(allData.hk_dzgl_singlePic, 4, true, 100, 62));
 
-        allData.hk_xgdp = allData.hk_xgdp.slice(0, 6);
+        allData.hk_xgdp = formatData(allData.hk_xgdp, 6, true);
 
-        allData.hk_xgpj = singlePicList(allData.hk_xgpj.slice(0, 4));
+        allData.hk_xgpj = singlePicList(formatData(allData.hk_xgpj, 4, true, 100, 62));
 
-        allData.hk_rdzt = singlePicList(allData.hk_rdzt.slice(0, 4));
+        allData.hk_rdzt = singlePicList(formatData(allData.hk_rdzt, 4, true, 100, 62));
 
-        allData.hk_ssgs = singlePicList(allData.hk_ssgs.slice(0, 4));
+        allData.hk_ssgs = singlePicList(formatData(allData.hk_ssgs, 4, true, 100, 62));
 
         allData.hk_ggyw = allData.hk_ggyw.slice(0, 8);
 
         allData.hk_mgyw = allData.hk_mgyw.slice(0, 8);
 
-        allData.hk_jgdt = singlePicList(allData.hk_jgdt.slice(0, 4));
+        allData.hk_jgdt = singlePicList(formatData(allData.hk_jgdt, 4, true, 100, 62));
 
-        allData.hk_ggxt = singlePicList(allData.hk_ggxt.slice(0, 4));
+        allData.hk_ggxt = singlePicList(formatData(allData.hk_ggxt, 4, true, 100, 62));
 
-        allData.hk_mjyhs = singlePicList(allData.hk_mjyhs.slice(0, 4));
+        allData.hk_mjyhs = singlePicList(formatData(allData.hk_mjyhs, 4, true, 100, 62));
 
         allData.hk_lzzx = singlePicList(allData.hk_lzzx.slice(0, 8));
 

@@ -54,7 +54,7 @@ class BannerMap extends React.PureComponent {
                         groupName="推荐位"
                         position="relative"
                         content={content}>
-                        <Slides config={config} />
+                        <Slides content={content} config={config} />
                     </Chip>
                 </div>
             </div>

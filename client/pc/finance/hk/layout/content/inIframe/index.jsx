@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 
 class InIframe extends React.PureComponent {
@@ -8,12 +7,31 @@ class InIframe extends React.PureComponent {
         content: PropTypes.object,
     };
 
-    render() {
+    appendIframe = parentNode => {
         const {
             content: { iframeSrc, width, height },
         } = this.props;
 
-        return <iframe src={iframeSrc} className={styles.frameBox} scrolling="no" width={width} height={height} />;
+        const newFrame = document.createElement('iframe');
+
+        newFrame.src = iframeSrc;
+        // FF、IE隐藏边框有效
+        newFrame.frameBorder = 0;
+        newFrame.scrolling = 'no';
+        newFrame.width = width;
+        newFrame.height = height;
+        newFrame.scrolling = 'no';
+        parentNode.appendChild(newFrame);
+    };
+
+    componentDidMount() {
+        const iframeDom = this.refs.iframe;
+
+        this.appendIframe(iframeDom);
+    }
+
+    render() {
+        return <div ref="iframe" />;
     }
 }
 

@@ -16,7 +16,7 @@ const filterRecommendData = (recommendData, originArray) => {
                 return;
             }
         });
-        
+
         return flag;
     });
 
@@ -43,7 +43,52 @@ const singlePicList = listData => {
     return [...haveThumbnail, ...noThumbnail];
 };
 
+const { formatUrl, formatImage } = require('@ifeng/public_method');
+
+/**
+ * 格式化数据
+ * @param {Array} dataArray 数组数据
+ * @param {Number} needNum 需要的条数
+ * @param {Boolean} picTileOnly 是否仅需要图片标题和链接，默认为false
+ * @param {Number} picWidth 图片宽，默认大图模式，宽698
+ * @param {Number} picHeight 图片高，默认大图模式，高392
+ */
+const formatData = (dataArray, needNum, picTileOnly = false, picWidth = 698, picHeight = 392) => {
+    const simpleFormatData = [];
+
+    // 容错处理
+    if (!dataArray) {
+        return [];
+    }
+    dataArray.forEach(item => {
+        const { id, newsTime, title, url, commentUrl, source } = item;
+        let thumbnail = '';
+
+        if (simpleFormatData.length < needNum) {
+            const { thumbnails, thumbnailsCount } = item;
+
+            thumbnail =
+                Number(thumbnailsCount) > 0
+                    ? thumbnails && thumbnails.image && thumbnails.image[0] && thumbnails.image[0].url
+                    : '';
+        }
+
+        simpleFormatData.push({
+            id: picTileOnly ? undefined : id,
+            newsTime: picTileOnly ? undefined : newsTime,
+            commentUrl: picTileOnly ? undefined : commentUrl,
+            source: picTileOnly ? undefined : source,
+            title,
+            url: formatUrl(url),
+            thumbnail: thumbnail ? formatImage(thumbnail, picWidth, picHeight) : thumbnail,
+        });
+    });
+
+    return simpleFormatData;
+};
+
 module.exports = {
     filterRecommendData,
-    singlePicList
+    singlePicList,
+    formatData,
 };
