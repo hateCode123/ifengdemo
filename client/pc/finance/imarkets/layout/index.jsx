@@ -6,13 +6,13 @@ import ChipEdit from 'ChipEdit';
 import transform from 'chipDataTransform';
 import Header from './header';
 import Logo from './logo';
-import Tools from './tools';
+import Tools from './tool';
 import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from '../components/newsStream';
 import Question from './question';
 import HotTopic from './hot-topic';
-import CalenderBox from './CalenderBox';
+import CalenderBox from './calenderBox';
 import SuspendedAd from '../components/suspended-ad';
 import FooterBox from './footerbox';
 import GoToTop from '../components/go-to-top';
@@ -27,9 +27,7 @@ class Layout extends PureComponent {
         const headerData = {
             nav: content.nav,
         };
-        const newDisplayData = {
-            topnews: content.topnews,
-        };
+        const newDisplayData = content.topnews;
         const newsStreamData = content.newsstream;
         const hotTopicData = {
             hottopic: content.hottopic,
@@ -54,7 +52,9 @@ class Layout extends PureComponent {
                     <Shares />
                     <div className={styles.main_middle}>
                         {/* 新闻展示 */}
-                        <NewsDisplay content={newDisplayData} />
+                        <Chip id={55069} content={newDisplayData} type="recommend" title="推荐位" groupName="推荐位">
+                            <NewsDisplay />
+                        </Chip>
                         {/* 新闻流 */}
                         <NewsStream content={newsStreamData} />
                     </div>

@@ -1,0 +1,19 @@
+.list {
+    height: 28px;
+    line-height: 28px;
+    background: url(./dian01.jpg) no-repeat 0 center;
+    padding-left: 12px;
+    overflow: hidden;
+    font-size: 14px;
+    & a {
+        color: #3b3a3b;
+    }
+    & a:hover {
+        cursor: pointer;
+        color: #f54343;
+    }
+}
+
+.bold {
+    font-weight: bold;
+}

@@ -61,23 +61,43 @@ class Layout extends React.PureComponent {
                                 content={content.slider}>
                                 <SimpleSlider />
                             </Chip>
-                            <Chip
-                                id="20031"
-                                type="struct"
-                                title="新闻列表"
-                                groupName="leftContent"
-                                content={content.info}>
-                                <NewsList />
-                            </Chip>
+                            <NewsList content={content.info} moreNews={content.moreNews} />
                         </div>
 
                         <div className={styles.bodyRightCon}>
                             <HotNews content={hotNewsData} />
-                            <AdAside content={content.adAside1} />
-                            <AdAside content={content.adAside2} />
-                            <AdAside content={content.adAside3} />
-                            <AdAside content={content.adAside4} />
-                            <AdAside content={content.adAside5} />
+                            <Chip
+                                id="10021"
+                                type="static"
+                                title="右侧广告1"
+                                groupName="rightContent"
+                                content={content.adAside1}>
+                                <AdAside />
+                            </Chip>
+                            <Chip
+                                id="10022"
+                                type="static"
+                                title="右侧广告2"
+                                groupName="rightContent"
+                                content={content.adAside2}>
+                                <AdAside />
+                            </Chip>
+                            <Chip
+                                id="10023"
+                                type="static"
+                                title="右侧广告3"
+                                groupName="rightContent"
+                                content={content.adAside3}>
+                                <AdAside />
+                            </Chip>
+                            <Chip
+                                id="10024"
+                                type="static"
+                                title="右侧广告4"
+                                groupName="rightContent"
+                                content={content.adAside4}>
+                                <AdAside />
+                            </Chip>
                         </div>
                     </div>
                 </div>

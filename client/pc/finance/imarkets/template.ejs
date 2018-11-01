@@ -7,8 +7,10 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>凤凰国际iMarkets_为国际金融投资者提供最专业的金融市场资讯服务</title>
+    <%- statisticsData.statisticsHead %>
     <script id="__INITIAL_STATE__">
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var __chipsData = <%- JSON.stringify(kvList) %>;
     </script>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
@@ -32,7 +34,6 @@
             }
         </script>
     <% } %>
-
     <script>
         var staticData = <%- JSON.stringify(staticData) %>;
 
@@ -48,7 +49,6 @@
             }
         }
     </script>
-
     <%- adData.adHead ? decodeURIComponent(adData.adHead) : undefined %>
 </head>
 <body>
@@ -70,7 +70,7 @@
             <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
         {{/each}}
     {{/if}}
-    <%- decodeURIComponent(adData.adBody) %>
+    <%- adData && adData.adBody ? decodeURIComponent(adData.adBody) : undefined %>
     <%- statisticsData.statisticsBody %>
 </body>
 </html>

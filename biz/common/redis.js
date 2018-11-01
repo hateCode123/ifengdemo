@@ -1,6 +1,6 @@
-// const Redis = require('ioredis');
-// const config = require('../configs');
+const Redis = require('ioredis');
+const config = require('../configs');
 
-// const client = new Redis.Cluster(config.default.redisHosts);
+const client = new Redis.Cluster(config.default.redisHosts);
 
-// module.exports = client;
+module.exports = client;

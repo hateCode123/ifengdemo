@@ -1,0 +1,52 @@
+.tools_box {
+    margin-bottom: 19px;
+    background: url('./bg-green.jpg') repeat-y center top;
+}
+.tools_main {
+    width: 1000px;
+    height: 81px;
+    margin: 0 auto;
+}
+/* 通用的直播按钮样式 */
+a.zhibo_link {
+    display: block;
+    float: left;
+    position: relative;
+    padding: 0 43px 0 16px;
+    height: 100%;
+    line-height: 81px;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+        color: #fff;
+        background-color: #1a8068;
+    }
+}
+.ml14 {
+    margin-left: 14px;
+}
+.play {
+    position: absolute;
+    top: 33px;
+    right: 16px;
+    display: block;
+    margin-left: 8px;
+    width: 18px;
+    height: 18px;
+    background-image: url('./play.png');
+}
+.earth {
+    display: inline-block;
+}
+.earth {
+    width: 33px;
+    height: 32px;
+    background-image: url('./earth.png');
+}
+.link_title {
+    margin-left: 9px;
+    font-size: 24px;
+    vertical-align: 7px;
+    font-weight: bold;
+}

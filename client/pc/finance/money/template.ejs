@@ -22,6 +22,7 @@
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
         var adData = <%- JSON.stringify(adData) %>;
         var staticData = <%- JSON.stringify(staticData) %>;
+        var __chipsData = <%- JSON.stringify(kvList) %>;
 
         for (var key in adData) {
             try{

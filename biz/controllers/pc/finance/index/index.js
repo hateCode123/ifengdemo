@@ -19,25 +19,33 @@ exports.list = {
     low: true,
     preview: true,
     online: true,
+    async_chips: [
+        ['stockLogoAd:财经 - 股票首页 - 股票LogoAd', 'KVProxy', 'getDynamicFragment', 20038],
+        ['rankings:wemoney-热门新闻排行', 'KVProxy', 'getDynamicFragment', 20032],
+        ['secNav:财经 - 股票首页 - 二级导航', 'KVProxy', 'getDynamicFragment', 20040],
+        ['hotTitle:wemoney - 热门新闻排行标题', 'KVProxy', 'getDynamicFragment', 20033],
+        ['navBar:财经 - 股票首页 - 导航栏', 'KVProxy', 'getDynamicFragment', 20039],
+        ['custom:凤凰财经', 'KVProxy', 'getCustom', '17007_719_68'],
+    ],
     handler: async ctx => {
         const json = [
             // 统计代码 Head 片段
-            ['statisticsHead', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+            ['statisticsHead:统计代码 Head 片段', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
 
             // 统计代码 Body 片段
-            ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
+            ['statisticsBody:统计代码 Body 片段', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
 
             // 通用导航
-            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
+            ['nav:通用导航', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             // 搜索
-            ['search', 'KVProxy', 'getStructuredFragment', 20005, getStringByKey('content')],
+            ['search:搜索', 'KVProxy', 'getStructuredFragment', 20005, getStringByKey('content')],
 
             // Logo
-            ['logo', 'KVProxy', 'getStructuredFragment', 20006, getStringByKey('content')],
+            ['logo:Logo', 'KVProxy', 'getStructuredFragment', 20006, getStringByKey('content')],
 
             // Logo Ad
-            ['logoAd', 'KVProxy', 'getStructuredFragment', 20007, getStringByKey('content')],
+            ['logoAd:Logo Ad', 'KVProxy', 'getStructuredFragment', 20007, getStringByKey('content')],
 
             // 财经首页导航
             ['navigation', 'KVProxy', 'getStructuredFragment', 20008, getStringByKey('content')],
@@ -91,7 +99,7 @@ exports.list = {
             ['lark', 'KVProxy', 'getDynamicFragment', '20031', getStringByKey('data')],
 
             // 专题会议
-            ['meeting', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
+            ['meeting:专题会议', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
             // 底部合作链接
             ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],

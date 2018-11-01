@@ -29,11 +29,11 @@ class RightContent extends React.PureComponent {
             <div className={styles.col_R}>
                 {content.financeVideo.length > 0 ? (
                     <React.Fragment>
-                        <BoxTitle url="#" title="财经视频" />
+                        <BoxTitle url="#" title="财经推荐" />
                         <Chip
                             id="55016"
                             type="recommend"
-                            title="财经视频"
+                            title="财经推荐"
                             groupName="正文"
                             position="relative"
                             translate="handleFinanceVideoData"
@@ -46,7 +46,7 @@ class RightContent extends React.PureComponent {
                 )}
                 <Ad content={content.asideAd1} styleName={styles.box_1} />
                 <div className={styles.box_finance}>
-                    <BoxTitle url="#" title="财经智库" />
+                    <BoxTitle url="#" title="策划 · 智库" />
                     <ul className={`${styles.list} clearfix`}>
                         <ThinkTank tip="研究院" content={content.institute} />
                         <ThinkTank tip="国子策" content={content.lark} />
@@ -54,7 +54,7 @@ class RightContent extends React.PureComponent {
                 </div>
                 <Ad content={content.asideAd2} styleName={styles.box_2} />
                 <div className={styles.meeting}>
-                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题·会议">
+                    <BoxTitle url="//finance.ifeng.com/zhuanti/" title="专题 · 会议">
                         <Ad content={content.meetingAd} styleName={styles.meetingAd} />
                     </BoxTitle>
                     <Meeting content={content.meeting} ad={content.meetingListAd} />

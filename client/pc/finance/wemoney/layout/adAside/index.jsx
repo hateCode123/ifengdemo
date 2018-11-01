@@ -16,14 +16,7 @@ class AdAside extends React.PureComponent {
 
         return (
             <div>
-                <Chip
-                    id={`${content.id}`}
-                    type="static"
-                    title={content.name}
-                    groupName="rightContent"
-                    content={content.content}>
-                    <Recommend />
-                </Chip>
+                <Recommend content={content} />
             </div>
         );
     }
@@ -32,7 +25,7 @@ class AdAside extends React.PureComponent {
 /**
  * 定义组件属性类型
  * */
-AdAside.propTypes = { content: PropTypes.object };
+AdAside.propTypes = { content: PropTypes.string };
 
 /**
  * 定义组件默认属性

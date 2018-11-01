@@ -242,7 +242,7 @@ class NewsStream extends PureComponent {
                     <div className={styles.more_box}>
                         <a
                             className={styles.more}
-                            href="http://finance.ifeng.com/listpage/794/1/list.shtml"
+                            href="//finance.ifeng.com/listpage/794/1/list.shtml"
                             target="_blank"
                             rel={relText}>
                             查看更多新闻

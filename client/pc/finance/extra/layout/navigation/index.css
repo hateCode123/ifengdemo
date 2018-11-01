@@ -1,0 +1,41 @@
+.col_box {
+    position: relative;
+    background: #f54343;
+    width: 100%;
+    margin: 0 auto;
+    height: 39px;
+}
+
+.col_navlist {
+    width: 998px;
+    margin: 0 auto;
+    height: 39px;
+    & ul {
+        background: url(./line05.jpg) left top no-repeat;
+        height: 39px;
+        overflow: hidden;
+        & li {
+            font-size: 14px;
+            height: 39px;
+            line-height: 39px;
+            background: url(./line05.jpg) right top no-repeat;
+            padding: 0 12px 0 12px;
+            float: left;
+            & a {
+                color: #fff;
+            }
+        }
+        & a:hover {
+            color: #ffc200;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
+
+.pa {
+    padding: 0 35px;
+    & a {
+        color: #ffc200;
+    }
+}

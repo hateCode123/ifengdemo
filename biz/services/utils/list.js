@@ -28,15 +28,3 @@ const formatList = function formatList (list, simpler = false) {
 };
 
 exports.formatList = formatList;
-
-/* 格式化imarkets数据并返回指定数量的数据 */
-exports.imarketslist = function imarketslist(list, noFormat = false) {
-    const topnews = [];
-    const newsstream = [];
-
-    // 置顶新闻
-    topnews.push(...noFormat ? list.slice(0, 6) : formatList(list.slice(0, 6), true));
-    newsstream.push(...noFormat ? list.slice(7, 7 + 36) : formatList(list.slice(7, 7 + 36)));
-
-    return { topnews, newsstream };
-};

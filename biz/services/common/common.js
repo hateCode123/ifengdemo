@@ -380,16 +380,18 @@ const transfer = async (ctx, json) => {
     const map = new Tars.Map(Tars.String, Tars.List(Tars.String));
 
     for (const item of json) {
-        backData[item[0]] = [];
+        let kv_key = item[0].split(':')[0];
+
+        backData[kv_key] = [];
         const key = getAction(`${item[1]}.${item[2]}`);
 
         if (!obj[key]) {
             obj[key] = {};
         }
         if (!obj[key][item[3]]) {
-            obj[key][item[3]] = [{ name: item[0], handle: item[4], schemaKey: item[5] }];
+            obj[key][item[3]] = [{ name: kv_key, handle: item[4], schemaKey: item[5] }];
         } else {
-            obj[key][item[3]].push({ name: item[0], handle: item[4], schemaKey: item[5] });
+            obj[key][item[3]].push({ name: kv_key, handle: item[4], schemaKey: item[5] });
         }
     }
 
@@ -414,9 +416,9 @@ const transfer = async (ctx, json) => {
             // logger.info(`${ctx.uuid}: ${JSON.stringify(carrier)}`);
 
             // 如果有span ，则传递给 tars
-            result = await KVProxy.getAllWithTracer(ctx, map, JSON.stringify(carrier));
+            result = await KVProxy.getAllWithTracer(ctx, json, map, JSON.stringify(carrier));
         } else {
-            result = await KVProxy.getAll(ctx, map);
+            result = await KVProxy.getAll(ctx, json, map);
         }
 
         //
@@ -453,6 +455,8 @@ const transfer = async (ctx, json) => {
             for (const item of obj[key][id]) {
 
                 const itemkey = item.name;
+
+                // console.log(itemkey);
                 const handle = item.handle;
                 const schemaKey = item.schemaKey;
 
