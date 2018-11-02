@@ -60,7 +60,9 @@ const formatData = (dataArray, needNum, picTileOnly = false, picWidth = 698, pic
     if (!dataArray) {
         return [];
     }
-    dataArray.forEach(item => {
+
+    for (let i = 0, len = dataArray.length; i < len; i++) {
+        const item = dataArray[i];
         const { id, newsTime, title, url, commentUrl, source } = item;
         let thumbnail = '';
 
@@ -71,18 +73,20 @@ const formatData = (dataArray, needNum, picTileOnly = false, picWidth = 698, pic
                 Number(thumbnailsCount) > 0
                     ? thumbnails && thumbnails.image && thumbnails.image[0] && thumbnails.image[0].url
                     : '';
+            simpleFormatData.push({
+                id: picTileOnly ? undefined : id,
+                newsTime: picTileOnly ? undefined : newsTime,
+                commentUrl: picTileOnly ? undefined : commentUrl,
+                source: picTileOnly ? undefined : source,
+                title,
+                url: formatUrl(url),
+                thumbnail: thumbnail ? formatImage(thumbnail, picWidth, picHeight) : thumbnail,
+            });
+        } else {
+            // 避免造成性能浪费
+            break;
         }
-
-        simpleFormatData.push({
-            id: picTileOnly ? undefined : id,
-            newsTime: picTileOnly ? undefined : newsTime,
-            commentUrl: picTileOnly ? undefined : commentUrl,
-            source: picTileOnly ? undefined : source,
-            title,
-            url: formatUrl(url),
-            thumbnail: thumbnail ? formatImage(thumbnail, picWidth, picHeight) : thumbnail,
-        });
-    });
+    }
 
     return simpleFormatData;
 };
