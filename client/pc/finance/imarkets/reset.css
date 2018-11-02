@@ -94,15 +94,9 @@ a {
     text-decoration: none;
 }
 a:hover {
+    color: #ba2636;
     text-decoration: underline;
 }
-a:link {
-    color: #004276;
-}
-a:hover {
-    color: #ba2636;
-}
-
 :global {
     & .clear {
         clear: both;

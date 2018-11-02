@@ -30,6 +30,7 @@ class NewsStream extends PureComponent {
     countMap = {}; // 文章评论数，渲染list后清空
     state = {
         content: this.props.content,
+        countMapCache: {},
     };
 
     componentDidMount() {
@@ -41,6 +42,7 @@ class NewsStream extends PureComponent {
             // 生成评论地址的数组
             const urlArr = [];
             const keys = [];
+            const { countMapCache, content } = this.state;
 
             for (const key in this.countMap) {
                 keys.push(key);
@@ -49,15 +51,11 @@ class NewsStream extends PureComponent {
 
             const data = await getCommentCount(urlArr);
 
-            for (let i = 0, j = data.length; i < j; i++) {
-                const item = data[i];
-
-                this.countMap[keys[i]].allcount = item.allcount;
-            }
-
-            this.setState({
-                content: this.state.content,
+            data.forEach((value, index) => {
+                countMapCache[keys[index]] = value.allcount;
             });
+
+            this.setState({ countMapCache: { ...countMapCache } });
         } catch (err) {
             console.error(err);
         }
@@ -73,6 +71,7 @@ class NewsStream extends PureComponent {
     // 3图模式渲染
     threeImageItemView(item, url, pinglunUrl) {
         const image = item.thumbnails.image;
+        const { countMapCache } = this.state;
 
         return (
             <li
@@ -110,7 +109,7 @@ class NewsStream extends PureComponent {
                     ) : null}
                     <time className={styles.text}>{formatTime(item.newsTime)}</time>
                     <a className={styles.ly} href={pinglunUrl} title={item.title} target="_blank" rel={relText}>
-                        {item.allcount || 0}
+                        {(item.commentUrl && countMapCache[item.id]) || 0}
                     </a>
                 </div>
             </li>
@@ -119,6 +118,7 @@ class NewsStream extends PureComponent {
     // 1图模式渲染
     oneImageItemView(item, url, pinglunUrl) {
         const image = item.thumbnails.image;
+        const { countMapCache } = this.state;
 
         return (
             <li
@@ -133,7 +133,7 @@ class NewsStream extends PureComponent {
                     <img src={formatImage(image[0].url, 144, 80)} />
                 </a>
                 <div className={styles.news_item_infor}>
-                    <h2 className={`${styles.news_item_title} ${styles.mb34}`}>
+                    <h2 className={`${styles.news_item_title} ${styles.mb16} ${styles.h50}`}>
                         <a href={url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
@@ -145,7 +145,7 @@ class NewsStream extends PureComponent {
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
                         <a className={styles.ly} href={pinglunUrl} target="_blank" rel={relText}>
-                            {item.allcount || 0}
+                            {(item.commentUrl && countMapCache[item.id]) || 0}
                         </a>
                     </div>
                 </div>
@@ -154,13 +154,15 @@ class NewsStream extends PureComponent {
     }
     // 无图模式
     noImageItemView(item, url, pinglunUrl) {
+        const { countMapCache } = this.state;
+
         return (
             <li
                 key={`${item.id}_${item.creator}_${item.newsTime}`}
                 className={`${styles.news_item_no_image} clearfix`}
                 data-id={item.id}>
                 <div className={styles.news_item_infor}>
-                    <h2 className={`${styles.news_item_title} ${styles.mb34}`}>
+                    <h2 className={`${styles.news_item_title} ${styles.mb16} ${styles.h50}`}>
                         <a href={url} title={item.title} target="_blank" rel={relText}>
                             {item.title}
                         </a>
@@ -172,7 +174,7 @@ class NewsStream extends PureComponent {
                         ) : null}
                         <time className={styles.text}>{formatTime(item.newsTime)}</time>
                         <a className={styles.ly} href={pinglunUrl} target="_blank" rel={relText}>
-                            {item.allcount || 0}
+                            {(item.commentUrl && countMapCache[item.id]) || 0}
                         </a>
                     </div>
                 </div>
@@ -186,17 +188,15 @@ class NewsStream extends PureComponent {
 
         return list.map((item, index) => {
             // 将已渲染id加入到数组
-            const idKey = `list_${item.id}`;
 
-            id.push(idKey);
+            id.push(item.id);
 
             // 格式化url
             const url = formatUrl(item.url);
 
             // 评论
-            if (!(idKey in this.countMapCache)) {
-                this.countMapCache[idKey] = item;
-                this.countMap[idKey] = item;
+            if (!(item.id in this.countMapCache)) {
+                this.countMap[item.id] = item;
             }
 
             // 评论地址

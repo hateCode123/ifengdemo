@@ -86,7 +86,7 @@
     width: 100%;
 }
 .news_item_title {
-    height: 26px;
+    max-height: 50px;
     font-size: 18px;
     line-height: 26px;
     font-weight: bold;
@@ -100,8 +100,8 @@
         }
     }
 }
-.mb34 {
-    margin-bottom: 34px;
+.h50 {
+    height: 50px;
 }
 .mb16 {
     margin-bottom: 16px;
