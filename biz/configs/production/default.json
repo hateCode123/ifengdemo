@@ -17,7 +17,9 @@
     "logs": {
         "level": "info"
     },
-    "redisHosts": [],
+    "redisHosts": [
+        { "host": "shank-redis-ha-master-svc.test-k8s-loda.svc.cluster.local", "port": 6379 }
+    ],
     "blacklist": ["/controllers/black/black.js"],
     "cdnCacheTime": 120
 }

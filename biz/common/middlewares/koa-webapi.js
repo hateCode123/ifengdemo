@@ -70,6 +70,9 @@ module.exports = (app, options = {}) => {
             child.finish();
             this.spanrpc.finish();
         }
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend json function
@@ -93,6 +96,9 @@ module.exports = (app, options = {}) => {
 
         this.type = contentType;
         this.body = response;
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend jsonp function
@@ -119,11 +125,13 @@ module.exports = (app, options = {}) => {
             response = { code, message, data };
         }
 
-
         response = `${callback}(${JSON.stringify(response)})`;
 
         this.type = contentType;
         this.body = response;
+
+        // 将kv放入队列
+        writeKvToQueue(this);
     };
 
     // extend error function
@@ -131,3 +139,35 @@ module.exports = (app, options = {}) => {
         this.status = status || 404;
     };
 };
+
+const set = new Set();
+const prefix = `${config.default.namespace}:${config.default.appname}`;
+const cacheTime = 7 * 24 * 60 * 60;
+function writeKvToQueue(ctx) {
+    process.nextTick(() => {
+        for (let item of ctx.kvList) {
+            set.add(
+                `${prefix}:chip:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
+                    item.type != 'documents.' ? item.id : ':id'
+                }`,
+            );
+        }
+    });
+}
+
+setInterval(function() {
+    let index = 0;
+    const size = set.size;
+    const start = process.uptime() * 1000;
+    for (let item of set) {
+        // console.log(item);
+        redis.set(item, '1', 'EX', cacheTime, () => {
+            index++;
+            if (size == index) {
+                let time = process.uptime() * 1000 - start;
+                console.info({ chip: { size, time } });
+            }
+        });
+    }
+    set.clear();
+}, 2 * 60 * 1000 + parseInt(Math.random() * 1000 * 60));
