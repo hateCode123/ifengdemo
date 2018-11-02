@@ -21,7 +21,7 @@ class Shares extends PureComponent {
                 <div dangerouslySetInnerHTML={{ __html: this.iframe }} />
                 <p>
                     数据来源：
-                    <a href="http://www.fx678.com/" target="_blank">
+                    <a className={styles.laiyuan} href="http://www.fx678.com/" target="_blank">
                         汇通网
                     </a>
                 </p>

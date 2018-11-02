@@ -2,26 +2,24 @@
  * 后台服务入口
  */
 const logger = require('./biz/common/logger');
-const { tracer, jaegerInit } = require('./biz/common/jaeger');
-const { Tags } = require('opentracing');
+const { jaegerInit } = require('./biz/common/jaeger');
 const config = require('./biz/configs');
 const Koa = require('koa');
 const path = require('path');
 const onerror = require('koa-onerror');
 const json = require('koa-json');
 const bodyParser = require('koa-bodyparser');
-const Timers = require('./biz/common/utils/timers');
 const koaStatic = require('koa-static');
 const routers = require('./biz/routers');
 const rewrite = require('./biz/rewrite');
-const prevent = require('./biz/common/prevent');
+// const prevent = require('./biz/common/prevent');
 const _ = require('lodash');
 const uuid = require('uuid/v1');
 const moment = require('moment');
 const os = require('os');
 const hostname = os.hostname();
 const pid = process.pid;
-const gracefulShutdown = require('./biz/common/shutdown');
+// const gracefulShutdown = require('./biz/common/shutdown');
 
 // 普罗米修斯
 const { promInit } = require('./biz/common/prom');
@@ -204,23 +202,30 @@ app.use(rewrite);
 // 加载路由
 app.use(routers.routes(), routers.allowedMethods());
 
-const cleanup = () => {
-    return new Promise(resolve => {
-        console.log('... in cleanup');
-        setTimeout(() => {
-            console.log('... cleanup finished');
-            resolve();
-        }, 1000);
-    });
-};
-
 // this enables the graceful shutdown with advanced options
-gracefulShutdown(server, {
-    signals: 'SIGINT SIGTERM',
-    timeout: 30000,
-    development: false,
-    onShutdown: cleanup,
-    finally: () => {
-        console.log('Server gracefulls shutted down.....');
-    },
+// gracefulShutdown(server, {
+//     signals: 'SIGINT SIGTERM',
+//     timeout: 30000,
+//     development: false,
+//     onShutdown: () => {
+//         return new Promise(resolve => {
+//             console.log('... in cleanup');
+//             setTimeout(() => {
+//                 console.log('... cleanup finished');
+//                 resolve();
+//             }, 1000);
+//         });
+//     },
+//     finally: () => {
+//         console.log('Server gracefulls shutted down.....');
+//     },
+// });
+['SIGINT', 'SIGTERM'].forEach(signal => {
+    process.on(signal, () => {
+        console.info({ signal });
+        setTimeout(() => {
+            console.info({ signal: 'process.exit' });
+            process.exit();
+        }, 20000);
+    });
 });
