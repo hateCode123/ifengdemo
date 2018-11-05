@@ -37,4 +37,5 @@ module.exports = {
             title: item.title,
         }));
     },
+    getTop3: data => data.slice(0, 3),
 };

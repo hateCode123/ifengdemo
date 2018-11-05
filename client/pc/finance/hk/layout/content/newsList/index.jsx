@@ -35,6 +35,7 @@ class NewsList extends React.PureComponent {
                         type="recommend"
                         title={recommendName}
                         groupName="信息流头部推荐位"
+                        translate="getTop3"
                         content={recommendData}>
                         <PureList />
                     </Chip>

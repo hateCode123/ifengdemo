@@ -1,5 +1,6 @@
 const { transfer, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
 const { filterRecommendData, singlePicList, formatData } = require('../../../../../services/utils/utils');
+const { getTop3 } = require('../../../../../common/transform.js');
 
 exports.list = {
     path: '/pc/finance/hk/test',
@@ -124,6 +125,8 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         allData.hk_tt_withoutR = formatData(filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR), 9, false, 100, 62);
+
+        allData.hk_tt_recommend = getTop3(allData.hk_tt_recommend);
 
         allData.hk_dzgl_singlePic = singlePicList(formatData(allData.hk_dzgl_singlePic, 4, true, 100, 62));
 

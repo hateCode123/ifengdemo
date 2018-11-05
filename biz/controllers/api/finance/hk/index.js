@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
-const { handleJson } = require('../../../../services/common/common');
+const { transfer, handleJson, getStringByKey } = require('../../../../services/common/common');
 
 /**
  * 根据股票名称获取相关新闻、公司要闻、公司公告
@@ -118,6 +118,43 @@ exports.getHKFocusNews = {
         });
 
         res.data = returnList;
+
+        if (ctx.params.callback) {
+            ctx.jsonp(res);
+        } else {
+            ctx.json(res);
+        }
+    },
+};
+
+exports.getHKIndexAd = {
+    path: '/api/finance/hk/getHKIndexAd/:callback?',
+    method: 'get',
+    type: 'jsonp',
+    cdncache: 120,
+    online: true,
+    handler: async ctx => {
+        const json = [
+            // 左侧对联广告
+            ['ad_couplet_left', 'KVProxy', 'getStructuredFragment', 30039, getStringByKey('content')],
+
+            // 右侧对联广告
+            ['ad_couplet_right', 'KVProxy', 'getStructuredFragment', 30040, getStringByKey('content')],
+
+            // 顶部通栏广告
+            ['ad_top_banner', 'KVProxy', 'getStructuredFragment', 30010, getStringByKey('content')],
+
+            // 中部通栏广告01
+            ['ad_middle_banner_01', 'KVProxy', 'getStructuredFragment', 30011, getStringByKey('content')],
+
+            // 中部通栏广告02
+            ['ad_middle_banner_02', 'KVProxy', 'getStructuredFragment', 30013, getStringByKey('content')],
+
+            // 底部通栏广告
+            ['ad_bottom_banner', 'KVProxy', 'getStructuredFragment', 30014, getStringByKey('content')],
+        ];
+
+        const res = await transfer(ctx, json);
 
         if (ctx.params.callback) {
             ctx.jsonp(res);
