@@ -36,7 +36,8 @@ module.exports = async (ctx, next) => {
         if (domain.indexOf('shankapi.ifeng.com') > -1) {
             rewrite(ctx, /\/(\w+)/, '/api');
         } else if (domain.indexOf('ucms.ifeng.com') > -1) {
-            let originPrefix = ctx.headers['origin'].replace(/\.\w+\.\w+$/, '').replace(/^https?:\/\/(test\.)?/, '');
+            let origin = ctx.headers['origin'] || '';
+            let originPrefix = origin.replace(/\.\w+\.\w+$/, '').replace(/^https?:\/\/(test\.)?/, '');
 
             rewrite(ctx, /\/shank\/\w+/, `/${devicetype}/${originPrefix}`);
         } else if (domain.indexOf(`${domainPrefix}.ifeng.com`) > -1) {
