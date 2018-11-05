@@ -59,15 +59,25 @@ const getSkey = (title, pcUrl) => {
  * @param {string} time 新闻时间
  */
 const handleNewstime = time => {
-    const d = new Date();
+    try {
+        if (!time) {
+            return time;
+        }
 
-    time = time.substr(0, time.length - 3);
-    const year = Number(time.split('-')[0]);
+        const d = new Date();
 
-    if (year < d.getFullYear()) {
+        time = time.substr(0, time.length - 3);
+        const year = Number(time.split('-')[0]);
+
+        if (year < d.getFullYear()) {
+            return time;
+        } else {
+            return time.substr(5, time.length);
+        }
+    } catch (e) {
+        console.error(e);
+
         return time;
-    } else {
-        return time.substr(5, time.length);
     }
 };
 
