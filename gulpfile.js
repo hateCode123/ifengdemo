@@ -18,23 +18,24 @@ const _edit_inject_html = `
 <head>
 <script>
     try {
+        document.getElementsByTagName('html')[0].style.visibility = 'hidden';
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://ucms.ifeng.com/api/heartbeat', false);
+        xhr.open('GET', 'https://ucms.ifeng.com/api/heartbeat', true);
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    
-                } else {
-                    window.location.href=window.location.href.split('/visualediting').join('');
-                }
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                document.getElementsByTagName('html')[0].style.visibility = '';
+            } else {
+                window.location.href=window.location.href.split('/visualediting').join('');
             }
+          }
         }
+        xhr.timeout = 2000;
         xhr.send(null,'');
     } catch (e) {
         window.location.href=window.location.href.split('/visualediting').join('');
     }
-</script>
-`;
+</script>`;
 
 // 合并js
 gulp.task('polyfill', () => {
