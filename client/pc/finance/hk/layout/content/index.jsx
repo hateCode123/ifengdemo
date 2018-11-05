@@ -9,6 +9,7 @@ import InIframe from './inIframe/';
 import Ad from '../ad/';
 import errorBoundary from '@ifeng/errorBoundary';
 import { searchStockSuggest } from '../../../../services/api';
+import { rel } from '../../../../utils/rel';
 
 class Content extends React.PureComponent {
     static propTypes = {
@@ -37,7 +38,7 @@ class Content extends React.PureComponent {
                         symbol: searchRes[item].symbol,
                         name: searchRes[item].name,
                         type: mapStockType[searchRes[item].type],
-                        page_url: `//hk.finance.ifeng.com/stock.php?code=${item}`,
+                        page_url: `//hk.finance.ifeng.com/quote/stock.php?code=${item}`,
                     });
                 }
             }
@@ -70,7 +71,7 @@ class Content extends React.PureComponent {
                             symbol: searchRes[item].symbol,
                             name: searchRes[item].name,
                             type: mapStockType[searchRes[item].type],
-                            page_url: `//hk.finance.ifeng.com/stock.php?code=${item}`,
+                            page_url: `//hk.finance.ifeng.com/quote/stock.php?code=${item}`,
                         });
                     }
                 }
@@ -123,10 +124,12 @@ class Content extends React.PureComponent {
     };
 
     suggestListOff = () => {
-        this.setState({
-            suggestShow: false,
-            searchRes: [],
-        });
+        setTimeout(() => {
+            this.setState({
+                suggestShow: false,
+                searchRes: [],
+            });
+        }, 500);
     };
 
     render() {
