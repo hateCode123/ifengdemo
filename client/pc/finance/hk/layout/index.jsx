@@ -265,7 +265,7 @@ class Layout extends React.PureComponent {
                 </Chip>
                 <Content content={contentData} />
                 <Chip
-                    id="10015"
+                    id="25002"
                     type="static"
                     title="底部合作链接"
                     groupName="底部合作链接"

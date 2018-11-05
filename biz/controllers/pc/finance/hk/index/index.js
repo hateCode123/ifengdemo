@@ -124,9 +124,9 @@ exports.list = {
 
         const allData = await transfer(ctx, json);
 
-        allData.hk_tt_withoutR = formatData(filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR), 9, false, 100, 62);
-
         allData.hk_tt_recommend = getTop3(allData.hk_tt_recommend);
+
+        allData.hk_tt_withoutR = formatData(filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR, 12), 12, false, 100, 62);
 
         allData.hk_dzgl_singlePic = singlePicList(formatData(allData.hk_dzgl_singlePic, 4, true, 100, 62));
 

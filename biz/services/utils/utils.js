@@ -1,10 +1,13 @@
 /**
  * 排重，去掉推荐位数据
- * @param {Array} recommendIds 推荐位数据数组
+ * @param {Array} recommendData 推荐位数据数组
  * @param {Array} originArray 需要排重的数组
+ * @param {Number} needNum 需要的总条数
  * @returns {Array} filterArr 去重后数组
  */
-const filterRecommendData = (recommendData, originArray) => {
+const filterRecommendData = (recommendData, originArray, needNum) => {
+    const rLen = recommendData.length;
+
     const filterArr = originArray.filter(each => {
         const originId = each.id;
         let flag = true;
@@ -20,7 +23,7 @@ const filterRecommendData = (recommendData, originArray) => {
         return flag;
     });
 
-    return filterArr;
+    return filterArr.slice(0, needNum - rLen);
 };
 
 /**
