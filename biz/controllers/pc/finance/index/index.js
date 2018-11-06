@@ -1,6 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
+const { handleAdDataAndStaticData } = require('../../../../services/utils/utils');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const {
     handleHeadlinePicData,
@@ -48,7 +49,7 @@ exports.list = {
             ['logoAd:Logo Ad', 'KVProxy', 'getStructuredFragment', 20007, getStringByKey('content')],
 
             // 财经首页导航
-            ['navigation', 'KVProxy', 'getStructuredFragment', 20008, getStringByKey('content')],
+            ['navigation:财经首页导航', 'KVProxy', 'getStructuredFragment', 20008, getStringByKey('content')],
 
             // 投顾产品
             ['production', 'KVProxy', 'getStructuredFragment', 20009, getStringByKey('content')],
@@ -127,7 +128,7 @@ exports.list = {
 
             // channelAd
             [
-                'channelAd',
+                'channelAd:channelAd',
                 'KVProxy',
                 'getAd',
                 'adchip_finance/s_finance_130318_index_ad_label_pdgm_180x25.inc.html',
@@ -418,40 +419,14 @@ exports.list = {
             logger.error(error);
             ctx.errorCount++;
         }
-        // 处理统计数据
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
 
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
-
-        // 处理广告碎片和静态碎片
-        const adData = {};
-        const staticData = {};
-
-        for (const item of json) {
-            if (item[2] === 'getAd') {
-                adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                delete allData[item[0]];
-            }
-            if (item[2] === 'getStaticFragment') {
-                if (typeof allData[item[0]] === 'string') {
-                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                } else {
-                    staticData[item[0]] = allData[item[0]];
-                }
-
-                delete allData[item[0]];
-            }
-        }
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_index', {
             allData,
-            statisticsData,
-            adData,
-            staticData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

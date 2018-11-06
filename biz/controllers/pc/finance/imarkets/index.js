@@ -1,6 +1,6 @@
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const { formatList } = require('../../../../services/utils/list');
-
+const { handleAdDataAndStaticData } = require('../../../../services/utils/utils');
 const handler = async ctx => {
     const { params } = ctx;
 
@@ -63,34 +63,13 @@ const handler = async ctx => {
         }
     }
 
-    // 处理广告碎片和静态碎片
-    const adData = {};
-    const staticData = {};
-
-    for (const item of json) {
-        if (item[2] === 'getAd') {
-            adData[item[0]] = encodeURIComponent(allData[item[0]]);
-            delete allData[item[0]];
-        }
-        if (item[2] === 'getStaticFragment') {
-            if (typeof allData[item[0]] === 'string') {
-                staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-            } else {
-                staticData[item[0]] = allData[item[0]];
-            }
-
-            delete allData[item[0]];
-        }
-    }
+    const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
     await ctx.html('finance_imarkets', {
         allData,
-        adData,
-        staticData,
-        statisticsData: {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        },
+        statisticsData: adDataAndStaticData.statisticsData,
+        adData: adDataAndStaticData.adData,
+        staticData: adDataAndStaticData.staticData,
     });
 };
 

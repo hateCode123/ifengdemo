@@ -4,6 +4,7 @@
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
 const logger = require('../../../../common/logger');
+const { handleAdDataAndStaticData } = require('../../../../services/utils/utils');
 
 exports.financeWemoney = {
     path: '/pc/finance/money',
@@ -15,6 +16,12 @@ exports.financeWemoney = {
     online: true,
     handler: async ctx => {
         const json = [
+            // 统计代码 Head 片段
+            ['statisticsHead:统计代码 Head 片段', 'KVProxy', 'getStaticFragment', 15015, getStringByKey('content')],
+
+            // 统计代码 Body 片段
+            ['statisticsBody:统计代码 Body 片段', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
+
             ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             ['navigation', 'KVProxy', 'getStructuredFragment', 20080, getJsonByKey('content')],
@@ -115,29 +122,13 @@ exports.financeWemoney = {
             logger.error(error);
         }
 
-        // 处理广告碎片和静态碎片
-        const adData = {};
-        const staticData = {};
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
-        for (const item of json) {
-            if (item[2] === 'getAd') {
-                adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                delete allData[item[0]];
-            }
-            if (item[2] === 'getStaticFragment') {
-                if (typeof allData[item[0]] === 'string') {
-                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                } else {
-                    staticData[item[0]] = allData[item[0]];
-                }
-
-                delete allData[item[0]];
-            }
-        }
         await ctx.html('finance_money', {
             allData,
-            adData,
-            staticData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

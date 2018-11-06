@@ -148,7 +148,7 @@ function writeKvToQueue(ctx) {
         for (let item of ctx.kvList) {
             set.add(
                 `${prefix}:chip:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
-                    item.type != 'documents.' ? item.id : ':id'
+                    item.type != 'documents' ? item.id : ':id'
                 }`,
             );
         }

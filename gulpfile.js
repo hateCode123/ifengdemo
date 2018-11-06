@@ -14,6 +14,28 @@ const cdnPath = env === 'pre_development' ? '/' : `//p0.ifengimg.com/fe/zl/test/
 const glob = require('glob');
 const fs = require('fs');
 const sourcemaps = require('gulp-sourcemaps');
+const _edit_inject_html = `
+<head>
+<script>
+    try {
+        document.getElementsByTagName('html')[0].style.visibility = 'hidden';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://ucms.ifeng.com/api/heartbeat', true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                document.getElementsByTagName('html')[0].style.visibility = '';
+            } else {
+                window.location.href=window.location.href.split('/visualediting').join('');
+            }
+          }
+        }
+        xhr.timeout = 2000;
+        xhr.send(null,'');
+    } catch (e) {
+        window.location.href=window.location.href.split('/visualediting').join('');
+    }
+</script>`;
 
 // 合并js
 gulp.task('polyfill', () => {
@@ -58,6 +80,24 @@ gulp.task('merge_modern', () => {
     del.sync([path.join(__dirname + '/dist/*_modern.html')]);
 });
 
+//将编辑页外网判断注入页面
+gulp.task('merge_edit_inject', () => {
+    let files = glob.sync(`${__dirname}/dist/*edit.html`);
+
+    for (const file of files) {
+        try {
+            let text = fs.readFileSync(file, 'utf-8');
+            if (file.indexOf('_edit.html') > -1) {
+                text = text.replace(/\<head\>/, _edit_inject_html);
+                fs.writeFileSync(file, text, 'utf-8');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    del.sync([path.join(__dirname + '/dist/*_modern.html')]);
+});
+
 // 将合并后的js链接，转为 cdn 链接
 gulp.task('cdn', () => {
     return gulp
@@ -77,5 +117,6 @@ gulp.task('cdn', () => {
 // 默认执行
 gulp.task('default', ['polyfill'], () => {
     gulp.start('merge_modern');
+    gulp.start('merge_edit_inject');
     gulp.start('cdn');
 });

@@ -1,6 +1,7 @@
 const { transfer, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
 const { filterRecommendData, singlePicList, formatData } = require('../../../../../services/utils/utils');
 const { getTop3 } = require('../../../../../common/transform.js');
+const { handleAdDataAndStaticData } = require('../../../../../services/utils/utils');
 
 exports.list = {
     path: '/pc/finance/hk/(index)?',
@@ -126,7 +127,13 @@ exports.list = {
 
         allData.hk_tt_recommend = getTop3(allData.hk_tt_recommend);
 
-        allData.hk_tt_withoutR = formatData(filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR, 12), 12, false, 100, 62);
+        allData.hk_tt_withoutR = formatData(
+            filterRecommendData(allData.hk_tt_recommend, allData.hk_tt_withoutR, 12),
+            12,
+            false,
+            100,
+            62,
+        );
 
         allData.hk_dzgl_singlePic = singlePicList(formatData(allData.hk_dzgl_singlePic, 4, true, 100, 62));
 
@@ -150,34 +157,13 @@ exports.list = {
 
         allData.hk_lzzx = singlePicList(allData.hk_lzzx.slice(0, 8));
 
-        // 处理广告碎片和静态碎片
-        const staticData = {};
-
-        for (const item of json) {
-            if (item[2] === 'getStaticFragment') {
-                if (typeof allData[item[0]] === 'string') {
-                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                } else {
-                    staticData[item[0]] = allData[item[0]];
-                }
-
-                delete allData[item[0]];
-            }
-        }
-
-        // 处理统计数据
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
-
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_hk', {
             allData,
-            statisticsData,
-            staticData,
+
+            statisticsData: adDataAndStaticData.statisticsData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };
