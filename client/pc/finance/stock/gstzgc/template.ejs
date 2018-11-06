@@ -9,7 +9,38 @@
     <%- statisticsData.statisticsHead %>
     <script>
         var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
         var __chipsData = <%- JSON.stringify(kvList) %>;
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
+                allData[key] = {};
+                e.message = key + ' ' +e.message;
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
+            }
+
+        }
+
+        for (var key in staticData) {
+            try{
+                if (typeof staticData[key] === 'string'){
+                    allData[key] = decodeURIComponent(staticData[key]);
+                } else {
+                    allData[key] = staticData[key]
+                }
+            }catch(e){
+                console.error(key, e);
+                allData[key] = [];
+                e.message = key + ' ' +e.message;
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+            }
+        }
     </script>
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet"> 

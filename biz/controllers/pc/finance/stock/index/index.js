@@ -4,6 +4,7 @@ const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy'
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
 const { handleBannerPicData, handleDayStockData } = require('../../../../../common/transform');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
+const { handleAdDataAndStaticData } = require('../../../../../services/utils/utils');
 
 exports.list = {
     path: '/pc/finance/stock',
@@ -448,40 +449,13 @@ exports.list = {
             ctx.errorCount++;
         }
 
-        // 处理统计数据
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
-
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
-
-        // 处理广告碎片和静态碎片
-        const adData = {};
-        const staticData = {};
-
-        for (const item of json) {
-            if (item[2] === 'getAd') {
-                adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                delete allData[item[0]];
-            }
-            if (item[2] === 'getStaticFragment') {
-                if (typeof allData[item[0]] === 'string') {
-                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                } else {
-                    staticData[item[0]] = allData[item[0]];
-                }
-
-                delete allData[item[0]];
-            }
-        }
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_stock_index', {
             allData,
-            statisticsData,
-            adData,
-            staticData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

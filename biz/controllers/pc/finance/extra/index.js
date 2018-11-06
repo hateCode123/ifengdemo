@@ -1,6 +1,7 @@
 const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../providers/ucmsapiProxy');
+const { handleAdDataAndStaticData } = require('../../../../services/utils/utils');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../../services/common/common');
 const {
     handleHeadlinePicData,
@@ -365,40 +366,14 @@ exports.list = {
             logger.error(error);
             ctx.errorCount++;
         }
-        // 处理统计数据
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
-
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
-
-        // 处理广告碎片和静态碎片
-        const adData = {};
-        const staticData = {};
-
-        for (const item of json) {
-            if (item[2] === 'getAd') {
-                adData[item[0]] = encodeURIComponent(allData[item[0]]);
-                delete allData[item[0]];
-            }
-            if (item[2] === 'getStaticFragment') {
-                if (typeof allData[item[0]] === 'string') {
-                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
-                } else {
-                    staticData[item[0]] = allData[item[0]];
-                }
-
-                delete allData[item[0]];
-            }
-        }
+  
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_extra', {
             allData,
-            statisticsData,
-            adData,
-            staticData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

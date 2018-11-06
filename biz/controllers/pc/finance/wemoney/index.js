@@ -2,6 +2,7 @@ const redis = require('../../../../common/redis');
 const logger = require('../../../../common/logger');
 const { KVProxy } = require('../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../services/common/common');
+const { handleAdDataAndStaticData } = require('../../../../services/utils/utils');
 
 exports.financeWemoney = {
     path: '/pc/finance/wemoney',
@@ -54,17 +55,13 @@ exports.financeWemoney = {
 
         const allData = await transfer(ctx, json);
 
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
-
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_wemoney', {
             allData,
-            statisticsData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

@@ -2,6 +2,7 @@
 const logger = require('../../../../../common/logger');
 const { transfer, getJson, getJsonByKey, getStringByKey } = require('../../../../../services/common/common');
 const { formatImage, formatUrl, recommendRandomSort } = require('@ifeng/public_method');
+const { handleAdDataAndStaticData } = require('../../../../../services/utils/utils');
 
 exports.financeWemoney = {
     path: '/pc/finance/stock/gstzgc',
@@ -157,17 +158,13 @@ exports.financeWemoney = {
             src: item.thumbnail ? formatImage(item.thumbnail, 640, 280) : '',
         }));
 
-        const statisticsData = {
-            statisticsHead: allData.statisticsHead,
-            statisticsBody: allData.statisticsBody,
-        };
-
-        delete allData.statisticsHead;
-        delete allData.statisticsBody;
+        const adDataAndStaticData = handleAdDataAndStaticData(ctx, json, allData);
 
         await ctx.html('finance_stock_gstzgc', {
             allData,
-            statisticsData,
+            statisticsData: adDataAndStaticData.statisticsData,
+            adData: adDataAndStaticData.adData,
+            staticData: adDataAndStaticData.staticData,
         });
     },
 };

@@ -3,6 +3,7 @@ const logger = require('../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getStringByKey, getString } = require('../../../services/common/common');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
+const { handleAdDataAndStaticData } = require('../../../services/utils/utils');
 
 exports.list = {
     path: '/pc/original/(index)?',

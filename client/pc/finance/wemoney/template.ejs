@@ -8,21 +8,54 @@
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <%- statisticsData.statisticsHead %>
     <script>
-        var __jsonData__ = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
+        var adData = <%- JSON.stringify(adData) %>;
+        var staticData = <%- JSON.stringify(staticData) %>;
         var __chipsData = <%- JSON.stringify(kvList) %>;
+
+        for (var key in adData) {
+            try{
+                if(key==='adHead' || key == 'adBody'){
+                    continue;
+                }
+                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+            }catch(e){
+                console.error(key, e);
+                allData[key] = {};
+                e.message = key + ' ' +e.message;
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
+            }
+
+        }
+
+        for (var key in staticData) {
+            try{
+                if (typeof staticData[key] === 'string'){
+                    allData[key] = decodeURIComponent(staticData[key]);
+                } else {
+                    allData[key] = staticData[key]
+                }
+            }catch(e){
+                console.error(key, e);
+                allData[key] = [];
+                e.message = key + ' ' +e.message;
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+            }
+        }
+
         var jsonData = {
-            nav: __jsonData__.commonNav,
-            navigation: __jsonData__.navigation,
-            slider: __jsonData__.slider,
-            info: __jsonData__.info,
-            hotNewsTitle: __jsonData__.hotNewsTitle,
-            hotNews: __jsonData__.hotNews,
-            adAside1: __jsonData__.adAside1,
-            adAside2: __jsonData__.adAside2,
-            adAside3: __jsonData__.adAside3,
-            adAside4: __jsonData__.adAside4,
-            copyright: __jsonData__.copyright,
-            moreNews: __jsonData__.moreNews
+            nav: allData.commonNav,
+            navigation: allData.navigation,
+            slider: allData.slider,
+            info: allData.info,
+            hotNewsTitle: allData.hotNewsTitle,
+            hotNews: allData.hotNews,
+            adAside1: allData.adAside1,
+            adAside2: allData.adAside2,
+            adAside3: allData.adAside3,
+            adAside4: allData.adAside4,
+            copyright: allData.copyright,
+            moreNews: allData.moreNews
         };
 
     </script>

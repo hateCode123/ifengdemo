@@ -94,8 +94,58 @@ const formatData = (dataArray, needNum, picTileOnly = false, picWidth = 698, pic
     return simpleFormatData;
 };
 
+const handleAdDataAndStaticData = (ctx, json, allData) => {
+    try {
+        const statisticsData = {
+            statisticsHead: allData.statisticsHead,
+            statisticsBody: allData.statisticsBody,
+        };
+
+        delete allData.statisticsHead;
+        delete allData.statisticsBody;
+
+        // 处理广告碎片和静态碎片
+        const adData = {};
+        const staticData = {};
+
+        for (const item of json) {
+            item[0] = item[0].split(':')[0];
+            if (item[2] === 'getAd') {
+                if (allData[item[0]] && typeof allData[item[0]] == 'string') {
+                    adData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else if (item[0] === 'adHead' || item[0] === 'adBody') {
+                    adData[item[0]] = encodeURIComponent('');
+                } else {
+                    adData[item[0]] = encodeURIComponent(`{
+                            data: '${item[0]}',
+                            preload: '',
+                            callback: function(elm, data) {
+                                console.log(data + ' 无广告');
+                            }
+                        }`);
+                }
+                delete allData[item[0]];
+            } else if (item[2] === 'getStaticFragment') {
+                if (typeof allData[item[0]] === 'string') {
+                    staticData[item[0]] = encodeURIComponent(allData[item[0]]);
+                } else {
+                    staticData[item[0]] = allData[item[0]];
+                }
+
+                delete allData[item[0]];
+            }
+        }
+
+        return { statisticsData, adData, staticData };
+    } catch (error) {
+        ctx.errorCount++;
+        console.error(error);
+    }
+};
+
 module.exports = {
     filterRecommendData,
     singlePicList,
     formatData,
+    handleAdDataAndStaticData,
 };
