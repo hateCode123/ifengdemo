@@ -10,15 +10,25 @@ exports.getwemediaEAccountImg = {
     online: true,
     handler: async ctx => {
         const wemediaEAccountId = ctx.params.wemediaEAccountId;
-        const body = await request.get({
-            url: `http://local.fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
-            json: true,
-        });
 
-        if (ctx.params.callback) {
-            ctx.jsonp(body.data);
-        } else {
-            ctx.json(body.data);
+        try {
+            let body = await request.get({
+                url: `http://local.fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
+                json: true,
+            });
+            
+            if (ctx.params.callback) {
+                ctx.jsonp(body.data);
+            } else {
+                ctx.json(body.data);
+            }
+        } catch (err) {
+            console.error(err);
+            if (ctx.params.callback) {
+                return ctx.jsonp(1, '获取数据失败');
+            } else {
+                return ctx.json(1, '获取数据失败');
+            }
         }
     },
 };
