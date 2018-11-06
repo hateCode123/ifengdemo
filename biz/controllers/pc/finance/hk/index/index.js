@@ -3,7 +3,7 @@ const { filterRecommendData, singlePicList, formatData } = require('../../../../
 const { getTop3 } = require('../../../../../common/transform.js');
 
 exports.list = {
-    path: '/pc/finance/hk/test',
+    path: '/pc/finance/hk/(index)?',
     method: 'get',
     type: 'html',
     cache: 0,
