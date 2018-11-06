@@ -10,7 +10,6 @@ import Tools from './tool';
 import Shares from './shares';
 import NewsDisplay from './news-display';
 import NewsStream from '../components/newsStream';
-import Question from './question';
 import HotTopic from './hot-topic';
 import CalenderBox from './calenderBox';
 import SuspendedAd from '../components/suspended-ad';
@@ -59,8 +58,6 @@ class Layout extends PureComponent {
                         <NewsStream content={newsStreamData} />
                     </div>
                     <div className={styles.main_right}>
-                        {/* TODO: 分析师答疑内容，新版上线后重新进行规划添加，暂时去掉不显示 */}
-                        {/* <Question content={ questionData } /> */}
                         {/* 热点专题 */}
                         <HotTopic content={hotTopicData} />
                         {/* 广告 */}

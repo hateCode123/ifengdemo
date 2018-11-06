@@ -28,7 +28,7 @@ class Tools extends PureComponent {
                             <i className={styles.play} />
                         </a>
                         <a className={styles.xwhkt} href="//wenda.ifeng.com" target="_blank" ref={relText}>
-                            <img src={require('./fhhkt.png')} alt="凤凰会客厅" />
+                            <img src={require('./fhhkt.png')} alt="凤凰汇客厅" />
                         </a>
                         {/* 跳转搜索 */}
                         <Search />
