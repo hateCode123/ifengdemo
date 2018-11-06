@@ -50,3 +50,19 @@ a.zhibo_link {
     vertical-align: 7px;
     font-weight: bold;
 }
+.xwhkt {
+    float: left;
+    display: block;
+    padding: 0 10px;
+    height: 100%;
+    &:hover {
+        text-decoration: none;
+        color: #fff;
+        background-color: #1a8068;
+    }
+    & img {
+        margin: 6px auto 0;
+        width: 174px;
+        height: 71px;
+    }
+}

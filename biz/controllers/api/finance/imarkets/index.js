@@ -8,8 +8,8 @@ exports.goldSnapshotsDataCache = {
     online: true,
     handler: async ctx => {
         const json = [
-            ['topnews', 'KVProxy', 'getRecommendFragment', 55069, getJsonByKey('data')],
-            ['newsstream', 'KVProxy', 'getDynamicFragment', 20044, getJsonByKey('data')],
+            ['topnews:推荐位', 'KVProxy', 'getRecommendFragment', 55069, getJsonByKey('data')],
+            ['newsstream:信息流', 'KVProxy', 'getDynamicFragment', 20044, getJsonByKey('data')],
         ];
         const allData = await transfer(ctx, json);
 
