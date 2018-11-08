@@ -16,7 +16,7 @@ exports.getwemediaEAccountImg = {
                 url: `http://local.fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
                 json: true,
             });
-            
+
             if (ctx.params.callback) {
                 ctx.jsonp(body.data);
             } else {
@@ -40,8 +40,13 @@ exports.getCustomList = {
     handler: async ctx => {
         const data = await KVProxy.getCustom(ctx, '17007_719_68').then(...handleJson(ctx));
 
-        for (const item of data) {
-            item.url = item.wwwUrl;
+        try {
+            for (const item of data) {
+                item.url = item.wwwUrl;
+            }
+        } catch (e) {
+            console.error(e);
+            console.info(data);
         }
 
         if (ctx.params.callback) {
