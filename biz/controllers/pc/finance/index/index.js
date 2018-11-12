@@ -21,12 +21,12 @@ exports.list = {
     preview: true,
     online: true,
     async_chips: [
-        ['stockLogoAd:财经 - 股票首页 - 股票LogoAd', 'KVProxy', 'getDynamicFragment', 20038],
-        ['rankings:wemoney-热门新闻排行', 'KVProxy', 'getDynamicFragment', 20032],
-        ['secNav:财经 - 股票首页 - 二级导航', 'KVProxy', 'getDynamicFragment', 20040],
-        ['hotTitle:wemoney - 热门新闻排行标题', 'KVProxy', 'getDynamicFragment', 20033],
-        ['navBar:财经 - 股票首页 - 导航栏', 'KVProxy', 'getDynamicFragment', 20039],
-        ['custom:凤凰财经', 'KVProxy', 'getCustom', '17007_719_68'],
+        ['customList:信息流首页数据', 'KVProxy', 'getCustom', '17007_719_68'],
+        ['macroList:信息流宏观数据', 'KVProxy', 'getDynamicFragment', 20038],
+        ['stockList:信息流股票数据', 'KVProxy', 'getDynamicFragment', 20032],
+        ['imarketsList:信息流imarkets数据', 'KVProxy', 'getDynamicFragment', 20040],
+        ['companyList:信息流港股数据', 'KVProxy', 'getDynamicFragment', 60128],
+        ['wemoneyList:信息流wemoney数据', 'KVProxy', 'getDynamicFragment', 20039],
     ],
     handler: async ctx => {
         const json = [
@@ -52,73 +52,73 @@ exports.list = {
             ['navigation:财经首页导航', 'KVProxy', 'getStructuredFragment', 20008, getStringByKey('content')],
 
             // 投顾产品
-            ['production', 'KVProxy', 'getStructuredFragment', 20009, getStringByKey('content')],
+            ['production:投顾产品', 'KVProxy', 'getStructuredFragment', 20009, getStringByKey('content')],
 
             // 焦点图
-            ['bannerPic', 'KVProxy', 'getSelectedPool', 9, getStringByKey('data')],
+            ['bannerPic:焦点图', 'KVProxy', 'getSelectedPool', 9, getStringByKey('data')],
 
             // 焦点图广告权益
-            ['bannerPicAd', 'KVProxy', 'getStructuredFragment', 30028, getStringByKey('content')],
+            ['bannerPicAd:焦点图广告权益', 'KVProxy', 'getStructuredFragment', 30028, getStringByKey('content')],
 
             // 头条新闻
-            ['headline', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
+            ['headline:头条新闻', 'KVProxy', 'getRecommendFragment', 20003, getJsonByKey('data')],
 
             // 客户权益
-            ['rights', 'KVProxy', 'getStaticFragment', 10018, getStringByKey('content')],
+            ['rights:客户权益', 'KVProxy', 'getStaticFragment', 10018, getStringByKey('content')],
 
             // 今日要闻
-            ['dayNews', 'KVProxy', 'getSelectedPool', 8, getStringByKey('data')],
+            ['dayNews:今日要闻', 'KVProxy', 'getSelectedPool', 8, getStringByKey('data')],
 
             // 今日要闻多拼新闻
-            ['extraNews', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
+            ['extraNews:今日要闻多拼新闻', 'KVProxy', 'getStaticFragment', 10011, getStringByKey('content')],
 
             // 返回连环话数据
-            ['comicBook', 'KVProxy', 'getDynamicFragment', '20027', getStringByKey('data')],
+            ['comicBook:返回连环话数据', 'KVProxy', 'getDynamicFragment', '20027', getStringByKey('data')],
 
             // 大咖说
-            ['talking', 'KVProxy', 'getDynamicFragment', '20028', getStringByKey('data')],
+            ['talking:大咖说', 'KVProxy', 'getDynamicFragment', '20028', getStringByKey('data')],
 
             // 财商教育
-            ['finance', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
+            ['finance:财商教育', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
 
             // 炒股大赛战报
-            ['stocks', 'KVProxy', 'getDynamicFragment', '40028', getStringByKey('data')],
+            ['stocks:炒股大赛战报', 'KVProxy', 'getDynamicFragment', '40028', getStringByKey('data')],
 
             // 炒股大赛新闻
-            ['stocksNews', 'KVProxy', 'getDynamicFragment', '20029', getStringByKey('data')],
+            ['stocksNews:炒股大赛新闻', 'KVProxy', 'getDynamicFragment', '20029', getStringByKey('data')],
 
             // 财商教育新闻列表
-            ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
+            ['financeList:财商教育新闻列表', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
 
             // 返回财经视频数据
-            ['financeVideo', 'KVProxy', 'getRecommendFragment', 55016, getStringByKey('data')],
+            ['financeVideo:财经视频数据', 'KVProxy', 'getRecommendFragment', 55016, getStringByKey('data')],
 
             // 研究院
-            ['institute', 'KVProxy', 'getDynamicFragment', '20030', getStringByKey('data')],
+            ['institute:研究院', 'KVProxy', 'getDynamicFragment', '20030', getStringByKey('data')],
 
             // 国子策
-            ['lark', 'KVProxy', 'getDynamicFragment', '20031', getStringByKey('data')],
+            ['lark:国子策', 'KVProxy', 'getDynamicFragment', '20031', getStringByKey('data')],
 
             // 专题会议
             ['meeting:专题会议', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
 
             // 信息流标题
-            ['infoTitle', 'KVProxy', 'getStructuredFragment', 45005, getStringByKey('content')],
+            ['infoTitle:信息流标题', 'KVProxy', 'getStructuredFragment', 45005, getStringByKey('content')],
 
             // 底部合作链接
-            ['cooperation', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
+            ['cooperation:底部合作链接', 'KVProxy', 'getStaticFragment', 10015, getStringByKey('content')],
 
             // 理财超市
-            ['market', 'KVProxy', 'getStaticFragment', 10080, getStringByKey('content')],
+            ['market:理财超市', 'KVProxy', 'getStaticFragment', 10080, getStringByKey('content')],
 
             // 理财速递
-            ['courier', 'KVProxy', 'getStaticFragment', 10082, getStringByKey('content')],
+            ['courier:理财速递', 'KVProxy', 'getStaticFragment', 10082, getStringByKey('content')],
 
             // 底部公用版权
-            ['footer', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
+            ['footer:底部公用版权', 'KVProxy', 'getStructuredFragment', 20036, getStringByKey('content')],
 
             // 二维码
-            ['qrCode', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],
+            ['qrCode:二维码', 'KVProxy', 'getStructuredFragment', 20013, getStringByKey('content')],
 
             // adHead
             ['adHead', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],

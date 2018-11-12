@@ -12,7 +12,7 @@ exports.getwemediaEAccountImg = {
         const wemediaEAccountId = ctx.params.wemediaEAccountId;
 
         try {
-            let body = await request.get({
+            const body = await request.get({
                 url: `http://local.fhhapi.ifeng.com/baseInfo/account/${wemediaEAccountId}/1`,
                 json: true,
             });
@@ -107,7 +107,7 @@ exports.getCompanyList = {
     method: 'get',
     online: true,
     handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '20033').then(...handleJson(ctx));
+        const data = await KVProxy.getDynamicFragment(ctx, '60128').then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);
