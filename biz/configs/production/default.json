@@ -18,7 +18,10 @@
         "level": "info"
     },
     "redisHosts": [
-        { "host": "shank-redis-ha-master-svc.test-k8s-loda.svc.cluster.local", "port": 6379 }
+        { "host": "shankcache-zc-redis-master-svc.redis.svc.cluster.local", "port": 6379 }
+    ],
+    "redisHostsSlave": [
+        { "host": "shankcache-zc-redis-slave-svc.redis.svc.cluster.local", "port": 6379 }
     ],
     "blacklist": ["/controllers/black/black.js"],
     "cdnCacheTime": 120

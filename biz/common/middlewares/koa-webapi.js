@@ -7,7 +7,7 @@ const { tracer } = require('../../common/jaeger');
 const config = require('../../configs');
 const _ = require('lodash');
 const KVTableEnum = config.common.KVProxy;
-const redis = require('../redis');
+const writeRedis = require('../redis')('write');
 
 module.exports = (app, options = {}) => {
     // extend html function
@@ -141,13 +141,13 @@ module.exports = (app, options = {}) => {
 };
 
 const set = new Set();
-const prefix = `${config.default.namespace}:${config.default.appname}`;
+const prefix = `${config.default.namespace}::${config.default.appname}`;
 const cacheTime = 7 * 24 * 60 * 60;
 function writeKvToQueue(ctx) {
     process.nextTick(() => {
         for (let item of ctx.kvList) {
             set.add(
-                `${prefix}:chip:${ctx.headers.domain}:${ctx.urlinfo.path}:${item.type}:${
+                `${prefix}::chip::${ctx.headers.domain}::${ctx.urlinfo.path}::${item.type}::${
                     item.type != 'documents' ? item.id : ':id'
                 }`,
             );
@@ -161,7 +161,7 @@ setInterval(function() {
     const start = process.uptime() * 1000;
     for (let item of set) {
         // console.log(item);
-        redis.set(item, '1', 'EX', cacheTime, () => {
+        writeRedis.set(item, '1', 'EX', cacheTime, () => {
             index++;
             if (size == index) {
                 let time = process.uptime() * 1000 - start;

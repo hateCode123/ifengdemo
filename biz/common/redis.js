@@ -1,11 +1,22 @@
 const Redis = require('ioredis');
 const config = require('../configs');
 
-let client = null;
+let write_client = null;
+let read_client = null;
 
 if (process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production') {
-    client = new Redis(config.default.redisHosts[0]);
+    write_client = new Redis(config.default.redisHosts[0]);
+    read_client = new Redis(config.default.redisHostsSlave[0]);
 } else {
-    client = new Redis.Cluster(config.default.redisHosts);
+    write_client = read_client = new Redis.Cluster(config.default.redisHosts);
 }
-module.exports = client;
+module.exports = type => {
+    if (type === 'read') {
+        return read_client;
+    }
+    if (type === 'write') {
+        return write_client;
+    }
+    
+    return null;
+};
