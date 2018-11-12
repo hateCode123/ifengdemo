@@ -172,6 +172,7 @@ class Layout extends React.PureComponent {
                 stocks: content.stocks,
             },
             info: {
+                infoTitle: content.infoTitle,
                 infoAd: content.infoAd,
                 hardAd: content.hardAd,
             },
