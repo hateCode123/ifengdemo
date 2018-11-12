@@ -2,7 +2,7 @@ const redis = require('../../../../../common/redis');
 const logger = require('../../../../../common/logger');
 const { KVProxy, SearchProxy } = require('../../../../../providers/ucmsapiProxy');
 const { transfer, getJson, getJsonByKey, getString, getStringByKey } = require('../../../../../services/common/common');
-const { handleBannerPicData, handleDayStockData } = require('../../../../../common/transform');
+const { handleFinanceListData, handleBannerPicData, handleDayStockData } = require('../../../../../common/transform');
 const { formatImage, formatUrl } = require('@ifeng/public_method');
 const { handleAdDataAndStaticData } = require('../../../../../services/utils/utils');
 
@@ -99,10 +99,16 @@ exports.list = {
             ['customStocksTitle', 'KVProxy', 'getStructuredFragment', 20052, getJsonByKey('content')],
 
             // 分析师答疑标题
-            ['QATitle', 'KVProxy', 'getStructuredFragment', 20053, getJsonByKey('content')],
+            // ['QATitle', 'KVProxy', 'getStructuredFragment', 20053, getJsonByKey('content')],
 
             // 分析师列表
-            ['QATabs', 'KVProxy', 'getStructuredFragment', 20054, getJsonByKey('content')],
+            // ['QATabs', 'KVProxy', 'getStructuredFragment', 20054, getJsonByKey('content')],
+
+            // 财商教育
+            ['finance', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
+
+            // 财商教育新闻列表
+            ['financeList', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
 
             // 轮播图
             ['bannerPic', 'KVProxy', 'getRecommendFragment', 30010, getStringByKey('data')],
@@ -309,6 +315,8 @@ exports.list = {
         const allData = await transfer(ctx, json);
 
         try {
+            allData.financeList = allData.financeList && handleFinanceListData(allData.financeList);
+
             allData.bannerPic = allData.bannerPic && handleBannerPicData(allData.bannerPic);
 
             allData.dayStock = allData.dayStock && handleDayStockData(allData.dayStock);

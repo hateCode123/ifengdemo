@@ -30,6 +30,12 @@ module.exports = {
             title: item.title,
         }));
     },
+    handleFinanceListData: data => {
+        return recommendRandomSort(data, 6).map(item => ({
+            url: item.url,
+            title: item.title,
+        }));
+    },
     handleFinanceVideoData: data => {
         return recommendRandomSort(data, 3).map(item => ({
             thumbnail: item.thumbnail ? formatImage(item.thumbnail, 300, 170) : item.thumbnail,

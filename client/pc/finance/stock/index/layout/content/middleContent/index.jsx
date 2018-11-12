@@ -7,7 +7,8 @@ import CattleStocks from './cattleStocks/';
 import Rank from './rank/';
 import FundsFlow from './fundsFlow/';
 import CustomStocks from './customStocks/';
-import Qa from './QA/';
+import Caption from './caption';
+import TitleList from './titleList';
 
 class MiddleContent extends React.PureComponent {
     static propTypes = {
@@ -76,15 +77,24 @@ class MiddleContent extends React.PureComponent {
                 <div className={styles.space20} />
                 <div className={styles.qa}>
                     <Chip
-                        id="20053"
+                        id="20010"
                         type="struct"
-                        title="分析师答疑标题"
+                        title="财商教育标题栏"
                         groupName="正文"
-                        content={content.QaTitle}
-                        position="relative">
-                        <MidTitle />
+                        position="relative"
+                        content={content.finance}>
+                        <Caption />
                     </Chip>
-                    <Qa tabs={content.QaTabs} />
+                    <Chip
+                        id="20006"
+                        type="recommend"
+                        title="财商教育新闻列表"
+                        groupName="正文"
+                        content={content.financeList}
+                        position="relative"
+                        translate="handleFinanceListData">
+                        <TitleList />
+                    </Chip>
                 </div>
             </div>
         );

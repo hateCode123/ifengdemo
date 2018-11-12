@@ -70,7 +70,8 @@ class Layout extends React.PureComponent {
                 fundsFlowTitle: content.fundsFlowTitle,
                 customStocksTitle: content.customStocksTitle,
                 QaTitle: content.QATitle,
-                QaTabs: content.QATabs,
+                finance: content.finance,
+                financeList: content.financeList,
             },
             rightContent: {
                 subjectTitle: content.subjectTitle,
