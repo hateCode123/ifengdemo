@@ -76,7 +76,7 @@ exports.list = {
             ['comicBook:返回连环话数据', 'KVProxy', 'getDynamicFragment', '20027', getStringByKey('data')],
 
             // 大咖说
-            ['talking:大咖说', 'KVProxy', 'getDynamicFragment', '60126', getStringByKey('data')],
+            ['talking:大咖说', 'KVProxy', 'getDynamicFragment', '1-75024-', getStringByKey('data')],
 
             // 财商教育
             ['finance:财商教育', 'KVProxy', 'getStructuredFragment', 20010, getStringByKey('content')],
@@ -85,7 +85,7 @@ exports.list = {
             ['stocks:炒股大赛战报', 'KVProxy', 'getDynamicFragment', '40028', getStringByKey('data')],
 
             // 炒股大赛新闻
-            ['stocksNews:炒股大赛新闻', 'KVProxy', 'getDynamicFragment', '60127', getStringByKey('data')],
+            ['stocksNews:炒股大赛新闻', 'KVProxy', 'getDynamicFragment', '1-67-75025-', getStringByKey('data')],
 
             // 财商教育新闻列表
             ['financeList:财商教育新闻列表', 'KVProxy', 'getRecommendFragment', 20006, getJsonByKey('data')],
