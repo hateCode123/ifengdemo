@@ -36,7 +36,6 @@
         }
     }
     & > h5 {
-        padding-top: 10px;
         & a {
             cursor: pointer;
             color: #000;
@@ -45,6 +44,11 @@
         }
         & a:hover {
             color: #f54343;
+        }
+        & span {
+            color: #999999;
+            font-weight: normal;
+            line-height: 22px;
         }
     }
 }

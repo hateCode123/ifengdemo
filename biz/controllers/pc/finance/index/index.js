@@ -357,7 +357,6 @@ exports.list = {
                 {
                     url: formatUrl(talkingTitle.url),
                     title: talkingTitle.title,
-                    name: talkingTitle.wemediaEAccountName,
                     wemediaEAccountId: talkingTitle.wemediaEAccountId,
                 },
             ].concat(talking);

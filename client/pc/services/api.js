@@ -114,13 +114,17 @@ const getwemediaEAccountImg = async wemediaEAccountId => {
         },
     );
 
-    let img = '';
+    let result = {};
 
     if (data.code === 0) {
-        img = data.data.headImage && data.data.headImage !== '' ? formatImage(data.data.headImage, 50, 50) : '';
+        result = {
+            img: data.data.headImage && data.data.headImage !== '' ? formatImage(data.data.headImage, 50, 50) : '',
+            weMediaName: data.data.weMediaName ? data.data.weMediaName : '',
+            description: data.data.description ? data.data.description : '',
+        };
     }
 
-    return img;
+    return result;
 };
 
 // 获取信息流首页数据

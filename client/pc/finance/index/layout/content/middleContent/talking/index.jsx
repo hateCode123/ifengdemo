@@ -12,7 +12,7 @@ class Talking extends React.Component {
     };
 
     state = {
-        img: '',
+        data: {},
     };
 
     async componentDidMount() {
@@ -20,10 +20,10 @@ class Talking extends React.Component {
             const { content } = this.props;
             const wemediaEAccountId = content[0].wemediaEAccountId;
 
-            const img = await getwemediaEAccountImg(wemediaEAccountId);
+            const result = await getwemediaEAccountImg(wemediaEAccountId);
 
             this.setState({
-                img,
+                data: result,
             });
         } catch (e) {
             console.error(e);
@@ -31,7 +31,7 @@ class Talking extends React.Component {
     }
 
     render() {
-        const { img } = this.state;
+        const { data } = this.state;
         const { content } = this.props;
 
         return (
@@ -51,12 +51,13 @@ class Talking extends React.Component {
                     <div className={styles.picTxt}>
                         <div className={styles.box_pic}>
                             <a href={content[0].url} target="_blank" rel={rel} title={content[0].title}>
-                                <img src={img} width="50" height="50" />
+                                <img src={data.img} width="50" height="50" />
                             </a>
                             <h5>
-                                <a href={content[0].url} target="_blank" rel={rel} title={content[0].name}>
-                                    {content[0].name}
+                                <a href={content[0].url} target="_blank" rel={rel} title={data.weMediaName}>
+                                    {data.weMediaName}
                                 </a>
+                                <span>{data.description}</span>
                             </h5>
                         </div>
                     </div>
