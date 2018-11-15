@@ -46,9 +46,11 @@
             color: #f54343;
         }
         & span {
+            display: block;
+            margin-top: 5px;
             color: #999999;
             font-weight: normal;
-            line-height: 22px;
+            line-height: 16px;
         }
     }
 }
