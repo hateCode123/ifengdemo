@@ -86,11 +86,19 @@ class StockSearch extends React.PureComponent {
 
                     break;
                 case 13:
-                    window.open(
-                        `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                            data[current !== null ? current : 0].c
-                        }`,
-                    );
+                    try {
+                        window.open(
+                            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+                                data[current !== null ? current : 0].c
+                            }`,
+                        );
+                    } catch (e) {
+                        console.error(e);
+
+                        e.message += `, errorData: ${JSON.stringify(data)}, current: ${current}`;
+
+                        if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+                    }
 
                     break;
             }
@@ -123,7 +131,15 @@ class StockSearch extends React.PureComponent {
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
 
-            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+            try {
+                window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
+            } catch (e) {
+                console.error(e);
+
+                e.message += `, errorData: ${JSON.stringify(data)}, current: ${current}`;
+
+                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+            }
         }
     };
 

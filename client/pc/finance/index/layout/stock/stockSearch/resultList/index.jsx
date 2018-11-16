@@ -12,14 +12,21 @@ class ResultList extends React.PureComponent {
     };
 
     handleClick = () => {
-        const { current } = this.state;
-        const { data } = this.props;
+        const { data, current } = this.props;
 
-        window.open(
-            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                data[current !== null ? current : 0].c
-            }`,
-        );
+        try {
+            window.open(
+                `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
+                    data[current !== null ? current : 0].c
+                }`,
+            );
+        } catch (e) {
+            console.error(e);
+
+            e.message += `, errorData: ${JSON.stringify(data)}, current: ${current}`;
+
+            if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
+        }
     };
 
     handleMouseOver = e => {
