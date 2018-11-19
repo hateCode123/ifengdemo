@@ -13,13 +13,10 @@ class ResultList extends React.PureComponent {
 
     handleClick = () => {
         const { data, current } = this.props;
+        const stock = data[current !== null ? current : 0];
 
         try {
-            window.open(
-                `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                    data[current !== null ? current : 0].c
-                }`,
-            );
+            window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
         } catch (e) {
             console.error(e);
 
