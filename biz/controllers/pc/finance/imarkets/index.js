@@ -13,7 +13,7 @@ const handler = async ctx => {
         ['nav:顶部导航', 'KVProxy', 'getStructuredFragment', '20002', getStringByKey('content')],
         ['hottopic:热点专题', 'KVProxy', 'getCustom', 'cmpp_topic_list_finance', getJson()],
         ['cooperation:底部合作链接', 'KVProxy', 'getStaticFragment', '10164', getStringByKey('content')],
-        ['footer:底部公用版权', 'KVProxy', 'getStaticFragment', '10114', getJsonByKey('content')],
+        ['footer:底部公用版权', 'KVProxy', 'getStructuredFragment', 20012, getJsonByKey('content')],
         ['adHead:广告（头）', 'KVProxy', 'getAd', 'ad_new_chip/s_all-indexs_180823_ad_qpdggtb.inc.html', getString()],
         ['adBody:广告（尾）', 'KVProxy', 'getAd', 'ad_new_chip/s_all_indexs_180823_ad_qpdpcggdb.inc.html', getString()],
         // 广告1000*90
