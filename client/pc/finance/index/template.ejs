@@ -16,12 +16,26 @@
         var staticData = <%- JSON.stringify(staticData) %>;
         var __chipsData = <%- JSON.stringify(kvList) %>;
 
+        var getChipsDataByKey = function (data, key) {
+            for (var i = 0, iLen = data.length; i<iLen;i++) {
+                if (data[i].key === key) {
+                    return data[i];
+                }
+            }
+
+            return null;
+        }
+
         for (var key in adData) {
             try{
                 if(key==='adHead' || key == 'adBody'){
                     continue;
                 }
                 allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
+                if (typeof __chipsData !== 'undefined') {
+                    allData[key].desc = getChipsDataByKey(__chipsData, key);
+                    allData[key].code = adData[key];
+                }
             }catch(e){
                 console.error(key, e);
                 allData[key] = {};

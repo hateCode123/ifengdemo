@@ -70,6 +70,9 @@ var BJ_REPORT = (function(global) {
             case 'inject':     // 流量劫持注入
                 type = 10;
                 break;
+            case 'slowApi':     // 慢速api接口
+                type = 11;
+                break;
             default:
                 type = 0;       // 未知错误
         }
