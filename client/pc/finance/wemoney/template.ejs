@@ -1,91 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb">
-
 <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
     <title>凤凰WEMONEY-新金融风向标-凤凰网</title>
     {{{ htmlWebpackPlugin.options.errorupload }}}
     <%- statisticsData.statisticsHead %>
-    <script>
-        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
-        var adData = <%- JSON.stringify(adData) %>;
-        var staticData = <%- JSON.stringify(staticData) %>;
-        var __chipsData = <%- JSON.stringify(kvList) %>;
-
-        for (var key in adData) {
-            try{
-                if(key==='adHead' || key == 'adBody'){
-                    continue;
-                }
-                allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
-            }catch(e){
-                console.error(key, e);
-                allData[key] = {};
-                e.message = key + ' ' +e.message;
-                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'ad');
-            }
-
-        }
-
-        for (var key in staticData) {
-            try{
-                if (typeof staticData[key] === 'string'){
-                    allData[key] = decodeURIComponent(staticData[key]);
-                } else {
-                    allData[key] = staticData[key]
-                }
-            }catch(e){
-                console.error(key, e);
-                allData[key] = [];
-                e.message = key + ' ' +e.message;
-                if (window && window.BJ_REPORT) window.BJ_REPORT.report(e, false, 'data');
-            }
-        }
-
-        var jsonData = {
-            nav: allData.commonNav,
-            navigation: allData.navigation,
-            slider: allData.slider,
-            info: allData.info,
-            hotNewsTitle: allData.hotNewsTitle,
-            hotNews: allData.hotNews,
-            adAside1: allData.adAside1,
-            adAside2: allData.adAside2,
-            adAside3: allData.adAside3,
-            adAside4: allData.adAside4,
-            copyright: allData.copyright,
-            moreNews: allData.moreNews
-        };
-
-    </script>
-
+    {{{ htmlWebpackPlugin.options.headScripts.default }}}
     {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{path}}" rel="stylesheet"> 
+    <link href="{{path}}" rel="stylesheet">
     {{/each}}
     {{{ htmlWebpackPlugin.options.polyfill }}}
 </head>
-
 <body>
     <div id="root"></div>
     {{#if htmlWebpackPlugin.options.useMorden}}
-    {{#if htmlWebpackPlugin.options.isDevMode}}
-        {{#each htmlWebpackPlugin.files.js}}
-            <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
-        {{/each}}
+        {{#if htmlWebpackPlugin.options.isDevMode}}
+            {{#each htmlWebpackPlugin.files.js}}
+                <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
+            {{/each}}
+        {{else}}
+            <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
+        {{/if}}
+        {{{htmlWebpackPlugin.options.modernPolyfill}}}
+        <script>
+            var __isIe8 = false;
+        </script>
+        <!--[if lt IE 9]>
+        <script>
+            __isIe8 = true;
+        </script>
+        <![endif]-->
+        <script>
+            if(__isIe8){
+                <!--include file="{{htmlWebpackPlugin.options.includelowName}}.html" -->
+            } else {
+                {{#each htmlWebpackPlugin.files.js}}
+                    document.write('<scr' + 'ipt nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></scri' + 'pt>');
+                {{/each}}
+            }
+        </script>
     {{else}}
-        <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
-    {{/if}}
-    {{{htmlWebpackPlugin.options.modernPolyfill}}}
-    {{#each htmlWebpackPlugin.files.js}}
-        <script nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
-    {{/each}}
-    {{else}}
         {{#each htmlWebpackPlugin.files.js}}
-            <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{path}}" type="text/javascript"></script>
         {{/each}}
     {{/if}}
     <%- statisticsData.statisticsBody %>
 </body>
-
 </html>

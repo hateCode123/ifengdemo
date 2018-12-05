@@ -39,6 +39,12 @@ class Layout extends React.PureComponent {
     //     console.log('componentDidMount');
     //     this.setState({ showTopCollapse: true });
     // }
+
+    componentDidMount() {
+        // 上报首屏时间
+        if (window && window.BJ_REPORT) window.BJ_REPORT.firstScreen();
+    }
+
     render() {
         const { content } = this.props;
 

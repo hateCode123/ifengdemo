@@ -24,6 +24,11 @@ class Layout extends React.PureComponent {
         content: PropTypes.object,
     };
 
+    componentDidMount() {
+        // 上报首屏时间
+        if (window && window.BJ_REPORT) window.BJ_REPORT.firstScreen();
+    }
+
     render() {
         const { content } = this.props;
 

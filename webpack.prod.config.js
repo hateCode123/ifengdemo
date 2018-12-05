@@ -113,7 +113,7 @@ const createConfig = function(type, platform, level, modern, port) {
                     env === 'production'
                         ? JSON.stringify('https://ucms.ifeng.com/shank/spring')
                         : env === 'pre_development'
-                            ? ''
+                            ? JSON.stringify('')
                             : JSON.stringify('http://test.ucms.ifeng.com/shank/spring'),
             }),
             new MiniCssExtractPlugin({

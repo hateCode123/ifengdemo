@@ -25,7 +25,7 @@ const setPostCssLoaderPulgins = ((nextcss, postImport, adaptive) => (platform, l
               return [
                   postImport(),
                   nextcss({
-                      browsers: ['last 2 versions', 'IOS >= 9', 'android>= 4'],
+                      browsers: ['last 2 versions', 'IOS >= 8', 'android>= 4'],
                   }),
                   adaptive({
                       remUnit: 75,

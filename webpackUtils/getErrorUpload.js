@@ -38,7 +38,7 @@ module.exports = (level, type) => {
                 router: <%- JSON.stringify(router) %>,
                 perf_filter_list: ${JSON.stringify(filterJsList)},
                 perf_timeout: 0,
-                pref_count: 50
+                pref_count: 0
             });
             BJ_REPORT.tryJs().spyAll();
             BJ_REPORT.heartbeat();
@@ -50,7 +50,7 @@ module.exports = (level, type) => {
         }
             
     </script>
-    <script src="//p2.ifengimg.com/a/2018/0913/adview_pic_cpc_cpm_cpa_guanggao_gg_ads_300x250.js" type="text/javascript"></script> 
+    <script src="https://p2.ifengimg.com/a/2018/0913/adview_pic_cpc_cpm_cpa_guanggao_gg_ads_300x250.js" type="text/javascript"></script> 
     <script type="text/javascript">
         if (typeof(killads) == 'undefined'){
             var err = new Error('脚本被拦截');

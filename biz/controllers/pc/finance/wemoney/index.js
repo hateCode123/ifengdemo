@@ -22,7 +22,7 @@ exports.financeWemoney = {
             ['statisticsBody', 'KVProxy', 'getStaticFragment', 15016, getStringByKey('content')],
             
             // 通用导航
-            ['commonNav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
+            ['nav', 'KVProxy', 'getStructuredFragment', 20002, getStringByKey('content')],
 
             // 导航
             ['navigation', 'KVProxy', 'getStaticFragment', 10003, getJson()],

@@ -1,76 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>凤凰国际iMarkets_为国际金融投资者提供最专业的金融市场资讯服务</title>
-    <%- statisticsData.statisticsHead %>
-    <script id="__INITIAL_STATE__">
-        var allData = <%- JSON.stringify(allData).replace(/</g, '\\u003c') %>;
-        var __chipsData = <%- JSON.stringify(kvList) %>;
-    </script>
     {{{ htmlWebpackPlugin.options.errorupload }}}
-    {{{ htmlWebpackPlugin.options.polyfill }}}
+    <%- statisticsData.statisticsHead %>
+    {{{ htmlWebpackPlugin.options.headScripts.default }}}
     {{#each htmlWebpackPlugin.files.css}}
     <link href="{{path}}" rel="stylesheet">
     {{/each}}
-    <% if(Object.values(adData).length !== 0){ %>
-        <script>
-            var adData = <%- JSON.stringify(adData) %>;
-
-            for (var key in adData) {
-                try {
-                    if (key === 'adHead' || key === 'adBody') continue;
-                    allData[key] = new Function('return ' + decodeURIComponent(adData[key]))();
-                } catch(err) {
-                    console.error(key, err);
-                    allData[key] = {};
-                    e.message = key + ' ' + err.message;
-                    if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'ad');
-                }
-            }
-        </script>
-    <% } %>
-    <script>
-        var staticData = <%- JSON.stringify(staticData) %>;
-
-        for (var key in staticData) {
-            try {
-                if (typeof staticData[key] === 'string') allData[key] = decodeURIComponent(staticData[key]);
-                else allData[key] = staticData[key];
-            } catch(err) {
-                console.error(key, err);
-                allData[key] = [];
-                e.message = key + ' ' + err.message;
-                if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'data');
-            }
-        }
-    </script>
-    <%- adData.adHead ? decodeURIComponent(adData.adHead) : undefined %>
+    {{{ htmlWebpackPlugin.options.polyfill }}}
+    <%- decodeURIComponent(adData.adHead) %>
 </head>
 <body>
     <div id="root"></div>
     {{#if htmlWebpackPlugin.options.useMorden}}
-    {{#if htmlWebpackPlugin.options.isDevMode}}
-        {{#each htmlWebpackPlugin.files.js}}
-            <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
-        {{/each}}
+        {{#if htmlWebpackPlugin.options.isDevMode}}
+            {{#each htmlWebpackPlugin.files.js}}
+                <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
+            {{/each}}
+        {{else}}
+            <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
+        {{/if}}
+        {{{htmlWebpackPlugin.options.modernPolyfill}}}
+        <script>
+            var __isIe8 = false;
+        </script>
+        <!--[if lt IE 9]>
+        <script>
+            __isIe8 = true;
+        </script>
+        <![endif]-->
+        <script>
+            if(__isIe8){
+                <!--include file="{{htmlWebpackPlugin.options.includelowName}}.html" -->
+            } else {
+                {{#each htmlWebpackPlugin.files.js}}
+                    document.write('<scr' + 'ipt nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></scri' + 'pt>');
+                {{/each}}
+            }
+        </script>
     {{else}}
-    <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
-    {{/if}}
-    {{{htmlWebpackPlugin.options.modernPolyfill}}}
-    {{#each htmlWebpackPlugin.files.js}}
-        <script nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
-    {{/each}}
-    {{else}}
         {{#each htmlWebpackPlugin.files.js}}
-            <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{path}}" type="text/javascript"></script>
         {{/each}}
     {{/if}}
-    <%- adData && adData.adBody ? decodeURIComponent(adData.adBody) : undefined %>
+    <%- decodeURIComponent(adData.adBody) %>
     <%- statisticsData.statisticsBody %>
 </body>
 </html>

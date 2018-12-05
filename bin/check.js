@@ -153,9 +153,9 @@ async function checkPageInjectScript() {
         let text = fs.readFileSync(file, 'utf-8');
         let errList = [];
         // 错误上报
-        if (!/{{{.+htmlWebpackPlugin.options.errorupload.+}}}/.test(text)) {
+        if (!/{{{.+htmlWebpackPlugin.options.headScripts.+}}}/.test(text)) {
             errList.push(
-                `请在head中添加错误上报代码(在页面所有js代码之前引入)：{{{ htmlWebpackPlugin.options.errorupload }}}`,
+                `添加头部统一数据处理脚本： {{{ htmlWebpackPlugin.options.headScripts.default }}}`,
             );
         }
 
@@ -180,14 +180,14 @@ async function checkPageInjectScript() {
             errList.push(`请在body中添加广告代码：<%- decodeURIComponent(adData.adBody) %>`);
         }
 
-        if (
-            !(
-                /<\%\- *JSON\.stringify\(adData\) *\%\>/.test(text) &&
-                text.indexOf('decodeURIComponent(adData[key])') > 0
-            )
-        ) {
-            errList.push(`请对广告碎片做容错处理`);
-        }
+        // if (
+        //     !(
+        //         /<\%\- *JSON\.stringify\(adData\) *\%\>/.test(text) &&
+        //         text.indexOf('decodeURIComponent(adData[key])') > 0
+        //     )
+        // ) {
+        //     errList.push(`请对广告碎片做容错处理`);
+        // }
 
         $ = cheerio.load(text);
 

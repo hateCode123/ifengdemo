@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb">
-
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
@@ -17,10 +16,8 @@
 
     {{{ htmlWebpackPlugin.options.polyfill }}}
 </head>
-
 <body>
     <div id="root"></div>
-
     {{#if htmlWebpackPlugin.options.useMorden}}
     {{#if htmlWebpackPlugin.options.isDevMode}}
         {{#each htmlWebpackPlugin.files.js}}
@@ -39,5 +36,4 @@
         {{/each}}
     {{/if}}
 </body>
-
 </html>

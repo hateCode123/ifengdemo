@@ -138,6 +138,15 @@ module.exports = (app, options = {}) => {
     app.context.error = function(status) {
         this.status = status || 404;
     };
+
+    app.context.errorLog = function(err) {
+        if (typeof err === 'object') {
+            err.bid = this.uuid;
+        } else if (typeof err === 'string') {
+            err += `，bid： ${this.uuid}`;
+        }
+        console.error(err);
+    };
 };
 
 const set = new Set();

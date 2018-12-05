@@ -10,7 +10,7 @@ const del = require('del');
 const packageJson = require('./package.json');
 const appName = packageJson.name.split('.').join('');
 const env = process.env.NODE_ENV;
-const cdnPath = env === 'pre_development' ? '/' : `//p0.ifengimg.com/fe/zl/test/live/${appName}/`;
+const cdnPath = env === 'pre_development' ? '/' : `https://p0.ifengimg.com/fe/zl/test/live/${appName}/`;
 const glob = require('glob');
 const fs = require('fs');
 const sourcemaps = require('gulp-sourcemaps');
@@ -61,23 +61,35 @@ gulp.task('merge_modern', () => {
     let files = glob.sync(`${__dirname}/dist/*.html`);
     for (const file of files) {
         try {
-            if (file.indexOf('_modern.html') > -1) {
+            if (
+                file.indexOf('_modern.html') > -1 ||
+                file.indexOf('_low.html') > -1 ||
+                file.indexOf('_low_include.html') > -1
+            ) {
                 continue;
             }
 
             let text = fs.readFileSync(file, 'utf-8');
-            if (/\<\!--include *file="(.+\.html)" -->/.test(text)) {
-                let match = text.match(/\<\!--include *file="(.+\.html)" -->/);
+            if (/\<\!--include *file="(.+modern\.html)" -->/.test(text)) {
+                let match = text.match(/\<\!--include *file="(.+modern\.html)" -->/);
                 let modern_name = match[1];
                 let modern_text = fs.readFileSync(path.join(__dirname, `/dist/${modern_name}`), 'utf-8');
-                text = text.replace(/\<\!--include *file="(.+\.html)" -->/, modern_text);
-                fs.writeFileSync(file, text, 'utf-8');
+                text = text.replace(/\<\!--include *file="(.+modern\.html)" -->/, modern_text);
             }
+
+            if (/\<\!--include *file="(.+include\.html)" -->/.test(text)) {
+                let match = text.match(/\<\!--include *file="(.+include\.html)" -->/);
+                let low_name = match[1];
+                let low_text = fs.readFileSync(path.join(__dirname, `/dist/${low_name}`), 'utf-8');
+                text = text.replace(/\<\!--include *file="(.+include\.html)" -->/, low_text);
+            }
+
+            fs.writeFileSync(file, text, 'utf-8');
         } catch (error) {
             console.log(error);
         }
     }
-    del.sync([path.join(__dirname + '/dist/*_modern.html')]);
+    del.sync([path.join(__dirname + '/dist/*_modern.html'), path.join(__dirname + '/dist/*_low_include.html')]);
 });
 
 //将编辑页外网判断注入页面
@@ -95,7 +107,6 @@ gulp.task('merge_edit_inject', () => {
             console.log(error);
         }
     }
-    del.sync([path.join(__dirname + '/dist/*_modern.html')]);
 });
 
 // 将合并后的js链接，转为 cdn 链接

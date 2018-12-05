@@ -2966,13 +2966,23 @@ for (const key in KVProxy) {
             function(data) {
                 data.span = child;
                 data.callInfo = `KVProxy.${key}(...args)`;
+                setRpcProm(ctx, data);
                 return data;
             },
-            function(error) {
-                error.span = child;
-                error.callInfo = `KVProxy.${key}(...args)`;
-                console.log(error);
-                return error;
+            function(data) {
+                try {
+                    data.span = child;
+                    data.callInfo = `KVProxy.${key}(...args)`;
+                    setRpcProm(ctx, data);
+                    if(data.response && data.response.error){
+                        ctx.errorLog && ctx.errorLog(data.response.error);
+                    }else{
+                        console.error(data);
+                    }
+                } catch (error) {
+                    console.error(error)
+                }
+                return data;
             },
         );
     };
@@ -3010,4 +3020,23 @@ function getIds(ctx, key, arr) {
         ctx.kvList.push({ type: KVTableEnum[key] || '', id: item, title: '', desc: '' });
     }
     return ids;
+}
+
+// 设置普罗米修斯指标
+function setRpcProm(ctx, data) {
+    try {
+        if (config.default.statisticsProm && data.response) {
+            ctx.p_rpc.observe(
+                {
+                    url: ctx.urlinfo ? ctx.urlinfo.path : '',
+                    rpc_func: data.callInfo,
+                    hostname: config.hostname,
+                },
+                data.response.costtime || 0,
+            );
+        }
+    } catch (error) {
+        console.error(error);
+    }
+ 
 }

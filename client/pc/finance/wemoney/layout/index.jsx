@@ -21,10 +21,14 @@ import Footer from './components/footer/';
 */
 
 class Layout extends React.PureComponent {
+    componentDidMount() {
+        // 上报首屏时间
+        if (window && window.BJ_REPORT) window.BJ_REPORT.firstScreen();
+    }
+
     /**
      * 渲染网页布局
      */
-
     render() {
         /**
          * 组件分发数据

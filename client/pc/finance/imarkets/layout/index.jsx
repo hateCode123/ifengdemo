@@ -18,6 +18,11 @@ import GoToTop from '../components/go-to-top';
 import Ad from '@ifeng/ui_pc_ad';
 
 class Layout extends PureComponent {
+    componentDidMount() {
+        // 上报首屏时间
+        if (window && window.BJ_REPORT) window.BJ_REPORT.firstScreen();
+    }
+
     render() {
         /**
          * 组件分发数据

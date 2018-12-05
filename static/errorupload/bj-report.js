@@ -5,7 +5,8 @@
  * Copyright (c) 2014 kael, chriscai
  * Licensed under the MIT license.
  */
-
+// 处理 console 未定义的问题
+!function(e){"use strict";e.console||(e.console={});for(var o,i,n=e.console,r=function(){},t=["memory"],l="assert,clear,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn".split(",");o=t.pop();)n[o]||(n[o]={});for(;i=l.pop();)n[i]||(n[i]=r)}("undefined"==typeof window?this:window);
 
 var BJ_REPORT = (function(global) {
     if (global.BJ_REPORT) return global.BJ_REPORT;
@@ -30,7 +31,7 @@ var BJ_REPORT = (function(global) {
         perf_url: '',
         perf_filter_list: [],
         perf_timeout: 0,
-        pref_count: 50
+        pref_count: 0
     };
     var debugid = request('debugid');
     var sid = getCookie('sid');
@@ -70,17 +71,22 @@ var BJ_REPORT = (function(global) {
             case 'inject':     // 流量劫持注入
                 type = 10;
                 break;
-            case 'slowApi':     // 慢速api接口
+            case 'whitescreen': // 页面从正常变为白屏
                 type = 11;
+                break;
+            case 'routematchgood': // 路由错配后，页面正常显示
+                type = 12;
+                break;
+            case 'slowApi': // 慢速api接口
+                type = 13;
                 break;
             default:
                 type = 0;       // 未知错误
         }
 
         return type
-
    }
-   
+
     function request(paras)
     {
         try {
@@ -101,7 +107,7 @@ var BJ_REPORT = (function(global) {
         }
        
     }
-
+   
     function getCookie(name) {
         try {
             var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
@@ -134,7 +140,6 @@ var BJ_REPORT = (function(global) {
         } catch (error) {
             console && console.error(error);
         }
-        
     }
 
     function addListener () {
@@ -243,17 +248,8 @@ var BJ_REPORT = (function(global) {
                     // }
                 }
             }
-            // console.log(JSON.stringify(perfs))
-            if(perfs.length > _config.pref_count){
-                perfs = perfs.sort(function(a,b){
-                    return  (a.response < b.response) ? 1 : -1
-                })
-                // console.log(perfs)
-                perfs = perfs.slice(0,_config.pref_count);
-                // console.log(perfs)
-            }
 
-            return fixed_perfs.concat(perfs);
+            return fixed_perfs.slice(0, config.pref_count + 1);
 
         } catch (error) {
             console && console.error(error);
@@ -602,6 +598,24 @@ var BJ_REPORT = (function(global) {
             }
             
         },
+        domreadyheartbeat: function(){
+            try {
+                // 发送心跳
+                var heartjson =  {
+                    namespace:_config.namespace,
+                    appname: _config.appname,
+                    route: '/domready/' + _config.router,
+                    url: window.location.href
+                }
+                var url = _config.hb_url + '?d=' + encodeURIComponent(JSON.stringify(heartjson));
+
+                var _img = new Image();
+                _img.src = url;
+            } catch (error) {
+                console && console.error(error)
+            }
+            
+        },
         // 上报性能
         performace: function(){
             var uploadStatus = false;
@@ -624,7 +638,7 @@ var BJ_REPORT = (function(global) {
                 // console.log(_config.perf_filter_list)
             });
             
-            function sendDate(event){
+            function sendData(event){
                 if(uploadStatus){
                     return;
                 }
@@ -652,18 +666,54 @@ var BJ_REPORT = (function(global) {
     
             addListener()(window, "load", function(event) {
                 setTimeout(function(){
-                    sendDate('load');
+                    sendData('load');
                 },300)
                 
             });
 
             addListener()(window, "beforeunload", function(e) {
-                sendDate('beforeunload');
+                sendData('beforeunload');
             });
 
             addListener()(window, "unload", function(e) {
-                sendDate('unload');
+                sendData('unload');
             });
+        },
+        // 上报首屏时间
+        firstScreen: function(){
+            var didMountEndTime = new Date().valueOf();
+
+            setTimeout(() => {
+                try {
+                    var t = performance.timing;
+                    if(t){
+                        var json =  {
+                            namespace:_config.namespace,
+                            appname: _config.appname,
+                            route: '/firstScreen/' + _config.router,
+                            _t: new Date - 0,
+                            uid: _config.uid,
+                            bid: _config.bid,
+                            sid: sid,
+                            userid: userid,
+                            url: global.location.href.replace(/\?.*/,''),
+                            requests: [{  
+                                loadPage: didMountEndTime - t.fetchStart,
+                                domReady: new Date().valueOf() - t.fetchStart,
+                                name: window.location.href.replace(/\?.*/,'')
+                            }]
+                        }
+                        var url = _config.perf_url+'?d=' + encodeURIComponent(JSON.stringify(json));
+                        
+                        var _img = new Image();
+                        _img.src = url;
+                    }
+                } catch (error) {
+                    console && console.error(err)
+                }
+            }, 1);
+
+           
         },
          // 拦截注入
          injection: function(){
@@ -682,8 +732,6 @@ var BJ_REPORT = (function(global) {
                 } catch (error) {
                     console && console.error(err)
                 }
-                
-    
             });
         },
         // 验活
@@ -699,6 +747,9 @@ var BJ_REPORT = (function(global) {
                             var err = new Error('alive error');
                             if (window && window.BJ_REPORT) window.BJ_REPORT.report(err, false, 'alive');
                             // upPerformance();
+                        }else{
+                            // 页面从正常变白
+                            goodTobad(); 
                         }
                     } else {
                         var perfs = getPerformance();
@@ -711,6 +762,34 @@ var BJ_REPORT = (function(global) {
                 }
             
             }, 5000);
+
+            // 页面由正常情况突然变白
+            function goodTobad(){
+                var _id =  setInterval(function(){
+                    var map = getAlive();
+                    if(map.ALL < 200){
+                        if (window && window.BJ_REPORT) {
+                            clearInterval(_id);
+                            var err = new Error('页面从正常变白');
+                            window.BJ_REPORT.report(err, false, 'whitescreen');
+                        }
+
+                    }
+                },2000);
+            }
+        },
+        matchAutoRepair: function(){
+            var _id =  setInterval(function(){
+                var map = getAlive();
+                if(map.ALL > 200){
+                    if (window && window.BJ_REPORT) {
+                        clearInterval(_id);
+                        var err = new Error('路由错配，页面正常显示');
+                        window.BJ_REPORT.report(err, false, 'routematchgood');
+                    }
+
+                }
+            },2000);
         },
         info: function(msg) { // info report
             if (!msg) {

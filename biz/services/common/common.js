@@ -389,10 +389,9 @@ const transfer = async (ctx, json) => {
             obj[key] = {};
         }
         if (!obj[key][item[3]]) {
-            obj[key][item[3]] = [{ name: kv_key, handle: item[4], schemaKey: item[5] }];
-        } else {
-            obj[key][item[3]].push({ name: kv_key, handle: item[4], schemaKey: item[5] });
+            obj[key][item[3]] = [];
         }
+        obj[key][item[3]].push({ name: kv_key, kvType: item[2], handle: item[4], schemaKey: item[5] });
     }
 
     for (const key in obj) {
@@ -435,25 +434,13 @@ const transfer = async (ctx, json) => {
         if (config.default.statisticsJaeger && result.span) {
             result.span.finish();
         }
-        if (config.default.statisticsProm && result.response) {
-            ctx.p_rpc.observe(
-                {
-                    url: ctx.urlinfo.path,
-                    rpc_func: result.callInfo.replace('[object Object]', ''),
-                    hostname,
-                },
-                result.response.costtime || 0,
-            );
-        }
     }
     // console.dir(result.response.return.value, {depth: null});
-
     for (const key in result.response.return.value) {
         const kvObj = result.response.return.value[key].value;
 
         for (const id in kvObj) {
             for (const item of obj[key][id]) {
-
                 const itemkey = item.name;
 
                 // console.log(itemkey);
@@ -461,7 +448,7 @@ const transfer = async (ctx, json) => {
                 const schemaKey = item.schemaKey;
 
                 // 全页预览处理
-                if (ctx.urlinfo.preview && id === ctx.request.body.id) {
+                if (ctx.urlinfo && ctx.urlinfo.preview && id === ctx.request.body.id) {
                     let data = decodeURIComponent(ctx.request.body.data);
 
                     try {
@@ -481,7 +468,14 @@ const transfer = async (ctx, json) => {
 
                 // kv数据schema处理
                 if (schemaKey && schemaCheck) {
-                    backData[itemkey] = schemaCheck(backData[itemkey], schemaKey, ctx);
+                    backData[itemkey] = schemaCheck(ctx, {
+                        data: backData[itemkey],
+                        jsonKey: itemkey,
+                        schemaKey,
+                        kvType: item.kvType,
+                        key: id,
+                        type: 'kv',
+                    });
                 }
             }
         }

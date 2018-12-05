@@ -1,11 +1,10 @@
 const prom = require('prom-client');
 const Router = require('koa-router');
 const config = require('../configs');
-const logger = require('./logger');
 const router = new Router();
 const register = prom.register;
 const Histogram = prom.Histogram;
-const Counter = prom.Counter;
+// const Counter = prom.Counter;
 const Gauge = prom.Gauge;
 const pidusage = require('pidusage');
 const pid = process.pid;
@@ -71,13 +70,15 @@ const p_rpc = new Histogram({
     buckets,
 });
 
+// 初始化JSON.parse请求时间统计
 const p_parse = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_parse`,
-    help: '统计rpc时间',
+    help: '统计JSON.parse时间',
     labelNames: ['url', 'method', 'status_code', 'hostname'],
-    buckets: [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 4, 5, 6, 7, 8, 10],
+    buckets: [0, 0.2, 0.5, 0.75, 1, 1.5, 2, 3, 5, 7, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 500, 1000, 2000],
 });
 
+// 初始化页面渲染时间统计
 const p_rander = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_rander`,
     help: '页面渲染时间',
@@ -85,6 +86,7 @@ const p_rander = new Histogram({
     buckets: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 });
 
+// 初始化服务端错误数量统计
 const p_error = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_error`,
     help: '服务端错误数量',
@@ -93,18 +95,20 @@ const p_error = new Histogram({
 });
 
 // 初始化http请求计数器
-const c = new Counter({
-    name: `${config.default.namespace}_${config.default.appname}_counter`,
-    help: 'Example of a counter',
-    labelNames: ['code', 'hostname'],
-});
+// const c = new Counter({
+//     name: `${config.default.namespace}_${config.default.appname}_counter`,
+//     help: 'Example of a counter',
+//     labelNames: ['code', 'hostname'],
+// });
 
+// 初始化内存占用统计
 const p_memory = new Gauge({
     name: `${config.default.namespace}_${config.default.appname}_memory`,
     help: '内存占用',
     labelNames: ['type', 'hostname'],
 });
 
+// 初始化CPU使用统计
 const p_pidusage = new Gauge({
     name: `${config.default.namespace}_${config.default.appname}_pidusage`,
     help: 'CPU使用，percentage (from 0 to 100*vcore)',
@@ -122,7 +126,7 @@ const promInit = app => {
                 if (ctx.url === '/heartbeat') {
                     return;
                 }
-                c.inc({ code: ctx.status });
+                // c.inc({ code: ctx.status });
                 const labelObj = {
                     url: ctx.urlinfo && ctx.urlinfo.path ? ctx.urlinfo.path : '未知路由',
                     method: ctx.method,
@@ -135,7 +139,7 @@ const promInit = app => {
                 p_error.observe(labelObj, ctx.errorCount);
                 p_parse.observe(labelObj, parseInt(ctx.parseTime));
             } catch (error) {
-                logger.error(error);
+                console.error(error);
             }
         });
     }
@@ -165,7 +169,7 @@ setInterval(() => {
 
 // 导出
 module.exports = {
-    c,
+    // c,
     p_request,
     p_rpc,
     p_parse,
