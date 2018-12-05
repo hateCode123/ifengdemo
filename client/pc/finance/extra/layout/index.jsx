@@ -15,6 +15,8 @@ class Layout extends React.PureComponent {
     };
 
     componentDidMount() {
+        // 上报首屏时间
+        if (window && window.BJ_REPORT) window.BJ_REPORT.firstScreen();
         this.unHandleClick = addEventListener(document, 'click', this.handleClick);
     }
 
