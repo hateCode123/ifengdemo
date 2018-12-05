@@ -36,6 +36,7 @@ var BJ_REPORT = (function(global) {
     var debugid = request('debugid');
     var sid = getCookie('sid');
     var userid = getCookie('userid');
+    var alive_count = (typeof __domAliveNum != 'undefined') ? __domAliveNum: 200;
 
    function getErrorType (key){
        var type = 0;
@@ -248,8 +249,7 @@ var BJ_REPORT = (function(global) {
                     // }
                 }
             }
-
-            return fixed_perfs.slice(0, config.pref_count + 1);
+            return fixed_perfs.slice(0, _config.pref_count);
 
         } catch (error) {
             console && console.error(error);
@@ -683,7 +683,7 @@ var BJ_REPORT = (function(global) {
         firstScreen: function(){
             var didMountEndTime = new Date().valueOf();
 
-            setTimeout(() => {
+            setTimeout(function (){
                 try {
                     var t = performance.timing;
                     if(t){
@@ -741,7 +741,7 @@ var BJ_REPORT = (function(global) {
                     var node = document.body;
                     if (node) {
                         var map = getAlive();
-                        if(map.ALL < 200){
+                        if(map.ALL < alive_count){
                             // var perfs = getPerformance();
         
                             var err = new Error('alive error');
@@ -767,7 +767,7 @@ var BJ_REPORT = (function(global) {
             function goodTobad(){
                 var _id =  setInterval(function(){
                     var map = getAlive();
-                    if(map.ALL < 200){
+                    if(map.ALL < alive_count){
                         if (window && window.BJ_REPORT) {
                             clearInterval(_id);
                             var err = new Error('页面从正常变白');
@@ -781,7 +781,7 @@ var BJ_REPORT = (function(global) {
         matchAutoRepair: function(){
             var _id =  setInterval(function(){
                 var map = getAlive();
-                if(map.ALL > 200){
+                if(map.ALL > alive_count){
                     if (window && window.BJ_REPORT) {
                         clearInterval(_id);
                         var err = new Error('路由错配，页面正常显示');

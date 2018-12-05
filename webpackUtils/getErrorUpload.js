@@ -38,7 +38,7 @@ module.exports = (level, type) => {
                 router: <%- JSON.stringify(router) %>,
                 perf_filter_list: ${JSON.stringify(filterJsList)},
                 perf_timeout: 0,
-                pref_count: 0
+                pref_count: 1,
             });
             BJ_REPORT.tryJs().spyAll();
             BJ_REPORT.heartbeat();
