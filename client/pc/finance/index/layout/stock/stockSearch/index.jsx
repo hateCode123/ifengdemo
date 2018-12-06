@@ -62,6 +62,8 @@ class StockSearch extends React.PureComponent {
         let num = current;
 
         if (data.length > 0) {
+            const stock = data[current !== null ? current : 0];
+
             switch (e.keyCode) {
                 case 38:
                     if (current === null) {
@@ -86,12 +88,10 @@ class StockSearch extends React.PureComponent {
 
                     break;
                 case 13:
+                    if (!stock) return;
+
                     try {
-                        window.open(
-                            `//finance.ifeng.com/app/hq/${data[current !== null ? current : 0].t}/${
-                                data[current !== null ? current : 0].c
-                            }`,
-                        );
+                        window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);
                     } catch (e) {
                         console.error(e);
 
@@ -130,6 +130,8 @@ class StockSearch extends React.PureComponent {
 
         if (data.length > 0) {
             const stock = data[current !== null ? current : 0];
+
+            if (!stock) return;
 
             try {
                 window.open(`//finance.ifeng.com/app/hq/${stock.t}/${stock.c}`);

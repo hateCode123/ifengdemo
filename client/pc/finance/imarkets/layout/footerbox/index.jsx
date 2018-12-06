@@ -28,8 +28,8 @@ class FooterBox extends PureComponent {
                 <Ad styleName={styles.ad} content={content.footerAd} />
                 {/* 底部公共版权 */}
                 <Chip
-                    id="10114"
-                    type="static"
+                    id="20012"
+                    type="struct"
                     title="底部公共版权"
                     groupName="底部"
                     translate="jsonParse"
