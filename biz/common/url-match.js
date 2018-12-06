@@ -3,7 +3,7 @@ const config = require('../configs');
 const { tracer } = require('../common/jaeger');
 const env = process.env.NODE_ENV;
 
-exports.match = (routerObj, handler) => {
+exports.match = (routerObj) => {
     return async (ctx, next) => {
         if (config.default.statistics) {
             ctx.routerTime = Timers.timeEnd(ctx.routerTimeStart);
@@ -18,6 +18,7 @@ exports.match = (routerObj, handler) => {
             return false;
         }
 
-        return await handler(ctx, next);
+        // return await handler(ctx, next);
+        await next();
     };
 };

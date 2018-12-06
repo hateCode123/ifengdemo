@@ -4,7 +4,7 @@ module.exports = {
         var adData = <%- JSON.stringify(typeof adData ==='object' ? adData: {}) %>;
         var staticData = <%- JSON.stringify(typeof staticData ==='object' ? staticData: {}) %>;
         var __chipsData = <%- JSON.stringify(kvList) %>;
-        var __apiReport = (Math.random() > 0);
+        var __apiReport = (Math.random() > 0.99);
         var __apiReportMaxCount = 50;
 
         var getChipsDataByKey = function (data, key) {

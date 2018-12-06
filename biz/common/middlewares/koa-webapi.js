@@ -55,7 +55,7 @@ module.exports = (app, options = {}) => {
             }
             data.kvList = this.kvList;
         } else {
-            data.kvList = '';
+            data.kvList = [];
         }
         data.bid = this.uuid;
         data.router = this.urlinfo.path;

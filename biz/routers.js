@@ -141,7 +141,7 @@ for (const i in routers) {
             routerList.push({
                 path,
                 method: methodItem,
-                handlers: [...meddlewareList, match(routerObj, handler)],
+                handlers: [match(routerObj), ...meddlewareList, handler],
             });
 
             // 添加页面编辑中间件
@@ -158,7 +158,7 @@ for (const i in routers) {
                 routerList.push({
                     path: routerObj.path,
                     method: methodItem,
-                    handlers: [...meddlewareList, match(routerObj, handler)],
+                    handlers: [match(routerObj), ...meddlewareList, handler],
                 });
             }
             // 添加全页预览中间件
@@ -174,7 +174,7 @@ for (const i in routers) {
                 routerList.push({
                     path: routerObj.path,
                     method: 'post',
-                    handlers: [...meddlewareList, match(routerObj, handler)],
+                    handlers: [match(routerObj), ...meddlewareList, handler],
                 });
             }
 
@@ -191,7 +191,7 @@ for (const i in routers) {
                 routerList.push({
                     path: `${path}/low`,
                     method: methodItem,
-                    handlers: [...meddlewareList, match(routerObj, handler)],
+                    handlers: [match(routerObj), ...meddlewareList, handler],
                 });
             }
             // 处理路由冒泡
@@ -207,7 +207,7 @@ for (const i in routers) {
                 routerList.push({
                     path: routerObj.path,
                     method: methodItem,
-                    handlers: [...meddlewareList, match(routerObj, handler)],
+                    handlers: [match(routerObj), ...meddlewareList, handler],
                 });
             }
         }

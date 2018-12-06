@@ -2939,8 +2939,8 @@ exports.KVProxy = {};
 exports.SearchProxy = {};
 const KVTableEnum = config.common.KVProxy;
 for (const key in KVProxy) {
-    // console.log(key);
     exports.KVProxy[key] = function(ctx, ...args) {
+        const kvitem =  autoRetry(ctx, key, 3);
         var child = !config.default.statisticsJaeger
             ? null
             : tracer.startSpan(`KVProxy.${key}(...args)`, { childOf: ctx.spanrpc || ctx.spanrouter || ctx.span });
@@ -2962,7 +2962,7 @@ for (const key in KVProxy) {
             args = [getIds(ctx, key, args)];
         }
 
-        return KVProxy[key](...args).then(
+        return kvitem(...args).then(
             function(data) {
                 data.span = child;
                 data.callInfo = `KVProxy.${key}(...args)`;
@@ -3038,5 +3038,31 @@ function setRpcProm(ctx, data) {
     } catch (error) {
         console.error(error);
     }
- 
+}
+
+function autoRetry(ctx, key, retryMax) {
+    let retryNum = 0;
+
+    return function funcR() {
+        let params = arguments;
+        return new Promise((resolve, reject) => {
+            KVProxy[key](...params)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(err => {
+                    if (retryNum < retryMax) {
+                        retryNum++;
+                        if (err.response && err.response.error && err.response.error.code === -13001) {
+                            ctx.errorLog({title: `KVProxy.${key}() timeout, 第${retryNum}次尝试`}); 
+                            resolve(funcR(...params));
+                        } else {
+                            reject(err);
+                        }
+                    } else {
+                        reject(err);
+                    }
+                });
+        });
+    };
 }

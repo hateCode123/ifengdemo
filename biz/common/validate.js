@@ -7,9 +7,11 @@ const Joi = require('joi');
  * @return {Funciton}
  */
 exports.validate = (schemas, type) => {
-    return async(ctx, next) => {
+    return async (ctx, next) => {
         if (schemas) {
-            const ret = Joi.validate(Object.assign({}, ctx.query, ctx.params, ctx.request.body), schemas, { allowUnknown: true });
+            const ret = Joi.validate(Object.assign({}, ctx.query, ctx.params, ctx.request.body), schemas, {
+                allowUnknown: true,
+            });
 
             if (ret.error) {
                 ctx.errorCount++;
@@ -27,7 +29,7 @@ exports.validate = (schemas, type) => {
                                         </html>`;
                         break;
                     case 'jsonp':
-                        ctx.jsonp({ error: 'params validate occurs Error' });
+                        ctx.jsonp(1, 'params validate occurs Error', ret.error.details);
                         break;
                     default:
                         ctx.json(1, 'params validate occurs Error', ret.error.details);
