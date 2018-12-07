@@ -85,8 +85,8 @@ class Calender extends PureComponent {
     // 判断是否为当前时间之后
     isTomorrow = (todayYear, todayMonth, todayDate, year, month, date) => {
         if (year > todayYear) return true;
-        if (month > todayMonth) return true;
-        if (date > todayDate) return true;
+        if (year >= todayYear && month > todayMonth) return true;
+        if (year >= todayYear && month >= todayMonth && date > todayDate) return true;
     };
     // 渲染日期
     dateView() {
@@ -111,6 +111,7 @@ class Calender extends PureComponent {
                 '2',
                 '0',
             )}${String(i).padStart('2', '0')}10.html`;
+
             const aHref = this.isTomorrow(todayYear, todayMonth, todayDate, this.state.year, this.state.month, i)
                 ? null
                 : href;
