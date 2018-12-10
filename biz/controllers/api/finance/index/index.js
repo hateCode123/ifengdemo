@@ -33,8 +33,8 @@ exports.getwemediaEAccountImg = {
     },
 };
 
-exports.getCustomList = {
-    path: '/api/finance/index/customList/:callback?',
+exports.getInfoIndexList = {
+    path: '/api/finance/index/infoIndex/:callback?',
     method: 'get',
     online: true,
     handler: async ctx => {
@@ -57,72 +57,13 @@ exports.getCustomList = {
     },
 };
 
-exports.getMacroList = {
-    path: '/api/finance/index/macroList/:callback?',
+exports.getInfoDataList = {
+    path: '/api/finance/index/infoData/:key/:callback?',
     method: 'get',
     online: true,
     handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '20038').then(...handleJson(ctx));
-
-        if (ctx.params.callback) {
-            ctx.jsonp(data);
-        } else {
-            ctx.json(data);
-        }
-    },
-};
-
-exports.getStockList = {
-    path: '/api/finance/index/stockList/:callback?',
-    method: 'get',
-    online: true,
-    handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '20032').then(...handleJson(ctx));
-
-        if (ctx.params.callback) {
-            ctx.jsonp(data);
-        } else {
-            ctx.json(data);
-        }
-    },
-};
-
-exports.getImarketsList = {
-    path: '/api/finance/index/imarketsList/:callback?',
-    method: 'get',
-    online: true,
-    handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '20040').then(...handleJson(ctx));
-
-        if (ctx.params.callback) {
-            ctx.jsonp(data);
-        } else {
-            ctx.json(data);
-        }
-    },
-};
-
-exports.getCompanyList = {
-    path: '/api/finance/index/companyList/:callback?',
-    method: 'get',
-    online: true,
-    handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '60128').then(...handleJson(ctx));
-
-        if (ctx.params.callback) {
-            ctx.jsonp(data);
-        } else {
-            ctx.json(data);
-        }
-    },
-};
-
-exports.getWemoneyList = {
-    path: '/api/finance/index/wemoneyList/:callback?',
-    method: 'get',
-    online: true,
-    handler: async ctx => {
-        const data = await KVProxy.getDynamicFragment(ctx, '20039').then(...handleJson(ctx));
+        const key = ctx.params.key;
+        const data = await KVProxy.getDynamicFragment(ctx, key).then(...handleJson(ctx));
 
         if (ctx.params.callback) {
             ctx.jsonp(data);

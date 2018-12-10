@@ -6,20 +6,13 @@ import errorBoundary from '@ifeng/errorBoundary';
 import { LazyImg } from '@ifeng/ui_pc_lazyLoad';
 import { rel } from '../../../../../../utils/rel';
 import { handleAd } from '../../../../../../utils/utils';
-import {
-    getCommentCount,
-    getCustomList,
-    getMacroList,
-    getStockList,
-    getImarketsList,
-    getCompanyList,
-    getWemoneyList,
-} from '../../../../../../services/api';
+import { getCommentCount, getInfoIndexList, getInfoDataList } from '../../../../../../services/api';
 
 class ContentList extends React.PureComponent {
     static propTypes = {
         infoAd: PropTypes.object,
         index: PropTypes.number,
+        dataKey: PropTypes.string,
     };
 
     state = {
@@ -90,22 +83,14 @@ class ContentList extends React.PureComponent {
 
         try {
             const { len } = this.state;
-            const { index } = this.props;
+            const { index, dataKey } = this.props;
 
             let data = [];
 
             if (index === 0) {
-                data = await getCustomList();
-            } else if (index === 1) {
-                data = await getMacroList();
-            } else if (index === 2) {
-                data = await getStockList();
-            } else if (index === 3) {
-                data = await getImarketsList();
-            } else if (index === 4) {
-                data = await getCompanyList();
+                data = await getInfoIndexList();
             } else {
-                data = await getWemoneyList();
+                data = await getInfoDataList(dataKey);
             }
 
             if (data) {

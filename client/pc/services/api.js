@@ -128,9 +128,9 @@ const getwemediaEAccountImg = async wemediaEAccountId => {
 };
 
 // 获取信息流首页数据
-const getCustomList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/customList/getCustomList`, {
-        jsonpCallback: 'getCustomList',
+const getInfoIndexList = async () => {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/infoIndex/getInfoIndexList`, {
+        jsonpCallback: 'getInfoIndexList',
         cache: false,
     });
 
@@ -148,106 +148,10 @@ const getCustomList = async () => {
     return result;
 };
 
-// 获取信息流宏观数据
-const getMacroList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/macroList/getMacroList`, {
-        jsonpCallback: 'getMacroList',
-        cache: false,
-    });
-
-    const result = data.data.data.map(item => ({
-        thumbnails:
-            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                ? formatImage(item.thumbnails.image[0].url, 144, 96)
-                : '',
-        commentUrl: item.commentUrl,
-        pcUrl: item.url,
-        url: formatUrl(item.url),
-        title: item.title,
-        source: item.source,
-        newsTime: handleNewstime(item.newsTime),
-        skey: item.skey,
-    }));
-
-    return result;
-};
-
-// 获取信息流股票数据
-const getStockList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/stockList/getStockList`, {
-        jsonpCallback: 'getStockList',
-        cache: false,
-    });
-
-    const result = data.data.data.map(item => ({
-        thumbnails:
-            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                ? formatImage(item.thumbnails.image[0].url, 144, 96)
-                : '',
-        commentUrl: item.commentUrl,
-        pcUrl: item.url,
-        url: formatUrl(item.url),
-        title: item.title,
-        source: item.source,
-        newsTime: handleNewstime(item.newsTime),
-        skey: item.skey,
-    }));
-
-    return result;
-};
-
-// 获取信息流 imarkets 数据
-const getImarketsList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/imarketsList/getImarketsList`, {
-        jsonpCallback: 'getImarketsList',
-        cache: false,
-    });
-
-    const result = data.data.data.map(item => ({
-        thumbnails:
-            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                ? formatImage(item.thumbnails.image[0].url, 144, 96)
-                : '',
-        commentUrl: item.commentUrl,
-        pcUrl: item.url,
-        url: formatUrl(item.url),
-        title: item.title,
-        source: item.source,
-        newsTime: handleNewstime(item.newsTime),
-        skey: item.skey,
-    }));
-
-    return result;
-};
-
-// 获取信息流公司抓取数据
-const getCompanyList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/companyList/getCompanyList`, {
-        jsonpCallback: 'getCompanyList',
-        cache: false,
-    });
-
-    const result = data.data.data.map(item => ({
-        thumbnails:
-            item.thumbnails && item.thumbnails.image && item.thumbnails.image[0]
-                ? formatImage(item.thumbnails.image[0].url, 144, 96)
-                : '',
-        commentUrl: item.commentUrl,
-        pcUrl: item.url,
-        url: formatUrl(item.url),
-        title: item.title,
-        source: item.source,
-        newsTime: handleNewstime(item.newsTime),
-        skey: item.skey,
-    }));
-
-    return result;
-};
-
-// 获取信息流 Wemoney 数据
-const getWemoneyList = async () => {
-    const data = await jsonp(`${apiBaseUrl}/finance/index/wemoneyList/getWemoneyList`, {
-        jsonpCallback: 'getWemoneyList',
+// 获取信息流其他数据
+const getInfoDataList = async key => {
+    const data = await jsonp(`${apiBaseUrl}/finance/index/infoData/${key}/getInfoDataList`, {
+        jsonpCallback: 'getInfoDataList',
         cache: false,
     });
 
@@ -442,12 +346,8 @@ export {
     getTopicData,
     getFundsFlowData,
     getwemediaEAccountImg,
-    getCustomList,
-    getMacroList,
-    getStockList,
-    getImarketsList,
-    getCompanyList,
-    getWemoneyList,
+    getInfoIndexList,
+    getInfoDataList,
     getLiveData,
     refreshLiveData,
     getStockRank,
