@@ -11,31 +11,33 @@ const pid = process.pid;
 const os = require('os');
 const hostname = os.hostname();
 const buckets = [
-    2,
-    4,
-    6,
-    8,
+    5,
     10,
+    15,
     20,
+    25,
     30,
+    35,
     40,
+    45,
     50,
     60,
     70,
     80,
     90,
     100,
-    110,
     120,
-    130,
     140,
-    150,
     160,
-    170,
     180,
-    190,
     200,
+    300,
+    400,
     500,
+    600,
+    700,
+    800,
+    900,
     1000,
 ];
 
@@ -75,7 +77,7 @@ const p_parse = new Histogram({
     name: `${config.default.namespace}_${config.default.appname}_parse`,
     help: '统计JSON.parse时间',
     labelNames: ['url', 'method', 'status_code', 'hostname'],
-    buckets: [0, 0.2, 0.5, 0.75, 1, 1.5, 2, 3, 5, 7, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 500, 1000, 2000],
+    buckets: [1, 2, 3, 5, 7, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
 });
 
 // 初始化页面渲染时间统计

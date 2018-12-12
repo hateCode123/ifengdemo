@@ -177,8 +177,10 @@ app.use(async (ctx, next) => {
             serverTime: moment().format('YYYY-MM-DD HH:mm:ss'),
             domain: ctx.header.domain || 'nodomain',
             devicetype: ctx.headers['devicetype'] || 'nodevicetype',
+            referer: ctx.headers['referer']
         },
     });
+
 });
 
 // jaeger初始化
