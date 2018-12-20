@@ -1,8 +1,0 @@
-.news_live {
-    composes: clearfix from global;
-}
-
-.stock_news {
-    position: relative;
-    padding-top: 5px;
-}

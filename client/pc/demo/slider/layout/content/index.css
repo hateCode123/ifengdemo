@@ -1,0 +1,22 @@
+.slider {
+    width: 920px;
+    margin: 0 auto;
+}
+[data-dots-active='true'] {
+    width: 24px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    background: #f54343 !important;
+    margin: 0 3px !important;
+}
+[data-dots-active='false'] {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 10px !important;
+    background: #ccc !important;
+    margin: 0 3px !important;
+}
+[data-dots-wrap='true'] {
+    left: 50%;
+    bottom: -21px !important;
+}

@@ -3,7 +3,7 @@
     "namespace": "dev_shank",
     "alias": "spring",
     "debug": true,
-    "port": 3000,
+    "port": 3001,
     "outputStd": true,
     "viewsdir": "devtmp",
     "apiPrefix": "",

@@ -1,7 +1,0 @@
-
-.labe_02{ position:relative; padding-bottom:10px;composes: clearfix from global;}
-.labe_02 li{ float:left; height:22px; line-height:22px; padding-right:8px; margin-right:8px; background:url(http://y1.ifengimg.com/a/2014/0922/lc/images/l_10.png) right center no-repeat; cursor:pointer;}
-.labe_02 li a{ padding:5px; color:#333333; text-decoration:none; font-size:12px; font-family:Microsoft YaHei;}
-.labe_02 li.current a{ background:#f54343; color:#FFF;}
-.labe_02 li.none{ background:none;}
-.jzrq{ position:absolute; right:0px; color:#b5b5b5; font-size:12px; height:22px; line-height:22px;}
