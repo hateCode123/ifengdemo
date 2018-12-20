@@ -221,7 +221,7 @@ class SliderControl extends React.PureComponent {
                         </React.Fragment>
                     ) : null}
 
-                    <div className={styles.dots_wrap} data-dots-wrap>
+                    <div className={`${styles.dots_wrap} ${styles.clearfix}`} data-dots-wrap>
                         {React.Children.map(this.props.children, (elem, index) => {
                             return (
                                 <span
