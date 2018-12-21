@@ -1,0 +1,111 @@
+.modal_mask {
+    background-color: rgba(33, 33, 33, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    animation: showMask 0.3s;
+}
+.show {
+    transition: all 0.3s;
+    display: block;
+}
+.modal_body {
+    background-color: #fff;
+    border-radius: 4px;
+    /* padding: 30px; */
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate3d(-50%, -50%, 0);
+}
+.modal_title {
+    height: 50px;
+    line-height: 50px;
+    background: #f6f6f6;
+    font-size: 16px;
+    color: #666666;
+    padding-left: 20px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.modal_contianer {
+    min-height: 100px;
+}
+.modal_footer {
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 16px;
+    text-align: right;
+    border-radius: 0 0 4px 4px;
+}
+.btn {
+    line-height: 1.499;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 32px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
+    border-color: #d9d9d9;
+    outline: 0;
+    & span {
+        pointer-events: none;
+        display: inline-block;
+    }
+    &:hover {
+        color: #f57878;
+        background-color: #fff;
+        border-color: #f57878;
+    }
+    &.btn_comfirm {
+        color: #fff;
+        background-color: #f54343;
+        border-color: #f54343;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+        -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        &:hover {
+            color: #fff;
+            background-color: #f57878;
+            border-color: #f57878;
+        }
+    }
+}
+.ml_8 {
+    margin-left: 8px;
+}
+
+@keyframes showMask {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(33, 33, 33, 0.4);
+    }
+}
