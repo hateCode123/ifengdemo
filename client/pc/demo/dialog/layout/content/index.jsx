@@ -4,6 +4,7 @@ import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 
 import Modal from './modal/index';
+import ModalBox from './modal/dialog';
 class Content extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
@@ -21,6 +22,10 @@ class Content extends React.PureComponent {
         });
     }
 
+    tryIt() {
+        console.log('you win');
+    }
+
     modalHide() {
         this.setState({
             modal: false,
@@ -29,6 +34,19 @@ class Content extends React.PureComponent {
     handleOk() {
         console.log('ok呀');
         this.modalHide();
+    }
+    handleClose() {
+        console.log('closed');
+        // this.tryIt();
+        ModalBox.dailog({
+            title: 'Demo',
+            content: 'Hello world!',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => console.log('ok'),
+            onCancel: () => console.log('cancel'),
+            onClose: () => console.log('closed'),
+        });
     }
 
     render() {
@@ -49,8 +67,25 @@ class Content extends React.PureComponent {
                         children={modalContent}
                         onOk={this.handleOk.bind(this)}
                         onCancel={this.handleCancel.bind(this)}
+                        onClose={() => {
+                            this.handleClose();
+                        }}
                         footer={true}
                     />
+                    <button
+                        onClick={() =>
+                            ModalBox.dailog({
+                                title: 'Demo',
+                                content: 'Hello world!',
+                                okText: '确认',
+                                cancelText: '取消',
+                                onOk: () => console.log('ok'),
+                                onCancel: () => console.log('cancel'),
+                                onClose: () => console.log('closed'),
+                            })
+                        }>
+                        click me!
+                    </button>
                 </div>
             </React.Fragment>
         );
