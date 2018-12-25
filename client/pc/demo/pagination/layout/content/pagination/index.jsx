@@ -11,14 +11,16 @@ class Pagination extends React.PureComponent {
     };
 
     static propTypes = {
-        total: PropTypes.number,
+        total: PropTypes.number.isRequired,
         pageSize: PropTypes.number,
         onChange: PropTypes.func.isRequired,
+        type: PropTypes.string,
     };
 
     static defaultProps = {
         total: 0,
         pageSize: 20,
+        type: 'normal',
     };
 
     componentDidMount() {}
@@ -112,6 +114,36 @@ class Pagination extends React.PureComponent {
         return pages;
     }
 
+    creatSimple() {
+        const { total, pageSize } = this.props;
+        const { current } = this.state;
+
+        const totalPage = Math.ceil(total / pageSize);
+
+        const pages = (
+            <div className={styles.simple_wrap}>
+                <div
+                    className={`${current === 1 ? styles.nomore : ''} ${styles.fy_left}`}
+                    onClick={this.goPrev_s.bind(this)}>
+                    {'<<'}
+                </div>
+                <div className={styles.fy_col}>
+                    <span className={styles.fy_cur}>{current}</span>
+                    {'/'}
+                    <span>{totalPage}</span>
+                </div>
+                <div
+                    className={`${current === totalPage ? styles.nomore : ''} ${styles.fy_left}`}
+                    onClick={this.goNext_s.bind(this, totalPage)}>
+                    {'>>'}
+                </div>
+            </div>
+        );
+
+        return pages;
+    }
+
+    // 普通样式点击事件
     // 点击事件
     go(current, totalPage) {
         console.log('current=', current);
@@ -167,13 +199,54 @@ class Pagination extends React.PureComponent {
         this.go(current, totalPage);
     }
 
+    // 简洁样式点击事件
+    // 跳转事件
+    go_s(current, totalPage) {
+        const { onChange, pageSize } = this.props;
+
+        this.setState({
+            current,
+        });
+        onChange({ pageNumber: current, pageSize });
+    }
+    // 点击上一页事件
+    goPrev_s() {
+        let { current } = this.state;
+
+        if (--current === 0) {
+            return;
+        }
+
+        this.go_s(current);
+    }
+
+    // 点击下一页事件
+    goNext_s(totalPage) {
+        let { current } = this.state;
+
+        if (++current > totalPage) {
+            return;
+        }
+
+        this.go_s(current, totalPage);
+    }
+
     render() {
         const Pages = this.creatPage();
+        const Pages_s = this.creatSimple();
+
+        const { type } = this.props;
 
         return (
             <React.Fragment>
                 <div className={styles.main}>
-                    <ul>{Pages}</ul>
+                    {(() => {
+                        if (type === 'normal') {
+                            return <ul>{Pages}</ul>;
+                        } else if (type === 'simple') {
+                            return <div>{Pages_s}</div>;
+                        }
+                    })()}
                 </div>
             </React.Fragment>
         );

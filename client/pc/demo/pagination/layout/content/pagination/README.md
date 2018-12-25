@@ -1,10 +1,12 @@
-没啥特别的功能待优化
-参数：
+翻页组件
 
--   total ------------ number,总条数
--   pageSize ------------ number,每页条数
--   onChange ------------ function,触发点击的回调，有一个默认参数返回分页数据
-    -   pageSize ------------ 页码
-    -   pageNumber ------------ 每页条数
+API：
 
-2018/12/20 caoyuan1
+-   total ------------ `[number]` `[isRequired]`,总条数
+-   pageSize ------------ `[number]`,每页条数,默认 20
+-   onChange ------------ `[function]` `[isRequired]`,点击跳页的回调，接受一个默认参数对象（分页数据）:
+    -   pageSize ------------ `[number]` 每页条数
+    -   pageNumber ------------ `[number]` 当前页码
+-   type ------------ `[string]` 翻页组件的样式 `normal || simple`，默认`normal`
+
+2018/12/25 caoyuan1

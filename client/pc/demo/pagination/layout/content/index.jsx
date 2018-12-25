@@ -19,6 +19,10 @@ class Content extends React.PureComponent {
                 <div className={styles.slider}>
                     <Pagination total={150} pageSize={10} onChange={this.handleChangePage} />
                 </div>
+                <br />
+                <div className={styles.slider}>
+                    <Pagination total={150} type={'simple'} pageSize={10} onChange={this.handleChangePage} />
+                </div>
             </React.Fragment>
         );
     }
