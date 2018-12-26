@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="always" name="referrer">
+    <title>table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    {{{ htmlWebpackPlugin.options.errorupload }}}
+
+    {{#each htmlWebpackPlugin.files.css}}
+    <link href="{{path}}" rel="stylesheet">
+    {{/each}}
+
+    {{{ htmlWebpackPlugin.options.polyfill }}}
+    <script src="//p3.ifengimg.com/a/2018/0820/fa.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    {{#if htmlWebpackPlugin.options.useMorden}}
+    {{#if htmlWebpackPlugin.options.isDevMode}}
+    {{#each htmlWebpackPlugin.files.js}}
+    <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
+    {{/each}}
+    {{else}}
+    <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
+    {{/if}}
+    {{{htmlWebpackPlugin.options.modernPolyfill}}}
+    {{#each htmlWebpackPlugin.files.js}}
+    <script nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+    {{/each}}
+    {{else}}
+    {{#each htmlWebpackPlugin.files.js}}
+    <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+    {{/each}}
+    {{/if}}
+
+    <script> var sta_collection_time = new Date().getTime();</script>
+    <script id="sta_collection_new">
+        window.analytics(encodeURIComponent(window.location.href));
+    </script>
+</body>
+
+</html>
