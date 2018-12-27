@@ -12,6 +12,11 @@
         border-right: solid 1px #e5e5e5;
         cursor: pointer;
         line-height: 36px;
+        background: #fff;
+        transition: all 0.2s;
+        &:hover {
+            background: #f6f6f6;
+        }
     }
     &:after {
         content: '.';
@@ -27,11 +32,17 @@
 .nomore {
     color: #b5b5b5 !important;
     cursor: default !important;
+    &:hover {
+        background: #fff !important;
+    }
 }
 .ellipsis {
     /* border:none !important;
     margin:0 10px; */
     cursor: default !important;
+    &:hover {
+        background: #fff !important;
+    }
 }
 .simple_wrap {
 }
@@ -45,6 +56,10 @@
     border-radius: 4px;
     float: left;
     cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+        background: #eee;
+    }
 }
 .fy_col {
     float: left;
@@ -85,6 +100,7 @@
         border: solid 1px #e5e5e5;
         margin-left: 10px;
         cursor: pointer;
+        transition: all 0.2s;
         &:hover {
             background: #eee;
         }

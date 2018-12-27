@@ -17,10 +17,15 @@ class Content extends React.PureComponent {
         return (
             <React.Fragment>
                 <div className={styles.slider}>
+                    <div className={styles.txt}>小于9页：</div>
+                    <Pagination total={150} pageSize={20} onChange={this.handleChangePage} />
+                </div>
+                <div className={styles.slider}>
+                    <div className={styles.txt}>大于9页(跳页可选)：</div>
                     <Pagination showQuickJumper total={150} pageSize={10} onChange={this.handleChangePage} />
                 </div>
-                <br />
                 <div className={styles.slider}>
+                    <div className={styles.txt}>简洁模式：</div>
                     <Pagination
                         total={150}
                         type={'simple'}

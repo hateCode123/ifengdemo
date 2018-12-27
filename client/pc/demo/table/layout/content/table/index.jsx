@@ -19,9 +19,10 @@ class Table extends React.PureComponent {
         this.formatDataSource();
     }
 
-    // 对dataSource内容拓展，可插入自定义的列内容
+    // 对dataSource内容拓展，插入自定义的列内容
     formatDataSource() {
         const { dataSource, columns } = this.props;
+        // 深拷贝一下
         let new_dataSource = JSON.parse(JSON.stringify(dataSource));
 
         for (let i = 0; i < columns.length; i++) {
@@ -48,6 +49,7 @@ class Table extends React.PureComponent {
 
         console.log(dataSource);
 
+        // 数据对象渲染
         return Object.keys(item).map((_item, _index) => {
             const rowContent = item[columns[_index].dataIndex] ? item[columns[_index].dataIndex] : '';
             const rowRender = columns[_index].render ? columns[_index].render : '';

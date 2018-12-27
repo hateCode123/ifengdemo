@@ -6,8 +6,7 @@ import errorBoundary from '@ifeng/errorBoundary';
 class Pagination extends React.PureComponent {
     state = {
         current: 1,
-        groupCount: 7,
-        startCount: 1,
+        startCount: 3,
         acceptGo: true,
     };
 
@@ -26,18 +25,16 @@ class Pagination extends React.PureComponent {
         showQuickJumper: false,
     };
 
-    componentDidMount() {}
-
     // 动态生成页码
     creatPage() {
         const { total, pageSize } = this.props;
-        const { current, groupCount, startCount } = this.state;
+        const { current, startCount } = this.state;
 
         const totalPage = Math.ceil(total / pageSize);
 
         let pages = [];
 
-        if (totalPage <= 10) {
+        if (totalPage <= 9) {
             // 如果总页数小于
             pages.push(
                 <li key={0} onClick={this.goPrev.bind(this)} className={current === 1 ? styles.nomore : ''}>
@@ -65,20 +62,67 @@ class Pagination extends React.PureComponent {
                     {'<<'}
                 </li>,
             );
-            const loopLength = totalPage - startCount > 9 ? groupCount + startCount - 1 : groupCount + startCount;
-
-            for (let i = startCount; i <= loopLength; i++) {
-                pages.push(
-                    <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
-                        {i}
-                    </li>,
-                );
-            }
-            // 分页中间的省略号
-            if (totalPage - startCount > 9) {
+            pages.push(
+                <li className={current === 1 ? styles.active : ''} key={1} onClick={this.go.bind(this, 1, totalPage)}>
+                    {1}
+                </li>,
+            );
+            if (current > 5) {
                 pages.push(
                     <li className={styles.ellipsis} key={-1}>
                         ···
+                    </li>,
+                );
+            } else {
+                pages.push(
+                    <li
+                        key={2}
+                        onClick={this.go.bind(this, 2, totalPage)}
+                        className={current === 2 ? styles.active : ''}>
+                        {2}
+                    </li>,
+                );
+            }
+            if (current < 6) {
+                for (let i = startCount; i <= startCount + 4; i++) {
+                    pages.push(
+                        <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
+                            {i}
+                        </li>,
+                    );
+                }
+            } else if (current > totalPage - 5) {
+                for (let i = totalPage - 6; i <= totalPage - 2; i++) {
+                    pages.push(
+                        <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
+                            {i}
+                        </li>,
+                    );
+                }
+            } else {
+                for (let i = current - 2; i <= current + 2; i++) {
+                    pages.push(
+                        <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
+                            {i}
+                        </li>,
+                    );
+                }
+            }
+
+            // 分页中间的省略号
+            if (totalPage > 9 && current < totalPage - 4) {
+                pages.push(
+                    <li className={styles.ellipsis} key={-2}>
+                        ···
+                    </li>,
+                );
+            } else {
+                pages.push(
+                    <li
+                        className={current === totalPage - 1 ? styles.active : ''}
+                        key={2}
+                        onClick={this.go.bind(this, totalPage - 1, totalPage)}>
+                        {totalPage - 1}
                     </li>,
                 );
             }
@@ -86,14 +130,6 @@ class Pagination extends React.PureComponent {
             // if (current === totalPage - 1) {
             //     pages.push(null);
             // } else {
-            pages.push(
-                <li
-                    className={current === totalPage - 1 ? styles.active : ''}
-                    key={totalPage - 1}
-                    onClick={this.go.bind(this, totalPage - 1, totalPage)}>
-                    {totalPage - 1}
-                </li>,
-            );
             pages.push(
                 <li
                     className={current === totalPage ? styles.active : ''}
@@ -153,26 +189,6 @@ class Pagination extends React.PureComponent {
         let { startCount, groupCount } = this.state;
         const { onChange, pageSize } = this.props;
 
-        if (
-            current - startCount - groupCount === 0 &&
-            startCount < totalPage - 9 &&
-            current !== totalPage - 1 &&
-            current !== totalPage
-        ) {
-            this.setState({
-                startCount: startCount + 1,
-            });
-        }
-        if (current < startCount && current >= 1 && current !== totalPage - 1 && current !== totalPage) {
-            this.setState({
-                startCount: startCount - 1,
-            });
-        }
-        if (current === totalPage - 1 || current === totalPage) {
-            this.setState({
-                startCount: totalPage - 9,
-            });
-        }
         // console.log(startCount);
         this.setState({
             current,
