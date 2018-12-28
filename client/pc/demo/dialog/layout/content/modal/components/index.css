@@ -17,6 +17,7 @@
     background-color: #fff;
     border-radius: 4px;
     /* padding: 30px; */
+    box-shadow: 0 0 10px #e0d8cf;
     position: absolute;
     left: 50%;
     top: 40%;

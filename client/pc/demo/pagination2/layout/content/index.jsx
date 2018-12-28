@@ -25,8 +25,13 @@ class Content extends React.PureComponent {
                     <Pagination showQuickJumper total={150} pageSize={10} onChange={this.handleChangePage} />
                 </div>
                 <div className={styles.slider}>
+                    <div className={styles.txt}>指定当前页：</div>
+                    <Pagination current={6} total={150} pageSize={10} onChange={this.handleChangePage} />
+                </div>
+                <div className={styles.slider}>
                     <div className={styles.txt}>简洁模式：</div>
                     <Pagination
+                        current={6}
                         total={150}
                         type={'simple'}
                         pageSize={10}

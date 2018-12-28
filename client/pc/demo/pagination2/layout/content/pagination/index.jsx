@@ -5,9 +5,9 @@ import errorBoundary from '@ifeng/errorBoundary';
 
 class Pagination extends React.PureComponent {
     state = {
-        current: 1,
+        current: this.props.current || 1,
         startCount: 3,
-        acceptGo: true,
+        acceptGo: false,
     };
 
     static propTypes = {
@@ -16,6 +16,23 @@ class Pagination extends React.PureComponent {
         onChange: PropTypes.func.isRequired,
         type: PropTypes.string,
         showQuickJumper: PropTypes.bool,
+        current: (props, propName, componentName) => {
+            // 校验current,必须为指定范围内的正整数
+            const { total, pageSize } = props;
+            const totalPage = Math.ceil(total / pageSize);
+            const isPositiveInteger = /^[1-9]\d*$/.test(props[propName]);
+
+            if (
+                props[propName] < 1 ||
+                props[propName] > totalPage ||
+                typeof props[propName] !== 'number' ||
+                !isPositiveInteger
+            ) {
+                return new Error(
+                    `'current' should be a number greater than or equal to 1, less than or equal to ${totalPage}`,
+                );
+            }
+        },
     };
 
     static defaultProps = {
@@ -23,6 +40,7 @@ class Pagination extends React.PureComponent {
         pageSize: 20,
         type: 'normal',
         showQuickJumper: false,
+        current: 1,
     };
 
     // 动态生成页码
@@ -35,7 +53,7 @@ class Pagination extends React.PureComponent {
         let pages = [];
 
         if (totalPage <= 9) {
-            // 如果总页数小于
+            // 总页数小于9
             pages.push(
                 <li key={0} onClick={this.goPrev.bind(this)} className={current === 1 ? styles.nomore : ''}>
                     {'<<'}
@@ -57,6 +75,7 @@ class Pagination extends React.PureComponent {
                 </li>,
             );
         } else {
+            // 总页数大于9
             pages.push(
                 <li key={0} onClick={this.goPrev.bind(this)} className={current === 1 ? styles.nomore : ''}>
                     {'<<'}
@@ -68,6 +87,7 @@ class Pagination extends React.PureComponent {
                 </li>,
             );
             if (current > 5) {
+                // 当前页大于5时，第二格变成省略号
                 pages.push(
                     <li className={styles.ellipsis} key={-1}>
                         ···
@@ -83,7 +103,9 @@ class Pagination extends React.PureComponent {
                     </li>,
                 );
             }
+            // 动态渲染的部分
             if (current < 6) {
+                // 当当前页小于第六页时，渲染从第三页到第七页
                 for (let i = startCount; i <= startCount + 4; i++) {
                     pages.push(
                         <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
@@ -92,6 +114,7 @@ class Pagination extends React.PureComponent {
                     );
                 }
             } else if (current > totalPage - 5) {
+                // 当当前页大于倒数第六页时，渲染从倒数第七页到倒数第三页
                 for (let i = totalPage - 6; i <= totalPage - 2; i++) {
                     pages.push(
                         <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
@@ -100,6 +123,7 @@ class Pagination extends React.PureComponent {
                     );
                 }
             } else {
+                // 中间状态(6 <= current <= total - 5)，渲染五页，当前页始终位于中间
                 for (let i = current - 2; i <= current + 2; i++) {
                     pages.push(
                         <li key={i} onClick={this.go.bind(this, i)} className={current === i ? styles.active : ''}>
@@ -111,6 +135,7 @@ class Pagination extends React.PureComponent {
 
             // 分页中间的省略号
             if (totalPage > 9 && current < totalPage - 4) {
+                // 当总页数大于9，当前页小于totalPage - 4页时，倒数第二格变为省略号
                 pages.push(
                     <li className={styles.ellipsis} key={-2}>
                         ···
@@ -126,10 +151,6 @@ class Pagination extends React.PureComponent {
                     </li>,
                 );
             }
-            // 倒数第一、第二页
-            // if (current === totalPage - 1) {
-            //     pages.push(null);
-            // } else {
             pages.push(
                 <li
                     className={current === totalPage ? styles.active : ''}
@@ -147,8 +168,6 @@ class Pagination extends React.PureComponent {
                 </li>,
             );
         }
-
-        // }
 
         return pages;
     }
@@ -186,7 +205,6 @@ class Pagination extends React.PureComponent {
     // 点击事件
     go(current, totalPage) {
         console.log('current=', current);
-        let { startCount, groupCount } = this.state;
         const { onChange, pageSize } = this.props;
 
         // console.log(startCount);
@@ -194,6 +212,7 @@ class Pagination extends React.PureComponent {
             current,
         });
 
+        // 返回当前翻页数据
         onChange({ pageNumber: current, pageSize });
     }
 
@@ -275,9 +294,11 @@ class Pagination extends React.PureComponent {
         const targetCurrent = this.refs.go_input.value;
         const isNum = isNaN(Number(targetCurrent));
 
-        console.log(isNum);
+        // 检查是否为正整数
+        const isPositiveInteger = /^[1-9]\d*$/.test(targetCurrent);
 
-        if (!targetCurrent || isNum || targetCurrent < 1 || targetCurrent > totalPage) {
+        // 修改允许跳页的状态
+        if (!targetCurrent || isNum || targetCurrent < 1 || targetCurrent > totalPage || !isPositiveInteger) {
             this.setState({
                 acceptGo: false,
             });
@@ -286,8 +307,6 @@ class Pagination extends React.PureComponent {
                 acceptGo: true,
             });
         }
-
-        console.log(targetCurrent);
     }
 
     render() {
@@ -297,6 +316,24 @@ class Pagination extends React.PureComponent {
         const { total, pageSize, type, showQuickJumper } = this.props;
 
         const totalPage = Math.ceil(total / pageSize);
+
+        // 跳页组件
+        const quickJumper = (
+            <div className={styles.go}>
+                <input
+                    type="text"
+                    className={styles.go_input}
+                    ref="go_input"
+                    onChange={this.checkInputValue.bind(this, totalPage)}
+                    placeholder={'输入页码'}
+                />
+                <div
+                    className={`${styles.go_btn} ${!this.state.acceptGo ? styles.disable : ''}`}
+                    onClick={this.goTarget.bind(this, type, totalPage)}>
+                    GO
+                </div>
+            </div>
+        );
 
         return (
             <React.Fragment>
@@ -308,22 +345,7 @@ class Pagination extends React.PureComponent {
                             return <div>{Pages_s}</div>;
                         }
                     })()}
-                    {showQuickJumper ? (
-                        <div className={styles.go}>
-                            <input
-                                type="text"
-                                className={styles.go_input}
-                                ref="go_input"
-                                onChange={this.checkInputValue.bind(this, totalPage)}
-                                placeholder={'输入页码'}
-                            />
-                            <div
-                                className={`${styles.go_btn} ${!this.state.acceptGo ? styles.disable : ''}`}
-                                onClick={this.goTarget.bind(this, type, totalPage)}>
-                                GO
-                            </div>
-                        </div>
-                    ) : null}
+                    {showQuickJumper ? quickJumper : null}
                 </div>
             </React.Fragment>
         );
