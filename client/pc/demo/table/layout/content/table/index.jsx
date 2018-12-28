@@ -47,8 +47,6 @@ class Table extends React.PureComponent {
     renderRow(item, index) {
         const { dataSource, columns } = this.props;
 
-        console.log(dataSource);
-
         // 数据对象渲染
         return Object.keys(item).map((_item, _index) => {
             const rowContent = item[columns[_index].dataIndex] ? item[columns[_index].dataIndex] : '';

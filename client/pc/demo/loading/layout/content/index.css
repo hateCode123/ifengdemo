@@ -1,0 +1,11 @@
+.box {
+    width: 640px;
+    height: 424px;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+.content {
+    width: 640px;
+    height: 424px;
+    background: url(http://img.hb.aicdn.com/5bee7b665c3e547749308b81c0362e02bee345405bcaf-y6XVn2_fw658) no-repeat;
+}
