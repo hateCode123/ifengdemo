@@ -26,7 +26,10 @@ class Content extends React.PureComponent {
                         <div className={styles.content} />
                     </Spin>
                 </div>
+                <br />
                 <Spin spinning={this.state.isLoading} size={'small'} />
+                <br />
+                <Spin spinning={this.state.isLoading} simple />
             </React.Fragment>
         );
     }

@@ -12,6 +12,7 @@ class Content extends React.PureComponent {
 
     render() {
         const list = [{ NO1: 1, NO2: 2, NO3: 3 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }];
+        const list1 = [];
 
         const column = [
             {
@@ -60,8 +61,11 @@ class Content extends React.PureComponent {
 
         return (
             <React.Fragment>
-                <div>
-                    <Table dataSource={list} columns={column} />
+                <div style={{ marginLeft: '300px', marginTop: '100px' }}>
+                    <Table dataSource={list} columns={column} emptyText={'暂无数据哦'} />
+                </div>
+                <div style={{ marginLeft: '300px', marginTop: '100px' }}>
+                    <Table dataSource={list1} columns={column} emptyText={'暂无数据哦'} />
                 </div>
             </React.Fragment>
         );

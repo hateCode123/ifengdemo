@@ -7,9 +7,12 @@ class Table extends React.PureComponent {
     static propTypes = {
         dataSource: PropTypes.array,
         columns: PropTypes.array,
+        emptyText: PropTypes.string,
     };
 
-    static defaultProps = {};
+    static defaultProps = {
+        emptyText: '暂无数据',
+    };
 
     state = {
         _dataSource: this.props.dataSource,
@@ -32,7 +35,7 @@ class Table extends React.PureComponent {
                 const d_item = new_dataSource[j];
 
                 if (!d_item[c_item.dataIndex]) {
-                    d_item[c_item.dataIndex] = 'extended';
+                    d_item[c_item.dataIndex] = '';
                 }
             }
         }
@@ -67,7 +70,7 @@ class Table extends React.PureComponent {
     }
 
     render() {
-        const { columns } = this.props;
+        const { columns, dataSource, emptyText } = this.props;
         const { _dataSource } = this.state;
 
         return (
@@ -96,6 +99,11 @@ class Table extends React.PureComponent {
                                     </tr>
                                 );
                             })}
+                            {dataSource.length > 0 ? null : (
+                                <tr className={styles.nomore}>
+                                    <td colSpan={columns.length}>{emptyText}</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

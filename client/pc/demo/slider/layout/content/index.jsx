@@ -30,15 +30,40 @@ class Content extends React.PureComponent {
             interval: 2000,
             direction: 'right',
             number: 2,
-            imgWidth: 920,
-            imgHeight: 100,
+            unitWidth: 920,
+            unitHeight: 100,
             dotsAction: 'click',
+        };
+
+        const sliderTmpl = (item, index) => {
+            console.log(item, index);
+
+            return (
+                <div>
+                    <img src={item.imgUrl} width={1000} />
+                </div>
+            );
+        };
+
+        const config1 = {
+            arrow: false,
+            interval: 2000,
+            direction: 'right',
+            number: 2,
+            unitWidth: 920,
+            unitHeight: 100,
+            dotsAction: 'click',
+            sliderTmpl,
         };
 
         return (
             <React.Fragment>
                 <div className={styles.slider}>
                     <Slider data={data} config={config} />
+                </div>
+                <br />
+                <div className={styles.slider}>
+                    <Slider data={data} config={config1} />
                 </div>
             </React.Fragment>
         );

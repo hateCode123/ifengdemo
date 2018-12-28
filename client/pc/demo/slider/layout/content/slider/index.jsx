@@ -9,8 +9,8 @@ class SliderControl extends React.PureComponent {
         interval: PropTypes.number,
         direction: PropTypes.string,
         number: PropTypes.number,
-        imgWidth: PropTypes.number.isRequired,
-        imgHeight: PropTypes.number.isRequired,
+        unitWidth: PropTypes.number.isRequired,
+        unitHeight: PropTypes.number.isRequired,
         children: PropTypes.array,
         dotsAction: PropTypes.string,
         arrow: PropTypes.bool,
@@ -30,8 +30,8 @@ class SliderControl extends React.PureComponent {
         activeIndex: 1,
         offsetDistance:
             this.props.direction === 'right' || this.props.direction === 'left'
-                ? -this.props.imgWidth
-                : -this.props.imgHeight,
+                ? -this.props.unitWidth
+                : -this.props.unitHeight,
         pause: false,
         flag: true,
     };
@@ -75,14 +75,14 @@ class SliderControl extends React.PureComponent {
         if (this.direction === 'y') {
             return {
                 top: `${this.state.offsetDistance}px`,
-                width: this.props.imgWidth,
-                height: this.props.imgHeight * (this.props.number + 2),
+                width: this.props.unitWidth,
+                height: this.props.unitHeight * (this.props.number + 2),
             };
         } else {
             return {
                 left: `${this.state.offsetDistance}px`,
-                width: this.props.imgWidth * (this.props.number + 2),
-                height: this.props.imgHeight,
+                width: this.props.unitWidth * (this.props.number + 2),
+                height: this.props.unitHeight,
             };
         }
     }
@@ -157,9 +157,9 @@ class SliderControl extends React.PureComponent {
             let boxDistance = '';
 
             if (this.direction === 'x') {
-                boxDistance = this.props.imgWidth;
+                boxDistance = this.props.unitWidth;
             } else {
-                boxDistance = this.props.imgHeight;
+                boxDistance = this.props.unitHeight;
             }
             let offsetDistance = this.state.offsetDistance;
 
@@ -211,7 +211,7 @@ class SliderControl extends React.PureComponent {
             <React.Fragment>
                 <div
                     className={styles.default_styles}
-                    style={{ width: this.props.imgWidth, height: this.props.imgHeight }}
+                    style={{ width: this.props.unitWidth, height: this.props.unitHeight }}
                     onMouseOver={this.mouseHandle.bind(this)}
                     onMouseLeave={this.mouseHandle.bind(this)}>
                     {this.props.arrow ? (
@@ -250,35 +250,77 @@ class Slider extends React.PureComponent {
     static propTypes = {
         config: PropTypes.object.isRequired,
         data: PropTypes.array.isRequired,
+        sliderTmpl: PropTypes.func,
     };
 
+    renderSliderTmpl() {
+        const { data } = this.props;
+        const { sliderTmpl, unitWidth, unitHeight } = this.props.config;
+
+        return data.map((item, index) => {
+            return (
+                <li className={styles.li} key={index} style={{ width: unitWidth, height: unitHeight }}>
+                    {(() => {
+                        return sliderTmpl(item, index);
+                    })()}
+                </li>
+            );
+        });
+    }
+
     render() {
+        const {
+            interval,
+            number,
+            boxStyle,
+            unitWidth,
+            unitHeight,
+            direction,
+            dotsAction,
+            arrow,
+            sliderTmpl,
+        } = this.props.config;
+
         return (
             <React.Fragment>
-                <SliderControl
-                    interval={this.props.config.interval}
-                    number={this.props.config.number}
-                    boxStyle={this.props.config.boxStyle}
-                    imgWidth={this.props.config.imgWidth}
-                    imgHeight={this.props.config.imgHeight}
-                    direction={this.props.config.direction}
-                    dotsAction={this.props.config.dotsAction}
-                    arrow={this.props.config.arrow}>
-                    {this.props.data.map((item, index) => {
-                        return (
-                            <li className={styles.li} key={index}>
-                                <a href={item.linkUrl}>
-                                    <img
-                                        className={styles.img}
-                                        width={this.props.config.imgWidth}
-                                        height={this.props.config.imgHeight}
-                                        src={item.imgUrl}
-                                    />
-                                </a>
-                            </li>
-                        );
-                    })}
-                </SliderControl>
+                {sliderTmpl ? (
+                    <SliderControl
+                        interval={interval}
+                        number={number}
+                        boxStyle={boxStyle}
+                        unitWidth={unitWidth}
+                        unitHeight={unitHeight}
+                        direction={direction}
+                        dotsAction={dotsAction}
+                        arrow={arrow}>
+                        {this.renderSliderTmpl()}
+                    </SliderControl>
+                ) : (
+                    <SliderControl
+                        interval={interval}
+                        number={number}
+                        boxStyle={boxStyle}
+                        unitWidth={unitWidth}
+                        unitHeight={unitHeight}
+                        direction={direction}
+                        dotsAction={dotsAction}
+                        arrow={arrow}>
+                        {this.props.data.map((item, index) => {
+                            return (
+                                <li className={styles.li} key={index}>
+                                    <a href={item.linkUrl}>
+                                        <img
+                                            className={styles.img}
+                                            width={unitWidth}
+                                            height={unitHeight}
+                                            src={item.imgUrl}
+                                        />
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </SliderControl>
+                )}
             </React.Fragment>
         );
     }
