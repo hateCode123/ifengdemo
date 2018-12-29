@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 
-class Table extends React.PureComponent {
+class Spin extends React.PureComponent {
     static propTypes = {
         spinning: PropTypes.bool.isRequired,
         children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
@@ -158,4 +158,4 @@ class Table extends React.PureComponent {
     }
 }
 
-export default errorBoundary(Table);
+export default errorBoundary(Spin);

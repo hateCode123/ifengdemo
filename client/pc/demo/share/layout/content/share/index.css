@@ -12,6 +12,20 @@
     padding: 1px;
     z-index: 99999999;
 }
+.btn {
+    width: 58px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: right;
+    color: #666;
+    cursor: pointer;
+    background: url(./zhuanfa.png) no-repeat left center;
+    &:hover {
+        background: url(./zhuanfa_hover.png) no-repeat left center;
+        color: #333333;
+    }
+}
 .wb {
     border-bottom: solid 1px #e5e5e5;
     width: 80px;
