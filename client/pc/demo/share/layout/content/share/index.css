@@ -1,0 +1,41 @@
+.share {
+    position: relative;
+    font-size: 14px;
+}
+.shareCard {
+    position: absolute;
+    background: url(./share_k.png) no-repeat;
+    width: 126px;
+    height: 168px;
+    left: -130px;
+    top: -45px;
+    padding: 1px;
+    z-index: 99999999;
+}
+.wb {
+    border-bottom: solid 1px #e5e5e5;
+    width: 80px;
+    background: url(./xinlang.png) no-repeat 8px center;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 38px;
+    text-align: left;
+    cursor: pointer;
+    &:hover {
+        background-color: #f6f6f6;
+    }
+}
+.wx {
+    text-align: left;
+    & span {
+        background: url(./weixin.png) no-repeat 8px 6px;
+        display: block;
+        text-align: left;
+        padding-left: 36px;
+        line-height: 30px;
+    }
+    & img {
+        width: 100px;
+        margin-left: 10px;
+    }
+}
