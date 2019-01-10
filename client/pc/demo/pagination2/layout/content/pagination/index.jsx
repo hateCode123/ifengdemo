@@ -181,7 +181,7 @@ class Pagination extends React.PureComponent {
         const pages = (
             <div className={styles.simple_wrap}>
                 <div
-                    className={`${current === 1 ? styles.nomore : ''} ${styles.fy_left}`}
+                    className={`${current === 1 ? styles.nomore : ''} ${styles.s_fy_left}`}
                     onClick={this.goPrev_s.bind(this)}>
                     {'<<'}
                 </div>
@@ -191,7 +191,7 @@ class Pagination extends React.PureComponent {
                     <span>{totalPage}</span>
                 </div>
                 <div
-                    className={`${current === totalPage ? styles.nomore : ''} ${styles.fy_left}`}
+                    className={`${current === totalPage ? styles.nomore : ''} ${styles.s_fy_left}`}
                     onClick={this.goNext_s.bind(this, totalPage)}>
                     {'>>'}
                 </div>

@@ -5,6 +5,7 @@ import errorBoundary from '@ifeng/errorBoundary';
 
 import Modal from './modal/index';
 import ModalBox from './modal/dialog';
+import Alert from './modal/alert';
 class Content extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
@@ -82,6 +83,15 @@ class Content extends React.PureComponent {
                                 onOk: () => console.log('ok'),
                                 onCancel: () => console.log('cancel'),
                                 onClose: () => console.log('closed'),
+                            })
+                        }>
+                        click me!
+                    </button>
+                    <button
+                        onClick={() =>
+                            Alert.warning({
+                                content: 'Hello world!',
+                                // onClose: () => console.log('closed'),
                             })
                         }>
                         click me!

@@ -4,7 +4,8 @@ import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 
 import UploadBox from './uploadBox';
-import UploadBox1 from './uploadBox1';
+import Uploader from './uploader';
+import Upload from './uploader/upload';
 
 class Content extends React.PureComponent {
     // static propTypes = {
@@ -13,19 +14,56 @@ class Content extends React.PureComponent {
     state = {};
 
     render() {
-        const shareInfo = {
-            url: 'https://feng.ifeng.com/c/7j0IEJyUsOM',
-            picUrl:
-                'https://d.ifengimg.com/w145_h80_q70/e0.ifengimg.com/11/2018/1228/41334D757F5A783FA8994DB818C5A9526915B376_size132_w1080_h662.jpeg',
-            title: '无核化还没谈好，朝韩迫不及待联通半岛铁路线',
-            summery: '',
+        const config = {
+            type: 0, // 0 视频 1 图片 2 普通文件
+            appid: 'wemedia',
+            onBeforeUpload: file => {
+                console.log('上传之前');
+            },
+            progressCallback: (percentage, file) => {
+                console.log(percentage);
+            },
+            successCallback: (url, file) => {
+                console.log('上传完成');
+                console.log(url);
+            },
+            errorCallback: errors => {
+                console.log(errors);
+            },
         };
 
         return (
             <React.Fragment>
                 <div className={styles.box}>
                     <UploadBox />
-                    <UploadBox1 />
+                    <div style={{ width: '100px', height: '100px' }}>
+                        <Uploader className={styles.uploader} config={config} />
+                    </div>
+                    <Uploader config={config}>
+                        <div className={styles.children} style={{ width: '100px', height: '100px' }} />
+                    </Uploader>
+                    <button
+                        onClick={() =>
+                            Upload.start({
+                                type: 0, // 0 视频 1 图片 2 普通文件
+                                appid: 'wemedia',
+                                onBeforeUpload: file => {
+                                    console.log('上传之前');
+                                },
+                                progressCallback: (percentage, file) => {
+                                    console.log(percentage);
+                                },
+                                successCallback: (url, file) => {
+                                    console.log('上传完成');
+                                    console.log(url);
+                                },
+                                errorCallback: errors => {
+                                    console.log(errors);
+                                },
+                            })
+                        }>
+                        按钮
+                    </button>
                 </div>
             </React.Fragment>
         );

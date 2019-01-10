@@ -1,3 +1,3 @@
-import Modal from './components';
+import Modal from './components/modal_normal';
 
 export default Modal;

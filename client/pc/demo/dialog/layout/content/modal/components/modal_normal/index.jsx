@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
-import closeImg from './image/close.png';
+import closeImg from '../image/close.png';
 
 class Modal extends React.PureComponent {
     state = {

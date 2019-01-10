@@ -406,4 +406,4 @@ function binb2b64(binarray) {
     }
     return str;
 }
-module.exports = hex_sha1;
+export default hex_sha1;

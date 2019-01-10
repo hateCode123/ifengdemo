@@ -80,6 +80,7 @@
         "@ifeng/ui_pc_userInfo": "^1.0.7",
         "@ifeng/visualediting": "^1.1.8",
         "@ifengbuild/postcss-adaptive": "^1.0.1",
+        "antd": "^3.12.1",
         "anujs": "^1.4.7",
         "babel-eslint": "^8.2.2",
         "babel-loader": "^8.0.0",

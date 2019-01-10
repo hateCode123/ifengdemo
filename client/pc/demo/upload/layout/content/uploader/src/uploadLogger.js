@@ -13,7 +13,7 @@ const uploadLogger = params => {
     let fileId = params.fileId || '';
     let runTime = new Date();
 
-    console.log(params);
+    new Error(params);
 
     // $.ajax({
     //     type: 'POST',
@@ -23,4 +23,4 @@ const uploadLogger = params => {
     // });
 };
 
-module.exports = uploadLogger;
+export default uploadLogger;

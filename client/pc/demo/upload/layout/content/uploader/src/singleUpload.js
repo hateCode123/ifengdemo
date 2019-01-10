@@ -14,13 +14,13 @@ import uploadLogger from './uploadLogger';
  *      @param  {String} appcode  应用的 编码 ？需要询问一下陈勇
  *      @param  {String} uid      uid
  */
-
-const singleUpload = (file, url, options) => {
+/* eslint-disable */
+const singleUpload = function(file, url, options) {
     this.init(file, url, options);
 };
 
 singleUpload.prototype = {
-    init: (file, url, options) => {
+    init: function(file, url, options) {
         this.file = file;
         this.url = url;
         this.cutSize = options.cutSize || 512 * 1024;
@@ -37,16 +37,18 @@ singleUpload.prototype = {
         this.flieStatsusEidt();
     },
     //
-    flieStatsusEidt: () => {
-        this.statusList = new Array();
+    flieStatsusEidt: function() {
+        console.log(this.fileStatus);
+        this.statusList = [];
         for (let i = 1; i <= this.fileStatus.length; i++) {
-            if (this.fileStatus[i - 1] === 0) {
+            if (Number(this.fileStatus[i - 1]) === 0) {
                 this.statusList.push(i);
             }
         }
+        console.log(this.statusList);
     },
     // 初始化需要提交的参数
-    initPostParams: options => {
+    initPostParams: function(options) {
         this.postParams = {
             appId: options.appid, // 应用 id
             fileId: options.fileId, // 传入的文件id
@@ -58,12 +60,12 @@ singleUpload.prototype = {
         };
     },
     // 设置文件开始位置
-    setBegin: begin => {
+    setBegin: function(begin) {
         this.begin = begin || 0;
     },
 
     // 设置文件结束位置
-    setEnd: (begin, cutSize) => {
+    setEnd: function(begin, cutSize) {
         let fileSize = this.file.size;
         let end = '';
 
@@ -79,11 +81,11 @@ singleUpload.prototype = {
     },
 
     // 空函数
-    emptyFn: () => {
+    emptyFn: function() {
         return true;
     },
     // 初始化回调
-    initCallback: options => {
+    initCallback: function(options) {
         this.loadstartCallback = options.loadstartCallback || this.emptyFn;
         this.loadCallback = options.loadCallback || this.emptyFn;
         this.errorCallback = options.errorCallback || this.emptyFn;
@@ -92,23 +94,21 @@ singleUpload.prototype = {
         this.loadendCallback = options.loadendCallback || this.emptyFn;
     },
     // 上传文件
-    fileUpload: () => {
+    fileUpload: function() {
         this.send(this.postParams);
     },
     // 切割文件
-    getBlob: (begin, end) => {
+    getBlob: function(begin, end) {
         let file = this.file;
 
-        /* eslint-disable */
         return file.slice
             ? file.slice(begin, end)
             : file.webkitSlice
                 ? file.webkitSlice(begin, end)
                 : file.mozSlice(begin, end);
-        /* eslint-enable */
     },
     // 取消上传
-    abortUpload: () => {
+    abortUpload: function() {
         this.abort = false;
     },
     // 对数字进行转换的函数，具体转换啥了的问问陈勇
@@ -145,14 +145,12 @@ singleUpload.prototype = {
         }
         return num;
     },
-    /* eslint-enable */
-    send: oParam => {
+    send: function(oParam) {
         /* eslint-disable */
         const _this = this;
         /* eslint-enable */
         let index = _this.statusList.shift(); // 取第一个值
 
-        console.log(_this.statusList);
         if (!_this.abort || index === undefined) {
             return false;
         }
@@ -219,8 +217,9 @@ singleUpload.prototype = {
                     if (response.success === true) {
                         console.log(_this.fileStatus, 'send');
                         let successNum = response.status.substr(1).match(_this.reg).length;
+                        const progress = `${(successNum / oParam.blockCount) * 100}%`;
 
-                        _this.progressCallback(successNum / oParam.blockCount, _this.file);
+                        _this.progressCallback(progress, _this.file);
                         if (successNum >= _this.fileStatus.length - 1 || index >= _this.fileStatus.length - 2) {
                             _this.loadCallback(_this.file, response);
                             _this.abort = false;
@@ -256,4 +255,4 @@ singleUpload.prototype = {
         };
     },
 };
-module.exports = singleUpload;
+export default singleUpload;
