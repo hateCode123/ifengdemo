@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import uploader from './src';
 
+let _uploader = null;
+
 const creatUpload = props => {
     const div = document.createElement('div');
 
@@ -30,6 +32,7 @@ const creatUpload = props => {
             };
 
             uploader(files, options);
+            _uploader = uploader(files, options);
         } else {
             return;
         }
@@ -59,4 +62,8 @@ Upload.start = props =>
     creatUpload({
         ...props,
     });
+Upload.stop = () => {
+    // console.dir(_uploader);
+    _uploader.abortUpload();
+};
 export default Upload;

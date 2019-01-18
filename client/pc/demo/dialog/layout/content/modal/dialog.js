@@ -4,6 +4,7 @@ import Modal from './components/modal_normal';
 import ModalAlert from './components/modal_alert';
 
 const show_dialog = props => {
+    console.log(props);
     let component = null;
     const div = document.createElement('div');
 

@@ -76,6 +76,9 @@ const createConfig = function(type, platform, level, filepath, modern) {
             //     level,
             //     filepath,
             // ),
+            new webpack.ProvidePlugin({
+                'window.Quill': 'quill',
+            }),
         ],
     };
 };

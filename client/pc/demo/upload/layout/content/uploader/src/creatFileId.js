@@ -32,7 +32,6 @@ CreatFileId.prototype = {
         // 存储开始创建id的时间
         startTime[this.file.name] = new Date().valueOf();
 
-        var _this = this;
         var begin = customBegin || this.begin;
         var end = this.getEnd(begin, customCutsize);
         var blob = this.getBlob(begin, end);
@@ -46,8 +45,8 @@ CreatFileId.prototype = {
         }
 
         iReader.readAsBinaryString(blob);
-        iReader.onload = function(e) {
-            _this.iReaderLoad(e);
+        iReader.onload = e => {
+            this.iReaderLoad(e);
         };
     },
 

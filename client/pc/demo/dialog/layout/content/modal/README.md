@@ -64,7 +64,6 @@ import Modal from '[your components dir]/modal/dialog';
 
 params: object 类型
 
--   `isOpen` ---------------- `[bool]` `[isRequired]` : 弹窗是否可见
 -   `title` ---------------- `[string]` `[isRequired]` : 弹窗标题
 -   `content` ---------------- `[string]/[element]` : 自定义弹窗内容
 -   `className` ---------------- `[string]` : 给最外层容器添加类名 (万一有用呢)

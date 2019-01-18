@@ -151,6 +151,8 @@ singleUpload.prototype = {
         /* eslint-enable */
         let index = _this.statusList.shift(); // 取第一个值
 
+        console.log(_this.xhr.abort);
+
         if (!_this.abort || index === undefined) {
             return false;
         }

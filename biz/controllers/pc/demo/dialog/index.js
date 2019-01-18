@@ -1,4 +1,4 @@
-exports.login = {
+exports.dialog = {
     path: '/demo/dialog',
     method: 'get',
     type: 'html',

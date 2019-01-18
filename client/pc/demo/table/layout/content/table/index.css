@@ -2,8 +2,11 @@
     & * {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
+        border-collapse: collapse;
+        border-spacing: 0;
     }
     & table {
+        width: 100%;
         border: solid 1px #e5e5e5;
         border-bottom: none;
     }

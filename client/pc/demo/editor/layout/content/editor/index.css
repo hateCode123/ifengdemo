@@ -1,0 +1,170 @@
+.editorWrap {
+    height: 400px;
+    & * {
+        box-sizing: border-box;
+    }
+}
+.toolBar {
+    height: 50px;
+    width: 100%;
+    padding: 9px 15px;
+    background-color: #f6f6f6;
+    border: 1px solid #e5e5e5;
+    & ul {
+        height: 100%;
+        float: left;
+    }
+    & ul li {
+        width: 30px;
+        height: 30px;
+        float: left;
+        margin-right: 3px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        text-align: center;
+        line-height: 30px;
+        &:hover {
+            background: #e5e5e5;
+        }
+    }
+}
+.line {
+    float: left;
+    width: 1px;
+    height: 100%;
+    background: #e5e5e5;
+    margin: 0 8px 0 5px;
+}
+.rightBox {
+    height: 30px;
+    float: right;
+    text-align: center;
+    line-height: 30px;
+    color: #999;
+    font-size: 14px;
+}
+.padding {
+    padding: 0 6px 0 22px;
+}
+
+/* toolBar背景 */
+
+.toolBar ul li.bold {
+    background: url(./images/bold.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/bold_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.italic {
+    background: url(./images/italic.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/italic_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.header1 {
+    background: url(./images/head1.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/head1_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.header2 {
+    background: url(./images/head2.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/head2_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.source {
+    background: url(./images/source.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/source_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.list_num {
+    background: url(./images/listNum.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/listNum_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.list_dot {
+    background: url(./images/listDot.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/listDot_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.photo {
+    background: url(./images/photo.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/photo_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.video {
+    background: url(./images/video.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/video_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.audio {
+    background: url(./images/audio.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/audio_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.link {
+    background: url(./images/link.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/link_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.clear {
+    background: url(./images/clear.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/clear_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.undo {
+    background: url(./images/undo.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/undo_cur.png) no-repeat center center;
+        }
+    }
+}
+.toolBar ul li.redo {
+    background: url(./images/redo.png) no-repeat center center;
+    &:hover {
+        &:hover {
+            background: #e5e5e5 url(./images/redo_cur.png) no-repeat center center;
+        }
+    }
+}
+.textArea {
+    height: 400px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+}

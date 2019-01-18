@@ -17,7 +17,6 @@
     background-color: #fff;
     border-radius: 4px;
     /* padding: 30px; */
-    box-shadow: 0 0 10px #e0d8cf;
     position: absolute;
     left: 50%;
     top: 40%;
@@ -98,6 +97,10 @@
             border-color: #f57878;
         }
     }
+}
+.buttonWrap {
+    width: 260px;
+    margin: 0 auto;
 }
 .btn_dialog {
     line-height: 1.499;

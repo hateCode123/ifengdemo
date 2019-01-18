@@ -23,6 +23,7 @@
     font-family: 'Microsoft YaHei';
     text-align: center;
     z-index: 99999999999;
+    padding: 0 10px;
     & img {
         display: block;
         margin: 17px auto 12px;

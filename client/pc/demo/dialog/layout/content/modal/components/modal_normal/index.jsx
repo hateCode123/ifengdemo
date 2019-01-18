@@ -40,11 +40,22 @@ class Modal extends React.PureComponent {
         footer: true,
     };
 
+    // static getDerivedStateFromProps(props, state) {
+    //     if (props.isOpen !== state.isOpen) {
+    //         return props.isOpen;
+    //     }
+
+    //     return null;
+    // }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
         if ('isOpen' in nextProps) {
             this.setState({
                 isOpen: nextProps.isOpen,
             });
+            if (!nextProps.isOpen) {
+                nextProps.onClose();
+            }
         }
     }
 
@@ -64,7 +75,6 @@ class Modal extends React.PureComponent {
             isOpen: false,
         });
         this.toggleModalClass(false);
-        this.props.onClose();
     }
 
     emptyFunc() {}
@@ -72,7 +82,7 @@ class Modal extends React.PureComponent {
     handleOk() {
         console.log('press ok');
         this.props.onOk();
-        this.close();
+        // this.close();
     }
     // 点击取消触发的事件
     handleCancel() {
@@ -124,16 +134,18 @@ class Modal extends React.PureComponent {
                                 <div className={`${styles.modal_footer} ${styles.clearfix}`}>
                                     {type === 'dialog' ? (
                                         <React.Fragment>
-                                            <button
-                                                className={styles.btn_dialog}
-                                                onClick={this.handleCancel.bind(this)}>
-                                                <span>{cancelText}</span>
-                                            </button>
-                                            <button
-                                                className={`${styles.btn_dialog} ${styles.btn_comfirm}`}
-                                                onClick={this.handleOk.bind(this)}>
-                                                <span>{okText}</span>
-                                            </button>
+                                            <div className={`${styles.buttonWrap} ${styles.clearfix}`}>
+                                                <button
+                                                    className={styles.btn_dialog}
+                                                    onClick={this.handleCancel.bind(this)}>
+                                                    <span>{cancelText}</span>
+                                                </button>
+                                                <button
+                                                    className={`${styles.btn_dialog} ${styles.btn_comfirm}`}
+                                                    onClick={this.handleOk.bind(this)}>
+                                                    <span>{okText}</span>
+                                                </button>
+                                            </div>
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>

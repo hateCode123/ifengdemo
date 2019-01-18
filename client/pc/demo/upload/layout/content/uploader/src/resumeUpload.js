@@ -7,7 +7,6 @@ import uploadLogger from './uploadLogger';
 
 /* eslint-disable */
 export const ResumeUpload = function(file, options) {
-    console.log(options);
     this.checkPath = 'query'; // 不需要本地文件验证文件地址
     this.checkPath1 = 'fileInfo'; // 需要本地文件验证文件地址
     this.uploadPath = 'upload'; // 上传文件地址
@@ -31,10 +30,10 @@ export const ResumeUpload = function(file, options) {
     options = options || {};
     this.type = options.type || 0;
     this.appid = options.appid || 'wemedia';
-    // this.cropper = options.cropper;
+    this.cropper = options.cropper;
     this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
     this.successCallback = options.successCallback || this.successCallback;
-    this.onFinishedCallback = options.removeUpload;
+    this.onFinishedCallback = options.removeUpload || this.onFinishedCallback;
     this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
     this.errorCallback = options.errorCallback || this.errorCallback;
     this.index = options.index;
@@ -44,24 +43,23 @@ export const ResumeUpload = function(file, options) {
 };
 ResumeUpload.prototype = {
     init: function(file) {
-        const _this = this;
         this.file = file;
         this.fileName = file.name;
         this.file.id = `FHH_FILE_${this.index}`;
+        if (!this.checkFileSizeAndType(this.type)) {
+            return false;
+        }
         this.blockCount =
             this.file.size % this.limit === 0
                 ? parseInt(this.file.size % this.limit)
                 : parseInt(this.file.size / this.limit + 1); // 最后一块是整块+余数
-        if (!this.checkFileSizeAndType(this.type)) {
-            return false;
-        }
         if (this.type === 1 && this.showBase64) {
             let reader = new FileReader();
 
             reader.readAsDataURL(file);
             reader.onload = e => {
-                _this.file.base64Url = this.result;
-                _this.getUgcTaskInfo(_this.type, _this.startCreate.bind(_this));
+                this.file.base64Url = this.result;
+                this.getUgcTaskInfo(this.type, this.startCreate.bind(this));
             };
 
             return;
@@ -111,6 +109,7 @@ ResumeUpload.prototype = {
                 };
                 this.errorCallback(error, this.file);
                 this.onError(error);
+                this.onFinishedCallback();
 
                 return false;
             }
@@ -126,6 +125,7 @@ ResumeUpload.prototype = {
                 };
                 this.errorCallback(error, this.file);
                 this.onError(error);
+                this.onFinishedCallback();
 
                 return false;
             }
@@ -134,8 +134,8 @@ ResumeUpload.prototype = {
             // let suffix = ['webp'];
             // let pos = this.fileName.lastIndexOf(".");
             // let lastName = this.fileName.substring(pos+1).toLowerCase();
-            // if($.inArray(lastName,suffix) === 0){
-            //     layer.alert("请选择正确的格式");
+            // if(){
+            //
             //     return false;
             // }
             if (this.file.size > 5 * 1024 * 1024) {
@@ -146,6 +146,7 @@ ResumeUpload.prototype = {
                 };
                 this.errorCallback(error, this.file);
                 this.onError(error);
+                this.onFinishedCallback();
 
                 return false;
             }
@@ -154,7 +155,6 @@ ResumeUpload.prototype = {
         return true;
     },
     getUgcTaskInfo: async function(type, callback) {
-        const _this = this;
         if (type === 0 || type === 2) {
             callback({});
         } else if (type === 1) {
@@ -183,6 +183,7 @@ ResumeUpload.prototype = {
                 if (res.code === 0) {
                     // 获取到rid successCb
                     let param = { successCb: res.data.callback, bizId: res.data.rid };
+                    console.log(param);
 
                     callback(param);
                 } else {
@@ -200,13 +201,14 @@ ResumeUpload.prototype = {
             callbackScope: this,
         });
         this.creatChecksum.creat();
-        this.onBeforeUpload.call(this, this.file);
+        this.onBeforeUpload.call(this.file);
     },
     creatFileIdCallback: function(checksum) {
         this.checksum = checksum;
+        // 创建一个fileId都这么麻烦
         this.fileId = `${hex_sha1(this.sid + this.appid + this.checksum)}_${this.blockCount}`;
 
-        // 如果是视频资源 需要拿到本地文件地址  如果是图片资源 需要拿到cdn图片地址
+        // 如果是视频资源 需要拿到本地文件地址fileInfo  如果是图片资源 需要拿到cdn图片地址query
         let checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
         let param = {
             appid: this.appid,
@@ -229,6 +231,7 @@ ResumeUpload.prototype = {
             };
             this.errorCallback(error, this.file);
             this.onError(error);
+            this.onFinishedCallback();
             uploadLogger({
                 name: 'PC_upload_fail<checkFile>',
                 desc: 'checkFileCallback returned msg.successs is false',
@@ -260,6 +263,7 @@ ResumeUpload.prototype = {
                         };
                         this.errorCallback(error, this.file);
                         this.onError(error);
+                        this.onFinishedCallback();
                         // 失败日志
                         uploadLogger({
                             name: 'PC_upload_fail<polling video finalUrl>',
@@ -299,6 +303,7 @@ ResumeUpload.prototype = {
                         };
                         this.errorCallback(error, this.file);
                         this.onError(error);
+                        this.onFinishedCallback();
 
                         // 失败日志
                         uploadLogger({
@@ -335,6 +340,7 @@ ResumeUpload.prototype = {
                             };
                             this.errorCallback(error, this.file);
                             this.onError(error);
+                            this.onFinishedCallback();
                             // 失败日志
                             uploadLogger({
                                 name: 'PC_upload_fail<polling picture finalurl>',
@@ -440,8 +446,10 @@ ResumeUpload.prototype = {
     onError: function(errors) {
         throw errors;
     },
+    onFinishedCallback: function() {},
     abortUpload: function(callback) {
         if (this.uploading && this.singleUpload) {
+            console.log('取消');
             this.singleUpload.xhr.abort = false;
             this.singleUpload.abortUpload();
         }

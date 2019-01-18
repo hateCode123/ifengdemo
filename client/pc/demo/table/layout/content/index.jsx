@@ -8,10 +8,14 @@ class Content extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
     // };
-    state = {};
+    state = {
+        list: [{ NO1: 1, NO2: 2, NO3: 3 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }],
+    };
 
     render() {
-        const list = [{ NO1: 1, NO2: 2, NO3: 3 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }];
+        const { list } = this.state;
+        const list0 = [{ NO1: 1, NO2: 2, NO3: 3 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }];
+        const list2 = [{ NO1: 1, NO2: 1, NO3: 1 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }];
         const list1 = [];
 
         const column = [
@@ -36,6 +40,9 @@ class Content extends React.PureComponent {
                             onClick={() => {
                                 console.log(text);
                                 console.log(record);
+                                this.setState({
+                                    list: list2,
+                                });
                             }}>
                             按钮
                         </button>
@@ -61,7 +68,7 @@ class Content extends React.PureComponent {
 
         return (
             <React.Fragment>
-                <div style={{ marginLeft: '300px', marginTop: '100px' }}>
+                <div style={{ marginLeft: '300px', marginTop: '100px', width: '500px' }}>
                     <Table dataSource={list} columns={column} emptyText={'暂无数据哦'} />
                 </div>
                 <div style={{ marginLeft: '300px', marginTop: '100px' }}>

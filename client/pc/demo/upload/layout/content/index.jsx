@@ -15,7 +15,7 @@ class Content extends React.PureComponent {
 
     render() {
         const config = {
-            type: 0, // 0 视频 1 图片 2 普通文件
+            type: 1, // 0 视频 1 图片 2 普通文件
             appid: 'wemedia',
             onBeforeUpload: file => {
                 console.log('上传之前');
@@ -62,7 +62,13 @@ class Content extends React.PureComponent {
                                 },
                             })
                         }>
-                        按钮
+                        上传
+                    </button>
+                    <button
+                        onClick={() => {
+                            Upload.stop();
+                        }}>
+                        停止
                     </button>
                 </div>
             </React.Fragment>

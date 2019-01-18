@@ -22,6 +22,15 @@ class Table extends React.PureComponent {
         this.formatDataSource();
     }
 
+    // 更新表格数据
+    static getDerivedStateFromProps(props, state) {
+        if (props.dataSource !== state._dataSource) {
+            return props.dataSource;
+        }
+
+        return null;
+    }
+
     // 对dataSource内容拓展，插入自定义的列内容
     formatDataSource() {
         const { dataSource, columns } = this.props;

@@ -10,7 +10,7 @@ class Content extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
     // };
-    state = { modal: false };
+    state = { modal: false, isOpen: true };
 
     handleCancel() {
         console.log('cancle呀');
@@ -34,7 +34,7 @@ class Content extends React.PureComponent {
     }
     handleOk() {
         console.log('ok呀');
-        this.modalHide();
+        // this.modalHide();
     }
     handleClose() {
         console.log('closed');
@@ -76,13 +76,15 @@ class Content extends React.PureComponent {
                     <button
                         onClick={() =>
                             ModalBox.dailog({
+                                isOpen: this.state.isOpen,
                                 title: 'Demo',
-                                content: 'Hello world!',
+                                content: <button>按钮</button>,
                                 okText: '确认',
                                 cancelText: '取消',
                                 onOk: () => console.log('ok'),
                                 onCancel: () => console.log('cancel'),
                                 onClose: () => console.log('closed'),
+                                footer: false,
                             })
                         }>
                         click me!
