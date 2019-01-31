@@ -205,7 +205,26 @@
             width: 480px;
             height: 100px;
             margin: 0 auto;
-            background: #f6f6f6;
+            background: #f6f6f6 url(./images/audio-cover.png) no-repeat 15px 15px;
+        }
+        & .ql-container.ql-snow x-video {
+            display: block;
+            width: 480px;
+            height: 326px;
+            margin: 0 auto;
+            background: #f6f6f6 url(./images/video-purse.png) no-repeat center;
+        }
+        & .ql-container.ql-snow .ql-editor {
+            padding: 12px 120px !important;
+        }
+        & .ql-editor.ql-blank::before {
+            color: rgba(0, 0, 0, 0.6);
+            content: attr(data-placeholder);
+            font-style: italic;
+            left: 120px;
+            pointer-events: none;
+            position: absolute;
+            right: 15px;
         }
     }
 }

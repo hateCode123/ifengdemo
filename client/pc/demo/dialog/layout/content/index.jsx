@@ -49,6 +49,19 @@ class Content extends React.PureComponent {
             onClose: () => console.log('closed'),
         });
     }
+    beforeClose() {
+        ModalBox.dailog({
+            title: '提示',
+            content: '确定关闭吗',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                this.setState({});
+            },
+            onCancel: () => false,
+            onClose: () => false,
+        });
+    }
 
     render() {
         const modalContent = (
@@ -71,6 +84,7 @@ class Content extends React.PureComponent {
                         onClose={() => {
                             this.handleClose();
                         }}
+                        beforeClose={this.beforeClose.bind(this)}
                         footer={true}
                     />
                     <button

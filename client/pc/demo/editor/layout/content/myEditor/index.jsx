@@ -13,6 +13,7 @@ import CustomLink from './myModules/link';
 import CustomDivider from './myModules/divider/index';
 import CustomImage from './myModules/image';
 import CustomAudio from './myModules/audio';
+import CustomVideo from './myModules/video';
 
 class MyEditor extends React.PureComponent {
     // static propTypes = {
@@ -47,6 +48,9 @@ class MyEditor extends React.PureComponent {
 
         // 自定义插入音频
         this.customAudio();
+
+        // 自定义插入视频
+        this.customVideo();
     }
 
     // 初始化编辑器
@@ -337,6 +341,31 @@ class MyEditor extends React.PureComponent {
         const customAudio = new CustomAudio(this.editor, options);
 
         customAudio.handleUploadAudio();
+    }
+
+    // 插入视频的事件
+    customVideo() {
+        this.toolbar.addHandler('video', () => {
+            this.handleInsertVideo();
+        });
+    }
+    // 插入视频的事件
+    handleInsertVideo() {
+        const options = {
+            type: 0,
+            progressCallback: percentage => {
+                console.log(percentage);
+            },
+            successCallback: () => {
+                console.log('成功了');
+            },
+            errorCallback: error => {
+                console.log(error);
+            },
+        };
+        const customVideo = new CustomVideo(this.editor, options);
+
+        customVideo.handleUploadVideo();
     }
 
     handleChange(editorState) {

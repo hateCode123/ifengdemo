@@ -242,7 +242,7 @@ singleUpload.prototype = {
                 _this.send(oParam);
             };
 
-            _this.xhr.open('POST', _this.url, false);
+            _this.xhr.open('POST', _this.url, true);
             try {
                 _this.xhr.send(fd);
             } catch (err) {

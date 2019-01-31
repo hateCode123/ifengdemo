@@ -25,6 +25,7 @@ class Modal extends React.PureComponent {
         footer: PropTypes.bool,
         type: PropTypes.string,
         onClose: PropTypes.func,
+        beforeClose: PropTypes.func,
     };
 
     static defaultProps = {
@@ -38,6 +39,9 @@ class Modal extends React.PureComponent {
         modalWith: 400,
         dialogModalWith: 300,
         footer: true,
+        beforeClose: () => {
+            return true;
+        },
     };
 
     // static getDerivedStateFromProps(props, state) {
@@ -87,7 +91,15 @@ class Modal extends React.PureComponent {
     // 点击取消触发的事件
     handleCancel() {
         console.log('press cancel');
-        this.props.onCancel();
+        const { beforeClose, onCancel } = this.props;
+
+        if (beforeClose && !beforeClose()) {
+            return;
+        }
+
+        this.props.beforeClose();
+
+        onCancel();
         this.close();
     }
 

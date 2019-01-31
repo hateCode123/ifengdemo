@@ -1,0 +1,14 @@
+.checkbox {
+    width: 16px;
+    height: 16px;
+    background: url(./checkbox.png) no-repeat center;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+.checkbox_cur {
+    width: 16px;
+    height: 16px;
+    background: url(./checkbox_cur.png) no-repeat center;
+    cursor: pointer;
+    transition: all 0.1s;
+}

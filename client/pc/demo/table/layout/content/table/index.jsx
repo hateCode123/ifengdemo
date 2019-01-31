@@ -25,7 +25,7 @@ class Table extends React.PureComponent {
     // 更新表格数据
     static getDerivedStateFromProps(props, state) {
         if (props.dataSource !== state._dataSource) {
-            return props.dataSource;
+            return { _dataSource: props.dataSource };
         }
 
         return null;
@@ -34,8 +34,9 @@ class Table extends React.PureComponent {
     // 对dataSource内容拓展，插入自定义的列内容
     formatDataSource() {
         const { dataSource, columns } = this.props;
+
         // 深拷贝一下
-        let new_dataSource = JSON.parse(JSON.stringify(dataSource));
+        const new_dataSource = JSON.parse(JSON.stringify(dataSource));
 
         for (let i = 0; i < columns.length; i++) {
             const c_item = columns[i];
@@ -61,6 +62,8 @@ class Table extends React.PureComponent {
 
         // 数据对象渲染
         return Object.keys(item).map((_item, _index) => {
+            if (!columns[_index]) return null;
+
             const rowContent = item[columns[_index].dataIndex] ? item[columns[_index].dataIndex] : '';
             const rowRender = columns[_index].render ? columns[_index].render : '';
 

@@ -1,0 +1,18 @@
+.Button {
+    width: 118px;
+    height: 38px;
+    background: #f6f6f6;
+    text-align: center;
+    line-height: 39px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+    user-select: none;
+}
+.confirm {
+    background: #f54343;
+    color: #fff;
+    border: 1px solid #f54343;
+}

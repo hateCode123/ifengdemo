@@ -1,0 +1,50 @@
+.formItem {
+    display: inline-block;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    /* line-height: 1.5; */
+    color: #333;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 0px;
+    vertical-align: top;
+}
+.label {
+    display: inline-block;
+    text-align: left;
+    width: 145px;
+    font-size: 14px;
+    color: #666666;
+    height: 40px;
+    line-height: 40px;
+}
+.from_control {
+    display: inline-block;
+    vertical-align: top;
+}
+.isRequired::before {
+    display: inline-block;
+    margin-right: 4px;
+    content: '*';
+    font-family: SimSun;
+    line-height: 1;
+    font-size: 14px;
+    color: #f5222d;
+}
+.error {
+    font-size: 13px;
+    color: #f54343;
+    animation: show 0.3s;
+    margin-top: 3px;
+}
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

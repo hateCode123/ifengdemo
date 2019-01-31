@@ -55,7 +55,10 @@ class Pagination extends React.PureComponent {
         if (totalPage <= 9) {
             // 总页数小于9
             pages.push(
-                <li key={0} onClick={this.goPrev.bind(this)} className={current === 1 ? styles.nomore : ''}>
+                <li
+                    key={0}
+                    onClick={this.goPrev.bind(this)}
+                    className={`${current === 1 ? styles.nomore : ''} ${styles.pre_arrow}`}>
                     {'<<'}
                 </li>,
             );
@@ -70,7 +73,7 @@ class Pagination extends React.PureComponent {
                 <li
                     key={totalPage + 1}
                     onClick={this.goNext.bind(this, totalPage)}
-                    className={current === totalPage ? styles.nomore : ''}>
+                    className={`${current === totalPage ? styles.nomore : ''} ${styles.next_arrow}`}>
                     {'>>'}
                 </li>,
             );

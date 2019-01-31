@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import uploader from './src';
 
-let _uploader = null;
-
 const creatUpload = props => {
     const div = document.createElement('div');
 
@@ -18,12 +16,13 @@ const creatUpload = props => {
         const files = e.target.files;
         const config = props;
 
-        console.log(files);
+        // console.log(files);
 
         if (files) {
             const options = {
                 type: config.type,
                 appid: config.appid,
+                checkFileSizeAndType: config.checkFileSizeAndType,
                 onBeforeUpload: config.onBeforeUpload,
                 progressCallback: config.progressCallback,
                 successCallback: config.successCallback,
@@ -32,7 +31,6 @@ const creatUpload = props => {
             };
 
             uploader(files, options);
-            _uploader = uploader(files, options);
         } else {
             return;
         }
@@ -62,8 +60,5 @@ Upload.start = props =>
     creatUpload({
         ...props,
     });
-Upload.stop = () => {
-    // console.dir(_uploader);
-    _uploader.abortUpload();
-};
+
 export default Upload;

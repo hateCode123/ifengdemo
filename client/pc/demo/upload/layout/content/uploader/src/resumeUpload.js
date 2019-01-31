@@ -30,7 +30,7 @@ export const ResumeUpload = function(file, options) {
     options = options || {};
     this.type = options.type || 0;
     this.appid = options.appid || 'wemedia';
-    this.cropper = options.cropper;
+    this.checkFileSizeAndType = options.checkFileSizeAndType || this.checkFileSizeAndType;
     this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
     this.successCallback = options.successCallback || this.successCallback;
     this.onFinishedCallback = options.removeUpload || this.onFinishedCallback;
@@ -46,9 +46,11 @@ ResumeUpload.prototype = {
         this.file = file;
         this.fileName = file.name;
         this.file.id = `FHH_FILE_${this.index}`;
-        if (!this.checkFileSizeAndType(this.type)) {
-            return false;
+
+        if (!this.checkFileSizeAndType(file, this.type)) {
+            return true;
         }
+        console.log('格式大小校验通过');
         this.blockCount =
             this.file.size % this.limit === 0
                 ? parseInt(this.file.size % this.limit)
@@ -66,7 +68,7 @@ ResumeUpload.prototype = {
         }
         this.getUgcTaskInfo(this.type, this.startCreate.bind(this));
     },
-    checkFileSizeAndType: function(type) {
+    checkFileSizeAndType: function(file, type) {
         const isInArray = (value, arr) => {
             for (let i = 0; i < arr.length; i++) {
                 if (value === arr[i]) {
@@ -130,14 +132,20 @@ ResumeUpload.prototype = {
                 return false;
             }
         } else if (type === 1) {
-            // 如果是图片资源
-            // let suffix = ['webp'];
-            // let pos = this.fileName.lastIndexOf(".");
-            // let lastName = this.fileName.substring(pos+1).toLowerCase();
-            // if(){
-            //
-            //     return false;
-            // }
+            // 如果是图片资源;
+            let suffix = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
+            let pos = this.fileName.lastIndexOf('.');
+            let lastName = this.fileName.substring(pos + 1).toLowerCase();
+            if (!isInArray(lastName, suffix)) {
+                const error = {
+                    status: 40001,
+                    msg: '请选择正确的格式',
+                };
+                this.errorCallback(error, this.file);
+                this.onError(error);
+                this.onFinishedCallback();
+                return false;
+            }
             if (this.file.size > 5 * 1024 * 1024) {
                 // alert('图片不能大于5M,请重新选择');
                 const error = {
@@ -201,7 +209,7 @@ ResumeUpload.prototype = {
             callbackScope: this,
         });
         this.creatChecksum.creat();
-        this.onBeforeUpload.call(this.file);
+        this.onBeforeUpload(this.file);
     },
     creatFileIdCallback: function(checksum) {
         this.checksum = checksum;
@@ -244,7 +252,7 @@ ResumeUpload.prototype = {
             if (Number(msg.status.substring(0, 1)) === 1 && msg.fileUrl != null) {
                 window.clearInterval(_this.ervalObject);
                 _this.uploading = false;
-                _this.uploadProgressCallback('100%', this.file);
+                // _this.uploadProgressCallback('100%', this.file);
                 _this.successCallback(msg.fileUrl, _this.file);
                 _this.onFinishedCallback();
 
@@ -331,9 +339,11 @@ ResumeUpload.prototype = {
 
                                 _this.uploading = false;
                                 _this.successCallback(url, _this.file);
+                                _this.uploadProgressCallback('100%', _this.file);
                                 _this.onFinishedCallback();
                             }
                         } catch (e) {
+                            console.error(e);
                             const error = {
                                 status: 50003,
                                 msg: '文件信息查询失败',
@@ -346,6 +356,7 @@ ResumeUpload.prototype = {
                                 name: 'PC_upload_fail<polling picture finalurl>',
                                 desc: e,
                             });
+                            // throw e;
                         }
                     };
 
@@ -364,7 +375,6 @@ ResumeUpload.prototype = {
         let reg = /[1]/g;
 
         this.fileStatus = msg.status.substr(1).split('');
-        this.fileName = this.cropper ? `${this.fileName}.png` : this.fileName;
         const options = {
             fileStatus: this.fileStatus,
             cutSize: this.limit,

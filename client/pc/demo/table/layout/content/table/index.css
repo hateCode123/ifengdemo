@@ -5,40 +5,52 @@
         border-collapse: collapse;
         border-spacing: 0;
     }
+
     & table {
         width: 100%;
         border: solid 1px #e5e5e5;
         border-bottom: none;
     }
+
     & td {
         min-width: 50px;
         padding: 16px;
         border-bottom: 1px solid #e5e5e5;
+        font-size: 14px;
     }
+
     & thead {
         background: #f6f6f6;
     }
+
     & thead tr {
         background: #f6f6f6;
     }
+
     & tbody tr {
         background: #fff;
         transition: all 0.2s;
+
         &:hover {
             background: #e6f7ff;
         }
     }
+
     & thead tr {
         background: #f6f6f6;
     }
+
     & tbody tr td {
     }
+
     & thead tr td {
     }
+
     & .nomore {
         text-align: center;
         color: #888;
         font-size: 14px;
+
         &:hover {
             background: #fff;
         }
