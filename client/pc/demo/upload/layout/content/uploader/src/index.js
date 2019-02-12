@@ -1,4 +1,4 @@
-import { ResumeUpload } from './resumeUpload';
+import ResumeUpload from './resumeUpload';
 
 const uploader = (files, options) => {
     console.log('开始上传流程');
@@ -10,12 +10,19 @@ const uploader = (files, options) => {
             index++;
             options.index = index;
             const file = files[i];
+            // console.log(new ResumeUpload(file, options));
+            const upload = new ResumeUpload(file, options);
 
-            // console.log( ResumeUpload(file, options));
-            return new ResumeUpload(file, options);
+            window.ResumeUpload = upload;
+
+            return upload;
         }
     } else {
-        return new ResumeUpload(files, options);
+        const upload = new ResumeUpload(files, options);
+
+        window.ResumeUpload = upload;
+
+        return upload;
     }
 };
 

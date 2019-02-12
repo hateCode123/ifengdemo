@@ -38,7 +38,7 @@ render() {
 }
 ```
 
-### 二、在方法中调用(推荐)
+### 二、动态调用(推荐)
 
 ```jsx
 import Upload from '[your components dir]/uploader/upload';
@@ -61,13 +61,24 @@ import Upload from '[your components dir]/uploader/upload';
             errorCallback: errors => {
                 console.log(errors);
             },
+            abortUpload: () => {
+                console.log('停止了');
+            }
         })
     }>
-    按钮
-</button>;
+    上传
+</button>
+<button
+    onClick={() => {
+        Upload.stop();
+    }}>
+    停止
+</button>
 ```
 
 ## API
+
+### Upload.start(opitons）: 开始上传
 
 -   `options`: `Object`
     -   `type`: `Number` 上传文件的业务类型: 0 视频 1 图片 2 普通文件，默认 0。
@@ -76,7 +87,10 @@ import Upload from '[your components dir]/uploader/upload';
     -   `progressCallback`: `Function` 上传进度的回调。返回参数: (`percentage`: 上传进度, `file`: 当前文件对象)
     -   `successCallback`: `Function` 上传成功的回调。返回参数: (`url`: 上传完成后文件可访问路径。当文件尚未上传完或者未合并完，该项为 null, `file`: 当前文件对象)
     -   `errorCallback`: `Function` 上传出错的回调。返回参数: (`errors`: 上传过程中出错调用)，返回错误状态如下`错误提示`
+    -   `abortUpload`: `Function` 上传终止的回调。
 -   `title`: `String` 鼠标 hover 时的`title`文本
+
+### Upload.stop() : 终止上传
 
 ## 错误提示
 

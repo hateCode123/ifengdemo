@@ -1,6 +1,8 @@
-import uploadLogger from './uploadLogger.js';
+import hex_sha1 from '../src/sha.js';
+import uploadLogger from '../src/uploadLogger.js';
 import { ajax } from '@ifeng/ui_base';
 
+/* eslint-disable */
 /**
  * 校验文件：
  * @param  {Object} file    文件对象
@@ -11,16 +13,17 @@ import { ajax } from '@ifeng/ui_base';
  * @param  {String} appcode 应用的code 具体是啥需要问陈勇
  * @param  {String} uid 用户id 具体如何取要看现有凤凰的系统。
  */
-class CheckFile {
-    constructor(file, url, options) {
-        this.file = file;
-        this.url = url;
-        this.params = this.initParam(options);
-        this.callback = options.callback;
-        this.callbackScope = options.callbackScope;
-        this.options = options;
-    }
-    initParam(options) {
+window.checkFile = function(file, url, options) {
+    this.file = file;
+    this.url = url;
+    this.params = this.initParam(options);
+    this.callback = options.callback;
+    this.callbackScope = options.callbackScope;
+    this.options = options;
+};
+
+checkFile.prototype = {
+    initParam: function(options) {
         // 根据options筛选校验需要的参数
         return {
             fileId: options.fileId, // 根据uid，appid，checksum之和生成的校验码。
@@ -29,16 +32,19 @@ class CheckFile {
             bizId: options.bizId,
             successCb: options.successCb,
         };
-    }
+    },
+
     // 执行校验请求。
-    async runCheck() {
+    runCheck: async function() {
+        const _this = this;
+
         try {
             const res = await ajax(this.url, {
                 data: this.params,
             });
 
-            console.log('runCheck result=', res);
-            this.callback.call(this.callbackScope, this.file, res, this.options);
+            console.log('result=', res);
+            _this.callback.call(_this.callbackScope, _this.file, res, _this.options);
         } catch (error) {
             const errorState = `XMLHttpRequest.status=${XMLHttpRequest.status}&XMLHttpRequest.readyState=${
                 XMLHttpRequest.readyState
@@ -47,11 +53,10 @@ class CheckFile {
             uploadLogger({
                 name: 'PC_upload_fail<checkFile>',
                 desc: errorState,
-                fileId: this.params.fileId,
+                fileId: _this.params.fileId,
             });
             throw error;
         }
-    }
-}
-
-export default CheckFile;
+    },
+};
+export default checkFile;

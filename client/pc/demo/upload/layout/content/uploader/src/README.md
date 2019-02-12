@@ -26,14 +26,20 @@ handleFileChange = e => {
             },
             errorCallback: (errors) => {
                 console.log(errors);
+            },
+            abortUpload: () => {
+                console.log('停止');
             }
-            };
+        };
+        uploader(files, options);
+    } else {
+        return;
+    }
 
-            uploader(files, options);
-        }
-
-    };
-
+};
+handleAbort () {
+    if(window.ResumeUpload) window.ResumeUpload.abortUpload();
+}
 ...
 
 <input
@@ -42,6 +48,7 @@ handleFileChange = e => {
     onChange={this.handleFileChange.bind(this)}
     title="选择文件"
 />
+<button onClick={this.handleAbort.bind(this)}></button>
 ```
 
 ## API
@@ -55,6 +62,15 @@ handleFileChange = e => {
     -   `progressCallback`: `Function` 上传进度的回调。返回参数: (`percentage`: 上传进度, `file`: 当前文件对象)
     -   `successCallback`: `Function` 上传成功的回调。返回参数: (`url`: 上传完成后文件可访问路径。当文件尚未上传完或者未合并完，该项为 null, `file`: 当前文件对象)
     -   `errorCallback`: `Function` 上传出错的回调。返回参数: (`errors`: 上传过程中出错调用)，返回错误状态如下
+    -   `abortUpload`: `Function` 上传终止的回调
+
+## 终止上传
+
+触发上传后有一个全局的 ResumeUpload
+
+```jsx
+if (window.ResumeUpload) window.ResumeUpload.abortUpload();
+```
 
 ## 错误提示
 

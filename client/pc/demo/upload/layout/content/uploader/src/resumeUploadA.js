@@ -1,59 +1,48 @@
-import checkFile from './checkFile';
+import checkFile from '../bak/checkFileA';
 import hex_sha1 from './sha';
 import { cookie, ajax, jsonp } from '@ifeng/ui_base';
-import CreatFileId from './creatFileId';
-import singleUpload from './singleUpload';
+import CreatFileId from '../bak/creatFileIdA';
+import singleUpload from '../bak/singleUploadA';
 import uploadLogger from './uploadLogger';
-/**
- * 参数       类型        名称                      默认值       是否必须
- * @param  {Object}     options
- * @param  {Number}     options.type              0           否        资源类型  0视频 1图片
- * @param  {String}     options.appid             'wemedia'   否        标记上传渠道
- * @param  {Function}   options.onBeforeUpload                否        上传之前操作回调函数
- * @param  {Function}   options.successCallback               否        上传成功回调
- * @param  {Function}   options.errorCallback                 否        上传失败回调函数
- * @param  {Function}   options.progressCallback              否        上传过程中回调函数
- * @param  {Boolean}    options.showBase64        false       否        上传过程是否显示base64Url
- */
-class ResumeUpload {
-    constructor(file, options) {
-        this.checkPath = 'query'; // 不需要本地文件验证文件地址
-        this.checkPath1 = 'fileInfo'; // 需要本地文件验证文件地址
-        this.uploadPath = 'upload'; // 上传文件地址
-        this.uploadUrl = 'http://transmission.ifeng.com/'; // 上传视频和音频
-        this.imageServer = 'http://d.ifengimg.com/q100/'; // 上传图片的cdn地址
-        this.rinfo = 'http://ugc.ifeng.com/index.php/user/info'; // 查询用户信息
-        this.getid = 'http://ugc.ifeng.com/index.php/user/getid'; // 获取rid
-        this.fileId = ''; // fileId文件唯一标识
-        this.fileStatus = {}; // 上传文件的状态
-        this.limit = 2 * 1024 * 1024;
-        this.xhr = new XMLHttpRequest();
-        let isExternal = /external/gi.test(window.location.pathname);
 
-        this.sid = isExternal ? cookie.get('fhhmgrimgsid') : cookie.get('sid');
-        this.ugcCallback = null;
-        this.rid = '';
-        // this.element = ele;
-        this.loopCount = 20;
-        this.ervalObject = null;
+/* eslint-disable */
+export const ResumeUpload = function(file, options) {
+    this.checkPath = 'query'; // 不需要本地文件验证文件地址
+    this.checkPath1 = 'fileInfo'; // 需要本地文件验证文件地址
+    this.uploadPath = 'upload'; // 上传文件地址
+    this.uploadUrl = 'http://transmission.ifeng.com/';
+    this.imageServer = 'http://d.ifengimg.com/q100/';
+    this.rinfo = 'http://ugc.ifeng.com/index.php/user/info'; // 查询用户信息
+    this.getid = 'http://ugc.ifeng.com/index.php/user/getid'; // 获取rid
+    this.fileId = '';
+    this.fileStatus = {};
+    this.limit = 2 * 1024 * 1024;
+    this.xhr = new XMLHttpRequest();
+    let isExternal = /external/gi.test(window.location.pathname);
 
-        options = options || {};
-        this.type = options.type || 0; // 0 视频 1 图片 2 音频
-        this.appid = options.appid || 'wemedia';
-        this.checkFileSizeAndType = options.checkFileSizeAndType || this.checkFileSizeAndType;
-        this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
-        this.successCallback = options.successCallback || this.successCallback;
-        this.onFinishedCallback = options.removeUpload || this.onFinishedCallback;
-        this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
-        this.errorCallback = options.errorCallback || this.errorCallback;
-        this.index = options.index;
-        this.showBase64 = options.showBase64 || false;
-        this.uploading = true;
-        this.abortUploadCb = options.abortUpload || this.emptyFn;
-        this.init(file);
-    }
-    // 初始化
-    init(file) {
+    this.sid = isExternal ? cookie.get('fhhmgrimgsid') : cookie.get('sid');
+    this.ugcCallback = null;
+    this.rid = '';
+    // this.element = ele;
+    this.loopCount = 20;
+    this.ervalObject = null;
+
+    options = options || {};
+    this.type = options.type || 0;
+    this.appid = options.appid || 'wemedia';
+    this.checkFileSizeAndType = options.checkFileSizeAndType || this.checkFileSizeAndType;
+    this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
+    this.successCallback = options.successCallback || this.successCallback;
+    this.onFinishedCallback = options.removeUpload || this.onFinishedCallback;
+    this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
+    this.errorCallback = options.errorCallback || this.errorCallback;
+    this.index = options.index;
+    this.showBase64 = options.showBase64 || false;
+    this.uploading = true;
+    this.init(file);
+};
+ResumeUpload.prototype = {
+    init: function(file) {
         this.file = file;
         this.fileName = file.name;
         this.file.id = `FHH_FILE_${this.index}`;
@@ -78,9 +67,8 @@ class ResumeUpload {
             return;
         }
         this.getUgcTaskInfo(this.type, this.startCreate.bind(this));
-    }
-    // 校验文件的大小与格式
-    checkFileSizeAndType(file, type) {
+    },
+    checkFileSizeAndType: function(file, type) {
         const isInArray = (value, arr) => {
             for (let i = 0; i < arr.length; i++) {
                 if (value === arr[i]) {
@@ -121,7 +109,6 @@ class ResumeUpload {
                     status: 40001,
                     msg: '请选择正确的格式',
                 };
-
                 this.errorCallback(error, this.file);
                 this.onError(error);
                 this.onFinishedCallback();
@@ -130,7 +117,6 @@ class ResumeUpload {
             }
 
             if (this.file.size > 1000 * 1024 * 1024) {
-                // 大于1g推荐使用客户端
                 // console.log(
                 //     '<div style="padding:22px 32px 32px;">上传文件请小于1000M，超出请下载<a href="http://v.ifeng.com/vblog/clientdownload/index.html" style="text-decoration:underline;color:#901D22" target="_blank">客户端</a>上传</div>',
                 // );
@@ -139,7 +125,6 @@ class ResumeUpload {
                     status: 40002,
                     msg: '上传文件请小于1000M，超出请下载客户端',
                 };
-
                 this.errorCallback(error, this.file);
                 this.onError(error);
                 this.onFinishedCallback();
@@ -151,17 +136,14 @@ class ResumeUpload {
             let suffix = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
             let pos = this.fileName.lastIndexOf('.');
             let lastName = this.fileName.substring(pos + 1).toLowerCase();
-
             if (!isInArray(lastName, suffix)) {
                 const error = {
                     status: 40001,
                     msg: '请选择正确的格式',
                 };
-
                 this.errorCallback(error, this.file);
                 this.onError(error);
                 this.onFinishedCallback();
-
                 return false;
             }
             if (this.file.size > 5 * 1024 * 1024) {
@@ -170,7 +152,6 @@ class ResumeUpload {
                     status: 40003,
                     msg: '图片不能大于5M,请重新选择',
                 };
-
                 this.errorCallback(error, this.file);
                 this.onError(error);
                 this.onFinishedCallback();
@@ -180,9 +161,8 @@ class ResumeUpload {
         }
 
         return true;
-    }
-    // 上传图片 获取ugs任务信息
-    async getUgcTaskInfo(type, callback) {
+    },
+    getUgcTaskInfo: async function(type, callback) {
         if (type === 0 || type === 2) {
             callback({});
         } else if (type === 1) {
@@ -211,6 +191,7 @@ class ResumeUpload {
                 if (res.code === 0) {
                     // 获取到rid successCb
                     let param = { successCb: res.data.callback, bizId: res.data.rid };
+                    console.log(param);
 
                     callback(param);
                 } else {
@@ -220,24 +201,23 @@ class ResumeUpload {
                 throw error;
             }
         }
-    }
-    // 开始上传流程
-    startCreate(param) {
+    },
+    startCreate: function(param) {
         this.oParam = param;
         this.creatChecksum = new CreatFileId(this.file, {
             callback: this.creatFileIdCallback,
             callbackScope: this,
         });
         this.creatChecksum.creat();
-        this.onBeforeUpload(this.file); // 上传之前回调, 需要考虑这个回调放在这里是否合理
-    }
-    // 创建fileId
-    creatFileIdCallback(checksum) {
+        this.onBeforeUpload(this.file);
+    },
+    creatFileIdCallback: function(checksum) {
+        console.log(checksum);
         this.checksum = checksum;
         // 创建一个fileId都这么麻烦
         this.fileId = `${hex_sha1(this.sid + this.appid + this.checksum)}_${this.blockCount}`;
 
-        // 如果是视频资源 需要拿到本地文件地址(checkPath1)fileInfo  如果是图片资源 需要拿到cdn图片地址(checkPath)query
+        // 如果是视频资源 需要拿到本地文件地址fileInfo  如果是图片资源 需要拿到cdn图片地址query
         let checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
         let param = {
             appid: this.appid,
@@ -250,14 +230,14 @@ class ResumeUpload {
 
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();
-    }
-    checkFileCallback(file, msg, options) {
+    },
+    checkFileCallback: function(file, msg, options) {
+        const _this = this;
         if (!msg.success) {
             const error = {
                 status: 50001,
                 msg: '校验文件失败',
             };
-
             this.errorCallback(error, this.file);
             this.onError(error);
             this.onFinishedCallback();
@@ -271,26 +251,25 @@ class ResumeUpload {
         if (this.type === 0 || this.type === 2) {
             // 视频资源和音频
             if (Number(msg.status.substring(0, 1)) === 1 && msg.fileUrl != null) {
-                window.clearInterval(this.ervalObject);
-                this.uploading = false;
-                // this.uploadProgressCallback('100%', this.file);
-                this.successCallback(msg.fileUrl, this.file);
-                this.onFinishedCallback();
+                window.clearInterval(_this.ervalObject);
+                _this.uploading = false;
+                // _this.uploadProgressCallback('100%', this.file);
+                _this.successCallback(msg.fileUrl, _this.file);
+                _this.onFinishedCallback();
 
                 return;
             } else if (Number(msg.status.substring(0, 1)) === 1 && msg.fileUrl == null) {
                 this.ervalObject = setInterval(() => {
                     // 轮询本地文件url
-                    this.loopCount--;
-                    if (this.loopCount <= 0) {
+                    _this.loopCount--;
+                    if (_this.loopCount <= 0) {
                         // 轮询记数
-                        window.clearInterval(this.ervalObject);
+                        window.clearInterval(_this.ervalObject);
                         // layer.msg('上传视频失败，请重新上传！');
                         const error = {
                             status: 50002,
                             msg: '文件上传失败',
                         };
-
                         this.errorCallback(error, this.file);
                         this.onError(error);
                         this.onFinishedCallback();
@@ -302,12 +281,12 @@ class ResumeUpload {
 
                         return;
                     }
-                    let icheckFile = new checkFile(this.file, this.uploadUrl + this.checkPath1, {
-                        appid: this.appid,
-                        fileId: this.fileId,
-                        blockCount: this.blockCount,
-                        callback: this.checkFileCallback,
-                        callbackScope: this,
+                    let icheckFile = new checkFile(_this.file, _this.uploadUrl + _this.checkPath1, {
+                        appid: _this.appid,
+                        fileId: _this.fileId,
+                        blockCount: _this.blockCount,
+                        callback: _this.checkFileCallback,
+                        callbackScope: _this,
                     });
 
                     icheckFile.runCheck();
@@ -322,16 +301,15 @@ class ResumeUpload {
             if (Number(msg.status.substring(0, 1)) === 1) {
                 // 文件本地上传已经成功，轮询直到查到cdn资源文件
                 this.ervalObject = setInterval(() => {
-                    this.loopCount--;
-                    if (this.loopCount <= 0) {
+                    _this.loopCount--;
+                    if (_this.loopCount <= 0) {
                         // 轮询记数
-                        window.clearInterval(this.ervalObject);
+                        window.clearInterval(_this.ervalObject);
                         // alert('上传失败，请重新上传！');
                         const error = {
                             status: 50002,
                             msg: '文件上传失败',
                         };
-
                         this.errorCallback(error, this.file);
                         this.onError(error);
                         this.onFinishedCallback();
@@ -347,23 +325,23 @@ class ResumeUpload {
 
                     const getRinfo = async () => {
                         try {
-                            const resp = await jsonp(this.rinfo, {
+                            const resp = await jsonp(_this.rinfo, {
                                 data: {
-                                    rid: this.oParam.bizId,
-                                    sid: this.sid,
+                                    rid: _this.oParam.bizId,
+                                    sid: _this.sid,
                                     rtype: 3,
                                     rt: 'jsonp',
                                 },
                             });
 
                             if (resp.data.status === 0 && resp.data.finalpath && resp.data.finalurl) {
-                                window.clearInterval(this.ervalObject);
-                                const url = this.imageServer + resp.data.finalurl.replace(/http[s]?:\/\//, '');
+                                window.clearInterval(_this.ervalObject);
+                                const url = _this.imageServer + resp.data.finalurl.replace(/http[s]?:\/\//, '');
 
-                                this.uploading = false;
-                                this.successCallback(url, this.file);
-                                this.uploadProgressCallback('100%', this.file);
-                                this.onFinishedCallback();
+                                _this.uploading = false;
+                                _this.successCallback(url, _this.file);
+                                _this.uploadProgressCallback('100%', _this.file);
+                                _this.onFinishedCallback();
                             }
                         } catch (e) {
                             console.error(e);
@@ -371,7 +349,6 @@ class ResumeUpload {
                                 status: 50003,
                                 msg: '文件信息查询失败',
                             };
-
                             this.errorCallback(error, this.file);
                             this.onError(error);
                             this.onFinishedCallback();
@@ -392,8 +369,8 @@ class ResumeUpload {
             // 本地上传没有完成,继续上传
             this.toUpload(msg);
         }
-    }
-    toUpload(msg) {
+    },
+    toUpload: function(msg) {
         console.log('上传中...');
         // 本地上传没有完成,继续上传
         let reg = /[1]/g;
@@ -436,8 +413,8 @@ class ResumeUpload {
         // }
         this.singleUpload.xhr.abort = true;
         this.singleUpload.fileUpload();
-    }
-    uploadLoadCallback(file, msg) {
+    },
+    uploadLoadCallback: function(file, msg) {
         // upload成功后 最后一次不要查 否则会出问题
         let reg = /0/g;
 
@@ -460,45 +437,52 @@ class ResumeUpload {
 
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();
-    }
-    uploadProgressCallback(percentage, file) {
+    },
+    uploadProgressCallback: function(percentage, file) {
         // 默认上传过程中回调函数
 
         console.log(percentage);
-    }
-    successCallback(url, file) {
+    },
+    successCallback: (url, file) => {
         this.uploading = false;
         if (!url) return;
         window.clearInterval(this.ervalObject);
         console.log('上传成功');
         // 上传的是图片,显示图片预览
-    }
-    onBeforeUpload(file) {}
-    errorCallback(errors, file) {
+    },
+    onBeforeUpload: function(file) {},
+    errorCallback: function(errors, file) {
         console.log(errors);
-    }
-    onError(errors) {
+    },
+    onError: function(errors) {
         throw errors;
-    }
-    onFinishedCallback() {}
-    abortUpload(callback) {
+    },
+    onFinishedCallback: function() {},
+    abortUpload: function(callback) {
         if (this.uploading && this.singleUpload) {
-            console.log('终止上传');
+            console.log('取消');
             this.singleUpload.xhr.abort = false;
             this.singleUpload.abortUpload();
         }
         if (this.ervalObject) window.clearInterval(this.ervalObject);
-        // 终止上传后的各种回调
-        if (callback) {
-            callback();
-        } else if (this.abortUploadCb) {
-            this.abortUploadCb();
-        }
-        this.onFinishedCallback();
-    }
-    emptyFn() {
-        return true;
-    }
-}
 
-export default ResumeUpload;
+        if (callback) callback();
+    },
+};
+/* eslint-enable */
+
+// export const resumeUpload = (files, options) => {
+//     console.log('开始上传流程');
+
+//     let index = -1;
+
+//     for (let i = 0; i < files.length; i++) {
+//         index++;
+//         options.index = index;
+//         const file = files[i];
+
+//         // console.log( ResumeUpload(file, options));
+//         /* eslint-disable */
+//         return new ResumeUpload(file, options);
+//     }
+// };

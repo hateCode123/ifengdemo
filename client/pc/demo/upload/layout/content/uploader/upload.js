@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import uploader from './src';
-
 const creatUpload = props => {
     const div = document.createElement('div');
 
@@ -10,11 +9,16 @@ const creatUpload = props => {
     const onFinished = () => {
         ReactDOM.unmountComponentAtNode(div);
         document.body.removeChild(div);
+        window.ResumeUpload = null;
     };
+
+    // console.dir(singleUpload);
 
     const handleFileChange = e => {
         const files = e.target.files;
         const config = props;
+
+        // console.dir(uploader);
 
         // console.log(files);
 
@@ -28,6 +32,7 @@ const creatUpload = props => {
                 successCallback: config.successCallback,
                 errorCallback: config.errorCallback,
                 removeUpload: onFinished,
+                abortUpload: config.abortUpload,
             };
 
             uploader(files, options);
@@ -60,5 +65,12 @@ Upload.start = props =>
     creatUpload({
         ...props,
     });
+Upload.stop = () => {
+    if (window.ResumeUpload) {
+        window.ResumeUpload.abortUpload();
+    } else {
+        return;
+    }
+};
 
 export default Upload;

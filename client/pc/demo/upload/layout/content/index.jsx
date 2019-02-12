@@ -13,6 +13,10 @@ class Content extends React.PureComponent {
     // };
     state = {};
 
+    abortUpload() {
+        console.log('停止');
+    }
+
     render() {
         const config = {
             type: 1, // 0 视频 1 图片 2 普通文件
@@ -59,6 +63,9 @@ class Content extends React.PureComponent {
                                 },
                                 errorCallback: errors => {
                                     console.log(errors);
+                                },
+                                abortUpload: () => {
+                                    console.log('停止');
                                 },
                             })
                         }>

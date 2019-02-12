@@ -1,5 +1,5 @@
-import hex_sha1 from './sha';
-import uploadLogger from './uploadLogger';
+import hex_sha1 from '../src/sha';
+import uploadLogger from '../src/uploadLogger';
 
 /**
  * 单文件分段上传
@@ -14,8 +14,13 @@ import uploadLogger from './uploadLogger';
  *      @param  {String} appcode  应用的 编码 ？需要询问一下陈勇
  *      @param  {String} uid      uid
  */
-class SingleUpload {
-    constructor(file, url, options) {
+/* eslint-disable */
+const singleUpload = function(file, url, options) {
+    this.init(file, url, options);
+};
+
+singleUpload.prototype = {
+    init: function(file, url, options) {
         this.file = file;
         this.url = url;
         this.cutSize = options.cutSize || 512 * 1024;
@@ -30,40 +35,37 @@ class SingleUpload {
         this.sendNum = 0;
         this.postingIndex = new Array();
         this.flieStatsusEidt();
-    }
-    // 空函数
-    emptyFn() {
-        return true;
-    }
-    // 生成未上传文件的数组
-    flieStatsusEidt() {
-        // console.log(this.fileStatus);
+    },
+    //
+    flieStatsusEidt: function() {
+        console.log(this.fileStatus);
         this.statusList = [];
         for (let i = 1; i <= this.fileStatus.length; i++) {
             if (Number(this.fileStatus[i - 1]) === 0) {
                 this.statusList.push(i);
             }
         }
-        // console.log('flieStatsusEidt---', this.statusList);
-    }
+        console.log('flieStatsusEidt---', this.statusList);
+    },
     // 初始化需要提交的参数
-    initPostParams(options) {
+    initPostParams: function(options) {
         this.postParams = {
             appId: options.appid, // 应用 id
             fileId: options.fileId, // 传入的文件id
-            blockCount: options.blockCount, // 文件块数
+            blockCount: options.blockCount,
             fileName: options.fileName,
             bizId: options.bizId,
             successCb: options.successCb,
             blockId: '',
         };
-    }
+    },
     // 设置文件开始位置
-    setBegin(begin) {
+    setBegin: function(begin) {
         this.begin = begin || 0;
-    }
+    },
+
     // 设置文件结束位置
-    setEnd(begin, cutSize) {
+    setEnd: function(begin, cutSize) {
         let fileSize = this.file.size;
         let end = '';
 
@@ -76,45 +78,44 @@ class SingleUpload {
 
             return begin + cutSize;
         }
-    }
+    },
+
+    // 空函数
+    emptyFn: function() {
+        return true;
+    },
     // 初始化回调
-    initCallback(options) {
+    initCallback: function(options) {
         this.loadstartCallback = options.loadstartCallback || this.emptyFn;
         this.loadCallback = options.loadCallback || this.emptyFn;
         this.errorCallback = options.errorCallback || this.emptyFn;
         this.progressCallback = options.progressCallback || this.emptyFn;
         this.abortCallback = options.abortCallback || this.emptyFn;
         this.loadendCallback = options.loadendCallback || this.emptyFn;
-    }
+    },
     // 上传文件
-    fileUpload() {
+    fileUpload: function() {
         this.send(this.postParams);
-    }
+    },
     // 切割文件
-    getBlob(begin, end) {
-        const file = this.file;
-        let func = '';
+    getBlob: function(begin, end) {
+        let file = this.file;
 
-        if (!file.slice) {
-            if (file.webkitSlice) {
-                func = file.webkitSlice(begin, end);
-            } else {
-                func = file.mozSlice(begin, end);
-            }
-        } else {
-            func = file.slice(begin, end);
-        }
-
-        return func;
-    }
+        return file.slice
+            ? file.slice(begin, end)
+            : file.webkitSlice
+                ? file.webkitSlice(begin, end)
+                : file.mozSlice(begin, end);
+    },
     // 取消上传
-    abortUpload() {
+    abortUpload: function() {
         console.log('停止上传');
-        this.xhr.abort = false;
+        console.log(this.file);
         this.abort = false;
-    }
+    },
     // 对数字进行转换的函数，具体转换啥了的问问陈勇
-    toByte(origin) {
+    /* eslint-disable */
+    toByte: function(origin) {
         let n = Number(origin);
         let n0 = 0;
         let n1 = 0;
@@ -124,12 +125,11 @@ class SingleUpload {
         let n5 = (n >> 16) & 0xff;
         let n6 = (n >> 8) & 0xff;
         let n7 = (n >> 0) & 0xff;
-
         n4 = this.toSignInt(n4);
         n5 = this.toSignInt(n5);
         n6 = this.toSignInt(n6);
         n7 = this.toSignInt(n7);
-        const ascString =
+        let ascString =
             String.fromCharCode(n0) +
             String.fromCharCode(n1) +
             String.fromCharCode(n2) +
@@ -138,19 +138,20 @@ class SingleUpload {
             String.fromCharCode(n5) +
             String.fromCharCode(n6) +
             String.fromCharCode(n7);
-
         return ascString;
-    }
+    },
     // 对数字进行转换的函数，具体转换啥了的问问陈勇
-    toSignInt(num) {
+    toSignInt: function(num) {
         if (num > 127) {
-            num -= 128 * 2;
+            num = num - 128 * 2;
         }
-
         return num;
-    }
-    send(oParam) {
+    },
+    send: function(oParam) {
         let index = this.statusList.shift(); // 删除第一个值，并返回这个值
+
+        console.log('index---', index);
+        console.log(this.xhr.abort);
 
         if (!this.abort || index === undefined) {
             return false;
@@ -182,13 +183,12 @@ class SingleUpload {
 
             return;
         }
-        // console.log(this.getBlob(begin, begin + r_size));
+        console.log(this.getBlob(begin, begin + r_size));
         iReader.readAsBinaryString(this.getBlob(begin, begin + r_size));
         let currentBlockId = '';
 
         iReader.onload = e => {
             currentBlockId = hex_sha1(e.target.result + this.toByte(blockSize));
-            // 组装form表单参数
             fd.append('fileId', oParam.fileId);
             fd.append('appId', oParam.appId);
             fd.append('blockIndex', index);
@@ -197,17 +197,28 @@ class SingleUpload {
             fd.append('blockId', currentBlockId);
             fd.append('blockCount', oParam.blockCount);
             fd.append('blockContent', this.getBlob(begin, end), oParam.fileName);
+            /* eslint-disable */
             console.log(
-                `fileId--${oParam.fileId}--appId--${
-                    oParam.appId
-                }--blockIndex--${index}--blockId--${currentBlockId}--blockCount--${oParam.blockCount}`,
+                'fileId--' +
+                    oParam.fileId +
+                    '--appId--' +
+                    oParam.appId +
+                    '--blockIndex--' +
+                    index +
+                    '--blockId--' +
+                    currentBlockId +
+                    '--blockCount--' +
+                    oParam.blockCount,
             );
+            /* eslint-enable */
             this.xhr.onload = () => {
                 if (this.xhr.status === 200) {
+                    console.log(this.xhr.responseText);
+                    /* eslint-disable */
                     let response = JSON.parse(this.xhr.responseText);
-
+                    /* eslint-enable */
                     if (response.success === true) {
-                        console.log('send status ==', response.status);
+                        console.log(this.fileStatus, 'send');
                         let successNum = response.status.substr(1).match(this.reg).length;
                         const progress = `${(successNum / oParam.blockCount) * 100}%`;
 
@@ -243,10 +254,8 @@ class SingleUpload {
                     fileId: oParam.fileId,
                 });
                 this.send(oParam);
-                throw err;
             }
         };
-    }
-}
-
-export default SingleUpload;
+    },
+};
+export default singleUpload;
