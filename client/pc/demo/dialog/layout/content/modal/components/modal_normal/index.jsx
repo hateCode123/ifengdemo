@@ -12,7 +12,7 @@ class Modal extends React.PureComponent {
 
     static propTypes = {
         isOpen: PropTypes.bool.isRequired,
-        title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+        title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
         children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
         className: PropTypes.string,
         maskClosable: PropTypes.bool,
@@ -21,11 +21,9 @@ class Modal extends React.PureComponent {
         okText: PropTypes.string,
         cancelText: PropTypes.string,
         modalWith: PropTypes.number,
-        dialogModalWith: PropTypes.number,
         footer: PropTypes.bool,
         type: PropTypes.string,
-        onClose: PropTypes.func,
-        beforeClose: PropTypes.func,
+        onClose: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     };
 
     static defaultProps = {
@@ -37,30 +35,19 @@ class Modal extends React.PureComponent {
         okText: 'OK',
         cancelText: 'Cancel',
         modalWith: 400,
-        dialogModalWith: 300,
         footer: true,
-        beforeClose: () => {
-            return true;
-        },
     };
 
-    // static getDerivedStateFromProps(props, state) {
-    //     if (props.isOpen !== state.isOpen) {
-    //         return props.isOpen;
-    //     }
+    static getDerivedStateFromProps(nextProps, state) {
+        let resIsOpen = {};
 
-    //     return null;
-    // }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if ('isOpen' in nextProps) {
-            this.setState({
+        if (nextProps.isOpen !== state.isOpen) {
+            resIsOpen = {
                 isOpen: nextProps.isOpen,
-            });
-            if (!nextProps.isOpen) {
-                nextProps.onClose();
-            }
+            };
         }
+
+        return { ...resIsOpen };
     }
 
     toggleModalClass(isOpen) {
@@ -88,18 +75,45 @@ class Modal extends React.PureComponent {
         this.props.onOk();
         // this.close();
     }
+    handleOk_dialog() {
+        // dialog模式下点击ok事件
+        console.log('press ok');
+        this.props.onOk();
+        this.close();
+        this.props.onClose();
+    }
     // 点击取消触发的事件
     handleCancel() {
         console.log('press cancel');
-        const { beforeClose, onCancel } = this.props;
-
-        if (beforeClose && !beforeClose()) {
-            return;
-        }
-
-        this.props.beforeClose();
+        const { onCancel } = this.props;
 
         onCancel();
+        this.close();
+        this.props.onClose();
+    }
+    // 点击关闭触发的事件
+    handleClose() {
+        console.log('press close');
+        const { onClose } = this.props;
+
+        // 可自定义关闭按钮是否可用
+        if (Object.prototype.toString.call(onClose) === '[object Object]') {
+            if (onClose.closeAble !== false) {
+                onClose.callback();
+                this.close();
+            } else {
+                onClose.callback();
+            }
+        } else if (Object.prototype.toString.call(onClose) === '[object Function]') {
+            onClose();
+            this.close();
+        }
+    }
+    dialogHandleClose() {
+        console.log('press close');
+        const { onClose } = this.props;
+
+        onClose();
         this.close();
     }
 
@@ -114,7 +128,6 @@ class Modal extends React.PureComponent {
             onCancel,
             maskClosable,
             modalWith,
-            dialogModalWith,
             footer,
             type,
         } = this.props;
@@ -129,21 +142,32 @@ class Modal extends React.PureComponent {
                         onClick={maskClosable ? this.handleCancel.bind(this) : this.emptyFunc.bind(this)}>
                         <div
                             className={styles.modal_body}
-                            style={{ width: type === 'dialog' ? `${dialogModalWith}px` : `${modalWith}px` }}
+                            style={{ width: `${modalWith}px` }}
                             onClick={e => {
                                 e.stopPropagation();
                             }}>
-                            <div className={styles.modal_title}>
-                                <div style={{ float: 'left' }}>{title}</div>
-                                <div className={styles.close} onClick={this.handleCancel.bind(this)}>
-                                    <img src={closeImg} title="关闭" />
+                            {title ? (
+                                <div className={styles.modal_title}>
+                                    <div style={{ float: 'left' }}>{title}</div>
+                                    <div
+                                        className={styles.close}
+                                        onClick={
+                                            type === 'dialog'
+                                                ? this.dialogHandleClose.bind(this)
+                                                : this.handleClose.bind(this)
+                                        }>
+                                        <img src={closeImg} title="关闭" />
+                                    </div>
                                 </div>
-                            </div>
+                            ) : null}
                             <div className={styles.modal_contianer} ref="contianer">
                                 {isOpen ? children : null}
                             </div>
                             {footer ? (
-                                <div className={`${styles.modal_footer} ${styles.clearfix}`}>
+                                <div
+                                    className={`${type === 'dialog' ? styles.dialog_footer : styles.modal_footer} ${
+                                        styles.clearfix
+                                    }`}>
                                     {type === 'dialog' ? (
                                         <React.Fragment>
                                             <div className={`${styles.buttonWrap} ${styles.clearfix}`}>
@@ -154,7 +178,7 @@ class Modal extends React.PureComponent {
                                                 </button>
                                                 <button
                                                     className={`${styles.btn_dialog} ${styles.btn_comfirm}`}
-                                                    onClick={this.handleOk.bind(this)}>
+                                                    onClick={this.handleOk_dialog.bind(this)}>
                                                     <span>{okText}</span>
                                                 </button>
                                             </div>

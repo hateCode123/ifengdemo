@@ -1,22 +1,14 @@
-.slider {
-    width: 920px;
-    margin: 300px auto;
-}
-[data-dots-active='true'] {
-    width: 24px !important;
-    height: 8px !important;
-    border-radius: 4px !important;
-    background: #f54343 !important;
-    margin: 0 3px !important;
-}
-[data-dots-active='false'] {
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 10px !important;
-    background: #ccc !important;
-    margin: 0 3px !important;
-}
-[data-dots-wrap='true'] {
-    left: 50%;
-    bottom: -21px !important;
+.dialogTxt {
+    width: 352px;
+    height: 43px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #333333;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 39px;
 }

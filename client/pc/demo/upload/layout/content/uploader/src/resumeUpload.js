@@ -26,9 +26,9 @@ class ResumeUpload {
         this.getid = 'http://ugc.ifeng.com/index.php/user/getid'; // 获取rid
         this.fileId = ''; // fileId文件唯一标识
         this.fileStatus = {}; // 上传文件的状态
-        this.limit = 2 * 1024 * 1024;
+        this.limit = 2 * 1024 * 1024; // 2m
         this.xhr = new XMLHttpRequest();
-        let isExternal = /external/gi.test(window.location.pathname);
+        const isExternal = /external/gi.test(window.location.pathname);
 
         this.sid = isExternal ? cookie.get('fhhmgrimgsid') : cookie.get('sid');
         this.ugcCallback = null;
@@ -67,10 +67,11 @@ class ResumeUpload {
                 ? parseInt(this.file.size % this.limit)
                 : parseInt(this.file.size / this.limit + 1); // 最后一块是整块+余数
         if (this.type === 1 && this.showBase64) {
-            let reader = new FileReader();
+            const reader = new FileReader();
 
             reader.readAsDataURL(file);
             reader.onload = e => {
+                console.log(this.result);
                 this.file.base64Url = this.result;
                 this.getUgcTaskInfo(this.type, this.startCreate.bind(this));
             };
@@ -81,6 +82,7 @@ class ResumeUpload {
     }
     // 校验文件的大小与格式
     checkFileSizeAndType(file, type) {
+        // 工具函数，判断某项是否在数组内
         const isInArray = (value, arr) => {
             for (let i = 0; i < arr.length; i++) {
                 if (value === arr[i]) {
@@ -93,7 +95,7 @@ class ResumeUpload {
 
         if (type === 0 || type === 2) {
             // 如果视频资源和音频
-            let suffix1 = [
+            const suffix1 = [
                 'mp4',
                 'mpeg',
                 'wmv',
@@ -110,10 +112,10 @@ class ResumeUpload {
                 'f4v',
                 'vob',
             ];
-            let suffix2 = ['mp3', 'wav', 'wma', 'ogg'];
-            let suffix = type === 0 ? suffix1 : suffix2;
-            let pos = this.fileName.lastIndexOf('.');
-            let lastName = this.fileName.substring(pos + 1).toLowerCase();
+            const suffix2 = ['mp3', 'wav', 'wma', 'ogg'];
+            const suffix = type === 0 ? suffix1 : suffix2;
+            const pos = this.fileName.lastIndexOf('.');
+            const lastName = this.fileName.substring(pos + 1).toLowerCase();
 
             if (!isInArray(lastName, suffix)) {
                 // alert('请选择正确的格式');
@@ -130,7 +132,7 @@ class ResumeUpload {
             }
 
             if (this.file.size > 1000 * 1024 * 1024) {
-                // 大于1g推荐使用客户端
+                // 大于1g推荐使用客户端的处理
                 // console.log(
                 //     '<div style="padding:22px 32px 32px;">上传文件请小于1000M，超出请下载<a href="http://v.ifeng.com/vblog/clientdownload/index.html" style="text-decoration:underline;color:#901D22" target="_blank">客户端</a>上传</div>',
                 // );
@@ -148,9 +150,9 @@ class ResumeUpload {
             }
         } else if (type === 1) {
             // 如果是图片资源;
-            let suffix = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
-            let pos = this.fileName.lastIndexOf('.');
-            let lastName = this.fileName.substring(pos + 1).toLowerCase();
+            const suffix = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
+            const pos = this.fileName.lastIndexOf('.');
+            const lastName = this.fileName.substring(pos + 1).toLowerCase();
 
             if (!isInArray(lastName, suffix)) {
                 const error = {
@@ -251,6 +253,7 @@ class ResumeUpload {
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();
     }
+    // 校验文件的回调
     checkFileCallback(file, msg, options) {
         if (!msg.success) {
             const error = {
@@ -273,7 +276,7 @@ class ResumeUpload {
             if (Number(msg.status.substring(0, 1)) === 1 && msg.fileUrl != null) {
                 window.clearInterval(this.ervalObject);
                 this.uploading = false;
-                // this.uploadProgressCallback('100%', this.file);
+                this.uploadProgressCallback('100%', this.file);
                 this.successCallback(msg.fileUrl, this.file);
                 this.onFinishedCallback();
 
@@ -398,7 +401,7 @@ class ResumeUpload {
         // 本地上传没有完成,继续上传
         let reg = /[1]/g;
 
-        this.fileStatus = msg.status.substr(1).split('');
+        this.fileStatus = msg.status.substr(1).split(''); // 截掉第一位并转化为数组
         const options = {
             fileStatus: this.fileStatus,
             cutSize: this.limit,

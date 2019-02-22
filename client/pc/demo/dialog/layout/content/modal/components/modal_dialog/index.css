@@ -42,71 +42,14 @@
 .modal_contianer {
     min-height: 120px;
 }
-.modal_footer {
-    border-top: 1px solid #e8e8e8;
-    padding: 10px 16px;
-    text-align: right;
-    border-radius: 0 0 4px 4px;
-}
-.btn {
-    line-height: 1.499;
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 0 15px;
-    font-size: 14px;
-    border-radius: 4px;
-    height: 34px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    position: relative;
-    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
-    color: rgba(0, 0, 0, 0.65);
-    background-color: #fff;
-    border-color: #d9d9d9;
-    outline: 0;
-    & span {
-        pointer-events: none;
-        display: inline-block;
-    }
-    &:hover {
-        color: #f57878;
-        background-color: #fff;
-        border-color: #f57878;
-    }
-    &.btn_comfirm {
-        color: #fff;
-        background-color: #f54343;
-        border-color: #f54343;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-        -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-        &:hover {
-            color: #fff;
-            background-color: #f57878;
-            border-color: #f57878;
-        }
-    }
-}
-.buttonWrap {
-    width: 250px;
-    margin: 0 auto;
-}
 .dialog_footer {
     height: 70px;
     /* padding: 10px 16px; */
     border-radius: 0 0 4px 4px;
+}
+.buttonWrap {
+    width: 250px;
+    margin: 0 auto;
 }
 .btn_dialog {
     line-height: 1.499;

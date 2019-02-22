@@ -3,7 +3,7 @@
     height: 424px;
     margin: 0 auto;
     margin-top: 200px;
-    background: #eee;
+    background: rgb(221, 220, 220);
 }
 .uploader {
     width: 100%;
@@ -13,8 +13,47 @@
     }
 }
 .children {
-    background: url(./jiahao.png) center center no-repeat;
+    background: #eee url(./jiahao.png) center center no-repeat;
 }
-.children:hover {
-    background-color: #fff;
+.uploadPercentWrap {
+    width: 250px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 100px;
+    display: inline-block;
+    margin-right: 8px;
+}
+.uploadPercentInner {
+    height: 8px;
+    background-color: red;
+    border-radius: 100px;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+    position: relative;
+    &::before {
+        content: '';
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        border-radius: 10px;
+        -webkit-animation: progress-active 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+        animation: progress-active 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+    }
+}
+@keyframes progress-active {
+    0% {
+        opacity: 0.1;
+        width: 0;
+    }
+    20% {
+        opacity: 0.5;
+        width: 0;
+    }
+    100% {
+        opacity: 0;
+        width: 100%;
+    }
 }

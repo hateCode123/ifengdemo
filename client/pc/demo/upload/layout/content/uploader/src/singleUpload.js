@@ -35,7 +35,7 @@ class SingleUpload {
     emptyFn() {
         return true;
     }
-    // 生成未上传文件的数组
+    // 生成未上传文件的数组 例[1, 1, 1, 0, 0, 0]
     flieStatsusEidt() {
         // console.log(this.fileStatus);
         this.statusList = [];
@@ -45,6 +45,7 @@ class SingleUpload {
             }
         }
         // console.log('flieStatsusEidt---', this.statusList);
+        // 例[4, 5, 6]
     }
     // 初始化需要提交的参数
     initPostParams(options) {
@@ -57,25 +58,7 @@ class SingleUpload {
             successCb: options.successCb,
             blockId: '',
         };
-    }
-    // 设置文件开始位置
-    setBegin(begin) {
-        this.begin = begin || 0;
-    }
-    // 设置文件结束位置
-    setEnd(begin, cutSize) {
-        let fileSize = this.file.size;
-        let end = '';
-
-        if (begin + cutSize >= fileSize) {
-            this.postParams.lb = true;
-
-            return fileSize;
-        } else {
-            this.postParams.lb = false;
-
-            return begin + cutSize;
-        }
+        console.log(this.postParams);
     }
     // 初始化回调
     initCallback(options) {

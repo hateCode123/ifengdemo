@@ -189,7 +189,27 @@
             }
         }
     }
+    /* 编辑器内部的元素的样式 */
     & :global {
+        & .ql-editor {
+            font-family: MicrosoftYaHei;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 28px;
+            letter-spacing: 0px;
+            color: #333333;
+        }
+        & .ql-editor.ql-blank::before {
+            font-family: MicrosoftYaHei;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 28px;
+            letter-spacing: 0px;
+            color: #999999;
+            font-style: normal !important;
+        }
         & .ql-container.ql-snow {
             background: #fff;
             height: 350px;
@@ -210,9 +230,88 @@
         & .ql-container.ql-snow x-video {
             display: block;
             width: 480px;
-            height: 326px;
+            height: 270px;
             margin: 0 auto;
-            background: #f6f6f6 url(./images/video-purse.png) no-repeat center;
+            position: relative;
+            & #video-ctrl-close {
+                /* 视频块级元素的操作按钮 */
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                background: url(./images/crl_btn.png);
+                right: -42px;
+                cursor: pointer;
+            }
+            & video {
+                width: 100%;
+                height: 100%;
+            }
+            & #video-uploading-mask {
+                position: absolute;
+                top: 0;
+                z-index: 999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                & #loading {
+                    display: block;
+                    position: absolute;
+                    top: 120px;
+                    left: 50%;
+                    margin-left: -16px;
+                    width: 32px;
+                    height: 32px;
+                    background: url(./images/loading_big.png) no-repeat center;
+                    animation: roll 0.8s linear infinite;
+                }
+                & p {
+                    width: 100%;
+                    position: absolute;
+                    font-family: MicrosoftYaHei;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    line-height: 28px;
+                    letter-spacing: 0px;
+                    color: #ffffff;
+                    top: 180px;
+                    text-align: center;
+                }
+                & #progress {
+                    width: 100%;
+                    height: 5px;
+                    position: absolute;
+                    bottom: 0;
+                    background: #ccc;
+                }
+                & #innerProgress {
+                    width: 0;
+                    height: 5px;
+                    background: #f54343;
+                    transition: all 0.3s;
+                }
+            }
+            & #video-mask {
+                position: absolute;
+                top: 0;
+                z-index: 9999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.2) url(./images/video-purse.png) center no-repeat;
+                & p {
+                    width: 100%;
+                    position: absolute;
+                    font-family: MicrosoftYaHei;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    line-height: 28px;
+                    letter-spacing: 0px;
+                    color: #ffffff;
+                    top: 180px;
+                    text-align: center;
+                }
+            }
         }
         & .ql-container.ql-snow .ql-editor {
             padding: 12px 120px !important;

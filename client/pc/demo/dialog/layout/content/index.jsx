@@ -4,7 +4,7 @@ import styles from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 
 import Modal from './modal/index';
-import ModalBox from './modal/dialog';
+import Dialog from './modal/dialog';
 import Alert from './modal/alert';
 class Content extends React.PureComponent {
     // static propTypes = {
@@ -39,7 +39,7 @@ class Content extends React.PureComponent {
     handleClose() {
         console.log('closed');
         // this.tryIt();
-        ModalBox.dailog({
+        Dialog({
             title: 'Demo',
             content: 'Hello world!',
             okText: '确认',
@@ -47,19 +47,6 @@ class Content extends React.PureComponent {
             onOk: () => console.log('ok'),
             onCancel: () => console.log('cancel'),
             onClose: () => console.log('closed'),
-        });
-    }
-    beforeClose() {
-        ModalBox.dailog({
-            title: '提示',
-            content: '确定关闭吗',
-            okText: '确认',
-            cancelText: '取消',
-            onOk: () => {
-                this.setState({});
-            },
-            onCancel: () => false,
-            onClose: () => false,
         });
     }
 
@@ -84,21 +71,21 @@ class Content extends React.PureComponent {
                         onClose={() => {
                             this.handleClose();
                         }}
-                        beforeClose={this.beforeClose.bind(this)}
                         footer={true}
                     />
                     <button
                         onClick={() =>
-                            ModalBox.dailog({
+                            Dialog({
                                 isOpen: this.state.isOpen,
-                                title: 'Demo',
-                                content: <button>按钮</button>,
+                                // title: 'Demo',
+                                content: <div className={styles.dialogTxt}>你确定关闭吗</div>,
                                 okText: '确认',
                                 cancelText: '取消',
-                                onOk: () => console.log('ok'),
+                                onOk: () => {
+                                    console.log('ok');
+                                },
                                 onCancel: () => console.log('cancel'),
                                 onClose: () => console.log('closed'),
-                                footer: false,
                             })
                         }>
                         click me!

@@ -24,6 +24,7 @@ class MyEditor extends React.PureComponent {
         linkModalIsOpen: false,
         linkError: '',
         linkType: 0,
+        percentage: 0,
     };
     editor = null;
     toolbar = null;
@@ -143,6 +144,11 @@ class MyEditor extends React.PureComponent {
         );
 
         this.toolbar = this.editor.getModule('toolbar');
+
+        // 实验
+        // const container = this.editor.addContainer('ql-custom', div);
+
+        // console.log(container);
     }
 
     // 给按钮加hover标题titletip
@@ -301,12 +307,17 @@ class MyEditor extends React.PureComponent {
     // 插入图片的事件
     handleInsertImage() {
         const options = {
-            type: 0,
+            type: 1,
             progressCallback: percentage => {
                 console.log(percentage);
             },
             successCallback: () => {
                 console.log('成功了');
+                const div = document.createElement('div');
+
+                div.style.width = '100px';
+                div.style.height = '100px';
+                let container = this.editor.addContainer('ql-custom');
             },
             errorCallback: error => {
                 console.log(error);
@@ -327,7 +338,7 @@ class MyEditor extends React.PureComponent {
     // 插入音频的事件
     handleInsertAudio() {
         const options = {
-            type: 0,
+            type: 2,
             progressCallback: percentage => {
                 console.log(percentage);
             },
@@ -352,12 +363,30 @@ class MyEditor extends React.PureComponent {
     // 插入视频的事件
     handleInsertVideo() {
         const options = {
-            type: 0,
-            progressCallback: percentage => {
-                console.log(percentage);
+            onBeforeUpload: id => {
+                console.log(id);
             },
-            successCallback: () => {
+            progressCallback: async (percentage, id) => {
+                const video = await document.getElementById(`${id}`);
+
+                // console.log(percentage);
+                this.setState({
+                    percentage,
+                });
+                // console.dir(video);
+                if (video) {
+                    const innerProgress = video.lastElementChild.lastElementChild.lastElementChild;
+
+                    if (innerProgress) {
+                        innerProgress.style.width = percentage;
+                    }
+                }
+            },
+            successCallback: (url, id) => {
                 console.log('成功了');
+                const video = document.getElementById(`${id}`);
+
+                video.innerHTML = `<div id="video-ctrl-close"></div><video src="${url}"></video><div id="video-mask"><p>视频尚未发布，暂时无法播放</p></div>`;
             },
             errorCallback: error => {
                 console.log(error);
@@ -365,7 +394,22 @@ class MyEditor extends React.PureComponent {
         };
         const customVideo = new CustomVideo(this.editor, options);
 
-        customVideo.handleUploadVideo();
+        customVideo.handleUploadVideo(); // 执行插入视频的动作
+        const editor = document.querySelector('.ql-editor');
+        const videoCtrl = document.querySelector('#video-ctrl');
+
+        console.log(videoCtrl);
+        editor.onclick = e => {
+            const target = e.target;
+
+            if (target.id === 'video-ctrl-close') {
+                console.dir(target);
+                const thisVideo = target.parentElement;
+
+                customVideo.stopUpload();
+                editor.removeChild(thisVideo);
+            }
+        };
     }
 
     handleChange(editorState) {

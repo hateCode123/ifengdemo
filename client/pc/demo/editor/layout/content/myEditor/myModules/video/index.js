@@ -1,80 +1,106 @@
 import alert from '../../../../../../dialog/layout/content/modal/alert';
 import Quill from 'quill';
 import Upload from '../../../../../../upload/layout/content/uploader/upload';
-// 自定义音频插件
+// 自定义视频插件
 let BlockEmbed = Quill.import('blots/block/embed');
 
 class VideoBlot extends BlockEmbed {
     static create(value) {
+        // 可配置属性值
         let node = super.create();
 
-        node.setAttribute('data-src', value.src);
+        console.log('value----', value);
+        node.setAttribute('id', value.id);
+        node.innerHTML = value.content;
+        node.setAttribute('contenteditable', false);
 
         return node;
     }
 
     static value(node) {
+        // 自定义的node节点
+        console.log('node----', node);
+
         return {
-            src: node.getAttribute('data-src'),
+            id: node.getAttribute('id'), // 自定义Attribute属性
+            content: node.innerHTML, // 插入内容，可以是dom或字符串
         };
     }
 }
 VideoBlot.blotName = 'video';
-VideoBlot.tagName = 'x-video';
-Quill.register(VideoBlot);
+VideoBlot.tagName = 'x-video'; // 自定义标签
+Quill.register(VideoBlot); // 注册模块
 
 class CustomVideo {
     constructor(quill, options) {
         this.quill = quill;
         this.toolbar = quill.getModule('toolbar');
-        this.type = options.type;
         // submitCallback, successCallback, errorCallback
         this.handleUploadVideo = this.handleUploadVideo.bind(this);
-        this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
+        this.onBeforeUpload = options.onBeforeUpload || this.uploadProgressCallback;
+        this.uploadProgressCallback = options.progressCallback || this.onBeforeUpload;
         this.successCallback = options.successCallback || this.successCallback;
         this.errorCallback = options.errorCallback || this.errorCallback;
     }
-    // 注册audio插件
+    // 注册video插件
     handleUploadVideo() {
         console.log('开始上传');
         Upload.start({
             type: 0, // 0 视频 1 图片 2 音频
             appid: 'wemedia',
-            onBeforeUpload: file => {
+            onBeforeUpload: async file => {
                 console.log('上传之前');
+                const id = new Date().getTime();
+
+                this.id = id;
+                await this.handleInsertVideo(id);
+                await this.onBeforeUpload(id);
             },
             progressCallback: (percentage, file) => {
-                this.uploadProgressCallback(percentage);
+                this.uploadProgressCallback(percentage, this.id);
             },
             successCallback: (url, file) => {
                 console.log('上传完成');
                 console.log(url);
-                this.successCallback(url);
+                this.successCallback(url, this.id);
                 this.url = url;
                 this.fileName = file.name;
-                this.handleInsertVideo();
+                // this.handleInsertVideo(url);
             },
             errorCallback: errors => {
                 this.errorCallback(errors);
             },
         });
     }
-    // 插入音频标签
-    handleInsertVideo() {
+    // 停止上传
+    stopUpload() {
+        Upload.stop();
+    }
+    // 成功的模板
+    successContent(url) {
+        return `<div id="video-ctrl-close"></div><video src="${url}"></video><div id="video-mask"><p>视频尚未发布，暂时无法播放</p></div>`;
+    }
+    // 正在上传的模板
+    uploadingContent() {
+        return '<div id="video-ctrl-close"></div><div id="video-uploading-mask"><div id="loading"></div><p>视频正在上传，请稍后</p><div id="progress"><div id="innerProgress"></div></div></div>';
+    }
+    // 插入视频标签
+    handleInsertVideo(id) {
         const range = this.quill.getSelection(true);
 
-        // 插入分割线
+        // 插入元素
         this.quill.insertText(range.index, '\n', Quill.sources.USER);
         this.quill.insertEmbed(
-            range.index + 1,
+            range.index,
             'video',
             {
-                src: this.url,
+                id,
+                content: this.uploadingContent(),
             },
             true,
             Quill.sources.USER,
         );
-        this.quill.setSelection(range.index + 2, Quill.sources.SILENT);
+        this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
         this.quill.focus();
     }
     // 成功的回调
