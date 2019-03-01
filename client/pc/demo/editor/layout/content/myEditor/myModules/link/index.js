@@ -109,7 +109,7 @@ class CustomLink {
                 );
             }
         }
-        this.quill.blur();
+        // this.quill.blur();
     }
     // 修改超链接
     updateLink(linkUrl, linkTxt, linkEle) {

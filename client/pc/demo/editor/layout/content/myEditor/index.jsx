@@ -7,6 +7,7 @@ import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import { tooltips } from './myModules/toolTip/tooltip-list';
 import Modal from '../../../../dialog/layout/content/modal/index';
+import UploaderCropperModal from './uploaderCropperModal';
 
 // for this component
 import CustomLink from './myModules/link';
@@ -25,6 +26,7 @@ class MyEditor extends React.PureComponent {
         linkError: '',
         linkType: 0,
         percentage: 0,
+        showCropperModal: false,
     };
     editor = null;
     toolbar = null;
@@ -52,6 +54,9 @@ class MyEditor extends React.PureComponent {
 
         // 自定义插入视频
         this.customVideo();
+
+        // 初始化多媒体标签功能按钮
+        this.initEmbedCtrl();
     }
 
     // 初始化编辑器
@@ -201,22 +206,6 @@ class MyEditor extends React.PureComponent {
                 linkType: 0,
             });
         });
-
-        const editorBox = document.querySelectorAll('.ql-editor')[0];
-
-        editorBox.onclick = e => {
-            e = e || window.event;
-            const target = e.target || e.srcElement;
-
-            if (target.nodeName === 'A') {
-                // console.log(target.nodeName);
-                this.setState({
-                    linkType: 1,
-                });
-                handleLinkModalShow();
-                this.handleEditLink(target);
-            }
-        };
     }
     // 插入链接的事件
     handleInsertLink() {
@@ -307,17 +296,29 @@ class MyEditor extends React.PureComponent {
     // 插入图片的事件
     handleInsertImage() {
         const options = {
-            type: 1,
-            progressCallback: percentage => {
+            onBeforeUpload: id => {
+                console.log(id);
+            },
+            progressCallback: async (percentage, id) => {
                 console.log(percentage);
             },
-            successCallback: () => {
+            successCallback: (url, id, file) => {
                 console.log('成功了');
-                const div = document.createElement('div');
+                const img = document.getElementById(id);
+                const innerProgress = img.lastElementChild.lastElementChild.lastElementChild;
 
-                div.style.width = '100px';
-                div.style.height = '100px';
-                let container = this.editor.addContainer('ql-custom');
+                if (innerProgress) {
+                    innerProgress.style.width = '100%';
+                }
+                setTimeout(() => {
+                    img.innerHTML = `<div id="img-ctrl-warapper">
+                    <div id="img-ctrl-close"></div>
+                    <div id="img-ctrl-cropper"></div>
+                </div>
+                <img src="${url}" alt="${file.name}">`;
+                }, 200);
+
+                img.setAttribute('data-src', url);
             },
             errorCallback: error => {
                 console.log(error);
@@ -326,6 +327,69 @@ class MyEditor extends React.PureComponent {
         const customImage = new CustomImage(this.editor, options);
 
         customImage.handleUploadImage();
+        // 删除视频按钮的功能
+        const editor = document.querySelector('.ql-editor');
+
+        editor.onclick = e => {
+            const target = e.target;
+
+            if (target.id === 'img-ctrl-close') {
+                console.dir(target);
+                const thisImg = target.parentElement.parentElement;
+
+                editor.removeChild(thisImg);
+            }
+            if (target.id === 'img-ctrl-cropper') {
+                console.dir(target);
+                this.cropperImg(target);
+            }
+        };
+    }
+    // 裁图功能
+    cropperImg(target) {
+        const thisImg = target.parentElement.parentElement;
+        const imgID = thisImg.id;
+        const toCropperImg = thisImg.querySelector('img').src;
+
+        this.setState({
+            imgID,
+            showCropperModal: true,
+            toCropperImg,
+        });
+    }
+    // 上传裁剪后的图片之前
+    beforeUploadCroppedImg(dataUrl, index, file) {
+        const thisImg = document.getElementById(index);
+
+        this.handleCloseCropperModal();
+        thisImg.innerHTML = `<div id="img-ctrl-warapper">
+        <div id="img-ctrl-close"></div>
+        <div id="img-ctrl-cropper"></div>
+    </div>
+    <img src="${dataUrl}" alt="${file.name}">
+    <div id="img-uploading-mask">
+    <div id="loading"></div>
+    <p>图片上传中，请稍候</p>
+    <div id="i-progress"><div id="i-innerProgress"></div></div>
+</div>`;
+    }
+    // 获取新的图片
+    getNewPic(url, index, file) {
+        const img = document.getElementById(index);
+        const innerProgress = img.lastElementChild.lastElementChild.lastElementChild;
+
+        if (innerProgress) {
+            innerProgress.style.width = '100%';
+        }
+        setTimeout(() => {
+            img.innerHTML = `<div id="img-ctrl-warapper">
+                    <div id="img-ctrl-close"></div>
+                    <div id="img-ctrl-cropper"></div>
+                </div>
+                <img src="${url}" alt="${file.name}">`;
+        }, 200);
+
+        img.setAttribute('data-src', url);
     }
 
     // 自定义插入音频
@@ -338,12 +402,30 @@ class MyEditor extends React.PureComponent {
     // 插入音频的事件
     handleInsertAudio() {
         const options = {
-            type: 2,
-            progressCallback: percentage => {
-                console.log(percentage);
+            onBeforeUpload: id => {
+                console.log(id);
             },
-            successCallback: () => {
-                console.log('成功了');
+            progressCallback: async (percentage, id) => {
+                const audio = await document.getElementById(id);
+
+                if (audio) {
+                    const innerProgress = audio.lastElementChild.lastElementChild.lastElementChild;
+
+                    if (innerProgress) {
+                        innerProgress.style.width = percentage;
+                    }
+                }
+            },
+            successCallback: (url, id, file) => {
+                const audio = document.getElementById(id);
+
+                audio.innerHTML = `<div id="audio-ctrl-close"></div>
+                <div id="audio-desc">
+                    <div class="fileName">${file.name}</div>
+                    <p class="tips">音频尚未发布，暂时无法播放</p>
+                </div>`;
+
+                audio.setAttribute('data-src', url);
             },
             errorCallback: error => {
                 console.log(error);
@@ -352,8 +434,21 @@ class MyEditor extends React.PureComponent {
         const customAudio = new CustomAudio(this.editor, options);
 
         customAudio.handleUploadAudio();
-    }
+        // 删除音频按钮的功能
+        const editor = document.querySelector('.ql-editor');
 
+        editor.onclick = e => {
+            const target = e.target;
+
+            if (target.id === 'audio-ctrl-close') {
+                console.dir(target);
+                const thisAudio = target.parentElement;
+
+                customAudio.stopUpload();
+                editor.removeChild(thisAudio);
+            }
+        };
+    }
     // 插入视频的事件
     customVideo() {
         this.toolbar.addHandler('video', () => {
@@ -367,12 +462,8 @@ class MyEditor extends React.PureComponent {
                 console.log(id);
             },
             progressCallback: async (percentage, id) => {
-                const video = await document.getElementById(`${id}`);
+                const video = await document.getElementById(id);
 
-                // console.log(percentage);
-                this.setState({
-                    percentage,
-                });
                 // console.dir(video);
                 if (video) {
                     const innerProgress = video.lastElementChild.lastElementChild.lastElementChild;
@@ -383,10 +474,11 @@ class MyEditor extends React.PureComponent {
                 }
             },
             successCallback: (url, id) => {
-                console.log('成功了');
                 const video = document.getElementById(`${id}`);
 
                 video.innerHTML = `<div id="video-ctrl-close"></div><video src="${url}"></video><div id="video-mask"><p>视频尚未发布，暂时无法播放</p></div>`;
+
+                video.setAttribute('data-src', url);
             },
             errorCallback: error => {
                 console.log(error);
@@ -395,10 +487,9 @@ class MyEditor extends React.PureComponent {
         const customVideo = new CustomVideo(this.editor, options);
 
         customVideo.handleUploadVideo(); // 执行插入视频的动作
+        // 删除视频按钮的功能
         const editor = document.querySelector('.ql-editor');
-        const videoCtrl = document.querySelector('#video-ctrl');
 
-        console.log(videoCtrl);
         editor.onclick = e => {
             const target = e.target;
 
@@ -412,6 +503,52 @@ class MyEditor extends React.PureComponent {
         };
     }
 
+    // 插入的多媒体元素 功能按钮的初始化
+    initEmbedCtrl() {
+        const editor = document.querySelector('.ql-editor');
+
+        // 删除超链接
+        editor.onclick = e => {
+            e = e || window.event;
+            const target = e.target || e.srcElement;
+
+            // 修改超链接
+            if (target.nodeName === 'A') {
+                // console.log(target.nodeName);
+                this.setState({
+                    linkType: 1,
+                    linkModalIsOpen: true,
+                });
+                this.handleEditLink(target);
+            }
+            // 删除图片
+            if (target.id === 'img-ctrl-close') {
+                const thisImg = target.parentElement.parentElement;
+
+                editor.removeChild(thisImg);
+            }
+            // 裁剪图片
+            if (target.id === 'img-ctrl-cropper') {
+                console.dir(target);
+                this.cropperImg(target);
+            }
+            // 删除音频
+            if (target.id === 'audio-ctrl-close') {
+                console.dir(target);
+                const thisAudio = target.parentElement;
+
+                editor.removeChild(thisAudio);
+            }
+            // 删除视频
+            if (target.id === 'video-ctrl-close') {
+                console.dir(target);
+                const thisVideo = target.parentElement;
+
+                editor.removeChild(thisVideo);
+            }
+        };
+    }
+
     handleChange(editorState) {
         // console.log(editorState);
         this.setState({
@@ -419,8 +556,18 @@ class MyEditor extends React.PureComponent {
         });
     }
 
+    handleCloseCropperModal() {
+        this.setState({
+            showCropperModal: false,
+        });
+    }
+
+    errorCallback(error) {
+        console.log(error);
+    }
+
     render() {
-        const { linkError, linkType } = this.state;
+        const { linkError, linkType, imgID, showCropperModal, toCropperImg } = this.state;
         const linkForm = (
             <React.Fragment>
                 <div className={styles.linkForm}>
@@ -480,13 +627,23 @@ class MyEditor extends React.PureComponent {
                     <Modal
                         modalWith={430}
                         isOpen={this.state.linkModalIsOpen}
-                        title={'错误提示'}
+                        title={'插入内部链接'}
                         onCancel={() => {
                             this.linkModalHide();
                         }}
+                        on
                         footer={false}>
                         {linkForm}
                     </Modal>
+                    <UploaderCropperModal
+                        img={toCropperImg}
+                        index={imgID}
+                        isOpen={showCropperModal}
+                        onClose={this.handleCloseCropperModal.bind(this)}
+                        beforeUpload={this.beforeUploadCroppedImg.bind(this)}
+                        getNewPic={this.getNewPic.bind(this)}
+                        errorCallback={this.errorCallback.bind(this)}
+                    />
                 </div>
             </React.Fragment>
         );

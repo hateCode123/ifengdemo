@@ -215,18 +215,150 @@
             height: 350px;
             border: 1px solid #e5e5e5;
         }
-        & .ql-container.ql-snow img {
-            max-width: 50%;
+        & .ql-container.ql-snow x-img {
+            width: 480px;
+            height: 326px;
             display: block;
             margin: 0 auto;
+            position: relative;
+            white-space: normal;
+            & #img-ctrl-warapper {
+                /* 图片块级元素的操作按钮 */
+                width: 32px;
+                height: 70px;
+                position: absolute;
+                background: url(./images/crl_btn.png);
+                right: -42px;
+                cursor: pointer;
+                & #img-ctrl-close {
+                    width: 100%;
+                    height: 32px;
+                }
+                & #img-ctrl-cropper {
+                    width: 100%;
+                    height: 32px;
+                    margin-top: 6px;
+                }
+            }
+            & img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            & #img-uploading-mask {
+                position: absolute;
+                top: 0;
+                z-index: 999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                & #loading {
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -16px;
+                    left: 50%;
+                    margin-left: -16px;
+                    width: 32px;
+                    height: 32px;
+                    background: url(./images/loading_big.png) no-repeat center;
+                    animation: roll 0.8s linear infinite;
+                }
+                & p {
+                    width: 100%;
+                    position: absolute;
+                    font-family: MicrosoftYaHei;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    line-height: 28px;
+                    letter-spacing: 0px;
+                    color: #ffffff;
+                    top: 180px;
+                    text-align: center;
+                }
+                & #i-progress {
+                    width: 100%;
+                    height: 5px;
+                    position: absolute;
+                    bottom: 0;
+                    background: #ccc;
+                }
+                & #i-innerProgress {
+                    width: 0;
+                    height: 5px;
+                    background: #f54343;
+                    transition: all 0.3s;
+                }
+            }
         }
+        /* 插入的音频模块     */
         & .ql-container.ql-snow x-audio {
             display: block;
             width: 480px;
             height: 100px;
             margin: 0 auto;
             background: #f6f6f6 url(./images/audio-cover.png) no-repeat 15px 15px;
+            position: relative;
+            & #audio-ctrl-close {
+                /* 音频块级元素的操作按钮 */
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                background: url(./images/crl_btn.png);
+                right: -42px;
+                cursor: pointer;
+            }
+            & #audio-desc {
+                position: absolute;
+                left: 110px;
+                top: 0;
+                width: 370px;
+                height: 100%;
+                overflow: hidden;
+                white-space: normal;
+                & .fileName {
+                    width: 337px;
+                    padding-top: 13px;
+                    font-family: MicrosoftYaHei;
+                    font-size: 16px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    line-height: 26px;
+                    letter-spacing: 0px;
+                    color: #333333;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+                & .tips {
+                    height: 20px;
+                    font-family: MicrosoftYaHei;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    letter-spacing: 0px;
+                    color: #999999;
+                    position: absolute;
+                    bottom: 13px;
+                }
+            }
+            & #a-progress {
+                width: 100%;
+                height: 5px;
+                position: absolute;
+                bottom: 0;
+                background: #ccc;
+            }
+            & #a-innerProgress {
+                width: 0;
+                height: 5px;
+                background: #f54343;
+                transition: all 0.3s;
+            }
         }
+        /* 插入的视频模块 */
         & .ql-container.ql-snow x-video {
             display: block;
             width: 480px;
@@ -277,14 +409,14 @@
                     top: 180px;
                     text-align: center;
                 }
-                & #progress {
+                & #v-progress {
                     width: 100%;
                     height: 5px;
                     position: absolute;
                     bottom: 0;
                     background: #ccc;
                 }
-                & #innerProgress {
+                & #v-innerProgress {
                     width: 0;
                     height: 5px;
                     background: #f54343;

@@ -8,14 +8,17 @@ class AudioBlot extends BlockEmbed {
     static create(value) {
         let node = super.create();
 
-        node.setAttribute('data-src', value.src);
+        node.setAttribute('id', value.id);
+        node.innerHTML = value.content;
+        node.setAttribute('contenteditable', false);
 
         return node;
     }
 
     static value(node) {
         return {
-            src: node.getAttribute('data-src'),
+            id: node.getAttribute('id'), // 追加id
+            content: node.innerHTML,
         };
     }
 }
@@ -27,9 +30,9 @@ class CustomAudio {
     constructor(quill, options) {
         this.quill = quill;
         this.toolbar = quill.getModule('toolbar');
-        this.type = options.type;
         // submitCallback, successCallback, errorCallback
         this.handleUploadAudio = this.handleUploadAudio.bind(this);
+        this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
         this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
         this.successCallback = options.successCallback || this.successCallback;
         this.errorCallback = options.errorCallback || this.errorCallback;
@@ -40,8 +43,13 @@ class CustomAudio {
         Upload.start({
             type: 2, // 0 视频 1 图片 2 音频
             appid: 'wemedia',
-            onBeforeUpload: file => {
+            onBeforeUpload: async file => {
                 console.log('上传之前');
+                const id = `x-audio-${new Date().getTime()}`;
+
+                this.id = id;
+                await this.handleInsertAudio(id, file);
+                await this.onBeforeUpload(id);
             },
             progressCallback: (percentage, file) => {
                 this.uploadProgressCallback(percentage);
@@ -49,32 +57,45 @@ class CustomAudio {
             successCallback: (url, file) => {
                 console.log('上传完成');
                 console.log(url);
-                this.successCallback(url);
+                this.successCallback(url, this.id, file);
                 this.url = url;
                 this.fileName = file.name;
-                this.handleInsertAudio();
             },
             errorCallback: errors => {
                 this.errorCallback(errors);
             },
         });
     }
+    // 停止上传
+    stopUpload() {
+        Upload.stop();
+    }
+    // 正在上传的模板
+    uploadingContent(file) {
+        return `<div id="audio-ctrl-close"></div>
+        <div id="audio-desc">
+            <div class="fileName">${file.name}</div>
+            <p class="tips">音频上传中，请稍候</p>
+        </div>
+        <div id="a-progress"><div id="a-innerProgress"></div></div>`;
+    }
     // 插入音频标签
-    handleInsertAudio() {
+    handleInsertAudio(id, file) {
         const range = this.quill.getSelection(true);
 
-        // 插入分割线
+        console.log(file);
         this.quill.insertText(range.index, '\n', Quill.sources.USER);
         this.quill.insertEmbed(
-            range.index + 1,
+            range.index,
             'audio',
             {
-                src: this.url,
+                id,
+                content: this.uploadingContent(file),
             },
             true,
             Quill.sources.USER,
         );
-        this.quill.setSelection(range.index + 2, Quill.sources.SILENT);
+        this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
         this.quill.focus();
     }
     // 成功的回调

@@ -1,0 +1,99 @@
+.cropperContent {
+    padding: 30px 40px 0 40px;
+}
+.cropperWrapper {
+    float: left;
+}
+.preViewWrapper {
+    float: right;
+    width: 240px;
+    & .txt {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+    }
+}
+.type1 {
+    width: 240px;
+    height: 160px;
+    padding: 10px;
+    border: solid 1px #e5e5e5;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    & p {
+        margin-top: 10px;
+        text-align: center;
+        font-family: MicrosoftYaHei;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #333333;
+    }
+}
+.type2 {
+    width: 240px;
+    height: 215px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1px #e5e5e5;
+    & p {
+        margin-top: 10px;
+        text-align: center;
+        font-family: MicrosoftYaHei;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #333333;
+    }
+}
+.active {
+    border: solid 4px #f54343;
+    padding: 6px;
+}
+.preView1 {
+    width: 220px;
+    height: 110px;
+    background-color: #eee;
+    overflow: hidden;
+}
+.preView2 {
+    width: 220px;
+    height: 165px !important;
+    background-color: #eee;
+    overflow: hidden;
+}
+.footer {
+    padding: 36px 0 30px 0;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    & .btnWrapper {
+        width: 250px;
+        height: 40px;
+        margin: 0 auto;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        line-height: 40px;
+        & .okBtn {
+            float: left;
+            width: 120px;
+            height: 40px;
+            background: #f54343;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        & .cancelBtn {
+            float: right;
+            color: #666;
+            width: 120px;
+            height: 40px;
+            background: #f6f6f6;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    }
+}

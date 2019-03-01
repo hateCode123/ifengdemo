@@ -37,8 +37,8 @@ class CustomVideo {
         this.toolbar = quill.getModule('toolbar');
         // submitCallback, successCallback, errorCallback
         this.handleUploadVideo = this.handleUploadVideo.bind(this);
-        this.onBeforeUpload = options.onBeforeUpload || this.uploadProgressCallback;
-        this.uploadProgressCallback = options.progressCallback || this.onBeforeUpload;
+        this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
+        this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
         this.successCallback = options.successCallback || this.successCallback;
         this.errorCallback = options.errorCallback || this.errorCallback;
     }
@@ -50,7 +50,7 @@ class CustomVideo {
             appid: 'wemedia',
             onBeforeUpload: async file => {
                 console.log('上传之前');
-                const id = new Date().getTime();
+                const id = `x-video-${new Date().getTime()}`;
 
                 this.id = id;
                 await this.handleInsertVideo(id);
@@ -82,7 +82,7 @@ class CustomVideo {
     }
     // 正在上传的模板
     uploadingContent() {
-        return '<div id="video-ctrl-close"></div><div id="video-uploading-mask"><div id="loading"></div><p>视频正在上传，请稍后</p><div id="progress"><div id="innerProgress"></div></div></div>';
+        return '<div id="video-ctrl-close"></div><div id="video-uploading-mask"><div id="loading"></div><p>视频上传中，请稍候</p><div id="v-progress"><div id="v-innerProgress"></div></div></div>';
     }
     // 插入视频标签
     handleInsertVideo(id) {
