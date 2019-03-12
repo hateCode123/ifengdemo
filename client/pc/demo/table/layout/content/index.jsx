@@ -9,7 +9,7 @@ class Content extends React.PureComponent {
     //     content: PropTypes.object,
     // };
     state = {
-        list: [{ NO1: 1, NO2: 2, NO3: 3 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }],
+        list: [{ NO1: 1, NO2: 2, NO3: 3, n: 1 }, { NO1: 4, NO2: 5, NO3: 6 }, { NO1: 7, NO2: 8, NO3: 9 }],
     };
 
     render() {
@@ -53,6 +53,8 @@ class Content extends React.PureComponent {
                 title: 'No.4',
                 dataIndex: 'NO4',
                 render: (text, record) => {
+                    console.log(text, record);
+
                     return (
                         <button
                             onClick={() => {
@@ -69,7 +71,7 @@ class Content extends React.PureComponent {
         return (
             <React.Fragment>
                 <div style={{ marginLeft: '300px', marginTop: '100px', width: '500px' }}>
-                    <Table dataSource={list} columns={column} emptyText={'暂无数据哦'} />
+                    <Table dataSource={list} columns={column} emptyText={'暂无数据哦'} configClass={styles.table} />
                 </div>
                 <div style={{ marginLeft: '300px', marginTop: '100px' }}>
                     <Table dataSource={list1} columns={column} emptyText={'暂无数据哦'} />

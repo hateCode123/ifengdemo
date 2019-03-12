@@ -185,7 +185,7 @@ class ResumeUpload {
     }
     // 上传图片 获取ugs任务信息
     async getUgcTaskInfo(type, callback) {
-        if (type === 0 || type === 2) {
+        if (type === 0 || type === 2 || type === 3) {
             callback({});
         } else if (type === 1) {
             const data = {
@@ -481,7 +481,7 @@ class ResumeUpload {
         console.log(errors);
     }
     onError(errors) {
-        throw errors;
+        console.log(errors);
     }
     onFinishedCallback() {}
     abortUpload(callback) {

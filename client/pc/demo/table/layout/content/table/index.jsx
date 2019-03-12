@@ -8,6 +8,7 @@ class Table extends React.PureComponent {
         dataSource: PropTypes.array,
         columns: PropTypes.array,
         emptyText: PropTypes.string,
+        configClass: PropTypes.string
     };
 
     static defaultProps = {
@@ -82,13 +83,13 @@ class Table extends React.PureComponent {
     }
 
     render() {
-        const { columns, dataSource, emptyText } = this.props;
+        const { columns, dataSource, emptyText, configClass } = this.props;
         const { _dataSource } = this.state;
 
         return (
             <React.Fragment>
                 <div className={styles.table}>
-                    <table>
+                    <table className={configClass}>
                         <thead>
                             <tr>
                                 {columns.map((item, index) => {

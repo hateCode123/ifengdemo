@@ -24,7 +24,6 @@
     }
 
     & thead tr {
-        background: #f6f6f6;
     }
 
     & tbody tr {
@@ -34,10 +33,6 @@
         &:hover {
             background: #e6f7ff;
         }
-    }
-
-    & thead tr {
-        background: #f6f6f6;
     }
 
     & tbody tr td {

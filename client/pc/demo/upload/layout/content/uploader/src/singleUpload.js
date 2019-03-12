@@ -139,6 +139,7 @@ class SingleUpload {
             return false;
         }
         if (this.errorNum >= 5 || this.sendNum >= this.fileStatus.length + 15) {
+            console.log('上传失败');
             this.errorCallback(this.xhr, this.file, this);
 
             return false;

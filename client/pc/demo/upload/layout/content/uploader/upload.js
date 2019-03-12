@@ -30,7 +30,9 @@ const creatUpload = props => {
                 onBeforeUpload: config.onBeforeUpload,
                 progressCallback: config.progressCallback,
                 successCallback: config.successCallback,
-                errorCallback: config.errorCallback,
+                errorCallback: (errors) => {
+                    config.errorCallback(errors);
+                },
                 removeUpload: onFinished,
                 abortUpload: config.abortUpload,
             };
@@ -41,22 +43,36 @@ const creatUpload = props => {
         }
     };
 
-    ReactDOM.render(
-        /* eslint-disable */
-        <div style={{ width: 0, height: 0, overflow: 'hidden' }}>
-            <input
-                type="file"
-                id="upload_input"
-                onChange={handleFileChange}
-                title="选择文件"
-                style={{ display: 'none' }}
-            />
-        </div>,
-        /* eslint-enable */
-        div,
-    );
+    const id = `upload_input_${new Date().getTime()}`;
 
-    document.getElementById('upload_input').click();
+    if (props.multiple) {
+        ReactDOM.render(
+            /* eslint-disable */
+            <div style={{ width: 0, height: 0, overflow: 'hidden' }}>
+                <input
+                    type="file"
+                    id={id}
+                    onChange={handleFileChange}
+                    title="选择文件"
+                    style={{ display: 'none' }}
+                    multiple="multiple"
+                />
+            </div>,
+            /* eslint-enable */
+            div,
+        );
+    } else {
+        ReactDOM.render(
+            /* eslint-disable */
+            <div style={{ width: 0, height: 0, overflow: 'hidden' }}>
+                <input type="file" id={id} onChange={handleFileChange} title="选择文件" style={{ display: 'none' }} />
+            </div>,
+            /* eslint-enable */
+            div,
+        );
+    }
+
+    document.getElementById(id).click();
 };
 
 const Upload = {};

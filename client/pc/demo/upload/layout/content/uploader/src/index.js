@@ -17,7 +17,7 @@ const uploader = (files, options) => {
 
             return upload;
         }
-    } else {
+    } else { // 如果是单文件对象
         const upload = new ResumeUpload(files, options);
 
         window.ResumeUpload = upload;
