@@ -30,7 +30,7 @@ const creatUpload = props => {
                 onBeforeUpload: config.onBeforeUpload,
                 progressCallback: config.progressCallback,
                 successCallback: config.successCallback,
-                errorCallback: (errors) => {
+                errorCallback: errors => {
                     config.errorCallback(errors);
                 },
                 removeUpload: onFinished,
@@ -43,7 +43,33 @@ const creatUpload = props => {
         }
     };
 
-    const id = `upload_input_${new Date().getTime()}`;
+    // 限制文件类型
+    const initAccept = type => {
+        let accept = '';
+
+        switch (type) {
+            case 0:
+                accept = 'video/*';
+                break;
+            case 1:
+                accept = 'image/*';
+                break;
+            case 2:
+                accept = 'audio/*';
+                break;
+            case 3:
+                accept = '';
+                break;
+
+            default:
+                break;
+        }
+
+        return accept;
+    };
+
+    const id = `upload_input_${new Date().getTime()}`; // 给input标签生成唯一标识id
+    const accept = initAccept(Number(props.type));
 
     if (props.multiple) {
         ReactDOM.render(
@@ -56,6 +82,7 @@ const creatUpload = props => {
                     title="选择文件"
                     style={{ display: 'none' }}
                     multiple="multiple"
+                    accept={initAccept(props.type)}
                 />
             </div>,
             /* eslint-enable */
@@ -65,7 +92,14 @@ const creatUpload = props => {
         ReactDOM.render(
             /* eslint-disable */
             <div style={{ width: 0, height: 0, overflow: 'hidden' }}>
-                <input type="file" id={id} onChange={handleFileChange} title="选择文件" style={{ display: 'none' }} />
+                <input
+                    type="file"
+                    id={id}
+                    onChange={handleFileChange}
+                    title="选择文件"
+                    style={{ display: 'none' }}
+                    accept={accept}
+                />
             </div>,
             /* eslint-enable */
             div,

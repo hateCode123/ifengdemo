@@ -3,6 +3,7 @@ import ResumeUpload from './resumeUpload';
 const uploader = (files, options) => {
     console.log('开始上传流程');
 
+    // 如果是FileList
     if (FileList.prototype.isPrototypeOf(files)) {
         let index = -1;
 
@@ -17,7 +18,8 @@ const uploader = (files, options) => {
 
             return upload;
         }
-    } else { // 如果是单文件对象
+    } else {
+        // 如果是单文件对象
         const upload = new ResumeUpload(files, options);
 
         window.ResumeUpload = upload;

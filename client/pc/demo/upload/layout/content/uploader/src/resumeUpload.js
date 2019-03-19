@@ -17,11 +17,11 @@ import uploadLogger from './uploadLogger';
  */
 class ResumeUpload {
     constructor(file, options) {
-        this.checkPath = 'query'; // 不需要本地文件验证文件地址
-        this.checkPath1 = 'fileInfo'; // 需要本地文件验证文件地址
+        this.checkPath = 'query'; // 需要回调时使用 (图片)
+        this.checkPath1 = 'fileInfo'; // 不需要回调时 (视频、音频)
         this.uploadPath = 'upload'; // 上传文件地址
-        this.uploadUrl = 'http://transmission.ifeng.com/'; // 上传视频和音频
-        this.imageServer = 'http://d.ifengimg.com/q100/'; // 上传图片的cdn地址
+        this.uploadUrl = 'http://transmission.ifeng.com/'; // 上传地址
+        this.imageServer = 'http://d.ifengimg.com/q100/'; // 查询文件(图片，普通文件)信息的cdn地址
         this.rinfo = 'http://ugc.ifeng.com/index.php/user/info'; // 查询用户信息
         this.getid = 'http://ugc.ifeng.com/index.php/user/getid'; // 获取rid
         this.fileId = ''; // fileId文件唯一标识
@@ -38,7 +38,7 @@ class ResumeUpload {
         this.ervalObject = null;
 
         options = options || {};
-        this.type = options.type || 0; // 0 视频 1 图片 2 音频
+        this.type = options.type || 0; // 0 视频 1 图片 2 音频 3 其他(待定)
         this.appid = options.appid || 'wemedia';
         this.checkFileSizeAndType = options.checkFileSizeAndType || this.checkFileSizeAndType;
         this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
@@ -185,9 +185,9 @@ class ResumeUpload {
     }
     // 上传图片 获取ugs任务信息
     async getUgcTaskInfo(type, callback) {
-        if (type === 0 || type === 2 || type === 3) {
+        if (type === 0 || type === 2) {
             callback({});
-        } else if (type === 1) {
+        } else if (type === 1 || type === 3) {
             const data = {
                 sid: this.sid,
                 utype: 0, // 普通用户
@@ -321,7 +321,7 @@ class ResumeUpload {
             // 本地上传没有完成,继续上传
             this.toUpload(msg);
         } else {
-            // 图片资源
+            // 图片资源 需要轮询ugc业务系统该文件的状态
             if (Number(msg.status.substring(0, 1)) === 1) {
                 // 文件本地上传已经成功，轮询直到查到cdn资源文件
                 this.ervalObject = setInterval(() => {
@@ -421,10 +421,11 @@ class ResumeUpload {
         // 图片需要bizId和successCb参数
         let newOption = {};
 
-        if (this.type === 1) {
+        if (this.type === 1 || this.type === 3) {
             newOption = {
                 ...options,
                 ...{
+                    // 这两个参数的作用，是当图片上传成功后，通知ugc业务系统上传成功
                     bizId: this.oParam.bizId,
                     successCb: this.oParam.successCb,
                 },
