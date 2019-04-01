@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import uploader from './src';
+import multileUploader from './src/multiple';
 const creatUpload = props => {
     const div = document.createElement('div');
 
@@ -12,15 +13,10 @@ const creatUpload = props => {
         window.ResumeUpload = null;
     };
 
-    // console.dir(singleUpload);
-
+    // 单文件上传
     const handleFileChange = e => {
         const files = e.target.files;
         const config = props;
-
-        // console.dir(uploader);
-
-        // console.log(files);
 
         if (files) {
             const options = {
@@ -38,6 +34,30 @@ const creatUpload = props => {
             };
 
             uploader(files, options);
+        } else {
+            return;
+        }
+    };
+
+    // 多文件上传
+    const handleMultipleFileChange = e => {
+        const files = e.target.files;
+        const config = props;
+
+        if (files) {
+            const options = {
+                type: config.type,
+                appid: config.appid,
+                checkFileSizeAndType: config.checkFileSizeAndType,
+                onBeforeUpload: config.onBeforeUpload,
+                progressCallback: config.progressCallback,
+                successCallback: config.successCallback,
+                errorCallback: errors => {
+                    config.errorCallback(errors);
+                },
+            };
+
+            multileUploader(files, options);
         } else {
             return;
         }
@@ -78,10 +98,10 @@ const creatUpload = props => {
                 <input
                     type="file"
                     id={id}
-                    onChange={handleFileChange}
+                    onChange={handleMultipleFileChange}
                     title="选择文件"
                     style={{ display: 'none' }}
-                    multiple="multiple"
+                    multiple
                     accept={initAccept(props.type)}
                 />
             </div>,

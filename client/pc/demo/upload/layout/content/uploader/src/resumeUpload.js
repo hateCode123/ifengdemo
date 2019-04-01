@@ -231,7 +231,7 @@ class ResumeUpload {
             callbackScope: this,
         });
         this.creatChecksum.creat();
-        this.onBeforeUpload(this.file); // 上传之前回调, 需要考虑这个回调放在这里是否合理
+        this.onBeforeUpload(this.file, this.index); // 上传之前回调, 需要考虑这个回调放在这里是否合理
     }
     // 创建fileId
     creatFileIdCallback(checksum) {

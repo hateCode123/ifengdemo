@@ -80,16 +80,18 @@ class Content extends React.PureComponent {
     }
 
     // 多文件上传
-    multipleUpload() {
-        UploadNormal.start({
-            type: 3, // 0 视频 1 图片 2 普通文件
+    multipleUpload = e => {
+        const files = e.target.files;
+        const options = {
+            type: 1, // 0 视频 1 图片 2 普通文件
             appid: 'wemedia',
             multiple: true,
-            onBeforeUpload: file => {
+            onBeforeUpload: (file, index) => {
                 console.log('上传之前');
                 this.setState({
                     file,
                 });
+                console.log(index);
             },
             progressCallback: (percentage, file) => {
                 console.log(percentage);
@@ -104,11 +106,10 @@ class Content extends React.PureComponent {
             errorCallback: errors => {
                 console.log(errors);
             },
-            abortUpload: () => {
-                console.log('停止');
-            },
-        });
-    }
+        };
+
+        UploadNormal.start(options);
+    };
 
     render() {
         const config = {
@@ -169,6 +170,9 @@ class Content extends React.PureComponent {
                     {/* <div style={{ marginTop: '50px' }}>
                         <button onClick={this.multipleUpload.bind(this)}>上传</button>
                     </div> */}
+
+                    {/* <input type="file" name="" id="" multiple onChange={this.multipleUpload} /> */}
+                    <button onClick={this.multipleUpload}>按钮</button>
                 </div>
             </React.Fragment>
         );
