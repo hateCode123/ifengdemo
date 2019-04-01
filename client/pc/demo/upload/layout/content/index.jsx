@@ -81,7 +81,6 @@ class Content extends React.PureComponent {
 
     // 多文件上传
     multipleUpload = e => {
-        const files = e.target.files;
         const options = {
             type: 1, // 0 视频 1 图片 2 普通文件
             appid: 'wemedia',

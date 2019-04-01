@@ -8,7 +8,6 @@ const uploader = (files, options) => {
         index++;
         options.index = index;
         const file = files[i];
-        // console.log(new ResumeUpload(file, options));
 
         new ResumeUpload(file, options);
     }
