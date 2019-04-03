@@ -34,11 +34,16 @@ class CustomImage {
         this.toolbar = quill.getModule('toolbar');
         // submitCallback, successCallback, errorCallback
         this.handleUploadImage = this.handleUploadImage.bind(this);
-        this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
-        this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
-        this.successCallback = options.successCallback || this.successCallback;
-        this.errorCallback = options.errorCallback || this.errorCallback;
+        this.handleInsertImages = this.handleInsertImages.bind(this);
+        // this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
+        // this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
+        // this.successCallback = options.successCallback || this.successCallback;
+        // this.errorCallback = options.errorCallback || this.errorCallback;
     }
+    onBeforeUpload() {}
+    uploadProgressCallback() {}
+    successCallback() {}
+    errorCallback() {}
     handleUploadImage() {
         console.log('开始上传');
         Upload.start({
@@ -109,6 +114,29 @@ class CustomImage {
         );
         this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
         this.quill.focus();
+    }
+    handleInsertImages(imgs) {
+        const range = this.quill.getSelection(true);
+
+        this.quill.insertText(range.index, '\n', Quill.sources.USER);
+        imgs.forEach(item => {
+            this.quill.insertEmbed(
+                range.index,
+                'image',
+                {
+                    id: `x-img-${new Date().getTime()}`,
+                    alt: '上传失败',
+                    content: `<div id="img-ctrl-warapper">
+                                <div id="img-ctrl-close"></div>
+                                <div id="img-ctrl-cropper"></div>
+                                </div>
+                                <img src="${item.url}" alt="上传失败">`,
+                },
+                true,
+                Quill.sources.USER,
+            );
+            this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+        });
     }
 }
 

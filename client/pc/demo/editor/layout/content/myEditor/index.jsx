@@ -8,6 +8,7 @@ import 'quill/dist/quill.snow.css';
 import { tooltips } from './myModules/toolTip/tooltip-list';
 import Modal from '../../../../dialog/layout/content/modal/index';
 import UploaderCropperModal from './uploaderCropperModal';
+import UploadImgModal from './uploadImgModal';
 
 // for this component
 import CustomLink from './myModules/link';
@@ -27,6 +28,7 @@ class MyEditor extends React.PureComponent {
         linkType: 0,
         percentage: 0,
         showCropperModal: false,
+        showImgUploadModal: false,
     };
     editor = null;
     toolbar = null;
@@ -290,7 +292,10 @@ class MyEditor extends React.PureComponent {
     customImage() {
         // 插入图片
         this.toolbar.addHandler('image', () => {
-            this.handleInsertImage();
+            // this.handleInsertImage();
+            this.setState({
+                showImgUploadModal: true,
+            });
         });
     }
     // 插入图片的事件
@@ -345,6 +350,15 @@ class MyEditor extends React.PureComponent {
             }
         };
     }
+    // 新插入图片
+    _handleInsertImage = imgs => {
+        console.log('插入');
+        console.log(imgs);
+
+        const customImage = new CustomImage(this.editor);
+
+        customImage.handleInsertImages(imgs, {});
+    };
     // 裁图功能
     cropperImg(target) {
         const thisImg = target.parentElement.parentElement;
@@ -556,6 +570,13 @@ class MyEditor extends React.PureComponent {
         });
     }
 
+    // 关闭图片上传窗口
+    handleCloseImgUploadModal = () => {
+        this.setState({
+            showImgUploadModal: false,
+        });
+    };
+    // 关闭裁剪窗口
     handleCloseCropperModal() {
         this.setState({
             showCropperModal: false,
@@ -567,7 +588,7 @@ class MyEditor extends React.PureComponent {
     }
 
     render() {
-        const { linkError, linkType, imgID, showCropperModal, toCropperImg } = this.state;
+        const { linkError, linkType, imgID, showCropperModal, toCropperImg, showImgUploadModal } = this.state;
         const linkForm = (
             <React.Fragment>
                 <div className={styles.linkForm}>
@@ -643,6 +664,11 @@ class MyEditor extends React.PureComponent {
                         beforeUpload={this.beforeUploadCroppedImg.bind(this)}
                         getNewPic={this.getNewPic.bind(this)}
                         errorCallback={this.errorCallback.bind(this)}
+                    />
+                    <UploadImgModal
+                        isOpen={showImgUploadModal}
+                        onClose={this.handleCloseImgUploadModal}
+                        onSubmit={this._handleInsertImage}
                     />
                 </div>
             </React.Fragment>

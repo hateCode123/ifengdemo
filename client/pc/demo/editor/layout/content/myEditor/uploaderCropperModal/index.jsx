@@ -10,6 +10,7 @@ import Modal from '../../../../../dialog/layout/content/modal/index';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import uploader from '../../../../../upload/layout/content/uploader/src/index';
+import { getImage } from '../../../../../../utils/cutImg';
 
 class UploaderCropperModal extends React.PureComponent {
     static propTypes = {
@@ -53,6 +54,17 @@ class UploaderCropperModal extends React.PureComponent {
         }
 
         return { ...resSrc, ...resIsOpen };
+    }
+
+    imgTrick(src) {
+        const img = new Image();
+
+        console.log(img);
+
+        img.src = src;
+        img.crossOrigin = 'anonymous';
+
+        return img;
     }
 
     componentDidMount() {
@@ -137,7 +149,7 @@ class UploaderCropperModal extends React.PureComponent {
     }
 
     render() {
-        const { type, aspectRatio } = this.state;
+        const { type, aspectRatio, src } = this.state;
 
         /**
          * 组件分发数据
@@ -148,6 +160,7 @@ class UploaderCropperModal extends React.PureComponent {
                 <div className={`${styles.cropperContent} clearfix`}>
                     <div className={styles.cropperWrapper}>
                         <Cropper
+                            // src={this.state.src}
                             src={this.state.src}
                             // className="company-logo-cropper"
                             style={{ height: 450, width: 450 }}
@@ -169,15 +182,29 @@ class UploaderCropperModal extends React.PureComponent {
                             className={`${styles.type1} ${type === 1 ? styles.active : ''}`}
                             onClick={this.handleChangeAspectRatio.bind(this, 1)}>
                             <div className={styles.preView1} id="preView" />
+                            {type === 1 ? null : (
+                                <div className={styles.mask1}>
+                                    <div className={styles.preView1Inner}>
+                                        <img src={src ? getImage(src, 220, 110) : ''} alt="" />
+                                    </div>
+                                </div>
+                            )}
                             <p>2 : 1</p>
                         </div>
                         <div
                             className={`${styles.type2} ${type === 2 ? styles.active : ''}`}
                             onClick={this.handleChangeAspectRatio.bind(this, 2)}>
                             <div className={styles.preView2} id="preView" />
+                            {type === 2 ? null : (
+                                <div className={styles.mask2}>
+                                    <div className={styles.preView1Inner}>
+                                        <img src={src ? getImage(src, 220, 165) : ''} alt="" />
+                                    </div>
+                                </div>
+                            )}
                             <p>4 : 3</p>
                         </div>
-                        <div className={styles.txt}>裁剪后预览</div>
+                        <div className={styles.txt}>取消比例模版后，可自由拖动角标裁剪。</div>
                     </div>
                 </div>
                 <div className={styles.footer}>

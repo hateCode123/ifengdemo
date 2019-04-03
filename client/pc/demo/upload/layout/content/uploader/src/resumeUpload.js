@@ -124,7 +124,7 @@ class ResumeUpload {
                     msg: '请选择正确的格式',
                 };
 
-                this.errorCallback(error, this.file);
+                this.errorCallback(error, this.file, this.index);
                 this.onError(error);
                 this.onFinishedCallback();
 
@@ -142,7 +142,7 @@ class ResumeUpload {
                     msg: '上传文件请小于1000M，超出请下载客户端',
                 };
 
-                this.errorCallback(error, this.file);
+                this.errorCallback(error, this.file, this.index);
                 this.onError(error);
                 this.onFinishedCallback();
 
@@ -160,7 +160,7 @@ class ResumeUpload {
                     msg: '请选择正确的格式',
                 };
 
-                this.errorCallback(error, this.file);
+                this.errorCallback(error, this.file, this.index);
                 this.onError(error);
                 this.onFinishedCallback();
 
@@ -173,7 +173,7 @@ class ResumeUpload {
                     msg: '图片不能大于5M,请重新选择',
                 };
 
-                this.errorCallback(error, this.file);
+                this.errorCallback(error, this.file, this.index);
                 this.onError(error);
                 this.onFinishedCallback();
 
@@ -261,7 +261,7 @@ class ResumeUpload {
                 msg: '校验文件失败',
             };
 
-            this.errorCallback(error, this.file);
+            this.errorCallback(error, this.file, this.index);
             this.onError(error);
             this.onFinishedCallback();
             uploadLogger({
@@ -276,8 +276,8 @@ class ResumeUpload {
             if (Number(msg.status.substring(0, 1)) === 1 && msg.fileUrl != null) {
                 window.clearInterval(this.ervalObject);
                 this.uploading = false;
-                this.uploadProgressCallback('100%', this.file);
-                this.successCallback(msg.fileUrl, this.file);
+                this.uploadProgressCallback('100%', this.file, this.index);
+                this.successCallback(msg.fileUrl, this.file, this.index);
                 this.onFinishedCallback();
 
                 return;
@@ -294,7 +294,7 @@ class ResumeUpload {
                             msg: '文件上传失败',
                         };
 
-                        this.errorCallback(error, this.file);
+                        this.errorCallback(error, this.file, this.index);
                         this.onError(error);
                         this.onFinishedCallback();
                         // 失败日志
@@ -335,7 +335,7 @@ class ResumeUpload {
                             msg: '文件上传失败',
                         };
 
-                        this.errorCallback(error, this.file);
+                        this.errorCallback(error, this.file, this.index);
                         this.onError(error);
                         this.onFinishedCallback();
 
@@ -364,8 +364,8 @@ class ResumeUpload {
                                 const url = this.imageServer + resp.data.finalurl.replace(/http[s]?:\/\//, '');
 
                                 this.uploading = false;
-                                this.successCallback(url, this.file);
-                                this.uploadProgressCallback('100%', this.file);
+                                this.successCallback(url, this.file, this.index);
+                                this.uploadProgressCallback('100%', this.file, this.index);
                                 this.onFinishedCallback();
                             }
                         } catch (e) {
@@ -375,7 +375,7 @@ class ResumeUpload {
                                 msg: '文件信息查询失败',
                             };
 
-                            this.errorCallback(error, this.file);
+                            this.errorCallback(error, this.file, this.index);
                             this.onError(error);
                             this.onFinishedCallback();
                             // 失败日志
@@ -465,12 +465,12 @@ class ResumeUpload {
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();
     }
-    uploadProgressCallback(percentage, file) {
+    uploadProgressCallback(percentage, file, index) {
         // 默认上传过程中回调函数
 
         console.log(percentage);
     }
-    successCallback(url, file) {
+    successCallback(url, file, index) {
         this.uploading = false;
         if (!url) return;
         window.clearInterval(this.ervalObject);
@@ -478,7 +478,7 @@ class ResumeUpload {
         // 上传的是图片,显示图片预览
     }
     onBeforeUpload(file) {}
-    errorCallback(errors, file) {
+    errorCallback(errors, file, index) {
         console.log(errors);
     }
     onError(errors) {

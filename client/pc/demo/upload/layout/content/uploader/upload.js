@@ -44,10 +44,32 @@ const creatUpload = props => {
         const files = e.target.files;
         const config = props;
 
+        if (props.getFileList) {
+            let index = -1;
+            let fileList = [];
+
+            for (let i = 0; i < files.length; i++) {
+                index++;
+                let item = {};
+                const file = files[i];
+                const iFileReader = new FileReader();
+
+                iFileReader.readAsDataURL(file);
+                iFileReader.onload = e => {
+                    item['src'] = e.target.result;
+                };
+                item['file'] = file;
+                item['index'] = index;
+                item['id'] = `uploading_${index}_${new Date().getTime()}`;
+                fileList.push(item);
+            }
+            props.getFileList(fileList);
+        }
         if (files) {
             const options = {
                 type: config.type,
                 appid: config.appid,
+                filesList: files,
                 checkFileSizeAndType: config.checkFileSizeAndType,
                 onBeforeUpload: config.onBeforeUpload,
                 progressCallback: config.progressCallback,
