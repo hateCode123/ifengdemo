@@ -69,14 +69,11 @@ const creatUpload = props => {
             const options = {
                 type: config.type,
                 appid: config.appid,
-                filesList: files,
                 checkFileSizeAndType: config.checkFileSizeAndType,
                 onBeforeUpload: config.onBeforeUpload,
                 progressCallback: config.progressCallback,
                 successCallback: config.successCallback,
-                errorCallback: errors => {
-                    config.errorCallback(errors);
-                },
+                errorCallback: config.errorCallback,
             };
 
             multileUploader(files, options);

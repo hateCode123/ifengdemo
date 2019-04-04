@@ -1,5 +1,7 @@
 import Quill from 'quill';
 import Upload from '../../../../../../upload/layout/content/uploader/upload';
+
+import PicIntroBlot from '../picIntro';
 // 自定义图片插件
 let BlockEmbed = Quill.import('blots/block/embed');
 
@@ -26,6 +28,7 @@ class ImageBlot extends BlockEmbed {
 }
 ImageBlot.blotName = 'image';
 ImageBlot.tagName = 'x-img';
+Quill.register(PicIntroBlot);
 Quill.register(ImageBlot);
 
 class CustomImage {
@@ -118,25 +121,38 @@ class CustomImage {
     handleInsertImages(imgs) {
         const range = this.quill.getSelection(true);
 
-        this.quill.insertText(range.index, '\n', Quill.sources.USER);
-        imgs.forEach(item => {
+        // this.quill.insertText(range.index, '\n', Quill.sources.USER);
+        imgs.forEach((item, index) => {
             this.quill.insertEmbed(
-                range.index,
+                range.index + index,
                 'image',
                 {
                     id: `x-img-${new Date().getTime()}`,
                     alt: '上传失败',
                     content: `<div id="img-ctrl-warapper">
-                                <div id="img-ctrl-close"></div>
-                                <div id="img-ctrl-cropper"></div>
-                                </div>
-                                <img src="${item.url}" alt="上传失败">`,
+                    <div id="img-ctrl-close"></div>
+                    <div id="img-ctrl-cropper"></div>
+                    </div>
+                    <img src="${item.url}" alt="上传失败">`,
                 },
                 true,
                 Quill.sources.USER,
             );
-            this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+            // this.quill.insertEmbed(
+            //     range.index + 1,
+            //     'picIntro',
+            //     {
+            //         id: 'picIntro',
+            //         alt: 'picIntro',
+            //         // content: '单击添加图片描述（最多20字）',
+            //         content: '<span id="picIntroPlaceholder">单击添加图片描述（最多20字）</span>',
+            //         class: 'picIntro',
+            //     },
+            //     true,
+            //     Quill.sources.USER,
+            // );
         });
+        // this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
     }
 }
 

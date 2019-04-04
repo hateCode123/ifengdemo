@@ -59,9 +59,9 @@ handleAbort () {
     -   `type`: `Number` 上传文件的业务类型: 0 视频 1 图片 2 普通文件。
     -   `appid`: `String` 上传服务为了区分上传请求的来源，会为每一个使用上传服务的业务系统分配一个标识 appId。业务系统在进行上传操作时，需要将`appId`一并传给上传服务。
     -   `onBeforeUpload`: `Function` 上传之前的操作回调。返回一个参数，当前文件对象
-    -   `progressCallback`: `Function` 上传进度的回调。返回参数: (`percentage`: 上传进度, `file`: 当前文件对象)
-    -   `successCallback`: `Function` 上传成功的回调。返回参数: (`url`: 上传完成后文件可访问路径。当文件尚未上传完或者未合并完，该项为 null, `file`: 当前文件对象)
-    -   `errorCallback`: `Function` 上传出错的回调。返回参数: (`errors`: 上传过程中出错调用)，返回错误状态如下
+    -   `progressCallback`: `Function` 上传进度的回调。返回参数: (`percentage`: 上传进度, `file`: 当前文件对象, `index`: 当前文件的索引 )
+    -   `successCallback`: `Function` 上传成功的回调。返回参数: (`url`: 上传完成后文件可访问路径。当文件尚未上传完或者未合并完，该项为 null, `file`: 当前文件对象， `index`: 当前文件的索引)
+    -   `errorCallback`: `Function` 上传出错的回调。返回参数: (`errors`: 上传过程中出错调用, `file`: 当前文件对象, `index`: 当前文件的索引)，返回错误状态如下
     -   `abortUpload`: `Function` 上传终止的回调
 
 ## 终止上传

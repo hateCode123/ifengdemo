@@ -173,6 +173,7 @@ class ResumeUpload {
                     msg: '图片不能大于5M,请重新选择',
                 };
 
+                console.log(error, this.file, this.index);
                 this.errorCallback(error, this.file, this.index);
                 this.onError(error);
                 this.onFinishedCallback();

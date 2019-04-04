@@ -11,6 +11,7 @@ import 'cropperjs/dist/cropper.css';
 import uploader from '../../../../../upload/layout/content/uploader/upload';
 import { getImage } from '../../../../../../utils/cutImg';
 import Sortable from 'react-sortablejs';
+import Alert from '../../../../../dialog/layout/content/modal/alert';
 
 class UploadImgModal extends React.PureComponent {
     static propTypes = {
@@ -22,6 +23,7 @@ class UploadImgModal extends React.PureComponent {
     state = {
         isOpen: this.props.isOpen,
         uploadingImgs: new Array(),
+        isSort: true,
     };
 
     static defaultProps = {
@@ -57,33 +59,54 @@ class UploadImgModal extends React.PureComponent {
         uploader.start(options);
     };
 
-    fileListIds = {};
-    fileListUrls = {};
-    // 获取文件列表
+    fileListIds = {}; // 文件id的缓存
+    fileListUrls = {}; // 文件上传成功的url的缓存
+    errorFiles = []; // 上传失败的文件的缓存
+    isUploading = false; // 正在上传的状态标记
+    // 获取文件列表, 这里做一些上传之前的操作
     getFileList = fileList => {
+        this.isUploading = true;
         // console.log(fileList);
         this.fileListIds = {};
+        // this.fileListUrls = {};
         const imgs = fileList;
+        const formatImgs = [];
 
+        // 图片过大则不上传
+        // imgs.forEach((item, index) => {
+        //     if (item.file.size > 5 * 1024 * 1024) {
+        //         Alert.warning({
+        //             content: `${item.file.name}过大，请重新选择`,
+        //             onClose: () => {},
+        //         });
+        //     } else {
+        //         formatImgs.push(item);
+        //         this.fileListIds[item.index] = item.id;
+        //     }
+        // });
         imgs.forEach((item, index) => {
-            item['isUploading'] = false;
-
+            formatImgs.push(item);
             this.fileListIds[item.index] = item.id;
         });
 
-        // console.log(imgs);
+        console.log(formatImgs);
 
         this.setState({
-            uploadingImgs: [...this.state.uploadingImgs, ...imgs],
+            uploadingImgs: [...this.state.uploadingImgs, ...formatImgs],
         });
     };
     // 上传之前
     onBeforeUpload = (file, index) => {
         console.log('上传之前');
-        this.setState({
-            file,
-        });
         // console.log(index, '===========', file);
+        const thisImg = document.getElementById(this.fileListIds[index]);
+        const { uploadingImgs } = this.state;
+
+        uploadingImgs.forEach(item => {
+            if (item.id === this.fileListIds[index]) {
+                thisImg.firstElementChild.src = item.src;
+            }
+        });
     };
     progressCallback = (percentage, file, index) => {
         // console.log(percentage);
@@ -103,30 +126,72 @@ class UploadImgModal extends React.PureComponent {
                 item.url = url;
                 this.fileListUrls[item.id] = url;
             }
+            // 拖拽排序的数据缓存
+            thisImg.parentElement.setAttribute('data-id', JSON.stringify({ id: this.fileListIds[index], index, url }));
         });
+        if (Object.keys(this.fileListUrls).length + this.errorFiles.length === Object.keys(this.fileListIds).length) {
+            this.isUploading = false;
+        }
+        console.log(this.isUploading);
         thisImg.firstElementChild.src = url;
+        thisImg.parentElement.lastElementChild.style.display = 'block';
         thisImg.removeChild(thisImg.lastElementChild);
     };
     // 上传失败
-    errorCallback = (errors, index) => {
+    errorCallback = (errors, file, index) => {
         console.log(index, '=========', errors);
+        this.errorFiles.push(this.fileListIds[index]);
+        // if (errors.status === 40003) {
+        //     return;
+        // }
+        Alert.warning({
+            content: `${file.name}上传失败，请重新上传`,
+            onClose: () => {
+                const taskNum = Object.keys(this.fileListUrls).length + this.errorFiles.length;
+
+                if (taskNum) {
+                    this.isUploading = false;
+                }
+                console.log(this.isUploading);
+                const thisImg = document.getElementById(this.fileListIds[index]);
+
+                console.log(thisImg);
+                // 视图更新
+                thisImg.parentElement.firstElementChild.style.display = 'block';
+                thisImg.removeChild(thisImg.lastElementChild);
+                thisImg.parentElement.lastElementChild.style.display = 'block';
+                thisImg.parentElement.lastElementChild.setAttribute('data-errorItem', true);
+                // 不允许排序
+                this.setState({
+                    isSort: false,
+                });
+            },
+        });
     };
 
     handleClose = () => {
+        this.fileListIds = {};
+        this.fileListUrls = {};
         this.setState({
             uploadingImgs: [],
+            isSort: true,
         });
         this.props.onClose();
     };
 
     // 确认提交
     confirmInsertPic = () => {
+        console.log(this.isUploading);
+        this.fileListIds = {};
+        this.fileListUrls = {};
         this.props.onClose();
         const { uploadingImgs } = this.state;
         let imgs = [];
 
         uploadingImgs.forEach(item => {
-            imgs.unshift({ url: item.url, id: item.id });
+            if (item.url) {
+                imgs.push({ url: item.url, id: item.id });
+            }
         });
 
         this.props.onSubmit(imgs);
@@ -136,8 +201,11 @@ class UploadImgModal extends React.PureComponent {
     };
 
     handleCancel = () => {
+        this.fileListIds = {};
+        this.fileListUrls = {};
         this.setState({
             uploadingImgs: [],
+            isSort: true,
         });
         this.props.onClose();
     };
@@ -145,26 +213,69 @@ class UploadImgModal extends React.PureComponent {
     // 排序
     handleSortable = (order, sortable, evt) => {
         let newArr = [];
+        const { isSort } = this.state;
 
         // console.log(order);
         order.forEach((item, index) => {
             // console.log(item);
             item = JSON.parse(item);
-            item['url'] = this.fileListUrls[item.id];
             // console.log('sortItem=', item);
+            item['url'] = this.fileListUrls[item.id];
             newArr.push(item);
         });
 
         // console.log(newArr);
         const _newArr = JSON.parse(JSON.stringify(newArr));
 
+        if (!isSort) {
+            Alert.warning({
+                content: '请删除上传失败的图片再进行排序',
+            });
+
+            return;
+        }
+
         this.setState({
             uploadingImgs: _newArr,
         });
     };
 
-    render() {
+    // 删除
+    handleDelete = e => {
+        const targetId = e.currentTarget.attributes['data-uploading-id'].value;
+        const isError = e.currentTarget.attributes['data-errorItem']
+            ? e.currentTarget.attributes['data-errorItem'].value
+            : false;
+
+        console.log(isError);
+        if (isError) {
+            this.errorFiles.splice(this.errorFiles.indexOf(targetId), 1);
+            e.currentTarget.parentElement.firstElementChild.style = 'none';
+        }
         const { uploadingImgs } = this.state;
+        let targetItem = '';
+        const _uploadingImgs = JSON.parse(JSON.stringify(uploadingImgs));
+
+        uploadingImgs.forEach((item, index) => {
+            if (item.id === targetId) {
+                targetItem = item;
+            }
+        });
+        _uploadingImgs.splice(uploadingImgs.indexOf(targetItem), 1);
+        // console.log(_uploadingImgs);
+        this.setState({
+            uploadingImgs: _uploadingImgs,
+        });
+        // console.log(this.state.uploadingImgs);
+        if (!this.errorFiles.length) {
+            this.setState({
+                isSort: true,
+            });
+        }
+    };
+
+    render() {
+        const { uploadingImgs, isSort } = this.state;
 
         /**
          * 组件分发数据
@@ -186,14 +297,20 @@ class UploadImgModal extends React.PureComponent {
                                         <div
                                             className={styles.preImgsItem}
                                             data-uploading-index={item.index}
-                                            data-id={JSON.stringify(item)}
+                                            data-id={JSON.stringify({ id: item.id, index: item.index, url: item.url })}
                                             key={index}>
-                                            <div id={item.id}>
-                                                <img src={item.src} />
+                                            <div className={styles.error}>上传失败</div>
+                                            <div className={styles.innerWrapper} id={item.id}>
+                                                <img src={item.url} />
                                                 <div className={styles.uploadingItem}>
                                                     <div className={styles.loading} />
                                                 </div>
                                             </div>
+                                            <div
+                                                data-uploading-id={item.id}
+                                                className={styles.delete}
+                                                onClick={this.handleDelete}
+                                            />
                                         </div>
                                     );
                                 })}

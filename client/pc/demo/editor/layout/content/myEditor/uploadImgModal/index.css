@@ -15,13 +15,21 @@
     height: 109px;
     margin-right: 20px;
     border: 1px solid #e5e5e5;
+    cursor: move;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     position: relative;
     margin-bottom: 20px;
     position: relative;
+    & .innerWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
     & div img {
         display: block;
         max-width: 100%;
@@ -78,6 +86,7 @@
     color: #999;
     text-align: center;
     margin-right: 0;
+    cursor: pointer;
 }
 .uploadingItem {
     width: 100%;
@@ -152,6 +161,33 @@
     height: 109px;
     background: #f6f6f6;
     border: 1px solid #e5e5e5;
+}
+
+.delete {
+    position: absolute;
+    display: none;
+    width: 32px;
+    height: 32px;
+    background: url(./crl_btn.f72db593.png) no-repeat;
+    right: -16px;
+    top: -16px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.error {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(100, 149, 198, 0.5);
+    text-align: center;
+    & span {
+        color: #fff;
+    }
 }
 
 @keyframes roll {
