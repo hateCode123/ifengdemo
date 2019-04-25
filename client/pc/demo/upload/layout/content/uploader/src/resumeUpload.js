@@ -188,7 +188,7 @@ class ResumeUpload {
     async getUgcTaskInfo(type, callback) {
         if (type === 0 || type === 2) {
             callback({});
-        } else if (type === 1 || type === 3) {
+        } else if (type === 1) {
             const data = {
                 sid: this.sid,
                 utype: 0, // 普通用户
@@ -213,7 +213,7 @@ class ResumeUpload {
 
                 if (res.code === 0) {
                     // 获取到rid successCb
-                    let param = { successCb: res.data.callback, bizId: res.data.rid };
+                    const param = { successCb: res.data.callback, bizId: res.data.rid };
 
                     callback(param);
                 } else {
@@ -241,15 +241,15 @@ class ResumeUpload {
         this.fileId = `${hex_sha1(this.sid + this.appid + this.checksum)}_${this.blockCount}`;
 
         // 如果是视频资源 需要拿到本地文件地址(checkPath1)fileInfo  如果是图片资源 需要拿到cdn图片地址(checkPath)query
-        let checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
-        let param = {
+        const checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
+        const param = {
             appid: this.appid,
             fileId: this.fileId,
             blockCount: this.blockCount,
             callback: this.checkFileCallback,
             callbackScope: this,
         };
-        let param1 = { ...param, ...this.oParam };
+        const param1 = { ...param, ...this.oParam };
 
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();
@@ -306,7 +306,7 @@ class ResumeUpload {
 
                         return;
                     }
-                    let icheckFile = new checkFile(this.file, this.uploadUrl + this.checkPath1, {
+                    const icheckFile = new checkFile(this.file, this.uploadUrl + this.checkPath1, {
                         appid: this.appid,
                         fileId: this.fileId,
                         blockCount: this.blockCount,
@@ -400,7 +400,7 @@ class ResumeUpload {
     toUpload(msg) {
         console.log('上传中...');
         // 本地上传没有完成,继续上传
-        let reg = /[1]/g;
+        const reg = /[1]/g;
 
         this.fileStatus = msg.status.substr(1).split(''); // 截掉第一位并转化为数组
         const options = {
@@ -444,7 +444,7 @@ class ResumeUpload {
     }
     uploadLoadCallback(file, msg) {
         // upload成功后 最后一次不要查 否则会出问题
-        let reg = /0/g;
+        const reg = /0/g;
 
         if (!reg.test(msg.status)) {
             this.checkFileCallback(file, msg);
@@ -453,7 +453,7 @@ class ResumeUpload {
         }
         this.fileId = `${hex_sha1(this.sid + this.appid + this.checksum)}_${this.blockCount}`;
         // 如果是视频资源 需要拿到本地文件地址  如果是图片资源 需要拿到cdn图片地址
-        let checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
+        const checkPath = this.oParam === {} ? this.checkPath1 : this.checkPath;
         const param = {
             appid: this.appid,
             fileId: this.fileId,
@@ -461,7 +461,7 @@ class ResumeUpload {
             callback: this.checkFileCallback,
             callbackScope: this,
         };
-        let param1 = { ...param, ...this.oParam };
+        const param1 = { ...param, ...this.oParam };
 
         this.checkFile = new checkFile(this.file, this.uploadUrl + checkPath, param1);
         this.checkFile.runCheck();

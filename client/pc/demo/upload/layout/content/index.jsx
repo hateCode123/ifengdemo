@@ -8,6 +8,44 @@ import Uploader from './uploader';
 import UploadNormal from './uploader/upload';
 import UploadContinue from './uploader/src/index';
 
+class ImgWrapper extends React.PureComponent {
+    static propTypes = {
+        content: PropTypes.array,
+    };
+    state = {
+        content: this.props.content,
+    };
+    componentDidMount() {}
+
+    static getDerivedStateFromProps = (props, state) => {
+        let resImgs = {};
+
+        if (props.content !== state.content) {
+            resImgs = {
+                content: props.content,
+            };
+        }
+
+        return {
+            ...resImgs,
+        };
+    };
+
+    componentWillUnmount() {}
+
+    render() {
+        const { content } = this.state;
+
+        return content.map((item, index) => {
+            return (
+                <div key={index} className={styles.preView}>
+                    <img src={item} alt="" />
+                </div>
+            );
+        });
+    }
+}
+
 class Content extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
@@ -15,6 +53,7 @@ class Content extends React.PureComponent {
     state = {
         uploadPercent: 0,
         file: '',
+        imgs: [],
     };
     // 开始上传
     startUpload() {
@@ -82,7 +121,7 @@ class Content extends React.PureComponent {
     // 多文件上传
     multipleUpload = e => {
         const options = {
-            type: 1, // 0 视频 1 图片 2 普通文件
+            type: 3, // 0 视频 1 图片 2 音频文件 3 其他文件
             appid: 'wemedia',
             multiple: true,
             onBeforeUpload: (file, index) => {
@@ -98,16 +137,23 @@ class Content extends React.PureComponent {
                     uploadPercent: percentage,
                 });
             },
-            successCallback: (url, file) => {
-                console.log('上传完成');
-                console.log(url);
-            },
+            successCallback: this.successCallback,
             errorCallback: errors => {
                 console.log(errors);
             },
         };
 
         UploadNormal.start(options);
+    };
+    successCallback = url => {
+        const { imgs } = this.state;
+        const newImgs = imgs;
+
+        newImgs.push(url);
+        console.log(newImgs);
+        this.setState({
+            imgs: JSON.parse(JSON.stringify(newImgs)),
+        });
     };
 
     render() {
@@ -129,6 +175,7 @@ class Content extends React.PureComponent {
                 console.log(errors);
             },
         };
+        const { imgs } = this.state;
 
         return (
             <React.Fragment>
@@ -163,7 +210,7 @@ class Content extends React.PureComponent {
                             name=""
                             id=""
                             onChange={this.handleCustomUpload.bind(this)}
-                            // multiple="multiple"
+                            multiple="multiple"
                         />
                     </div>
                     {/* <div style={{ marginTop: '50px' }}>
@@ -172,6 +219,9 @@ class Content extends React.PureComponent {
 
                     {/* <input type="file" name="" id="" multiple onChange={this.multipleUpload} /> */}
                     <button onClick={this.multipleUpload}>按钮</button>
+                    <div className={'clearfix'} style={{ marginTop: '50px' }}>
+                        {imgs.length > 0 ? <ImgWrapper content={imgs} /> : null}
+                    </div>
                 </div>
             </React.Fragment>
         );

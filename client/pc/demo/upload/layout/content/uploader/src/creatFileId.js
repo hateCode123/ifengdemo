@@ -2,8 +2,8 @@ import hex_sha1 from './sha.js';
 import uploadLogger from './uploadLogger.js';
 
 // 为了打印生成文件id消耗的时间而声明的变量。
-let startTime = {};
-let endTime = {};
+const startTime = {};
+const endTime = {};
 
 /**
  * 根据文件生成id
@@ -35,10 +35,10 @@ class CreatFileId {
         // 存储开始创建id的时间
         startTime[this.file.name] = new Date().valueOf();
 
-        let begin = customBegin || this.begin;
-        let end = this.getEnd(begin, customCutsize);
-        let blob = this.getBlob(begin, end);
-        let iReader = new FileReader();
+        const begin = customBegin || this.begin;
+        const end = this.getEnd(begin, customCutsize);
+        const blob = this.getBlob(begin, end);
+        const iReader = new FileReader();
 
         if (!iReader.readAsBinaryString) {
             uploadLogger({
@@ -62,8 +62,8 @@ class CreatFileId {
      * @return {Numver}               文件截取结束位置
      */
     getEnd(begin, customCutsize) {
-        let size = this.file.size;
-        let cutsize = customCutsize || this.cutsize;
+        const size = this.file.size;
+        const cutsize = customCutsize || this.cutsize;
 
         return size < begin + cutsize ? size : begin + cutsize;
     }
@@ -92,7 +92,7 @@ class CreatFileId {
     }
     // 文件使用readAsBinaryString读取后的回调
     iReaderLoad(e) {
-        let fileId = hex_sha1(e.target.result + this.toByte(this.file.size));
+        const fileId = hex_sha1(e.target.result + this.toByte(this.file.size));
 
         // 打印创建出id的结束时间
         endTime[this.file.name] = new Date().valueOf();
@@ -102,11 +102,11 @@ class CreatFileId {
     }
     // 对数字进行转换的函数，具体转换啥了的问问陈勇
     toByte(origin) {
-        let n = Number(origin);
-        let n0 = 0;
-        let n1 = 0;
-        let n2 = 0;
-        let n3 = 0;
+        const n = Number(origin);
+        const n0 = 0;
+        const n1 = 0;
+        const n2 = 0;
+        const n3 = 0;
         let n4 = (n >> 24) & 0xff;
         let n5 = (n >> 16) & 0xff;
         let n6 = (n >> 8) & 0xff;

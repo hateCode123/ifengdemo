@@ -98,11 +98,11 @@ class SingleUpload {
     }
     // 对数字进行转换的函数，具体转换啥了的问问陈勇
     toByte(origin) {
-        let n = Number(origin);
-        let n0 = 0;
-        let n1 = 0;
-        let n2 = 0;
-        let n3 = 0;
+        const n = Number(origin);
+        const n0 = 0;
+        const n1 = 0;
+        const n2 = 0;
+        const n3 = 0;
         let n4 = (n >> 24) & 0xff;
         let n5 = (n >> 16) & 0xff;
         let n6 = (n >> 8) & 0xff;
@@ -133,7 +133,7 @@ class SingleUpload {
         return num;
     }
     send(oParam) {
-        let index = this.statusList.shift(); // 删除第一个值，并返回这个值
+        const index = this.statusList.shift(); // 删除第一个值，并返回这个值
 
         if (!this.abort || index === undefined) {
             return false;
@@ -145,17 +145,17 @@ class SingleUpload {
             return false;
         }
         this.sendNum++;
-        let fd = new FormData();
+        const fd = new FormData();
         // 循环调用每次取其中的一片
-        let begin = (index - 1) * this.cutSize;
+        const begin = (index - 1) * this.cutSize;
         let end = begin + this.cutSize;
 
         end = end > this.file.size ? this.file.size : end;
-        let blockSize = end - begin;
+        const blockSize = end - begin;
         let r_size = 512 * 1024;
 
         r_size = r_size >= blockSize ? blockSize : r_size;
-        let iReader = new FileReader();
+        const iReader = new FileReader();
 
         if (!iReader.readAsBinaryString) {
             uploadLogger({
@@ -188,11 +188,11 @@ class SingleUpload {
             );
             this.xhr.onload = () => {
                 if (this.xhr.status === 200) {
-                    let response = JSON.parse(this.xhr.responseText);
+                    const response = JSON.parse(this.xhr.responseText);
 
                     if (response.success === true) {
                         console.log('send status ==', response.status);
-                        let successNum = response.status.substr(1).match(this.reg).length;
+                        const successNum = response.status.substr(1).match(this.reg).length;
                         const progress = `${(successNum / oParam.blockCount) * 100}%`;
 
                         this.progressCallback(progress, this.file);

@@ -3,7 +3,7 @@ import Upload from '../../../../../../upload/layout/content/uploader/upload';
 
 import PicIntroBlot from '../picIntro';
 // 自定义图片插件
-let BlockEmbed = Quill.import('blots/block/embed');
+const BlockEmbed = Quill.import('blots/block/embed');
 
 class ImageBlot extends BlockEmbed {
     static create(value) {
@@ -36,7 +36,7 @@ class CustomImage {
         this.quill = quill;
         this.toolbar = quill.getModule('toolbar');
         // submitCallback, successCallback, errorCallback
-        this.handleUploadImage = this.handleUploadImage.bind(this);
+        // this.handleUploadImage = this.handleUploadImage.bind(this);
         this.handleInsertImages = this.handleInsertImages.bind(this);
         // this.onBeforeUpload = options.onBeforeUpload || this.onBeforeUpload;
         // this.uploadProgressCallback = options.progressCallback || this.uploadProgressCallback;
@@ -49,38 +49,42 @@ class CustomImage {
     errorCallback() {}
     handleUploadImage() {
         console.log('开始上传');
-        Upload.start({
-            type: 1, // 0 视频 1 图片 2 普通文件
-            appid: 'wemedia',
-            onBeforeUpload: async file => {
-                const id = `x-img-${new Date().getTime()}`;
+        try {
+            Upload.start({
+                type: 1, // 0 视频 1 图片 2 普通文件
+                appid: 'wemedia',
+                onBeforeUpload: async file => {
+                    const id = `x-img-${new Date().getTime()}`;
 
-                this.id = id;
-                const fileReader = new FileReader();
+                    this.id = id;
+                    const fileReader = new FileReader();
 
-                fileReader.readAsDataURL(file);
-                let img = '';
+                    fileReader.readAsDataURL(file);
+                    let img = '';
 
-                fileReader.onload = e => {
-                    img = e.target.result;
-                    this.handleInsertImage(id, file, img);
-                };
-                this.onBeforeUpload(id);
-            },
-            progressCallback: (percentage, file) => {
-                this.uploadProgressCallback(percentage);
-            },
-            successCallback: (url, file) => {
-                console.log('上传完成');
-                console.log(url);
-                this.successCallback(url, this.id, file);
-                this.url = url;
-                this.fileName = file.name;
-            },
-            errorCallback: errors => {
-                this.errorCallback(errors);
-            },
-        });
+                    fileReader.onload = e => {
+                        img = e.target.result;
+                        this.handleInsertImage(id, file, img);
+                    };
+                    this.onBeforeUpload(id);
+                },
+                progressCallback: (percentage, file) => {
+                    this.uploadProgressCallback(percentage);
+                },
+                successCallback: (url, file) => {
+                    console.log('上传完成');
+                    console.log(url);
+                    this.successCallback(url, this.id, file);
+                    this.url = url;
+                    this.fileName = file.name;
+                },
+                errorCallback: errors => {
+                    this.errorCallback(errors);
+                },
+            });
+        } catch (e) {
+            console.error(e);
+        }
     }
     // 正在上传的模板
     uploadingContent(file, img) {
@@ -100,8 +104,6 @@ class CustomImage {
     handleInsertImage(id, file, img) {
         const range = this.quill.getSelection(true);
 
-        // console.log(img);
-
         // 插入分割线
         this.quill.insertText(range.index, '\n', Quill.sources.USER);
         this.quill.insertEmbed(
@@ -118,22 +120,26 @@ class CustomImage {
         this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
         this.quill.focus();
     }
+    // 插入批量图片
     handleInsertImages(imgs) {
         const range = this.quill.getSelection(true);
 
         // this.quill.insertText(range.index, '\n', Quill.sources.USER);
+        // 将批量图片循环插入到编辑器内
         imgs.forEach((item, index) => {
+            const date = new Date().getTime();
+
             this.quill.insertEmbed(
                 range.index + index,
                 'image',
                 {
-                    id: `x-img-${new Date().getTime()}`,
+                    id: `x-img-${date}`,
                     alt: '上传失败',
                     content: `<div id="img-ctrl-warapper">
                     <div id="img-ctrl-close"></div>
                     <div id="img-ctrl-cropper"></div>
                     </div>
-                    <img src="${item.url}" alt="上传失败">`,
+                    <img src="${item.url}?${date}" alt="上传失败">`,
                 },
                 true,
                 Quill.sources.USER,

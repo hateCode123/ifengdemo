@@ -136,7 +136,7 @@ class MyEditor extends React.PureComponent {
         this.editor.on('text-change', this.handleChange.bind(this));
         // 添加字数统计 和 自动保存提示
         const toolbar = document.getElementsByClassName('ql-toolbar');
-        let rightBox = document.createElement('div');
+        const rightBox = document.createElement('div');
 
         toolbar[0].appendChild(rightBox);
         rightBox.classList.add('ql-toolbar-rightBox');
@@ -161,18 +161,18 @@ class MyEditor extends React.PureComponent {
     // 给按钮加hover标题titletip
     customToolbarTitle() {
         // console.log(this.editor.getModule('toolbar').container.querySelectorAll('.ql-link'));
-        let toolbarElement = this.toolbar.container;
-        let buttons = toolbarElement.querySelectorAll('button');
+        const toolbarElement = this.toolbar.container;
+        const buttons = toolbarElement.querySelectorAll('button');
 
-        for (let el of buttons) {
-            let toolTip = document.createElement('div');
+        for (const el of buttons) {
+            const toolTip = document.createElement('div');
             const name = tooltips[el.className.slice(3)];
             let title = '';
 
             if (typeof name === 'string') {
                 title = name;
             } else {
-                let value = el.value || '';
+                const value = el.value || '';
 
                 if (value != null && name[value]) {
                     title = name[value];
@@ -300,38 +300,43 @@ class MyEditor extends React.PureComponent {
     }
     // 插入图片的事件
     handleInsertImage() {
-        const options = {
-            onBeforeUpload: id => {
-                console.log(id);
-            },
-            progressCallback: async (percentage, id) => {
-                console.log(percentage);
-            },
-            successCallback: (url, id, file) => {
-                console.log('成功了');
-                const img = document.getElementById(id);
-                const innerProgress = img.lastElementChild.lastElementChild.lastElementChild;
+        try {
+            const options = {
+                onBeforeUpload: id => {
+                    console.log(id);
+                },
+                progressCallback: async (percentage, id) => {
+                    console.log(percentage);
+                },
+                successCallback: (url, id, file) => {
+                    console.log('成功了');
+                    const img = document.getElementById(id);
+                    const innerProgress = img.lastElementChild.lastElementChild.lastElementChild;
 
-                if (innerProgress) {
-                    innerProgress.style.width = '100%';
-                }
-                setTimeout(() => {
-                    img.innerHTML = `<div id="img-ctrl-warapper">
+                    if (innerProgress) {
+                        innerProgress.style.width = '100%';
+                    }
+                    setTimeout(() => {
+                        img.innerHTML = `<div id="img-ctrl-warapper">
                     <div id="img-ctrl-close"></div>
                     <div id="img-ctrl-cropper"></div>
                 </div>
                 <img src="${url}" alt="${file.name}">`;
-                }, 200);
+                    }, 200);
 
-                img.setAttribute('data-src', url);
-            },
-            errorCallback: error => {
-                console.log(error);
-            },
-        };
-        const customImage = new CustomImage(this.editor, options);
+                    img.setAttribute('data-src', url);
+                },
+                errorCallback: error => {
+                    console.log(error);
+                },
+            };
+            const customImage = new CustomImage(this.editor, options);
 
-        customImage.handleUploadImage();
+            customImage.handleUploadImage();
+        } catch (e) {
+            console.log(e);
+        }
+
         // 删除视频按钮的功能
         const editor = document.querySelector('.ql-editor');
 
