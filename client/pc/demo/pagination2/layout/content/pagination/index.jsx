@@ -18,19 +18,23 @@ class Pagination extends React.PureComponent {
         showQuickJumper: PropTypes.bool,
         current: (props, propName, componentName) => {
             // 校验current,必须为指定范围内的正整数
-            const { total, pageSize } = props;
+            const { total, pageSize, current } = props;
             const totalPage = Math.ceil(total / pageSize);
             const isPositiveInteger = /^[1-9]\d*$/.test(props[propName]);
 
-            if (
-                props[propName] < 1 ||
-                props[propName] > totalPage ||
-                typeof props[propName] !== 'number' ||
-                !isPositiveInteger
-            ) {
-                return new Error(
-                    `'current' should be a number greater than or equal to 1, less than or equal to ${totalPage}`,
-                );
+            // console.log(current);
+
+            if (current) {
+                if (
+                    props[propName] < 1 ||
+                    props[propName] > totalPage ||
+                    typeof props[propName] !== 'number' ||
+                    !isPositiveInteger
+                ) {
+                    return new Error(
+                        `'current' should be a number greater than or equal to 1, less than or equal to ${totalPage}`,
+                    );
+                }
             }
         },
     };
@@ -43,6 +47,27 @@ class Pagination extends React.PureComponent {
         current: 1,
     };
 
+    static getDerivedStateFromProps(nextProps, state) {
+        let resCurrent = {};
+        let resTotal = {};
+        let resPageSize = {};
+
+        if (nextProps.current !== state.current) {
+            resCurrent = nextProps.current;
+        }
+        if (nextProps.total !== state.total) {
+            resTotal = nextProps.current;
+        }
+        if (nextProps.pageSize !== state.pageSize) {
+            resPageSize = nextProps.current;
+        }
+
+        return {
+            ...resCurrent,
+            ...resTotal,
+            ...resPageSize,
+        };
+    }
     // 动态生成页码
     creatPage() {
         const { total, pageSize } = this.props;
@@ -50,15 +75,12 @@ class Pagination extends React.PureComponent {
 
         const totalPage = Math.ceil(total / pageSize);
 
-        let pages = [];
+        const pages = [];
 
         if (totalPage <= 9) {
             // 总页数小于9
             pages.push(
-                <li
-                    key={0}
-                    onClick={this.goPrev.bind(this)}
-                    className={`${current === 1 ? styles.nomore : ''} ${styles.pre_arrow}`}>
+                <li key={0} onClick={this.goPrev.bind(this)} className={current === 1 ? styles.nomore : ''}>
                     {'<<'}
                 </li>,
             );
@@ -73,7 +95,7 @@ class Pagination extends React.PureComponent {
                 <li
                     key={totalPage + 1}
                     onClick={this.goNext.bind(this, totalPage)}
-                    className={`${current === totalPage ? styles.nomore : ''} ${styles.next_arrow}`}>
+                    className={current === totalPage ? styles.nomore : ''}>
                     {'>>'}
                 </li>,
             );
