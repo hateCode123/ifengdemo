@@ -14,6 +14,9 @@ class SliderControl extends React.PureComponent {
         children: PropTypes.array,
         dotsAction: PropTypes.string,
         arrow: PropTypes.bool,
+        dotsShow: PropTypes.bool,
+        afterChange: PropTypes.func,
+        data: PropTypes.array,
     };
 
     static defaultProps = {
@@ -24,6 +27,7 @@ class SliderControl extends React.PureComponent {
         dotsStyle: styles.dots,
         dotsActiveStyle: styles.active,
         arrow: true,
+        dotsShow: true,
     };
 
     state = {
@@ -47,6 +51,9 @@ class SliderControl extends React.PureComponent {
     componentWillUnmount() {
         clearTimeout(this.timeOuter);
         clearInterval(this.timer);
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     autoPlay() {
@@ -179,11 +186,16 @@ class SliderControl extends React.PureComponent {
                     this.autoPlay();
                 }
             } else {
-                let temp = offsetDistance - (boxDistance * this.state.activeIndex - Math.abs(offsetDistance)) / 30;
+                const temp = offsetDistance - (boxDistance * this.state.activeIndex - Math.abs(offsetDistance)) / 30;
 
                 offsetDistance = temp;
 
                 this.setState({ offsetDistance });
+            }
+            if (this.props.afterChange) {
+                this.props.afterChange(
+                    this.state.activeIndex === this.props.data.length + 1 ? 1 : this.state.activeIndex,
+                );
             }
         }, 10);
     }
@@ -201,7 +213,7 @@ class SliderControl extends React.PureComponent {
     }
 
     render() {
-        const { dotsAction } = this.props;
+        const { dotsAction, dotsShow } = this.props;
 
         // 用户可选圆点触发事件
         const clickFun = dotsAction === 'click' ? this.dotsStep : this.emptyFun;
@@ -220,19 +232,20 @@ class SliderControl extends React.PureComponent {
                             <span className={styles.rightIcon} data-arrow-right onClick={this.right.bind(this)} />{' '}
                         </React.Fragment>
                     ) : null}
-
-                    <div className={`${styles.dots_wrap} ${styles.clearfix}`} data-dots-wrap>
-                        {React.Children.map(this.props.children, (elem, index) => {
-                            return (
-                                <span
-                                    data-dots-active={this.checkDotsAttr(index)}
-                                    className={this.checkDots(index)}
-                                    onClick={clickFun.bind(this, index)}
-                                    onMouseOver={hoverFun.bind(this, index)}
-                                />
-                            );
-                        })}
-                    </div>
+                    {dotsShow ? (
+                        <div className={`${styles.dots_wrap} ${styles.clearfix}`} data-dots-wrap>
+                            {React.Children.map(this.props.children, (elem, index) => {
+                                return (
+                                    <span
+                                        data-dots-active={this.checkDotsAttr(index)}
+                                        className={this.checkDots(index)}
+                                        onClick={clickFun.bind(this, index)}
+                                        onMouseOver={hoverFun.bind(this, index)}
+                                    />
+                                );
+                            })}
+                        </div>
+                    ) : null}
                     <div className={styles.container}>
                         <ul className={styles.ul} style={this.directionHandle()}>
                             {this.props.children[this.props.number - 1]}
@@ -279,6 +292,8 @@ class Slider extends React.PureComponent {
             dotsAction,
             arrow,
             sliderTmpl,
+            dotsShow,
+            afterChange,
         } = this.props.config;
 
         return (
@@ -292,7 +307,10 @@ class Slider extends React.PureComponent {
                         unitHeight={unitHeight}
                         direction={direction}
                         dotsAction={dotsAction}
-                        arrow={arrow}>
+                        arrow={arrow}
+                        dotsShow={dotsShow}
+                        afterChange={afterChange}
+                        data={this.props.data}>
                         {this.renderSliderTmpl()}
                     </SliderControl>
                 ) : (

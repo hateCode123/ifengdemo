@@ -7,5 +7,7 @@
 .content {
     width: 640px;
     height: 424px;
-    background: url(http://img.hb.aicdn.com/5bee7b665c3e547749308b81c0362e02bee345405bcaf-y6XVn2_fw658) no-repeat;
+    background: url(https://d.ifengimg.com/w360_h220_q70/p1.ifengimg.com/2019_17/D99E9D210E1E48381CEA1423D96565676A2AA360_w360_h220.jpg)
+        no-repeat;
+    background-size: cover;
 }
