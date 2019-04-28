@@ -122,7 +122,7 @@ class Content extends React.PureComponent {
     multipleUpload = e => {
         const options = {
             type: 3, // 0 视频 1 图片 2 音频文件 3 其他文件
-            appid: 'wemedia',
+            appid: 'upLoadFlash',
             multiple: true,
             onBeforeUpload: (file, index) => {
                 console.log('上传之前');
